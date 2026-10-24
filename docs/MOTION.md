@@ -70,3 +70,34 @@
 
 **未验证**：封面过渡的实际观感（位置、缩放、快慢是否自然）没有任何真机/真桌面观察记录。
 若观感不对，回退到 2.1.0 的近似效果即可。
+
+---
+
+## 六、体系化升级（2.1.9 之后）
+
+这一节是**索引**：原先的曲线体系（`JmEasing`）与桌面端 `Motion.kt` 仍然有效，
+但"用多长、进还是出、哪些必须更快"现在集中到了 token 层，三份文档各管一段：
+
+| 文档 | 管什么 |
+| --- | --- |
+| 本文（`MOTION.md`） | 历史：曲线体系的由来、桌面端 `Motion.kt` 的建立过程 |
+| `MOTION-EXPRESSIVE.md` | **契约**：三条判断标准、11 类交互的时长/曲线表、三条可判定硬约束、帧率实测数据（含失败记录） |
+| `MOTION-SOURCES.md` | **来源与边界**：哪些原则有依据、哪些我其实没验证到 |
+
+代码落点：
+
+| 层 | 文件 | 说明 |
+| --- | --- | --- |
+| token | `ui/theme/JmMotion.kt` | `JmMotionTable(MotionSpec)`：从各风格 fast/base/slow 派生 14 个交互 token |
+| 退化 | `ui/theme/ReduceMotion.kt` | 读系统动画缩放，退化为 120ms 淡入 |
+| 反馈 | `ui/MotionFeedback.kt` | `Modifier.jmPressScale()`（0.97 缩放，共用 interactionSource） |
+| 守门 | `test/.../JmMotionTest.kt` | 四套风格 × 三条硬约束 + 风格身份不被抹平 |
+| 守门 | `test/.../MotionAuditTest.kt` | 禁止在 UI 里写死 `tween(...)`/`spring(...)`（白名单逐条写理由） |
+| 桌面 | `desktop/.../Motion.kt` | `MotionTokens`：与 Android 同比例（0.72/0.87/0.83/0.75） |
+
+**已接入的动效**：页面转场（含 reduce-motion 退化）、阅读器工具栏显隐、共享元素 hero、随机页旋转、卡片按压、卡片进入。
+**未接入**：`dialogIn/Out`、按钮类按压、`listExit`（需要有"移除"场景才有意义）。
+
+**测量现状**：滚动 / 底栏 / 前进 / 返回有实测数字（95 分位 10 / 12 / 14 / 16ms，后两项样本量为 1），
+阅读器工具栏与 hero 的帧率**仍未测到** —— 用 input 事件测转场已被证伪（九次失败，记录在 `MOTION-EXPRESSIVE.md`），
+下一步应改用 instrumentation（`mainClock` + `FrameTimingMetric`）。
