@@ -19,6 +19,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -38,6 +39,7 @@ import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.ChevronLeft
 import androidx.compose.material.icons.filled.ChevronRight
 import androidx.compose.material.icons.filled.SwapHoriz
+import androidx.compose.material.icons.filled.Contrast
 import androidx.compose.material.icons.filled.SwapVert
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
@@ -461,11 +463,25 @@ fun ReaderScreen(
                                     readerPrefs.comicRenderMode = next
                                 },
                             ) {
-                                Text(
-                                    text = if (readerComicRenderMode.value == ComicRenderMode.Grayscale) "彩色" else "黑白",
-                                    color = c.accent,
-                                    style = MaterialTheme.typography.labelSmall,
-                                )
+                                Row(verticalAlignment = Alignment.CenterVertically) {
+                                    Icon(
+                                        imageVector = Icons.Filled.Contrast,
+                                        contentDescription = "切换黑白 / 全彩",
+                                        tint = c.accent,
+                                        modifier = Modifier.size(20.dp),
+                                    )
+                                    Spacer(Modifier.size(4.dp))
+                                    Text(
+                                        // 显示**当前**状态（用户要求：把现在的样子写在上面）
+                                        text = if (readerComicRenderMode.value == ComicRenderMode.Grayscale) {
+                                            "黑白"
+                                        } else {
+                                            "全彩"
+                                        },
+                                        color = c.accent,
+                                        style = MaterialTheme.typography.labelSmall,
+                                    )
+                                }
                             }
                         },
                     )

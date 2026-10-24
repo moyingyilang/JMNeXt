@@ -18,6 +18,7 @@ import okhttp3.Request
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+import com.jmnext.wallpaper.rotationStep
 
 /**
  * 把 Bing 返回地址里的 `_宽x高` 段改成我们要的尺寸。
@@ -219,17 +220,16 @@ class WallpaperStore(context: Context, private val client: OkHttpClient) {
             .ifEmpty { cache }
             .ifEmpty { throw IllegalStateException("图源没有返回可用地址") }
 
-        // 轮换：按游标取，跳过当前这张，避免连点两次看到同一张
-        var cursor = prefs.getInt(KEY_CURSOR, 0) % pool.size
-        if (pool.size > 1 && pool.getOrNull(cursor) == s.url) cursor = (cursor + 1) % pool.size
+        // 轮换：决策抽到共享层的 rotationStep（有单测），这里只负责落盘与取值
+        val step = rotationStep(prefs.getInt(KEY_CURSOR, 0), pool, s.url)
         prefs.edit {
-            putInt(KEY_CURSOR, (cursor + 1) % pool.size)
-            // 回绕到 0 表示这一轮看完了：下次 pick 前先补一批新图
-            if ((cursor + 1) % pool.size == 0) putBoolean(KEY_WANT_REFRESH, true)
+            putInt(KEY_CURSOR, step.nextCursor)
+            // 走完一轮：下次 pick 前先补一批新图（这是"翻来覆去只有那几张"的主因之一）
+            if (step.wrap) putBoolean(KEY_WANT_REFRESH, true)
         }
 
         return s.copy(
-            url = pool[cursor],
+            url = pool[step.index],
             credit = if (wantBing) prefs.getString(KEY_CREDIT, null) else ANIME_CREDIT,
             error = null,
         )
