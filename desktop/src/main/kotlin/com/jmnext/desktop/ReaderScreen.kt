@@ -530,6 +530,8 @@ internal fun PageItem(repository: JmRepository, payload: ReadPayload, image: Rea
                 contentDescription = "第 ${index + 1} 页",
                 modifier = Modifier.fillMaxWidth(),
                 contentScale = ContentScale.FillWidth,
+                // 黑白 / 墨水屏：与 Android 共用同一套颜色矩阵（见 ComicRender.kt）
+                colorFilter = comicRenderFilter(ComicRenderPref.mode),
             )
 
             // 失败可以点一下重试：原来失败就永远停在"加载中"，读者只能退出去再进来

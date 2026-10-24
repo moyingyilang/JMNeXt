@@ -1,4 +1,5 @@
 package com.jmnext.desktop
+import com.jmnext.data.prefs.ComicRenderMode
 import com.jmnext.data.prefs.ReaderMode
 import com.jmnext.wallpaper.WallpaperMode
 
@@ -184,6 +185,31 @@ fun AppearanceScreen() {
             }
             Text(
                 if (Appearance.dark) "当前：深色" else "当前：浅色",
+                style = MaterialTheme.typography.labelSmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
+        }
+
+        // 漫画渲染：与 Android 同一套语义（彩色/黑白/墨水屏），系数共用 shared 的 ComicRenderMath。
+        // 设置页只写，阅读页读 —— 选完下次进阅读页生效。
+        Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            Text("漫画渲染", style = MaterialTheme.typography.titleMedium)
+            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                ComicRenderMode.entries.forEach { m ->
+                    val label = m.label
+                    Button(
+                        onClick = { ComicRenderPref.mode = m; refresh++ },
+                        modifier = Modifier.height(38.dp),
+                    ) {
+                        Text(
+                            if (ComicRenderPref.mode == m) "· $label" else label,
+                            style = MaterialTheme.typography.labelSmall,
+                        )
+                    }
+                }
+            }
+            Text(
+                "只作用于漫画画面，不影响界面配色。墨水屏设备选「墨水屏」：去色并提高对比度。",
                 style = MaterialTheme.typography.labelSmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
