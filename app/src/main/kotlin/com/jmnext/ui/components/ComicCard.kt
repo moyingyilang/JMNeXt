@@ -39,6 +39,13 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.LocalIndication
 import androidx.compose.runtime.remember
 import com.jmnext.ui.jmPressScale
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.graphics.graphicsLayer
+import com.jmnext.ui.theme.rememberJmMotion
+import androidx.compose.runtime.getValue
 
 /** 封面比例固定 3:4 —— 与服务端 `_3x4` 裁切一致，占位与实图之间不会跳变。 */
 private const val COVER_RATIO = 3f / 4f
@@ -85,12 +92,23 @@ fun ComicCard(
      */
     updated: Boolean = false,
 ) {
+    // 进入动画：首次组合时从「下方 12dp + 透明」到位（listEnter token）。
+    // 只在首次出现时播一次（remember 记忆），滚动复用不会再触发，避免网格闪动。
+    var jmAppeared by remember { mutableStateOf(false) }
+    LaunchedEffect(Unit) { jmAppeared = true }
+    val jmEnter = rememberJmMotion().listEnter
+    val jmEnterAlpha by animateFloatAsState(if (jmAppeared) 1f else 0f, jmEnter.tween(), label = "jmEnterAlpha")
+    val jmEnterShift by animateFloatAsState(if (jmAppeared) 0f else 12f, jmEnter.tween(), label = "jmEnterShift")
     // 按压反馈与 ripple 共用同一个 interactionSource，否则两者会互抢事件
     val jmPressInteraction = remember { MutableInteractionSource() }
     val c = JmTheme.colors
     Column(
         modifier = modifier
             .width(width)
+            .graphicsLayer {
+                alpha = jmEnterAlpha
+                translationY = jmEnterShift
+            }
             .clip(jmShape(Radius.lg))
             .clickable(
                 interactionSource = jmPressInteraction,
