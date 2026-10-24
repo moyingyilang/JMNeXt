@@ -14,6 +14,7 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.material3.Button
 import com.jmnext.data.prefs.AppPrefs
+import com.jmnext.data.prefs.ComicRenderMode
 import com.jmnext.data.SerialNotify
 import androidx.core.content.ContextCompat
 import androidx.compose.ui.platform.LocalContext
@@ -924,6 +925,12 @@ private fun ReadingCard(
     onReaderModeChange: (ReaderMode) -> Unit,
 ) {
     val c = JmTheme.colors
+    // 漫画渲染模式：直接在此读写偏好（避免把参数一路从 NavHost/Activity 传进来）
+    val renderCtx = androidx.compose.ui.platform.LocalContext.current
+    val renderPrefs = remember(renderCtx) {
+        AppPrefs(SharedPrefsKeyValueStore(renderCtx, "jm_prefs"))
+    }
+    var comicRenderMode by remember { mutableStateOf(renderPrefs.comicRenderMode) }
     SettingCard(title = "阅读") {
         Text("默认浏览形态", style = MaterialTheme.typography.bodyLarge, color = c.text)
         SingleChoiceSegmentedButtonRow(
