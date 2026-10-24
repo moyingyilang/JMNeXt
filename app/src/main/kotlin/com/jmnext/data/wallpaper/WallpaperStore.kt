@@ -128,6 +128,25 @@ class WallpaperStore(context: Context, private val client: OkHttpClient) {
 
     fun setInterval(minutes: Int) = update { it.copy(intervalMinutes = minutes.coerceAtLeast(0)) }
 
+    /**
+     * 清除壁纸缓存并立刻换一张。
+     *
+     * 用户反馈"翻来覆去只有那几张、也清不掉" —— 之前根本没有入口，
+     * 缓存键写在同一个 prefs 里且从不失效。这里把两个候选池、Bing 的跨天标记
+     * 与轮换游标一起清掉，再强制取一次。
+     */
+    suspend fun clearCache() {
+        prefs.edit {
+            remove(KEY_BING)
+            remove(KEY_ANIME)
+            remove(KEY_BING_DAY)
+            remove(KEY_CURSOR)
+            putBoolean(KEY_WANT_REFRESH, true)
+        }
+        update { it.copy(url = null, error = null) }
+        next(force = true)
+    }
+
     fun setCustomUrl(url: String) = update { it.copy(customUrl = url.trim()) }
 
     /**
@@ -175,11 +194,14 @@ class WallpaperStore(context: Context, private val client: OkHttpClient) {
 
         // 什么时候才联网：缓存没攒够（4 张）或空的，或者 Bing 跨天了。
         // 攒够之后就一直吃缓存轮换 —— 第三方接口不该被我们反复调用
-        val needFetch = cache.isEmpty() || cache.size < CACHE_MIN || (wantBing && staleBing)
+        // 走完一整轮也要重新取：否则攒够 CACHE_MIN 之后就永远吃同一批缓存（用户反馈"翻来覆去只有那几张"）
+        val wrapRefresh = prefs.getBoolean(KEY_WANT_REFRESH, false)
+        val needFetch = cache.isEmpty() || cache.size < CACHE_MIN || (wantBing && staleBing) || wrapRefresh
         if (needFetch) {
             val fetched = if (wantBing) fetchBing() else fetchAnime()
-            val merged = (cache + fetched).distinct().take(CACHE_MAX)
+            val merged = (fetched + cache).distinct().take(CACHE_MAX)   // 新图优先：旧写法老图在前，被 take(CACHE_MAX) 截掉，池子因此钉死
             writeCache(if (wantBing) KEY_BING else KEY_ANIME, merged)
+            prefs.edit { putBoolean(KEY_WANT_REFRESH, false) }
             if (wantBing) {
                 prefs.edit {
                     putString(KEY_BING_DAY, day)
@@ -195,7 +217,11 @@ class WallpaperStore(context: Context, private val client: OkHttpClient) {
         // 轮换：按游标取，跳过当前这张，避免连点两次看到同一张
         var cursor = prefs.getInt(KEY_CURSOR, 0) % pool.size
         if (pool.size > 1 && pool.getOrNull(cursor) == s.url) cursor = (cursor + 1) % pool.size
-        prefs.edit { putInt(KEY_CURSOR, (cursor + 1) % pool.size) }
+        prefs.edit {
+            putInt(KEY_CURSOR, (cursor + 1) % pool.size)
+            // 回绕到 0 表示这一轮看完了：下次 pick 前先补一批新图
+            if ((cursor + 1) % pool.size == 0) putBoolean(KEY_WANT_REFRESH, true)
+        }
 
         return s.copy(
             url = pool[cursor],
@@ -324,5 +350,6 @@ class WallpaperStore(context: Context, private val client: OkHttpClient) {
         private const val KEY_BING = "cache_bing"
         private const val KEY_ANIME = "cache_anime"
         private const val KEY_BING_DAY = "bing_day"
+        private const val KEY_WANT_REFRESH = "want_refresh"
     }
 }
