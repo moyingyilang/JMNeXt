@@ -1135,7 +1135,7 @@ arm64 用户被告知有新版本后，按"arm64 版"去找，**找不到任何�
 | 项 | 改动 | 提交 | 验证状态 |
 | --- | --- | --- | --- |
 | OOM | `JmImage.unscramble` 改**按条带流式搬运**：峰值由 3×7.2MB 降到「位图 + 一条带」 | `57b164f` | 编译通过；**待真机确认** |
-| 阅读页背景 | 新增 `ReaderBackdrop`（主题实色打底 + 壁纸 14dp 模糊 + 压暗），去掉 `ambientBase()` | `be91761` `87d430a` `90fb146` | 编译通过；**待观感确认** |
+| 阅读页背景 | 新增 `ReaderBackdrop`（主题实色打底 + 壁纸 14dp 模糊 + 压暗），去掉 `ambientBase()` | `be91761` `87d430a` `90fb146` | **用户已确认观感**（"壁纸修的挺不错，加上通透模式观感真的好"） |
 | 壁纸轮换 | 候选池不再钉死（新图优先 + 走完一轮补货）、`clearCache()`、间隔改秒级、设置加档位与清缓存按钮 | `48a5001` `3c1e059` `ddaf1fd` | 编译通过；**待真机确认** |
 | 黑白/墨水屏 | `ComicRenderMode` + `AppPrefs.comicRenderMode` + `comicRenderFilter`；阅读器页图挂 `colorFilter`；设置「阅读」卡片三选一 | `36bbf60` `cdbf4e2` | 编译通过；**待真机确认** |
 
@@ -1156,3 +1156,14 @@ arm64 用户被告知有新版本后，按"arm64 版"去找，**找不到任何�
 
 顺带记录 OOM 相关的两个上限（供后续收紧时参考）：Coil 内存缓存 = 堆的 **25%**（`JmApp.kt:123`）、
 预取范围由 `LiteFeatures.prefetchBefore/After` 经 `scalePrefetch()` 换算（`ReaderScreen.kt:1071-1072`）。
+
+**第 2 项已获用户确认**："这壁纸修的挺不错，加上通透模式观感真的好"。因此该项从"待确认"转为**已确认**。
+
+**测试全绿**（本轮改动后）：
+- `:app:testFullDebugUnitTest` → BUILD SUCCESSFUL，含新增 `ComicRenderTest`（3 个用例）；
+- `:shared:test` → BUILD SUCCESSFUL in 28s。
+
+**一个环境教训**：在 chroot 里手工拼命令时**必须带 `LANG=C.UTF-8`**（`enter.sh` 里有）。
+测试报告会把用例名写成**中文文件名**（如 `诊断_不同深度在不同停留下的成本.html`），
+缺 LANG 时报告生成报 `Malformed input or input contains unmappable characters` ——
+看起来像"测试失败"，实际是用例**全部通过**、只有报告写不出来。
