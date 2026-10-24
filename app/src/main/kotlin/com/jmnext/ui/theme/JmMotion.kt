@@ -82,12 +82,15 @@ class JmMotionTable(
     /** 错误抖动：只在"有输入被拒"时用。 */
     val errorShake get() = constant("errorShake", 200, JmEasing.outCubic)
 
+    /** 图标旋转（随机页的刷新）：720 度转完要201c收得住201d，所以用 emphasized 而不是线性。 */
+    val spin get() = constant("spin", 600, JmEasing.emphasized)
+
     /** 全部 token（供自检遍历；新增 token 时记得登记）。 */
     val all: List<JmMotionSpec>
         get() = listOf(
             press, listEnter, listExit, navForward, navBack, hero,
             bottomBarIn, bottomBarOut, dialogIn, dialogOut,
-            readerBarsIn, readerBarsOut, loading, errorShake,
+            readerBarsIn, readerBarsOut, loading, errorShake, spin,
         )
 }
 

@@ -35,6 +35,7 @@ import com.jmnext.ui.components.GlassLevel
 import com.jmnext.ui.components.GlassSurface
 import com.jmnext.ui.theme.JmTheme
 import com.jmnext.ui.theme.Spacing
+import com.jmnext.ui.theme.rememberJmMotion
 import kotlinx.coroutines.launch
 import com.jmnext.ui.Notices
 
@@ -71,6 +72,8 @@ fun RandomFab(
     val scope = rememberCoroutineScope()
     // 骰子转动：单击时转两圈。用 Animatable 而不是 animateFloatAsState，
     // 因为要"每次点击都再转一次"，目标值需要累加而不是收敛到某个固定值。
+    // token 在 composable 体里取一次；协程里不能再调 remember*（那不是 composable 上下文）
+    val jmMotion = rememberJmMotion()
     val spin = remember { Animatable(0f) }
 
     Box(modifier.padding(end = Spacing.lg, bottom = bottomInset + Spacing.md)) {
@@ -83,7 +86,7 @@ fun RandomFab(
                     onClick = {
                         scope.launch {
                             // 先转起来再拉取：把等待时间变成反馈
-                            launch { spin.animateTo(spin.value + 720f, tween(600)) }
+                            launch { spin.animateTo(spin.value + 720f, jmMotion.spin.tween()) }
                             val one = runCatching { repo.bootstrap(); repo.randomRecommend() }
                                 .getOrDefault(emptyList()).randomOrNull()
                             if (one != null) {
