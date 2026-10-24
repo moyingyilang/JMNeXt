@@ -44,3 +44,48 @@ object Motion {
     /** 常规过渡用的 tween（配 NORMAL_MS）。 */
     fun <T> normal() = tween<T>(durationMillis = NORMAL_MS, easing = Standard)
 }
+
+/**
+ * 交互级 token：与 Android 的 `JmMotionTable` **同一组比例**。
+ *
+ * 为什么要在 QUICK/NORMAL/PAGE 之上再加一层：Android 端已经把"列表进入 / 移除 / 前进 / 返回 /
+ * 底部栏 / 对话框 / 工具栏"这些**交互**固定了相对关系（退出比进入快 0.72–0.87 倍），
+ * 桌面端如果只按 NORMAL/PAGE 各自取值，两端手感会慢慢分叉 —— 同一款产品在两个平台上
+ * 节奏不一致，用户是会察觉的（"电脑上好像更黏"）。
+ *
+ * 这里的数字**不是随便取的**，是从 [Motion.QUICK_MS] / [Motion.NORMAL_MS] / [Motion.PAGE_MS]
+ * 派生出来的，比例与 `docs/MOTION-EXPRESSIVE.md` 第二节的表格一致。
+ */
+data class MotionToken(val millis: Int, val easing: Easing) {
+    fun <T> spec() = tween<T>(durationMillis = millis, easing = easing)
+}
+
+object MotionTokens {
+    /** 按压反馈：最短，才有"跟手"感。 */
+    val press = MotionToken(Motion.QUICK_MS, Motion.Standard)
+
+    /** 列表进入 / 移除：移除必须更快，否则显拖沓。 */
+    val listEnter = MotionToken(Motion.NORMAL_MS, Motion.Enter)
+    val listExit = MotionToken((Motion.NORMAL_MS * 0.72f).toInt(), Motion.Exit)
+
+    /** 页面切换：返回是"撤销"，比前进快。 */
+    val navForward = MotionToken(Motion.PAGE_MS, Motion.Enter)
+    val navBack = MotionToken((Motion.PAGE_MS * 0.87f).toInt(), Motion.Exit)
+
+    /** 共享元素：距离大，用 Standard（= emphasized）在开头给足速度。 */
+    val hero = MotionToken(Motion.PAGE_MS, Motion.Standard)
+
+    /** 底部栏：隐去比显出快。 */
+    val bottomBarIn = MotionToken(Motion.NORMAL_MS, Motion.Enter)
+    val bottomBarOut = MotionToken((Motion.NORMAL_MS * 0.83f).toInt(), Motion.Exit)
+
+    /** 对话框：聚焦，不是飞入。 */
+    val dialogIn = MotionToken((Motion.NORMAL_MS * 0.9f).toInt(), Motion.Enter)
+    val dialogOut = MotionToken((Motion.NORMAL_MS * 0.75f).toInt(), Motion.Exit)
+
+    /** 图片淡入：沿用 [Motion.IMAGE_MS]，略慢以避免闪烁。 */
+    val image = MotionToken(Motion.IMAGE_MS, Motion.Standard)
+
+    /** 全部 token（供自检/审计遍历）。 */
+    val all = listOf(press, listEnter, listExit, navForward, navBack, hero, bottomBarIn, bottomBarOut, dialogIn, dialogOut, image)
+}
