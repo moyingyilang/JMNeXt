@@ -1144,3 +1144,15 @@ arm64 用户被告知有新版本后，按"arm64 版"去找，**找不到任何�
 2. 阅读页四周背景：是否已是"淡淡的壁纸"而非渐变花纹（太抢眼可调 `ReaderBackdrop` 的 14dp/0.42）；
 3. 壁纸设 10 秒后是否连续换**不同的**图；点「清除壁纸缓存」是否立刻换一张；
 4. 设置 → 阅读 → 漫画渲染选「墨水屏」，漫画页是否为高对比黑白。
+
+**第 4 项现在有自动验证**：新增 `app/src/test/kotlin/com/jmnext/ui/ComicRenderTest.kt`（JUnit4，与仓库既有测试同一框架），
+断言三条可判定的性质：
+
+1. 彩色模式不产生矩阵/滤镜（无额外开销）；
+2. 黑白模式把任意颜色映射成 R=G=B；
+3. 墨水屏模式暗部更暗、亮部更亮、中灰基本不动。
+
+跑法：`gradle :app:testFullDebugUnitTest --tests "com.jmnext.ui.ComicRenderTest"` → **BUILD SUCCESSFUL in 1m**。
+
+顺带记录 OOM 相关的两个上限（供后续收紧时参考）：Coil 内存缓存 = 堆的 **25%**（`JmApp.kt:123`）、
+预取范围由 `LiteFeatures.prefetchBefore/After` 经 `scalePrefetch()` 换算（`ReaderScreen.kt:1071-1072`）。
