@@ -1215,3 +1215,36 @@ pm install -r …/app-full-debug.apk   → Success
 am start -n com.jmnext/.MainActivity → Starting
 logcat（300 行）中无 FATAL / AndroidRuntime / OutOfMemory
 ```
+
+## 2.1.9 发布记录（2026-10-25）
+
+**版本号**：`app` versionCode 43 / versionName 2.1.9；`desktop/Version.kt` 2.1.9；
+`desktop/build.gradle.kts` 的 `packageVersion` 与 `Implementation-Version` 均为 2.1.9。
+
+**Release**：<https://github.com/moyingyilang/JMNeXt/releases/tag/v2.1.9>
+tag `v2.1.9` → `45adbb72`（发布时 HEAD 一致），**15 个附件**，正式版（非 pre-release）。
+
+| 平台 | 附件 |
+| --- | --- |
+| Android | `Android-full-2.1.9.apk`（3M，`com.jmnext`）、`Android-lite-2.1.9.apk`（3M，`com.jmnext.lite`） |
+| Linux aarch64 | `tar.gz` / `deb` / `rpm` / `AppImage`（66M / 53M / 66M / 67M） |
+| Linux x86_64 | `tar.gz` / `deb` / `rpm` / `AppImage`（85M / 78M / 85M / 85M） |
+| Windows | `arm64.zip`（67M）、`arm64.exe`（83M）、`x64.zip`（84M）、`x64.exe`（83M）、`universal.exe`（167M） |
+
+**验证**：
+- `:app:testFullDebugUnitTest` 与 `:shared:test` 通过（含新增 `ComicRenderTest` 3 例、`RotationTest` 5 例）；
+- `:app:assembleFullRelease` / `assembleLiteRelease` 通过（R8 两个变体，11m01s）；
+- 15 个包由各自的 `desktop/scripts/package-*.sh` 产出，其中 9 个脚本全部跑通；
+- 上传后逐个核对附件名与大小，数量与 v2.1.8 一致（15）。
+
+**过程中修掉的真实问题**：
+1. `desktop/scripts/package-windows-arm64.sh` 的版本号正则写死为 `1\.9\.[0-9]+`，
+   在 2.1.x 上匹配不到 → `VERSION` 为空 → 脚本**静默退出码 1**，导致 Windows arm64 ZIP 长期缺产物；
+   已改为与其它脚本一致的通用正则；
+2. 多个 desktop 打包脚本**不自带 `cd`**，必须从 `desktop/` 目录运行，否则报找不到 `Version.kt`；
+3. `gh release create` 一次性上传 15 个附件（约 1.1G）会因单个大文件超时（HTTP 408）而**整体回滚**；
+   改为「先建空 Release，再逐个上传 + 4 次重试」，15 个附件全部成功。
+
+**未验证**（如实保留）：
+- 桌面端 GUI 观感**未目视验证**（构建环境无显示）：只确认编译与打包成功，阅读页"跟随壁纸"是按代码判断；
+- Android 上的秒级轮换与「清除壁纸缓存」仍只有"手机版没问题"的整体确认。
