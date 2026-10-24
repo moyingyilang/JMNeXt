@@ -85,3 +85,25 @@ e: Cannot access 'fun expressive(): MotionScheme': it is internal in 'MotionSche
 - 不做"每个控件都加动画"：没有因果关系的运动只会让界面显得廉价；
 - 不做弹跳（bounce/overshoot）除非表达"越界后回弹"这一物理含义；
 - 不为了动效牺牲启动时间或首帧。
+
+## 七、帧率基线（2026-10-25，真机实测）
+
+设备：本机（aarch64 Android 15/16，具体型号未记）。构建：`app-full-debug.apk`（2.1.9 之后、动效 token 接入版）。
+采集方式：`pm install -r` 覆盖安装 → `am force-stop` + `am start` 冷启动 → 等 8s → `dumpsys gfxinfo com.jmnext reset`
+→ 5 次滑动 + 1 次点击 → `dumpsys gfxinfo`。
+
+| 指标 | 数值 |
+| --- | --- |
+| Number Missed Vsync | **0** |
+| Number Slow UI thread | **0** |
+| Number Slow issue draw commands | **0** |
+| 帧耗时分布 | 集中在 7–9ms（7ms 206 帧、8ms 272 帧、9ms 308 帧），共约 1122 帧 |
+| 50th gpu percentile | 6ms |
+| 90th gpu percentile | **7ms** |
+| 95th gpu percentile | **10ms** |
+
+**判定**：95 分位 10ms < 16.7ms（60fps 预算），当前动效在**滚动与点击路径上没有掉帧**。
+这条基线的作用是：以后任何动效改动都要再测一次并与之对比，**不允许靠"看起来还行"结案**。
+
+**未覆盖的路径**（下一轮补测）：页面前进/返回转场、hero 共享元素、阅读器工具栏显隐、底部栏展开 —— 这些需要逐项
+`gfxinfo reset` + 单次操作分别采集，滚动路径的基线不能代表它们。
