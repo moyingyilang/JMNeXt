@@ -83,8 +83,10 @@ import com.jmnext.ui.screens.reader.ReaderScreen
 import com.jmnext.ui.screens.search.SearchScreen
 import com.jmnext.ui.screens.settings.BlockSettingsScreen
 import com.jmnext.ui.screens.tags.TagFavoritesScreen
+import com.jmnext.ui.theme.JmEasing
 import com.jmnext.ui.theme.JmTheme
 import com.jmnext.ui.theme.MotionSpec
+import com.jmnext.ui.theme.rememberReduceMotion
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 
@@ -292,10 +294,13 @@ private fun enterFor(
     initialRoute: String?,
     targetRoute: String?,
     motion: MotionSpec,
+    reduceMotion: Boolean = false,
 ): EnterTransition {
     val shift = tabShiftOf(initialRoute, targetRoute)
+    // 系统要求减少动画：退化为极短淡入（120ms），不取消"发生了变化"的反馈
+    if (reduceMotion) return fadeIn(tween(120, easing = JmEasing.standard))
     if (shift == 0) return fadeIn(tween(motion.base, easing = motion.enter))
-    return slideInHorizontally(tabSlideSpec(motion)) { width ->
+    return slideInHorizontally(tabSlideSpec(motion, reduceMotion)) { width ->
         tabSlideEnterOffset(shift, width)
     }
 }
@@ -305,10 +310,12 @@ private fun exitFor(
     initialRoute: String?,
     targetRoute: String?,
     motion: MotionSpec,
+    reduceMotion: Boolean = false,
 ): ExitTransition {
     val shift = tabShiftOf(initialRoute, targetRoute)
+    if (reduceMotion) return fadeOut(tween(120, easing = JmEasing.standard))
     if (shift == 0) return fadeOut(tween(motion.base, easing = motion.exit))
-    return slideOutHorizontally(tabSlideSpec(motion)) { width ->
+    return slideOutHorizontally(tabSlideSpec(motion, reduceMotion)) { width ->
         tabSlideExitOffset(shift, width)
     }
 }
@@ -322,8 +329,10 @@ private fun exitFor(
  * 不在这里区分 enter/exit 曲线：整屏滑动是一次**成对**的位移（一页进、一页出），
  * 两条曲线不同就会看到两页之间的接缝一宽一窄。要变就一起变。
  */
-private fun tabSlideSpec(motion: MotionSpec): FiniteAnimationSpec<IntOffset> =
-    if (motion.springy) {
+private fun tabSlideSpec(motion: MotionSpec, reduceMotion: Boolean = false): FiniteAnimationSpec<IntOffset> =
+    if (reduceMotion) {
+        tween(durationMillis = 120, easing = JmEasing.standard)
+    } else if (motion.springy) {
         spring(dampingRatio = 0.9f, stiffness = 320f)
     } else {
         tween(durationMillis = tabSlideDurationMs(motion), easing = motion.enter)
@@ -356,6 +365,8 @@ fun JmNavHost(
     val currentRoute = entry?.destination?.route
     val showBottomBar = MainTab.entries.any { it.pattern == currentRoute }
     val motion = JmTheme.motion
+    // 系统"减少动画"开启时，转场与 Tab 滑动统一退化为 120ms 淡入（见 ui/theme/ReduceMotion.kt）
+    val reduceMotion = rememberReduceMotion()
 
     // 底栏只认识「第几栏」：这里把 MainTab 翻成它要的形态，路由的判断都留在导航层。
     val barItems = remember { MainTab.entries.map { BottomBarItem(label = it.label, icon = it.icon) } }
@@ -495,16 +506,16 @@ fun JmNavHost(
                 // 四段转场共用同一份方向计算：Tab 切换既有 push（点底栏）也有 pop
                 // （详情页的标签 push 到搜索页后退回），两边用同一几何，来回才对称。
                 enterTransition = {
-                    enterFor(initialState.destination.route, targetState.destination.route, motion)
+                    enterFor(initialState.destination.route, targetState.destination.route, motion, reduceMotion)
                 },
                 exitTransition = {
-                    exitFor(initialState.destination.route, targetState.destination.route, motion)
+                    exitFor(initialState.destination.route, targetState.destination.route, motion, reduceMotion)
                 },
                 popEnterTransition = {
-                    enterFor(initialState.destination.route, targetState.destination.route, motion)
+                    enterFor(initialState.destination.route, targetState.destination.route, motion, reduceMotion)
                 },
                 popExitTransition = {
-                    exitFor(initialState.destination.route, targetState.destination.route, motion)
+                    exitFor(initialState.destination.route, targetState.destination.route, motion, reduceMotion)
                 },
             ) {
                 composable(MainTab.Home.route) {
