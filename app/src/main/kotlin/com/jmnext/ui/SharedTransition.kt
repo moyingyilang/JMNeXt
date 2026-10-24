@@ -13,6 +13,7 @@ import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
 import com.jmnext.ui.theme.JmTheme
+import com.jmnext.ui.theme.toJmMotionTable
 
 /**
  * 共享元素转场的作用域。拿不到（页面不在 [SharedTransitionScope] 里）时，
@@ -96,7 +97,8 @@ fun Modifier.jmSharedElement(key: String?): Modifier {
     // 绑到同一个 MotionSpec 之后，封面到位与页面淡完是同一时刻。
     val motion = JmTheme.motion
     val bounds = remember(motion.base, motion.enter) {
-        BoundsTransform { _, _ -> tween(durationMillis = motion.base, easing = motion.enter) }
+        // hero 用 token 里的曲线：距离大，需要 emphasized 在开头就给出速度（见 JmMotionTable.hero）
+        BoundsTransform { _, _ -> motion.toJmMotionTable().hero.tween() }
     }
     return with(shared) {
         // 用位置参数：这个重载的参数名在版本间改过（state / sharedContentState），

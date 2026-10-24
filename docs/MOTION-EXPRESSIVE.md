@@ -58,9 +58,9 @@ e: Cannot access 'fun expressive(): MotionScheme': it is internal in 'MotionSche
 
 | 差距 | 表现 |
 | --- | --- |
-| 没有"交互 → token"的映射表 | 各处直接写 `tween(200)`/`tween(300)`，同一个动作在不同页面时长不同 |
+| ~~没有"交互 → token"的映射表~~（**更正**：多数已是 `motion.base/enter/exit/fast`；真正缺的是阅读器工具栏的 5 处**未指定 spec**，已接 `readerBarsIn/Out`；随机转场的 600ms 旋转仍待处理） | — |
 | 缺退出语义 | 多数动画只有进入，退出用同一个 spec（导致"退出和进入一样慢"） |
-| 缺共享元素 | 详情页头图与列表封面之间没有空间连续性 |
+| ~~缺共享元素~~（**更正**： + `SharedTransitionLayout` 早已接线，只是曲线取的是 `motion.base/enter`；已改用 `hero` token 的 emphasized 曲线） | — |
 | 缺 reduce-motion 降级 | 系统关闭动画 / 无障碍"减少动态"时没有统一退化路径 |
 | 没有帧率证据 | 动效"好不好看"目前全靠肉眼，没有掉帧数据 |
 

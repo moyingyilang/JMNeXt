@@ -111,6 +111,7 @@ import com.jmnext.ui.components.GlassTopBar
 import com.jmnext.ui.components.LoadingBox
 import com.jmnext.ui.theme.jmShape
 import com.jmnext.ui.theme.JmTheme
+import com.jmnext.ui.theme.rememberJmMotion
 import com.jmnext.ui.theme.Radius
 import com.jmnext.ui.theme.Spacing
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -299,6 +300,8 @@ fun ReaderScreen(
     // LocalContext.current 是 composable 读取，需在 remember 之外取
     val context = LocalContext.current
     val readProgress = remember(context) { ReadProgressStore(SharedPrefsKeyValueStore(context, "jm_read_progress")) }
+    // 本页动效统一走 token（含系统 reduce-motion 退化），显/隐时长不同：隐更快，阅读时工具栏要迅速让位
+    val jmMotion = rememberJmMotion()
     val readerPrefs = remember(context) { AppPrefs(SharedPrefsKeyValueStore(context, "jm_prefs")) }
     LaunchedEffect(Unit) { readerComicRenderMode.value = readerPrefs.comicRenderMode }
     val vm: ReaderViewModel = viewModel(
@@ -392,7 +395,7 @@ fun ReaderScreen(
                     AnimatedVisibility(
                         visible = barsVisible,
                         enter = slideInVertically { -it },
-                        exit = slideOutVertically { -it },
+                        exit = slideOutVertically(jmMotion.readerBarsOut.tween()) { -it },
                         modifier = Modifier.align(Alignment.TopCenter).padding(top = 64.dp),
                     ) {
                         GlassSurface(level = GlassLevel.Flyout, shape = jmShape(Radius.md)) {
@@ -409,7 +412,7 @@ fun ReaderScreen(
                 AnimatedVisibility(
                     visible = barsVisible,
                     enter = slideInVertically { -it },
-                    exit = slideOutVertically { -it },
+                    exit = slideOutVertically(jmMotion.readerBarsOut.tween()) { -it },
                     modifier = Modifier.align(Alignment.TopCenter),
                 ) {
                     GlassTopBar(
@@ -490,8 +493,8 @@ fun ReaderScreen(
                 // 底栏不再要求「有目录」才出现：页码与滑块在单话作品里同样有用
                 AnimatedVisibility(
                     visible = barsVisible,
-                    enter = slideInVertically { it },
-                    exit = slideOutVertically { it },
+                    enter = slideInVertically(jmMotion.readerBarsIn.tween()) { it },
+                    exit = slideOutVertically(jmMotion.readerBarsOut.tween()) { it },
                     modifier = Modifier.align(Alignment.BottomCenter),
                 ) {
                     ReaderBottomBar(
@@ -884,8 +887,8 @@ private fun PagedReader(
 
         AnimatedVisibility(
             visible = showIndicator,
-            enter = slideInVertically { it },
-            exit = slideOutVertically { it },
+            enter = slideInVertically(rememberJmMotion().readerBarsIn.tween()) { it },
+            exit = slideOutVertically(rememberJmMotion().readerBarsOut.tween()) { it },
             modifier = Modifier.align(Alignment.TopCenter).padding(top = 72.dp),
         ) {
             GlassSurface(
