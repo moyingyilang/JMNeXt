@@ -1124,3 +1124,23 @@ arm64 用户被告知有新版本后，按"arm64 版"去找，**找不到任何�
 两处都要**补单元测试**（`UpdateCheckTest`），因为这类"字符串规则"最容易在改动中悄悄失效 ——
 已有 7 个用例覆盖了标签前缀、变体后缀、附件名与直链拼装；新增 `fix(n)` 后要再加：`2.1.7.fix1 > 2.1.7`、
 `2.1.7.fix2 > 2.1.7.fix1`、`2.1.7.fix1` 与 `2.1.7.fix1.lite` 视为同版本、以及附件名里保留 `fix1`。
+
+## 2.x 批次：OOM / 阅读页背景 / 壁纸轮换 / 黑白墨水屏（本轮）
+
+**构建证据**：容器内 `/opt/gradle-9.8.0/bin/gradle --offline :app:assembleFullDebug`
+→ **BUILD SUCCESSFUL in 55s**，产物 `app/build/outputs/apk/full/debug/app-full-debug.apk`（24.6 MB）。
+（此前一次失败是 `shared/build`、`app/build` 里残留旧路径 `JMComic_Next` 的产物导致
+`DexingNoClasspathTransform` 报 "outside the root directory"；用 root 删除 build 目录后复现即消失。）
+
+| 项 | 改动 | 提交 | 验证状态 |
+| --- | --- | --- | --- |
+| OOM | `JmImage.unscramble` 改**按条带流式搬运**：峰值由 3×7.2MB 降到「位图 + 一条带」 | `57b164f` | 编译通过；**待真机确认** |
+| 阅读页背景 | 新增 `ReaderBackdrop`（主题实色打底 + 壁纸 14dp 模糊 + 压暗），去掉 `ambientBase()` | `be91761` `87d430a` `90fb146` | 编译通过；**待观感确认** |
+| 壁纸轮换 | 候选池不再钉死（新图优先 + 走完一轮补货）、`clearCache()`、间隔改秒级、设置加档位与清缓存按钮 | `48a5001` `3c1e059` `ddaf1fd` | 编译通过；**待真机确认** |
+| 黑白/墨水屏 | `ComicRenderMode` + `AppPrefs.comicRenderMode` + `comicRenderFilter`；阅读器页图挂 `colorFilter`；设置「阅读」卡片三选一 | `36bbf60` `cdbf4e2` | 编译通过；**待真机确认** |
+
+**真机要看的四件事**：
+1. 翻 1131×1600 这类大页，是否还出现 `OutOfMemoryError`；
+2. 阅读页四周背景：是否已是"淡淡的壁纸"而非渐变花纹（太抢眼可调 `ReaderBackdrop` 的 14dp/0.42）；
+3. 壁纸设 10 秒后是否连续换**不同的**图；点「清除壁纸缓存」是否立刻换一张；
+4. 设置 → 阅读 → 漫画渲染选「墨水屏」，漫画页是否为高对比黑白。
