@@ -24,6 +24,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import kotlinx.coroutines.launch
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -44,6 +46,7 @@ import java.io.File
 @Composable
 fun AppearanceScreen() {
     var refresh by remember { mutableStateOf(0) }
+    val scope = rememberCoroutineScope()
 
     Column(
         Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(24.dp),
@@ -146,6 +149,13 @@ fun AppearanceScreen() {
 
             // 在线壁纸（模式/换一张/轮换/自定义地址/署名）：见 WallpaperRemoteSection.kt
             WallpaperRemoteSection(onChanged = { refresh++ })
+            // 清除壁纸缓存：电脑端此前没有入口，攒够 CACHE_MAX 后池子会一直轮转同一批地址
+            TextButton(onClick = {
+                scope.launch {
+                    RemoteWallpaper.clearCache()
+                    refresh++
+                }
+            }) { Text("清除壁纸缓存") }
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(10.dp),

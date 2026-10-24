@@ -56,6 +56,17 @@ object RemoteWallpaper {
      * 换一张。[force] 为 true 表示用户手动点的：忽略冷却与"今天已取过"的限制，
      * 但缓存里还有没用过的地址时仍然优先用缓存，不额外打接口。
      */
+    /** 清除壁纸缓存并立刻换一张（与 Android 的 clearCache 对齐）。 */
+    suspend fun clearCache() {
+        prefs.remove(KEY_BING_CACHE)
+        prefs.remove(KEY_ANIME_CACHE)
+        prefs.remove(KEY_BING_DAY)
+        prefs.remove(KEY_CURSOR)
+        prefs.putBoolean(KEY_WANT_REFRESH, true)
+        update { it.copy(url = null, error = null) }
+        next(force = true)
+    }
+
     suspend fun next(force: Boolean = false) {
         val now = System.currentTimeMillis()
         if (!force && now - lastFetchAt < WallpaperSources.COOLDOWN_MS) return
@@ -89,10 +100,14 @@ object RemoteWallpaper {
         val today = LocalDate.now().toString()
         val staleBing = wantBing && prefs.getString(KEY_BING_DAY, null) != today
 
-        if (WallpaperSources.needFetch(cache.size, wantBing, prefs.getString(KEY_BING_DAY, null), today)) {
+        if (WallpaperSources.needFetch(
+            cache.size, wantBing, prefs.getString(KEY_BING_DAY, null), today,
+            forceRefresh = prefs.getBoolean(KEY_WANT_REFRESH, false),
+        )) {
             val fetched = if (wantBing) fetchBing(portraitHint) else fetchAnime()
             cache = (cache + fetched).distinct().take(WallpaperSources.CACHE_MAX)
             writeCache(cacheKey, cache)
+            prefs.putBoolean(KEY_WANT_REFRESH, false)
             if (wantBing) {
                 prefs.putString(KEY_BING_DAY, today)
                 prefs.putString(KEY_CREDIT, fetchedCredit)
@@ -102,6 +117,8 @@ object RemoteWallpaper {
 
         val (url, newCursor) = WallpaperSources.nextFromPool(cache, cursor, s.url)
         prefs.putString(KEY_CURSOR, newCursor.toString())
+        // 回绕到 0 表示这一轮看完了：下次取图前先补一批新地址
+        if (newCursor == 0) prefs.putBoolean(KEY_WANT_REFRESH, true)
         s.copy(
             url = url,
             credit = if (wantBing) prefs.getString(KEY_CREDIT, null) else WallpaperSources.ANIME_CREDIT,
@@ -203,6 +220,7 @@ object RemoteWallpaper {
     private const val KEY_INTERVAL = "interval"
     private const val KEY_CUSTOM = "customUrl"
     private const val KEY_CURSOR = "cursor"
+    private const val KEY_WANT_REFRESH = "want_refresh"
     private const val KEY_BING_DAY = "bingDay"
     private const val KEY_BING_CACHE = "bingCache"
     private const val KEY_ANIME_CACHE = "animeCache"

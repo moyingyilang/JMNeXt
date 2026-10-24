@@ -86,8 +86,19 @@ object WallpaperSources {
      * 是否需要联网补图：缓存没攒够（或空的），或者 Bing 跨天了。
      * 攒够之后就一直吃缓存轮换 —— 第三方接口不该被反复调用。
      */
-    fun needFetch(cacheSize: Int, wantBing: Boolean, cachedDay: String?, today: String): Boolean =
-        cacheSize <= 0 || cacheSize < CACHE_MIN || (wantBing && cachedDay != today)
+    /**
+     * 什么时候才联网取新图。
+     *
+     * [forceRefresh] 用于"走完一整轮"或用户手动清缓存：否则一旦攒够 [CACHE_MIN] 就再也不取，
+     * 池子被钉死在同一批地址上（用户反馈的"翻来覆去只有那几张"就是这个原因）。
+     */
+    fun needFetch(
+        cacheSize: Int,
+        wantBing: Boolean,
+        cachedDay: String?,
+        today: String,
+        forceRefresh: Boolean = false,
+    ): Boolean = forceRefresh || cacheSize <= 0 || cacheSize < CACHE_MIN || (wantBing && cachedDay != today)
 
     /**
      * 从池子里取下一张：按游标取，跳过当前这张（避免连点两次看到同一张）。
