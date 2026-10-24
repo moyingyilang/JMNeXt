@@ -175,6 +175,7 @@ class AppPrefs(private val sp: KeyValueStore) {
         const val KEY_SERIAL_NOTIFY = "serial_notify"
         const val KEY_SERIAL_NOTIFY_SEEN = "serial_notify_seen"
         const val KEY_READER_MODE = "reader_mode"
+        const val KEY_COMIC_RENDER = "comic_render_mode"
         const val KEY_SEARCH_HISTORY = "search_history"
         const val SEARCH_HISTORY_LIMIT = 20
     }
