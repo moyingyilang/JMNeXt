@@ -101,6 +101,7 @@ import com.jmnext.data.remote.dto.SeriesItem
 import com.jmnext.ui.LocalRepository
 import com.jmnext.ui.components.ErrorBox
 import com.jmnext.ui.LocalUiOptions
+import com.jmnext.ui.comicRenderFilter
 import com.jmnext.ui.components.GlassLevel
 import com.jmnext.ui.components.GlassSurface
 import com.jmnext.ui.components.GlassTopBar
@@ -951,6 +952,10 @@ private fun ReaderImage(
     placeholderRatio: Float? = null,
 ) {
     val context = LocalPlatformContext.current
+    // 漫画渲染模式（彩色 / 黑白 / 墨水屏）：进入阅读器时读一次，避免每帧读 SharedPreferences
+    val renderMode = remember(context) {
+        AppPrefs(SharedPrefsKeyValueStore(context, "jm_prefs")).comicRenderMode
+    }
     // 重试次数。每次自增都会换一个新的 memoryCacheKey，让 Coil 真正重新发一次请求 ——
     // 否则相同的请求实例会被判定为「没有变化」，界面会永远停在失败状态上。
     var attempt by remember(image.image) { mutableIntStateOf(0) }
@@ -992,6 +997,7 @@ private fun ReaderImage(
             painter = painter,
             contentDescription = "第 ${image.page} 页",
             contentScale = contentScale,
+            colorFilter = comicRenderFilter(renderMode),
             modifier = Modifier.fillMaxSize(),
         )
 

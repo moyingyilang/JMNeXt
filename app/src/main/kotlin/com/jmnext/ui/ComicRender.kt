@@ -1,20 +1,8 @@
 package com.jmnext.ui
 
-import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.ColorMatrix
 import com.jmnext.data.prefs.ComicRenderMode
-
-/**
- * 当前漫画渲染模式。
- *
- * 用 CompositionLocal 而不是层层传参：页图绘制点有三处
- * （`ReaderImage`、`ZoomableReaderImage`、`PagedReader` 的调用），
- * 传参要改五个签名，而读取方只关心"现在是什么模式"。
- *
- * 默认 [ComicRenderMode.Color] —— 未提供的地方（预览、测试）保持原样，不会莫名变色。
- */
-val LocalComicRenderMode = compositionLocalOf { ComicRenderMode.Color }
 
 /**
  * 各模式的颜色矩阵（4x5，作用于 0..1 的颜色分量）。
