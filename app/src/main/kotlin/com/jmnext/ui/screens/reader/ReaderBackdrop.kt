@@ -31,7 +31,7 @@ fun ReaderBackdrop(modifier: Modifier = Modifier) {
 
     Box(modifier.fillMaxSize()) {
         // 底：不透明实色（无壁纸时这就是最终背景；有壁纸时它保证页间接缝不可见）
-        Box(Modifier.fillMaxSize().background(c.surface))
+        Box(Modifier.fillMaxSize().background(c.surfaceSunken))
 
         if (wall.showsImage && !wall.url.isNullOrBlank()) {
             AsyncImage(
@@ -44,7 +44,7 @@ fun ReaderBackdrop(modifier: Modifier = Modifier) {
             Box(
                 Modifier
                     .fillMaxSize()
-                    .background(c.surface.copy(alpha = (wall.dim + 0.42f).coerceIn(0f, 0.9f))),
+                    .background(c.surfaceSunken.copy(alpha = (wall.dim + 0.42f).coerceIn(0f, 0.9f))),
             )
         }
     }
