@@ -828,61 +828,30 @@ private fun WallpaperCard() {
                     Icon(Icons.Filled.Refresh, contentDescription = "换一张", tint = c.accent)
                 }
                 Text(
-                Text(
-                    text = "自动更换：" + when {
-                        wall.intervalSeconds <= 0 -> "关闭"
-                        wall.intervalSeconds < 60 -> wall.intervalSeconds.toString() + " 秒"
-                        wall.intervalSeconds % 3600 == 0 -> (wall.intervalSeconds / 3600).toString() + " 小时"
-                        else -> (wall.intervalSeconds / 60).toString() + " 分钟"
+                    text = when (wall.intervalMinutes) {
+                        0 -> "自动更换：关闭"
+                        else -> "自动更换：每 ${wall.intervalMinutes} 分钟"
                     },
                     style = MaterialTheme.typography.labelSmall,
                     color = c.textTertiary,
                     modifier = Modifier.weight(1f),
                 )
-                    style = MaterialTheme.typography.labelSmall,
-                    color = c.textTertiary,
-                    modifier = Modifier.weight(1f),
-                )
             }
 
-            // 档位改成秒级：用户要按「时/分/秒」控制粒度，原来最细只有 1 分钟
+            // 间隔档位与博客一致：关闭 / 5 / 15 / 30 / 60 分钟
             SingleChoiceSegmentedButtonRow(modifier = Modifier.fillMaxWidth()) {
-                listOf(0, 10, 30, 60, 300, 1800, 3600).forEachIndexed { index, seconds ->
+                listOf(0, 5, 15, 30, 60).forEachIndexed { index, minutes ->
                     SegmentedButton(
-                        selected = wall.intervalSeconds == seconds,
-                        onClick = { store?.setIntervalSeconds(seconds) },
-                        shape = SegmentedButtonDefaults.itemShape(index, 7),
+                        selected = wall.intervalMinutes == minutes,
+                        onClick = { store?.setInterval(minutes) },
+                        shape = SegmentedButtonDefaults.itemShape(index, 5),
                     ) {
                         Text(
-                            text = when (seconds) {
-                                0 -> "关"
-                                10 -> "10秒"
-                                30 -> "30秒"
-                                60 -> "1分"
-                                300 -> "5分"
-                                1800 -> "30分"
-                                else -> "1时"
-                            },
+                            text = if (minutes == 0) "关" else "$minutes",
                             style = MaterialTheme.typography.labelSmall,
                         )
                     }
                 }
-            }
-
-            // 清缓存：此前没有入口，用户反馈"翻来覆去只有那几张、也清不掉"
-            Row(
-                modifier = Modifier.fillMaxWidth().padding(top = Spacing.xs),
-                verticalAlignment = Alignment.CenterVertically,
-            ) {
-                TextButton(onClick = { scope.launch { store?.clearCache() } }) {
-                    Text("清除壁纸缓存", color = c.accent)
-                }
-                Text(
-                    text = "清掉已缓存的候选图，立刻重新取一批",
-                    style = MaterialTheme.typography.labelSmall,
-                    color = c.textTertiary,
-                    modifier = Modifier.weight(1f),
-                )
             }
         }
 
@@ -929,16 +898,15 @@ private fun WallpaperCard() {
         }
 
         Text(
-        Text(
             text = "壁纸是本应用**唯一**会连出去的第三方请求，且只在你选择图片来源后才会发生；" +
-                "选「纯渐变」时一个字节都不会发。已取到的地址缓存在本地轮换，但**不会锁死一批**：" +
-                "新取到的图优先进入候选池，走完一轮就自动补一批，也可以在上面手动「清除壁纸缓存」。" +
+                "选「纯渐变」时一个字节都不会发。已取到的地址会缓存在本地轮换（攒够 4 张就不再请求），" +
                 "Bing 的地址每天只重新取一次 —— 不为了一张背景图反复打别人的接口。" +
-                "阅读页**会**画壁纸（淡化处理）：底层永远先铺一层实色，所以伪长图的接缝依然看不见。",
+                "阅读页不画壁纸：伪长图的接缝必须看不见。",
             style = MaterialTheme.typography.labelSmall,
             color = c.textTertiary,
             modifier = Modifier.padding(top = Spacing.sm),
         )
+    }
 }
 
 /**
