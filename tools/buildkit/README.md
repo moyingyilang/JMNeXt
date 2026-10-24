@@ -40,27 +40,3 @@ cp env.example build.env   # 按自己的环境改：项目路径、容器根、
 
 **MPL-2.0**（见 `LICENSE`）：按文件传染 —— 修改了本仓库的文件，那些文件及其修改需以 MPL 公开；
 把本工具当工具使用、或与自己的代码放在别的文件里，则不受约束。与 GPL/AGPL 兼容（MPL §3.3）。
-
----
-
-## 本仓库里的这份是内置副本（vendored）
-
-上游独立项目：<https://github.com/moyingyilang/android-termux-builders4JMNeXt>（**MPL-2.0**）。
-本目录与上游保持一致（`10-enter.sh` … `40-package-desktop.sh` 逐字节相同），只有下面几处按本仓库情况调整：
-
-| 项 | 上游 | 本仓库 |
-| --- | --- | --- |
-| 配置模板 | `env.example` | `build.env`（脚本按这个文件名读） |
-| `50-verify-desktop.sh`、`verify-apk.sh` | 上游版本 | 有本地改动（适配本仓库的产物路径） |
-| `desktop/scripts/package-*.sh` | 不在上游 | 本仓库自带（9 个，Linux/Windows 各形态），同样 MPL-2.0 |
-
-**许可证边界**：应用代码（`app/`、`shared/`、`desktop/src`）是 **AGPL-3.0**；
-构建/打包脚本是 **MPL-2.0**（文件级 copyleft，不把使用者卷进强传染性）。两者刻意并存。
-
-### 本仓库侧的两个坑（上游脚本不会替你记）
-
-1. **部分 desktop 打包脚本不自带 `cd`**：必须从 `desktop/` 目录运行，否则报
-   `src/main/kotlin/com/jmnext/desktop/Version.kt: No such file or directory`；
-2. **`package-windows-arm64.sh` 曾把版本正则写死为 `1\.9\.[0-9]+`**，在 2.1.x 上匹配不到会让
-   `VERSION` 变空、脚本**静默退出码 1**（Windows arm64 ZIP 因此长期缺产物）。已改为通用正则 ——
-   如果上游也有同类写法，建议同步修掉。
