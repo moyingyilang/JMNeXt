@@ -1,4 +1,5 @@
 #!/bin/bash
+# SPDX-License-Identifier: MPL-2.0
 # Windows x64 免装 Java 的 ZIP。
 #
 # 为什么要单独写：`gradle fatJar` 打出的 jar **不含 Skiko 的原生库**（.dll），

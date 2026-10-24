@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# SPDX-License-Identifier: MPL-2.0
 # 组装「Windows on ARM 免装 Java」的 ZIP。
 #
 # 需要两样东西，都不写死在命令里、用变量给出：

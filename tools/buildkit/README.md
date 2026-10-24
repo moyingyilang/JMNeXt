@@ -36,6 +36,4 @@ Windows 出 ZIP / 免装 Java ZIP / 单体 exe，含 x64、arm64、架构自适�
 
 与仓库一致：**AGPL-3.0**。
 
-> 现状提示：`tools/buildkit/*.sh` 的文件头目前写的是 `SPDX-License-Identifier: MPL-2.0`，
-> 与仓库 `LICENSE`（AGPL-3.0）**不一致**；`desktop/scripts/*.sh` 尚无 SPDX 头。
-> 这两处需要按项目的最终决定统一（本 README 暂不为它们做单方面声明）。
+> 

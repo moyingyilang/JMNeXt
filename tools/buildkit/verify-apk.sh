@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# SPDX-License-Identifier: MPL-2.0
 # APK 断言式验收：发布前必须通过，否则不许上传。
 #
 # 为什么要有它：2.1.2 曾把"只有 classes.dex、没有 manifest 与资源"的坏包发出去，

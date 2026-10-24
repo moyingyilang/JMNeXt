@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# SPDX-License-Identifier: MPL-2.0
 # 打包闸门：输入未变且产物齐全时跳过本次打包。
 #
 # 背景：完整打包链实测 433 秒（Linux aarch64 84 秒 + Linux x86_64 170 秒 + 两个 ZIP 69 秒 + 两个 exe 97 秒），

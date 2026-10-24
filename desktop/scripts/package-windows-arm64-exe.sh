@@ -1,4 +1,5 @@
 #!/bin/bash
+# SPDX-License-Identifier: MPL-2.0
 # Windows arm64 **单体 exe**（便携、免安装、双击即运行）。
 #
 # 为什么要它：此前的交付物是一个 ZIP（里面是 jmnext.bat + runtime/ + jar），第一次拿到的人

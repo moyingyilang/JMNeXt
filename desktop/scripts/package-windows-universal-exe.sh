@@ -1,4 +1,5 @@
 #!/bin/bash
+# SPDX-License-Identifier: MPL-2.0
 # Windows **架构自适应单体 exe**：一个文件同时含 x64 与 arm64 两套运行时，启动时自动选择。
 #
 # 为什么单独做一个：此前的单体 exe 分 x64 / arm64 两个文件，用户需要自己判断机器架构

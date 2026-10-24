@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# SPDX-License-Identifier: MPL-2.0
 #
 # 交叉打包：aarch64 主机 → x86_64 Linux。
 #

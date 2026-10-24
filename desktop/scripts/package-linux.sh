@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# SPDX-License-Identifier: MPL-2.0
 #
 # 构建并打包 Linux 桌面版（aarch64），出包前做产物自检。
 #

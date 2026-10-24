@@ -1,4 +1,5 @@
 #!/bin/bash
+# SPDX-License-Identifier: MPL-2.0
 # Linux **架构自适应 tar.gz**：一个包内含 aarch64 与 x86_64 两套运行时，启动时按 uname -m 自动选择。
 #
 # 为什么只做 tar.gz：deb/rpm 的架构写在**包元数据**里（Architecture: arm64/x86_64），里面装着架构相关的
