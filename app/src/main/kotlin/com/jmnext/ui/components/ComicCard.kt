@@ -35,6 +35,10 @@ import com.jmnext.ui.theme.jmShape
 import com.jmnext.ui.theme.JmTheme
 import com.jmnext.ui.theme.Radius
 import com.jmnext.ui.theme.Spacing
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.LocalIndication
+import androidx.compose.runtime.remember
+import com.jmnext.ui.jmPressScale
 
 /** 封面比例固定 3:4 —— 与服务端 `_3x4` 裁切一致，占位与实图之间不会跳变。 */
 private const val COVER_RATIO = 3f / 4f
@@ -81,12 +85,19 @@ fun ComicCard(
      */
     updated: Boolean = false,
 ) {
+    // 按压反馈与 ripple 共用同一个 interactionSource，否则两者会互抢事件
+    val jmPressInteraction = remember { MutableInteractionSource() }
     val c = JmTheme.colors
     Column(
         modifier = modifier
             .width(width)
             .clip(jmShape(Radius.lg))
-            .clickable(onClick = onClick)
+            .clickable(
+                interactionSource = jmPressInteraction,
+                indication = LocalIndication.current,
+                onClick = onClick,
+            )
+            .jmPressScale(jmPressInteraction)
             .padding(bottom = Spacing.sm),
         verticalArrangement = Arrangement.spacedBy(Spacing.sm),
     ) {
