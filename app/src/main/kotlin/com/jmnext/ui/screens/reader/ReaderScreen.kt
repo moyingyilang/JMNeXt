@@ -94,6 +94,7 @@ import com.jmnext.data.JmRepository
 import com.jmnext.data.image.ScrambleTransformation
 import com.jmnext.data.prefs.AppPrefs
 import com.jmnext.data.prefs.ReadProgressStore
+import com.jmnext.data.prefs.ComicRenderMode
 import com.jmnext.data.prefs.ReaderMode
 import com.jmnext.data.remote.dto.ReadImage
 import com.jmnext.data.remote.dto.ReadPayload
@@ -296,6 +297,8 @@ fun ReaderScreen(
     // LocalContext.current 是 composable 读取，需在 remember 之外取
     val context = LocalContext.current
     val readProgress = remember(context) { ReadProgressStore(SharedPrefsKeyValueStore(context, "jm_read_progress")) }
+    val readerPrefs = remember(context) { AppPrefs(SharedPrefsKeyValueStore(context, "jm_prefs")) }
+    LaunchedEffect(Unit) { readerComicRenderMode.value = readerPrefs.comicRenderMode }
     val vm: ReaderViewModel = viewModel(
         key = "reader-$chapterId",
         factory = viewModelFactory {
@@ -444,6 +447,24 @@ fun ReaderScreen(
                                     },
                                     tint = c.accent,
                                     modifier = Modifier.size(22.dp),
+                                )
+                            }
+                            // 黑白 / 全彩：点一下切换一次（墨水屏档位只在设置里选）
+                            IconButton(
+                                onClick = {
+                                    val next = if (readerComicRenderMode.value == ComicRenderMode.Grayscale) {
+                                        ComicRenderMode.Color
+                                    } else {
+                                        ComicRenderMode.Grayscale
+                                    }
+                                    readerComicRenderMode.value = next
+                                    readerPrefs.comicRenderMode = next
+                                },
+                            ) {
+                                Text(
+                                    text = if (readerComicRenderMode.value == ComicRenderMode.Grayscale) "彩色" else "黑白",
+                                    color = c.accent,
+                                    style = MaterialTheme.typography.labelSmall,
                                 )
                             }
                         },
@@ -952,10 +973,8 @@ private fun ReaderImage(
     placeholderRatio: Float? = null,
 ) {
     val context = LocalPlatformContext.current
-    // 漫画渲染模式（彩色 / 黑白 / 墨水屏）：进入阅读器时读一次，避免每帧读 SharedPreferences
-    val renderMode = remember(context) {
-        AppPrefs(SharedPrefsKeyValueStore(context, "jm_prefs")).comicRenderMode
-    }
+    // 渲染模式来自阅读器级状态（右上角按钮可即时切换）
+    val renderMode by readerComicRenderMode
     // 重试次数。每次自增都会换一个新的 memoryCacheKey，让 Coil 真正重新发一次请求 ——
     // 否则相同的请求实例会被判定为「没有变化」，界面会永远停在失败状态上。
     var attempt by remember(image.image) { mutableIntStateOf(0) }
@@ -1067,6 +1086,9 @@ private fun scalePrefetch(base: Int): Int {
     val depth = SelfTuner.prefetchDepth
     return ((base * depth + 3) / 6).coerceIn(1, 12)
 }
+
+/// 阅读器当前的漫画渲染模式（页图读它；右上角按钮即时切换）。
+private val readerComicRenderMode = mutableStateOf(ComicRenderMode.Color)
 
 private val PREFETCH_BEFORE get() = scalePrefetch(LiteFeatures.prefetchBefore)
 private val PREFETCH_AFTER get() = scalePrefetch(LiteFeatures.prefetchAfter)
