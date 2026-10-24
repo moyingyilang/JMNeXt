@@ -88,3 +88,23 @@ class JmMotionTest {
         assertTrue("退化后仍应保留进/出方向语义", short.isEnter == spec.isEnter)
     }
 }
+
+/** 退化路径的补充断言：开启"减少动画"后，**任何** token 都必须是极短淡入。 */
+class JmMotionReduceTest {
+
+    private val spec = MotionSpec(150, 240, 360, springy = true)
+
+    @Test
+    fun everyTokenCollapsesWhenReduceMotionIsOn() {
+        for (s in spec.toJmMotionTable(reduceMotion = true).all) {
+            assertEquals("[${s.name}] 退化后应为 120ms", 120, s.durationMillis)
+        }
+    }
+
+    @Test
+    fun reduceMotionKeepsDirectionSemantics() {
+        val table = spec.toJmMotionTable(reduceMotion = true)
+        assertTrue(table.listEnter.isEnter)
+        assertTrue(!table.listExit.isEnter)
+    }
+}

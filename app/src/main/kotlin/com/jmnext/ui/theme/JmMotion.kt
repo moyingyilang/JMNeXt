@@ -44,10 +44,14 @@ data class JmMotionSpec(
  *
  * 加载态与错误抖动是**体验常量**（与风格无关），因为它们的语义是"进度未知"与"输入被拒"。
  */
-class JmMotionTable(private val m: MotionSpec) {
+class JmMotionTable(
+    private val m: MotionSpec,
+    /** true 时所有 token 退化为 [reducedMotion]（120ms 交叉淡入，无位移曲线）。 */
+    private val reduceMotion: Boolean = false,
+) {
 
     private fun spec(name: String, ms: Int, easing: Easing, isEnter: Boolean, pair: String? = null) =
-        JmMotionSpec(name, ms.coerceIn(90, 600), easing, isEnter, pair)
+        JmMotionSpec(name, ms.coerceIn(90, 600), easing, isEnter, pair).let { if (reduceMotion) it.reducedMotion() else it }
 
     val press get() = spec("press", m.fast, m.enter, isEnter = true)
 
@@ -68,11 +72,15 @@ class JmMotionTable(private val m: MotionSpec) {
     val readerBarsIn get() = spec("readerBarsIn", m.fast * 2, JmEasing.standard, isEnter = true)
     val readerBarsOut get() = spec("readerBarsOut", (m.fast * 1.67f).toInt(), JmEasing.standard, isEnter = false, pair = "readerBarsIn")
 
+    /** 与风格无关的体验常量；同样要受"减少动画"约束。 */
+    private fun constant(name: String, ms: Int, easing: Easing) =
+        JmMotionSpec(name, ms, easing, isEnter = true).let { if (reduceMotion) it.reducedMotion() else it }
+
     /** 骨架扫光：线性 = 进度未知，这里线性反而是正确语义。 */
-    val loading get() = JmMotionSpec("loading", 1200, LinearEasing, isEnter = true)
+    val loading get() = constant("loading", 1200, LinearEasing)
 
     /** 错误抖动：只在"有输入被拒"时用。 */
-    val errorShake get() = JmMotionSpec("errorShake", 200, JmEasing.outCubic, isEnter = true)
+    val errorShake get() = constant("errorShake", 200, JmEasing.outCubic)
 
     /** 全部 token（供自检遍历；新增 token 时记得登记）。 */
     val all: List<JmMotionSpec>
@@ -84,7 +92,7 @@ class JmMotionTable(private val m: MotionSpec) {
 }
 
 /** 由风格派生出 token 表。 */
-fun MotionSpec.toJmMotionTable(): JmMotionTable = JmMotionTable(this)
+fun MotionSpec.toJmMotionTable(reduceMotion: Boolean = false): JmMotionTable = JmMotionTable(this, reduceMotion)
 
 /**
  * 系统"减少动画"开启时的退化：统一 120ms 淡入淡出，不带位移。
