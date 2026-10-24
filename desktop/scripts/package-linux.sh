@@ -8,6 +8,7 @@
 # 必须在容器里运行（需要 glibc 的 JDK 与 dpkg-deb/rpmbuild/mksquashfs）。
 # 用法：  scripts/package-linux.sh [输出目录]      默认 dist
 set -euo pipefail
+trap 'rm -rf "${CHK:-}" "${STAGE:-}" "${TOP:-}" "${AD:-}" "${W:-}" "${D:-}" 2>/dev/null || true' EXIT   # 退出即清临时目录，避免中断/超时把 staging 留在容器 /tmp
 
 cd "$(dirname "$0")/.."
 V=${VERSION:-$(grep -oE '[0-9]+.[0-9]+.[0-9]+' src/main/kotlin/com/jmnext/desktop/Version.kt | tail -1)}

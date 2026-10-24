@@ -14,7 +14,7 @@ VERSION=$(grep -oE '[0-9]+\.[0-9]+\.[0-9]+' src/main/kotlin/com/jmnext/desktop/V
 . "$(dirname "$0")/lib-gate.sh"
 GATE_EXPECT="$OUT_DIR/Windows-arm64-$VERSION.exe"
 if ! gate_begin win-arm64-exe "$OUT_DIR" src/main/kotlin ../shared/src/main/kotlin build.gradle.kts ../gradle/libs.versions.toml; then exit 0; fi
-W=$(mktemp -d); trap 'rm -rf "$W"' EXIT
+W=$(mktemp -d); trap 'rm -rf "$W" "${CHK:-}"' EXIT
 STAGE="$W/stage"; mkdir -p "$STAGE"
 
 echo "== 1/4 胖 jar（windows-arm64）=="

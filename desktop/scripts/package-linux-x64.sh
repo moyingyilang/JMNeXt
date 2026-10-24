@@ -10,6 +10,7 @@
 #
 # 用法：scripts/package-linux-x64.sh [输出目录]   默认 dist-x64
 set -euo pipefail
+trap 'rm -rf "${CHK:-}" "${STAGE:-}" "${TOP:-}" "${AD:-}" "${W:-}" "${D:-}" 2>/dev/null || true' EXIT   # 退出即清临时目录，避免中断/超时把 staging 留在容器 /tmp
 cd "$(dirname "$0")/.."
 V=${VERSION:-$(grep -oE '[0-9]+.[0-9]+.[0-9]+' src/main/kotlin/com/jmnext/desktop/Version.kt | tail -1)}
 [ -n "$V" ] || { echo '拿不到版本号（Version.kt）'; exit 1; }
