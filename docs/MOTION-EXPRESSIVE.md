@@ -308,3 +308,16 @@ dump 显示详情页特征（`作者：sun、林巨星`、`共 2946 页 · 665 �
 样本量为 1，只能作为"没有明显超标"的**初步**证据，不能当稳定基线）。
 
 **未完成**：阅读器工具栏、hero、底部栏展开的帧率；`press`/`listEnter`/`listExit`/`dialogIn/Out` 接入组件。
+
+## 十九、为什么按钮类**不**加按压缩放
+
+查过之后决定不加，理由是**它们本来就有按压反馈**：
+- `Material3` 的 `Button` / `IconButton` / `TextButton` 自带 ripple + state layer（按下变亮/压暗），
+  这是 Material 的既有语言；
+- 而 `ComicCard` 是**自绘卡片**（`Column` + `clip` + `clickable`），只有 ripple、没有尺寸反馈，
+  在密集网格里 ripple 又被相邻卡片稀释 —— 所以它才需要 `jmPressScale`。
+
+**结论**：按压反馈的缺口只在"自绘的可点击容器"，不在 Material 组件上。
+再给 13 处 `Button(...)` 叠一层缩放，属于**重复表达**（ripple + 缩放同时出现），大概率显得廉价。
+这条与 `MOTION-EXPRESSIVE.md` 第一节"不抢戏"一致：同一时刻只保留一处主反馈。
+因此 `press` token 的适用范围到此为止，除非用户明确要求"按钮也要缩"。
