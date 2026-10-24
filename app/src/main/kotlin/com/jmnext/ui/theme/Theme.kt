@@ -76,6 +76,12 @@ object JmEasing {
 
     /** HyperOS 的转场曲线（退出用）：比进入更快收走，让前方的页迅速让位。 */
     val hyperOSOut: Easing = CubicBezierEasing(0.5f, 0f, 0.30f, 1f)
+
+    /**
+     * 「强调」曲线：起步极快、其后几乎匀速收尾。共享元素与 hero 转场用它 ——
+     * 位移跨越的距离大，需要在开头就把速度给足，否则看起来像"懒懒地漂过去"。
+     */
+    val emphasized: Easing = CubicBezierEasing(0.2f, 0f, 0f, 1f)
 }
 
 /**
