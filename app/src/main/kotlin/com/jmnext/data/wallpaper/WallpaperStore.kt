@@ -76,8 +76,13 @@ data class WallpaperState(
     val blur: Int = 0,
     /** 压暗遮罩 0..0.6（对应博客的 `--wallpaper-dim`，默认 0.12）。 */
     val dim: Float = 0.12f,
-    /** 自动更换间隔（分钟），0 = 只在手动「换一张」时换。 */
-    val intervalMinutes: Int = 0,
+    /**
+     * 自动更换间隔（**秒**），0 = 只在手动「换一张」时换。
+     *
+     * 从分钟改成秒：用户要按「时/分/秒」控制粒度（想快速轮换看不同图），
+     * 只给分钟级最细就是 1 分钟，太粗。旧值（分钟）在读取时按 *60 迁移。
+     */
+    val intervalSeconds: Int = 0,
     val customUrl: String = "",
     val loading: Boolean = false,
     val error: String? = null,
@@ -126,7 +131,7 @@ class WallpaperStore(context: Context, private val client: OkHttpClient) {
 
     fun setDim(value: Float) = update { it.copy(dim = value.coerceIn(0f, MAX_DIM)) }
 
-    fun setInterval(minutes: Int) = update { it.copy(intervalMinutes = minutes.coerceAtLeast(0)) }
+    fun setIntervalSeconds(seconds: Int) = update { it.copy(intervalSeconds = seconds.coerceAtLeast(0)) }
 
     /**
      * 清除壁纸缓存并立刻换一张。
@@ -291,7 +296,8 @@ class WallpaperStore(context: Context, private val client: OkHttpClient) {
         credit = prefs.getString(KEY_CREDIT, null),
         blur = prefs.getInt(KEY_BLUR, 0),
         dim = prefs.getFloat(KEY_DIM, 0.12f),
-        intervalMinutes = prefs.getInt(KEY_INTERVAL, 0),
+        intervalSeconds = prefs.getInt(KEY_INTERVAL_SEC, -1)
+            .let { if (it >= 0) it else prefs.getInt(KEY_INTERVAL, 0) * 60 },
         customUrl = prefs.getString(KEY_CUSTOM, "").orEmpty(),
     )
 
@@ -301,7 +307,7 @@ class WallpaperStore(context: Context, private val client: OkHttpClient) {
         putString(KEY_CUSTOM, s.customUrl)
         putInt(KEY_BLUR, s.blur)
         putFloat(KEY_DIM, s.dim)
-        putInt(KEY_INTERVAL, s.intervalMinutes)
+        putInt(KEY_INTERVAL_SEC, s.intervalSeconds)
     }
 
     private fun readCache(key: String): List<String> = runCatching {
@@ -346,6 +352,7 @@ class WallpaperStore(context: Context, private val client: OkHttpClient) {
         private const val KEY_BLUR = "blur"
         private const val KEY_DIM = "dim"
         private const val KEY_INTERVAL = "interval"
+        private const val KEY_INTERVAL_SEC = "interval_sec"
         private const val KEY_CURSOR = "cursor"
         private const val KEY_BING = "cache_bing"
         private const val KEY_ANIME = "cache_anime"

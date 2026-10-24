@@ -70,11 +70,11 @@ class MainActivity : ComponentActivity() {
 
             // 自动更换。只在应用活着的时候走（与博客的做法一致：网页关掉计时器也就没了），
             // 不留后台定时任务 —— 为了一张背景图常驻后台不值当
-            LaunchedEffect(wallpaper.mode, wallpaper.intervalMinutes) {
-                val minutes = wallpaper.intervalMinutes
-                if (minutes > 0 && wallpaper.mode != WallpaperMode.Off) {
+            LaunchedEffect(wallpaper.mode, wallpaper.intervalSeconds) {
+                val seconds = wallpaper.intervalSeconds
+                if (seconds > 0 && wallpaper.mode != WallpaperMode.Off) {
                     while (true) {
-                        delay(minutes * 60_000L)
+                        delay(seconds * 1_000L)
                         wallpaperStore.next()
                     }
                 }
