@@ -159,6 +159,16 @@ class AppPrefs(private val sp: KeyValueStore) {
             .getOrDefault(ReaderMode.Scroll)
         set(value) = sp.putString(KEY_READER_MODE, value.name)
 
+    /**
+     * 漫画图渲染模式（彩色 / 黑白 / 墨水屏）。默认彩色 —— 升级不动任何人的画面。
+     *
+     * 只影响漫画画面，不影响界面配色：墨水屏设备的痛点在图不在壳，
+     * 把整个界面也弄灰反而更难辨认层级。
+     */
+    var comicRenderMode: ComicRenderMode
+        get() = ComicRenderMode.fromName(sp.getString(KEY_COMIC_RENDER, null))
+        set(value) = sp.putString(KEY_COMIC_RENDER, value.name)
+
     private companion object {
         val historySerializer = ListSerializer(String.serializer())
 
