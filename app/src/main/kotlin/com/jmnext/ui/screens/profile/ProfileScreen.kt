@@ -958,6 +958,34 @@ private fun ReadingCard(
             color = c.textTertiary,
             modifier = Modifier.padding(top = Spacing.sm),
         )
+        Text(
+            text = "漫画渲染",
+            style = MaterialTheme.typography.bodyLarge,
+            color = c.text,
+            modifier = Modifier.padding(top = Spacing.md),
+        )
+        SingleChoiceSegmentedButtonRow(
+            modifier = Modifier.fillMaxWidth().padding(top = Spacing.sm),
+        ) {
+            ComicRenderMode.entries.forEachIndexed { index, m ->
+                SegmentedButton(
+                    selected = comicRenderMode == m,
+                    onClick = {
+                        comicRenderMode = m
+                        renderPrefs.comicRenderMode = m   // 下次进阅读器生效
+                    },
+                    shape = SegmentedButtonDefaults.itemShape(index, ComicRenderMode.entries.size),
+                ) {
+                    Text(m.label, style = MaterialTheme.typography.labelSmall)
+                }
+            }
+        }
+        Text(
+            text = comicRenderMode.hint + "。只作用于漫画画面，不影响界面配色；墨水屏设备选「墨水屏」会更清楚。",
+            style = MaterialTheme.typography.labelSmall,
+            color = c.textTertiary,
+            modifier = Modifier.padding(top = Spacing.sm),
+        )
     }
 }
 
