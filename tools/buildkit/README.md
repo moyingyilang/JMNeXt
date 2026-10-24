@@ -1,24 +1,41 @@
-# buildkit（跨架构构建脚本集）
+# buildkit：本项目的构建与出包工具链
 
-把"在 Termux + Linux 容器里构建 Android 与 Compose Desktop、并跨架构打包"这套流程参数化后的脚本集。
-目标：换台机器、换个架构，改 `build.env` 就能跑，而不是重踩一遍坑。
+这套脚本负责把源码变成可发布的产物 —— Android APK、桌面端 deb/rpm/AppImage/exe/ZIP。
+它们和源码一起开源（与仓库同为 **AGPL-3.0**，见仓库根 `LICENSE`）。
 
-## 用法
+## 为什么单独抽出来
 
-```bash
-cp env.example build.env   # 按自己的环境改路径与 build-tools 版本
-./10-enter.sh              # 进入构建环境 + 绑定挂载自检（挂载掉了是最常见的坑）
-./20-build-android.sh      # 打 Android release 包（full/lite），带产物新鲜度自检
-./30-verify-apk.sh         # 验收：包名、版本、签名
-```
+2.0.0 期间出过两次"改了代码但打出来的包是旧的"，都靠人肉发现，代价是用户白跑一趟。
+所以这里的每一步都带**产物自检**：不过检查就拒绝出包。这不是可选项。
 
-## 已验证 / 未验证
+## 文件
 
-- **在本机实测通过**：`10-enter.sh`（容器内可见项目与 Android SDK）、`20`/`30` 的判据来源
-  （`aapt2 dump badging` 的包名与版本、`apksigner verify`、时间戳自检）；
-- **未验证**：在其他机器、其他发行版、proot 而非 chroot、x86_64 宿主机上的表现；
-  以及 desktop 打包脚本（本仓库尚未收敛进来）。
+| 文件 | 作用 |
+| --- | --- |
+| `build.env` | **配置模板**：项目根目录、容器根、容器内 JDK/Gradle、Android SDK、要挂载的宿主机目录、打包任务名。复制成本地 `build.env` 后按自己的环境改（**不要提交个人路径**） |
+| `10-enter.sh` | 进入构建容器（chroot/proot），把需要的宿主机目录 bind 进去 |
+| `20-build-android.sh` | 打 Android release（full + lite，走 R8），并检查 APK 是不是**今天**产出的 |
+| `30-verify-apk.sh` | 验包名与签名 |
+| `40-package-desktop.sh` | 跑桌面端打包脚本，产出 linux/windows 各形态 |
+| `50-verify-desktop.sh` | 验桌面端产物（能启动、版本号正确等） |
+| `verify-apk.sh` | 单独验 APK 的辅助脚本 |
 
-## 许可
+桌面端各形态的打包细节在 `desktop/scripts/package-*.sh`（Linux 出 tar.gz/deb/rpm/AppImage，
+Windows 出 ZIP / 免装 Java ZIP / 单体 exe，含 x64、arm64、架构自适应三类）。
 
-**MPL-2.0**（见 `LICENSE`）：按文件传染 —— 改了这个工具的文件就要公开那些文件；把工具当工具用、或与自己的代码放在别的文件里，则不受影响。脚本源自作者自己的项目，版权归作者，可另行授权。
+## 已知约束
+
+- **必须在 Linux 容器里跑**：需要 glibc 的 JDK 与 `dpkg-deb` / `rpmbuild` / `mksquashfs` / `jpackage`；
+- `build.env` 里的 `PROJECT_DIR` 等路径**与具体机器绑定**：本仓库内的模板用的是通用示例，
+  换机器要改；脚本发现"宿主机上找不到项目"就是这个没改；
+- **部分 desktop 打包脚本要求工作目录是 `desktop/`**（它们不像 `package-linux.sh` 那样自己 `cd`），
+  从仓库根直接跑会报找不到 `src/main/kotlin/.../Version.kt`；
+- 构建产物只放 `dist*/` 与 `build/`（已在 `.gitignore`），**不入库**；发版时作为 Release 附件。
+
+## 许可证
+
+与仓库一致：**AGPL-3.0**。
+
+> 现状提示：`tools/buildkit/*.sh` 的文件头目前写的是 `SPDX-License-Identifier: MPL-2.0`，
+> 与仓库 `LICENSE`（AGPL-3.0）**不一致**；`desktop/scripts/*.sh` 尚无 SPDX 头。
+> 这两处需要按项目的最终决定统一（本 README 暂不为它们做单方面声明）。
