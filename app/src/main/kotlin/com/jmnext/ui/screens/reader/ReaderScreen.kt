@@ -364,7 +364,6 @@ fun ReaderScreen(
                             // 伪长图的接缝会重新变得可见，这正是 1.1.5 修掉的问题。
                             // 背景由 ReaderBackdrop() 画（跟随壁纸 / 无壁纸退回主题纯色），
                             // 它底层永远先铺一层实色，所以接缝依然看不见。
-                            // 所以接缝依然看不见。
                             .pointerInput(mode) {
                                 detectTapGestures(onTap = { barsVisible = !barsVisible })
                             },
