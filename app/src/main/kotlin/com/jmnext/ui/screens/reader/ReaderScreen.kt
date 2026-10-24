@@ -370,11 +370,11 @@ fun ReaderScreen(
                             // 阅读页的背景与设置页对不上——用户反馈的「不同步」主要就是这一处。
                             // ambientBase 只会画实色渐变与光斑，不依赖任何透明度，
                             // 所以接缝依然看不见。
-                            .ambientBase()
                             .pointerInput(mode) {
                                 detectTapGestures(onTap = { barsVisible = !barsVisible })
                             },
                     ) {
+                        ReaderBackdrop()
                         val toggleBars = { barsVisible = !barsVisible }
                         when (mode) {
                             ReaderMode.Scroll -> ScrollReader(payload, repo, pageLink)
