@@ -828,9 +828,9 @@ private fun WallpaperCard() {
                     Icon(Icons.Filled.Refresh, contentDescription = "换一张", tint = c.accent)
                 }
                 Text(
-                    text = when (wall.intervalMinutes) {
+                    text = when (val iv = wall.intervalSeconds) {
                         0 -> "自动更换：关闭"
-                        else -> "自动更换：每 ${wall.intervalMinutes} 分钟"
+                        else -> "自动更换：每 " + (if (iv < 60) iv.toString() + " 秒" else if (iv % 3600 == 0) (iv / 3600).toString() + " 小时" else (iv / 60).toString() + " 分钟")
                     },
                     style = MaterialTheme.typography.labelSmall,
                     color = c.textTertiary,
@@ -838,20 +838,35 @@ private fun WallpaperCard() {
                 )
             }
 
-            // 间隔档位与博客一致：关闭 / 5 / 15 / 30 / 60 分钟
+            // 档位改成秒级：用户要按「时/分/秒」控制粒度（原来最细只有 1 分钟）
             SingleChoiceSegmentedButtonRow(modifier = Modifier.fillMaxWidth()) {
-                listOf(0, 5, 15, 30, 60).forEachIndexed { index, minutes ->
+                listOf(0, 10, 30, 60, 300, 1800, 3600).forEachIndexed { index, seconds ->
                     SegmentedButton(
-                        selected = wall.intervalMinutes == minutes,
-                        onClick = { store?.setInterval(minutes) },
-                        shape = SegmentedButtonDefaults.itemShape(index, 5),
+                        selected = wall.intervalSeconds == seconds,
+                        onClick = { store?.setIntervalSeconds(seconds) },
+                        shape = SegmentedButtonDefaults.itemShape(index, 7),
                     ) {
                         Text(
-                            text = if (minutes == 0) "关" else "$minutes",
+                            text = when (seconds) { 0 -> "关"; 10 -> "10秒"; 30 -> "30秒"; 60 -> "1分"; 300 -> "5分"; 1800 -> "30分"; else -> "1时" },
                             style = MaterialTheme.typography.labelSmall,
                         )
                     }
                 }
+            }
+            // 清缓存：此前没有入口（用户反馈"翻来覆去只有那几张、也清不掉"）
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                TextButton(onClick = { scope.launch { store?.clearCache() } }) {
+                    Text("清除壁纸缓存", color = c.accent)
+                }
+                Text(
+                    text = "清掉已缓存的候选图，立刻重新取一批",
+                    style = MaterialTheme.typography.labelSmall,
+                    color = c.textTertiary,
+                    modifier = Modifier.weight(1f),
+                )
             }
         }
 
