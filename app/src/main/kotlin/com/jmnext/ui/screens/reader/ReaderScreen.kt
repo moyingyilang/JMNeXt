@@ -103,7 +103,6 @@ import com.jmnext.ui.components.ErrorBox
 import com.jmnext.ui.LocalUiOptions
 import com.jmnext.ui.components.GlassLevel
 import com.jmnext.ui.components.GlassSurface
-import com.jmnext.ui.components.ambientBase
 import com.jmnext.ui.components.GlassTopBar
 import com.jmnext.ui.components.LoadingBox
 import com.jmnext.ui.theme.jmShape
@@ -363,12 +362,8 @@ fun ReaderScreen(
                             .fillMaxSize()
                             // 阅读页必须有**不透明**底：壁纸若从页间/页边透出来，
                             // 伪长图的接缝会重新变得可见，这正是 1.1.5 修掉的问题。
-                            //
-                            // 用与设置页**同一段绘制**（ambientBase）而不是自己写一个色值：
-                            // 这里原来在滚动模式取 `c.backdrop.first()`、翻页模式写死
-                            // `Color.Black`，于是换成 Material / Miuix 或开莫奈之后，
-                            // 阅读页的背景与设置页对不上——用户反馈的「不同步」主要就是这一处。
-                            // ambientBase 只会画实色渐变与光斑，不依赖任何透明度，
+                            // 背景由 ReaderBackdrop() 画（跟随壁纸 / 无壁纸退回主题纯色），
+                            // 它底层永远先铺一层实色，所以接缝依然看不见。
                             // 所以接缝依然看不见。
                             .pointerInput(mode) {
                                 detectTapGestures(onTap = { barsVisible = !barsVisible })
