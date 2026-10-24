@@ -8,15 +8,15 @@ import androidx.compose.animation.core.tween
 /**
  * 一次运动的最小描述：**时长 + 曲线**，外加两个用于自检的元数据。
  *
- * 为什么要有这一层：项目里原来散着 9 处 `tween(...)` 与 5 处 `spring(...)`，同一个动作
- * （比如"列表项出现"）在不同页面用了不同时长，用户能感觉到"这里和那里不一样快"却说不出哪里不对。
- * 现在所有动效都从这里取，参数集中、可被单测约束。
+ * 为什么要这一层：项目里原来散着 9 处 `tween(...)` 与 5 处 `spring(...)`，
+ * 同一个动作（如"列表项出现"）在不同页面用了不同时长，用户能感到"这里和那里不一样快"却说不出哪不对。
  *
- * 设计契约见 `docs/MOTION-EXPRESSIVE.md`；三条硬约束由 `JmMotionTest` 保证：
- * 时长落在 90..600ms、**退出不得慢于进入**、除加载态外不得用线性曲线。
+ * 注意本表**不是写死的常数**：它由当前风格的 [MotionSpec] 派生（见 [JmMotionTable]）——
+ * Material / Miuix / HyperOS / Plasma 各有自己的 fast/base/slow 与进出曲线，
+ * 这是风格识别度的一部分，不能被一套全局数值抹平。
  *
- * @param isEnter true = 进入/出现；false = 退出/消失
- * @param pair 与哪一段配对（成对校验"退出 ≤ 进入"）
+ * 三条硬约束由 `JmMotionTest` 对**每一套风格**分别验证：
+ * 时长落在 90..600ms、退出不得慢于进入、除加载态外不得用线性曲线。
  */
 data class JmMotionSpec(
     val name: String,
@@ -25,64 +25,72 @@ data class JmMotionSpec(
     val isEnter: Boolean,
     val pair: String? = null,
 ) {
-    /** 转成 Compose 的 [TweenSpec]；需要弹簧时另说（本项目当前不用弹簧，见文档说明）。 */
     fun <T> tween(): TweenSpec<T> = tween(durationMillis = durationMillis, easing = easing)
 }
 
 /**
- * 全项目唯一的动效参数表。
+ * 由某个风格的 [MotionSpec] 派生出全部交互的 token。
  *
- * 数值来源与理由见 `docs/MOTION-EXPRESSIVE.md` 第二节；这里只强调两条最容易做错的：
- * 1. **退出比进入快**（160 vs 220、260 vs 300、150 vs 200）—— 退出是"撤销"，用户已知要去哪；
- * 2. **加载态是唯一允许线性**的地方 —— 线性 = 进度未知，这反而是正确语义。
+ * 映射关系（比例是按"感知时长"定的，不是随手取整）：
+ *
+ * | 交互 | 时长取自 |
+ * | --- | --- |
+ * | 按压反馈 | `fast`（<100ms 才有触觉感） |
+ * | 列表进入 / 移除 | `base` / `base×0.72`（退出更快） |
+ * | 前进 / 返回转场 | `slow` / `slow×0.87` |
+ * | 共享元素 hero | `slow`（距离大，用强调曲线） |
+ * | 底部栏 / 对话框 | `base` 与其更快值 |
+ * | 阅读器工具栏 | `fast×2` / `fast×1.67` |
+ *
+ * 加载态与错误抖动是**体验常量**（与风格无关），因为它们的语义是"进度未知"与"输入被拒"。
  */
-object JmMotion {
+class JmMotionTable(private val m: MotionSpec) {
 
-    /** 按压反馈：小于 100ms 才有"触觉"感，慢了像卡了一下。 */
-    val press = JmMotionSpec("press", 90, JmEasing.standard, isEnter = true)
+    private fun spec(name: String, ms: Int, easing: Easing, isEnter: Boolean, pair: String? = null) =
+        JmMotionSpec(name, ms.coerceIn(90, 600), easing, isEnter, pair)
 
-    /** 列表项进入：内容"长出来"，不是"跳出来"。 */
-    val listEnter = JmMotionSpec("listEnter", 220, JmEasing.fluent, isEnter = true)
-    val listExit = JmMotionSpec("listExit", 160, JmEasing.inCubic, isEnter = false, pair = "listEnter")
+    val press get() = spec("press", m.fast, m.enter, isEnter = true)
 
-    /** 页面转场：前进从右推入；返回是撤销，因此更快。 */
-    val navForward = JmMotionSpec("navForward", 300, JmEasing.decel, isEnter = true)
-    val navBack = JmMotionSpec("navBack", 260, JmEasing.outCubic, isEnter = false, pair = "navForward")
+    val listEnter get() = spec("listEnter", m.base, m.enter, isEnter = true)
+    val listExit get() = spec("listExit", (m.base * 0.72f).toInt(), m.exit, isEnter = false, pair = "listEnter")
 
-    /** 共享元素（hero）：距离大，需要"强调"曲线在开头给足速度。 */
-    val hero = JmMotionSpec("hero", 320, JmEasing.emphasized, isEnter = true)
+    val navForward get() = spec("navForward", m.slow, m.enter, isEnter = true)
+    val navBack get() = spec("navBack", (m.slow * 0.87f).toInt(), m.exit, isEnter = false, pair = "navForward")
 
-    /** 底部栏：先给容器、再给内容（内容错开 40ms，由调用方用 delay 实现）。 */
-    val bottomBarIn = JmMotionSpec("bottomBarIn", 240, JmEasing.decel, isEnter = true)
-    val bottomBarOut = JmMotionSpec("bottomBarOut", 200, JmEasing.inCubic, isEnter = false, pair = "bottomBarIn")
+    val hero get() = spec("hero", m.slow, JmEasing.emphasized, isEnter = true)
 
-    /** 对话框：聚焦，不是"飞入"。 */
-    val dialogIn = JmMotionSpec("dialogIn", 200, JmEasing.decel, isEnter = true)
-    val dialogOut = JmMotionSpec("dialogOut", 150, JmEasing.inCubic, isEnter = false, pair = "dialogIn")
+    val bottomBarIn get() = spec("bottomBarIn", m.base, m.enter, isEnter = true)
+    val bottomBarOut get() = spec("bottomBarOut", (m.base * 0.83f).toInt(), m.exit, isEnter = false, pair = "bottomBarIn")
 
-    /** 阅读器工具栏：沉浸阅读时必须有让位感，所以隐去比显出更快。 */
-    val readerBarsIn = JmMotionSpec("readerBarsIn", 180, JmEasing.standard, isEnter = true)
-    val readerBarsOut = JmMotionSpec("readerBarsOut", 150, JmEasing.standard, isEnter = false, pair = "readerBarsIn")
+    val dialogIn get() = spec("dialogIn", (m.base * 0.9f).toInt(), m.enter, isEnter = true)
+    val dialogOut get() = spec("dialogOut", (m.base * 0.75f).toInt(), m.exit, isEnter = false, pair = "dialogIn")
 
-    /** 骨架屏扫光：唯一允许线性的地方。 */
-    val loading = JmMotionSpec("loading", 1200, LinearEasing, isEnter = true)
+    val readerBarsIn get() = spec("readerBarsIn", m.fast * 2, JmEasing.standard, isEnter = true)
+    val readerBarsOut get() = spec("readerBarsOut", (m.fast * 1.67f).toInt(), JmEasing.standard, isEnter = false, pair = "readerBarsIn")
 
-    /** 错误抖动：只在"有输入被拒"时用，且必须衰减。 */
-    val errorShake = JmMotionSpec("errorShake", 200, JmEasing.outCubic, isEnter = true)
+    /** 骨架扫光：线性 = 进度未知，这里线性反而是正确语义。 */
+    val loading get() = JmMotionSpec("loading", 1200, LinearEasing, isEnter = true)
 
-    /** 全部 token（供自检遍历，新增时不要漏登记）。 */
-    val all: List<JmMotionSpec> = listOf(
-        press, listEnter, listExit, navForward, navBack, hero,
-        bottomBarIn, bottomBarOut, dialogIn, dialogOut,
-        readerBarsIn, readerBarsOut, loading, errorShake,
-    )
+    /** 错误抖动：只在"有输入被拒"时用。 */
+    val errorShake get() = JmMotionSpec("errorShake", 200, JmEasing.outCubic, isEnter = true)
 
-    /**
-     * 系统"减少动画"开启时的退化：统一 120ms 淡入淡出，不用任何位移曲线。
-     *
-     * 为什么不是"直接不动画"：完全无动画会让页面切换失去因果线索（用户会以为没点上），
-     * 极短的交叉淡入既尊重了无障碍设置，又保留了"发生了变化"的反馈。
-     */
-    fun reduceMotion(spec: JmMotionSpec): JmMotionSpec =
-        JmMotionSpec("reduce(${spec.name})", 120, JmEasing.standard, spec.isEnter, spec.pair)
+    /** 全部 token（供自检遍历；新增 token 时记得登记）。 */
+    val all: List<JmMotionSpec>
+        get() = listOf(
+            press, listEnter, listExit, navForward, navBack, hero,
+            bottomBarIn, bottomBarOut, dialogIn, dialogOut,
+            readerBarsIn, readerBarsOut, loading, errorShake,
+        )
 }
+
+/** 由风格派生出 token 表。 */
+fun MotionSpec.toJmMotionTable(): JmMotionTable = JmMotionTable(this)
+
+/**
+ * 系统"减少动画"开启时的退化：统一 120ms 淡入淡出，不带位移。
+ *
+ * 为什么不直接"不动画"：完全无动画会让页面切换失去因果线索（用户会以为没点上），
+ * 极短交叉淡入既尊重无障碍设置，又保留了"发生了变化"的反馈。
+ */
+fun JmMotionSpec.reducedMotion(): JmMotionSpec =
+    JmMotionSpec("reduce(${name})", 120, JmEasing.standard, isEnter, pair)
