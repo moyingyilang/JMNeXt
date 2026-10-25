@@ -45,3 +45,27 @@ body.mobile .m-tab a.on { color:var(--acc); }
 .settings { display:flex; flex-direction:column; gap:12px; max-width:360px; }
 .settings label { display:flex; gap:8px; align-items:center; }
 .settings select { background:#161a22; color:var(--fg); border:1px solid var(--line); border-radius:6px; padding:6px; }
+
+/* ---------- iOS / 移动端适配 ----------
+ * Safari 的地址栏会收放，100vh 在 iPhone 上会把底部导航顶出可视区，
+ * 所以优先用 dvh；同时给刘海与 Home 指示条留出安全区。 */
+@supports (height: 100dvh) {
+  body.desktop, body.mobile { min-height: 100dvh; }
+}
+body.mobile {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+body.mobile .m-main {
+  padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+}
+/* 顶部安全区：iPhone 刘海机型 */
+body.mobile > header, body.mobile .m-head {
+  padding-top: env(safe-area-inset-top, 0px);
+}
+/* 横向安全区（横屏时） */
+body.mobile .m-main {
+  padding-left: env(safe-area-inset-left, 0px);
+  padding-right: env(safe-area-inset-right, 0px);
+}
+/* 避免 iOS 上双击缩放与点击高亮 */
+body.mobile { -webkit-text-size-adjust: 100%; -webkit-tap-highlight-color: transparent; }

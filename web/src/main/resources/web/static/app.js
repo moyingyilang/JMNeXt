@@ -89,6 +89,55 @@ async function renderFavorites() {
   }
 }
 
+// ---------- 搜索 ----------
+async function renderSearch() {
+  if (!content) return;
+  const q0 = decodeURIComponent((location.hash.split('?q=')[1] || '')).trim();
+  content.innerHTML = `
+    <h2 class="title">搜索</h2>
+    <form id="sf" class="row" style="display:flex;gap:8px">
+      <input id="q" name="q" value="${escapeHtml(q0)}" placeholder="关键词 / 作者 / 标签"
+             style="flex:1;background:#161a22;color:var(--fg);border:1px solid var(--line);border-radius:6px;padding:8px">
+      <button type="submit">搜索</button>
+    </form>
+    <div id="sr"></div>`;
+  const form = document.getElementById('sf');
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const q = document.getElementById('q').value.trim();
+    location.hash = q ? `#/search?q=${encodeURIComponent(q)}` : '#/search';
+  });
+  const sr = document.getElementById('sr');
+  if (!q0) { sr.innerHTML = '<p class="hint">输入关键词后回车</p>'; return; }
+  sr.innerHTML = '<p class="hint">搜索中…</p>';
+  try {
+    const list = await api(`/api/search?q=${encodeURIComponent(q0)}`);
+    if (!list || list.length === 0) { sr.innerHTML = '<p class="hint">没有结果</p>'; return; }
+    sr.innerHTML = `<div class="${layout === 'mobile' ? 'm-grid' : 'grid'}">${list.map(it => `
+      <a class="card" href="#/album/${encodeURIComponent(it.id)}">
+        <span class="card-t">${escapeHtml(it.name || it.id)}</span>
+      </a>`).join('')}</div>`;
+  } catch (e) {
+    sr.innerHTML = `<p class="hint">搜索失败：${escapeHtml(e.message)}</p>`;
+  }
+}
+
+// ---------- 历史 ----------
+async function renderHistory() {
+  if (!content) return;
+  content.innerHTML = '<p class="hint">载入历史…</p>';
+  try {
+    const list = await api('/api/history');
+    if (!list || list.length === 0) { content.innerHTML = '<p class="hint">还没有阅读记录</p>'; return; }
+    content.innerHTML = `<ul class="fav-list">${list.map(h => `
+      <li><a href="#/read/${encodeURIComponent(h.chapterId || h.chapter)}">
+        ${escapeHtml(h.title || h.aid || '')}</a>
+        <span class="hint"> 第 ${escapeHtml(String(h.page ?? 0))} 页</span></li>`).join('')}</ul>`;
+  } catch (e) {
+    content.innerHTML = `<p class="hint">历史载入失败：${escapeHtml(e.message)}（先登录）</p>`;
+  }
+}
+
 // ---------- 设置 ----------
 async function renderSettings() {
   if (!content) return;
@@ -130,6 +179,8 @@ function route() {
   if (!h || h === '#/') return renderHome();
   if ((m = h.match(/^#\/favorites$/))) return renderFavorites();
   if ((m = h.match(/^#\/settings$/))) return renderSettings();
+  if ((m = h.match(/^#\/history$/))) return renderHistory();
+  if (h.match(/^#\/search/)) return renderSearch();
   if ((m = h.match(/^#\/album\/(.+)$/))) return renderAlbum(decodeURIComponent(m[1]));
   if (h.match(/^#\/read\//)) return; // 阅读器由 reader.js 处理
   return renderHome();
