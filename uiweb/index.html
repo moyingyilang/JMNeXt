@@ -9,7 +9,7 @@
   #boot{padding:16px;white-space:pre-wrap;word-break:break-all;font-size:13px;opacity:.85}
   canvas{display:block}
 </style>
-<!-- 没有 webpack 时浏览器不认裸模块名；Kotlin/Wasm 产物里有一处 @js-joda/core，映射到本地文件。 -->
+<!-- 无 webpack 时浏览器不认裸模块名；Kotlin/Wasm 产物里有 @js-joda/core 这一处，映射到本地文件。 -->
 <script type="importmap">
 { "imports": { "@js-joda/core": "./vendor/js-joda.esm.js" } }
 </script>
@@ -29,7 +29,7 @@
       say('⑤ main 已执行；canvas ' + (c ? (c.width + 'x' + c.height) : '不存在'));
     }, 2500);
   } catch (err) {
-    say('⑥ 导入失败：' + (err && (err.message || err)));
+    say("⑥ 导入失败：" + (err && (err.message || err)) + "\n\n仍可使用手写版界面：打开 \/legacy 路径即可（功能完整）。");
   }
 </script>
 </body>
