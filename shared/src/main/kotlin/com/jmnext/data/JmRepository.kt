@@ -370,7 +370,7 @@ class JmRepository(
                 )
             }
             throw IllegalStateException(
-                "收藏状态与预期不符：期望 ，服务端实际 ，已尝试回滚",
+                "收藏状态与预期不符：期望 " + expected + "，服务端实际 " + result.type + "，已尝试回滚",
             )
         }
         return result
