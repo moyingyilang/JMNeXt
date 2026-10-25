@@ -354,7 +354,8 @@ class AccountListViewModel(
                 if (result.isSuccess && more.isNotEmpty()) page = next
                 prev.copy(
                     loadingMore = false,
-                    items = if (result.isSuccess) prev.items + more else prev.items,
+                    // 去重：本地优先的首页可能已包含远端后续页的条目，直接相加会出现重复卡
+                    items = if (result.isSuccess) (prev.items + more).distinctBy { it.id } else prev.items,
                     loadMoreError = if (result.isSuccess) null else result.exceptionOrNull()?.message,
                     // 成功但本页为空 = 到底了（服务端不给 total 时的唯一终点信号）
                     exhausted = result.isSuccess && more.isEmpty(),
