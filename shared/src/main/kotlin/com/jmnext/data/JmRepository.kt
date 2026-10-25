@@ -754,11 +754,34 @@ class JmRepository(
     )
 
     /** 漫画详情。 */
-    suspend fun album(id: String): AlbumDetail = remote.get(
-        JmPaths.ALBUM,
-        AlbumDetail.serializer(),
-        mapOf("id" to id),
-    )
+    /**
+     * 取本子详情。
+     *
+     * **跟随官方 2.1.12**：传入的 `id` 可能是**章节 ID**（例如从历史、章节链接或搜索结果点进来）。
+     * 服务端会照原样返回那一话本身 —— 它的 `series_id` 指向父本子、且 `series` 为空，
+     * 于是详情页会显示成"一话"：没有章节目录，收藏与阅读进度也会记到错的 id 上。
+     * 官方客户端本版的做法是自动重定向到父本子，这里保持一致。
+     *
+     * 守卫三条，缺一不可：
+     * - `seriesId` 非空且不为 "0"（单本子/单话的 series_id 常为 0）；
+     * - `seriesId` 不等于入参（避免自指死循环）；
+     * - `series` 为空（有章节目录说明拿到的已经是本子，不该再跳）。
+     */
+    suspend fun album(id: String): AlbumDetail {
+        val detail = remote.get(
+            JmPaths.ALBUM,
+            AlbumDetail.serializer(),
+            mapOf("id" to id),
+        )
+        val parent = detail.seriesId
+        val needsRedirect = parent != null && parent.isNotBlank() && parent != "0" && parent != id && detail.series.isEmpty()
+        if (!needsRedirect || parent == null) return detail
+        return remote.get(
+            JmPaths.ALBUM,
+            AlbumDetail.serializer(),
+            mapOf("id" to parent),
+        )
+    }
 
     /**
      * 阅读内容（图片列表）。
