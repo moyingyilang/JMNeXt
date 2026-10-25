@@ -55,7 +55,7 @@ compose.desktop {
                 org.jetbrains.compose.desktop.application.dsl.TargetFormat.AppImage,
             )
             packageName = "jmnext"  // deb/rpm 对包名字符有限制，大写与下划线不合法
-            packageVersion = "2.2.0"
+            packageVersion = "2.2.1"
             description = "JMNeXt 桌面版"
             vendor = "moyingyilang"
         }
@@ -108,7 +108,7 @@ tasks.register<Jar>("fatJar") {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     manifest {
         attributes["Main-Class"] = "com.jmnext.desktop.MainKt"
-        attributes["Implementation-Version"] = "2.2.0"
+        attributes["Implementation-Version"] = "2.2.1"
     }
     from(sourceSets.main.get().output)
     from({
