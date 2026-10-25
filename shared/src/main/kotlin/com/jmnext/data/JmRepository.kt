@@ -345,11 +345,36 @@ class JmRepository(
      * 告知实际动作（`add` / `remove` / `move` / `edit`）。因此客户端不需要先查状态再决定调什么，
      * 也就不会出现「本地以为已收藏、服务端其实没有」这类不一致。
      */
-    suspend fun toggleFavorite(aid: String): ActionResult = remote.post(
-        JmPaths.FAVORITE,
-        JsonElement.serializer(),
-        mapOf("aid" to aid),
-    ).toActionResult()
+    suspend fun toggleFavorite(
+        aid: String,
+        /** 期望发生的动作（`add` / `remove`）。传了就做一致性校验与回滚；不传则维持旧的纯切换语义。 */
+        expected: String? = null,
+        /** 与官方 `rollback_when_mismatch` 同名同义：状态不符时把服务端翻回去。 */
+        rollbackWhenMismatch: Boolean = true,
+    ): ActionResult {
+        val result = remote.post(
+            JmPaths.FAVORITE,
+            JsonElement.serializer(),
+            mapOf("aid" to aid),
+        ).toActionResult()
+        // **跟随官方 2.1.12**：Toggle 接口是"翻转"语义，服务端可能已经先翻过一次（并发点击、
+        // 另一台设备改过、或本地状态本身就旧了）。若它实际执行的动作与我们期望的不符，
+        // 说明服务端现在处于我们**不想要**的状态 —— 官方做法是再次请求把它翻回来（第二次调用
+        // 会执行相反动作），然后抛出可读错误，让界面把这个异常当作"没改成"处理。
+        if (expected != null && rollbackWhenMismatch && result.type != null && result.type != expected) {
+            runCatching {
+                remote.post(
+                    JmPaths.FAVORITE,
+                    JsonElement.serializer(),
+                    mapOf("aid" to aid),
+                )
+            }
+            throw IllegalStateException(
+                "收藏状态与预期不符：期望 ，服务端实际 ，已尝试回滚",
+            )
+        }
+        return result
+    }
 
     /**
      * 收藏列表。
