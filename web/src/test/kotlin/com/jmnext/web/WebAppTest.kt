@@ -1,4 +1,8 @@
 package com.jmnext.web
+import io.ktor.http.contentType
+import io.ktor.http.ContentType
+import io.ktor.client.request.setBody
+import io.ktor.client.request.post
 
 import io.ktor.client.request.get
 import io.ktor.client.request.header
@@ -54,3 +58,50 @@ class WebAppTest {
 }
 
 private suspend fun io.ktor.client.statement.HttpResponse.bodyAsTextSafe(): String = bodyAsText()
+
+class WebAuthGuardTest {
+
+    @Test
+    fun protectedEndpointsRequireSession() = testApplication {
+        application { module() }
+        for (path in listOf("/api/home", "/api/search?q=x", "/api/me")) {
+            val r = client.get(path)
+            assertEquals(HttpStatusCode.Unauthorized, r.status, "$path 未登录应 401")
+        }
+    }
+
+    @Test
+    fun healthAndPageStayPublic() = testApplication {
+        application { module() }
+        assertEquals(HttpStatusCode.OK, client.get("/api/health").status)
+        assertEquals(HttpStatusCode.OK, client.get("/").status)
+    }
+
+    @Test
+    fun loginRejectsEmptyCredentials() = testApplication {
+        application { module() }
+        val r = client.post("/api/login") {
+            header("Content-Type", "application/json")
+            setBody("""{"username":"","password":""}""")
+        }
+        assertEquals(HttpStatusCode.BadRequest, r.status)
+    }
+
+    @Test
+    fun cookieParsing() {
+        assertEquals("abc123", cookieSession("a=1; jmsid=abc123; b=2"))
+        assertEquals(null, cookieSession("a=1; b=2"))
+        assertEquals(null, cookieSession(null))
+    }
+
+    @Test
+    fun sessionIdsAreRandomAndUnique() {
+        val reg = SessionRegistry()
+        val a = reg.create(); val b = reg.create()
+        assertEquals(64, a.id.length, "32 字节 → 64 个十六进制字符")
+        assertTrue(a.id != b.id)
+        assertEquals(2, reg.size())
+        reg.drop(a.id)
+        assertEquals(1, reg.size())
+    }
+}

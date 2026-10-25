@@ -37,12 +37,14 @@ fun isMobileUa(ua: String?): Boolean {
         !("ipad" in s) && !("tablet" in s)
 }
 
-fun Application.module() {
+fun Application.module(registry: SessionRegistry = SessionRegistry()) {
     install(ContentNegotiation) {
         json()
     }
 
     routing {
+        apiRoutes(registry)
+
         get("/api/health") {
             call.respond(Health(status = "ok", version = WEBUI_VERSION))
         }
