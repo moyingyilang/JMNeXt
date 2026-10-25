@@ -86,6 +86,22 @@ class FavoriteStore(
 
     private fun key(namespace: String) = "favorites_" + namespace
 
+    /** 明确"设为已收藏"。与 toggle 不同：已是收藏态时不翻转，用于成功响应后的落库。 */
+    fun add(namespace: String, entry: FavoriteEntry) {
+        if (entry.aid.isBlank()) return
+        val current = all(namespace)
+        if (current.any { it.aid == entry.aid }) return
+        val now = entry.addedAt.takeIf { it > 0L } ?: System.currentTimeMillis()
+        save(
+            namespace,
+            (listOf(entry.copy(addedAt = now)) + current).sortedByDescending { it.addedAt }.take(limit),
+        )
+    }
+
+    /** 明确"设为未收藏"。 */
+    fun removeAid(namespace: String, aid: String) =
+        save(namespace, all(namespace).filterNot { it.aid == aid })
+
     fun all(namespace: String): List<FavoriteEntry> = runCatching {
         val raw = kv.getString(key(namespace)) ?: return emptyList()
         Json.decodeFromString(serializer, raw)

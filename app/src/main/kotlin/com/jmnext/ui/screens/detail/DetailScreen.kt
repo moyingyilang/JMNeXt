@@ -1,4 +1,6 @@
 package com.jmnext.ui.screens.detail
+import com.jmnext.data.prefs.FavoriteEntry
+import com.jmnext.data.prefs.FavoriteStore
 
 import com.jmnext.data.prefs.SharedPrefsKeyValueStore
 import androidx.compose.foundation.layout.Arrangement
@@ -161,6 +163,9 @@ class DetailViewModel(
     private val repo: JmRepository,
     private val readProgress: ReadProgressStore,
     private val comicId: String,
+    /** 本地收藏：成功响应后落库，断网时"我的收藏"仍可见。 */
+    private val favoriteStore: FavoriteStore,
+    private val namespace: () -> String,
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(DetailUiState())
@@ -495,6 +500,18 @@ class DetailViewModel(
                 "add", "move", "edit" -> true
                 else -> _state.value.detail?.isFavorite ?: false
             }
+            // 本地落库：只在服务端明确返回了动作时写，避免把"不知道"当成"已收藏"
+            when (action?.type) {
+                "add", "move", "edit" -> favoriteStore.add(
+                    namespace(),
+                    com.jmnext.data.prefs.FavoriteEntry(
+                        aid = comicId,
+                        title = _state.value.detail?.name.orEmpty(),
+                    ),
+                )
+                "remove" -> favoriteStore.removeAid(namespace(), comicId)
+                else -> Unit
+            }
             // 只有「刚收藏/移动」才引导归类；取消收藏时弹选择器毫无意义
             val shouldOfferFolder = action != null && action.type in setOf("add", "move", "edit")
             val folders = if (shouldOfferFolder) {
@@ -580,9 +597,11 @@ fun DetailScreen(
         }
     }
     val readProgress = remember(context) { ReadProgressStore(SharedPrefsKeyValueStore(context, "jm_read_progress")) }
+    // 本地收藏存在 app 级（与 readProgress 同层）
+    val app = androidx.compose.ui.platform.LocalContext.current.applicationContext as com.jmnext.JmApp
     val vm: DetailViewModel = viewModel(
         key = "detail-$comicId",
-        factory = viewModelFactory { initializer { DetailViewModel(repo, readProgress, comicId) } },
+        factory = viewModelFactory { initializer { DetailViewModel(repo, readProgress, comicId, app.favoriteStore, { app.accountNamespace }) } },
     )
     val state by vm.state.collectAsStateWithLifecycle()
     val c = JmTheme.colors

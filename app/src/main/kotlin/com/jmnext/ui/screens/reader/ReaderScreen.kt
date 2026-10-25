@@ -1,4 +1,6 @@
 package com.jmnext.ui.screens.reader
+import com.jmnext.data.prefs.HistoryEntry
+import com.jmnext.data.prefs.HistoryStore
 import com.jmnext.data.ImageBytes
 import com.jmnext.data.PageSampler
 import com.jmnext.data.SelfTuner
@@ -147,6 +149,9 @@ class ReaderViewModel(
     private val repo: JmRepository,
     private val readProgress: ReadProgressStore,
     private val comicId: String,
+    /** 本地历史：读到哪一话一并落库，断网时"观看历史"仍可见。 */
+    private val historyStore: HistoryStore,
+    private val namespace: () -> String,
     initialChapterId: String,
 ) : ViewModel() {
 
@@ -256,6 +261,14 @@ class ReaderViewModel(
     private fun recordProgress(payload: ReadPayload) {
         // 记录的键用作品 id 而不是章节 id：详情页要回答的是「这个作品读到哪一话」
         readProgress.record(comicId, _state.value.currentChapterId)
+        // 本地历史：同一作品只保留最新一条（读第 3 话顶掉第 2 话）
+        historyStore.record(
+            namespace(),
+            com.jmnext.data.prefs.HistoryEntry(
+                aid = comicId,
+                chapterId = _state.value.currentChapterId,
+            ),
+        )
     }
 
     /** 相邻章节。目录里找不到当前话时两边都为空（例如目录还没载入）。 */
@@ -307,7 +320,12 @@ fun ReaderScreen(
     val vm: ReaderViewModel = viewModel(
         key = "reader-$chapterId",
         factory = viewModelFactory {
-            initializer { ReaderViewModel(repo, readProgress, comicId, chapterId) }
+            initializer { ReaderViewModel(
+                repo, readProgress, comicId,
+                (context.applicationContext as com.jmnext.JmApp).historyStore,
+                { (context.applicationContext as com.jmnext.JmApp).accountNamespace },
+                chapterId,
+            ) }
         },
     )
     val state by vm.state.collectAsStateWithLifecycle()
