@@ -87,7 +87,18 @@ private val repository: JmRepository by lazy {
     )
 }
 
-fun main() {
+fun main(args: Array<String>) {
+    // 2.2.2：无界面启动 WebUI。没有这个入口，WebUI 在产品里就没有触发器。
+    if (args.contains("--web")) {
+        val port = args.firstOrNull { it.startsWith("--port=") }?.substringAfter("=")?.toIntOrNull() ?: 17800
+        val lan = args.contains("--lan")
+        val cfg = com.jmnext.web.WebConfig(lan = lan, port = port, passcode = if (lan) com.jmnext.web.WebConfig.newPasscode() else "")
+        val (actual, server) = com.jmnext.web.startWebServer(cfg)
+        println("WebUI: http://127.0.0.1:" + actual)
+        if (lan) println("局域网已开启，口令：" + cfg.passcode)
+        Runtime.getRuntime().addShutdownHook(Thread { runCatching { server.stop(0, 0) } })
+        while (true) Thread.sleep(1_000)
+    }
     // 必须最先调用：否则在此之前打印的启动信息（版本与构建时间、渲染后端）只进终端、不进日志。
     // 此前"日志里看不到启动行"就是这个原因 —— 不是跑的是旧包。
     Log.init()

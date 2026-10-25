@@ -22,9 +22,18 @@ plugins {
  */
 sourceSets.main {
     kotlin.srcDir("../shared/src/main/kotlin")
+    // 2.2.2：WebUI 与 shared 同样是纯 JVM，按源码引入（不引入跨工程依赖）
+    kotlin.srcDir("../web/src/main/kotlin")
+    // WebUI 的 HTML/CSS/JS 必须一起进 classpath，否则入口页 500
+    resources.srcDir("../web/src/main/resources")
 }
 
 dependencies {
+    // 2.2.2 WebUI：本地 Ktor 服务
+    implementation("io.ktor:ktor-server-core:3.0.3")
+    implementation("io.ktor:ktor-server-cio:3.0.3")
+    implementation("io.ktor:ktor-server-content-negotiation:3.0.3")
+    implementation("io.ktor:ktor-serialization-kotlinx-json:3.0.3")
     testImplementation("junit:junit:4.13.2")
     implementation(compose.desktop.currentOs)
     // material3 不在 currentOs 里，要单独加（Kotlin/Compose 的实际报错就是第 3 行 unresolved）
@@ -97,6 +106,10 @@ val targetNative by configurations.creating {
 }
 
 dependencies {
+    // 2.2.2 WebUI：本地 Ktor 服务
+    implementation("io.ktor:ktor-server-cio:3.0.3")
+    implementation("io.ktor:ktor-server-content-negotiation:3.0.3")
+    implementation("io.ktor:ktor-serialization-kotlinx-json:3.0.3")
     skikoForTarget[targetPlatform]?.let { targetNative(it) }
 }
 
