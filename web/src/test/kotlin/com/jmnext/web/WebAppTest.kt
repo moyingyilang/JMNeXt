@@ -1,4 +1,5 @@
 package com.jmnext.web
+import kotlin.test.assertNull
 import com.jmnext.data.prefs.HistoryEntry
 import io.ktor.http.contentType
 import io.ktor.http.ContentType
@@ -161,5 +162,39 @@ class WebStaticTest {
         val mobile = client.get("/") { header("User-Agent", "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0)") }.bodyAsTextSafe()
         assertTrue(desktop.contains("reader.js"))
         assertTrue(mobile.contains("reader.js"))
+    }
+}
+
+class WebFavoriteSettingsTest {
+
+    @Test
+    fun favoriteToggleIsIdempotent() {
+        val dir = java.nio.file.Files.createTempDirectory("fav").toFile()
+        val f = com.jmnext.data.prefs.FavoriteStore(FileKeyValueStore(java.io.File(dir, "f.properties")))
+        f.add("s1", com.jmnext.data.prefs.FavoriteEntry(aid = "42"))
+        assertTrue(f.has("s1", "42"))
+        // 再加一次不应变成两条
+        f.add("s1", com.jmnext.data.prefs.FavoriteEntry(aid = "42"))
+        assertEquals(1, f.all("s1").size)
+        f.removeAid("s1", "42")
+        assertEquals(false, f.has("s1", "42"))
+    }
+
+    @Test
+    fun settingsRoundTrip() {
+        val dir = java.nio.file.Files.createTempDirectory("set").toFile()
+        val kv = FileKeyValueStore(java.io.File(dir, "s.properties"))
+        kv.putString("theme", "dark")
+        kv.putString("readerMode", "page")
+        assertEquals("dark", kv.getString("theme"))
+        assertEquals("page", kv.getString("readerMode"))
+        assertNull(kv.getString("missing"))
+    }
+
+    @Test
+    fun settingsEndpointIsPublic() = testApplication {
+        application { module() }
+        // 设置读取不需要会话（前端首屏要据此决定主题）
+        assertEquals(HttpStatusCode.OK, client.get("/api/settings").status)
     }
 }

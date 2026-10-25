@@ -41,6 +41,8 @@ fun Application.module(
     registry: SessionRegistry = SessionRegistry(),
     imageCache: ImageCache = ImageCache(java.io.File(System.getProperty("java.io.tmpdir"), "jmnext-web-img")),
     stores: ReaderStores = ReaderStores(FileKeyValueStore(java.io.File(System.getProperty("java.io.tmpdir"), "jmnext-web/kv.properties"))),
+    favorites: com.jmnext.data.prefs.FavoriteStore = com.jmnext.data.prefs.FavoriteStore(FileKeyValueStore(java.io.File(System.getProperty("java.io.tmpdir"), "jmnext-web/fav.properties"))),
+    settings: FileKeyValueStore = FileKeyValueStore(java.io.File(System.getProperty("java.io.tmpdir"), "jmnext-web/settings.properties")),
 ) {
     install(ContentNegotiation) {
         json()
@@ -50,6 +52,7 @@ fun Application.module(
         apiRoutes(registry)
         imageRoutes(registry, imageCache)
         readerRoutes(registry, stores)
+        detailRoutes(registry, favorites, settings)
 
         get("/api/health") {
             call.respond(Health(status = "ok", version = WEBUI_VERSION))
