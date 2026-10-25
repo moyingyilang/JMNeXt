@@ -38,6 +38,7 @@ fun isMobileUa(ua: String?): Boolean {
 }
 
 fun Application.module(
+    config: WebConfig = WebConfig(),
     registry: SessionRegistry = SessionRegistry(),
     imageCache: ImageCache = ImageCache(java.io.File(System.getProperty("java.io.tmpdir"), "jmnext-web-img")),
     stores: ReaderStores = ReaderStores(FileKeyValueStore(java.io.File(System.getProperty("java.io.tmpdir"), "jmnext-web/kv.properties"))),
@@ -49,6 +50,7 @@ fun Application.module(
     }
 
     routing {
+        gateRoutes(config)
         apiRoutes(registry)
         imageRoutes(registry, imageCache)
         readerRoutes(registry, stores)

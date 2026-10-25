@@ -198,3 +198,54 @@ class WebFavoriteSettingsTest {
         assertEquals(HttpStatusCode.OK, client.get("/api/settings").status)
     }
 }
+
+class WebGateRouteTest {
+
+    @Test
+    fun defaultConfigListensLoopbackOnly() {
+        val c = WebConfig()
+        assertEquals("127.0.0.1", c.host)
+        assertTrue(!c.lan)
+    }
+
+    @Test
+    fun lanConfigListensAllInterfaces() {
+        val c = WebConfig(lan = true, passcode = "123456")
+        assertEquals("0.0.0.0", c.host)
+    }
+
+    @Test
+    fun passcodeIsSixDigits() {
+        repeat(20) {
+            val p = WebConfig.newPasscode()
+            assertEquals(6, p.length)
+            assertTrue(p.all { it.isDigit() })
+        }
+    }
+
+    @Test
+    fun gateRejectsWrongPasscodeInLanMode() = testApplication {
+        application { module(config = WebConfig(lan = true, passcode = "123456")) }
+        val bad = client.post("/api/gate") {
+            header("Content-Type", "application/json")
+            setBody("""{"code":"000000"}""")
+        }
+        assertEquals(HttpStatusCode.Forbidden, bad.status)
+        val ok = client.post("/api/gate") {
+            header("Content-Type", "application/json")
+            setBody("""{"code":"123456"}""")
+        }
+        assertEquals(HttpStatusCode.OK, ok.status)
+        assertTrue(ok.headers["Set-Cookie"]?.contains("jmgate=") == true, "应发放口令 cookie")
+    }
+
+    @Test
+    fun gateOpenWhenNotInLanMode() = testApplication {
+        application { module(config = WebConfig()) }
+        val r = client.post("/api/gate") {
+            header("Content-Type", "application/json")
+            setBody("""{"code":"whatever"}""")
+        }
+        assertEquals(HttpStatusCode.OK, r.status, "只听回环时不需要口令")
+    }
+}
