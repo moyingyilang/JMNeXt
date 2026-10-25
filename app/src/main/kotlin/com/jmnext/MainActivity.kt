@@ -13,6 +13,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.jmnext.ui.LocalTagBlocker
 import com.jmnext.data.prefs.AppPrefs
@@ -27,6 +29,7 @@ import com.jmnext.ui.components.AmbientBackdrop
 import com.jmnext.ui.theme.JmTheme
 import com.jmnext.ui.theme.ThemeStyle
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 /**
  * 唯一的 Activity。所有界面都是 Compose，导航交给 [JmNavHost]。
@@ -70,6 +73,22 @@ class MainActivity : ComponentActivity() {
 
             // 自动更换。只在应用活着的时候走（与博客的做法一致：网页关掉计时器也就没了），
             // 不留后台定时任务 —— 为了一张背景图常驻后台不值当
+            // 「跟随手机壁纸」：WallpaperManager 没有"壁纸已更换"的回调，只能在回到前台时重新读一次。
+            // 不这样做的话，用户在系统里换了壁纸、回到应用还是旧图 —— 这是这个功能的已知限制里唯一能补偿的一条。
+            val wallScope = rememberCoroutineScope()
+            val lifecycleOwner = androidx.lifecycle.compose.LocalLifecycleOwner.current
+            DisposableEffect(lifecycleOwner, wallpaper.mode) {
+                val observer = androidx.lifecycle.LifecycleEventObserver { _, event ->
+                    if (event == androidx.lifecycle.Lifecycle.Event.ON_RESUME &&
+                        wallpaper.mode == WallpaperMode.SystemWallpaper
+                    ) {
+                        wallScope.launch { wallpaperStore.next(force = true) }
+                    }
+                }
+                lifecycleOwner.lifecycle.addObserver(observer)
+                onDispose { lifecycleOwner.lifecycle.removeObserver(observer) }
+            }
+
             LaunchedEffect(wallpaper.mode, wallpaper.intervalSeconds) {
                 val seconds = wallpaper.intervalSeconds
                 if (seconds > 0 && wallpaper.mode != WallpaperMode.Off) {
