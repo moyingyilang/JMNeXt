@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>JMNeXt WebUI</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>
+  html,body{margin:0;padding:0;height:100%;background:#101014;color:#ddd;font:14px/1.6 -apple-system,system-ui,sans-serif}
+  #boot{padding:16px;white-space:pre-wrap;word-break:break-all;font-size:13px;opacity:.85}
+  canvas{display:block}
+</style>
+<!-- 没有 webpack 时浏览器不认裸模块名；Kotlin/Wasm 产物里有一处 @js-joda/core，映射到本地文件。 -->
+<script type="importmap">
+{ "imports": { "@js-joda/core": "./vendor/js-joda.esm.js" } }
+</script>
+</head>
+<body>
+<div id="boot">① 页面已打开，正在加载 wasm…</div>
+<script type="module">
+  const boot = document.getElementById('boot');
+  const say = (t) => { boot.textContent = t; };
+  window.addEventListener('error', e => say('② 运行错误：' + (e.message || e.error)));
+  window.addEventListener('unhandledrejection', e => say('③ Promise 拒绝：' + (e.reason && (e.reason.message || e.reason))));
+  try {
+    await import('./JMNeXt-uiweb.mjs?v=' + Date.now());
+    say('④ wasm 已加载并执行 main');
+    setTimeout(() => {
+      const c = document.querySelector('canvas');
+      say('⑤ main 已执行；canvas ' + (c ? (c.width + 'x' + c.height) : '不存在'));
+    }, 2500);
+  } catch (err) {
+    say('⑥ 导入失败：' + (err && (err.message || err)));
+  }
+</script>
+</body>
+</html>

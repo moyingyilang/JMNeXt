@@ -24,6 +24,8 @@ dependencies {
     implementation(libs.ktor.server.cio)
     implementation(libs.ktor.server.content.negotiation)
     implementation(libs.ktor.serialization.json)
+    // wasm 前端与 API 分端口，需要 CORS
+    implementation("io.ktor:ktor-server-cors:3.0.3")
     testImplementation(kotlin("test"))
     testImplementation(libs.ktor.server.test.host)
 }
