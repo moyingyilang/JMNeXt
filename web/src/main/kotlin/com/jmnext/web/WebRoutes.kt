@@ -106,7 +106,9 @@ fun Route.imageRoutes(reg: SessionRegistry, cache: ImageCache) {
             ?: return@get call.respond(HttpStatusCode.BadGateway, ErrOut("取章节失败"))
         val img = payload.images.getOrNull(idx)
             ?: return@get call.respond(HttpStatusCode.NotFound, ErrOut("页码越界"))
-        val raw = ImageFetcher.get(img.image, referer = "https://18comic.vip/")
+        // Referer 用**图片自身的 host**：线路不同域名也不同，硬编码会 403
+        val host = runCatching { java.net.URI(img.image).host }.getOrNull()
+        val raw = ImageFetcher.get(img.image, referer = host?.let { "https://$it/" })
             ?: return@get call.respond(HttpStatusCode.BadGateway, ErrOut("取图失败"))
         val slices = com.jmnext.data.crypto.JmCrypto.sliceCount(payload.id, img.page.toString())
         val out = JvmUnscramble.unscramble(raw, slices)

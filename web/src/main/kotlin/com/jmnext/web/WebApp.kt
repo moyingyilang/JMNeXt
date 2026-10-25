@@ -40,6 +40,7 @@ fun isMobileUa(ua: String?): Boolean {
 fun Application.module(
     registry: SessionRegistry = SessionRegistry(),
     imageCache: ImageCache = ImageCache(java.io.File(System.getProperty("java.io.tmpdir"), "jmnext-web-img")),
+    stores: ReaderStores = ReaderStores(FileKeyValueStore(java.io.File(System.getProperty("java.io.tmpdir"), "jmnext-web/kv.properties"))),
 ) {
     install(ContentNegotiation) {
         json()
@@ -48,6 +49,7 @@ fun Application.module(
     routing {
         apiRoutes(registry)
         imageRoutes(registry, imageCache)
+        readerRoutes(registry, stores)
 
         get("/api/health") {
             call.respond(Health(status = "ok", version = WEBUI_VERSION))

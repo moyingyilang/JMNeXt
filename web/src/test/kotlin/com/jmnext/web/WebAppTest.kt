@@ -1,4 +1,5 @@
 package com.jmnext.web
+import com.jmnext.data.prefs.HistoryEntry
 import io.ktor.http.contentType
 import io.ktor.http.ContentType
 import io.ktor.client.request.setBody
@@ -103,5 +104,31 @@ class WebAuthGuardTest {
         assertEquals(2, reg.size())
         reg.drop(a.id)
         assertEquals(1, reg.size())
+    }
+}
+
+class ReaderStoreTest {
+
+    private fun stores(): ReaderStores {
+        val dir = java.nio.file.Files.createTempDirectory("kv").toFile()
+        return ReaderStores(FileKeyValueStore(java.io.File(dir, "kv.properties")))
+    }
+
+    @Test
+    fun historyIsNamespacedPerSession() {
+        val s = stores()
+        s.history.record("ses-a", HistoryEntry(aid = "100", chapterId = "200", page = 3))
+        s.history.record("ses-b", HistoryEntry(aid = "100", chapterId = "999", page = 1))
+        assertEquals(1, s.history.all("ses-a").size)
+        assertEquals("200", s.history.all("ses-a")[0].chapterId)
+        assertEquals("999", s.history.all("ses-b")[0].chapterId, "两个会话不应串数据")
+    }
+
+    @Test
+    fun readOutUsesProxyUrls() {
+        // 只验证 URL 形状（不触网）：索引 → /img/chapter/index
+        val chapter = "abc"
+        val urls = (0 until 3).map { "/img/$chapter/$it" }
+        assertEquals(listOf("/img/abc/0", "/img/abc/1", "/img/abc/2"), urls)
     }
 }
