@@ -257,6 +257,25 @@ Fluent（Windows 11 Acrylic / Mica）与 MIUI 毛玻璃设计语言，两端观�
 | [docs/engineering-notes.md](docs/engineering-notes.md) | 工程笔记：构建问题、静默失败问题与判断依据 |
 | [CHANGELOG.md](CHANGELOG.md) | 各版本变更，含未验证项声明 |
 
+## WebUI（2.2.2）
+
+桌面端带一个本地 Web 服务：浏览器里就能浏览、搜索、阅读、收藏。
+
+```sh
+# 只监听本机（默认）
+jmnext-desktop --web              # → http://127.0.0.1:17800
+
+# 指定端口（被占用时会自动顺延，实际端口会打印出来）
+jmnext-desktop --web --port=18888
+
+# 局域网访问（会打印一个 6 位口令，浏览器首次访问要输入）
+jmnext-desktop --web --lan
+```
+
+**按访问头给两套界面**：桌面浏览器是侧栏 + 网格 + 横向双页阅读；手机浏览器是底部 tab + 单列 + 纵向滚动。两套共用同一套接口。
+
+**安全边界**：默认只听 `127.0.0.1`；局域网必须显式开启并过口令；JWT 只存在服务端内存、不进浏览器；前端永远拿不到 JM 的原始图片地址（只拿 `/img/<chapter>/<index>`，服务端负责防盗链、反切片与缓存）。
+
 ## 致谢
 
 - **[tiann](https://github.com/tiann) 的 [KernelSU](https://github.com/tiann/KernelSU)**：
