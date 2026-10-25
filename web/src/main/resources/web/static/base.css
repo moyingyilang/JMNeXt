@@ -30,3 +30,18 @@ body.mobile .m-tab a.on { color:var(--acc); }
 .reader-spread .page { width:100%; height:auto; display:block; border-radius:6px; }
 .reader-spread .page.single { grid-column:1 / -1; }
 .reader-scroll .page { width:100%; height:auto; display:block; margin:0 0 8px; border-radius:6px; }
+
+/* 列表与详情 */
+.grid, .m-grid { display:grid; gap:10px; }
+.grid { grid-template-columns:repeat(auto-fill, minmax(150px, 1fr)); }
+.m-grid { grid-template-columns:repeat(2, 1fr); }
+.card { background:#161a22; border:1px solid var(--line); border-radius:8px; padding:10px; }
+.card-t { font-size:13px; }
+.title { margin:0 0 12px; font-size:18px; }
+.row { margin:0 0 12px; }
+.chapters { padding-left:20px; }
+.chapters li { margin:4px 0; }
+.fav-list { padding-left:20px; }
+.settings { display:flex; flex-direction:column; gap:12px; max-width:360px; }
+.settings label { display:flex; gap:8px; align-items:center; }
+.settings select { background:#161a22; color:var(--fg); border:1px solid var(--line); border-radius:6px; padding:6px; }

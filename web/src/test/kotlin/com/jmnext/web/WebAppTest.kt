@@ -249,3 +249,25 @@ class WebGateRouteTest {
         assertEquals(HttpStatusCode.OK, r.status, "只听回环时不需要口令")
     }
 }
+
+class WebPagesTest {
+
+    @Test
+    fun appScriptCoversAllPages() = testApplication {
+        application { module() }
+        val js = client.get("/static/app.js").bodyAsTextSafe()
+        listOf("/api/home", "/api/album/", "/api/favorite/", "/api/favorites", "/api/settings").forEach {
+            assertTrue(js.contains(it), "app.js 应覆盖 $it")
+        }
+        assertTrue(!js.contains("18comic"), "前端不应出现 JM 域名")
+    }
+
+    @Test
+    fun pagesLinkToNewRoutes() = testApplication {
+        application { module() }
+        val d = client.get("/") { header("User-Agent", "Mozilla/5.0 (X11; Linux x86_64)") }.bodyAsTextSafe()
+        val m = client.get("/") { header("User-Agent", "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0)") }.bodyAsTextSafe()
+        assertTrue(d.contains("#/favorites") && d.contains("#/settings"))
+        assertTrue(m.contains("#/favorites"))
+    }
+}
