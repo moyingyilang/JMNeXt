@@ -81,7 +81,7 @@ class JmSession(
     val isReady: Boolean get() = apiBaseUrl != null
 
     companion object {
-        /** 与 `JMComic3v2.1.9.apk` 对齐，服务端会校验版本号合法性。 */
-        const val DEFAULT_CLIENT_VERSION = "2.1.9"
+        /** 与 `JMComic3 v2.1.12` 对齐，服务端会校验版本号合法性。 */
+        const val DEFAULT_CLIENT_VERSION = "2.1.12"
     }
 }
