@@ -1,4 +1,8 @@
 package com.jmnext.ui.screens.favorites
+import com.jmnext.data.prefs.FavoriteEntry
+import com.jmnext.data.prefs.HistoryEntry
+import com.jmnext.data.prefs.FavoriteStore
+import com.jmnext.data.prefs.HistoryStore
 
 import androidx.compose.material.icons.automirrored.filled.DriveFileMove
 import androidx.compose.foundation.layout.Arrangement
@@ -108,6 +112,11 @@ data class AccountListUiState(
 class AccountListViewModel(
     private val repo: JmRepository,
     private val kind: AccountListKind,
+    /** 本地历史/收藏：**本地优先**，服务端只用于首次导入（2.2.1 起）。 */
+    private val historyStore: HistoryStore,
+    private val favoriteStore: FavoriteStore,
+    /** 每次调用取当前账号的命名空间 —— 不能用构造期定死的值（换号/登录后要换）。 */
+    private val namespace: () -> String,
 ) : ViewModel() {
 
     // 登录态用当前真实值做初值：默认值 false 会让已登录用户在首帧看到「需要登录」
@@ -158,12 +167,38 @@ class AccountListViewModel(
                 repo.bootstrap()
                 when (kind) {
                     AccountListKind.Favorites -> {
-                        val p = repo.favorites(page = 1, folderId = _state.value.selectedFolder)
-                        Triple(p.list, p.folderList, p.totalCount)
+                        val ns = namespace()
+                        val local = favoriteStore.all(ns)
+                        if (local.isNotEmpty()) {
+                            // 断网也能看见：本地有就直接用，不去请求
+                            Triple(local.map { it.toListItem() }, emptyList(), local.size)
+                        } else {
+                            val p = repo.favorites(page = 1, folderId = _state.value.selectedFolder)
+                            // 首次导入：把服务端结果落本地，下次断网可见
+                            p.list.forEach {
+                                favoriteStore.toggle(
+                                    ns,
+                                    FavoriteEntry(aid = it.id, title = it.name.orEmpty(), cover = it.image),
+                                )
+                            }
+                            Triple(p.list, p.folderList, p.totalCount)
+                        }
                     }
                     AccountListKind.History -> {
-                        val p = repo.history(page = 1)
-                        Triple(p.list, emptyList(), p.totalCount)
+                        val ns = namespace()
+                        val local = historyStore.all(ns)
+                        if (local.isNotEmpty()) {
+                            Triple(local.map { it.toListItem() }, emptyList(), local.size)
+                        } else {
+                            val p = repo.history(page = 1)
+                            p.list.forEach {
+                                historyStore.record(
+                                    ns,
+                                    HistoryEntry(aid = it.id, title = it.name.orEmpty(), cover = it.image),
+                                )
+                            }
+                            Triple(p.list, emptyList(), p.totalCount)
+                        }
                     }
                     AccountListKind.Tracking -> {
                         // 追更列表是 POST（见 JmPaths.TRACKING_LIST），与上面两个 GET 不同
@@ -357,9 +392,11 @@ fun AccountListScreen(
     modifier: Modifier = Modifier,
 ) {
     val repo = LocalRepository.current
+    // 本地历史/收藏存在 app 级（与 readProgress 同一层），所以要从 application 取
+    val app = androidx.compose.ui.platform.LocalContext.current.applicationContext as com.jmnext.JmApp
     val vm: AccountListViewModel = viewModel(
         key = "account-list-${kind.name}",
-        factory = viewModelFactory { initializer { AccountListViewModel(repo, kind) } },
+        factory = viewModelFactory { initializer { AccountListViewModel(repo, kind, app.historyStore, app.favoriteStore, { app.accountNamespace }) } },
     )
     val state by vm.state.collectAsStateWithLifecycle()
     val c = JmTheme.colors
@@ -608,3 +645,18 @@ private fun FolderRow(
         }
     }
 }
+
+/** 本地历史 → UI 列表项。与 `ListItem` 的服务端映射保持同一套字段语义。 */
+private fun HistoryEntry.toListItem(): ListItem = ListItem(
+    id = aid,
+    name = title.ifBlank { null },
+    image = cover,
+)
+
+/** 本地收藏 → UI 列表项。本地记录必然处于"已收藏"，所以 isFavorite 固定 true。 */
+private fun FavoriteEntry.toListItem(): ListItem = ListItem(
+    id = aid,
+    name = title.ifBlank { null },
+    image = cover,
+    isFavorite = true,
+)
