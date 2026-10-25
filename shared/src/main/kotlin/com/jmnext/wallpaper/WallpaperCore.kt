@@ -15,6 +15,7 @@ enum class WallpaperMode(val label: String, val desc: String) {
     Anime("二次元随机", "t.alcy.cc / t.mwm.moe / loliapi 三个源依次尝试"),
     All("全部随机", "Bing 与二次元混合"),
     Custom("自定义地址", "自己填一个图片直链"),
+    SystemWallpaper("跟随手机壁纸", "读取系统当前壁纸（Android）；换壁纸后回到应用或点「重新读取」生效"),
 }
 
 /**

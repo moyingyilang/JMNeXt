@@ -61,6 +61,7 @@ enum class WallpaperMode(val label: String, val desc: String) {
     Anime("二次元随机", "t.alcy.cc / t.mwm.moe / loliapi 三个源依次尝试"),
     All("全部随机", "Bing 与二次元混合"),
     Custom("自定义地址", "自己填一个图片直链"),
+    SystemWallpaper("跟随手机壁纸", "读取系统当前壁纸（Android）；换壁纸后回到应用或点「重新读取」生效"),
 }
 
 /**
@@ -165,6 +166,15 @@ class WallpaperStore(context: Context, private val client: OkHttpClient) {
         val s = _state.value
         when (s.mode) {
             WallpaperMode.Off -> update { it.copy(url = null, credit = null, error = null) }
+            // 跟随系统壁纸：不联网，读本机壁纸缓存成文件后走同一个图片链路
+            WallpaperMode.SystemWallpaper -> {
+                val url = SystemWallpaperSource.load(appContext)
+                if (url == null) {
+                    update { it.copy(url = null, credit = null, error = "读不到系统壁纸，已退回纯色") }
+                } else {
+                    update { it.copy(url = url, credit = "系统壁纸", error = null) }
+                }
+            }
 
             WallpaperMode.Custom -> {
                 if (s.customUrl.isBlank()) {
