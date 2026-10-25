@@ -29,9 +29,9 @@ class LocalStoresTest {
     @Test
     fun historyKeepsOnlyLatestPerAlbum() {
         val s = HistoryStore(FakeStore())
-        s.record(HistoryEntry(aid = "1", chapterId = "c1", title = "A", updatedAt = 100))
-        s.record(HistoryEntry(aid = "1", chapterId = "c2", title = "A", updatedAt = 200))
-        val all = s.all()
+        s.record("u1", HistoryEntry(aid = "1", chapterId = "c1", title = "A", updatedAt = 100))
+        s.record("u1", HistoryEntry(aid = "1", chapterId = "c2", title = "A", updatedAt = 200))
+        val all = s.all("u1")
         assertEquals(1, all.size, "同一本作品只应保留一条")
         assertEquals("c2", all[0].chapterId, "应保留最新那一话")
     }
@@ -39,16 +39,16 @@ class LocalStoresTest {
     @Test
     fun historyIsNamespaceIsolated() {
         val kv = FakeStore()
-        HistoryStore(kv, namespace = "u1").record(HistoryEntry(aid = "1", updatedAt = 1))
-        assertEquals(1, HistoryStore(kv, namespace = "u1").all().size)
-        assertEquals(0, HistoryStore(kv, namespace = "u2").all().size, "换账号不应串数据")
+        HistoryStore(kv).record("u1", HistoryEntry(aid = "1", updatedAt = 1))
+        assertEquals(1, HistoryStore(kv).all("u1").size)
+        assertEquals(0, HistoryStore(kv).all("u2").size, "换账号不应串数据")
     }
 
     @Test
     fun historyRespectsLimitAndDropsOldest() {
         val s = HistoryStore(FakeStore(), limit = 3)
-        repeat(5) { i -> s.record(HistoryEntry(aid = "$i", updatedAt = (i + 1) * 100L)) }
-        val all = s.all()
+        repeat(5) { i -> s.record("u1", HistoryEntry(aid = "$i", updatedAt = (i + 1) * 100L)) }
+        val all = s.all("u1")
         assertEquals(3, all.size)
         assertEquals(listOf("4", "3", "2"), all.map { it.aid }, "应按时间倒序且淘汰最早的")
     }
@@ -57,25 +57,25 @@ class LocalStoresTest {
     fun corruptedJsonDegradesToEmpty() {
         val kv = FakeStore()
         kv.rawPut("history_local", "{not json")
-        assertEquals(0, HistoryStore(kv).all().size, "坏数据应退化为空表而不是抛异常")
+        assertEquals(0, HistoryStore(kv).all("local").size, "坏数据应退化为空表而不是抛异常")
     }
 
     @Test
     fun favoriteToggleIsIdempotent() {
         val s = FavoriteStore(FakeStore())
-        assertTrue(s.toggle(FavoriteEntry(aid = "9", addedAt = 1)))
-        assertTrue(s.has("9"))
-        assertFalse(s.toggle(FavoriteEntry(aid = "9", addedAt = 2)), "第二次应取消收藏")
-        assertFalse(s.has("9"))
-        assertEquals(0, s.all().size)
+        assertTrue(s.toggle("u1", FavoriteEntry(aid = "9", addedAt = 1)))
+        assertTrue(s.has("u1", "9"))
+        assertFalse(s.toggle("u1", FavoriteEntry(aid = "9", addedAt = 2)), "第二次应取消收藏")
+        assertFalse(s.has("u1", "9"))
+        assertEquals(0, s.all("u1").size)
     }
 
     @Test
     fun favoriteSortedAndLimited() {
         val s = FavoriteStore(FakeStore(), limit = 2)
-        s.toggle(FavoriteEntry(aid = "a", addedAt = 1))
-        s.toggle(FavoriteEntry(aid = "b", addedAt = 2))
-        s.toggle(FavoriteEntry(aid = "c", addedAt = 3))
-        assertEquals(listOf("c", "b"), s.all().map { it.aid })
+        s.toggle("u1", FavoriteEntry(aid = "a", addedAt = 1))
+        s.toggle("u1", FavoriteEntry(aid = "b", addedAt = 2))
+        s.toggle("u1", FavoriteEntry(aid = "c", addedAt = 3))
+        assertEquals(listOf("c", "b"), s.all("u1").map { it.aid })
     }
 }

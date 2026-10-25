@@ -1,4 +1,6 @@
 package com.jmnext
+import com.jmnext.data.prefs.FavoriteStore
+import com.jmnext.data.prefs.HistoryStore
 import com.jmnext.data.SelfTuner
 
 import com.jmnext.data.auth.AndroidKeystoreKeyProvider
@@ -41,6 +43,19 @@ class JmApp : Application(), SingletonImageLoader.Factory {
 
     /** 阅读进度（作品 → 上次读到哪一话）。服务端历史只有作品粒度，这一层必须在本地。 */
     val readProgress: ReadProgressStore by lazy { ReadProgressStore(SharedPrefsKeyValueStore(this, "jm_read_progress")) }
+
+    /**
+     * 本地历史/收藏的账号命名空间。
+     *
+     * 用 **token 的哈希**而不是 uid：AuthStore 只暴露 token 与会员信息，没有稳定的 uid；
+     * 哈希对同一账号稳定、对日志与导出不泄露凭证本体。未登录时回落 "local"，
+     * 这样游客数据与任何账号的数据都不会互相污染。
+     */
+    val accountNamespace: String get() = authStore.token?.hashCode()?.toString() ?: "local"
+
+    /** 阅读历史与收藏的本地副本 —— 2.2.1 起这两项以本地为准，服务端只用于首次导入。 */
+    val historyStore: HistoryStore by lazy { HistoryStore(SharedPrefsKeyValueStore(this, "jm_history")) }
+    val favoriteStore: FavoriteStore by lazy { FavoriteStore(SharedPrefsKeyValueStore(this, "jm_favorites")) }
 
     /** 屏蔽规则（关键词 / 分类 / 标签）。 */
     val blockStore: BlockStore by lazy { BlockStore(SharedPrefsKeyValueStore(this, "jm_block")) }
