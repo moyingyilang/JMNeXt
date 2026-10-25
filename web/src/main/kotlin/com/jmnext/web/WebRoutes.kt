@@ -1,4 +1,6 @@
 package com.jmnext.web
+import io.ktor.server.response.respondBytes
+import io.ktor.http.ContentType
 
 import io.ktor.http.HttpStatusCode
 import io.ktor.server.application.call
@@ -78,5 +80,37 @@ fun Route.apiRoutes(reg: SessionRegistry) {
             r.onSuccess { call.respond(it) }
                 .onFailure { call.respond(HttpStatusCode.BadGateway, ErrOut("搜索失败：${it.message}")) }
         }
+    }
+}
+
+/**
+ * 图片代理：`GET /img/{chapter}/{idx}`。
+ *
+ * **前端永远拿不到 JM 的原始图片地址** —— 防盗链、反切片、缓存都在这里一处解决。
+ * 命中缓存直接返回；未命中则取原图 → 需要时反切片 → 落盘 → 返回。
+ */
+fun Route.imageRoutes(reg: SessionRegistry, cache: ImageCache) {
+    get("/img/{chapter}/{idx}") {
+        val s = reg.get(cookieSession(call.request.headers["Cookie"]))
+            ?: return@get call.respond(HttpStatusCode.Unauthorized, ErrOut("未登录"))
+        val chapter = call.parameters["chapter"].orEmpty()
+        val idx = call.parameters["idx"]?.toIntOrNull() ?: -1
+        if (chapter.isBlank() || idx < 0) return@get call.respond(HttpStatusCode.BadRequest, ErrOut("参数不对"))
+
+        val key = "img_${chapter}_$idx"
+        cache.get(key)?.let {
+            call.respondBytes(it, ContentType.parse(JvmUnscramble.formatOf(it)?.let { f -> "image/$f" } ?: "application/octet-stream"))
+            return@get
+        }
+        val payload = runCatching { s.repo.read(chapter) }.getOrNull()
+            ?: return@get call.respond(HttpStatusCode.BadGateway, ErrOut("取章节失败"))
+        val img = payload.images.getOrNull(idx)
+            ?: return@get call.respond(HttpStatusCode.NotFound, ErrOut("页码越界"))
+        val raw = ImageFetcher.get(img.image, referer = "https://18comic.vip/")
+            ?: return@get call.respond(HttpStatusCode.BadGateway, ErrOut("取图失败"))
+        val slices = com.jmnext.data.crypto.JmCrypto.sliceCount(payload.id, img.page.toString())
+        val out = JvmUnscramble.unscramble(raw, slices)
+        cache.put(key, out)
+        call.respondBytes(out, ContentType.parse(JvmUnscramble.formatOf(out)?.let { f -> "image/$f" } ?: "application/octet-stream"))
     }
 }

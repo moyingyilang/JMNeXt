@@ -37,13 +37,17 @@ fun isMobileUa(ua: String?): Boolean {
         !("ipad" in s) && !("tablet" in s)
 }
 
-fun Application.module(registry: SessionRegistry = SessionRegistry()) {
+fun Application.module(
+    registry: SessionRegistry = SessionRegistry(),
+    imageCache: ImageCache = ImageCache(java.io.File(System.getProperty("java.io.tmpdir"), "jmnext-web-img")),
+) {
     install(ContentNegotiation) {
         json()
     }
 
     routing {
         apiRoutes(registry)
+        imageRoutes(registry, imageCache)
 
         get("/api/health") {
             call.respond(Health(status = "ok", version = WEBUI_VERSION))
