@@ -24,3 +24,9 @@ body.mobile .m-main { flex:1; padding:12px; }
 body.mobile .m-tab { display:flex; border-top:1px solid var(--line); position:sticky; bottom:0; background:var(--bg); }
 body.mobile .m-tab a { flex:1; text-align:center; padding:12px 0; color:var(--dim); font-size:12px; }
 body.mobile .m-tab a.on { color:var(--acc); }
+
+/* 阅读器 */
+.reader-spread { display:grid; grid-template-columns:1fr 1fr; gap:8px; align-items:start; cursor:pointer; }
+.reader-spread .page { width:100%; height:auto; display:block; border-radius:6px; }
+.reader-spread .page.single { grid-column:1 / -1; }
+.reader-scroll .page { width:100%; height:auto; display:block; margin:0 0 8px; border-radius:6px; }

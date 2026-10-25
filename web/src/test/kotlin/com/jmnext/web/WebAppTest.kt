@@ -132,3 +132,34 @@ class ReaderStoreTest {
         assertEquals(listOf("/img/abc/0", "/img/abc/1", "/img/abc/2"), urls)
     }
 }
+
+class WebStaticTest {
+
+    @Test
+    fun readerScriptIsServed() = testApplication {
+        application { module() }
+        val r = client.get("/static/reader.js")
+        assertEquals(HttpStatusCode.OK, r.status)
+        val js = r.bodyAsTextSafe()
+        assertTrue(js.contains("/api/read/"), "阅读器应从代理接口取图列表")
+        assertTrue(js.contains("/api/progress/"), "阅读器应回传进度")
+        assertTrue(!js.contains("18comic"), "前端不应出现 JM 域名")
+    }
+
+    @Test
+    fun baseCssServesReaderStyles() = testApplication {
+        application { module() }
+        val css = client.get("/static/base.css").bodyAsTextSafe()
+        assertTrue(css.contains(".reader-spread"), "桌面双页样式应存在")
+        assertTrue(css.contains(".reader-scroll"), "手机纵向样式应存在")
+    }
+
+    @Test
+    fun bothLayoutsLoadReader() = testApplication {
+        application { module() }
+        val desktop = client.get("/") { header("User-Agent", "Mozilla/5.0 (X11; Linux x86_64)") }.bodyAsTextSafe()
+        val mobile = client.get("/") { header("User-Agent", "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0)") }.bodyAsTextSafe()
+        assertTrue(desktop.contains("reader.js"))
+        assertTrue(mobile.contains("reader.js"))
+    }
+}
