@@ -321,3 +321,23 @@ dump 显示详情页特征（`作者：sun、林巨星`、`共 2946 页 · 665 �
 再给 13 处 `Button(...)` 叠一层缩放，属于**重复表达**（ripple + 缩放同时出现），大概率显得廉价。
 这条与 `MOTION-EXPRESSIVE.md` 第一节"不抢戏"一致：同一时刻只保留一处主反馈。
 因此 `press` token 的适用范围到此为止，除非用户明确要求"按钮也要缩"。
+
+## 二十、instrumentation 尝试：搭起来了，但没跑通，已回退
+
+按第十八节的计划搭了 androidTest 基础设施，过程与结果如实记录：
+
+| 步骤 | 结果 |
+| --- | --- |
+| 版本目录补 4 个依赖 + `testInstrumentationRunner` | 加上了 |
+| `assembleFullDebugAndroidTest` | **BUILD SUCCESSFUL** |
+| `pm install -r` 测试 APK | Success |
+| `am instrument` 执行 | **跑起来了**（Tests run: 1 → 2） |
+| 第一次失败 | `NoSuchMethodException: InputManager.getInstance` —— 旧 Espresso 与新系统不兼容 |
+| 升级 `espresso-core:3.7.0` 后 | 仍 **Failures: 2**，断言信息被截断，未定位 |
+| 决策 | **回退**（`git checkout` + 删 `app/src/androidTest`） |
+
+**为什么回退而不是留着**：一个跑不出通过用例的基础设施留在树里，只会让后来者以为"我们有动效测试"。
+比没有更糟 —— 这与本项目"未验证就标注未验证"的纪律一致。
+
+**下一步若要重启这条路**，前提是：先能用官方样例（一个最简 `createComposeRule` + 空 `setContent`）跑通过，
+再往上叠 `mainClock`；而不是像这次直接写完整用例然后猜断言。
