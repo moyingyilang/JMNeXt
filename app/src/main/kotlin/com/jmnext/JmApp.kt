@@ -67,6 +67,20 @@ class JmApp : Application(), SingletonImageLoader.Factory {
      * 它懒加载，用户没开壁纸时不会有任何请求。
      */
     val wallpaperStore: WallpaperStore by lazy { WallpaperStore(this, repository.okHttp) }
+    /** WebDAV 同步配置（2.2.2）。单独一个 prefs 文件，避免和屏蔽/历史混在一起。 */
+    val syncSettings: com.jmnext.data.sync.SyncSettings by lazy {
+        com.jmnext.data.sync.SyncSettings(SharedPrefsKeyValueStore(this, "jm_sync"))
+    }
+
+    /** 同步编排。命名空间按当前账号取，换号不会把别人的数据同步走。 */
+    fun syncService(): com.jmnext.data.sync.SyncService = com.jmnext.data.sync.SyncService(
+        history = historyStore,
+        favorites = favoriteStore,
+        blocks = blockStore,
+        settings = syncSettings,
+        namespace = { accountNamespace },
+        device = android.os.Build.MODEL ?: "android",
+    )
 
     /**
      * 列表里的**标签屏蔽**（1.5.1）。

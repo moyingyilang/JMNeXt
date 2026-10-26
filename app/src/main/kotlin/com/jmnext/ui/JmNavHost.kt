@@ -622,6 +622,7 @@ fun JmNavHost(
                     onOpenNotifications = { nav.push(ROUTE_NOTIFICATIONS) },
                     onOpenAbout = { nav.push(ROUTE_ABOUT) },
                     onOpenTags = { nav.push(ROUTE_TAGS) },
+                    onOpenWebDav = { nav.push("webdav") },
                     onOpenBlock = { nav.push(ROUTE_BLOCK) },
                 )
             }
@@ -727,6 +728,11 @@ fun JmNavHost(
 
             composable(ROUTE_BLOCK) {
                 BlockSettingsScreen(onBack = { nav.popBackStack() })
+            }
+
+            composable("webdav") {
+                val app = androidx.compose.ui.platform.LocalContext.current.applicationContext as com.jmnext.JmApp
+                com.jmnext.ui.screens.settings.WebDavScreen(app = app, onBack = { nav.popBackStack() })
             }
 
             composable(ROUTE_HISTORY) {

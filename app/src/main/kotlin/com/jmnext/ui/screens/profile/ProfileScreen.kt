@@ -138,6 +138,8 @@ fun ProfileScreen(
     /** 打开「关于」整页（1.8.0）。 */
     onOpenAbout: () -> Unit,
     onOpenTags: () -> Unit,
+    /** 打开 WebDAV 同步页（2.2.2）。 */
+    onOpenWebDav: () -> Unit,
     onOpenBlock: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -188,6 +190,7 @@ fun ProfileScreen(
             // lite 去掉了全部壁纸与模糊功能，这一整张卡就不该出现
             if (!LiteFeatures.ENABLED) item { WallpaperCard() }
             item { BlockCard(onOpenBlock) }
+            item { WebDavCard(onOpen = onOpenWebDav) }
             item { ReadingCard(readerMode, onReaderModeChange) }
             item { PrivacyCard() }
             item { AboutCard(onOpenAbout = onOpenAbout) }
@@ -1338,6 +1341,37 @@ private fun DailyCard(onLogin: () -> Unit) {
                     }
                 }
             }
+        }
+    }
+}
+
+/**
+ * WebDAV 同步入口（2.2.2）。
+ *
+ * 只做汇总与入口，真正的表单在 [com.jmnext.ui.screens.settings.WebDavScreen]。
+ * 这里显示是否开启、远端路径，避免用户忘记自己配过什么。
+ */
+@Composable
+private fun WebDavCard(onOpen: () -> Unit) {
+    val c = JmTheme.colors
+    val app = androidx.compose.ui.platform.LocalContext.current.applicationContext as com.jmnext.JmApp
+    val cfg = remember { app.syncSettings.load() }
+
+    SettingCard(title = "WebDAV 同步") {
+        InfoRow("状态", if (cfg.enabled) "已开启" else "未开启")
+        InfoRow("远端路径", cfg.path.ifBlank { "—" })
+        Text(
+            text = if (cfg.isUsable) {
+                "同步阅读历史、收藏与屏蔽名单。多台设备指向同一文件即可互通。"
+            } else {
+                "尚未填写服务器地址。支持 Nextcloud、坚果云等标准 WebDAV 服务。"
+            },
+            style = MaterialTheme.typography.labelSmall,
+            color = c.textTertiary,
+            modifier = Modifier.padding(top = Spacing.sm),
+        )
+        TextButton(onClick = onOpen, modifier = Modifier.padding(top = Spacing.xs)) {
+            Text(if (cfg.isUsable) "配置 / 立即同步" else "去配置", color = c.accent)
         }
     }
 }
