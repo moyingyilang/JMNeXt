@@ -49,19 +49,6 @@ fun Application.module(
         json()
     }
 
-    // wasm 前端与 API 分端口部署（17802 / 17800），浏览器按跨源处理；
-    // 只放行本机回环来源，局域网模式由口令把守。
-    install(io.ktor.server.plugins.cors.routing.CORS) {
-        allowHost("127.0.0.1:17800", schemes = listOf("http"))
-        allowHost("127.0.0.1:17801", schemes = listOf("http"))
-        allowHost("127.0.0.1:17802", schemes = listOf("http"))
-        allowHost("localhost:17800", schemes = listOf("http"))
-        allowHost("localhost:17802", schemes = listOf("http"))
-        allowHeader(io.ktor.http.HttpHeaders.ContentType)
-        allowMethod(io.ktor.http.HttpMethod.Get)
-        allowMethod(io.ktor.http.HttpMethod.Post)
-        allowCredentials = true
-    }
 
     routing {
         gateRoutes(config)
