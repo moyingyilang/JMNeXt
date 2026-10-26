@@ -33,6 +33,11 @@ class SyncSettings(private val kv: KeyValueStore) {
         get() = kv.getString(K_LAST, null)?.toLongOrNull() ?: 0L
         set(value) { kv.putString(K_LAST, value.toString()) }
 
+    /** 上次成功同步时上传的载荷原文（JSON）。用于下次算“本机删除了什么”。 */
+    var lastPayload: String?
+        get() = kv.getString(K_PAYLOAD, null)
+        set(value) { kv.putString(K_PAYLOAD, value) }
+
     fun save(cfg: SyncConfig) {
         kv.putString(K_URL, cfg.url)
         kv.putString(K_USER, cfg.user)
@@ -48,5 +53,6 @@ class SyncSettings(private val kv: KeyValueStore) {
         const val K_PATH = "sync_webdav_path"
         const val K_ENABLED = "sync_webdav_enabled"
         const val K_LAST = "sync_webdav_last_at"
+        const val K_PAYLOAD = "sync_webdav_last_payload"
     }
 }
