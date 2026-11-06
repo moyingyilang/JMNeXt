@@ -67,7 +67,7 @@ fun AmbientBackdrop(
 
     Box(modifier = modifier.fillMaxSize()) {
         // 1. 渐变网格（或实心风格的纯色底）
-        Box(modifier = Modifier.fillMaxSize().ambientBase())
+        Box(modifier = Modifier.fillMaxSize().ambientBase(plain = wall.showsImage || wall.mode == WallpaperMode.Solid))
 
         // 1b. 纯色壁纸：用用户选的颜色盖住渐变底（零请求、零解码）
         if (wall.mode == WallpaperMode.Solid) {
@@ -149,7 +149,14 @@ fun AmbientBackdrop(
  * 所以这里只用实色的渐变与光斑，不引入壁纸或任何透明度依赖。
  */
 @Composable
-fun Modifier.ambientBase(): Modifier {
+/**
+ * 底色层。
+ *
+ * [plain] = true 时不画主题渐变与光斑，只铺一层很淡的中性色：
+ * 用户在「纯色壁纸」或「跟随手机壁纸」下要看到的是**自己的背景**，
+ * 主题的径向渐变盖上去会把它染成主题色（此前就是这样，观感上像“壁纸被主题吃掉了”）。
+ */
+fun Modifier.ambientBase(plain: Boolean = false): Modifier {
     val c = JmTheme.colors
     val spec = JmTheme.spec
     val options = LocalUiOptions.current
@@ -196,12 +203,17 @@ fun Modifier.ambientBase(): Modifier {
             radius = maxOf(w, h) * 0.72f,
         )
 
-        onDrawBehind {
-            drawRect(brush = base)
-            if (glow > 0f) {
-                drawRect(brush = glowA)
-                drawRect(brush = glowB)
-                drawRect(brush = glowC)
+        if (plain) {
+            // 纯粹玻璃：只压一层极淡的暗色，保证玻璃有可采样的对比，不引入任何色相
+            onDrawBehind { drawRect(color = Color.Black.copy(alpha = 0.10f)) }
+        } else {
+            onDrawBehind {
+                drawRect(brush = base)
+                if (glow > 0f) {
+                    drawRect(brush = glowA)
+                    drawRect(brush = glowB)
+                    drawRect(brush = glowC)
+                }
             }
         }
     }

@@ -63,6 +63,7 @@ enum class WallpaperMode(val label: String, val desc: String) {
     Custom("自定义地址", "自己填一个图片直链"),
     SystemWallpaper("跟随手机壁纸", "读取系统当前壁纸（Android）；换壁纸后回到应用或点「重新读取」生效"),
     Solid("纯色", "只用你选的一个颜色，不加载图片（零请求）"),
+    Picsum("Picsum 摄影", "按设备方向取图：手机竖图、平板/桌面横图（picsum.photos，无需 key）"),
 }
 
 /**
@@ -181,6 +182,15 @@ class WallpaperStore(context: Context, private val client: OkHttpClient) {
                 } else {
                     update { it.copy(url = url, credit = "系统壁纸", error = null) }
                 }
+            }
+
+            // Picsum：按设备方向取竖/横图。手机 = 竖屏，平板与桌面 = 横屏。
+            WallpaperMode.Picsum -> {
+                val portrait = isPortraitDevice()
+                val w = if (portrait) 1080 else 1920
+                val h = if (portrait) 1920 else 1080
+                val url = "https://picsum.photos/$w/$h?random=${System.nanoTime()}"
+                update { it.copy(url = url, credit = if (portrait) "Picsum 竖图" else "Picsum 横图", error = null) }
             }
 
             WallpaperMode.Custom -> {
@@ -338,6 +348,12 @@ class WallpaperStore(context: Context, private val client: OkHttpClient) {
 
     private fun writeCache(key: String, urls: List<String>) = prefs.edit {
         putString(key, JmJson.encodeToString(ListSerializer(String.serializer()), urls))
+    }
+
+    /** 设备是否竖屏形态：手机（最小宽度 < 600dp）算竖屏，平板/桌面算横屏。 */
+    fun isPortraitDevice(): Boolean {
+        val cfg = appContext.resources.configuration
+        return cfg.smallestScreenWidthDp < 600
     }
 
     private fun today(): String =

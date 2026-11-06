@@ -1010,22 +1010,23 @@ private fun ReadingCard(
 
 private fun AboutCard(onOpenAbout: () -> Unit) {
     val c = JmTheme.colors
-    val themeStyle = JmTheme.spec.style
+    // 只做入口：版本号一眼可见，其余（界面风格、动效、检查更新、链接、致谢）都在整页里。
     SettingCard(title = "关于") {
-        InfoRow("版本", BuildConfig.VERSION_NAME)
-        InfoRow("界面风格", themeStyle.label)
-        InfoRow("动效快慢", "快 ${Motion.FAST}ms · 中 ${Motion.BASE}ms · 慢 ${Motion.SLOW}ms")
-        Text(
-            text = "WindowGlass 与 Translucent 的令牌移植自 moyingyilang.github.io 的 global.css" +
-                "（三径向 + 一线性的渐变底、发丝描边、上缘高光）；Miuix 与 Material 是另外两套表面工艺。" +
-                "四套风格换的不只是配色 —— 圆角尺度、表面是实心还是玻璃、字重、按压手感都跟着换。",
-            style = MaterialTheme.typography.labelSmall,
-            color = c.textTertiary,
-            modifier = Modifier.padding(top = Spacing.sm),
-        )
+        GlassSurface(
+            modifier = Modifier.fillMaxWidth(),
+            level = GlassLevel.Card,
+            onClick = onOpenAbout,
+        ) {
+            Row(
+                modifier = Modifier.fillMaxWidth().padding(Spacing.md),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(Spacing.sm),
+            ) {
+                Text("版本 ${BuildConfig.VERSION_NAME}", color = c.text, modifier = Modifier.weight(1f))
+                Text("检查更新 / 关于 ›", color = c.accent)
+            }
+        }
     }
-        // 摘要卡只给结论，细节（变体说明、检查更新、链接、许可）在整页里
-        TextButton(onClick = onOpenAbout) { Text("更多信息与检查更新 ›") }
 }
 
 /**

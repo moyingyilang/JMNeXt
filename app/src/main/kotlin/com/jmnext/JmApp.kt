@@ -1,4 +1,5 @@
 package com.jmnext
+import okio.Path.Companion.toOkioPath
 import com.jmnext.data.prefs.FavoriteStore
 import com.jmnext.data.prefs.HistoryStore
 import com.jmnext.data.SelfTuner
@@ -149,6 +150,19 @@ class JmApp : Application(), SingletonImageLoader.Factory {
             .crossfade(LiteFeatures.imageCrossfade)
             // 内存缓存提到 25%：阅读时来回滚动、切上一话/下一话都会重看同一批图，
             // 默认档在长图流里很快就会被挤掉，然后变成「明明刚看过却要重新下载」。
+            .memoryCache { MemoryCache.Builder().maxSizePercent(context, 0.25).build() }
+            // 磁盘缓存显式配置（2.2.3）：Coil 的默认磁盘缓存很小，长漫画读到后面会把
+            // 前面几话的图挤出磁盘，再回看等于重新下载 —— 用户感知就是“同一本还在清缓存”。
+            // 这里给足 1GB（可用空间不足时按 1/8 收缩），并放进独立目录，清理时不影响其他缓存。
+            .diskCache {
+                val dir = java.io.File(context.cacheDir, "image_cache").toOkioPath()
+                val free = java.io.File(dir.toString()).usableSpace.takeIf { it > 0 } ?: 0L
+                val cap = if (free > 0) minOf(1L * 1024 * 1024 * 1024, free / 8) else 256L * 1024 * 1024
+                coil3.disk.DiskCache.Builder()
+                    .directory(dir)
+                    .maxSizeBytes(cap)
+                    .build()
+            }
             .memoryCache { MemoryCache.Builder().maxSizePercent(context, 0.25).build() }
             .build()
 
