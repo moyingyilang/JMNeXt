@@ -181,7 +181,7 @@ fun FloatingBottomBar(
             level = GlassLevel.Raised,
             // **真胶囊**：半径取短边的一半（percent = 50），两端是半圆。
             shape = RoundedCornerShape(percent = 50),
-            tinted = true,
+            tinted = false,   // 同上：栏上不要渐变
         ) {
             BoxWithConstraints(Modifier.fillMaxWidth().height(64.dp)) {
                 val itemWidth = maxWidth / tabCount

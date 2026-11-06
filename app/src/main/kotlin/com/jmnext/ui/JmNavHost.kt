@@ -1,4 +1,7 @@
 package com.jmnext.ui
+import com.jmnext.ui.components.glassSource
+import com.jmnext.ui.components.rememberGlassState
+import com.jmnext.ui.components.GlassHost
 
 import com.jmnext.ui.screens.about.AboutScreen
 import com.jmnext.ui.screens.random.RandomListScreen
@@ -39,6 +42,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.runtime.collectAsState
@@ -438,11 +442,14 @@ fun JmNavHost(
     // 悬浮那套还要加上让开系统手势条的 padding。
     var barInsetPx by remember { mutableIntStateOf(0) }
     val barInset = with(LocalDensity.current) { barInsetPx.toDp() }
+    // 真玻璃的宿主：组合完成后把 haze 状态挂上去，GlassSurface 由此走 backdrop blur。
+    val hazeState = rememberGlassState()
+    SideEffect { GlassHost.state = hazeState }
 
     // 共享元素（"触发前位置 → 触发后位置"）必须活在同一个 SharedTransitionLayout 里
     SharedTransitionLayout {
     CompositionLocalProvider(LocalSharedTransitionScope provides this) {
-    // 瞬时反馈：把 Notices 的当前条推给 Snackbar 显示（同一 id 重复触发会重新弹一次）
+    // 真玻璃：haze 状态与「可采样内容」必须成对存在 —— 玻璃表面实时模糊的就是这里标出的像素。
     val noticeHostState = remember { SnackbarHostState() }
     val noticeItem by Notices.state.collectAsState()
     LaunchedEffect(noticeItem?.id) {
@@ -475,6 +482,7 @@ fun JmNavHost(
         Box(
             modifier = Modifier
                 .fillMaxSize()
+                .glassSource(hazeState)
                 .graphicsLayer {
                     // 跟手后退：**只淡，不缩**，而且**只在系统没有这一层的版本上**才画
                     // （见 ownBackFeedback）。关掉时 alpha 恒为 1 —— 连读都不读

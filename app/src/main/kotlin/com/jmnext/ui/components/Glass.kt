@@ -156,7 +156,15 @@ fun GlassSurface(
             }
             .shadow(elevation, shape, clip = false)
             .clip(shape)
-            .background(fill)
+            // 有 haze 状态时用**真玻璃**：实时采样背后内容做模糊（backdrop blur）；
+            // 没有时退回原来的半透明填充（避免在无 host 的场景下什么都画不出来）。
+            .then(
+                if (GlassHost.state != null) {
+                    Modifier.glassSurface(state = GlassHost.state!!, shape = shape)
+                } else {
+                    Modifier.background(fill)
+                },
+            )
             .then(
                 // 强调色薄染（Translucent）：铺在填充之上、内容之下，像 Windhawk 把
                 // 系统强调色染到窗口上一样

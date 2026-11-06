@@ -44,7 +44,7 @@ fun GlassTopBar(
         modifier = modifier.fillMaxWidth(),
         level = GlassLevel.Raised,
         shape = RoundedCornerShape(0.dp),
-        tinted = true,
+        tinted = false,   // 纯粹的玻璃：不要暖→冷渐变层（用户明确要去掉栏上的渐变残留）
     ) {
         Row(
             modifier = Modifier

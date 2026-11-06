@@ -194,6 +194,9 @@ if (project.hasProperty("composeReports")) {
 }
 
 dependencies {
+    // 真·玻璃：backdrop blur（采样背后已绘制内容），而不是半透明贴片
+    implementation("dev.chrisbanes.haze:haze:2.1.0")
+    implementation("dev.chrisbanes.haze:haze-blur:2.1.0")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.lifecycle.runtime.ktx)

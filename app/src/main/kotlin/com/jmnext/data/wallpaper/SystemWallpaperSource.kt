@@ -57,22 +57,44 @@ object SystemWallpaperSource {
         }
     }
 
+    /**
+     * 依次尝试 API 上真实存在的五条路径（已用 javap 核对 android.jar）：
+     * getDrawable(FLAG_SYSTEM) → getDrawable() → peekDrawable() → peekFastDrawable() → getWallpaperFile()。
+     * 前四条返回 Drawable，最后一条直接给出壁纸文件的 fd，绕开 Drawable 解码失败的情况。
+     */
     private fun readBitmap(manager: WallpaperManager): Bitmap? {
-        // 1) drawable：最通用，覆盖静态壁纸
-        drawableOf(manager)?.let { return it }
+        drawableOf { manager.getDrawable(WallpaperManager.FLAG_SYSTEM) }
+            ?.let { Log.i(TAG, "系统壁纸取自 getDrawable(FLAG_SYSTEM)"); return it }
+        drawableOf { manager.drawable }
+            ?.let { Log.i(TAG, "系统壁纸取自 getDrawable()"); return it }
+        drawableOf { manager.peekDrawable() }
+            ?.let { Log.i(TAG, "系统壁纸取自 peekDrawable()"); return it }
+        drawableOf { manager.peekFastDrawable() }
+            ?.let { Log.i(TAG, "系统壁纸取自 peekFastDrawable()"); return it }
 
-        // 2) peekDrawable：不申请资源所有权，某些 ROM 上才可用
-        runCatching { manager.peekDrawable() }.getOrNull()?.let { d ->
-            drawableOf(manager, d)?.let { return it }
-        }
+        // 最后一条：直接读壁纸文件。某些 ROM 上 Drawable 解码失败但文件是好的。
+        runCatching {
+            manager.getWallpaperFile(WallpaperManager.FLAG_SYSTEM)?.use { pfd ->
+                android.graphics.BitmapFactory.decodeFileDescriptor(pfd.fileDescriptor)
+            }
+        }.onFailure { Log.w(TAG, "getWallpaperFile 失败：${it.javaClass.simpleName} ${it.message}") }
+            .getOrNull()?.let { Log.i(TAG, "系统壁纸取自 getWallpaperFile()"); return it }
 
-        // 3) 丢掉系统缓存的壁纸对象后重取：动态壁纸/主题替换后常见的一步
-        runCatching { manager.forgetLoadedWallpaper() }
-        drawableOf(manager)?.let { return it }
-
-        Log.w(TAG, "三条取图路径都失败：drawable / peekDrawable / 重取 均为空")
+        Log.w(TAG, "五条路径全部失败：drawable/peek/peekFast/file 均不可用")
         return null
     }
+
+    /** 把某个 Drawable 来源画成位图；取不到或画失败返回 null。 */
+    private inline fun drawableOf(block: () -> android.graphics.drawable.Drawable?): Bitmap? =
+        runCatching {
+            val d = block() ?: return@runCatching null
+            val w = d.intrinsicWidth.coerceAtLeast(1)
+            val h = d.intrinsicHeight.coerceAtLeast(1)
+            val bmp = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888)
+            d.setBounds(0, 0, w, h)
+            d.draw(Canvas(bmp))
+            bmp
+        }.onFailure { Log.w(TAG, "Drawable 解码失败：${it.javaClass.simpleName}") }.getOrNull()
 
     /** 把 drawable 画进 ARGB 位图；drawable 为空时返回 null。 */
     private fun drawableOf(

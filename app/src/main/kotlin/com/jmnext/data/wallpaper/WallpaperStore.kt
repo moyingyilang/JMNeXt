@@ -89,7 +89,7 @@ data class WallpaperState(
     val intervalSeconds: Int = 0,
     val customUrl: String = "",
     /** 纯色模式的颜色（ARGB）。默认深灰蓝，和主题底接近。 */
-    val solidColor: Int = 0xFF14161B.toInt(),
+    val solidColor: Int = 0,   // 0 = 自动：深色纯黑、浅色纯白
     val loading: Boolean = false,
     val error: String? = null,
 ) {
@@ -326,7 +326,7 @@ class WallpaperStore(context: Context, private val client: OkHttpClient) {
         intervalSeconds = prefs.getInt(KEY_INTERVAL_SEC, -1)
             .let { if (it >= 0) it else prefs.getInt(KEY_INTERVAL, 0) * 60 },
         customUrl = prefs.getString(KEY_CUSTOM, "").orEmpty(),
-        solidColor = prefs.getInt(KEY_SOLID, 0xFF14161B.toInt()),
+        solidColor = prefs.getInt(KEY_SOLID, 0),
     )
 
     private fun write(s: WallpaperState) = prefs.edit {
