@@ -192,7 +192,6 @@ fun ProfileScreen(
             item { BlockCard(onOpenBlock) }
             item { WebDavCard(onOpen = onOpenWebDav) }
             item { ReadingCard(readerMode, onReaderModeChange) }
-            item { PrivacyCard() }
             item { AboutCard(onOpenAbout = onOpenAbout) }
             item { ServerCard() }
         }
@@ -1008,33 +1007,14 @@ private fun ReadingCard(
 }
 
 @Composable
-private fun PrivacyCard() {
-    val c = JmTheme.colors
-    SettingCard(title = "隐私与广告") {
-        InfoRow("广告接口调用", "从不调用")
-        InfoRow("第三方请求", "仅壁纸（默认关闭）")
-        InfoRow("已屏蔽广告/追踪域名", "${AdBlocker.blockedDomainCount} 类")
-        InfoRow("凭证存储", "Keystore 加密")
-        Text(
-            text = "官方客户端的广告全部由客户端主动请求广告接口后自行插入，" +
-                "官方代码里定义了 60 多个插槽位置。本应用不实现任何插槽、不请求广告接口，" +
-                "并在网络层屏蔽第三方广告与追踪域名；图片通道共用同一个客户端，因此同样受拦截。" +
-                "另外不做任何行为采集。登录凭证经 Android Keystore 加密后落盘，不保存明文。",
-            style = MaterialTheme.typography.labelSmall,
-            color = c.textTertiary,
-            modifier = Modifier.padding(top = Spacing.sm),
-        )
-    }
-}
 
-@Composable
 private fun AboutCard(onOpenAbout: () -> Unit) {
     val c = JmTheme.colors
     val themeStyle = JmTheme.spec.style
     SettingCard(title = "关于") {
         InfoRow("版本", BuildConfig.VERSION_NAME)
         InfoRow("界面风格", themeStyle.label)
-        InfoRow("动效基准", "${Motion.FAST} / ${Motion.BASE} / ${Motion.SLOW} ms")
+        InfoRow("动效快慢", "快 ${Motion.FAST}ms · 中 ${Motion.BASE}ms · 慢 ${Motion.SLOW}ms")
         Text(
             text = "WindowGlass 与 Translucent 的令牌移植自 moyingyilang.github.io 的 global.css" +
                 "（三径向 + 一线性的渐变底、发丝描边、上缘高光）；Miuix 与 Material 是另外两套表面工艺。" +

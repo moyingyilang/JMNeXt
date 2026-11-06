@@ -3,53 +3,100 @@ package com.jmnext.data.wallpaper
 import android.app.WallpaperManager
 import android.content.Context
 import android.graphics.Bitmap
+import android.graphics.Canvas
 import android.util.Log
 import java.io.File
 import java.io.FileOutputStream
 
 /**
- * 读取**系统当前壁纸**并落成一个缓存文件，供既有图片链路使用。
+ * 读取**系统当前壁纸**并落成缓存文件，供既有图片链路使用。
  *
- * 为什么落文件而不是直接返回 Bitmap：背景层用的是 `AsyncImage(model = url)`，
- * 它天然支持 `file://`。落文件可以复用既有的模糊/压暗/裁剪链路，不必为这一个来源另写一套渲染。
+ * 为什么落文件：背景层是 `AsyncImage(model = url)`，天然支持 `file://`；
+ * 落文件能复用既有的模糊/压暗/裁剪链路，不必为这一个来源另写一套渲染。
  *
- * 已知限制（写在代码里而不是文档里，免得以后有人当成 bug）：
- * 1. **`WallpaperManager` 没有"壁纸已更换"的回调** —— 系统换壁纸后我们不会自动知道，
- *    只能在回到前台或用户点「重新读取」时重新取；
- * 2. 读不到（无权限、系统限制、动态壁纸）时返回 null，调用方**退回主题纯色**，不能白屏；
- * 3. 缓存文件带时间戳，避免 Coil 的 memoryCache 把旧图当成新图（同一个 URL 内容变了它不会重取）。
+ * ## 为什么用三条取图路径
+ * `WallpaperManager.drawable` 在部分机型/系统版本上返回 null（动态壁纸、被主题替换、
+ * 或系统对第三方读取做了限制）。只走这一条会表现为“读不到壁纸”。
+ * 因此按 `drawable` → `bitmap` → `peekDrawable` 依次尝试，谁成功用谁。
+ *
+ * ## 已知限制
+ * 1. 系统**没有“壁纸已更换”回调**，只能在回到前台或用户点「重新读取」时重取；
+ * 2. 三条路径都失败时返回 null，调用方退回纯色，不白屏；
+ * 3. 缓存文件名带时间戳，避免 Coil 把同 URL 的旧图当成新图；
+ * 4. 超大壁纸先等比缩到 [MAX_EDGE]，否则 4K 壁纸的 ARGB 位图要吃 30MB+。
  */
 object SystemWallpaperSource {
 
     private const val TAG = "JmWallpaper"
     private const val DIR = "system-wallpaper"
+    /** 最长边上限。背景会被模糊/压暗，超过这个尺寸对观感没有额外收益。 */
+    private const val MAX_EDGE = 1600
 
-    /**
-     * 取系统壁纸并写成缓存文件。
-     *
-     * @return `file://` 形式的 URL；读不到时返回 null（调用方应退回纯色）
-     */
     fun load(context: Context): String? {
         val dir = File(context.cacheDir, DIR).apply { mkdirs() }
         val out = File(dir, "wall-${System.currentTimeMillis()}.png")
+        val manager = WallpaperManager.getInstance(context)
+
+        val bitmap = readBitmap(manager)
+        if (bitmap == null) {
+            Log.w(TAG, "三条取图路径都失败（drawable/bitmap/peekDrawable 均为空）")
+            return null
+        }
+
         return try {
-            val manager = WallpaperManager.getInstance(context)
-            val drawable = manager.drawable ?: return null
-            val w = drawable.intrinsicWidth.coerceAtLeast(1)
-            val h = drawable.intrinsicHeight.coerceAtLeast(1)
-            val bmp = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888)
-            val canvas = android.graphics.Canvas(bmp)
-            drawable.setBounds(0, 0, w, h)
-            drawable.draw(canvas)
-            FileOutputStream(out).use { bmp.compress(Bitmap.CompressFormat.PNG, 100, it) }
-            bmp.recycle()
-            // 只保留最新一张，避免缓存目录无限增长
+            val scaled = scaleDown(bitmap)
+            FileOutputStream(out).use { scaled.compress(Bitmap.CompressFormat.PNG, 100, it) }
+            if (scaled !== bitmap) scaled.recycle()
+            bitmap.recycle()
             dir.listFiles()?.filter { it != out }?.forEach { it.delete() }
             "file://${out.absolutePath}"
         } catch (t: Throwable) {
-            Log.w(TAG, "读取系统壁纸失败：${t.javaClass.simpleName}")
+            Log.w(TAG, "写缓存失败：${t.javaClass.simpleName} ${t.message}")
             out.delete()
             null
         }
+    }
+
+    private fun readBitmap(manager: WallpaperManager): Bitmap? {
+        // 1) drawable：最通用，覆盖静态壁纸
+        drawableOf(manager)?.let { return it }
+
+        // 2) peekDrawable：不申请资源所有权，某些 ROM 上才可用
+        runCatching { manager.peekDrawable() }.getOrNull()?.let { d ->
+            drawableOf(manager, d)?.let { return it }
+        }
+
+        // 3) 丢掉系统缓存的壁纸对象后重取：动态壁纸/主题替换后常见的一步
+        runCatching { manager.forgetLoadedWallpaper() }
+        drawableOf(manager)?.let { return it }
+
+        Log.w(TAG, "三条取图路径都失败：drawable / peekDrawable / 重取 均为空")
+        return null
+    }
+
+    /** 把 drawable 画进 ARGB 位图；drawable 为空时返回 null。 */
+    private fun drawableOf(
+        manager: WallpaperManager,
+        explicit: android.graphics.drawable.Drawable? = null,
+    ): Bitmap? = runCatching {
+        val d = explicit ?: manager.drawable ?: return@runCatching null
+        val w = d.intrinsicWidth.coerceAtLeast(1)
+        val h = d.intrinsicHeight.coerceAtLeast(1)
+        val bmp = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888)
+        d.setBounds(0, 0, w, h)
+        d.draw(Canvas(bmp))
+        bmp
+    }.onFailure { Log.w(TAG, "drawable 读取失败：${it.javaClass.simpleName}") }.getOrNull()
+
+    private fun scaleDown(src: Bitmap): Bitmap {
+        val longest = maxOf(src.width, src.height)
+        if (longest <= MAX_EDGE) return src
+        val ratio = MAX_EDGE.toFloat() / longest
+        return Bitmap.createScaledBitmap(
+            src,
+            (src.width * ratio).toInt().coerceAtLeast(1),
+            (src.height * ratio).toInt().coerceAtLeast(1),
+            true,
+        )
     }
 }

@@ -56,7 +56,11 @@ data class BlockedPayload(
     val words: List<String> = emptyList(),
     val tags: List<String> = emptyList(),
     val categories: List<String> = emptyList(),
-)
+    /** 屏蔽项墓碑：删掉的词/标签/分类，避免被远端并集复活。 */
+    val deleted: List<Tombstone> = emptyList(),
+) {
+    fun all(): List<String> = words + tags + categories
+}
 
 /**
  * 合并结果。`appliedDeletions*` 表示“从远端墓碑里学到并需要在本地执行删除”的条数，
@@ -68,4 +72,5 @@ data class MergeResult(
     val favoriteConflicts: Int = 0,
     val appliedHistoryDeletions: Int = 0,
     val appliedFavoriteDeletions: Int = 0,
+    val appliedBlockedDeletions: Int = 0,
 )

@@ -62,6 +62,7 @@ enum class WallpaperMode(val label: String, val desc: String) {
     All("全部随机", "Bing 与二次元混合"),
     Custom("自定义地址", "自己填一个图片直链"),
     SystemWallpaper("跟随手机壁纸", "读取系统当前壁纸（Android）；换壁纸后回到应用或点「重新读取」生效"),
+    Solid("纯色", "只用你选的一个颜色，不加载图片（零请求）"),
 }
 
 /**
@@ -86,11 +87,14 @@ data class WallpaperState(
      */
     val intervalSeconds: Int = 0,
     val customUrl: String = "",
+    /** 纯色模式的颜色（ARGB）。默认深灰蓝，和主题底接近。 */
+    val solidColor: Int = 0xFF14161B.toInt(),
     val loading: Boolean = false,
     val error: String? = null,
 ) {
     /** 该不该画图片层。纯渐变模式下永远是 false。 */
-    val showsImage: Boolean get() = mode != WallpaperMode.Off && !url.isNullOrBlank()
+
+    val showsImage: Boolean get() = mode != WallpaperMode.Off && mode != WallpaperMode.Solid && !url.isNullOrBlank()
 }
 
 /**
@@ -167,6 +171,9 @@ class WallpaperStore(context: Context, private val client: OkHttpClient) {
         when (s.mode) {
             WallpaperMode.Off -> update { it.copy(url = null, credit = null, error = null) }
             // 跟随系统壁纸：不联网，读本机壁纸缓存成文件后走同一个图片链路
+            // 纯色：不联网、不读文件，只有一个颜色
+            WallpaperMode.Solid -> update { it.copy(url = null, credit = null, error = null) }
+
             WallpaperMode.SystemWallpaper -> {
                 val url = SystemWallpaperSource.load(appContext)
                 if (url == null) {
@@ -309,12 +316,14 @@ class WallpaperStore(context: Context, private val client: OkHttpClient) {
         intervalSeconds = prefs.getInt(KEY_INTERVAL_SEC, -1)
             .let { if (it >= 0) it else prefs.getInt(KEY_INTERVAL, 0) * 60 },
         customUrl = prefs.getString(KEY_CUSTOM, "").orEmpty(),
+        solidColor = prefs.getInt(KEY_SOLID, 0xFF14161B.toInt()),
     )
 
     private fun write(s: WallpaperState) = prefs.edit {
         putString(KEY_MODE, s.mode.name)
         putString(KEY_URL, s.url)
         putString(KEY_CUSTOM, s.customUrl)
+        putInt(KEY_SOLID, s.solidColor)
         putInt(KEY_BLUR, s.blur)
         putFloat(KEY_DIM, s.dim)
         putInt(KEY_INTERVAL_SEC, s.intervalSeconds)
@@ -358,7 +367,8 @@ class WallpaperStore(context: Context, private val client: OkHttpClient) {
         private const val KEY_MODE = "mode"
         private const val KEY_URL = "url"
         private const val KEY_CREDIT = "credit"
-        private const val KEY_CUSTOM = "custom_url"
+        private const val KEY_SOLID = "wallpaper_solid"
+    private const val KEY_CUSTOM = "custom_url"
         private const val KEY_BLUR = "blur"
         private const val KEY_DIM = "dim"
         private const val KEY_INTERVAL = "interval"

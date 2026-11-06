@@ -32,10 +32,6 @@ enum class ThemeStyle(val label: String, val tagline: String) {
         label = "WindowGlass",
         tagline = "Windows 11 窗口玻璃：8dp 圆角 + 发丝描边 + Acrylic 颗粒",
     ),
-    Translucent(
-        label = "Translucent",
-        tagline = "Windhawk 透明系：表面更透、强调色薄染，壁纸透得最明显",
-    ),
     FlatBlur(
         label = "FlatBlur",
         tagline = "平面化 + 高斯模糊：无描边、无颗粒、无高光，只留一层模糊的底",
@@ -286,21 +282,6 @@ object Styles {
      * 差别全在**透明度与染色**上 —— 表面不透明度砍掉近一半、铺一层强调色、
      * 描边换成更亮的版本，壁纸透出来的程度因此明显不同。
      */
-    val translucent = windowGlass.copy(
-        style = ThemeStyle.Translucent,
-        surface = windowGlass.surface.copy(
-            craft = SurfaceCraft.Glass,
-            fillAlphaScale = 0.58f,
-            accentTint = 0.12f,
-            backdropSaturate = Glass.SATURATION,
-            noise = 0.2f,
-            // 同上：半透明表面不投影
-            shadows = listOf(0.dp, 0.dp, 0.dp),
-        ),
-        // 壁纸透过来的更多，遮罩必须更重，否则文字压在花壁纸上没法读
-        wallpaperScrim = 0.58f,
-        backdropGlow = 1f,
-    )
 
     /** HyperOS：大圆角、实心卡片、不画描边，靠色差分层；弹性按压是它的标志手感。 */
     val miuix = JmSpec(
@@ -411,7 +392,6 @@ object Styles {
         } else {
             when (style) {
                 ThemeStyle.WindowGlass -> windowGlass
-                ThemeStyle.Translucent -> translucent
                 ThemeStyle.FlatBlur -> flatBlur
                 ThemeStyle.Miuix -> miuix
                 ThemeStyle.Material -> material

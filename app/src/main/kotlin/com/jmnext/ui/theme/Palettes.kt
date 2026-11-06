@@ -225,7 +225,6 @@ fun baselineM3Palette(dark: Boolean): JmPalette =
 /** 按风格取配色。Material 例外：它的配色由 M3 的颜色角色决定（见 [toJmPalette]）。 */
 fun paletteFor(style: ThemeStyle, dark: Boolean): JmPalette = when (style) {
     ThemeStyle.WindowGlass -> if (dark) DarkPalette else LightPalette
-    ThemeStyle.Translucent -> if (dark) TranslucentDark else TranslucentLight
     ThemeStyle.FlatBlur -> if (dark) FlatBlurDark else FlatBlurLight
     ThemeStyle.Miuix -> if (dark) MiuixDark else MiuixLight
     ThemeStyle.Material -> baselineM3Palette(dark)

@@ -11,6 +11,7 @@ import androidx.compose.ui.draw.drawWithCache
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import com.jmnext.data.wallpaper.WallpaperMode
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.ColorMatrix
 import androidx.compose.ui.layout.ContentScale
@@ -67,6 +68,11 @@ fun AmbientBackdrop(
     Box(modifier = modifier.fillMaxSize()) {
         // 1. 渐变网格（或实心风格的纯色底）
         Box(modifier = Modifier.fillMaxSize().ambientBase())
+
+        // 1b. 纯色壁纸：用用户选的颜色盖住渐变底（零请求、零解码）
+        if (wall.mode == WallpaperMode.Solid) {
+            Box(Modifier.fillMaxSize().background(Color(wall.solidColor)))
+        }
 
         // 2. 壁纸图片
         if (wall.showsImage) {

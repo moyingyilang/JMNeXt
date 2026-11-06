@@ -7,13 +7,11 @@ import com.jmnext.data.prefs.HistoryEntry
  * 纯函数合并：本地 + 远端 → 新载荷。
  *
  * 规则：
- * - **历史 / 收藏**：按 id 去重，取条目时间较新的一方；
- * - **墓碑**：按 id 取较晚的 `deletedAt`；若条目的时间**晚于**墓碑，说明用户在删除之后
- *   又重新添加过，此时以条目为准（墓碑失效）；
- * - **屏蔽名单**：取并集（屏蔽是“宁多勿少”的语义）；
- * - 列表按时间倒序、限制在 [limit] 条；墓碑按 TTL 清理。
+ * - 历史 / 收藏：按 id 去重，取较新的一方；墓碑晚于条目则删除，条目晚于墓碑则保留（复活）。
+ * - 屏蔽名单：**并集**，但墓碑里的项要剔除；本机当前仍存在的项视为“用户刚加回来”，墓碑作废。
+ * - 列表按时间倒序、上限 [limit]；墓碑按 TTL 清理。
  *
- * 关键正确性：远端“没有这条”**不等于**删除 —— 只有墓碑才算。
+ * 关键：远端“没有这条”不等于删除 —— 只有墓碑才算。
  */
 fun mergeSyncPayloads(
     local: SyncPayload,
@@ -24,12 +22,10 @@ fun mergeSyncPayloads(
     val remoteHistory = remote?.history.orEmpty()
     val remoteFavorites = remote?.favorites.orEmpty()
     val remoteBlocked = remote?.blocked ?: BlockedPayload()
-    val tombstonesHistory = latestTombstones(
-        local.deletedHistory + (remote?.deletedHistory.orEmpty()), now,
-    )
-    val tombstonesFavorites = latestTombstones(
-        local.deletedFavorites + (remote?.deletedFavorites.orEmpty()), now,
-    )
+
+    val histTombs = latestTombstones(local.deletedHistory + (remote?.deletedHistory.orEmpty()), now)
+    val favTombs = latestTombstones(local.deletedFavorites + (remote?.deletedFavorites.orEmpty()), now)
+    val blockTombs = latestTombstones(local.blocked.deleted + remoteBlocked.deleted, now)
 
     var historyConflicts = 0
     val historyMap = LinkedHashMap<String, HistoryEntry>()
@@ -49,34 +45,29 @@ fun mergeSyncPayloads(
         else if (r.addedAt > cur.addedAt) { favoriteMap[r.aid] = r; favoriteConflicts++ }
     }
 
-    // 墓碑生效：条目的时间早于删除时间 → 删除
-    val delHistory = tombstonesHistory.filter { (id, at) ->
-        val e = historyMap[id]
-        e != null && e.updatedAt <= at
-    }.keys
-    val delFavorites = tombstonesFavorites.filter { (id, at) ->
-        val e = favoriteMap[id]
-        e != null && e.addedAt <= at
-    }.keys
-
+    val delHistory = histTombs.filter { (id, at) -> historyMap[id]?.let { it.updatedAt <= at } ?: false }.keys
+    val delFavorites = favTombs.filter { (id, at) -> favoriteMap[id]?.let { it.addedAt <= at } ?: false }.keys
     delHistory.forEach { historyMap.remove(it) }
     delFavorites.forEach { favoriteMap.remove(it) }
 
-    // 条目在删除之后又被添加过 → 墓碑作废，避免“删了又加还一直被删”
-    val liveHistoryTombstones = tombstonesHistory.filter { (id, at) ->
-        val e = historyMap[id]
-        e == null || e.updatedAt < at
-    }
-    val liveFavoriteTombstones = tombstonesFavorites.filter { (id, at) ->
-        val e = favoriteMap[id]
-        e == null || e.addedAt < at
-    }
+    // 屏蔽：并集 → 剔除墓碑 → 本机仍存在的项清墓碑（视为重新添加）
+    val localBlockedAll = local.blocked.all().toSet()
+    val unionWords = (local.blocked.words + remoteBlocked.words).distinct()
+    val unionTags = (local.blocked.tags + remoteBlocked.tags).distinct()
+    val unionCategories = (local.blocked.categories + remoteBlocked.categories).distinct()
+
+    val liveBlockTombs = blockTombs.filterKeys { it !in localBlockedAll }
+    val deletedValues = liveBlockTombs.keys
 
     val blocked = BlockedPayload(
-        words = (local.blocked.words + remoteBlocked.words).distinct().sorted(),
-        tags = (local.blocked.tags + remoteBlocked.tags).distinct().sorted(),
-        categories = (local.blocked.categories + remoteBlocked.categories).distinct().sorted(),
+        words = unionWords.filterNot { it in deletedValues }.sorted(),
+        tags = unionTags.filterNot { it in deletedValues }.sorted(),
+        categories = unionCategories.filterNot { it in deletedValues }.sorted(),
+        deleted = liveBlockTombs.map { Tombstone(it.key, it.value) }.sortedByDescending { it.deletedAt },
     )
+
+    val liveHistTombs = histTombs.filter { (id, at) -> historyMap[id]?.let { it.updatedAt < at } ?: true }
+    val liveFavTombs = favTombs.filter { (id, at) -> favoriteMap[id]?.let { it.addedAt < at } ?: true }
 
     val merged = SyncPayload(
         updatedAt = now,
@@ -84,8 +75,8 @@ fun mergeSyncPayloads(
         history = historyMap.values.sortedByDescending { it.updatedAt }.take(limit),
         favorites = favoriteMap.values.sortedByDescending { it.addedAt }.take(limit),
         blocked = blocked,
-        deletedHistory = liveHistoryTombstones.map { Tombstone(it.key, it.value) }.sortedByDescending { it.deletedAt },
-        deletedFavorites = liveFavoriteTombstones.map { Tombstone(it.key, it.value) }.sortedByDescending { it.deletedAt },
+        deletedHistory = liveHistTombs.map { Tombstone(it.key, it.value) }.sortedByDescending { it.deletedAt },
+        deletedFavorites = liveFavTombs.map { Tombstone(it.key, it.value) }.sortedByDescending { it.deletedAt },
     )
     return MergeResult(
         payload = merged,
@@ -93,10 +84,10 @@ fun mergeSyncPayloads(
         favoriteConflicts = favoriteConflicts,
         appliedHistoryDeletions = delHistory.size,
         appliedFavoriteDeletions = delFavorites.size,
+        appliedBlockedDeletions = deletedValues.size,
     )
 }
 
-/** 同 id 取最晚的删除时间；顺带按 TTL 丢掉过期墓碑。 */
 private fun latestTombstones(list: List<Tombstone>, now: Long): Map<String, Long> {
     val m = HashMap<String, Long>()
     for (t in list) {

@@ -65,6 +65,13 @@ class SyncService(
         for (w in payload.blocked.words) blocks.addWord(w)
         for (t in payload.blocked.tags) blocks.addTag(t)
         for (c in payload.blocked.categories) blocks.addCategory(c)
+        // 屏蔽墓碑：值可能是词/标签/分类，三处都尝试删除（不存在的会被忽略）
+        for (t in payload.blocked.deleted.map { it.id }.toSet()) {
+            blocks.removeWord(t)
+            blocks.removeTag(t)
+            blocks.removeCategory(t)
+        }
+        // 屏蔽墓碑：删掉本机仍存在、但已被墓碑标记的项
 
         // 墓碑生效：本地有、但合并结果里没有、且墓碑时间晚于条目时间 → 删除
         val keepHistory = payload.history.map { it.aid }.toSet()
@@ -94,6 +101,13 @@ class SyncService(
         // 1) 本机删除 = 上次载荷里有、现在没有的条目 → 生成墓碑
         val now = System.currentTimeMillis()
         val localWithTombs = local.copy(
+            blocked = local.blocked.copy(
+                deleted = local.blocked.deleted + deletedSince(
+                    baseline?.blocked?.all().orEmpty(),
+                    local.blocked.all(),
+                    now,
+                ),
+            ),
             deletedHistory = local.deletedHistory + deletedSince(baseline?.history?.map { it.aid }.orEmpty(), local.history.map { it.aid }, now),
             deletedFavorites = local.deletedFavorites + deletedSince(baseline?.favorites?.map { it.aid }.orEmpty(), local.favorites.map { it.aid }, now),
         )
