@@ -74,6 +74,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -97,6 +99,7 @@ import com.jmnext.ui.components.CategoryChip
 import com.jmnext.ui.components.GlassLevel
 import com.jmnext.ui.components.GlassSurface
 import com.jmnext.ui.components.GlassTopBar
+import com.jmnext.ui.theme.SurfaceCraft
 import com.jmnext.ui.theme.jmShape
 import com.jmnext.ui.theme.JmTheme
 import com.jmnext.ui.theme.LocalJmPalette
@@ -1187,10 +1190,26 @@ private fun SettingCard(title: String, content: @Composable ColumnScope.() -> Un
 @Composable
 private fun InfoRow(label: String, value: String) {
     val c = JmTheme.colors
+    // 分层手段按材质分：Miuix（实心卡片）靠 1px 分隔线，Material 靠间距与 tonal 色阶。
+    val miuix = JmTheme.spec.surface.craft == SurfaceCraft.Card
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .heightIn(min = 40.dp)
+            .then(
+                if (miuix) {
+                    Modifier.drawBehind {
+                        drawLine(
+                            color = c.stroke,
+                            start = Offset(0f, 0f),
+                            end = Offset(size.width, 0f),
+                            strokeWidth = 1.dp.toPx(),
+                        )
+                    }
+                } else {
+                    Modifier
+                },
+            )
             .padding(vertical = Spacing.xs),
     ) {
         Text(
