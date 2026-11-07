@@ -160,16 +160,17 @@ fun GlassSurface(
             // （backdrop blur）。关掉时退回原来的半透明填充 —— 低端机上这一档能省掉
             // 每帧的采样与模糊。见 UiOptions.glassQuality。
             //
-            // tint 必须给**表面色**（不是白 8%）：KernelSU 的做法是把 surface 以 0.87 不透明度
-            // 混在模糊层上，玻璃的“乳白”来自这一层。只给极淡的白色会得到“糊掉的壁纸”，
-            // 观感就是脏与透，而不是玻璃。
+            // tint 用 **surface2 的 RGB**，不是当前层级的 raw：
+            // surface1 在深色主题里是 `0x0EFFFFFF`（白 5.5%），把它 alpha 抬到 0.86 就是
+            // “白 86%”—— 直接变不透明白板（踩过）。surface2 是 #262931（浅色 #FFFFFF），
+            // 拿它的 RGB 再给 0.86 才是 KernelSU 那种深色乳白玻璃。
             .then(
                 if (GlassHost.state != null && options.glassQuality.usesBackdrop) {
                     Modifier.glassSurface(
                         state = GlassHost.state!!,
                         shape = shape,
                         blurRadius = options.glassQuality.blurRadius!!,
-                        tint = raw.copy(alpha = 0.86f),
+                        tint = c.surface2.copy(alpha = if (ultra) 0.35f else 0.86f),
                     )
                 } else {
                     Modifier.background(fill)
