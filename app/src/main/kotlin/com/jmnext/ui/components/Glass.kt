@@ -135,7 +135,10 @@ fun GlassSurface(
     // 它们靠卡片本身立起来，透光会让层次糊掉。这里把 alpha 钉到 1，并禁用玻璃。
     val solidCraft = surface.craft == SurfaceCraft.Card || surface.craft == SurfaceCraft.Tonal
     val fill = if (solidCraft) raw.copy(alpha = 1f) else raw.copy(alpha = (raw.alpha * alphaScale).coerceIn(0f, 1f))
-    val elevation = when (level) {
+    // 分层手段按材质分：Miuix(Card) 靠描边、不用阴影；Material(Tonal) 靠 elevation。
+    val elevation = if (surface.craft == SurfaceCraft.Card) {
+        0.dp
+    } else when (level) {
         GlassLevel.Card -> Elevation.sm
         GlassLevel.Raised -> Elevation.card
         GlassLevel.Flyout -> Elevation.flyout

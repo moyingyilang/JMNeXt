@@ -303,8 +303,9 @@ object Styles {
             pressScale = 0.97f,
         ),
         type = TypeScale(
-            display = 30.sp, title = 22.sp, subtitle = 16.sp,
-            body = 15.sp, label = 13.5.sp, caption = 12.sp,
+            // 对齐 miuix-kmp 的 TextStyles：32 / 24 / 20 / 17 / 14 / 11
+            display = 32.sp, title = 24.sp, subtitle = 20.sp,
+            body = 17.sp, label = 14.sp, caption = 11.sp,
             titleWeight = FontWeight.Bold, subtitleWeight = FontWeight.SemiBold,
             bodyWeight = FontWeight.Medium, lineHeightFactor = 1.45f,
         ),
@@ -338,8 +339,9 @@ object Styles {
             shadows = listOf(0.dp, 1.dp, 6.dp),
         ),
         type = TypeScale(
+            // 对齐 M3 typescale：display 28 / title 22 / body 16 / label 14 / caption 12
             display = 28.sp, title = 22.sp, subtitle = 16.sp,
-            body = 16.sp, label = 14.sp, caption = 11.sp,
+            body = 16.sp, label = 14.sp, caption = 12.sp,
             titleWeight = FontWeight.Medium, subtitleWeight = FontWeight.Medium,
             bodyWeight = FontWeight.Normal, lineHeightFactor = 1.50f,
         ),

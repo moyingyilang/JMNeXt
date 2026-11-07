@@ -39,6 +39,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
@@ -1186,7 +1187,12 @@ private fun SettingCard(title: String, content: @Composable ColumnScope.() -> Un
 @Composable
 private fun InfoRow(label: String, value: String) {
     val c = JmTheme.colors
-    Row(modifier = Modifier.fillMaxWidth().padding(vertical = Spacing.xxs)) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .heightIn(min = 40.dp)
+            .padding(vertical = Spacing.xs),
+    ) {
         Text(
             text = label,
             style = MaterialTheme.typography.bodyLarge,
