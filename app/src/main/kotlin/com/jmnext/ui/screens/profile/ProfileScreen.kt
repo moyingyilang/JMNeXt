@@ -91,6 +91,7 @@ import com.jmnext.data.remote.dto.MemberInfo
 import com.jmnext.ui.LocalRepository
 import com.jmnext.ui.LocalWallpaper
 import com.jmnext.ui.LocalWallpaperStore
+import com.jmnext.ui.components.GlassQuality
 import com.jmnext.ui.components.CategoryChip
 import com.jmnext.ui.components.GlassLevel
 import com.jmnext.ui.components.GlassSurface
@@ -545,6 +546,13 @@ private fun AppearanceCard(
 
         // ---- 1.4.0 的五个可选项：默认全关，升级不动任何人的界面 ----
 
+        // 玻璃质量（2.2.2）：真实 backdrop blur 每帧采样背后像素，比半透明填充贵，
+        // 所以给三档。默认「中」。这一项放在最前面 —— 它决定下面几项观感的“底子”。
+        GlassQualityRow(
+            current = uiOptions.glassQuality,
+            onChange = { onUiOptionsChange(uiOptions.copy(glassQuality = it)) },
+        )
+
         OptionSwitch(
             title = "悬浮底栏",
             desc = "底栏变成浮在内容之上的胶囊，选中项带一块会滑过去的底。",
@@ -622,6 +630,43 @@ private fun AppearanceCard(
                 }
             }
         }
+        }
+    }
+}
+
+/**
+ * 玻璃质量三档选择（2.2.2）。
+ *
+ * 用三档而不是开关：真实 backdrop blur 的成本与观感都是连续的，
+ * 只有「开/关」会让用户以为中间没有余地。
+ */
+@Composable
+private fun GlassQualityRow(current: GlassQuality, onChange: (GlassQuality) -> Unit) {
+    if (LiteFeatures.ENABLED) return
+    val c = JmTheme.colors
+    Row(
+        modifier = Modifier.fillMaxWidth().padding(top = Spacing.lg),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        Column(Modifier.weight(1f).padding(end = Spacing.md)) {
+            Text("玻璃质量", style = MaterialTheme.typography.bodyLarge, color = c.text)
+            Text(
+                current.desc,
+                style = MaterialTheme.typography.labelSmall,
+                color = c.textTertiary,
+            )
+        }
+        Row(horizontalArrangement = Arrangement.spacedBy(Spacing.xs)) {
+            GlassQuality.entries.forEach { q ->
+                val selected = q == current
+                TextButton(onClick = { onChange(q) }) {
+                    Text(
+                        q.label,
+                        color = if (selected) c.accent else c.textTertiary,
+                        style = MaterialTheme.typography.bodyMedium,
+                    )
+                }
+            }
         }
     }
 }

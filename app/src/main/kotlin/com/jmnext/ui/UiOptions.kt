@@ -2,6 +2,7 @@ package com.jmnext.ui
 
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.unit.dp
+import com.jmnext.ui.components.GlassQuality
 import com.jmnext.ui.theme.MotionStyle
 
 /**
@@ -29,6 +30,11 @@ data class UiOptions(
     val predictiveBack: Boolean = false,
     /** 动效性格（标准 / Plasma）。 */
     val motionStyle: MotionStyle = MotionStyle.Default,
+    /**
+     * 玻璃质量（2.2.2）。真实 backdrop blur 每帧采样背后像素，比半透明填充贵，
+     * 给三档让用户按机器性能取舍：高 / 中 / 关。默认中。
+     */
+    val glassQuality: GlassQuality = GlassQuality.Medium,
 )
 
 /** 当前生效的可选开关。拿不到时用全默认值 —— 这些开关不该让界面崩掉。 */

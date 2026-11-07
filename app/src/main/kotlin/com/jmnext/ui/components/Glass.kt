@@ -156,11 +156,16 @@ fun GlassSurface(
             }
             .shadow(elevation, shape, clip = false)
             .clip(shape)
-            // 有 haze 状态时用**真玻璃**：实时采样背后内容做模糊（backdrop blur）；
-            // 没有时退回原来的半透明填充（避免在无 host 的场景下什么都画不出来）。
+            // 有 haze 状态、且用户没把玻璃质量关掉时，用**真玻璃**：实时采样背后内容做模糊
+            // （backdrop blur）。关掉时退回原来的半透明填充 —— 低端机上这一档能省掉
+            // 每帧的采样与模糊。见 UiOptions.glassQuality。
             .then(
-                if (GlassHost.state != null) {
-                    Modifier.glassSurface(state = GlassHost.state!!, shape = shape)
+                if (GlassHost.state != null && options.glassQuality.usesBackdrop) {
+                    Modifier.glassSurface(
+                        state = GlassHost.state!!,
+                        shape = shape,
+                        blurRadius = options.glassQuality.blurRadius!!,
+                    )
                 } else {
                     Modifier.background(fill)
                 },

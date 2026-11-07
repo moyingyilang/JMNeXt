@@ -80,3 +80,24 @@ object GlassHost {
     /** 当前可用的玻璃状态。由导航根在组合时写入；为空时各玻璃表面退回半透明填充。 */
     var state: HazeState? = null
 }
+
+/**
+ * 玻璃质量档位。
+ *
+ * 为什么需要这个开关：真实 backdrop blur 是**每帧重新采样并模糊背后的像素**，
+ * 比原来的半透明填充贵得多。低端机或大列表滚动时可能掉帧，
+ * 所以给用户三档：高（好看）/ 中（默认，平衡）/ 关（退回填充，零采样）。
+ *
+ * [blurRadius] 为 null 表示这一档**不做** backdrop 采样。
+ */
+enum class GlassQuality(
+    val label: String,
+    val desc: String,
+    val blurRadius: Dp?,
+) {
+    High("高", "真实模糊，半径 20dp —— 最好看，低端机可能掉帧", 20.dp),
+    Medium("中", "真实模糊，半径 12dp —— 默认，观感与性能折中", 12.dp),
+    Off("关", "不做背景采样，退回半透明填充 —— 最省电，适合低端机", null);
+
+    val usesBackdrop: Boolean get() = blurRadius != null
+}

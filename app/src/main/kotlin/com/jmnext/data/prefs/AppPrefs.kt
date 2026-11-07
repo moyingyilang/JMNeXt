@@ -2,6 +2,7 @@ package com.jmnext.data.prefs
 
 import com.jmnext.ui.theme.ThemeStyle
 import com.jmnext.ui.theme.MotionStyle
+import com.jmnext.ui.components.GlassQuality
 import com.jmnext.ui.UiOptions
 import com.jmnext.data.remote.JmJson
 import kotlinx.serialization.builtins.ListSerializer
@@ -103,6 +104,18 @@ class AppPrefs(private val sp: KeyValueStore) {
         set(value) = sp.putString(KEY_MOTION_STYLE, value.name)
 
     /**
+     * 玻璃质量：高 / 中 / 关。
+     *
+     * 存 name 而不是序号：以后调整档位顺序时，老用户的设置不会串档。
+     * 读到未知值时退回中档（默认），不让界面因为一个脏值退化成关。
+     */
+    var glassQuality: GlassQuality
+        get() = runCatching {
+            GlassQuality.valueOf(sp.getString(KEY_GLASS_QUALITY, null) ?: GlassQuality.Medium.name)
+        }.getOrDefault(GlassQuality.Medium)
+        set(value) = sp.putString(KEY_GLASS_QUALITY, value.name)
+
+    /**
      * 五个可选项作为一个整体读写。
      *
      * 这样设置页只需要一个 `UiOptions + onUiOptionsChange`，而不是五个开关各配一对回调；
@@ -115,6 +128,7 @@ class AppPrefs(private val sp: KeyValueStore) {
             ultraTranslucent = ultraTranslucent,
             predictiveBack = predictiveBack,
             motionStyle = motionStyle,
+            glassQuality = glassQuality,
         )
         set(value) {
             floatingBottomBar = value.floatingBottomBar
@@ -122,6 +136,7 @@ class AppPrefs(private val sp: KeyValueStore) {
             ultraTranslucent = value.ultraTranslucent
             predictiveBack = value.predictiveBack
             motionStyle = value.motionStyle
+            glassQuality = value.glassQuality
         }
 
     /**
@@ -180,6 +195,7 @@ class AppPrefs(private val sp: KeyValueStore) {
         const val KEY_ULTRA_TRANSLUCENT = "ultra_translucent"
         const val KEY_PREDICTIVE_BACK = "predictive_back"
         const val KEY_MOTION_STYLE = "motion_style"
+        const val KEY_GLASS_QUALITY = "glass_quality"
         const val KEY_FAVORITE_TAGS = "favorite_tags_v1"
         const val KEY_RANDOM_LAYOUT = "random_layout"
         const val KEY_SERIAL_NOTIFY = "serial_notify"
