@@ -131,7 +131,10 @@ fun GlassSurface(
             surface.craft == SurfaceCraft.Blur
         )
     val alphaScale = surface.fillAlphaScale * (if (ultra) ULTRA_TRANSLUCENT_FILL else 1f)
-    val fill = raw.copy(alpha = (raw.alpha * alphaScale).coerceIn(0f, 1f))
+    // 实心材质（Miuix = Card、Material = Tonal）**本来就该是不透明的**：
+    // 它们靠卡片本身立起来，透光会让层次糊掉。这里把 alpha 钉到 1，并禁用玻璃。
+    val solidCraft = surface.craft == SurfaceCraft.Card || surface.craft == SurfaceCraft.Tonal
+    val fill = if (solidCraft) raw.copy(alpha = 1f) else raw.copy(alpha = (raw.alpha * alphaScale).coerceIn(0f, 1f))
     val elevation = when (level) {
         GlassLevel.Card -> Elevation.sm
         GlassLevel.Raised -> Elevation.card
@@ -165,7 +168,7 @@ fun GlassSurface(
             // “白 86%”—— 直接变不透明白板（踩过）。surface2 是 #262931（浅色 #FFFFFF），
             // 拿它的 RGB 再给 0.86 才是 KernelSU 那种深色乳白玻璃。
             .then(
-                if (GlassHost.state != null && options.glassQuality.usesBackdrop) {
+                if (!solidCraft && GlassHost.state != null && options.glassQuality.usesBackdrop) {
                     Modifier.glassSurface(
                         state = GlassHost.state!!,
                         shape = shape,
