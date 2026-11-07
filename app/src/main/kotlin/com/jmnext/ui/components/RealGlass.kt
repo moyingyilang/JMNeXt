@@ -56,6 +56,17 @@ fun Modifier.glassSurface(
         input = HazeInput.Sources(state),
         style = HazeBlurStyle {
             blurRadius(blurRadius)
+            // vibrancy()：KernelSU 用 colorControls(saturation = 1.5f) 提鲜，
+            // 模糊会把颜色平均掉，不提饱和就是灰蒙蒙一片。
+            colorEffects(
+                listOf(
+                    dev.chrisbanes.haze.blur.HazeColorEffect.colorFilter(
+                        androidx.compose.ui.graphics.ColorFilter.colorMatrix(
+                            androidx.compose.ui.graphics.ColorMatrix().apply { setToSaturation(1.5f) },
+                        ),
+                    ),
+                ),
+            )
             noiseFactor(noise)
         },
     )
@@ -105,8 +116,8 @@ enum class GlassQuality(
     val desc: String,
     val blurRadius: Dp?,
 ) {
-    High("高", "真实模糊，半径 25dp —— 最好看，低端机可能掉帧", 25.dp),
-    Medium("中", "真实模糊，半径 16dp —— 默认，观感与性能折中", 16.dp),
+    High("高", "真实模糊，半径 12dp —— 最好看，低端机可能掉帧", 12.dp),
+    Medium("中", "真实模糊，半径 8dp —— 默认，观感与性能折中", 8.dp),
     Off("关", "不做背景采样，退回半透明填充 —— 最省电，适合低端机", null);
 
     val usesBackdrop: Boolean get() = blurRadius != null

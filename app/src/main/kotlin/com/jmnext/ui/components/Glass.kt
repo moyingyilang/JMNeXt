@@ -170,7 +170,7 @@ fun GlassSurface(
                         state = GlassHost.state!!,
                         shape = shape,
                         blurRadius = options.glassQuality.blurRadius!!,
-                        tint = c.surface2.copy(alpha = if (ultra) 0.35f else 0.86f),
+                        tint = c.surface2.copy(alpha = if (ultra) 0.22f else 0.40f),
                     )
                 } else {
                     Modifier.background(fill)
