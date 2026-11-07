@@ -144,16 +144,16 @@ data class TypeScale(
  */
 enum class MotionStyle(val label: String, val tagline: String) {
     Standard(
-        label = "标准",
-        tagline = "短促直接：切换干脆、位移很小",
+        label = "快",
+        tagline = "短促直接：切换干脆、位移很小 —— 最快的节奏",
     ),
     Plasma(
-        label = "Plasma",
-        tagline = "仿 KDE Plasma：出慢入快、时长更长、位移更柔",
+        label = "中",
+        tagline = "出慢入快、时长适中、位移柔和 —— 默认节奏",
     ),
     HyperOS(
-        label = "HyperOS",
-        tagline = "小米 HyperOS 的节奏：转场更长、收尾更缓，前后层次最明显",
+        label = "慢",
+        tagline = "转场更长、收尾更缓，前后层次最明显 —— 最慢的节奏",
     ),
     ;
 

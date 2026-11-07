@@ -77,8 +77,18 @@ fun GlassBox(
 
 /** 全局玻璃状态。由导航根提供，顶栏/底栏等表面读取；没有时退回旧的 [GlassSurface]。 */
 object GlassHost {
-    /** 当前可用的玻璃状态。由导航根在组合时写入；为空时各玻璃表面退回半透明填充。 */
-    var state: HazeState? = null
+    /**
+     * 当前可用的玻璃状态。由导航根在组合时写入；为空时各玻璃表面退回半透明填充。
+     *
+     * **必须是 Compose 状态**：`GlassSurface` 在组合期读它。普通 `var` 读不到变化，
+     * 首帧拿到 null 之后即使后面写入了值也不会重组 —— 那样玻璃永远走退回分支，
+     * 表现就是“看着像半透明贴片，根本没模糊”。
+     */
+    private val holder = androidx.compose.runtime.mutableStateOf<HazeState?>(null)
+
+    var state: HazeState?
+        get() = holder.value
+        set(value) { holder.value = value }
 }
 
 /**
@@ -95,8 +105,8 @@ enum class GlassQuality(
     val desc: String,
     val blurRadius: Dp?,
 ) {
-    High("高", "真实模糊，半径 20dp —— 最好看，低端机可能掉帧", 20.dp),
-    Medium("中", "真实模糊，半径 12dp —— 默认，观感与性能折中", 12.dp),
+    High("高", "真实模糊，半径 25dp —— 最好看，低端机可能掉帧", 25.dp),
+    Medium("中", "真实模糊，半径 16dp —— 默认，观感与性能折中", 16.dp),
     Off("关", "不做背景采样，退回半透明填充 —— 最省电，适合低端机", null);
 
     val usesBackdrop: Boolean get() = blurRadius != null

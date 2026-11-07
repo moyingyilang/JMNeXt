@@ -159,12 +159,17 @@ fun GlassSurface(
             // 有 haze 状态、且用户没把玻璃质量关掉时，用**真玻璃**：实时采样背后内容做模糊
             // （backdrop blur）。关掉时退回原来的半透明填充 —— 低端机上这一档能省掉
             // 每帧的采样与模糊。见 UiOptions.glassQuality。
+            //
+            // tint 必须给**表面色**（不是白 8%）：KernelSU 的做法是把 surface 以 0.87 不透明度
+            // 混在模糊层上，玻璃的“乳白”来自这一层。只给极淡的白色会得到“糊掉的壁纸”，
+            // 观感就是脏与透，而不是玻璃。
             .then(
                 if (GlassHost.state != null && options.glassQuality.usesBackdrop) {
                     Modifier.glassSurface(
                         state = GlassHost.state!!,
                         shape = shape,
                         blurRadius = options.glassQuality.blurRadius!!,
+                        tint = raw.copy(alpha = 0.86f),
                     )
                 } else {
                     Modifier.background(fill)

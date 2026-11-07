@@ -164,8 +164,9 @@ fun AboutScreen(
             InfoCard("说明") {
                 Text(
                     text = "JMNeXt 是禁漫（JMComic）的第三方客户端，用 Kotlin 与 Jetpack Compose 重写。" +
-                        "界面风格中的 WindowGlass 与 Translucent 令牌移植自 moyingyilang.github.io 的 global.css" +
-                        "（三径向 + 一线性的渐变底、发丝描边、上缘高光）；Miuix 与 Material 是另外两套表面工艺。",
+                        "界面风格中的 WindowGlass 令牌移植自 moyingyilang.github.io 的 global.css" +
+                        "（三径向 + 一线性的渐变底、发丝描边、上缘高光）；Miuix 与 Material 是另外两套表面工艺。" +
+                        "玻璃本身是 backdrop blur（haze）：表面实时采样并模糊它背后的内容。",
                     style = MaterialTheme.typography.bodySmall,
                     color = c.textSecondary,
                 )
