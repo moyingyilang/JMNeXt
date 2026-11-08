@@ -1,6 +1,7 @@
 package com.jmnext.ui.screens.home
 import androidx.compose.ui.res.stringResource
 
+import com.jmnext.ui.components.SectionTitle
 import com.jmnext.ui.components.jmAnimateItem
 import com.jmnext.data.remote.dto.NotificationItem
 import androidx.compose.runtime.produceState
@@ -388,16 +389,8 @@ private fun SectionTitle(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(Spacing.sm),
     ) {
-        Text(
-            // 服务端把操作提示写进了标题（实测「连载更新→右滑看更多→」），
-            // 直接显示就是把这串箭头当成内容摆出来。这里只取它前面的标题部分。
-            text = title.substringBefore("→").trim().ifEmpty { title },
-            style = MaterialTheme.typography.titleLarge,
-            color = c.text,
-            maxLines = 1,
-            overflow = TextOverflow.Ellipsis,
-            modifier = Modifier.weight(1f),
-        )
+        // 标题层级统一走 SectionTitle（它内部处理「服务端把提示写进标题」的裁剪）
+        SectionTitle(text = title, modifier = Modifier.weight(1f))
         if (updatedCount > 0) {
             // 只在**真的有**更新时才出现：没有更新的日子这一行保持干净，
             // 否则每天都挂着一个「0 部更新」，提示很快就没人看了
