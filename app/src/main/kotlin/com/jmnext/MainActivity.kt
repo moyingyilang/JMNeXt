@@ -86,6 +86,10 @@ class MainActivity : ComponentActivity() {
                         // 自动同步（2.2.2）：回到前台时若开启了同步且距上次超过 10 分钟，
                         // 在后台静默跑一次。失败不打扰用户 —— 设置页里有手动的“立即同步”。
                         wallScope.launch { com.jmnext.data.sync.AutoSyncRunner.maybeRun(app) }
+
+                        // 启动时检查一次更新（每天最多一次，只有真有新版本才提示，失败静默）
+
+                        wallScope.launch { runCatching { com.jmnext.data.StartupUpdateCheck.run(app) } }
                     }
                 }
                 lifecycleOwner.lifecycle.addObserver(observer)
