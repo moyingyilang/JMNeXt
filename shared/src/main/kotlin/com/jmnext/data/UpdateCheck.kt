@@ -67,18 +67,29 @@ object UpdateCheck {
      * 放在共享层而不是各端页面里：Android 与桌面都要做同一件事，
      * 各写一份的话，改 UA、改超时、改错误处理都得记住改两处。
      */
+    /**
+     * 拉取最新 release 的 tag。
+     *
+     * 依次尝试官方 API 与几个公共镜像（`api.github.com` 在部分网络下不可达），
+     * 第一个成功的胜出；全部失败返回 null（调用方按“没取到”处理，不打扰用户）。
+     * 更新是低频操作，走镜像完全够用。
+     */
     suspend fun fetchLatestTag(client: OkHttpClient): String? = withContext(Dispatchers.IO) {
-        val request = Request.Builder()
-            .url(LATEST_RELEASE_API)
-            .header("Accept", "application/vnd.github+json")
-            .build()
-        runCatching {
-            client.newCall(request).execute().use { resp ->
-                if (!resp.isSuccessful) return@use null
-                val body = resp.body.string()
-                Json.parseToJsonElement(body).jsonObject["tag_name"]?.jsonPrimitive?.content
-            }
-        }.getOrNull()
+        for (url in LATEST_RELEASE_APIS) {
+            val tag = runCatching {
+                val request = Request.Builder()
+                    .url(url)
+                    .header("Accept", "application/vnd.github+json")
+                    .build()
+                client.newCall(request).execute().use { resp ->
+                    if (!resp.isSuccessful) return@use null
+                    val body = resp.body.string()
+                    Json.parseToJsonElement(body).jsonObject["tag_name"]?.jsonPrimitive?.content
+                }
+            }.getOrNull()
+            if (tag != null) return@withContext tag
+        }
+        null
     }
 
     /**
@@ -128,4 +139,13 @@ object UpdateCheck {
 
     /** GitHub 的"最新发布"接口。 */
     const val LATEST_RELEASE_API = "https://api.github.com/repos/$REPO/releases/latest"
+
+    /** 拉取 release 的候选地址：官方 + 常用公共镜像（顺序即优先级）。 */
+    val LATEST_RELEASE_APIS = listOf(
+        LATEST_RELEASE_API,
+        "https://gh-proxy.com/https://api.github.com/repos/$REPO/releases/latest",
+        "https://ghproxy.net/https://api.github.com/repos/$REPO/releases/latest",
+        "https://mirror.ghproxy.com/https://api.github.com/repos/$REPO/releases/latest",
+        "https://ghfast.top/https://api.github.com/repos/$REPO/releases/latest",
+    )
 }

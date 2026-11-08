@@ -116,7 +116,12 @@ fun AboutScreen(repository: JmRepository) {
 
         Section("说明") {
             Text(
-                "JMNeXt 是禁漫（JMComic）的第三方客户端，用 Kotlin 与 Compose 重写；" +
+                // 与手机端同一口径：说明这一栏讲项目本身，不讲实现细节与材质
+                "JMNeXt 是禁漫（JMComic）的第三方客户端，用 Kotlin 与 Compose 重写。" +
+                    "不做插槽广告、不采集行为，登录凭证经系统密钥库加密保存。" +
+                    "阅读支持条漫与双页、伪长图拼接无接缝；阅读进度与收藏本地保存，" +
+                    "也能通过 WebDAV 在你自己的网盘上跨设备同步（历史、收藏、屏蔽名单）。" +
+                    "屏蔽规则按关键词 / 分类 / 标签生效，命中即从列表里消失。" +
                     "桌面端与 Android 端共用同一份跨平台数据层（:shared），" +
                     "差异只在平台实现（键值存储、密钥来源、图像解码）与界面。",
                 style = MaterialTheme.typography.bodyMedium,
