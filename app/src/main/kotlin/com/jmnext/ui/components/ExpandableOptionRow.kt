@@ -1,6 +1,8 @@
 package com.jmnext.ui.components
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.ExitTransition
+import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.spring
@@ -62,7 +64,8 @@ fun <T> ExpandableOptionRow(
     val arrow by animateFloatAsState(
         targetValue = if (expanded) 180f else 0f,
         // 阻尼 0.55：比展开动画更“脆”，点下去箭头立刻甩过去
-        animationSpec = spring(dampingRatio = 0.55f, stiffness = Spring.StiffnessMediumLow),
+        animationSpec = if (com.jmnext.LiteFeatures.ENABLED) tween(0) else
+        spring(dampingRatio = 0.55f, stiffness = Spring.StiffnessMediumLow),
         label = "arrow",
     )
     val current = options.firstOrNull { it.first == selected }?.second ?: ""
@@ -120,12 +123,14 @@ fun <T> ExpandableOptionRow(
             visible = expanded,
             // 展开：spring 带一点过冲（0.72 / MediumLow），像抽屉被轻轻弹出来
             enter = expandVertically(
-                animationSpec = spring(dampingRatio = 0.72f, stiffness = Spring.StiffnessMediumLow),
-            ) + fadeIn(tween(140)),
+                animationSpec = if (com.jmnext.LiteFeatures.ENABLED) tween(0) else
+                spring(dampingRatio = 0.72f, stiffness = Spring.StiffnessMediumLow),
+            ) + if (com.jmnext.LiteFeatures.ENABLED) EnterTransition.None else fadeIn(tween(140)),
             // 收起：阻尼更低、更干脆，不让它慢慢缩
             exit = shrinkVertically(
-                animationSpec = spring(dampingRatio = 0.85f, stiffness = Spring.StiffnessMedium),
-            ) + fadeOut(tween(120)),
+                animationSpec = if (com.jmnext.LiteFeatures.ENABLED) tween(0) else
+                spring(dampingRatio = 0.85f, stiffness = Spring.StiffnessMedium),
+            ) + if (com.jmnext.LiteFeatures.ENABLED) ExitTransition.None else fadeOut(tween(120)),
         ) {
             Column(
                 modifier = Modifier

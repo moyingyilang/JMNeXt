@@ -63,6 +63,8 @@ fun rememberRubberBandState(): RubberBandState {
  */
 @Composable
 fun Modifier.rubberBand(state: RubberBandState): Modifier {
+    // lite：越界回弹整段不装（nestedScroll + graphicsLayer 都是每帧成本）
+    if (com.jmnext.LiteFeatures.ENABLED) return this
     val scope = rememberCoroutineScope()
     val anim = remember { Animatable(0f) }
 

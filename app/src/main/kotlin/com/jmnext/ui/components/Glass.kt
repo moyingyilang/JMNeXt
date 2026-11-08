@@ -171,7 +171,9 @@ fun GlassSurface(
             // “白 86%”—— 直接变不透明白板（踩过）。surface2 是 #262931（浅色 #FFFFFF），
             // 拿它的 RGB 再给 0.86 才是 KernelSU 那种深色乳白玻璃。
             .then(
-                if (!solidCraft && GlassHost.state != null && options.glassQuality.usesBackdrop) {
+                if (!com.jmnext.LiteFeatures.ENABLED && !solidCraft &&
+                    GlassHost.state != null && options.glassQuality.usesBackdrop
+                ) {
                     Modifier.glassSurface(
                         state = GlassHost.state!!,
                         shape = shape,

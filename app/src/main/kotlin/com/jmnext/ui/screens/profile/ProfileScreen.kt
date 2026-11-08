@@ -564,7 +564,8 @@ private fun AppearanceCard(
 
         // 玻璃质量（2.2.2）：真实 backdrop blur 每帧采样背后像素，比半透明填充贵，
         // 所以给三档。默认「中」。这一项放在最前面 —— 它决定下面几项观感的“底子”。
-        ExpandableOptionRow(
+        // lite 没有玻璃（材质退化为实心），这一项摆出来只会误导
+        if (!LiteFeatures.ENABLED) ExpandableOptionRow(
             title = "玻璃质量",
             options = GlassQuality.entries.map { it to it.label },
             selected = uiOptions.glassQuality,

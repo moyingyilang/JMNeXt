@@ -151,6 +151,8 @@ android {
         debug {
             isMinifyEnabled = false
             applicationIdSuffix = ".debug"
+            // debug 也写崩溃日志（与 tracer 一致），但包名带 .debug，仅开发装机用
+            buildConfigField("boolean", "DEBUG_LOG", "true")
         }
 
         // 追踪包：用于「日志存储 + 错误追踪」。与 debug 的区别是——
