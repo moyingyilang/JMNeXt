@@ -325,7 +325,8 @@ object Styles {
      */
     val material = JmSpec(
         style = ThemeStyle.Material,
-        radius = RadiusScale(xs = 4.dp, sm = 8.dp, md = 12.dp, lg = 12.dp, xl = 28.dp),
+        // 对齐 M3 shape scale：none 0 / xs 4 / sm 8 / md 12 / lg 16 / xl 28
+        radius = RadiusScale(xs = 4.dp, sm = 8.dp, md = 12.dp, lg = 16.dp, xl = 28.dp),
         surface = SurfaceSpec(
             craft = SurfaceCraft.Tonal,
             fillAlphaScale = 1f,
