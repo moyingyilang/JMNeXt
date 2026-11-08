@@ -18,18 +18,18 @@
 
 **最新版本直达**（点击徽章直接下载对应平台的包）：
 
-[![Android full](https://img.shields.io/badge/Android-full-3DDC84?logo=android&logoColor=white)](https://github.com/moyingyilang/JMNeXt/releases/latest/download/Android-full-2.2.1.apk)
-[![Android lite](https://img.shields.io/badge/Android-lite-3DDC84?logo=android&logoColor=white)](https://github.com/moyingyilang/JMNeXt/releases/latest/download/Android-lite-2.2.1.apk)
-[![Windows x64](https://img.shields.io/badge/Windows-x64-0078D4?logo=windows&logoColor=white)](https://github.com/moyingyilang/JMNeXt/releases/latest/download/Windows-x64-2.2.1.zip)
-[![Windows arm64](https://img.shields.io/badge/Windows-arm64-0078D4?logo=windows&logoColor=white)](https://github.com/moyingyilang/JMNeXt/releases/latest/download/Windows-arm64-2.2.1.zip)
-[![Linux x86_64](https://img.shields.io/badge/Linux-x86__64-FCC624?logo=linux&logoColor=black)](https://github.com/moyingyilang/JMNeXt/releases/latest/download/Linux-x86_64-2.2.1.tar.gz)
-[![Linux aarch64](https://img.shields.io/badge/Linux-aarch64-FCC624?logo=linux&logoColor=black)](https://github.com/moyingyilang/JMNeXt/releases/latest/download/Linux-aarch64-2.2.1.tar.gz)
+[![Android full](https://img.shields.io/badge/Android-full-3DDC84?logo=android&logoColor=white)](https://github.com/moyingyilang/JMNeXt/releases/latest/download/Android-full-2.2.2.apk)
+[![Android lite](https://img.shields.io/badge/Android-lite-3DDC84?logo=android&logoColor=white)](https://github.com/moyingyilang/JMNeXt/releases/latest/download/Android-lite-2.2.2.apk)
+[![Windows x64](https://img.shields.io/badge/Windows-x64-0078D4?logo=windows&logoColor=white)](https://github.com/moyingyilang/JMNeXt/releases/latest/download/Windows-x64-2.2.2.zip)
+[![Windows arm64](https://img.shields.io/badge/Windows-arm64-0078D4?logo=windows&logoColor=white)](https://github.com/moyingyilang/JMNeXt/releases/latest/download/Windows-arm64-2.2.2.zip)
+[![Linux x86_64](https://img.shields.io/badge/Linux-x86__64-FCC624?logo=linux&logoColor=black)](https://github.com/moyingyilang/JMNeXt/releases/latest/download/Linux-x86_64-2.2.2.tar.gz)
+[![Linux aarch64](https://img.shields.io/badge/Linux-aarch64-FCC624?logo=linux&logoColor=black)](https://github.com/moyingyilang/JMNeXt/releases/latest/download/Linux-aarch64-2.2.2.tar.gz)
 
 [![Release](https://img.shields.io/github/v/release/moyingyilang/JMNeXt?label=最新版本&sort=semver)](https://github.com/moyingyilang/JMNeXt/releases/latest)
 [![Downloads](https://img.shields.io/github/downloads/moyingyilang/JMNeXt/total?label=总下载)](https://github.com/moyingyilang/JMNeXt/releases)
 [![License](https://img.shields.io/badge/license-AGPL--3.0--only-blue)](./LICENSE)
 
-当前最新版本为 **2.2.1**；2.2.2 正在收尾（界面材质重做 + WebDAV 同步）。
+当前最新版本为 **[2.2.2](https://github.com/moyingyilang/JMNeXt/releases/tag/v2.2.2)**（界面材质重做 + WebDAV 同步）。
 
 2.2.2 起附件为 **21 个**：15 个标准包 + 2 个 Android 追踪包 + 4 个桌面调试包。
 
