@@ -137,6 +137,9 @@
 - 桌面端不另出 debug 构建：它本就把 stdout/stderr tee 到 `~/jmnext.log`，另有环境摘要、
   `JMNEXT_VERBOSE=1` 详细日志与「崩溃」区块（见 `docs/DEBUG-BUILD.md`）。
 
+应用内入口：设置页最下方「崩溃日志（调试）」—— 显示最近一次的**文件名与时间**，
+可**复制到剪贴板**或**删除**；只在 `DEBUG_LOG=true` 的 debug / tracer 包出现，正式包不显示。
+
 ## 十、性能
 
 测量方法固定：`force-stop` → `gfxinfo reset` → `am start -W` → 滑动 10 次 → `framestats`。
@@ -166,9 +169,49 @@
 - **修复自动同步只在「跟随手机壁纸」时触发的 bug**（它原先被放在壁纸条件分支里）；
 - **README** 增加 GitHub 徽章（Android full/lite、Windows x64/arm64、Linux x86_64/aarch64 直达最新包）。
 
+## 十二、桌面端同步
+
+桌面端（`desktop/`）是**独立的 Compose Desktop UI**，不复用手机端界面代码，因此按组件逐个移植：
+
+- **可展开选项行**（新增 `desktop/ExpandableOptionRow.kt`）：外观页「界面风格」由横排按钮 + `·` 当前标记
+  改成「当前值 + 箭头 + 竖向列表」，选中态只用强调色 + SemiBold；「深浅色」两个按钮同样改为可展开行；
+  动画与手机端同参数（箭头 spring 0.55、展开 0.72、收起 0.85、淡入淡出 140 / 120 ms）；
+- **关于页**：「说明」改为讲项目特色（不做插槽广告、不采集行为、凭证加密、条漫与双页、
+  WebDAV 同步、屏蔽规则），不再讲实现细节；
+- **字号层级**：补齐四档 —— 页标题 24sp SemiBold（行高 32）、区块 17sp、正文 16sp（行高 24）、
+  说明 12.5sp；此前 `titleLarge` / `bodyLarge` 还是 Material 默认值，层级不完整；
+  字体族仍统一 `cjkFontFamily`（Windows 默认字体不含汉字，不指定会出现方框或按日式写法渲染）；
+- **检查更新**：代理链放在 `shared` 的 `fetchLatestTag` 里，桌面与手机共用同一条链；
+- **崩溃记录**：`Log.init()` 增加「崩溃」区块（线程名、异常类型、环境摘要、完整堆栈），保留原 handler。
+
+未移植的两项，以及原因：
+
+| 项 | 状态 | 原因 |
+| --- | --- | --- |
+| 材质分治 | 无需移植 | 桌面端表面本来就是不透明色（`#F6F7FA` / `#16181E`），也不具备 Android 的 backdrop blur |
+| 越界回弹 | 不做 | 桌面用滚轮，回弹收益低 |
+| 间距 4dp 栅格 | **未做** | 仍有 10dp（54 处）、6dp（28 处）、14dp（16 处）、18dp（5 处），多为 padding/spacedBy，批量替换有版式风险，留待单独一轮逐页调整 |
+
+## 十三、发布产物（21 个附件）
+
+| 类别 | 数量 | 说明 |
+| --- | --- | --- |
+| Android 正式 | 2 | `full` / `lite` |
+| Android 追踪包 | 2 | `full-tracer` / `lite-tracer`，崩溃落盘 + 设置页入口 |
+| Linux aarch64 | 4 | tar.gz / deb / rpm / AppImage |
+| Linux aarch64 调试 | 1 | `-debug.tar.gz`（附 `debug.sh`，开 `JMNEXT_VERBOSE=1`） |
+| Linux x86_64 | 4 | 同上 |
+| Linux x86_64 调试 | 1 | 同上 |
+| Windows | 5 | arm64 zip+exe、x64 zip+exe、universal exe |
+| Windows 调试 | 2 | arm64 / x64 的 `-debug.zip`（附 `debug.bat`） |
+
+- README 的 6 个 `releases/latest/download` 直链已更新到 2.2.2（`curl -I` 逐个验证，全部 302）；
+- 发版手册（`docs/RELEASE-RUNBOOK.md`）的附件数与校验条件同步改为 21。
+
 ## 未验证
 
-本版**不包含 WebUI**（浏览器界面）：它曾是 2.2.2 的计划项，已从本版移除，代码留在仓库但未随包发布。
+本版**不包含 WebUI**（浏览器界面）：它曾是 2.2.2 的计划项，做到一半放弃，并已从仓库删除
+（`web/`、`uiweb/` 两个模块、桌面端 `--web` 入口、`docs/WEBUI.md` 均已移除）。
 
 - WebDAV **没有连过真实网盘**（本次无可用账号）：用本地 WebDAV 服务做了端到端验证
   （含认证失败、嵌套目录、跨设备删除与复活），真实网盘的权限与错误码仍需实机确认；
