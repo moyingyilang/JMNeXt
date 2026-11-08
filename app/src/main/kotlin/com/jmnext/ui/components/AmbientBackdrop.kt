@@ -72,10 +72,10 @@ fun AmbientBackdrop(
 
         // 1b. 纯色壁纸：用用户选的颜色盖住渐变底（零请求、零解码）
         if (wall.mode == WallpaperMode.Solid) {
-            // 纯色：用户没指定颜色时按明暗取纯黑 / 纯白（0 表示自动）
+            // 纯色：用户没指定颜色时取**主题背景色**（深色主题是深色底、浅色主题是浅色底），
+            // 而不是纯黑/纯白 —— 纯黑纯白在任何主题下都显得突兀，也不随主题变化。
             val auto = wall.solidColor != 0
-            val dark = JmTheme.colors.backdrop.firstOrNull()?.luminance()?.let { it < 0.5f } ?: true
-            val color = if (auto) Color(wall.solidColor) else if (dark) Color.Black else Color.White
+            val color = if (auto) Color(wall.solidColor) else JmTheme.colors.backdrop.first()
             Box(Modifier.fillMaxSize().background(color))
         }
 
@@ -171,25 +171,17 @@ fun Modifier.ambientBase(plain: Boolean = false): Modifier {
         val w = size.width
         val h = size.height
 
-        // 底层线性渐变（CSS: linear-gradient(165deg, ...)）
-        // 底：玻璃材质用主题渐变（它是被采样的层次来源）；
-        // 实心材质（Miuix 的纯灰底、M3 的 surface）必须是**平的** ——
-        // 给它们铺渐变，卡片就变成“浮在彩色雾上”，这是与官方材质语言不符的地方。
-        val solidBase = spec.surface.craft == com.jmnext.ui.theme.SurfaceCraft.Card ||
-            spec.surface.craft == com.jmnext.ui.theme.SurfaceCraft.Tonal
-        val base = if (solidBase) {
-            Brush.linearGradient(
-                colors = listOf(c.backdrop.first(), c.backdrop.first()),
-                start = Offset(0f, 0f),
-                end = Offset(w, h),
-            )
-        } else {
-            Brush.linearGradient(
-                colors = c.backdrop,
-                start = Offset(0f, 0f),
-                end = Offset(w * 0.35f, h),
-            )
-        }
+        // 底层线性渐变（CSS: linear-gradient(165deg, ...)）。
+        //
+        // **这里不再按材质压平**：`plain = true` 的分支（有壁纸或纯色时）已经改成
+        // “只压 10% 暗色、不画渐变”，所以走到这里的只剩“没有壁纸图片”的情形，
+        // 那时渐变本身就是背景 —— 任何材质都该看到它。
+        // 之前给 Miuix/Material 无条件压成平色，导致这两套下渐变壁纸完全不生效（用户报的 bug）。
+        val base = Brush.linearGradient(
+            colors = c.backdrop,
+            start = Offset(0f, 0f),
+            end = Offset(w * 0.35f, h),
+        )
 
         // 三团径向光晕。强度由风格给：玻璃体系要它提供可采样的层次，
         // Material / Miuix 的底是平的（M3 的底色是 surface，HyperOS 是纯灰底），

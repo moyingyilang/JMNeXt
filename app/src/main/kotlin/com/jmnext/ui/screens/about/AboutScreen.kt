@@ -13,6 +13,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -108,38 +109,35 @@ fun AboutScreen(
             }
 
             InfoCard("检查更新") {
-                Text(
-                    text = "从 GitHub Releases 读取最新版本号，与本机版本比较。" +
-                        "只发一个请求，不上传任何信息。",
-                    style = MaterialTheme.typography.labelSmall,
-                    color = c.textTertiary,
-                )
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(Spacing.sm),
-                ) {
-                    TextButton(
-                        enabled = !checking,
-                        onClick = {
-                            checking = true
-                            result = null
-                            updatable = null
-                            scope.launch {
-                                val tag = runCatching { fetchLatestTag(repo.okHttp) }.getOrNull()
-                                checking = false
-                                result = when {
-                                    tag == null -> "没取到更新信息（网络不通，或 GitHub 暂时不可用）"
-                                    UpdateCheck.isNewer(tag, BuildConfig.VERSION_NAME) ->
-                                        "有新版本：$tag".also { updatable = tag }
-                                    else -> "已是最新版本（远端 $tag）"
-                                }
+                // 只放一个独立按钮：说明文字去掉了，点下去才发请求、才出现结果。
+                // 「要不要检查」由用户决定，卡片本身不再先讲一遍原理。
+                Button(
+                    enabled = !checking,
+                    onClick = {
+                        checking = true
+                        result = null
+                        updatable = null
+                        scope.launch {
+                            val tag = runCatching { fetchLatestTag(repo.okHttp) }.getOrNull()
+                            checking = false
+                            result = when {
+                                tag == null -> "没取到更新信息（网络不通，或 GitHub 暂时不可用）"
+                                UpdateCheck.isNewer(tag, BuildConfig.VERSION_NAME) ->
+                                    "有新版本：$tag".also { updatable = tag }
+                                else -> "已是最新版本（远端 $tag）"
                             }
-                        },
-                    ) { Text(if (checking) "检查中…" else "检查更新") }
+                        }
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                ) { Text(if (checking) "检查中…" else "检查更新") }
 
-                    result?.let {
-                        Text(text = it, style = MaterialTheme.typography.bodySmall, color = c.textSecondary)
-                    }
+                result?.let {
+                    Text(
+                        text = it,
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = c.textSecondary,
+                        modifier = Modifier.padding(top = Spacing.sm),
+                    )
                 }
                 updatable?.let { tag ->
                     // 直接给「该变体的安装包」直链（issue #5 的症结）：
@@ -164,10 +162,14 @@ fun AboutScreen(
 
             InfoCard("说明") {
                 Text(
+                    // 这一栏讲**项目本身**，不讲材质：材质属于「关于界面长什么样」，
+                    // 用户点进来说明想看的是「这是个什么应用、能做什么」。
                     text = "JMNeXt 是禁漫（JMComic）的第三方客户端，用 Kotlin 与 Jetpack Compose 重写。" +
-                        "界面风格中的 WindowGlass 令牌移植自 moyingyilang.github.io 的 global.css" +
-                        "（三径向 + 一线性的渐变底、发丝描边、上缘高光）；Miuix 与 Material 是另外两套表面工艺。" +
-                        "玻璃本身是 backdrop blur（haze）：表面实时采样并模糊它背后的内容。",
+                        "不做插槽广告、不采集行为，登录凭证经 Keystore 加密落盘。" +
+                        "阅读器支持条漫与双页、伪长图拼接无接缝，阅读进度与收藏可本地保存，" +
+                        "也能通过 WebDAV 在你自己的网盘上跨设备同步（历史、收藏、屏蔽名单）。" +
+                        "屏蔽规则按关键词 / 分类 / 标签生效，命中即从列表里消失。" +
+                        "桌面端另有浏览器界面：起一个只监听本机的服务，手机与电脑都能用。",
                     style = MaterialTheme.typography.bodySmall,
                     color = c.textSecondary,
                 )
