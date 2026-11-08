@@ -649,7 +649,12 @@ private fun GlassQualityRow(current: GlassQuality, onChange: (GlassQuality) -> U
     if (LiteFeatures.ENABLED) return
     val c = JmTheme.colors
     Row(
-        modifier = Modifier.fillMaxWidth().padding(top = Spacing.lg),
+        // 触控高度：规范要求可点区域 ≥48dp。用 heightIn 而非固定高度 ——
+        // 说明文字换行时行会自然变高，固定高度会把文字挤掉。
+        modifier = Modifier
+            .fillMaxWidth()
+            .heightIn(min = 48.dp)
+            .padding(top = Spacing.lg),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Column(Modifier.weight(1f).padding(end = Spacing.md)) {
@@ -691,7 +696,12 @@ private fun OptionSwitch(
 
     val c = JmTheme.colors
     Row(
-        modifier = Modifier.fillMaxWidth().padding(top = Spacing.lg),
+        // 触控高度：规范要求可点区域 ≥48dp。用 heightIn 而非固定高度 ——
+        // 说明文字换行时行会自然变高，固定高度会把文字挤掉。
+        modifier = Modifier
+            .fillMaxWidth()
+            .heightIn(min = 48.dp)
+            .padding(top = Spacing.lg),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Column(Modifier.weight(1f).padding(end = Spacing.md)) {
