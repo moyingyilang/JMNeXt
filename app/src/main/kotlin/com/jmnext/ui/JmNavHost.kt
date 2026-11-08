@@ -1,5 +1,6 @@
 package com.jmnext.ui
 import com.jmnext.ui.components.glassSource
+import com.jmnext.ui.components.rubberBand
 import com.jmnext.ui.components.rememberGlassState
 import com.jmnext.ui.components.GlassHost
 
@@ -444,6 +445,8 @@ fun JmNavHost(
     val barInset = with(LocalDensity.current) { barInsetPx.toDp() }
     // 真玻璃的宿主：组合完成后把 haze 状态挂上去，GlassSurface 由此走 backdrop blur。
     val hazeState = rememberGlassState()
+    // 越界回弹状态（自己实现，见 RubberBand.kt）：列表滚到尽头继续推时整页被拉动，松手弹回
+    val rubberBandState = com.jmnext.ui.components.rememberRubberBandState()
     SideEffect { GlassHost.state = hazeState }
 
     // 共享元素（"触发前位置 → 触发后位置"）必须活在同一个 SharedTransitionLayout 里
@@ -483,6 +486,8 @@ fun JmNavHost(
             modifier = Modifier
                 .fillMaxSize()
                 .glassSource(hazeState)
+                // 越界回弹（整页被拉动 + spring 弹回）
+                .rubberBand(rubberBandState)
                 .graphicsLayer {
                     // 跟手后退：**只淡，不缩**，而且**只在系统没有这一层的版本上**才画
                     // （见 ownBackFeedback）。关掉时 alpha 恒为 1 —— 连读都不读
