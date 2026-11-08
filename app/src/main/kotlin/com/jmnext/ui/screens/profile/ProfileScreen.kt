@@ -1021,21 +1021,36 @@ private fun ReadingCard(
 
 private fun AboutCard(onOpenAbout: () -> Unit) {
     val c = JmTheme.colors
-    // 只做入口：版本号一眼可见，其余（界面风格、动效、检查更新、链接、致谢）都在整页里。
-    SettingCard(title = "关于") {
-        GlassSurface(
-            modifier = Modifier.fillMaxWidth(),
-            level = GlassLevel.Card,
-            onClick = onOpenAbout,
+    // 用户要求：这一栏就写成「关于」，下面跟一行更小更灰的「版本：<实际版本>」。
+    // 不再用 SettingCard 的标题，因为标题 + 内容两行会重复出现两次「关于」。
+    GlassSurface(
+        modifier = Modifier.fillMaxWidth(),
+        level = GlassLevel.Card,
+        onClick = onOpenAbout,
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .heightIn(min = 64.dp)
+                .padding(horizontal = Spacing.lg, vertical = Spacing.md),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(Spacing.sm),
         ) {
-            Row(
-                modifier = Modifier.fillMaxWidth().padding(Spacing.md),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(Spacing.sm),
-            ) {
-                Text("版本 ${BuildConfig.VERSION_NAME}", color = c.text, modifier = Modifier.weight(1f))
-                Text("检查更新 / 关于 ›", color = c.accent)
+            Column(Modifier.weight(1f)) {
+                Text(
+                    text = "关于",
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = c.text,
+                )
+                Text(
+                    // 实际版本：debug 包会带 .debug 后缀（BuildConfig.VERSION_NAME 原样取）
+                    text = "版本：${BuildConfig.VERSION_NAME}",
+                    style = MaterialTheme.typography.labelSmall,
+                    color = c.textTertiary,
+                    modifier = Modifier.padding(top = Spacing.xxs),
+                )
             }
+            Text("›", style = MaterialTheme.typography.bodyLarge, color = c.textTertiary)
         }
     }
 }
