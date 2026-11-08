@@ -62,20 +62,12 @@ fun AppearanceScreen() {
                 style = MaterialTheme.typography.labelSmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
-            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                GlassStyle.entries.forEach { s ->
-                    val active = Appearance.style == s
-                    Button(
-                        onClick = { Appearance.style = s; refresh++ },
-                        modifier = Modifier.height(38.dp),
-                    ) {
-                        Text(
-                            if (active) "· ${s.label}" else s.label,
-                            style = MaterialTheme.typography.labelSmall,
-                        )
-                    }
-                }
-            }
+            ExpandableOptionRow(
+                title = "界面风格",
+                options = GlassStyle.entries.map { it to it.label },
+                selected = Appearance.style,
+                onSelect = { Appearance.style = it; refresh++ },
+            )
             Text(
                 "当前：${Appearance.style.label}（面板透明度 ${(Appearance.style.surfaceAlpha * 100).toInt()}%、圆角 ${Appearance.style.corner}dp" +
                     (if (Appearance.style.blurWallpaper) "、壁纸模糊" else "、壁纸不模糊") + "）",
@@ -188,11 +180,12 @@ fun AppearanceScreen() {
 
         // 深浅色
         Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-            Text("深浅色", style = MaterialTheme.typography.titleMedium)
-            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                TextButton(onClick = { Appearance.dark = false; refresh++ }) { Text("浅色") }
-                TextButton(onClick = { Appearance.dark = true; refresh++ }) { Text("深色") }
-            }
+            ExpandableOptionRow(
+                title = "深浅色",
+                options = listOf(false to "浅色", true to "深色"),
+                selected = Appearance.dark,
+                onSelect = { Appearance.dark = it; refresh++ },
+            )
             Text(
                 if (Appearance.dark) "当前：深色" else "当前：浅色",
                 style = MaterialTheme.typography.labelSmall,
