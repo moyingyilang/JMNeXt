@@ -39,7 +39,7 @@ object SystemWallpaperSource {
 
         val bitmap = readBitmap(manager)
         if (bitmap == null) {
-            Log.w(TAG, "三条取图路径都失败（drawable/bitmap/peekDrawable 均为空）")
+            Log.w(TAG, "五条取图路径都失败（drawable/peek/peekFast/file 均为空）")
             return null
         }
 

@@ -85,6 +85,7 @@ import com.jmnext.ui.LocalBottomBarInset
 import com.jmnext.BuildConfig
 import com.jmnext.data.BlockRules
 import com.jmnext.data.wallpaper.WallpaperMode
+import com.jmnext.data.wallpaper.WallpaperPermission
 import com.jmnext.data.prefs.ReaderMode
 import com.jmnext.data.prefs.ThemeMode
 import com.jmnext.data.remote.AdBlocker
@@ -821,6 +822,19 @@ private fun WallpaperCard() {
     val store = LocalWallpaperStore.current
     val wall = LocalWallpaper.current
     val scope = rememberCoroutineScope()
+    val context = androidx.compose.ui.platform.LocalContext.current
+    // 权限被拒时也要能回到「跟随手机壁纸」这个选项，所以把待处理的模式记下来，授权回调里再落实
+    val pendingMode = remember { androidx.compose.runtime.mutableStateOf<WallpaperMode?>(null) }
+    val permissionLauncher = androidx.activity.compose.rememberLauncherForActivityResult(
+        androidx.activity.result.contract.ActivityResultContracts.RequestPermission(),
+    ) { grantedFlag ->
+        val m = pendingMode.value
+        pendingMode.value = null
+        if (m != null && grantedFlag) {
+            store?.setMode(m)
+            scope.launch { store?.next(force = true) }
+        }
+    }
 
     SettingCard(title = "壁纸") {
         Text("来源", style = MaterialTheme.typography.bodyLarge, color = c.text)
@@ -836,8 +850,18 @@ private fun WallpaperCard() {
                     shape = RoundedCornerShape(Radius.pill),
                     color = if (on) c.accentSoft else c.surfaceSunken,
                     onClick = {
-                        store?.setMode(mode)
-                        if (mode != WallpaperMode.Off) scope.launch { store?.next(force = true) }
+                        // 选「跟随手机壁纸」时先要权限：没有权限时 getDrawable 是**静默返回 null** 的，
+                        // 等失败了再查日志根本看不出是权限问题（踩过）。
+                        val perm = WallpaperPermission.required()
+                        val needPerm = mode == WallpaperMode.SystemWallpaper &&
+                            perm != null && !WallpaperPermission.granted(context)
+                        if (needPerm) {
+                            pendingMode.value = mode
+                            permissionLauncher.launch(perm!!)
+                        } else {
+                            store?.setMode(mode)
+                            if (mode != WallpaperMode.Off) scope.launch { store?.next(force = true) }
+                        }
                     },
                 ) {
                     Text(
