@@ -477,15 +477,24 @@ private fun AppearanceCard(
                     onClick = { onThemeModeChange(mode) },
                     shape = SegmentedButtonDefaults.itemShape(index, ThemeMode.entries.size),
                 ) {
-                    // 只放文字：前面挂图标会显得像“勾选标记”，反而抢了选中态（用户反馈）
-                    Text(
-                        text = when (mode) {
-                            ThemeMode.System -> "跟随系统"
-                            ThemeMode.Light -> "浅色"
-                            ThemeMode.Dark -> "深色"
-                        },
-                        style = MaterialTheme.typography.labelSmall,
-                    )
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(Spacing.xxs),
+                    ) {
+                        // 自绘图标：太阳 / 月亮 / 滴管（用户要求保留）
+                        com.jmnext.ui.components.ThemeModeIcon(
+                            mode = mode,
+                            tint = if (themeMode == mode) JmTheme.colors.accent else JmTheme.colors.textSecondary,
+                        )
+                        Text(
+                            text = when (mode) {
+                                ThemeMode.System -> "跟随系统"
+                                ThemeMode.Light -> "浅色"
+                                ThemeMode.Dark -> "深色"
+                            },
+                            style = MaterialTheme.typography.labelSmall,
+                        )
+                    }
                 }
             }
         }

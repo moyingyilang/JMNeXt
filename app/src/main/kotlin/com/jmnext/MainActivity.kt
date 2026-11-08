@@ -79,18 +79,20 @@ class MainActivity : ComponentActivity() {
             val lifecycleOwner = androidx.lifecycle.compose.LocalLifecycleOwner.current
             DisposableEffect(lifecycleOwner, wallpaper.mode) {
                 val observer = androidx.lifecycle.LifecycleEventObserver { _, event ->
-                    if (event == androidx.lifecycle.Lifecycle.Event.ON_RESUME &&
-                        wallpaper.mode == WallpaperMode.SystemWallpaper
-                    ) {
+                    if (event != androidx.lifecycle.Lifecycle.Event.ON_RESUME) return@LifecycleEventObserver
+
+                    // 「跟随手机壁纸」：WallpaperManager 没有“壁纸已更换”的回调，只能在回到前台时重读。
+                    // 这一段**只对跟随手机壁纸有意义**，但下面两件事与壁纸无关，必须在外面。
+                    if (wallpaper.mode == WallpaperMode.SystemWallpaper) {
                         wallScope.launch { wallpaperStore.next(force = true) }
-                        // 自动同步（2.2.2）：回到前台时若开启了同步且距上次超过 10 分钟，
-                        // 在后台静默跑一次。失败不打扰用户 —— 设置页里有手动的“立即同步”。
-                        wallScope.launch { com.jmnext.data.sync.AutoSyncRunner.maybeRun(app) }
-
-                        // 启动时检查一次更新（每天最多一次，只有真有新版本才提示，失败静默）
-
-                        wallScope.launch { runCatching { com.jmnext.data.StartupUpdateCheck.run(app) } }
                     }
+
+                    // 自动同步（2.2.2）：回到前台时若开启了同步且距上次超过 10 分钟，静默跑一次。
+                    // 之前这段被误放在壁纸条件里，导致只有“跟随手机壁纸”时才自动同步（bug）。
+                    wallScope.launch { com.jmnext.data.sync.AutoSyncRunner.maybeRun(app) }
+
+                    // 启动检查更新：每天最多一次，只有真有新版本才提示，任何异常都吞掉。
+                    wallScope.launch { runCatching { com.jmnext.data.StartupUpdateCheck.run(app) } }
                 }
                 lifecycleOwner.lifecycle.addObserver(observer)
                 onDispose { lifecycleOwner.lifecycle.removeObserver(observer) }

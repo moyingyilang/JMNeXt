@@ -162,13 +162,11 @@ fun <T> ExpandableOptionRow(
                         horizontalArrangement = Arrangement.spacedBy(Spacing.sm),
                     ) {
                         Text(
-                            text = if (on) "●" else "○",
-                            style = MaterialTheme.typography.bodyMedium,
-                            color = if (on) c.accent else c.textTertiary,
-                        )
-                        Text(
                             text = label,
-                            style = MaterialTheme.typography.bodyLarge,
+                            // 选中态只靠颜色与字重，不再在文字前放 ● / ○ / 对钩（用户明确不要那个标记）
+                            style = MaterialTheme.typography.bodyLarge.copy(
+                                fontWeight = if (on) androidx.compose.ui.text.font.FontWeight.SemiBold else null,
+                            ),
                             color = if (on) c.accent else c.text,
                             modifier = Modifier.weight(1f),
                         )
