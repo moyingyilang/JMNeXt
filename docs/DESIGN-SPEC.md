@@ -7,8 +7,8 @@
 
 | 风格 | 材质语言 | 表面 | 模糊 | 阴影 | 圆角尺度 |
 | --- | --- | --- | --- | --- | --- |
-| WindowGlass | Windows 11 Acrylic | 半透明 + 发丝描边 + 上缘高光 | 有（backdrop blur） | 轻 | 8/12/16 |
-| FlatBlur | 扁平模糊 | 半透明 | 有 | 无 | 8/12/16 |
+| WindowGlass | Windows 11 Acrylic | 半透明 + 发丝描边 + 上缘高光 | 有（backdrop blur） | 无（玻璃不投影） | 8/12/16 |
+| FlatBlur | 扁平模糊 | 半透明 + 发丝边 | 有 | 无 | 8/12/16 |
 | **Miuix** | HyperOS 实心卡片 | **完全不透明** | **无** | **无**（靠描边与底色分层） | 4/8/12/16/24 |
 | **Material** | M3 Tonal | **完全不透明**（tonal surface） | **无** | **有**（level1/level3） | 4/8/12/28 |
 | Plasma（动效性格，不是材质） | —— | —— | —— | —— | —— |

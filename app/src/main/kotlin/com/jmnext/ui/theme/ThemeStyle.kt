@@ -294,12 +294,12 @@ object Styles {
             craft = SurfaceCraft.Card,
             fillAlphaScale = 1f,
             accentTint = 0f,
-            hairline = 0.dp,
+            hairline = 1.dp,   // HyperOS 靠 1px 描边分层
             innerHighlight = false,
             backdropSaturate = 1f,
             noise = 0f,
             // HyperOS 的卡片几乎不投影，层级靠「卡片比背景亮/暗一档」
-            shadows = listOf(0.dp, 1.dp, 3.dp),
+            shadows = listOf(0.dp, 0.dp, 0.dp),   // Miuix 不投影（分层靠描边与色阶）
             pressScale = 0.97f,
         ),
         type = TypeScale(
@@ -367,7 +367,7 @@ object Styles {
             craft = SurfaceCraft.Blur,
             fillAlphaScale = 1f,
             accentTint = 0f,
-            hairline = 0.dp,
+            hairline = 1.dp,   // 扁平米材质留一条发丝边做边界
             innerHighlight = false,
             backdropSaturate = 1.25f,
             noise = 0f,
