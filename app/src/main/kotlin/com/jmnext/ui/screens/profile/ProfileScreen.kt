@@ -654,7 +654,7 @@ private fun GlassQualityRow(current: GlassQuality, onChange: (GlassQuality) -> U
         modifier = Modifier
             .fillMaxWidth()
             .heightIn(min = 48.dp)
-            .padding(top = Spacing.lg),
+            .padding(top = Spacing.md),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Column(Modifier.weight(1f).padding(end = Spacing.md)) {
@@ -701,7 +701,7 @@ private fun OptionSwitch(
         modifier = Modifier
             .fillMaxWidth()
             .heightIn(min = 48.dp)
-            .padding(top = Spacing.lg),
+            .padding(top = Spacing.md),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Column(Modifier.weight(1f).padding(end = Spacing.md)) {
