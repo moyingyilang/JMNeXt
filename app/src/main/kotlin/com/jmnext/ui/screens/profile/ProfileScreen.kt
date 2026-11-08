@@ -934,16 +934,6 @@ private fun WallpaperCard() {
                 modifier = Modifier.padding(top = Spacing.sm),
             )
         }
-
-        Text(
-            text = "壁纸是本应用**唯一**会连出去的第三方请求，且只在你选择图片来源后才会发生；" +
-                "选「纯渐变」时一个字节都不会发。已取到的地址会缓存在本地轮换（攒够 4 张就不再请求），" +
-                "Bing 的地址每天只重新取一次 —— 不为了一张背景图反复打别人的接口。" +
-                "阅读页不画壁纸：伪长图的接缝必须看不见。",
-            style = MaterialTheme.typography.labelSmall,
-            color = c.textTertiary,
-            modifier = Modifier.padding(top = Spacing.sm),
-        )
     }
 }
 
