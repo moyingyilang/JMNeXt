@@ -125,9 +125,19 @@ fun BlogTheme(
         headlineLarge = MaterialTheme.typography.headlineLarge.copy(fontFamily = cjk),
         headlineMedium = MaterialTheme.typography.headlineMedium.copy(fontFamily = cjk),
         headlineSmall = MaterialTheme.typography.headlineSmall.copy(fontFamily = cjk),
-        titleLarge = MaterialTheme.typography.titleLarge.copy(fontFamily = cjk),
+        // 四档层级与手机端一致：页标题 24 / 区块 17 / 正文 15 / 说明 12.5
+        titleLarge = MaterialTheme.typography.titleLarge.copy(
+            fontFamily = cjk,
+            fontSize = 24.sp,
+            fontWeight = FontWeight.SemiBold,
+            lineHeight = 32.sp,
+        ),
         titleSmall = MaterialTheme.typography.titleSmall.copy(fontFamily = cjk),
-        bodyLarge = MaterialTheme.typography.bodyLarge.copy(fontFamily = cjk),
+        bodyLarge = MaterialTheme.typography.bodyLarge.copy(
+            fontFamily = cjk,
+            fontSize = 16.sp,
+            lineHeight = 24.sp,
+        ),
         labelLarge = MaterialTheme.typography.labelLarge.copy(fontFamily = cjk),
         labelMedium = MaterialTheme.typography.labelMedium.copy(fontFamily = cjk),
     )
