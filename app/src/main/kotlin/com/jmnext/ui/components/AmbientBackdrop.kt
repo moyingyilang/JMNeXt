@@ -172,11 +172,24 @@ fun Modifier.ambientBase(plain: Boolean = false): Modifier {
         val h = size.height
 
         // 底层线性渐变（CSS: linear-gradient(165deg, ...)）
-        val base = Brush.linearGradient(
-            colors = c.backdrop,
-            start = Offset(0f, 0f),
-            end = Offset(w * 0.35f, h),
-        )
+        // 底：玻璃材质用主题渐变（它是被采样的层次来源）；
+        // 实心材质（Miuix 的纯灰底、M3 的 surface）必须是**平的** ——
+        // 给它们铺渐变，卡片就变成“浮在彩色雾上”，这是与官方材质语言不符的地方。
+        val solidBase = spec.surface.craft == com.jmnext.ui.theme.SurfaceCraft.Card ||
+            spec.surface.craft == com.jmnext.ui.theme.SurfaceCraft.Tonal
+        val base = if (solidBase) {
+            Brush.linearGradient(
+                colors = listOf(c.backdrop.first(), c.backdrop.first()),
+                start = Offset(0f, 0f),
+                end = Offset(w, h),
+            )
+        } else {
+            Brush.linearGradient(
+                colors = c.backdrop,
+                start = Offset(0f, 0f),
+                end = Offset(w * 0.35f, h),
+            )
+        }
 
         // 三团径向光晕。强度由风格给：玻璃体系要它提供可采样的层次，
         // Material / Miuix 的底是平的（M3 的底色是 surface，HyperOS 是纯灰底），
