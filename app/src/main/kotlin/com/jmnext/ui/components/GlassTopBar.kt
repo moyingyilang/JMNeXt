@@ -20,6 +20,7 @@ import androidx.compose.ui.unit.dp
 import com.jmnext.ui.theme.JmTheme
 import com.jmnext.ui.theme.Sizing
 import com.jmnext.ui.theme.Spacing
+import com.jmnext.ui.theme.SurfaceCraft
 
 /**
  * 毛玻璃顶栏。
@@ -62,7 +63,13 @@ fun GlassTopBar(
                 ) {
                     Text(
                         text = title,
-                        style = MaterialTheme.typography.titleLarge,
+                        // 字重按材质取官方值：Material 的 app bar 用 titleLarge（M3 标准），
+                        // Miuix（HyperOS）标题层级更低一档，用 titleMedium 更接近原生观感。
+                        style = if (JmTheme.spec.surface.craft == SurfaceCraft.Card) {
+                            MaterialTheme.typography.titleMedium
+                        } else {
+                            MaterialTheme.typography.titleLarge
+                        },
                         color = c.text,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,
@@ -81,7 +88,7 @@ fun GlassTopBar(
 
             Row(
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(Spacing.xxs),
+                horizontalArrangement = Arrangement.spacedBy(Spacing.sm),
                 content = actions,
             )
         }
