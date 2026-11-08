@@ -51,6 +51,19 @@ object Log {
         System.setOut(PrintStream(TeeStream(System.out, stream), true, Charsets.UTF_8))
         System.setErr(PrintStream(TeeStream(System.err, stream), true, Charsets.UTF_8))
         line("日志开始", "文件=${file.absolutePath}")
+        // 未捕获异常：显式打一段「崩溃」区块（带环境摘要），
+        // 比只靠 stderr 更容易在日志里定位；保留原 handler，不影响 AWT 自己的处理。
+        val previous = Thread.getDefaultUncaughtExceptionHandler()
+        Thread.setDefaultUncaughtExceptionHandler { t, e ->
+            runCatching {
+                line("崩溃", "线程=${t.name} 类型=${e.javaClass.name}")
+                line("崩溃", envBlock())
+                val sw = java.io.StringWriter()
+                e.printStackTrace(java.io.PrintWriter(sw))
+                line("崩溃", sw.toString())
+            }
+            previous?.uncaughtException(t, e)
+        }
     }
 
     /** 统一格式：时间 + 标签 + 内容。图片加载与关键动作都走这里。 */

@@ -73,6 +73,8 @@ fun AboutScreen(
     var checking by remember { mutableStateOf(false) }
     var result by remember { mutableStateOf<String?>(null) }
     var updatable by remember { mutableStateOf<String?>(null) }
+    // 最新版的更新说明（新版才取得到），用于“这次更新了什么”
+    var notes by remember { mutableStateOf("") }
 
     val variant = buildString {
         append(if (LiteFeatures.ENABLED) "lite" else "full")
@@ -118,12 +120,16 @@ fun AboutScreen(
                         result = null
                         updatable = null
                         scope.launch {
-                            val tag = runCatching { fetchLatestTag(repo.okHttp) }.getOrNull()
+                            val latest = runCatching { com.jmnext.data.UpdateFetcher.latest(repo.okHttp) }.getOrNull()
+                            val tag = latest?.tag
                             checking = false
                             result = when {
                                 tag == null -> "没取到更新信息（网络不通，或 GitHub 暂时不可用）"
                                 UpdateCheck.isNewer(tag, BuildConfig.VERSION_NAME) ->
-                                    "有新版本：$tag".also { updatable = tag }
+                                    "有新版本：$tag".also {
+                                        updatable = tag
+                                        notes = latest?.notes.orEmpty()
+                                    }
                                 else -> "已是最新版本（远端 $tag）"
                             }
                         }
@@ -155,7 +161,15 @@ fun AboutScreen(
                             style = MaterialTheme.typography.labelSmall,
                             color = c.textTertiary,
                         )
-                        TextButton(onClick = { uri.openUri(UpdateCheck.releaseUrl(tag)) }) { Text("打开发布页") }
+                        // 这次更新了什么（release 说明摘要，经代理抓取）
+                        val brief = com.jmnext.data.UpdateFetcher.brief(notes)
+                        if (brief.isNotEmpty()) {
+                            Text(
+                                text = "更新内容：$brief",
+                                style = MaterialTheme.typography.labelSmall,
+                                color = c.textSecondary,
+                            )
+                        }
                     }
                 }
             }

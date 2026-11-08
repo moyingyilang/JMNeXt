@@ -16,7 +16,19 @@
 
 ## 下载
 
-发布页：[github.com/moyingyilang/JMNeXt/releases](https://github.com/moyingyilang/JMNeXt/releases)。
+**最新版本直达**（点击徽章直接下载对应平台的包）：
+
+[![Android full](https://img.shields.io/badge/Android-full-3DDC84?logo=android&logoColor=white)](https://github.com/moyingyilang/JMNeXt/releases/latest/download/Android-full-2.2.1.apk)
+[![Android lite](https://img.shields.io/badge/Android-lite-3DDC84?logo=android&logoColor=white)](https://github.com/moyingyilang/JMNeXt/releases/latest/download/Android-lite-2.2.1.apk)
+[![Windows x64](https://img.shields.io/badge/Windows-x64-0078D4?logo=windows&logoColor=white)](https://github.com/moyingyilang/JMNeXt/releases/latest/download/Windows-x64-2.2.1.zip)
+[![Windows arm64](https://img.shields.io/badge/Windows-arm64-0078D4?logo=windows&logoColor=white)](https://github.com/moyingyilang/JMNeXt/releases/latest/download/Windows-arm64-2.2.1.zip)
+[![Linux x86_64](https://img.shields.io/badge/Linux-x86__64-FCC624?logo=linux&logoColor=black)](https://github.com/moyingyilang/JMNeXt/releases/latest/download/Linux-x86_64-2.2.1.tar.gz)
+[![Linux aarch64](https://img.shields.io/badge/Linux-aarch64-FCC624?logo=linux&logoColor=black)](https://github.com/moyingyilang/JMNeXt/releases/latest/download/Linux-aarch64-2.2.1.tar.gz)
+
+[![Release](https://img.shields.io/github/v/release/moyingyilang/JMNeXt?label=最新版本&sort=semver)](https://github.com/moyingyilang/JMNeXt/releases/latest)
+[![Downloads](https://img.shields.io/github/downloads/moyingyilang/JMNeXt/total?label=总下载)](https://github.com/moyingyilang/JMNeXt/releases)
+[![License](https://img.shields.io/badge/license-AGPL--3.0--only-blue)](./LICENSE)
+
 当前最新版本为 **2.2.1**，共 **15 个附件**（Linux 8 个、Windows 5 个、Android 2 个）；**2.2.2（WebUI）开发中**。
 
 | 平台 | 架构 | 格式 | 大小 | 状态 |

@@ -135,6 +135,7 @@ android {
 
     buildTypes {
         release {
+            buildConfigField("boolean", "DEBUG_LOG", "false")
             // R8 混淆 + 资源压缩。debug 包未混淆时有 24MB，主要体积来自未被裁剪的
             // Compose 与 material-icons-extended —— 后者更明显，图标是按需保留的
             isMinifyEnabled = true
@@ -150,6 +151,20 @@ android {
         debug {
             isMinifyEnabled = false
             applicationIdSuffix = ".debug"
+        }
+
+        // 追踪包：用于「日志存储 + 错误追踪」。与 debug 的区别是——
+        // 它是**release 签名、可长期安装**的，但保留可调试与崩溃落盘，且不混淆便于看栈。
+        // 独立包名（.tracer），因此能和正式包并存，不影响日常使用。
+        create("tracer") {
+            initWith(getByName("release"))
+            isMinifyEnabled = false
+            isShrinkResources = false
+            isDebuggable = true
+            applicationIdSuffix = ".tracer"
+            versionNameSuffix = "-tracer"
+            matchingFallbacks += listOf("release")
+            buildConfigField("boolean", "DEBUG_LOG", "true")
         }
     }
 

@@ -120,6 +120,10 @@ class JmApp : Application(), SingletonImageLoader.Factory {
     }
 
     override fun onCreate() {
+        // 追踪包：把崩溃写到 filesDir/logs，便于用户导出（正式包不启用，不额外写盘）
+        if (BuildConfig.DEBUG_LOG) {
+            com.jmnext.data.CrashLogger.install(this)
+        }
         // 自学习调参器：算法核心在 shared，与桌面端共用同一份实现；学习状态落盘、跨重启延续。
         // 未接上时阅读页取到的是默认深度（窗口与今天一致），接上后才开始学。
         SelfTuner.init(this)
