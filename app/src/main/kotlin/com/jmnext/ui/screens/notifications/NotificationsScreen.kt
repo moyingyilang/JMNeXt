@@ -188,7 +188,7 @@ private fun NotificationCard(
                 }
                 Text(
                     text = if (item.typeText == NotificationItem.TYPE_COMIC_FOLLOW) "追更更新" else (item.titleText ?: "站内通知"),
-                    style = MaterialTheme.typography.titleSmall,
+                    style = MaterialTheme.typography.bodyLarge,
                     color = c.text,
                 )
                 item.dateText?.let {

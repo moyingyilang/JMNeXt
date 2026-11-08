@@ -1314,7 +1314,7 @@ private fun DailyCard(onLogin: () -> Unit) {
                 )
                 Text(
                     text = d.eventName ?: "签到活动",
-                    style = MaterialTheme.typography.titleSmall,
+                    style = MaterialTheme.typography.bodyLarge,
                     color = c.text,
                     modifier = Modifier.padding(top = Spacing.sm),
                 )
