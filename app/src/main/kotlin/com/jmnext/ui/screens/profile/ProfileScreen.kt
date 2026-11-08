@@ -837,42 +837,26 @@ private fun WallpaperCard() {
     }
 
     SettingCard(title = "壁纸") {
-        Text("来源", style = MaterialTheme.typography.bodyLarge, color = c.text)
-
-        FlowRow(
-            modifier = Modifier.fillMaxWidth().padding(top = Spacing.sm),
-            horizontalArrangement = Arrangement.spacedBy(Spacing.xs),
-            verticalArrangement = Arrangement.spacedBy(Spacing.xs),
-        ) {
-            WallpaperMode.entries.forEach { mode ->
-                val on = mode == wall.mode
-                Surface(
-                    shape = RoundedCornerShape(Radius.pill),
-                    color = if (on) c.accentSoft else c.surfaceSunken,
-                    onClick = {
-                        // 选「跟随手机壁纸」时先要权限：没有权限时 getDrawable 是**静默返回 null** 的，
-                        // 等失败了再查日志根本看不出是权限问题（踩过）。
-                        val perm = WallpaperPermission.required()
-                        val needPerm = mode == WallpaperMode.SystemWallpaper &&
-                            perm != null && !WallpaperPermission.granted(context)
-                        if (needPerm) {
-                            pendingMode.value = mode
-                            permissionLauncher.launch(perm!!)
-                        } else {
-                            store?.setMode(mode)
-                            if (mode != WallpaperMode.Off) scope.launch { store?.next(force = true) }
-                        }
-                    },
-                ) {
-                    Text(
-                        text = mode.label,
-                        style = MaterialTheme.typography.labelSmall,
-                        color = if (on) c.accent else c.textSecondary,
-                        modifier = Modifier.padding(horizontal = Spacing.md, vertical = Spacing.xs),
-                    )
+        // 来源有七八个选项，平铺成 chips 会挤成两三行；改成可展开的竖向列表（参照 bvds 的两段式展开）。
+        com.jmnext.ui.components.ExpandableOptionRow(
+            title = "来源",
+            options = WallpaperMode.entries.map { it to it.label },
+            selected = wall.mode,
+            onSelect = { mode ->
+                // 选「跟随手机壁纸」时先要权限：没有权限时 getDrawable 是**静默返回 null** 的，
+                // 等失败了再查日志根本看不出是权限问题（踩过）。
+                val perm = WallpaperPermission.required()
+                val needPerm = mode == WallpaperMode.SystemWallpaper &&
+                    perm != null && !WallpaperPermission.granted(context)
+                if (needPerm) {
+                    pendingMode.value = mode
+                    permissionLauncher.launch(perm!!)
+                } else {
+                    store?.setMode(mode)
+                    if (mode != WallpaperMode.Off) scope.launch { store?.next(force = true) }
                 }
-            }
-        }
+            },
+        )
 
         Text(
             text = wall.mode.desc,
