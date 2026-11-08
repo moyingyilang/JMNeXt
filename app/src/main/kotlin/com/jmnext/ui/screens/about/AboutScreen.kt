@@ -211,10 +211,12 @@ private fun InfoCard(title: String, content: @Composable () -> Unit) {
     val c = JmTheme.colors
     GlassSurface(level = GlassLevel.Card, shape = androidx.compose.foundation.shape.RoundedCornerShape(Radius.lg)) {
         Column(
-            modifier = Modifier.fillMaxWidth().padding(Spacing.md),
-            verticalArrangement = Arrangement.spacedBy(Spacing.xs),
+            // 卡片内边距按规范 16dp（原来是 12dp）
+            modifier = Modifier.fillMaxWidth().padding(Spacing.lg),
+            verticalArrangement = Arrangement.spacedBy(Spacing.sm),
         ) {
-            Text(text = title, style = MaterialTheme.typography.titleSmall, color = c.text)
+            // 卡片标题与设置页的 SettingCard 对齐（titleMedium），此前这里是 titleSmall
+            Text(text = title, style = MaterialTheme.typography.titleMedium, color = c.text)
             content()
         }
     }
@@ -222,9 +224,14 @@ private fun InfoCard(title: String, content: @Composable () -> Unit) {
 
 @Composable
 private fun InfoRow(label: String, value: String) {
-    Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-        Text(text = label, style = MaterialTheme.typography.bodySmall, color = JmTheme.colors.textSecondary)
-        Text(text = value, style = MaterialTheme.typography.bodySmall, color = JmTheme.colors.text)
+    Row(
+        modifier = Modifier.fillMaxWidth().heightIn(min = 40.dp),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = androidx.compose.ui.Alignment.CenterVertically,
+    ) {
+        // 与设置页 InfoRow 同一套层级：标签 bodyMedium + 次级色，值 bodyMedium + 主色
+        Text(text = label, style = MaterialTheme.typography.bodyMedium, color = JmTheme.colors.textSecondary)
+        Text(text = value, style = MaterialTheme.typography.bodyMedium, color = JmTheme.colors.text)
     }
 }
 
