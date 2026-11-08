@@ -780,7 +780,7 @@ private fun StyleOption(
                     )
                     Box(
                         modifier = Modifier
-                            .padding(start = Spacing.xs + 6.dp, top = Spacing.xs + 8.dp)
+                            .padding(start = Spacing.sm + Spacing.xs, top = Spacing.md)
                             .size(12.dp)
                             .clip(RoundedCornerShape(Radius.pill))
                             .background(palette.accent),

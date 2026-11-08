@@ -18,6 +18,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
+import com.jmnext.ui.theme.Spacing
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
@@ -95,7 +96,7 @@ fun NoticeHost(
                                 else -> MaterialTheme.colorScheme.surfaceVariant
                             }
                         )
-                        .padding(horizontal = 16.dp, vertical = 10.dp),
+                        .padding(horizontal = Spacing.lg, vertical = Spacing.sm),
                 )
             }
         }
