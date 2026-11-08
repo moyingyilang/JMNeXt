@@ -178,7 +178,9 @@ class WallpaperStore(context: Context, private val client: OkHttpClient) {
             WallpaperMode.SystemWallpaper -> {
                 val url = SystemWallpaperSource.load(appContext)
                 if (url == null) {
-                    update { it.copy(url = null, credit = null, error = "读不到系统壁纸，已退回纯色") }
+                    val why = SystemWallpaperSource.unsupportedReason(appContext)
+                        ?: "读不到系统壁纸，已退回纯色（可查看日志 JmWallpaper）"
+                    update { it.copy(url = null, credit = null, error = why) }
                 } else {
                     update { it.copy(url = url, credit = "系统壁纸", error = null) }
                 }

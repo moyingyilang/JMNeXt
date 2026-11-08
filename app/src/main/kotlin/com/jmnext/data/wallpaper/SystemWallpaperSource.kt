@@ -32,6 +32,31 @@ object SystemWallpaperSource {
     /** 最长边上限。背景会被模糊/压暗，超过这个尺寸对观感没有额外收益。 */
     private const val MAX_EDGE = 1600
 
+    /**
+     * 这台机器上「跟随手机壁纸」为什么可能不可用。
+     *
+     * 实测（HyperOS V816 / Android 17）：壁纸由 `com.miui.miwallpaper/ImageWallpaper`
+     * 这个**系统壁纸服务**托管，并非框架静态壁纸。此时 WallpaperManager 的五条读取路径
+     * 全部静默返回 null —— 不是权限问题（清单已声明，且 Android 13+ 本来也没有对应权限），
+     * 而是第三方应用拿不到该服务里的图。
+     *
+     * 返回 null 表示没有检测到这类限制。
+     */
+    fun unsupportedReason(context: Context): String? {
+        val info = runCatching {
+            WallpaperManager.getInstance(context).wallpaperInfo
+        }.getOrNull() ?: return null
+        val pkg = info.component?.packageName ?: return null
+        return when {
+            pkg.contains("miwallpaper") ->
+                "当前壁纸由系统壁纸服务（$pkg）托管，第三方应用读不到；" +
+                    "请改用「自定义地址」或「纯色」。"
+            pkg.isNotEmpty() && !pkg.contains("android") ->
+                "当前是动态/主题壁纸（$pkg），无法作为静态背景读取；请改用「自定义地址」或「纯色」。"
+            else -> null
+        }
+    }
+
     fun load(context: Context): String? {
         val dir = File(context.cacheDir, DIR).apply { mkdirs() }
         val out = File(dir, "wall-${System.currentTimeMillis()}.png")
