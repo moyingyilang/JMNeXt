@@ -31,6 +31,8 @@
 
 当前最新版本为 **2.2.1**；2.2.2 正在收尾（界面材质重做 + WebDAV 同步）。
 
+2.2.2 起附件为 **21 个**：15 个标准包 + 2 个 Android 追踪包 + 4 个桌面调试包。
+
 | 平台 | 架构 | 格式 | 大小 | 状态 |
 | --- | --- | --- | --- | --- |
 | Linux | aarch64 | 便携 tar.gz / deb / rpm / AppImage | 70 / 56 / 70 / 71 MB | 可用 |
@@ -39,6 +41,8 @@
 | Windows | arm64 | 免装 Java 的 ZIP / 单体 exe | 88 / 88 MB | 真机未验证 |
 | Windows | 通用 | 单体 exe（含两套运行时，按架构自动选择） | 176 MB | 用户确认可正常使用 |
 | Android | arm64 / armv7 | APK（`full` / `lite`） | 3.3 / 3.3 MB | 已发布 |
+| Android 追踪包 | arm64 / armv7 | APK（`full-tracer` / `lite-tracer`），崩溃落盘 | 26 / 26 MB | 需日志时使用 |
+| 桌面调试包 | Linux aarch64 / x86_64、Windows x64 / arm64 | 与标准包同构，附 `debug.sh` / `debug.bat` | 同标准包 | 需详细日志时使用 |
 
 附件名统一为「平台-架构-版本」，例如 `Linux-aarch64-2.1.8.deb`、`Windows-x64-2.1.8.zip`、
 `Android-full-2.1.8.apk`。
