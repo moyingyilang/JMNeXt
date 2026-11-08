@@ -92,7 +92,11 @@ class MainActivity : ComponentActivity() {
                     wallScope.launch { com.jmnext.data.sync.AutoSyncRunner.maybeRun(app) }
 
                     // 启动检查更新：每天最多一次，只有真有新版本才提示，任何异常都吞掉。
-                    wallScope.launch { runCatching { com.jmnext.data.StartupUpdateCheck.run(app) } }
+                    // **延迟 5 秒**：让它落在首帧之后，不与冷启动抢 CPU 与网络（实测同进程内会明显拖慢 TotalTime）。
+                    wallScope.launch {
+                        kotlinx.coroutines.delay(5_000)
+                        runCatching { com.jmnext.data.StartupUpdateCheck.run(app) }
+                    }
                 }
                 lifecycleOwner.lifecycle.addObserver(observer)
                 onDispose { lifecycleOwner.lifecycle.removeObserver(observer) }

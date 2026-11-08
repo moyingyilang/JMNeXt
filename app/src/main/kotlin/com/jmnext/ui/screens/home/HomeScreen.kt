@@ -265,6 +265,8 @@ private fun HomeContent(
                     items(
                         items = section.content.filterNot { it.id in hiddenIds },
                         key = { it.id },
+                        // 同一行里都是封面卡：声明 contentType，列表可跨 section 复用同一批组合
+                        contentType = { "cover" },
                     ) { comic ->
                         // 条目可见才去取它的详情（拿标签）。**没有标签规则时 request 内部首行就返回**，
                         // 一个请求都不会发；并发上限与缓存都在解析器里。
