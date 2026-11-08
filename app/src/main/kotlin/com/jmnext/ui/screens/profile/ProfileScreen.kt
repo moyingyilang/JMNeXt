@@ -95,6 +95,7 @@ import com.jmnext.data.remote.dto.MemberInfo
 import com.jmnext.ui.LocalRepository
 import com.jmnext.ui.LocalWallpaper
 import com.jmnext.ui.LocalWallpaperStore
+import com.jmnext.ui.components.ExpandableOptionRow
 import com.jmnext.ui.components.GlassQuality
 import com.jmnext.ui.components.CategoryChip
 import com.jmnext.ui.components.GlassLevel
@@ -553,9 +554,12 @@ private fun AppearanceCard(
 
         // 玻璃质量（2.2.2）：真实 backdrop blur 每帧采样背后像素，比半透明填充贵，
         // 所以给三档。默认「中」。这一项放在最前面 —— 它决定下面几项观感的“底子”。
-        GlassQualityRow(
-            current = uiOptions.glassQuality,
-            onChange = { onUiOptionsChange(uiOptions.copy(glassQuality = it)) },
+        ExpandableOptionRow(
+            title = "玻璃质量",
+            options = GlassQuality.entries.map { it to it.label },
+            selected = uiOptions.glassQuality,
+            onSelect = { onUiOptionsChange(uiOptions.copy(glassQuality = it)) },
+            summary = uiOptions.glassQuality.label + " · " + uiOptions.glassQuality.desc.substringBefore(" ——"),
         )
 
         OptionSwitch(
@@ -622,64 +626,18 @@ private fun AppearanceCard(
             color = c.textTertiary,
             modifier = Modifier.padding(top = Spacing.xxs),
         )
-        SingleChoiceSegmentedButtonRow(
-            modifier = Modifier.fillMaxWidth().padding(top = Spacing.sm),
-        ) {
-            MotionStyle.entries.forEachIndexed { index, style ->
-                SegmentedButton(
-                    selected = uiOptions.motionStyle == style,
-                    onClick = { onUiOptionsChange(uiOptions.copy(motionStyle = style)) },
-                    shape = SegmentedButtonDefaults.itemShape(index, MotionStyle.entries.size),
-                ) {
-                    Text(style.label, style = MaterialTheme.typography.labelSmall)
-                }
-            }
-        }
+        // 动效性格：三个值，改用可展开行（与壁纸来源同一套交互）
+        ExpandableOptionRow(
+            title = "动效快慢",
+            options = MotionStyle.entries.map { it to it.label },
+            selected = uiOptions.motionStyle,
+            onSelect = { onUiOptionsChange(uiOptions.copy(motionStyle = it)) },
+            modifier = Modifier.padding(top = Spacing.sm),
+        )
         }
     }
 }
 
-/**
- * 玻璃质量三档选择（2.2.2）。
- *
- * 用三档而不是开关：真实 backdrop blur 的成本与观感都是连续的，
- * 只有「开/关」会让用户以为中间没有余地。
- */
-@Composable
-private fun GlassQualityRow(current: GlassQuality, onChange: (GlassQuality) -> Unit) {
-    if (LiteFeatures.ENABLED) return
-    val c = JmTheme.colors
-    Row(
-        // 触控高度：规范要求可点区域 ≥48dp。用 heightIn 而非固定高度 ——
-        // 说明文字换行时行会自然变高，固定高度会把文字挤掉。
-        modifier = Modifier
-            .fillMaxWidth()
-            .heightIn(min = 48.dp)
-            .padding(top = Spacing.md),
-        verticalAlignment = Alignment.CenterVertically,
-    ) {
-        Column(Modifier.weight(1f).padding(end = Spacing.md)) {
-            Text("玻璃质量", style = MaterialTheme.typography.bodyLarge, color = c.text)
-            Text(
-                current.desc,
-                style = MaterialTheme.typography.labelSmall,
-                color = c.textTertiary,
-            )
-        }
-        Row(horizontalArrangement = Arrangement.spacedBy(Spacing.xs)) {
-            GlassQuality.entries.forEach { q ->
-                val selected = q == current
-                TextButton(onClick = { onChange(q) }) {
-                    Text(
-                        q.label,
-                        color = if (selected) c.accent else c.textTertiary,
-                        style = MaterialTheme.typography.bodyMedium,
-                    )
-                }
-            }
-        }
-    }
-}
 
 /** 一行「标题 + 说明 + 开关」。可选项都走它，省得每加一个开关就抄一遍 Row。 */
 @Composable
@@ -908,20 +866,16 @@ private fun WallpaperCard() {
             }
 
             // 档位改成秒级：用户要按「时/分/秒」控制粒度（原来最细只有 1 分钟）
-            SingleChoiceSegmentedButtonRow(modifier = Modifier.fillMaxWidth()) {
-                listOf(0, 10, 30, 60, 300, 1800, 3600).forEachIndexed { index, seconds ->
-                    SegmentedButton(
-                        selected = wall.intervalSeconds == seconds,
-                        onClick = { store?.setIntervalSeconds(seconds) },
-                        shape = SegmentedButtonDefaults.itemShape(index, 7),
-                    ) {
-                        Text(
-                            text = when (seconds) { 0 -> "关"; 10 -> "10秒"; 30 -> "30秒"; 60 -> "1分"; 300 -> "5分"; 1800 -> "30分"; else -> "1时" },
-                            style = MaterialTheme.typography.labelSmall,
-                        )
-                    }
-                }
-            }
+            // 自动切换间隔：七个档位，改用可展开行
+            ExpandableOptionRow(
+                title = "自动更换",
+                options = listOf(
+                    0 to "关闭", 10 to "10 秒", 30 to "30 秒", 60 to "1 分钟",
+                    300 to "5 分钟", 1800 to "30 分钟", 3600 to "1 小时",
+                ),
+                selected = wall.intervalSeconds,
+                onSelect = { store?.setIntervalSeconds(it) },
+            )
             // 清缓存：此前没有入口（用户反馈"翻来覆去只有那几张、也清不掉"）
             Row(
                 modifier = Modifier.fillMaxWidth(),

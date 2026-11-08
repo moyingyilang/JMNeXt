@@ -1,7 +1,9 @@
 package com.jmnext.ui.components
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.expandVertically
 import androidx.compose.animation.fadeIn
@@ -23,29 +25,24 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.jmnext.ui.theme.JmTheme
-import com.jmnext.ui.theme.Radius
 import com.jmnext.ui.theme.Spacing
 
 /**
  * 可展开的竖向选项组。
  *
- * 参照 `Xuewu-awa/bvds-for-Android` 里「清晰度」下拉的做法（`app.css` 的两段式：
- * 容器撑高 + 内容回弹），这里用 Compose 的等价实现：
- * `expandVertically + fadeIn` 撑开、箭头 `animateFloatAsState` 转 180°。
+ * 参照 `Xuewu-awa/bvds-for-Android` 的「清晰度」下拉（`app.css` 两段式：容器撑高 + 内容回弹），
+ * 用 Compose 的等价实现，并把动画调成**弹性**而不是线性：
+ * - 展开/收起用 spring（dampingRatio 0.7 左右），有轻微过冲，收尾利落 —— 这就是“灵动”的来源；
+ * - 箭头旋转同样是 spring，但阻尼更低，转得快一点；
+ * - 淡入淡出只负责遮掉首尾的硬边，时长压到 150ms 以内。
  *
- * 为什么需要它：壁纸来源这类选项已经有七八个，平铺成 chips 会挤成两三行、
- * 每次都要在整屏里找；折叠成一行「当前值 + 箭头」，展开后是竖向列表，一眼扫完。
- *
- * @param options 选项：值是任意类型，label 用于显示
- * @param selected 当前选中值
- * @param onSelect 选中回调（点击后自动收起）
- * @param summary 收起状态下标题右侧显示的文案，默认取选中项的 label
+ * 为什么需要它：壁纸来源、玻璃质量、动效、自动切换间隔这些选项都有 3–8 个值，
+ * 平铺成 chips 会挤成两三行；折叠成一行「当前值 ▾」，展开后是竖向列表，一眼扫完。
  */
 @Composable
 fun <T> ExpandableOptionRow(
@@ -60,7 +57,8 @@ fun <T> ExpandableOptionRow(
     var expanded by remember { mutableStateOf(false) }
     val arrow by animateFloatAsState(
         targetValue = if (expanded) 180f else 0f,
-        animationSpec = tween(220),
+        // 阻尼 0.55：比展开动画更“脆”，点下去箭头立刻甩过去
+        animationSpec = spring(dampingRatio = 0.55f, stiffness = Spring.StiffnessMediumLow),
         label = "arrow",
     )
     val current = options.firstOrNull { it.first == selected }?.second ?: ""
@@ -98,8 +96,14 @@ fun <T> ExpandableOptionRow(
 
         AnimatedVisibility(
             visible = expanded,
-            enter = expandVertically(animationSpec = tween(240)) + fadeIn(tween(180)),
-            exit = shrinkVertically(animationSpec = tween(200)) + fadeOut(tween(140)),
+            // 展开：spring 带一点过冲（0.72 / MediumLow），像抽屉被轻轻弹出来
+            enter = expandVertically(
+                animationSpec = spring(dampingRatio = 0.72f, stiffness = Spring.StiffnessMediumLow),
+            ) + fadeIn(tween(140)),
+            // 收起：阻尼更低、更干脆，不让它慢慢缩
+            exit = shrinkVertically(
+                animationSpec = spring(dampingRatio = 0.85f, stiffness = Spring.StiffnessMedium),
+            ) + fadeOut(tween(120)),
         ) {
             Column(
                 modifier = Modifier
@@ -138,4 +142,3 @@ fun <T> ExpandableOptionRow(
         }
     }
 }
-
