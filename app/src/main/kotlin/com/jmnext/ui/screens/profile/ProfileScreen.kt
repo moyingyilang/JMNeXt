@@ -74,6 +74,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import java.io.File
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -201,6 +202,8 @@ fun ProfileScreen(
             item { ReadingCard(readerMode, onReaderModeChange) }
             item { AboutCard(onOpenAbout = onOpenAbout) }
             item { ServerCard() }
+            // 崩溃日志入口：只有 debug / tracer 包会落盘（BuildConfig.DEBUG_LOG），正式包不显示
+            if (BuildConfig.DEBUG_LOG) item { CrashLogCard() }
         }
     }
 }
@@ -1412,5 +1415,67 @@ private fun WebDavCard(onOpen: () -> Unit) {
         TextButton(onClick = onOpen, modifier = Modifier.padding(top = Spacing.xs)) {
             Text(if (cfg.isUsable) "配置 / 立即同步" else "去配置", color = c.accent)
         }
+    }
+}
+
+/**
+ * 崩溃日志（仅 debug / tracer 包显示）。
+ *
+ * 日志由 [com.jmnext.data.CrashLogger] 写在 `filesDir/logs/crash-*.txt`。
+ * 这里不弹系统分享面板（要配 FileProvider），而是**复制到剪贴板** + 可删除，
+ * 够用且不引入额外配置。
+ */
+@Composable
+private fun CrashLogCard() {
+    val c = JmTheme.colors
+    val ctx = androidx.compose.ui.platform.LocalContext.current
+    var last by remember { mutableStateOf<File?>(null) }
+    var info by remember { mutableStateOf("") }
+    var reload by remember { mutableStateOf(0) }
+
+    LaunchedEffect(reload) {
+        val f = com.jmnext.data.CrashLogger.lastCrash(ctx)
+        last = f
+        info = if (f == null) {
+            "没有崩溃记录。"
+        } else {
+            val text = runCatching { f.readText() }.getOrDefault("")
+            val firstLine = text.lineSequence().firstOrNull { it.startsWith("time:") } ?: ""
+            "${f.name}　${firstLine.removePrefix("time:").trim()}"
+        }
+    }
+
+    SettingCard(title = "崩溃日志（调试）") {
+        InfoRow("状态", info)
+        Row(
+            modifier = Modifier.fillMaxWidth().padding(top = Spacing.sm),
+            horizontalArrangement = Arrangement.spacedBy(Spacing.sm),
+        ) {
+            TextButton(
+                enabled = last != null,
+                onClick = {
+                    val text = last?.let { runCatching { it.readText() }.getOrNull() }.orEmpty()
+                    val cm = ctx.getSystemService(android.content.Context.CLIPBOARD_SERVICE)
+                        as android.content.ClipboardManager
+                    cm.setPrimaryClip(android.content.ClipData.newPlainText("jmnext-crash", text))
+                    com.jmnext.ui.Notices.show("崩溃日志已复制到剪贴板")
+                },
+            ) { Text("复制最近一次") }
+
+            TextButton(
+                enabled = last != null,
+                onClick = {
+                    last?.delete()
+                    reload++
+                    com.jmnext.ui.Notices.show("已删除最近一次崩溃日志")
+                },
+            ) { Text("删除", color = c.error) }
+        }
+        Text(
+            text = "位置：应用私有目录 files/logs/。追踪包（tracer）与 debug 包才会记录；正式包不写盘。",
+            style = MaterialTheme.typography.labelSmall,
+            color = c.textTertiary,
+            modifier = Modifier.padding(top = Spacing.xs),
+        )
     }
 }
