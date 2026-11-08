@@ -25,6 +25,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.style.TextOverflow
@@ -111,10 +113,24 @@ fun <T> ExpandableOptionRow(
                     .padding(top = Spacing.xs),
                 verticalArrangement = Arrangement.spacedBy(Spacing.xxs),
             ) {
-                options.forEach { (value, label) ->
+                options.forEachIndexed { index, (value, label) ->
                     val on = value == selected
+                    // 错峰入场：每一项按 index 延迟一点点浮上来，整块不是“啪”地一起出现。
+                    // 延迟要短（每项 28ms、上限 120ms），否则选项多时会显得拖沓。
+                    val delayMs = (index * 28).coerceAtMost(120)
+                    var shown by remember { mutableStateOf(false) }
+                    val appear by animateFloatAsState(
+                        targetValue = if (shown) 1f else 0f,
+                        animationSpec = tween(durationMillis = 180, delayMillis = delayMs),
+                        label = "item-appear",
+                    )
+                    LaunchedEffect(Unit) { shown = true }
                     Row(
                         modifier = Modifier
+                            .graphicsLayer {
+                                alpha = appear
+                                translationY = (1f - appear) * 8.dp.toPx()
+                            }
                             .fillMaxWidth()
                             .heightIn(min = 48.dp)
                             .clickable(role = Role.RadioButton) {
