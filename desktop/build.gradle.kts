@@ -23,9 +23,7 @@ plugins {
 sourceSets.main {
     kotlin.srcDir("../shared/src/main/kotlin")
     // 2.2.2：WebUI 与 shared 同样是纯 JVM，按源码引入（不引入跨工程依赖）
-    kotlin.srcDir("../web/src/main/kotlin")
     // WebUI 的 HTML/CSS/JS 必须一起进 classpath，否则入口页 500
-    resources.srcDir("../web/src/main/resources")
 }
 
 dependencies {

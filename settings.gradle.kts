@@ -26,5 +26,3 @@ rootProject.name = "JMNeXt"
 
 include(":app")
 include(":shared")
-include(":web")
-include(":uiweb")

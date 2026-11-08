@@ -4,7 +4,7 @@
 
 # 2.2.2
 
-本版是三块：**界面材质重做**、**WebDAV 同步**、**WebUI（浏览器界面）**，外加一批交互与性能修正。
+本版两块：**界面材质重做** 与 **WebDAV 同步**，外加一批交互与性能修正。
 
 ---
 
@@ -114,20 +114,7 @@
 墓碑解决的是「远端没有这条」无法区分「别的设备删了」与「本机还没同步过」的问题 ——
 没有墓碑就只能永不传播删除，代价是取消收藏后下次同步又被拉回来。
 
-## 八、WebUI（浏览器界面）
-
-桌面端起一个只监听本机的 HTTP 服务，浏览器打开即可用：
-
-```sh
-jmnext-desktop --web                # http://127.0.0.1:17800
-jmnext-desktop --web --port=18888   # 端口被占会自动顺延
-jmnext-desktop --web --lan          # 局域网，会打印 6 位口令
-```
-
-- 按访问头给两套界面（桌面宽屏 / 手机窄屏），共用同一套接口；
-- 前端拿不到 JM 原始图片地址，只拿 `/img/<chapter>/<index>`，反切片与防盗链都在服务端。
-
-## 九、lite 分支
+## 八、lite 分支
 
 把 lite 做成真正的低端机版本，而不是“少几个开关”：
 
@@ -140,7 +127,7 @@ jmnext-desktop --web --lan          # 局域网，会打印 6 位口令
 实测（lite release，R8）：`dev/chrisbanes/haze` 命中 **0**（未混淆的 debug 包是 4 个 dex 命中）、
 `RubberBandState` 命中 **0**、APK **3.31 MB**（debug 36.5 MB）。
 
-## 十、追踪包（tracer）
+## 九、追踪包（tracer）
 
 新增 buildType `tracer`：release 签名 + 可调试 + 不混淆 + 包名后缀 `.tracer` + 版本后缀 `-tracer` + `BuildConfig.DEBUG_LOG = true`。
 
@@ -150,7 +137,7 @@ jmnext-desktop --web --lan          # 局域网，会打印 6 位口令
 - 桌面端不另出 debug 构建：它本就把 stdout/stderr tee 到 `~/jmnext.log`，另有环境摘要、
   `JMNEXT_VERBOSE=1` 详细日志与「崩溃」区块（见 `docs/DEBUG-BUILD.md`）。
 
-## 十一、性能
+## 十、性能
 
 测量方法固定：`force-stop` → `gfxinfo reset` → `am start -W` → 滑动 10 次 → `framestats`。
 
@@ -163,7 +150,7 @@ jmnext-desktop --web --lan          # 局域网，会打印 6 位口令
 
 改动：首页封面列表加 `contentType`（跨 section 复用组合）、去掉展开列表每项一套动画状态、启动检查延后 5 秒。
 
-## 十二、随本版修掉的其他问题
+## 十一、随本版修掉的其他问题
 
 - **跟随手机壁纸**：补 `READ_EXTERNAL_STORAGE`（API ≤ 32）与运行时申请；
   但实测本机（HyperOS V816 / Android 17）壁纸由 `com.miui.miwallpaper` 服务托管，
@@ -181,9 +168,10 @@ jmnext-desktop --web --lan          # 局域网，会打印 6 位口令
 
 ## 未验证
 
+本版**不包含 WebUI**（浏览器界面）：它曾是 2.2.2 的计划项，已从本版移除，代码留在仓库但未随包发布。
+
 - WebDAV **没有连过真实网盘**（本次无可用账号）：用本地 WebDAV 服务做了端到端验证
   （含认证失败、嵌套目录、跨设备删除与复活），真实网盘的权限与错误码仍需实机确认；
-- WebUI 的浏览器渲染、真实登录与取图、局域网可达性仍未验证；
 - 玻璃观感与帧率、桌面端移植后的观感、lite 表现、手机壁纸真机表现、本地历史/收藏端到端，均待确认。
 
 # 2.2.1

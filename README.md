@@ -29,7 +29,7 @@
 [![Downloads](https://img.shields.io/github/downloads/moyingyilang/JMNeXt/total?label=总下载)](https://github.com/moyingyilang/JMNeXt/releases)
 [![License](https://img.shields.io/badge/license-AGPL--3.0--only-blue)](./LICENSE)
 
-当前最新版本为 **2.2.1**，共 **15 个附件**（Linux 8 个、Windows 5 个、Android 2 个）；**2.2.2（WebUI）开发中**。
+当前最新版本为 **2.2.1**；2.2.2 正在收尾（界面材质重做 + WebDAV 同步）。
 
 | 平台 | 架构 | 格式 | 大小 | 状态 |
 | --- | --- | --- | --- | --- |
@@ -287,25 +287,6 @@ Fluent（Windows 11 Acrylic / Mica）与 MIUI 毛玻璃设计语言，两端观�
 不做删除传播的原因：单靠时间戳无法区分「远端删了」和「远端还没同步过」，贸然同步会清掉另一台设备的数据。跨设备删除要等墓碑表实现。
 
 自动同步在回到前台时触发，最小间隔 10 分钟，失败静默。
-
-## WebUI（2.2.2）
-
-桌面端带一个本地 Web 服务：浏览器里就能浏览、搜索、阅读、收藏。
-
-```sh
-# 只监听本机（默认）
-jmnext-desktop --web              # → http://127.0.0.1:17800
-
-# 指定端口（被占用时会自动顺延，实际端口会打印出来）
-jmnext-desktop --web --port=18888
-
-# 局域网访问（会打印一个 6 位口令，浏览器首次访问要输入）
-jmnext-desktop --web --lan
-```
-
-**按访问头给两套界面**：桌面浏览器是侧栏 + 网格 + 横向双页阅读；手机浏览器是底部 tab + 单列 + 纵向滚动。两套共用同一套接口。
-
-**安全边界**：默认只听 `127.0.0.1`；局域网必须显式开启并过口令；JWT 只存在服务端内存、不进浏览器；前端永远拿不到 JM 的原始图片地址（只拿 `/img/<chapter>/<index>`，服务端负责防盗链、反切片与缓存）。
 
 ## 致谢
 
