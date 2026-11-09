@@ -69,7 +69,9 @@ mkdir -p "$STAGE/DEBIAN" "$STAGE/opt/jmnext" "$STAGE/usr/bin" \
 cp -a "$APP/." "$STAGE/opt/jmnext/"
 printf '#!/bin/sh\nexec /opt/jmnext/bin/jmnext "$@"\n' > "$STAGE/usr/bin/jmnext"
 chmod 755 "$STAGE/usr/bin/jmnext"
-cp "$ICON" "$STAGE/usr/share/icons/hicolor/256x256/apps/jmnext.png"
+cp "${ICON256:-$(dirname "$ICON")/icons/jmnext-icon-256.png}" "$STAGE/usr/share/icons/hicolor/256x256/apps/jmnext.png"
+  mkdir -p "$STAGE/usr/share/icons/hicolor/48x48/apps"
+  cp "$(dirname "$ICON")/icons/jmnext-icon-48.png" "$STAGE/usr/share/icons/hicolor/48x48/apps/jmnext.png" 2>/dev/null
 printf '[Desktop Entry]\nType=Application\nName=JMNeXt\nExec=/opt/jmnext/bin/jmnext\nIcon=jmnext\nTerminal=false\nCategories=Utility;Graphics;\n' \
   > "$STAGE/usr/share/applications/jmnext.desktop"
 cat > "$STAGE/DEBIAN/control" <<'CTL'
