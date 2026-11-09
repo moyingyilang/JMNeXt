@@ -9,6 +9,7 @@
 | [`PARITY-AUDIT.md`](PARITY-AUDIT.md) | 想知道"还缺哪些 Android 功能" | 以代码为证据的逐屏对齐审计（严重 8 / 中等 11 / 轻微 8）+ 修复进度（含提交号）+ 接手必读 |
 | [`SELFTUNE.md`](../desktop/SELFTUNE.md) | 要看自学习算法怎么设计与验证 | 调什么、看什么信号、适应度、算法形式、安全阀、离线回放实测表与限制 |
 | [`engineering-notes.md`](engineering-notes.md) | 想了解历史工程细节 | 早期工程笔记（构建坑、静默失败坑、主题校验等），保留全文 |
+| [`VIRTUAL-DISPLAY.md`](VIRTUAL-DISPLAY.md) | 要做**干净画面**的自动测试 | 两条隔离路线（固定尺寸浮窗裁剪 / VirtualDisplay）、两个 display id 的区别与反查、黑屏排查清单、安全红线；配 `scripts/vd.sh` |
 | [`archive/parity-log.md`](archive/parity-log.md) | 想查某个问题的排查过程 | 开发日志全文（很长）。**其中多处已过时、且有明确写错处**，凡涉及"某功能是否已移植"一律以 PARITY-AUDIT 与代码为准 |
 | [`../CHANGELOG.md`](../CHANGELOG.md) | 想看每个版本改了什么 | 版本索引 + 各版本说明（含未验证项声明） |
 | [`../README.md`](../README.md) | 想安装与上手 | 面向使用者的说明（下载、运行、平台支持、自己构建） |
