@@ -1,7 +1,9 @@
 package com.jmnext.desktop
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.focusable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -12,7 +14,17 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.onFocusChanged
+import androidx.compose.ui.input.key.Key
+import androidx.compose.ui.input.key.KeyEventType
+import androidx.compose.ui.input.key.key
+import androidx.compose.ui.input.key.onKeyEvent
+import androidx.compose.ui.input.key.type
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 
@@ -57,6 +69,9 @@ fun SideNav(selected: String, onSelect: (String) -> Unit, unreadNotifications: I
             modifier = Modifier.padding(horizontal = 10.dp, vertical = 8.dp),
         )
         NAV_ITEMS.forEach { (route, title) ->
+            // 键盘与焦点（2.2.3 桌面端）：侧栏每项都可聚焦，Tab 逐项移动、Enter/Space 触发，
+            // 聚焦时画 1dp 焦点框 —— 此前桌面端只能鼠标点，键盘用户根本进不去。
+            var focused by remember { mutableStateOf(false) }
             val active = route == selected
             Text(
                 // 未读通知数照 Android 的 ProfileScreen（EntryButton 的 badge 参数）：只在 > 0 时显示，
@@ -75,6 +90,23 @@ fun SideNav(selected: String, onSelect: (String) -> Unit, unreadNotifications: I
                         if (active) MaterialTheme.colorScheme.primaryContainer
                         else MaterialTheme.colorScheme.surface,
                     )
+                    .border(
+                        width = if (focused) 1.dp else 0.dp,
+                        color = MaterialTheme.colorScheme.primary,
+                        shape = RoundedCornerShape(8.dp),
+                    )
+                    .onFocusChanged { focused = it.isFocused }
+                    .focusable()
+                    .onKeyEvent { event ->
+                        if (event.type == KeyEventType.KeyDown &&
+                            (event.key == Key.Enter || event.key == Key.Spacebar)
+                        ) {
+                            onSelect(route)
+                            true
+                        } else {
+                            false
+                        }
+                    }
                     .clickable { onSelect(route) }
                     .padding(horizontal = 10.dp, vertical = 8.dp),
             )
