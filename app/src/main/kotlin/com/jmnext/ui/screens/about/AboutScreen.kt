@@ -113,11 +113,11 @@ fun AboutScreen(
                 .padding(horizontal = Spacing.lg, vertical = Spacing.md),
             verticalArrangement = Arrangement.spacedBy(Spacing.md),
         ) {
-              // 头部：应用图标 + 名称 + 版本（参考 HyperCeiler 关于页的 hero 区）
+              // 头部：字标 → 技术栈与署名徽章 → 版本与一句说明（版本信息在徽章下面）
               Column(
                   modifier = Modifier.fillMaxWidth(),
                   horizontalAlignment = Alignment.CenterHorizontally,
-                  verticalArrangement = Arrangement.spacedBy(Spacing.xs),
+                  verticalArrangement = Arrangement.spacedBy(Spacing.xxs),
               ) {
                   Image(
                       painter = painterResource(
@@ -125,24 +125,14 @@ fun AboutScreen(
                       ),
                       contentDescription = "JMNeXt",
                       modifier = Modifier
-                          .width(210.dp)
+                          .width(170.dp)
                           .aspectRatio(1280f / 300f),
                   )
-                  Text(
-                      text = "版本 ${BuildConfig.VERSION_NAME} · $variant",
-                      style = MaterialTheme.typography.labelMedium,
-                      color = c.textTertiary,
-                  )
-                  Text(
-                      text = "禁漫（JMComic）第三方客户端",
-                      style = MaterialTheme.typography.labelSmall,
-                      color = c.textTertiary,
-                      textAlign = TextAlign.Center,
-                  )
-                  // 关于页徽章：Kotlin + Compose 与制作署名（Qt 徽章属于桌面端，不放这里）
+                  Spacer(Modifier.height(Spacing.xxs))
+                  // 徽章：Kotlin + Compose 与制作署名（Qt 徽章属于桌面端，不放这里）
                   Column(
                       horizontalAlignment = Alignment.CenterHorizontally,
-                      verticalArrangement = Arrangement.spacedBy(Spacing.xs),
+                      verticalArrangement = Arrangement.spacedBy(Spacing.xxs),
                   ) {
                       Image(
                           painter = painterResource(
@@ -159,6 +149,18 @@ fun AboutScreen(
                           modifier = Modifier.fillMaxWidth(0.9f).aspectRatio(1280f / 160f),
                       )
                   }
+                  Spacer(Modifier.height(Spacing.xxs))
+                  Text(
+                      text = "版本 ${BuildConfig.VERSION_NAME} · $variant",
+                      style = MaterialTheme.typography.labelMedium,
+                      color = c.textTertiary,
+                  )
+                  Text(
+                      text = "禁漫（JMComic）第三方客户端",
+                      style = MaterialTheme.typography.labelSmall,
+                      color = c.textTertiary,
+                      textAlign = TextAlign.Center,
+                  )
               }
 
             InfoCard("版本") {

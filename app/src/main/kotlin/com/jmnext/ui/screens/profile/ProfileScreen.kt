@@ -1039,8 +1039,7 @@ private fun ReadingCard(
 
 private fun AboutCard(onOpenAbout: () -> Unit) {
     val c = JmTheme.colors
-    // 参考 HyperCeiler 的入口样式：左边一枚应用图标（圆角方形），右边标题 + 副标题，末尾箭头。
-    // 图标用 resources 里的新 logo（jmnext_logo.png），与启动图标同一稿。
+    // 关于入口：标题 + 版本副标题 + 末尾箭头（左图标已按要求去掉）
     GlassSurface(
         modifier = Modifier.fillMaxWidth(),
         level = GlassLevel.Card,
@@ -1054,13 +1053,6 @@ private fun AboutCard(onOpenAbout: () -> Unit) {
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(Spacing.md),
         ) {
-            Image(
-                painter = painterResource(R.drawable.jmnext_logo),
-                contentDescription = null,
-                modifier = Modifier
-                    .size(40.dp)
-                    .clip(RoundedCornerShape(11.dp)),
-            )
             Column(Modifier.weight(1f)) {
                 Text(
                     text = "关于",
