@@ -2,6 +2,52 @@
 
 本项目按 [语义化版本](https://semver.org/lang/zh-CN/) 发布；未达到稳定版前用 `-beta.N` 后缀，并在 GitHub 上标记为 **pre-release**。
 
+# 2.3.0
+
+本版是**外观与工具链**的一次整理：换掉用了很久的旧图标，重做「关于」页，并把日常构建提速。
+
+---
+
+## 一、新图标
+
+旧图标是文字叠色的近似稿，24px 下糊成一团。这一版重做：
+
+- 字形：`JM` 连写 + 右上加号，笔画 9.5、圆头，内容安全半径 36（圆形遮罩不裁切）；
+- 四套皮肤：`orange-dark`、`orange-light`、`cyan-dark`、`cyan-light`；
+  深底 `#0D1422`、浅底 `#EEF2F9`，加号橙 `#FF7B00` 取自 JMComic_SRC 的主题色；
+- Android 自适应图标三层齐全：前景（透明）、背景（纯色 `#0D1422`）、单色层（Android 13+ 主题图标）；
+- 传统图标按 mdpi…xxxhdpi 五档导出，另有圆形版。
+
+资源与设计说明都在 `docs/branding/`（svg、png、preview 三部分）。
+
+## 二、关于页
+
+参考 HyperCeiler 的结构重排，并把品牌资源接进去：
+
+| 区域 | 内容 |
+| --- | --- |
+| 头部 | `about-title` 字标（深/浅两版按主题取） |
+| 徽章 | `Powered by Kotlin and Compose`、`Developed by Lyau_Chisen6173 & DeepSeek V4.1 Flash` |
+| 版本 | 版本号与变体（full · debug 等） |
+| 卡片 | 版本信息、检查更新、项目说明、链接、许可 |
+
+入口那边去掉了「关于」左侧的应用图标，只留标题、版本副标题与箭头。
+
+## 三、构建
+
+- 新增 `scripts/build-fast.sh`：`check`（只编 Kotlin）/ `apk` / `release` / `clean`，
+  默认 `--offline`，日常只编需要的变体；
+- `vfs.watch` 与 `configuration-cache.parallel` 做过 A/B，差异落在噪声里，未启用；
+- 实测写进 `docs/BUILD-SPEED.md`：up-to-date 3–6 秒、改一个 Kotlin 文件 6–16 秒、改资源 8 秒。
+
+---
+
+## 说明
+
+- 桌面端（Compose Desktop）本版未同步关于页改动；
+- 启动图标在各启动器/主题图标下的观感尚未逐机型核对。
+
+
 # 2.2.2
 
 本版两块：**界面材质重做** 与 **WebDAV 同步**，外加一批交互与性能修正。

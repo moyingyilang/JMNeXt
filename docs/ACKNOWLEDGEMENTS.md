@@ -36,7 +36,6 @@
 | Compose Multiplatform / Compose Desktop | Android 与桌面 UI |
 | OkHttp / Retrofit | 网络层 |
 | Coil | 图片加载（含 `file://` 本地壁纸） |
-| Ktor | 2.2.2 起的本地 WebUI 服务 |
 | Gradle | 构建 |
 
 各依赖的许可证以各自仓库的 LICENSE 为准；本项目不修改它们的源码。

@@ -248,8 +248,7 @@ fun AboutScreen(
                         "不做插槽广告、不采集行为，登录凭证经 Keystore 加密落盘。" +
                         "阅读器支持条漫与双页、伪长图拼接无接缝，阅读进度与收藏可本地保存，" +
                         "也能通过 WebDAV 在你自己的网盘上跨设备同步（历史、收藏、屏蔽名单）。" +
-                        "屏蔽规则按关键词 / 分类 / 标签生效，命中即从列表里消失。" +
-                        "桌面端另有浏览器界面：起一个只监听本机的服务，手机与电脑都能用。",
+                        "屏蔽规则按关键词 / 分类 / 标签生效，命中即从列表里消失。",
                     style = MaterialTheme.typography.bodySmall,
                     color = c.textSecondary,
                 )
@@ -338,3 +337,6 @@ private fun LinkRow(label: String, onClick: () -> Unit) {
         Text("›", style = MaterialTheme.typography.bodyLarge, color = c.textTertiary)
     }
 }
+
+
+

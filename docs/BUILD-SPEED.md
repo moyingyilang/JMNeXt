@@ -35,14 +35,24 @@
 | 开关 | 值 | 作用 |
 | --- | --- | --- |
 | `org.gradle.configuration-cache` | true | 配置阶段结果复用 |
-| `org.gradle.configuration-cache.parallel` | true | 配置阶段并行（2026-11-11 加） |
 | `org.gradle.caching` | true | 任务产物复用（容器内缓存约 3.1 G） |
 | `org.gradle.parallel` | true | 模块并行 |
 | `org.gradle.daemon` | true | 常驻 daemon（`--no-daemon` 实测慢 7 到 16 秒） |
-| `org.gradle.vfs.watch` | true | 文件系统监听（2026-11-11 加） |
 | `kotlin.compiler.execution.strategy` | daemon | Kotlin 编译常驻 |
 | `android.nonTransitiveRClass` | true | R 类不传递 |
 | lint | 不进日常构建 | `lintVitalAnalyzeRelease` 单任务曾占 release 总时长 77% |
+
+## 2026-11-11 的 A/B（结果：无效）
+
+改一个 Kotlin 文件后跑 `compileFullDebugKotlin`，各 3 轮：
+
+| 配置 | 三轮耗时 |
+| --- | --- |
+| 开 `vfs.watch` + `configuration-cache.parallel` | 47 / 16 / 7 秒 |
+| 关（默认） | 6 / 8 / 9 秒 |
+
+差异落在噪声里（第一轮含配置缓存重建），关掉反而更稳，所以**两项都没有启用**。
+日常真正有效的是：`--offline`、只编单变体、先 `check` 再 `apk`。
 
 ## 没有收益的（别再试）
 
