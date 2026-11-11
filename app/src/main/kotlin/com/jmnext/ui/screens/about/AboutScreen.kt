@@ -1,5 +1,19 @@
 package com.jmnext.ui.screens.about
 
+import androidx.compose.ui.graphics.luminance
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.clickable
+import com.jmnext.R
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.res.painterResource
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.ui.draw.clip
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -67,6 +81,8 @@ fun AboutScreen(
     modifier: Modifier = Modifier,
 ) {
     val c = JmTheme.colors
+    // 暗色主题下文字是浅色：用它判断该用哪一版字标/徽章（docs/branding 提供的 on-dark / on-light）
+    val dark = c.text.luminance() > 0.5f
     val repo = LocalRepository.current
     val scope = rememberCoroutineScope()
     val uri = LocalUriHandler.current
@@ -97,6 +113,56 @@ fun AboutScreen(
                 .padding(horizontal = Spacing.lg, vertical = Spacing.md),
             verticalArrangement = Arrangement.spacedBy(Spacing.md),
         ) {
+              // 头部：应用图标 + 名称 + 版本（参考 HyperCeiler 关于页的 hero 区）
+              Column(
+                  modifier = Modifier.fillMaxWidth(),
+                  horizontalAlignment = Alignment.CenterHorizontally,
+                  verticalArrangement = Arrangement.spacedBy(Spacing.xs),
+              ) {
+                  // 图标（与启动图标同一稿，取自 png/icon/orange-dark）
+                  Image(
+                      painter = painterResource(R.drawable.about_icon),
+                      contentDescription = null,
+                      modifier = Modifier
+                          .size(64.dp)
+                          .clip(RoundedCornerShape(16.dp)),
+                  )
+                  // 关于页标题：docs/branding/png/about-title-<dark|light>.png（透明底，深/浅各一版）
+                  Image(
+                      painter = painterResource(
+                          if (dark) R.drawable.about_title_dark else R.drawable.about_title_light,
+                      ),
+                      contentDescription = "JMNeXt",
+                      modifier = Modifier
+                          .width(210.dp)
+                          .aspectRatio(1280f / 300f),
+                  )
+                  Text(
+                      text = "版本 ${BuildConfig.VERSION_NAME} · $variant",
+                      style = MaterialTheme.typography.labelMedium,
+                      color = c.textTertiary,
+                  )
+                  Text(
+                      text = "禁漫（JMComic）第三方客户端",
+                      style = MaterialTheme.typography.labelSmall,
+                      color = c.textTertiary,
+                      textAlign = TextAlign.Center,
+                  )
+                  // 技术栈徽章：Android 版只放 Kotlin + Compose（Qt 徽章写的是 C++ 与 Qt，属于桌面端，别混进来）
+                  Column(
+                      horizontalAlignment = Alignment.CenterHorizontally,
+                      verticalArrangement = Arrangement.spacedBy(Spacing.xxs),
+                  ) {
+                      Image(
+                          painter = painterResource(
+                              if (dark) R.drawable.kotlin_compose_dark else R.drawable.kotlin_compose_light,
+                          ),
+                          contentDescription = "Powered by Kotlin and Compose",
+                          modifier = Modifier.height(22.dp).aspectRatio(1280f / 160f),
+                      )
+                  }
+              }
+
             InfoCard("版本") {
                 InfoRow("版本号", BuildConfig.VERSION_NAME)
                 InfoRow("变体", variant)
@@ -195,6 +261,18 @@ fun AboutScreen(
                 LinkRow("问题反馈") { uri.openUri("https://github.com/${UpdateCheck.REPO}/issues") }
             }
 
+            // 致谢徽章：开发者与协作工具（暗/亮两版）
+            Column(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalAlignment = Alignment.CenterHorizontally,
+            ) {
+                Image(
+                    painter = painterResource(if (dark) R.drawable.credit_dark else R.drawable.credit_light),
+                    contentDescription = "Developed by Lyau_Chisen6173 & DeepSeek V4.1 Flash",
+                    modifier = Modifier.width(210.dp).aspectRatio(1280f / 160f),
+                )
+            }
+
             InfoCard("许可") {
                 Text(
                     text = "本项目以 AGPL-3.0-only 授权。禁漫、JMComic 及相关内容的权利归其权利人所有；" +
@@ -253,8 +331,21 @@ private fun InfoRow(label: String, value: String) {
 
 @Composable
 private fun LinkRow(label: String, onClick: () -> Unit) {
-    // 触控高度 ≥48dp（设计规范）：关于页的三个链接此前只有文字高度
-    TextButton(onClick = onClick, modifier = Modifier.fillMaxWidth().heightIn(min = 48.dp)) {
-        Text(text = label, modifier = Modifier.fillMaxWidth())
+    val c = JmTheme.colors
+    // 行式链接（参考 HyperCeiler 的列表项）：文字在左、箭头在右，整行可点，高度 ≥48dp
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .heightIn(min = 48.dp)
+            .clickable(onClick = onClick),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        Text(
+            text = label,
+            style = MaterialTheme.typography.bodyMedium,
+            color = c.text,
+            modifier = Modifier.weight(1f),
+        )
+        Text("›", style = MaterialTheme.typography.bodyLarge, color = c.textTertiary)
     }
 }

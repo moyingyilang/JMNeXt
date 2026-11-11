@@ -1,5 +1,9 @@
 package com.jmnext.ui.screens.profile
 
+import com.jmnext.R
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.draw.clip
+import androidx.compose.foundation.Image
 import com.jmnext.data.prefs.SharedPrefsKeyValueStore
 import androidx.compose.material3.SwitchDefaults
 import com.jmnext.LiteFeatures
@@ -1035,8 +1039,8 @@ private fun ReadingCard(
 
 private fun AboutCard(onOpenAbout: () -> Unit) {
     val c = JmTheme.colors
-    // 用户要求：这一栏就写成「关于」，下面跟一行更小更灰的「版本：<实际版本>」。
-    // 不再用 SettingCard 的标题，因为标题 + 内容两行会重复出现两次「关于」。
+    // 参考 HyperCeiler 的入口样式：左边一枚应用图标（圆角方形），右边标题 + 副标题，末尾箭头。
+    // 图标用 resources 里的新 logo（jmnext_logo.png），与启动图标同一稿。
     GlassSurface(
         modifier = Modifier.fillMaxWidth(),
         level = GlassLevel.Card,
@@ -1048,8 +1052,15 @@ private fun AboutCard(onOpenAbout: () -> Unit) {
                 .heightIn(min = 64.dp)
                 .padding(horizontal = Spacing.lg, vertical = Spacing.md),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(Spacing.sm),
+            horizontalArrangement = Arrangement.spacedBy(Spacing.md),
         ) {
+            Image(
+                painter = painterResource(R.drawable.jmnext_logo),
+                contentDescription = null,
+                modifier = Modifier
+                    .size(40.dp)
+                    .clip(RoundedCornerShape(11.dp)),
+            )
             Column(Modifier.weight(1f)) {
                 Text(
                     text = "关于",
