@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="160" viewBox="0 0 1280 160">
+  <text x="640" y="102" text-anchor="middle" xml:space="preserve" font-family="DejaVu Sans" font-size="58" font-weight="700">
+    <tspan font-size="38" fill="#5C6B82" font-weight="400">Powered by&#160;</tspan><tspan fill="#7F52FF">Kotlin</tspan><tspan font-size="38" fill="#5C6B82" font-weight="400">&#160;and&#160;</tspan><tspan fill="#4285F4">Compose</tspan>
+  </text>
+</svg>

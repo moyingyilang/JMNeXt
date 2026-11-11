@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="460" viewBox="0 0 1280 460">
+  <polygon points="250,50 1030,50 1140,230 1030,410 250,410 140,230"
+           fill="#00599C" stroke="#2F8AD6" stroke-width="4" stroke-linejoin="round"/>
+  <g transform="translate(378,230) scale(2.8) translate(-51.25,-54)">
+    <g fill="none" stroke="#FFFFFF" stroke-width="9.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M47.75 38 V65.75 A9 9 0 0 1 29.75 65.75 V58"/>
+      <path d="M60 74.5 V38 L65 52 Q68.5 58 72 52 L77 38 V74.5"/>
+    </g>
+  </g>
+  <text x="520" y="292" font-family="DejaVu Sans Mono" font-size="180" font-weight="700" fill="#FFFFFF" xml:space="preserve">Ne</text>
+  <g fill="none" stroke="#FF7B00" stroke-width="28" stroke-linecap="round">
+    <path d="M762 180 L838 283"/>
+    <path d="M838 180 L762 283"/>
+  </g>
+  <text x="854" y="292" font-family="DejaVu Sans Mono" font-size="180" font-weight="700" fill="#FFFFFF">t</text>
+</svg>

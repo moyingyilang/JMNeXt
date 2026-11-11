@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="220" viewBox="0 0 1280 220">
+  <text x="640" y="92" text-anchor="middle" font-family="DejaVu Sans" font-size="60" font-weight="700" fill="#FFFFFF">Smaller. Lighter. Faster!</text>
+  <text x="640" y="162" text-anchor="middle" xml:space="preserve" font-family="DejaVu Sans" font-size="36" font-weight="400">
+    <tspan fill="#8FA3BF">Powered by&#160;</tspan><tspan fill="#659AD2" font-weight="700">C++</tspan><tspan fill="#8FA3BF">&#160;and&#160;</tspan><tspan fill="#41CD52" font-weight="700">Qt</tspan>
+  </text>
+</svg>
