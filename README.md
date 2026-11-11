@@ -28,7 +28,7 @@ JMComic 的第三方客户端，Kotlin 和 Compose 写的。Android 是主项目
 
 当前最新版本为 **[2.2.3](https://github.com/moyingyilang/JMNeXt/releases/tag/v2.2.3)**（新图标与关于页）。
 
-2.2.3 这次只发了 Android 四个包（full/lite 各一份正式包与一份追踪包），桌面端没重打，包还是 2.2.2 的。
+2.2.3 一共 21 个附件：15 个标准包 + 2 个 Android 追踪包 + 4 个桌面调试包。
 
 | 平台 | 架构 | 格式 | 大小 | 状态 |
 | --- | --- | --- | --- | --- |
