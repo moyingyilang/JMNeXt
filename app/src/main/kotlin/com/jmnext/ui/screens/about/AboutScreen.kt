@@ -119,15 +119,6 @@ fun AboutScreen(
                   horizontalAlignment = Alignment.CenterHorizontally,
                   verticalArrangement = Arrangement.spacedBy(Spacing.xs),
               ) {
-                  // 图标（与启动图标同一稿，取自 png/icon/orange-dark）
-                  Image(
-                      painter = painterResource(R.drawable.about_icon),
-                      contentDescription = null,
-                      modifier = Modifier
-                          .size(64.dp)
-                          .clip(RoundedCornerShape(16.dp)),
-                  )
-                  // 关于页标题：docs/branding/png/about-title-<dark|light>.png（透明底，深/浅各一版）
                   Image(
                       painter = painterResource(
                           if (dark) R.drawable.about_title_dark else R.drawable.about_title_light,
@@ -148,17 +139,24 @@ fun AboutScreen(
                       color = c.textTertiary,
                       textAlign = TextAlign.Center,
                   )
-                  // 技术栈徽章：Android 版只放 Kotlin + Compose（Qt 徽章写的是 C++ 与 Qt，属于桌面端，别混进来）
+                  // 关于页徽章：Kotlin + Compose 与制作署名（Qt 徽章属于桌面端，不放这里）
                   Column(
                       horizontalAlignment = Alignment.CenterHorizontally,
-                      verticalArrangement = Arrangement.spacedBy(Spacing.xxs),
+                      verticalArrangement = Arrangement.spacedBy(Spacing.xs),
                   ) {
                       Image(
                           painter = painterResource(
                               if (dark) R.drawable.kotlin_compose_dark else R.drawable.kotlin_compose_light,
                           ),
                           contentDescription = "Powered by Kotlin and Compose",
-                          modifier = Modifier.height(22.dp).aspectRatio(1280f / 160f),
+                          modifier = Modifier.fillMaxWidth(0.9f).aspectRatio(1280f / 160f),
+                      )
+                      Image(
+                          painter = painterResource(
+                              if (dark) R.drawable.credit_dark else R.drawable.credit_light,
+                          ),
+                          contentDescription = "Developed by Lyau_Chisen6173 & DeepSeek V4.1 Flash",
+                          modifier = Modifier.fillMaxWidth(0.9f).aspectRatio(1280f / 160f),
                       )
                   }
               }
@@ -261,17 +259,6 @@ fun AboutScreen(
                 LinkRow("问题反馈") { uri.openUri("https://github.com/${UpdateCheck.REPO}/issues") }
             }
 
-            // 致谢徽章：开发者与协作工具（暗/亮两版）
-            Column(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalAlignment = Alignment.CenterHorizontally,
-            ) {
-                Image(
-                    painter = painterResource(if (dark) R.drawable.credit_dark else R.drawable.credit_light),
-                    contentDescription = "Developed by Lyau_Chisen6173 & DeepSeek V4.1 Flash",
-                    modifier = Modifier.width(210.dp).aspectRatio(1280f / 160f),
-                )
-            }
 
             InfoCard("许可") {
                 Text(
