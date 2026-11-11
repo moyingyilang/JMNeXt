@@ -113,7 +113,7 @@ sed -i "s/@V@/$V/" "$TOP/SPECS/jmnext.spec"
 # 于是这条构建路径与在真机上完全一致，而不是伪造架构标记。
 RPM_OK=0
 RPM_OK=0
-if [ -x /usr/bin/qemu-x86_64-static ]; then
+if true; then  # 原生 rpmbuild + 自定义 rpmrc，见 docs/DESKTOP-PACKAGING.md 第六、七节
   # 本机 rpmbuild 是 aarch64，跨架构会被拒；qemu 跑 x86_64 的 rpmbuild，并显式指定 buildroot（否则 %install 失败）
   # strip 必须禁用：%install 末尾的 brp-strip 会用宿主的 aarch64 strip 去处理 x86_64 的 .so，报
   # "Unable to recognise the format" 并让整个 %install 失败（这是跨架构 rpm 的核心坑）
@@ -127,8 +127,8 @@ if [ -x /usr/bin/qemu-x86_64-static ]; then
     cp /usr/lib/rpm/rpmrc "$RPMRC" 2>/dev/null || cp /opt/rpm-arm64/usr/lib/rpm/rpmrc "$RPMRC"
     printf 'arch_compat: aarch64: x86_64\nbuildarch_compat: aarch64: x86_64\n' >> "$RPMRC"
   fi
-  export LD_LIBRARY_PATH=/opt/rpm-arm64/usr/lib/aarch64-linux-gnu${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}
-  /opt/rpm-arm64/usr/bin/rpmbuild -bb --rcfile "$RPMRC" --target x86_64 \
+  # 系统 rpmbuild 就是 aarch64，不需要私有解包那份
+  /usr/bin/rpmbuild -bb --rcfile "$RPMRC" --target x86_64 \
     --define "_topdir $TOP" --define "_buildrootdir $TOP/BUILDROOT" --define "__strip /bin/true" \
     "$TOP/SPECS/jmnext.spec" >/tmp/rpm-x64.log 2>&1 || true
   if [ -n "$(find "$TOP/RPMS" -name "*.rpm" 2>/dev/null)" ]; then RPM_OK=1; fi

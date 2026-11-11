@@ -122,8 +122,8 @@ sed -i "s/@V@/$V/" "$TOP/SPECS/jmnext.spec"
 # rpm：不要静音构建输出 —— 静音过一次，失败时看不到原因，白跑一轮。
 # 也**不要让它中断脚本**：rpm 失败不该连累后面 AppImage 的产出。
 # aarch64 的 rpmbuild：装 rpm:amd64 时系统那份被换成 x86_64 了，故这里用私有解包的 arm64 版
-export LD_LIBRARY_PATH=/opt/rpm-arm64/usr/lib/aarch64-linux-gnu:/opt/rpm-arm64/lib/aarch64-linux-gnu${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}
-RPMBUILD_AARCH64=/opt/rpm-arm64/usr/bin/rpmbuild
+# 系统 rpmbuild 就是 aarch64（容器本身是 arm64），不需要私有解包那份
+RPMBUILD_AARCH64=/usr/bin/rpmbuild
 if "$RPMBUILD_AARCH64" -bb --define "_topdir $TOP" --define "_target_cpu aarch64" "$TOP/SPECS/jmnext.spec"; then
   find "$TOP/RPMS" -name "*.rpm" -exec cp {} "$OUT/Linux-aarch64-$V.rpm" \;
   echo "  rpm 成功"
