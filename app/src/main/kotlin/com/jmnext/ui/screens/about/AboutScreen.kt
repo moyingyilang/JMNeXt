@@ -81,7 +81,7 @@ fun AboutScreen(
     modifier: Modifier = Modifier,
 ) {
     val c = JmTheme.colors
-    // 暗色主题下文字是浅色：用它判断该用哪一版字标/徽章（docs/branding 提供的 on-dark / on-light）
+    // 文字是浅色就说明当前是深色主题，用它挑字标和徽章的版本
     val dark = c.text.luminance() > 0.5f
     val repo = LocalRepository.current
     val scope = rememberCoroutineScope()
@@ -113,7 +113,7 @@ fun AboutScreen(
                 .padding(horizontal = Spacing.lg, vertical = Spacing.md),
             verticalArrangement = Arrangement.spacedBy(Spacing.md),
         ) {
-              // 头部：字标 → 技术栈与署名徽章 → 版本与一句说明（版本信息在徽章下面）
+              // 自上而下：字标、两枚徽章、版本行、一句介绍
               Column(
                   modifier = Modifier.fillMaxWidth(),
                   horizontalAlignment = Alignment.CenterHorizontally,
@@ -129,7 +129,7 @@ fun AboutScreen(
                           .aspectRatio(1280f / 300f),
                   )
                   Spacer(Modifier.height(Spacing.xxs))
-                  // 徽章：Kotlin + Compose 与制作署名（Qt 徽章属于桌面端，不放这里）
+                  // 这两枚是图，不是文字：内容分别是 Kotlin + Compose 和作者署名
                   Column(
                       horizontalAlignment = Alignment.CenterHorizontally,
                       verticalArrangement = Arrangement.spacedBy(Spacing.xxs),
@@ -168,8 +168,8 @@ fun AboutScreen(
                 InfoRow("变体", variant)
                 if (LiteFeatures.ENABLED) {
                     Text(
-                        text = "lite 面向低性能设备：只保留两种纯色界面、去掉壁纸与模糊，" +
-                            "并关闭图片淡入、条目动画，阅读器预取也更保守。",
+                        text = "lite 版给低配机器用的：只留两种纯色界面，没有壁纸和模糊，" +
+                            "图片淡入和条目动画也关了，阅读器预取更保守",
                         style = MaterialTheme.typography.labelSmall,
                         color = c.textTertiary,
                     )
@@ -177,8 +177,7 @@ fun AboutScreen(
             }
 
             InfoCard("检查更新") {
-                // 只放一个独立按钮：说明文字去掉了，点下去才发请求、才出现结果。
-                // 「要不要检查」由用户决定，卡片本身不再先讲一遍原理。
+                  // 不给说明文字，点了才发请求
                 Button(
                     enabled = !checking,
                     onClick = {
@@ -242,13 +241,10 @@ fun AboutScreen(
 
             InfoCard("说明") {
                 Text(
-                    // 这一栏讲**项目本身**，不讲材质：材质属于「关于界面长什么样」，
-                    // 用户点进来说明想看的是「这是个什么应用、能做什么」。
-                    text = "JMNeXt 是禁漫（JMComic）的第三方客户端，用 Kotlin 与 Jetpack Compose 重写。" +
-                        "不做插槽广告、不采集行为，登录凭证经 Keystore 加密落盘。" +
-                        "阅读器支持条漫与双页、伪长图拼接无接缝，阅读进度与收藏可本地保存，" +
-                        "也能通过 WebDAV 在你自己的网盘上跨设备同步（历史、收藏、屏蔽名单）。" +
-                        "屏蔽规则按关键词 / 分类 / 标签生效，命中即从列表里消失。",
+                    text = "禁漫（JMComic）的第三方客户端，Kotlin 与 Compose 写的。没有插槽广告，" +
+                        "也不记录你在看什么；登录凭证加密之后才写到本地\n\n" +
+                        "阅读器有纵向滚动和双页两种，长图拼接不留接缝。收藏、进度、屏蔽名单都在本地，" +
+                        "也能通过 WebDAV 同步到你自己的网盘。屏蔽按关键词、分类、标签走，命中就从列表里消失",
                     style = MaterialTheme.typography.bodySmall,
                     color = c.textSecondary,
                 )

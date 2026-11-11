@@ -1,66 +1,28 @@
-# 编译速度：实测与日常用法
+# 编译速度的几条实测
 
-本机是 Termux + Debian chroot（单容器），构建在容器内跑。以下数字都是**同一台机、热 daemon**
-下用 `date +%s` 前后取差得到的墙钟时间，不是 Gradle 自报的 task 时间。
+都是在这台机器上量的（Termux 里的 Debian 容器），用 date 取前后差，不是 Gradle 自己报的任务时间。
 
-## 日常用 `scripts/build-fast.sh`
+平时这么用就行：
 
-```sh
-./scripts/build-fast.sh check      # 只编 Kotlin（先看有没有错，最省时）
-./scripts/build-fast.sh apk        # 编 + 打 full debug
-./scripts/build-fast.sh apk lite   # 编 + 打 lite debug
-./scripts/build-fast.sh release    # 打 release（full + lite）
-```
+    ./scripts/build-fast.sh check      # 只编 Kotlin，先看有没有错
+    ./scripts/build-fast.sh apk        # 编完打 full debug 包
+    ./scripts/build-fast.sh release    # 打 release
 
-默认带 `--offline`：依赖已在缓存里时不再联网。需要拉新依赖时加 `--online`。
+默认带 --offline。依赖都在缓存里了，联网那点检查反而拖时间；真要拉新依赖时加 --online。
 
-## 实测（2026-11-11，`:app:assembleFullDebug`）
+量下来的数：
 
-| 场景 | 耗时 |
-| --- | --- |
-| 全部 up-to-date，离线 | 3 到 6 秒 |
-| 只改一个 Kotlin 文件 | 15 到 24 秒（`compileFullDebugKotlin` 单独跑约 11 到 20 秒） |
-| 只改一个资源文件 | 8 秒 |
-| 联网但全部 up-to-date | 3 到 29 秒（波动大，网络元数据检查是主要噪声） |
-| 首次（daemon 冷、配置缓存未建） | 1 分 42 秒（78 tasks） |
+- 什么都没改，全 up-to-date：3 到 6 秒
+- 只改一个 Kotlin 文件：15 到 24 秒（里面单跑 compileFullDebugKotlin 是 11 到 20 秒）
+- 只改一个资源：8 秒
+- 第一次跑（daemon 冷、配置缓存还没建）：1 分 42 秒，78 个任务
 
-结论：
+有个坑：联网和离线的差别不稳定。有一次全 up-to-date 联网跑了 29 秒，另一次同样条件是 3 秒。要比较就连测两轮，别拿单次结果下结论。
 
-- **联网与离线的差异不稳定**，不要用单次数字下判断；要对比就连测两轮。
-- 真正的成本在「改 Kotlin 后重编」这一段（11 到 24 秒），与打包无关。
-- 所以日常用 `check` 验错，确认后再 `apk`，别每轮都 `assembleDebug`（它会 full + lite 一起编）。
+真正费时间的是改完 Kotlin 重编那一段，跟打包没关系。所以平时先 check 验错，确认了再 apk；别每轮都 assembleDebug，那是 full 和 lite 一起编。
 
-## 已开的相关开关
+已经开着的开关：配置缓存、构建缓存（容器里约 3.1 G）、parallel、常驻 daemon、Kotlin 编译 daemon、nonTransitiveRClass。lint 没进日常构建，lintVitalAnalyzeRelease 单个任务曾经占到 release 总时长的 77%。
 
-| 开关 | 值 | 作用 |
-| --- | --- | --- |
-| `org.gradle.configuration-cache` | true | 配置阶段结果复用 |
-| `org.gradle.caching` | true | 任务产物复用（容器内缓存约 3.1 G） |
-| `org.gradle.parallel` | true | 模块并行 |
-| `org.gradle.daemon` | true | 常驻 daemon（`--no-daemon` 实测慢 7 到 16 秒） |
-| `kotlin.compiler.execution.strategy` | daemon | Kotlin 编译常驻 |
-| `android.nonTransitiveRClass` | true | R 类不传递 |
-| lint | 不进日常构建 | `lintVitalAnalyzeRelease` 单任务曾占 release 总时长 77% |
+试过没用的：vfs.watch 和 configuration-cache.parallel。改一个 Kotlin 文件各跑三轮，开着是 47/16/7 秒，关着是 6/8/9 秒，差别在噪声里，关着还稳一点，所以没留。--no-daemon 也别用，每次 fork 新 JVM 要多花 7 到 16 秒。workers.max=2 实测更慢，机器是热和内存先到头，不是并行度不够。
 
-## 2026-11-11 的 A/B（结果：无效）
-
-改一个 Kotlin 文件后跑 `compileFullDebugKotlin`，各 3 轮：
-
-| 配置 | 三轮耗时 |
-| --- | --- |
-| 开 `vfs.watch` + `configuration-cache.parallel` | 47 / 16 / 7 秒 |
-| 关（默认） | 6 / 8 / 9 秒 |
-
-差异落在噪声里（第一轮含配置缓存重建），关掉反而更稳，所以**两项都没有启用**。
-日常真正有效的是：`--offline`、只编单变体、先 `check` 再 `apk`。
-
-## 没有收益的（别再试）
-
-- `--no-daemon`：每次 fork 新 JVM 多花 7 到 16 秒；
-- `org.gradle.workers.max=2`：实测更慢（受限的是内存与散热，不是并行度）；
-- kapt → KSP：本项目完全没有 kapt/KSP。
-
-## 未做
-
-- gradle-profiler 的分场景基准（改 ABI、改依赖、clean）尚未跑；
-- 远程构建缓存（需服务器，单机无收益）。
+还没做的：gradle-profiler 的分场景基准（改 ABI、改依赖、clean）。远程构建缓存对单机没意义。

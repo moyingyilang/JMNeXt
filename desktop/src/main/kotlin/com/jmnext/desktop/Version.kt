@@ -1,7 +1,7 @@
 package com.jmnext.desktop
 
 /**
- * 桌面端版本号（2.3.0，与 Android 端同版号：新图标与构建提速；关于页改版仅在 Android 端）。
+ * 桌面端版本号。关于页那套改动只在 Android 端，桌面端这版只换了图标。
  *
  * 为什么不用 BuildConfig 那种自动生成：桌面端是独立的 Gradle 构建，
  * 没有 AGP 的 BuildConfig。这里先读 jar 清单里的 Implementation-Version，
@@ -14,4 +14,4 @@ val DESKTOP_VERSION: String = runCatching {
     Class.forName("com.jmnext.desktop.VersionKt")
         .`package`?.implementationVersion
         ?.takeIf { it.isNotBlank() }
-}.getOrNull() ?: "2.3.0"
+}.getOrNull() ?: "2.2.3"

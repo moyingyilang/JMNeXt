@@ -1,79 +1,61 @@
-# 发版运行手册
+# 发版手册
 
-一次发版的固定步骤，以及踩过的坑。**照这个做，别凭记忆。**
+照这个做，别凭记忆。发版最容易错的地方不是打包，是"版本号写了几处、只改了三处"。
 
-## 0. 前置
+## 前置：把版本号对齐
 
-- 版本号三处一起改：`app/build.gradle.kts`（versionCode + versionName）、
-  `desktop/src/main/kotlin/com/jmnext/desktop/Version.kt`、
-  `desktop/build.gradle.kts`（`packageVersion` 与 `Implementation-Version`）。
-- `CHANGELOG.md` 顶部加新版本段落（按已发布的口吻写，含"未验证"清单）。
-- 桌面端打包脚本靠 **读 `Version.kt` 的最后一行**取版本号，所以三处必须同时改，
-  否则会出现"包名 2.2.2、内容 2.2.1"。
+三处一起改：
 
-## 1. 出包（21 个）
+- `app/build.gradle.kts`：`versionCode` 和 `versionName`
+- `desktop/src/main/kotlin/com/jmnext/desktop/Version.kt`：常量 + 文件头注释
+- `desktop/build.gradle.kts`：`packageVersion` 与 `Implementation-Version`
 
-| 平台 | 命令 | 产物 |
-| --- | --- | --- |
-| Android | `:app:assembleFullRelease :app:assembleLiteRelease` | 2 个 APK |
-| Windows fat jar | `gradle fatJar -Ptarget=windows-arm64 fatJar -Ptarget=windows-x64` | 2 个 jar |
-| Linux aarch64 | `scripts/package-linux.sh` | 4 个 |
-| Linux x86_64 | `scripts/package-linux-x64.sh` | 4 个 |
-| Windows | `package-windows-arm64.sh`、`-x64.sh`、`-arm64-exe.sh`、`-x64-exe.sh`、`-universal-exe.sh` | 5 个 |
+桌面端的打包脚本是拿 `grep` 从 `Version.kt` 里抠版本号的，所以漏改这一处，包名会和内容对不上。
 
-**Windows 的 exe 脚本必须先有对应的 fat jar**，否则会立刻失败。
+CHANGELOG 顶部补一段，按已经发出去的口吻写，把没验证的也写进去。
 
-## 2. 归集与核对
+## 出包
 
-`stage-*.sh` 把产物映射成 15 个标准名，并打印缺失清单；另加 2 个 Android 追踪包（tracer）与 4 个桌面调试包（-debug），合计 **21 个**。**实到不等于 21 就停，不要发。**
+Android 四个：
 
-## 3. tag 与上传
+    gradle :app:assembleFullRelease :app:assembleLiteRelease
+    gradle :app:assembleFullTracer :app:assembleLiteTracer
 
-```sh
-git tag -a vX.Y.Z -m "..."
-git push origin main vX.Y.Z
-```
+桌面端走 `desktop/scripts/package-*.sh`，或者用 builder 仓库的 `40-package-desktop.sh` 一次跑完。Windows 的 exe 脚本要求先有对应的 fat jar，没有会立刻失败。
 
-## 4. 三个反复踩的坑
+产物按 `<平台>-<架构>-<版本>` 起名，Android 是 `Android-full-<版本>.apk`，lite 和 tracer 同理。
 
-### 坑一：`--notes-file` 忘了生成
+## 先发草稿，传完再解除
 
-`gh release create --notes-file .work/release-X.Y.Z.md` 在文件不存在时会**直接失败**，
-Release 根本没建。此时后续 `gh release upload` 全部报 `release not found`，
-而如果脚本把输出管道接到 `tee`，**`$?` 是 tee 的退出码（永远 0）**，
-于是每条都打印"成功" —— 表面 15/15，实际 Release 里一个都没有。
+    gh release create vX.Y.Z --draft --title "..." --notes-file .work/notes-X.Y.Z.md 产物...
 
-**核对必须查远端**：
+草稿阶段可以反复补传，用户看不到半成品。所有平台的包都齐了再 `gh release edit vX.Y.Z --draft=false`。
 
-```sh
-gh release view vX.Y.Z -R <owner>/<repo> --json assets --jq '.assets|length'   # 必须 15
-```
+## 三个坑
 
-不要相信脚本打印的"成功"。
+### 坑一：notes 文件不存在，release 静默没建
 
-### 坑二：`pkill -f <串>` 会杀掉自己
+`gh release create --notes-file` 在文件缺失时直接失败，Release 根本没建。后面所有 `gh release upload` 都报 `release not found`；如果脚本把输出接了 `tee`，`$?` 是 tee 的退出码，永远 0，于是每条都打印成功，看着 15/15，其实一个都没传。
 
-命令行里含同一个串时，`pkill -f` 会匹配到自己。用字符类绕开：
+核对要查远端，不要信脚本打印：
 
-```sh
-pkill -f "release-22[2]"      # 匹配 release-222，但不匹配本行
-```
+    gh release view vX.Y.Z --json assets --jq '.assets|length'
 
-### 坑三：杀流水线要连子进程
+### 坑二：tag 可能指在旧提交上
 
-只杀父脚本会留下 Gradle 进程占着配置缓存锁，下次构建报
-`Timeout waiting to lock Configuration Cache`。杀父进程后要连 `pkill -P` 一起杀，
-必要时删 `.gradle/configuration-cache/configuration-cache.lock`。
+发版前一定比一次：`git rev-parse vX.Y.Z^{commit}` 和构建产物时的 HEAD 是否一致。改过历史（比如 squash）之后旧 tag 还留着，就会出现"页面是 2.2.3、源码是 2.2.3、tag 指向一个已经不存在的提交"。
 
-## 5. 发完核对
+删掉重打就行，别在草稿阶段就建 tag。
 
-1. 远端附件数 = 21，逐个名字对得上；
-2. `git rev-parse vX.Y.Z^{commit}` 指向含新 versionCode 的提交；
-3. `gh release view --json body --jq '.body|length'` 不为 0（正文没丢）；
-4. 装 Android 包装到手机，核对包名 / versionCode / versionName / 大小。
+### 坑三：`pkill -f` 会杀掉自己
 
-## 附注：WebUI 已移除（2.2.2）
+命令行里带同一个串就会自匹配。要么用字符类绕开（`pkill -f "release-22[2]"`），要么老老实实记 pid。
 
-2.2.2 曾计划做 WebUI（浏览器界面），做到一半后放弃并从仓库删除：
-`web/`、`uiweb/` 模块、桌面端 `--web` 入口、`docs/WEBUI.md` 都已移除。
-**本版只发 WebDAV 同步**，出包时不需要任何 web 资源；若打包脚本仍引用 `../web`，属残留需清理。
+杀流水线要连子进程一起杀，只杀父脚本会留下 Gradle 占着配置缓存锁，下次构建报 `Timeout waiting to lock Configuration Cache`。
+
+## 发完核对
+
+1. 远端附件数和预期一致，名字逐个对得上
+2. tag 指向的提交 == 构建时 HEAD，且含新 versionCode
+3. release 正文非空
+4. 装一个 Android 包到手机，核对包名、versionCode、versionName、大小

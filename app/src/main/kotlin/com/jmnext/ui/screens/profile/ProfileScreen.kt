@@ -1039,7 +1039,7 @@ private fun ReadingCard(
 
 private fun AboutCard(onOpenAbout: () -> Unit) {
     val c = JmTheme.colors
-    // 关于入口：标题 + 版本副标题 + 末尾箭头（左图标已按要求去掉）
+    // 关于入口，只有标题、版本和箭头
     GlassSurface(
         modifier = Modifier.fillMaxWidth(),
         level = GlassLevel.Card,

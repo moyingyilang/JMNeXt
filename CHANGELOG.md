@@ -2,51 +2,41 @@
 
 本项目按 [语义化版本](https://semver.org/lang/zh-CN/) 发布；未达到稳定版前用 `-beta.N` 后缀，并在 GitHub 上标记为 **pre-release**。
 
-# 2.3.0
+# 2.2.3
 
-本版是**外观与工具链**的一次整理：换掉用了很久的旧图标，重做「关于」页，并把日常构建提速。
+这次没有新功能。改动集中在三处：应用图标、关于页、构建流程，另外清了一点 2.2.2 的遗留。
 
----
+## 图标
 
-## 一、新图标
+旧图标是把文字直接拼起来再调色的，缩到 24px 笔画就糊成一片。新稿按 Android 自适应图标的网格画：画布 108，笔画 9.5、圆头，内容收在半径 36 的圆内，这样圆形、方形、水滴三种遮罩裁切都不会碰到字形。
 
-旧图标是文字叠色的近似稿，24px 下糊成一团。这一版重做：
+四套配色。深底 `#0D1422`，浅底 `#EEF2F9`，加号取 `#FF7B00`——这个值来自 JMComic_SRC 的 `static/css/index.css`，是那边 swiper 分页点和滚动条的颜色。浅底那套把青色压深了一档，因为原色在浅底上对比度只有 1.6:1，24px 下基本看不见。
 
-- 字形：`JM` 连写 + 右上加号，笔画 9.5、圆头，内容安全半径 36（圆形遮罩不裁切）；
-- 四套皮肤：`orange-dark`、`orange-light`、`cyan-dark`、`cyan-light`；
-  深底 `#0D1422`、浅底 `#EEF2F9`，加号橙 `#FF7B00` 取自 JMComic_SRC 的主题色；
-- Android 自适应图标三层齐全：前景（透明）、背景（纯色 `#0D1422`）、单色层（Android 13+ 主题图标）；
-- 传统图标按 mdpi…xxxhdpi 五档导出，另有圆形版。
+自适应图标的三层都补齐了：前景透明、背景纯色、单色层给 Android 13 的主题图标用。传统图标按 mdpi 到 xxxhdpi 五档导出，另有一份圆形版。设计说明和资源都在 `docs/branding/`。
 
-资源与设计说明都在 `docs/branding/`（svg、png、preview 三部分）。
+## 关于页
 
-## 二、关于页
+结构参考 HyperCeiler：顶部是字标，深色页面用白字版、浅色用深字版，按当前文字色的亮度判断；下面两枚位图徽章；再下面才是版本号和一句话介绍；之后是卡片。
 
-参考 HyperCeiler 的结构重排，并把品牌资源接进去：
+徽章这块多花了一点时间。第一版把 Qt 那枚也放进去了，后来发现上面写的是 Powered by C++ and Qt，属于桌面端，Android 端不该出现，去掉了。署名徽章原本塞在「许可」卡片里，位置别扭，和 Kotlin 那枚并排之后才顺眼。
 
-| 区域 | 内容 |
-| --- | --- |
-| 头部 | `about-title` 字标（深/浅两版按主题取） |
-| 徽章 | `Powered by Kotlin and Compose`、`Developed by Lyau_Chisen6173 & DeepSeek V4.1 Flash` |
-| 版本 | 版本号与变体（full · debug 等） |
-| 卡片 | 版本信息、检查更新、项目说明、链接、许可 |
+「我的」里的入口把左边的应用图标去掉了，只剩标题、版本和箭头。
 
-入口那边去掉了「关于」左侧的应用图标，只留标题、版本副标题与箭头。
+## 构建
 
-## 三、构建
+加了 `scripts/build-fast.sh`。默认 `--offline`，只编需要的变体：平时先 `check`（只跑 `compileFullDebugKotlin`），确认没错了再 `apk`。原因是 `assembleDebug` 会把 full 和 lite 一起编，而日常九成时间只需要其中一个。
 
-- 新增 `scripts/build-fast.sh`：`check`（只编 Kotlin）/ `apk` / `release` / `clean`，
-  默认 `--offline`，日常只编需要的变体；
-- `vfs.watch` 与 `configuration-cache.parallel` 做过 A/B，差异落在噪声里，未启用；
-- 实测写进 `docs/BUILD-SPEED.md`：up-to-date 3–6 秒、改一个 Kotlin 文件 6–16 秒、改资源 8 秒。
+实测：全 up-to-date 3 到 6 秒；改一个 Kotlin 文件 15 到 24 秒；改一个资源 8 秒；第一次构建 1 分 42 秒、78 个任务。联网与离线的差异不稳定，有一次同样的 up-to-date 条件联网跑 29 秒、离线 7 秒，另一次两者都在 3 秒上下，所以对比要连测两轮。
 
----
+顺手试了两个常见开关，`vfs.watch` 和 `configuration-cache.parallel`，各三轮：开着 47/16/7 秒，关着 6/8/9 秒。落在噪声里，没留。这些数字都记在 `docs/BUILD-SPEED.md`。
+
+## 遗留清理
+
+2.2.2 放弃 WebUI 时留了三处尾巴。关于页里还写着「桌面端另有浏览器界面」，功能其实不存在；`desktop/build.gradle.kts` 里挂着五条 `io.ktor` 依赖，而源码里没有任何 `io.ktor` 引用；致谢表里也有一行 Ktor。都删了，删完 `:desktop:compileKotlin` 通过。
 
 ## 说明
 
-- 桌面端（Compose Desktop）本版未同步关于页改动；
-- 启动图标在各启动器/主题图标下的观感尚未逐机型核对。
-
+桌面端这版只换了图标和版本号，关于页仍是旧的。启动图标在各自启动器下的实际观感没有逐机型核对，只在我本机的虚拟屏上看过。
 
 # 2.2.2
 

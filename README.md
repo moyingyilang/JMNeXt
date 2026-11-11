@@ -1,11 +1,8 @@
 # JMNeXt
 
-用 Kotlin 与 Compose 实现的 JMComic 客户端。**Android 为主项目**，桌面端（Linux / Windows）由 Android 端
-移植而来，两端共用同一个 `shared` 数据层。
+JMComic 的第三方客户端，Kotlin 和 Compose 写的。Android 是主项目，桌面端（Linux / Windows）是从 Android 移植出去的，两端共用 `shared` 里的数据层。
 
-项目定位为阅读客户端：浏览、搜索、阅读、登录、收藏、追更、评论、通知与本地屏蔽。
-不包含购买功能，不含官方广告，也不含任何埋点。设计原则沿用既有表述 ——
-「Stability and simplicity are paramount」：能少不写多，能显式不隐式。
+就是个看漫画的工具：浏览、搜索、阅读、登录、收藏、追更、评论、通知、本地屏蔽。没有购买入口，没有官方广告，也不埋点。写的时候尽量少加东西，能显式就不隐式，能不写就不写。
 
 [下载](#下载) · [快速开始](#快速开始) · [功能](#功能) · [验证状态](#验证状态) · [致谢](#致谢与来源) ·
 [构建与开发](#构建与开发) · [版本线](#版本线) · [文档](#文档)
@@ -29,9 +26,9 @@
 [![Downloads](https://img.shields.io/github/downloads/moyingyilang/JMNeXt/total?label=总下载)](https://github.com/moyingyilang/JMNeXt/releases)
 [![License](https://img.shields.io/badge/license-AGPL--3.0--only-blue)](./LICENSE)
 
-当前最新版本为 **[2.2.2](https://github.com/moyingyilang/JMNeXt/releases/tag/v2.2.2)**（界面材质重做 + WebDAV 同步）。
+当前最新版本为 **[2.2.3](https://github.com/moyingyilang/JMNeXt/releases/tag/v2.2.3)**（新图标与关于页）。
 
-2.2.2 起附件为 **21 个**：15 个标准包 + 2 个 Android 追踪包 + 4 个桌面调试包。
+2.2.3 这次只发了 Android 四个包（full/lite 各一份正式包与一份追踪包），桌面端没重打，包还是 2.2.2 的。
 
 | 平台 | 架构 | 格式 | 大小 | 状态 |
 | --- | --- | --- | --- | --- |
