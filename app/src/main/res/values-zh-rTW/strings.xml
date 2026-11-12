@@ -1,0 +1,26 @@
+<resources>
+    <string name="about_title">關於</string>
+    <string name="about_back">返回</string>
+    <string name="about_tagline">禁漫（JMComic）第三方客戶端</string>
+    <string name="about_version_line">版本 %1$s · %2$s</string>
+    <string name="about_version">版本</string>
+    <string name="about_version_code">版本號</string>
+    <string name="about_variant">變體</string>
+    <string name="about_lite_note">lite 版給低配機器用的：只留兩種純色介面，沒有桌布和模糊，圖片淡入和條目動畫也關了，閱讀器預取更保守</string>
+    <string name="about_check_update">檢查更新</string>
+    <string name="about_checking">檢查中…</string>
+    <string name="about_check_failed">沒取到更新資訊（網路不通，或 GitHub 暫時不可用）</string>
+    <string name="about_check_new">有新版本：%1$s</string>
+    <string name="about_check_latest">已是最新版本（遠端 %1$s）</string>
+    <string name="about_download_pkg">下載更新包（%1$s）</string>
+    <string name="about_asset_note">一個安裝包同時支援 arm64 與 x86_64，無需區分架構。若直連打不開，可改用下面的發佈頁自行挑選。</string>
+    <string name="about_update_notes">更新內容：%1$s</string>
+    <string name="about_desc_title">說明</string>
+    <string name="about_desc">禁漫（JMComic）的第三方客戶端，Kotlin 與 Compose 寫的。沒有插槽廣告，也不記錄你在看什麼；登入憑證加密之後才寫到本地\n\n閱讀器有縱向滾動和雙頁兩種，長圖拼接不留接縫。收藏、進度、封鎖名單都在本地，也能透過 WebDAV 同步到你自己的網路硬碟。封鎖按關鍵字、分類、標籤走，命中就從列表裡消失</string>
+    <string name="about_links">連結</string>
+    <string name="about_link_home">專案首頁</string>
+    <string name="about_link_releases">發佈頁（下載新版本）</string>
+    <string name="about_link_issues">問題回報</string>
+    <string name="about_license_title">授權</string>
+    <string name="about_license">本專案以 AGPL-3.0-only 授權。禁漫、JMComic 及相關內容的權利歸其權利人所有；本應用與官方無關，僅提供客戶端實作。</string>
+</resources>

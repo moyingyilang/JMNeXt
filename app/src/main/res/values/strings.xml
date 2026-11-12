@@ -1,3 +1,29 @@
 <resources>
     <string name="app_name">JMNeXt</string>
+
+    <!-- 关于页；先只覆盖这一屏，链路跑通再往别的屏扩 -->
+    <string name="about_title">关于</string>
+    <string name="about_back">返回</string>
+    <string name="about_tagline">禁漫（JMComic）第三方客户端</string>
+    <string name="about_version_line">版本 %1$s · %2$s</string>
+    <string name="about_version">版本</string>
+    <string name="about_version_code">版本号</string>
+    <string name="about_variant">变体</string>
+    <string name="about_lite_note">lite 版给低配机器用的：只留两种纯色界面，没有壁纸和模糊，图片淡入和条目动画也关了，阅读器预取更保守</string>
+    <string name="about_check_update">检查更新</string>
+    <string name="about_checking">检查中…</string>
+    <string name="about_check_failed">没取到更新信息（网络不通，或 GitHub 暂时不可用）</string>
+    <string name="about_check_new">有新版本：%1$s</string>
+    <string name="about_check_latest">已是最新版本（远端 %1$s）</string>
+    <string name="about_download_pkg">下载更新包（%1$s）</string>
+    <string name="about_asset_note">一个安装包同时支持 arm64 与 x86_64，无需区分架构。若直链打不开，可改用下面的发布页自行挑选。</string>
+    <string name="about_update_notes">更新内容：%1$s</string>
+    <string name="about_desc_title">说明</string>
+    <string name="about_desc">禁漫（JMComic）的第三方客户端，Kotlin 与 Compose 写的。没有插槽广告，也不记录你在看什么；登录凭证加密之后才写到本地\n\n阅读器有纵向滚动和双页两种，长图拼接不留接缝。收藏、进度、屏蔽名单都在本地，也能通过 WebDAV 同步到你自己的网盘。屏蔽按关键词、分类、标签走，命中就从列表里消失</string>
+    <string name="about_links">链接</string>
+    <string name="about_link_home">项目主页</string>
+    <string name="about_link_releases">发布页（下载新版本）</string>
+    <string name="about_link_issues">问题反馈</string>
+    <string name="about_license_title">许可</string>
+    <string name="about_license">本项目以 AGPL-3.0-only 授权。禁漫、JMComic 及相关内容的权利归其权利人所有；本应用与官方无关，仅提供客户端实现。</string>
 </resources>

@@ -1,5 +1,6 @@
 package com.jmnext.ui.screens.about
 
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.graphics.luminance
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.width
@@ -80,6 +81,7 @@ fun AboutScreen(
     onBack: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    val ctx = LocalContext.current
     val c = JmTheme.colors
     // 文字是浅色就说明当前是深色主题，用它挑字标和徽章的版本
     val dark = c.text.luminance() > 0.5f
@@ -99,10 +101,10 @@ fun AboutScreen(
 
     Column(modifier.fillMaxSize()) {
         GlassTopBar(
-            title = "关于",
+            title = stringResource(R.string.about_title),
             navigation = {
                 IconButton(onClick = onBack) {
-                    Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "返回", tint = c.accent)
+                    Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(R.string.about_back), tint = c.accent)
                 }
             },
         )
@@ -151,32 +153,32 @@ fun AboutScreen(
                   }
                   Spacer(Modifier.height(Spacing.xxs))
                   Text(
-                      text = "版本 ${BuildConfig.VERSION_NAME} · $variant",
+                      text = stringResource(R.string.about_version_line, BuildConfig.VERSION_NAME, variant),
                       style = MaterialTheme.typography.labelMedium,
                       color = c.textTertiary,
                   )
                   Text(
-                      text = "禁漫（JMComic）第三方客户端",
+                      text = stringResource(R.string.about_tagline),
                       style = MaterialTheme.typography.labelSmall,
                       color = c.textTertiary,
                       textAlign = TextAlign.Center,
                   )
               }
 
-            InfoCard("版本") {
-                InfoRow("版本号", BuildConfig.VERSION_NAME)
-                InfoRow("变体", variant)
+            InfoCard(stringResource(R.string.about_version)) {
+                InfoRow(stringResource(R.string.about_version_code), BuildConfig.VERSION_NAME)
+                InfoRow(stringResource(R.string.about_variant), variant)
                 if (LiteFeatures.ENABLED) {
                     Text(
-                        text = "lite 版给低配机器用的：只留两种纯色界面，没有壁纸和模糊，" +
-                            "图片淡入和条目动画也关了，阅读器预取更保守",
+                        text = stringResource(R.string.about_lite_note) + "" +
+                            "",
                         style = MaterialTheme.typography.labelSmall,
                         color = c.textTertiary,
                     )
                 }
             }
 
-            InfoCard("检查更新") {
+            InfoCard(stringResource(R.string.about_check_update)) {
                   // 不给说明文字，点了才发请求
                 Button(
                     enabled = !checking,
@@ -189,18 +191,18 @@ fun AboutScreen(
                             val tag = latest?.tag
                             checking = false
                             result = when {
-                                tag == null -> "没取到更新信息（网络不通，或 GitHub 暂时不可用）"
+                                tag == null -> ctx.getString(R.string.about_check_failed)
                                 UpdateCheck.isNewer(tag, BuildConfig.VERSION_NAME) ->
-                                    "有新版本：$tag".also {
+                                    ctx.getString(R.string.about_check_new, tag).also {
                                         updatable = tag
                                         notes = latest?.notes.orEmpty()
                                     }
-                                else -> "已是最新版本（远端 $tag）"
+                                else -> ctx.getString(R.string.about_check_latest, tag)
                             }
                         }
                     },
                     modifier = Modifier.fillMaxWidth(),
-                ) { Text(if (checking) "检查中…" else "检查更新") }
+                ) { Text(if (checking) stringResource(R.string.about_checking) else stringResource(R.string.about_check_update)) }
 
                 result?.let {
                     Text(
@@ -218,11 +220,11 @@ fun AboutScreen(
                     val asset = UpdateCheck.androidAssetName(tag, lite = isLite)
                     Column(verticalArrangement = Arrangement.spacedBy(Spacing.xs)) {
                         TextButton(onClick = { uri.openUri(UpdateCheck.assetUrl(tag, asset)) }) {
-                            Text("下载更新包（$asset）")
+                            Text(ctx.getString(R.string.about_download_pkg, asset))
                         }
                         Text(
-                            text = "一个安装包同时支持 arm64 与 x86_64，无需区分架构。" +
-                                "若直链打不开，可改用下面的发布页自行挑选。",
+                            text = ctx.getString(R.string.about_asset_note) + "" +
+                                "",
                             style = MaterialTheme.typography.labelSmall,
                             color = c.textTertiary,
                         )
@@ -230,7 +232,7 @@ fun AboutScreen(
                         val brief = com.jmnext.data.UpdateFetcher.brief(notes)
                         if (brief.isNotEmpty()) {
                             Text(
-                                text = "更新内容：$brief",
+                                text = ctx.getString(R.string.about_update_notes, brief),
                                 style = MaterialTheme.typography.labelSmall,
                                 color = c.textSecondary,
                             )
@@ -239,28 +241,24 @@ fun AboutScreen(
                 }
             }
 
-            InfoCard("说明") {
+            InfoCard(stringResource(R.string.about_desc_title)) {
                 Text(
-                    text = "禁漫（JMComic）的第三方客户端，Kotlin 与 Compose 写的。没有插槽广告，" +
-                        "也不记录你在看什么；登录凭证加密之后才写到本地\n\n" +
-                        "阅读器有纵向滚动和双页两种，长图拼接不留接缝。收藏、进度、屏蔽名单都在本地，" +
-                        "也能通过 WebDAV 同步到你自己的网盘。屏蔽按关键词、分类、标签走，命中就从列表里消失",
+                    text = stringResource(R.string.about_desc),
                     style = MaterialTheme.typography.bodySmall,
                     color = c.textSecondary,
                 )
             }
 
-            InfoCard("链接") {
-                LinkRow("项目主页") { uri.openUri("https://github.com/${UpdateCheck.REPO}") }
-                LinkRow("发布页（下载新版本）") { uri.openUri("https://github.com/${UpdateCheck.REPO}/releases") }
-                LinkRow("问题反馈") { uri.openUri("https://github.com/${UpdateCheck.REPO}/issues") }
+            InfoCard(stringResource(R.string.about_links)) {
+                LinkRow(stringResource(R.string.about_link_home)) { uri.openUri("https://github.com/${UpdateCheck.REPO}") }
+                LinkRow(stringResource(R.string.about_link_releases)) { uri.openUri("https://github.com/${UpdateCheck.REPO}/releases") }
+                LinkRow(stringResource(R.string.about_link_issues)) { uri.openUri("https://github.com/${UpdateCheck.REPO}/issues") }
             }
 
 
-            InfoCard("许可") {
+            InfoCard(stringResource(R.string.about_license_title)) {
                 Text(
-                    text = "本项目以 AGPL-3.0-only 授权。禁漫、JMComic 及相关内容的权利归其权利人所有；" +
-                        "本应用与官方无关，仅提供客户端实现。",
+                    text = stringResource(R.string.about_license),
                     style = MaterialTheme.typography.labelSmall,
                     color = c.textTertiary,
                 )
