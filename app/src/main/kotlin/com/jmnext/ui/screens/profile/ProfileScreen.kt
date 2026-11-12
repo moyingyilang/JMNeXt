@@ -574,7 +574,7 @@ private fun AppearanceCard(
         // 所以给三档。默认「中」。这一项放在最前面 —— 它决定下面几项观感的“底子”。
         // lite 没有玻璃（材质退化为实心），这一项摆出来只会误导
         if (!LiteFeatures.ENABLED) ExpandableOptionRow(
-            title = "玻璃质量",
+            title = stringResource(R.string.appearance_glass_quality),
             options = GlassQuality.entries.map { it to it.label },
             selected = uiOptions.glassQuality,
             onSelect = { onUiOptionsChange(uiOptions.copy(glassQuality = it)) },
@@ -582,21 +582,21 @@ private fun AppearanceCard(
         )
 
         OptionSwitch(
-            title = "悬浮底栏",
+            title = stringResource(R.string.appearance_floating_bar),
             desc = "底栏变成浮在内容之上的胶囊，选中项带一块会滑过去的底。",
             checked = uiOptions.floatingBottomBar,
             onCheckedChange = { onUiOptionsChange(uiOptions.copy(floatingBottomBar = it)) },
         )
 
         OptionSwitch(
-            title = "通透模式",
+            title = stringResource(R.string.appearance_translucent),
             desc = "玻璃不再覆盖底色，只留模糊与描边；文字自动加一圈反色柔光保证可读。",
             checked = uiOptions.ultraTranslucent,
             onCheckedChange = { onUiOptionsChange(uiOptions.copy(ultraTranslucent = it)) },
         )
 
         OptionSwitch(
-            title = "莫奈取色套用在模糊上",
+            title = stringResource(R.string.appearance_monet_blur),
             desc = "用系统动态取色的主色 / 次色 / 第三色给背景与模糊层上色。" +
                 "需要开动态取色且系统为 Android 12+，否则这个开关不生效。",
             checked = uiOptions.monetBlur,
@@ -616,7 +616,7 @@ private fun AppearanceCard(
             Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU &&
                 Build.VERSION.SDK_INT < Build.VERSION_CODES.VANILLA_ICE_CREAM
         OptionSwitch(
-            title = "预测性返回",
+            title = stringResource(R.string.appearance_predictive_back),
             desc = when {
                 Build.VERSION.SDK_INT >= Build.VERSION_CODES.VANILLA_ICE_CREAM ->
                     "Android 15 起由系统提供（返回手势中系统会推动整个窗口），本项不再生效，已停用。"
@@ -634,7 +634,7 @@ private fun AppearanceCard(
         if (!LiteFeatures.ENABLED) {
         // lite 下动效性格被强制为默认（见 Theme.kt），选择器留着只会让人以为可以调
         Text(
-            text = "动效",
+            text = stringResource(R.string.appearance_motion),
             style = MaterialTheme.typography.bodyLarge,
             color = c.text,
             modifier = Modifier.padding(top = Spacing.lg),
@@ -647,7 +647,7 @@ private fun AppearanceCard(
         )
         // 动效性格：三个值，改用可展开行（与壁纸来源同一套交互）
         ExpandableOptionRow(
-            title = "动效快慢",
+            title = stringResource(R.string.appearance_motion_speed),
             options = MotionStyle.entries.map { it to it.label },
             selected = uiOptions.motionStyle,
             onSelect = { onUiOptionsChange(uiOptions.copy(motionStyle = it)) },
@@ -813,10 +813,10 @@ private fun WallpaperCard() {
         }
     }
 
-    SettingCard(title = "壁纸") {
+    SettingCard(title = stringResource(R.string.appearance_wallpaper)) {
         // 来源有七八个选项，平铺成 chips 会挤成两三行；改成可展开的竖向列表（参照 bvds 的两段式展开）。
         com.jmnext.ui.components.ExpandableOptionRow(
-            title = "来源",
+            title = stringResource(R.string.appearance_wallpaper_source),
             options = WallpaperMode.entries.map { it to it.label },
             selected = wall.mode,
             onSelect = { mode ->
@@ -868,10 +868,10 @@ private fun WallpaperCard() {
                     onClick = { scope.launch { store?.next(force = true) } },
                     enabled = wall.loading != true,
                 ) {
-                    Text(if (wall.loading) "取图中…" else "换一张", color = c.accent)
+                    Text(if (wall.loading) stringResource(R.string.appearance_wallpaper_loading) else stringResource(R.string.appearance_wallpaper_change), color = c.accent)
                 }
                 IconButton(onClick = { scope.launch { store?.next(force = true) } }) {
-                    Icon(Icons.Filled.Refresh, contentDescription = "换一张", tint = c.accent)
+                    Icon(Icons.Filled.Refresh, contentDescription = stringResource(R.string.appearance_wallpaper_change), tint = c.accent)
                 }
                 Text(
                     text = when (val iv = wall.intervalSeconds) {
@@ -887,9 +887,9 @@ private fun WallpaperCard() {
             // 档位改成秒级：用户要按「时/分/秒」控制粒度（原来最细只有 1 分钟）
             // 自动切换间隔：七个档位，改用可展开行
             ExpandableOptionRow(
-                title = "自动更换",
+                title = stringResource(R.string.appearance_wallpaper_auto),
                 options = listOf(
-                    0 to "关闭", 10 to "10 秒", 30 to "30 秒", 60 to "1 分钟",
+                    0 to stringResource(R.string.appearance_off), 10 to "10 秒", 30 to "30 秒", 60 to "1 分钟",
                     300 to "5 分钟", 1800 to "30 分钟", 3600 to "1 小时",
                 ),
                 selected = wall.intervalSeconds,

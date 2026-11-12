@@ -1,4 +1,6 @@
 package com.jmnext.ui
+import androidx.compose.ui.res.stringResource
+import androidx.annotation.StringRes
 import com.jmnext.ui.components.glassSource
 import com.jmnext.ui.components.rubberBand
 import com.jmnext.ui.components.rememberGlassState
@@ -108,13 +110,13 @@ import androidx.compose.material3.SnackbarHostState
 internal enum class MainTab(
     val route: String,
     val pattern: String,
-    val label: String,
+    @StringRes val labelRes: Int,
     val icon: ImageVector,
 ) {
-    Home("home", "home", "首页", Icons.Filled.Whatshot),
-    Category("category", "category", "分类", Icons.Filled.Sell),
-    Search("search", SEARCH_PATTERN, "搜索", Icons.Filled.Search),
-    Profile("profile", "profile", "我的", Icons.Filled.Person),
+    Home("home", "home", com.jmnext.R.string.nav_home, Icons.Filled.Whatshot),
+    Category("category", "category", com.jmnext.R.string.nav_category, Icons.Filled.Sell),
+    Search("search", SEARCH_PATTERN, com.jmnext.R.string.nav_search, Icons.Filled.Search),
+    Profile("profile", "profile", com.jmnext.R.string.nav_profile, Icons.Filled.Person),
 }
 
 private const val SEARCH_PATTERN = "search?q={q}"
@@ -373,8 +375,11 @@ fun JmNavHost(
     // 系统"减少动画"开启时，转场与 Tab 滑动统一退化为 120ms 淡入（见 ui/theme/ReduceMotion.kt）
     val reduceMotion = rememberReduceMotion()
 
+    val labels = MainTab.entries.map { stringResource(it.labelRes) }
     // 底栏只认识「第几栏」：这里把 MainTab 翻成它要的形态，路由的判断都留在导航层。
-    val barItems = remember { MainTab.entries.map { BottomBarItem(label = it.label, icon = it.icon) } }
+    val barItems = remember(labels) {
+        MainTab.entries.mapIndexed { i, tab -> BottomBarItem(label = labels[i], icon = tab.icon) }
+    }
     val selectedTabIndex = MainTab.entries
         .indexOfFirst { it.pattern == currentRoute }
         .coerceAtLeast(0)
@@ -886,8 +891,8 @@ private fun DockedBottomBar(
                 NavigationBarItem(
                     selected = currentRoute == tab.pattern,
                     onClick = { onSelect(tab) },
-                    icon = { Icon(tab.icon, contentDescription = tab.label) },
-                    label = { Text(tab.label, style = MaterialTheme.typography.labelSmall) },
+                    icon = { Icon(tab.icon, contentDescription = stringResource(tab.labelRes)) },
+                    label = { Text(stringResource(tab.labelRes), style = MaterialTheme.typography.labelSmall) },
                 )
             }
         }

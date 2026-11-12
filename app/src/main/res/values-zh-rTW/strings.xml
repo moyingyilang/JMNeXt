@@ -89,4 +89,22 @@
     <string name="crash_title">崩潰日誌（除錯）</string>
     <string name="crash_status">狀態</string>
     <string name="crash_none">沒有崩潰紀錄。</string>
+
+    <string name="nav_home">首頁</string>
+    <string name="nav_category">分類</string>
+    <string name="nav_search">搜尋</string>
+    <string name="nav_profile">我的</string>
+    <string name="appearance_glass_quality">玻璃品質</string>
+    <string name="appearance_floating_bar">懸浮底欄</string>
+    <string name="appearance_translucent">通透模式</string>
+    <string name="appearance_monet_blur">莫內取色套用在模糊上</string>
+    <string name="appearance_predictive_back">預測性返回</string>
+    <string name="appearance_motion">動效</string>
+    <string name="appearance_motion_speed">動效快慢</string>
+    <string name="appearance_wallpaper">桌布</string>
+    <string name="appearance_wallpaper_source">來源</string>
+    <string name="appearance_wallpaper_change">換一張</string>
+    <string name="appearance_wallpaper_loading">取圖中…</string>
+    <string name="appearance_wallpaper_auto">自動更換</string>
+    <string name="appearance_off">關閉</string>
 </resources>
