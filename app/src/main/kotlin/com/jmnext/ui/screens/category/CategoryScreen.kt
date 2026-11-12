@@ -1,5 +1,8 @@
 package com.jmnext.ui.screens.category
 
+import androidx.annotation.StringRes
+import androidx.compose.ui.res.stringResource
+import com.jmnext.R
 import com.jmnext.ui.components.jmAnimateItem
 import com.jmnext.ui.LocalTagBlocker
 import androidx.compose.foundation.layout.Arrangement
@@ -76,12 +79,12 @@ import kotlinx.coroutines.launch
  * 比搜索多出月榜与周榜 —— 官方 `CatSortData` 里定义了而搜索的 `SearchSortData` 没有，
  * 因此不能复用搜索的枚举。
  */
-enum class CategorySort(val key: String, val label: String) {
-    LATEST("", "最新"),
-    MOST_HEARTS("tf", "最多爱心"),
-    TOTAL_RANK("mv", "总排行"),
-    MONTH_RANK("mv_m", "月排行"),
-    WEEK_RANK("mp_w", "周排行"),
+enum class CategorySort(val key: String, @StringRes val labelRes: Int) {
+    LATEST("", com.jmnext.R.string.cat_sort_latest),
+    MOST_HEARTS("tf", com.jmnext.R.string.cat_sort_hearts),
+    TOTAL_RANK("mv", com.jmnext.R.string.cat_sort_total),
+    MONTH_RANK("mv_m", com.jmnext.R.string.cat_sort_month),
+    WEEK_RANK("mp_w", com.jmnext.R.string.cat_sort_week),
 }
 
 data class CategoryUiState(
@@ -278,8 +281,8 @@ fun CategoryScreen(
 
     Column(modifier = modifier.fillMaxSize()) {
         GlassTopBar(
-            title = "分类",
-            subtitle = state.parent?.name?.takeIf { it.isNotBlank() } ?: "按分类浏览",
+            title = stringResource(R.string.cat_title),
+            subtitle = state.parent?.name?.takeIf { it.isNotBlank() } ?: stringResource(R.string.cat_browse),
         )
 
         when {
@@ -295,7 +298,7 @@ fun CategoryScreen(
             else -> {
                 val parent = state.parent
                 CategoryChipRow(
-                    label = "分类",
+                    label = stringResource(R.string.cat_label),
                     options = state.categories.map { it.slug to (it.name ?: it.slug) },
                     selected = parent?.slug.orEmpty(),
                     onSelect = { slug ->
@@ -306,8 +309,8 @@ fun CategoryScreen(
                 val subs = parent?.subCategories.orEmpty()
                 if (subs.isNotEmpty()) {
                     CategoryChipRow(
-                        label = "子类",
-                        options = listOf("" to "全部") + subs.map { it.slug to (it.name ?: it.slug) },
+                        label = stringResource(R.string.cat_sub_label),
+                        options = listOf("" to stringResource(R.string.cat_all)) + subs.map { it.slug to (it.name ?: it.slug) },
                         selected = state.sub?.slug.orEmpty(),
                         onSelect = { slug ->
                             vm.selectSub(if (slug.isEmpty()) null else subs.find { it.slug == slug })
@@ -320,19 +323,19 @@ fun CategoryScreen(
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     Text(
-                        text = "画师与作品库",
+                        text = stringResource(R.string.cat_creator_lib),
                         style = MaterialTheme.typography.labelSmall,
                         color = c.textTertiary,
                         modifier = Modifier.weight(1f),
                     )
                     TextButton(onClick = onOpenCreators) {
-                        Text("进入 ›", color = c.accent)
+                        Text(stringResource(R.string.cat_enter), color = c.accent)
                     }
                 }
 
                 CategoryChipRow(
                     label = "排序",
-                    options = CategorySort.entries.map { it.key to it.label },
+                    options = CategorySort.entries.map { it.key to stringResource(it.labelRes) },
                     selected = state.sort.key,
                     onSelect = { key ->
                         CategorySort.entries.find { it.key == key }?.let { vm.setSort(it) }
@@ -349,7 +352,7 @@ fun CategoryScreen(
                     )
 
                     state.comics.isEmpty() -> MessageState(
-                        title = "这个分类下暂时没有作品",
+                        title = stringResource(R.string.cat_empty),
                         icon = Icons.Filled.Sell,
                         onRetry = { vm.loadList() },
                     )
@@ -553,7 +556,7 @@ private fun TagFallback(
         error != null && tags.isEmpty() -> ErrorBox(message = error, onRetry = onRetry)
 
         tags.isEmpty() -> MessageState(
-            title = "暂时拿不到分类",
+            title = stringResource(R.string.cat_load_failed),
             icon = Icons.Filled.Sell,
             onRetry = onRetry,
         )

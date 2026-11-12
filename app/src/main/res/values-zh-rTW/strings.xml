@@ -184,4 +184,20 @@
 
     <string name="search_hint_random_failed">隨機本子沒拿到，稍後再試</string>
     <string name="search_hint_no_keyword">請輸入關鍵字</string>
+
+    <string name="cat_title">分類</string>
+    <string name="cat_browse">按分類瀏覽</string>
+    <string name="cat_sort_latest">最新</string>
+    <string name="cat_sort_hearts">最多愛心</string>
+    <string name="cat_sort_total">總排行</string>
+    <string name="cat_sort_month">月排行</string>
+    <string name="cat_sort_week">週排行</string>
+    <string name="cat_label">分類</string>
+    <string name="cat_sub_label">子類</string>
+    <string name="cat_all">全部</string>
+    <string name="cat_creator_lib">畫師與作品庫</string>
+    <string name="cat_enter">進入 ›</string>
+    <string name="cat_sort">排序</string>
+    <string name="cat_empty">這個分類底下暫時沒有作品</string>
+    <string name="cat_load_failed">暫時拿不到分類</string>
 </resources>
