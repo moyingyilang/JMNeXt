@@ -268,4 +268,31 @@
     <string name="tagfav_dialog_title">收藏標籤</string>
     <string name="tagfav_dialog_desc">選取的標籤會加入「我的 → 標籤收藏」（上限 50）。</string>
     <string name="tagfav_save_fmt">收藏 %1 個</string>
+
+    <string name="week_title">週刊</string>
+    <string name="week_issue_fmt">%1 · 共 %2 部</string>
+    <string name="week_back">返回</string>
+    <string name="week_issue_label">刊期</string>
+    <string name="week_type_label">類型</string>
+    <string name="week_empty_title">這一期沒有作品</string>
+    <string name="week_empty_desc">換一個刊期或類型看看</string>
+
+    <string name="random_title">隨機推薦</string>
+    <string name="random_note_blocked">已排除你封鎖名單裡的作品</string>
+    <string name="random_note_pref">已排除封鎖名單 · 按你收藏偏好的標籤排序</string>
+    <string name="random_back">返回</string>
+    <string name="random_view_list">切換成列表</string>
+    <string name="random_view_grid">切換成網格</string>
+    <string name="random_shuffle">換一批</string>
+    <string name="random_loading">正在隨機…</string>
+    <string name="random_failed_fmt">沒拿到：%1</string>
+    <string name="creator_authors">畫師</string>
+    <string name="creator_works">作品</string>
+    <string name="creator_title">畫師與作品庫</string>
+    <string name="creator_total_fmt">共 %1 項</string>
+    <string name="creator_subtitle">來自作品庫的畫師與作品</string>
+    <string name="creator_search_authors">搜尋畫師</string>
+    <string name="creator_search_works">搜尋作品</string>
+    <string name="creator_search">搜尋</string>
+    <string name="creator_empty_authors">沒有找到畫師</string>
 </resources>

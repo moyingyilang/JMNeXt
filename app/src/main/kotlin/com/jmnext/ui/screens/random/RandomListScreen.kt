@@ -1,5 +1,7 @@
 package com.jmnext.ui.screens.random
 
+import androidx.compose.ui.res.stringResource
+import com.jmnext.R
 import com.jmnext.data.prefs.SharedPrefsKeyValueStore
 import com.jmnext.ui.components.jmAnimateItem
 import androidx.compose.runtime.derivedStateOf
@@ -196,16 +198,16 @@ fun RandomListScreen(
 
     Column(modifier.fillMaxSize()) {
         GlassTopBar(
-            title = "随机推荐",
+            title = stringResource(R.string.random_title),
             subtitle = when {
                 items_.isEmpty() -> null
-                favoriteTagCounts.isEmpty() -> "已排除你屏蔽名单里的作品"
+                favoriteTagCounts.isEmpty() -> stringResource(R.string.random_note_blocked)
                 // 说明排序依据：用户看到顺序变了应该知道为什么
-                else -> "已排除屏蔽名单 · 按你收藏偏好的标签排序"
+                else -> stringResource(R.string.random_note_pref)
             },
             navigation = {
                 IconButton(onClick = onBack) {
-                    Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "返回", tint = c.accent)
+                    Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(R.string.random_back), tint = c.accent)
                 }
             },
             actions = {
@@ -215,17 +217,17 @@ fun RandomListScreen(
                     prefs.randomLayout = layout
                 }) {
                     if (layout == LAYOUT_GRID) {
-                        Icon(Icons.AutoMirrored.Filled.ViewList, contentDescription = "切换成列表", tint = c.accent)
+                        Icon(Icons.AutoMirrored.Filled.ViewList, contentDescription = stringResource(R.string.random_view_list), tint = c.accent)
                     } else {
-                        Icon(Icons.Filled.GridView, contentDescription = "切换成网格", tint = c.accent)
+                        Icon(Icons.Filled.GridView, contentDescription = stringResource(R.string.random_view_grid), tint = c.accent)
                     }
                 }
-                TextButton(onClick = { round += 1 }) { Text("换一批") }
+                TextButton(onClick = { round += 1 }) { Text(stringResource(R.string.random_shuffle)) }
             },
         )
         when {
-            loading -> Hint("正在随机…")
-            error != null -> Hint("没拿到：$error")
+            loading -> Hint(stringResource(R.string.random_loading))
+            error != null -> Hint(stringResource(R.string.random_failed_fmt, error ?: ""))
             items_.isEmpty() -> Hint("这次没抽到（可能候选都被屏蔽名单挡住了，或网络不通）。")
             layout == LAYOUT_GRID -> LazyVerticalGrid(
                 columns = GridCells.Fixed(3),

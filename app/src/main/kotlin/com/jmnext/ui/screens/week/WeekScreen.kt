@@ -1,5 +1,7 @@
 package com.jmnext.ui.screens.week
 
+import androidx.compose.ui.res.stringResource
+import com.jmnext.R
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -221,15 +223,15 @@ fun WeekScreen(
 
     Column(modifier = modifier.fillMaxSize()) {
         GlassTopBar(
-            title = "周刊",
+            title = stringResource(R.string.week_title),
             subtitle = state.issue?.let { issue ->
-                if (state.total > 0) "${issue.label} · 共 ${state.total} 部" else issue.label
+                if (state.total > 0) stringResource(R.string.week_issue_fmt, issue.label, state.total) else issue.label
             },
             navigation = {
                 IconButton(onClick = onBack) {
                     Icon(
                         imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                        contentDescription = "返回",
+                        contentDescription = stringResource(R.string.week_back),
                         tint = c.accent,
                     )
                 }
@@ -238,7 +240,7 @@ fun WeekScreen(
 
         if (state.issues.isNotEmpty()) {
             ChipRow(
-                label = "刊期",
+                label = stringResource(R.string.week_issue_label),
                 options = state.issues,
                 selectedId = state.issue?.id.orEmpty(),
                 labelOf = { it.label },
@@ -247,7 +249,7 @@ fun WeekScreen(
         }
         if (state.types.isNotEmpty()) {
             ChipRow(
-                label = "类型",
+                label = stringResource(R.string.week_type_label),
                 options = state.types,
                 selectedId = state.type?.id.orEmpty(),
                 labelOf = { it.label },
@@ -264,8 +266,8 @@ fun WeekScreen(
             state.loadingList -> LoadingBox()
 
             state.items.isEmpty() -> MessageState(
-                title = "这一期没有作品",
-                description = "换一个刊期或类型看看",
+                title = stringResource(R.string.week_empty_title),
+                description = stringResource(R.string.week_empty_desc),
                 icon = Icons.Filled.CalendarMonth,
                 onRetry = { vm.loadList() },
             )

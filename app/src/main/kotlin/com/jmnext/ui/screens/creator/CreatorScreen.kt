@@ -1,5 +1,8 @@
 package com.jmnext.ui.screens.creator
 
+import androidx.annotation.StringRes
+import androidx.compose.ui.res.stringResource
+import com.jmnext.R
 import androidx.compose.material.icons.automirrored.filled.MenuBook
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -67,9 +70,9 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 /** 创作者库的两个维度。 */
-enum class CreatorTab(val label: String) {
-    Authors("画师"),
-    Works("作品"),
+enum class CreatorTab(@StringRes val labelRes: Int) {
+    Authors(com.jmnext.R.string.creator_authors),
+    Works(com.jmnext.R.string.creator_works),
 }
 
 data class CreatorUiState(
@@ -256,15 +259,15 @@ fun CreatorScreen(
 
     Column(modifier = modifier.fillMaxSize()) {
         GlassTopBar(
-            title = state.authorName ?: "画师与作品库",
-            subtitle = if (state.total > 0) "共 ${state.total} 项" else "来自作品库的画师与作品",
+            title = state.authorName ?: stringResource(R.string.creator_title),
+            subtitle = if (state.total > 0) stringResource(R.string.creator_total_fmt, state.total) else stringResource(R.string.creator_subtitle),
             navigation = {
                 IconButton(
                     onClick = { if (state.authorId != null) vm.closeAuthor() else onBack() },
                 ) {
                     Icon(
                         imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                        contentDescription = "返回",
+                        contentDescription = stringResource(R.string.random_back),
                         tint = c.accent,
                     )
                 }
@@ -280,7 +283,7 @@ fun CreatorScreen(
                     FilterChip(
                         selected = state.tab == tab,
                         onClick = { vm.setTab(tab) },
-                        label = { Text(tab.label, style = MaterialTheme.typography.labelSmall) },
+                        label = { Text(stringResource(tab.labelRes), style = MaterialTheme.typography.labelSmall) },
                     )
                 }
             }
@@ -291,14 +294,14 @@ fun CreatorScreen(
                 modifier = Modifier.fillMaxWidth().padding(horizontal = Spacing.lg, vertical = Spacing.sm),
                 placeholder = {
                     Text(
-                        text = if (state.tab == CreatorTab.Authors) "搜索画师" else "搜索作品",
+                        text = if (state.tab == CreatorTab.Authors) stringResource(R.string.creator_search_authors) else stringResource(R.string.creator_search_works),
                         color = c.textTertiary,
                     )
                 },
                 singleLine = true,
                 trailingIcon = {
                     IconButton(onClick = { vm.load() }) {
-                        Icon(Icons.Filled.Search, contentDescription = "搜索", tint = c.accent)
+                        Icon(Icons.Filled.Search, contentDescription = stringResource(R.string.creator_search), tint = c.accent)
                     }
                 },
                 keyboardOptions = androidx.compose.foundation.text.KeyboardOptions(
@@ -318,7 +321,7 @@ fun CreatorScreen(
 
             state.tab == CreatorTab.Authors && state.authorId == null ->
                 if (state.authors.isEmpty()) {
-                    MessageState(title = "没有找到画师", icon = Icons.Filled.Brush, onRetry = { vm.load() })
+                    MessageState(title = stringResource(R.string.creator_empty_authors), icon = Icons.Filled.Brush, onRetry = { vm.load() })
                 } else {
                     LazyVerticalGrid(
                         columns = GridCells.Adaptive(minSize = 168.dp),
