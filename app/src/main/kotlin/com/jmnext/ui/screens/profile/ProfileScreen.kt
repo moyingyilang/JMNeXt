@@ -991,8 +991,8 @@ private fun ReadingCard(
                 ) {
                     Text(
                         text = when (mode) {
-                            ReaderMode.Scroll -> "纵向滚动"
-                            ReaderMode.Page -> "横向翻页"
+                            ReaderMode.Scroll -> stringResource(R.string.reader_mode_scroll)
+                            ReaderMode.Page -> stringResource(R.string.reader_mode_page)
                         },
                         style = MaterialTheme.typography.labelSmall,
                     )
@@ -1000,13 +1000,13 @@ private fun ReadingCard(
             }
         }
         Text(
-            text = "纵向滚动适合长条页，横向翻页适合单页构图的作品。阅读页顶栏可临时切换。",
+            text = stringResource(R.string.reader_mode_note),
             style = MaterialTheme.typography.labelSmall,
             color = c.textTertiary,
             modifier = Modifier.padding(top = Spacing.sm),
         )
         Text(
-            text = "漫画渲染",
+            text = stringResource(R.string.comic_render),
             style = MaterialTheme.typography.bodyLarge,
             color = c.text,
             modifier = Modifier.padding(top = Spacing.md),
@@ -1056,13 +1056,13 @@ private fun AboutCard(onOpenAbout: () -> Unit) {
         ) {
             Column(Modifier.weight(1f)) {
                 Text(
-                    text = "关于",
+                    text = stringResource(R.string.about_entry),
                     style = MaterialTheme.typography.bodyLarge,
                     color = c.text,
                 )
                 Text(
                     // 实际版本：debug 包会带 .debug 后缀（BuildConfig.VERSION_NAME 原样取）
-                    text = "版本：${BuildConfig.VERSION_NAME}",
+                    text = stringResource(R.string.about_version_fmt, BuildConfig.VERSION_NAME),
                     style = MaterialTheme.typography.labelSmall,
                     color = c.textTertiary,
                     modifier = Modifier.padding(top = Spacing.xxs),
@@ -1117,13 +1117,13 @@ private fun ServerCard() {
     val clientVersion = JmSession.DEFAULT_CLIENT_VERSION
     val aligned = serverVersion == null || serverVersion == clientVersion
 
-    SettingCard(title = "服务端") {
+    SettingCard(title = stringResource(R.string.server_title)) {
         InfoRow(
-            "服务端对应官方版本",
+            stringResource(R.string.server_official),
             serverVersion ?: when {
-                !checked -> "读取中…"
-                failure != null -> "读取失败"
-                else -> "未提供"
+                !checked -> stringResource(R.string.server_loading)
+                failure != null -> stringResource(R.string.server_read_failed)
+                else -> stringResource(R.string.server_not_provided)
             },
         )
 
@@ -1135,8 +1135,8 @@ private fun ServerCard() {
                 modifier = Modifier.padding(top = Spacing.xs),
             )
         }
-        InfoRow("本客户端上报版本", clientVersion)
-        InfoRow("协议对齐", if (aligned) "一致" else "可能已变化")
+        InfoRow(stringResource(R.string.server_client_version), clientVersion)
+        InfoRow(stringResource(R.string.server_alignment), if (aligned) stringResource(R.string.server_aligned) else stringResource(R.string.server_may_changed))
 
         if (!aligned) {
             Text(
@@ -1158,7 +1158,7 @@ private fun ServerCard() {
         }
 
         TextButton(onClick = { reloadKey++ }) {
-            Text("重新读取", color = c.accent)
+            Text(stringResource(R.string.server_reread), color = c.accent)
         }
     }
 }
@@ -1261,12 +1261,12 @@ private fun DailyCard(onLogin: () -> Unit) {
         dailyLoading = false
     }
 
-    SettingCard(title = "每日签到") {
+    SettingCard(title = stringResource(R.string.daily_title)) {
         when {
             uid.isNullOrBlank() -> Text(
                 // 未登录不摆出签到界面（日历与进度都没有意义），只留一个能点的入口：
                 // 说明这个功能存在，以及怎么用上它
-                text = "登录后再签到",
+                text = stringResource(R.string.daily_login_first),
                 style = MaterialTheme.typography.bodyMedium,
                 color = c.accent,
                 modifier = Modifier
@@ -1276,14 +1276,14 @@ private fun DailyCard(onLogin: () -> Unit) {
             )
 
             dailyLoading -> Text(
-                text = "正在读取签到活动…",
+                text = stringResource(R.string.daily_loading),
                 style = MaterialTheme.typography.bodySmall,
                 color = c.textSecondary,
             )
 
             daily == null -> Text(
                 // 说明两种可能，而不是直接说"失败"：没有进行中的活动也会走到这里
-                text = "没读到签到活动（可能当前没有进行中的活动，或网络不通）。",
+                text = stringResource(R.string.daily_none),
                 style = MaterialTheme.typography.bodySmall,
                 color = c.textSecondary,
             )
@@ -1369,9 +1369,9 @@ private fun DailyCard(onLogin: () -> Unit) {
                     ) {
                         Text(
                             when {
-                                signedToday -> "今天已签到"
-                                complete -> "本期已签完"
-                                else -> "签到"
+                                signedToday -> stringResource(R.string.daily_today_signed)
+                                complete -> stringResource(R.string.daily_complete)
+                                else -> stringResource(R.string.daily_sign)
                             },
                         )
                     }
@@ -1403,9 +1403,9 @@ private fun WebDavCard(onOpen: () -> Unit) {
     val app = androidx.compose.ui.platform.LocalContext.current.applicationContext as com.jmnext.JmApp
     val cfg = remember { app.syncSettings.load() }
 
-    SettingCard(title = "WebDAV 同步") {
-        InfoRow("状态", if (cfg.enabled) "已开启" else "未开启")
-        InfoRow("远端路径", cfg.path.ifBlank { "—" })
+    SettingCard(title = stringResource(R.string.webdav_title)) {
+        InfoRow(stringResource(R.string.webdav_status), if (cfg.enabled) stringResource(R.string.webdav_on) else stringResource(R.string.webdav_off))
+        InfoRow(stringResource(R.string.webdav_path), cfg.path.ifBlank { "—" })
         Text(
             text = if (cfg.isUsable) {
                 "同步阅读历史、收藏与屏蔽名单。多台设备指向同一文件即可互通。"
@@ -1417,7 +1417,7 @@ private fun WebDavCard(onOpen: () -> Unit) {
             modifier = Modifier.padding(top = Spacing.sm),
         )
         TextButton(onClick = onOpen, modifier = Modifier.padding(top = Spacing.xs)) {
-            Text(if (cfg.isUsable) "配置 / 立即同步" else "去配置", color = c.accent)
+            Text(if (cfg.isUsable) stringResource(R.string.webdav_sync) else stringResource(R.string.webdav_configure), color = c.accent)
         }
     }
 }
@@ -1441,7 +1441,7 @@ private fun CrashLogCard() {
         val f = com.jmnext.data.CrashLogger.lastCrash(ctx)
         last = f
         info = if (f == null) {
-            "没有崩溃记录。"
+            ctx.getString(R.string.crash_none)
         } else {
             val text = runCatching { f.readText() }.getOrDefault("")
             val firstLine = text.lineSequence().firstOrNull { it.startsWith("time:") } ?: ""
@@ -1449,7 +1449,7 @@ private fun CrashLogCard() {
         }
     }
 
-    SettingCard(title = "崩溃日志（调试）") {
+    SettingCard(title = stringResource(R.string.crash_title)) {
         InfoRow("状态", info)
         Row(
             modifier = Modifier.fillMaxWidth().padding(top = Spacing.sm),
