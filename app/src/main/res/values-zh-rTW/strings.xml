@@ -107,4 +107,12 @@
     <string name="appearance_wallpaper_loading">取圖中…</string>
     <string name="appearance_wallpaper_auto">自動更換</string>
     <string name="appearance_off">關閉</string>
+
+    <string name="appearance_floating_bar_desc">底欄變成浮在內容之上的膠囊，選取項帶一塊會滑過去的底。</string>
+    <string name="appearance_translucent_desc">玻璃不再覆蓋底色，只留模糊與描邊；文字自動加一圈反色柔光保證可讀。</string>
+    <string name="appearance_monet_blur_desc">用系統動態取色的主色 / 次色 / 第三色給背景與模糊層上色。需要開動態取色且系統為 Android 12+，否則這個開關不生效。</string>
+    <string name="appearance_predictive_android15">Android 15 起由系統提供（返回手勢中系統會推動整個視窗），本項不再生效，已停用。</string>
+    <string name="appearance_predictive_on">返回手勢進行中，目前頁面跟手淡出，鬆手前就能看出要退出。</string>
+    <string name="appearance_predictive_unsupported">需要 Android 13 / 14；本機系統沒有預測性返回手勢，本項不生效。</string>
+    <string name="appearance_serial_desc">每半天左右讓系統挑個合適時機檢查一次，有變化才提醒；同一批更新只提醒一次。只用連載列表和你本地的閱讀時間，不上傳你在看什麼。預設關閉。</string>
 </resources>

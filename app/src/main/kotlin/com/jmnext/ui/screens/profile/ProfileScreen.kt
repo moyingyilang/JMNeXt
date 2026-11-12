@@ -542,8 +542,7 @@ private fun AppearanceCard(
         SettingCard(title = stringResource(R.string.profile_serial_notify)) {
             OptionSwitch(
                 title = "你追的连载更新时通知我",
-                desc = "每半天左右让系统挑个合适时机检查一次，有变化才提醒；同一批更新只提醒一次。" +
-                    "只用连载列表和你本地的阅读时间，不上传你在看什么。默认关闭。",
+                desc = stringResource(R.string.appearance_serial_desc),
                 checked = serialNotify,
                 onCheckedChange = { want ->
                     val needsPermission = Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU &&
@@ -583,14 +582,14 @@ private fun AppearanceCard(
 
         OptionSwitch(
             title = stringResource(R.string.appearance_floating_bar),
-            desc = "底栏变成浮在内容之上的胶囊，选中项带一块会滑过去的底。",
+            desc = stringResource(R.string.appearance_floating_bar_desc),
             checked = uiOptions.floatingBottomBar,
             onCheckedChange = { onUiOptionsChange(uiOptions.copy(floatingBottomBar = it)) },
         )
 
         OptionSwitch(
             title = stringResource(R.string.appearance_translucent),
-            desc = "玻璃不再覆盖底色，只留模糊与描边；文字自动加一圈反色柔光保证可读。",
+            desc = stringResource(R.string.appearance_translucent_desc),
             checked = uiOptions.ultraTranslucent,
             onCheckedChange = { onUiOptionsChange(uiOptions.copy(ultraTranslucent = it)) },
         )
@@ -619,12 +618,12 @@ private fun AppearanceCard(
             title = stringResource(R.string.appearance_predictive_back),
             desc = when {
                 Build.VERSION.SDK_INT >= Build.VERSION_CODES.VANILLA_ICE_CREAM ->
-                    "Android 15 起由系统提供（返回手势中系统会推动整个窗口），本项不再生效，已停用。"
+                    stringResource(R.string.appearance_predictive_android15)
                 predictiveBackUsable ->
                     // 1.4.3 起跟手阶段只做淡、不做缩放（缩放会把整页内容连同封面一起缩），
                     // 文案也必须跟着改 —— 否则用户会去找那个"缩小"。
-                    "返回手势进行中，当前页跟手淡出，松手前就能看出要退出。"
-                else -> "需要 Android 13 / 14；本机系统没有预测性返回手势，本项不生效。"
+                    stringResource(R.string.appearance_predictive_on)
+                else -> stringResource(R.string.appearance_predictive_unsupported)
             },
             checked = uiOptions.predictiveBack,
             enabled = predictiveBackUsable,
