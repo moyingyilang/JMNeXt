@@ -269,7 +269,10 @@
     "full_check_in_reward": "全簽獎勳",
     "monthly_check_in_bonus": "＊整月簽到, 可額外獲得色圖",
     "annual_full_check_in_rewards": "歷年全簽禮",
-    "start_this_month_check_in": "開啟本月簽到"
+    "start_this_month_check_in": "開啟本月簽到",
+    "makeup_check_in_count": "補簽到({{used}}/{{limit}})",
+    "select_makeup_date": "請選擇本月要補簽的日期",
+    "watch_ad_countdown": "還需觀看 {{seconds}} 秒，即可補簽本月 1 天"
   },
   "novel": {
     "novel": "小說",
@@ -322,6 +325,7 @@
       "標籤收藏",
       "信箱",
       "連載追蹤",
+      "網路測速",
       "標籤屏蔽",
       "成就任務",
       "簽到活動",
@@ -399,6 +403,21 @@
       "取消",
       "完成"
     ],
+    "progress_export": "匯出觀看進度",
+    "progress_import": "匯入觀看進度",
+    "progress_import_title": "匯入觀看進度",
+    "progress_import_hint": "將覆蓋目前的觀看進度，且無法復原。請輸入你的帳號密碼確認。",
+    "progress_password_placeholder": "請輸入帳號密碼",
+    "progress_export_done": "已匯出 {{works}} 部作品、{{chapters}} 個章節紀錄：{{where}}",
+    "progress_import_done": "已匯入 {{works}} 部作品、{{chapters}} 個章節紀錄",
+    "progress_nothing_to_export": "目前沒有可匯出的觀看進度",
+    "progress_err_no_permission": "需要儲存權限才能匯出檔案，請在系統設定允許後重試",
+    "progress_err_no_account": "找不到已儲存的帳號資料，請先登出後重新登入一次",
+    "progress_err_wrong_password": "密碼不正確",
+    "progress_err_decrypt": "解密失敗，請確認密碼與匯出時相同",
+    "progress_err_format": "檔案格式不正確，請選擇由本 App 匯出的檔案",
+    "progress_err_other_account": "這份檔案不屬於目前登入的帳號",
+    "progress_err_failed": "操作失敗，請稍後再試",
     "total_watched": "目前共觀看了",
     "this_comic": "本漫畫",
     "unread": "標記未讀",
@@ -425,12 +444,13 @@
     "tag_block_level_locked": "等級 8 開放使用",
     "speed_test_title": "網路測速",
     "speed_test_current_ip": "當前 IP 位址：",
+    "refresh_ip": "刷新",
     "speed_test_querying": "查詢中...",
-    "speed_test_current_latency": "當前 API 延遲／吞吐量：",
+    "speed_test_current_latency": "上傳/下載速率：",
     "speed_test_testing": "測速中...",
     "speed_test_unreachable": "無法連線",
     "speed_test_not_tested": "尚未測速",
-    "speed_test_image_ready_time": "圖片就緒時間：",
+    "speed_test_image_ready_time": "圖源順暢度：",
     "speed_test_image_load_fail": "無法載入",
     "speed_test_current_quality": "當前線路連線品質：",
     "speed_test_smooth": "順暢",
@@ -504,7 +524,19 @@
     "back": "返回",
     "logout": "會員登出",
     "logoutConfirm": "確定要登出帳號嗎？",
-    "logoutCancel": "沒事"
+    "logoutCancel": "沒事",
+    "verify_email_title": "信箱驗證碼驗證",
+    "enter_verification_code": "請輸入收到的信箱驗證碼",
+    "verification_code": "驗證碼",
+    "verify": "驗證",
+    "have_verification_code": "已收到驗證碼？點此輸入",
+    "email_code_sent_hint": "驗證碼已寄至你的信箱（非點擊連結）。請取得後回到本頁輸入驗證碼完成驗證；若已關閉視窗，請點「已收到驗證碼？點此輸入」。",
+    "resend_hint": "輸入收到驗證碼開通帳號，若提示逾時請重新發送驗證碼",
+    "resend_verification_code": "重新發送驗證碼",
+    "resend_no_email_hint": "沒收到EMAIL驗證碼？",
+    "resend_verification_code_desc": "請輸入註冊時的帳號與密碼，以重新發送驗證碼信件，記得查看垃圾信箱",
+    "send_verification_email": "發送EMAIL",
+    "resend_countdown": "{{seconds}} 秒後可重新發送"
   },
   "snack": {
     "unselected_items": "未選取項目",
@@ -538,6 +570,19 @@
     "devtools_blocked": "已封鎖。請關閉開發者工具後重新載入！",
     "confirm_exit_app": "確定要離開 App 嗎？",
     "confirm_close_cos_chat": "確定關閉 cos 私聊嗎？"
+  },
+  "crash": {
+    "title": "畫面載入失敗",
+    "chunk_hint": "可能是更新後舊檔案失效或網路不穩，重新載入即可。",
+    "generic_hint": "重新載入通常就能解決，或回首頁重新進入。",
+    "reload": "重新載入",
+    "go_home": "回首頁"
+  },
+  "notfound": {
+    "title": "找不到這個頁面",
+    "hint": "連結可能已經失效，或是網址輸入錯誤。",
+    "go_back": "返回上一頁",
+    "go_home": "回首頁"
   },
   "http": {
     "getError": "Get 發生錯誤，請回報管理員。\n\n現在時間",
@@ -577,16 +622,7 @@
     "series_movies": "系列影片",
     "originalManga": "原作漫畫",
     "movies": "部影片",
-    "related_movies": "推薦影片",
-    "incx": "海角亂倫",
-    "self": "日韓放映",
-    "yiji": "一姬推薦",
-    "dytw": "抖音推特",
-    "glam": "美女寫真",
-    "nrec": "裸聊錄屏",
-    "kstr": "韓國主播",
-    "goss": "爆料吃瓜",
-    "oddw": "奇趣百科"
+    "related_movies": "推薦影片"
   },
   "games": {
     "search_placeholder": "輸入搜尋內容...",
@@ -708,8 +744,10 @@
         "全程加密傳輸"
       ],
       "reminder_title": "JM娘小提醒",
-      "reminder_text_line1": "支付渠道偶爾會有點忙～",
-      "reminder_text_line2": "如果沒有成功，請再試2～3次，或換個支付方式試試哦！",
+      "reminder_text_line1": "支付通道偶爾會有點忙～",
+      "reminder_text_line2": "如果支付失敗，建議稍等3分鐘再試，或換個支付方式試試哦！",
+      "reminder_text_line3": "選擇信用卡支付時，需額外支付8%手續費，感謝你的理解與支持，JM娘會繼續努力，為你帶來更好的閱讀體驗～",
+      "credit_card_fee_badge": "需自付8%手續費",
       "methods": {
         "unionpay": "銀聯卡",
         "alipay4": "支付寶4",
@@ -763,6 +801,7 @@
     "captcha_label": "驗證碼",
     "captcha_refresh": "換一張驗證圖",
     "captcha_placeholder": "請輸入驗證碼",
+    "captcha_loading": "驗證碼產生中...",
     "submit": "送出",
     "submit_success": "回報成功",
     "submit_success_notice": "您的回報已成功送出，客服人員將盡快為您確認並處理。\n\n處理完成後，我們會再通知您；若有需要進一步提供資訊，也會主動與您聯繫。\n\n感謝您的耐心等候與支持！",

@@ -269,7 +269,10 @@
     "full_check_in_reward": "全签奖励",
     "monthly_check_in_bonus": "＊整月签到，可额外获得色图",
     "annual_full_check_in_rewards": "历年全签礼",
-    "start_this_month_check_in": "开启本月签到"
+    "start_this_month_check_in": "开启本月签到",
+    "makeup_check_in_count": "补签到({{used}}/{{limit}})",
+    "select_makeup_date": "请选择本月要补签的日期",
+    "watch_ad_countdown": "还需观看 {{seconds}} 秒，即可补签本月 1 天"
   },
   "novel": {
     "novel": "小说",
@@ -322,6 +325,7 @@
       "标签收藏",
       "信箱",
       "连载追踪",
+      "网络测速",
       "标签屏蔽",
       "成就任务",
       "签到活动",
@@ -399,6 +403,21 @@
       "取消",
       "完成"
     ],
+    "progress_export": "导出观看进度",
+    "progress_import": "导入观看进度",
+    "progress_import_title": "导入观看进度",
+    "progress_import_hint": "将覆盖当前的观看进度，且无法恢复。请输入你的账号密码确认。",
+    "progress_password_placeholder": "请输入账号密码",
+    "progress_export_done": "已导出 {{works}} 部作品、{{chapters}} 个章节记录：{{where}}",
+    "progress_import_done": "已导入 {{works}} 部作品、{{chapters}} 个章节记录",
+    "progress_nothing_to_export": "目前没有可导出的观看进度",
+    "progress_err_no_permission": "需要存储权限才能导出文件，请在系统设置允许后重试",
+    "progress_err_no_account": "找不到已保存的账号数据，请先登出后重新登录一次",
+    "progress_err_wrong_password": "密码不正确",
+    "progress_err_decrypt": "解密失败，请确认密码与导出时相同",
+    "progress_err_format": "文件格式不正确，请选择由本 App 导出的文件",
+    "progress_err_other_account": "这份文件不属于当前登录的账号",
+    "progress_err_failed": "操作失败，请稍后再试",
     "total_watched": "目前共观看了",
     "this_comic": "本漫画",
     "unread": "标记未读",
@@ -425,12 +444,13 @@
     "tag_block_level_locked": "等级 8 开放使用",
     "speed_test_title": "网络测速",
     "speed_test_current_ip": "当前 IP 地址：",
+    "refresh_ip": "刷新",
     "speed_test_querying": "查询中...",
-    "speed_test_current_latency": "当前 API 延迟／吞吐量：",
+    "speed_test_current_latency": "上传/下载速率：",
     "speed_test_testing": "测速中...",
     "speed_test_unreachable": "无法连线",
     "speed_test_not_tested": "尚未测速",
-    "speed_test_image_ready_time": "图片就绪时间：",
+    "speed_test_image_ready_time": "图源顺畅度：",
     "speed_test_image_load_fail": "无法载入",
     "speed_test_current_quality": "当前线路连线品质：",
     "speed_test_smooth": "顺畅",
@@ -503,7 +523,19 @@
     "back": "返回",
     "logout": "会员登出",
     "logoutConfirm": "确定要登出账号吗？",
-    "logoutCancel": "没事"
+    "logoutCancel": "没事",
+    "verify_email_title": "邮箱验证码验证",
+    "enter_verification_code": "请输入收到的邮箱验证码",
+    "verification_code": "验证码",
+    "verify": "验证",
+    "have_verification_code": "已收到验证码？点此输入",
+    "email_code_sent_hint": "验证码已寄至你的邮箱（非点击链接）。请取得后回到本页输入验证码完成验证；若已关闭窗口，请点「已收到验证码？点此输入」。",
+    "resend_hint": "输入收到的验证码开通账号，若提示逾时请重新发送验证码",
+    "resend_verification_code": "重新发送验证码",
+    "resend_no_email_hint": "没收到EMAIL验证码？",
+    "resend_verification_code_desc": "请输入注册时的账号与密码，以重新发送验证码邮件，记得查看垃圾邮箱",
+    "send_verification_email": "发送EMAIL",
+    "resend_countdown": "{{seconds}} 秒后可重新发送"
   },
   "snack": {
     "unselected_items": "未选择项目",
@@ -537,6 +569,19 @@
     "devtools_blocked": "已封锁。请关闭开发者工具后重新载入！",
     "confirm_exit_app": "确定要离开 App 吗？",
     "confirm_close_cos_chat": "确定关闭 cos 私聊吗？"
+  },
+  "crash": {
+    "title": "画面加载失败",
+    "chunk_hint": "可能是更新后旧文件失效或网络不稳，重新加载即可。",
+    "generic_hint": "重新加载通常就能解决，或回首页重新进入。",
+    "reload": "重新加载",
+    "go_home": "回首页"
+  },
+  "notfound": {
+    "title": "找不到这个页面",
+    "hint": "链接可能已经失效，或是网址输入错误。",
+    "go_back": "返回上一页",
+    "go_home": "回首页"
   },
   "http": {
     "getError": "Get 发生错误，请联系管理员。\n\n现在时间",
@@ -576,16 +621,7 @@
     "series_movies": "系列影片",
     "originalManga": "原作漫画",
     "movies": "部影片",
-    "related_movies": "推荐影片",
-    "incx": "海角乱伦",
-    "self": "日韩放映",
-    "yiji": "一姬推荐",
-    "dytw": "抖音推特",
-    "glam": "美女写真",
-    "nrec": "裸聊录屏",
-    "kstr": "韩国主播",
-    "goss": "爆料吃瓜",
-    "oddw": "奇趣百科"
+    "related_movies": "推荐影片"
   },
   "games": {
     "search_placeholder": "输入搜索内容...",
@@ -707,8 +743,10 @@
         "全程加密传输"
       ],
       "reminder_title": "JM娘小提醒",
-      "reminder_text_line1": "支付渠道偶尔会有点忙～",
-      "reminder_text_line2": "如果没有成功，请再试2～3次，或换个支付方式试试哦！",
+      "reminder_text_line1": "支付通道偶尔会有点忙～",
+      "reminder_text_line2": "如果支付失败，建议稍等3分钟再试，或换个支付方式试试哦！",
+      "reminder_text_line3": "选择信用卡支付时，需额外支付8%手续费，感谢你的理解与支持，JM娘会继续努力，为你带来更好的阅读体验～",
+      "credit_card_fee_badge": "需自付8%手续费",
       "methods": {
         "unionpay": "银联卡",
         "alipay4": "支付宝4",
@@ -762,6 +800,7 @@
     "captcha_label": "验证码",
     "captcha_refresh": "换一张验证图",
     "captcha_placeholder": "请输入验证码",
+    "captcha_loading": "验证码生成中...",
     "submit": "送出",
     "submit_success": "回报成功",
     "submit_success_notice": "您的回报已成功送出，客服人员将尽快为您确认并处理。\n\n处理完成后，我们会再通知您；若有需要进一步提供信息，也会主动与您联系。\n\n感谢您的耐心等候与支持！",
