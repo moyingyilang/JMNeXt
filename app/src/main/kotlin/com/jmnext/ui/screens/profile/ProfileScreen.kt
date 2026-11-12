@@ -1,5 +1,6 @@
 package com.jmnext.ui.screens.profile
 
+import androidx.compose.ui.res.stringResource
 import com.jmnext.R
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.draw.clip
@@ -159,7 +160,7 @@ fun ProfileScreen(
     val auth by repo.auth.state.collectAsStateWithLifecycle()
 
     Column(modifier = modifier.fillMaxSize()) {
-        GlassTopBar(title = "我的")
+        GlassTopBar(title = stringResource(R.string.profile_title))
 
         LazyColumn(
             modifier = Modifier.fillMaxSize(),
@@ -225,26 +226,26 @@ private fun AccountCard(
     onOpenTags: () -> Unit,
 ) {
     val c = JmTheme.colors
-    SettingCard(title = "账号") {
+    SettingCard(title = stringResource(R.string.profile_account)) {
         if (!loggedIn) {
             Text(
-                text = "未登录",
+                text = stringResource(R.string.profile_not_logged_in),
                 style = MaterialTheme.typography.bodyLarge,
                 color = c.text,
             )
             Text(
-                text = "收藏与观看历史绑定账号，登录后可在本机同步查看。",
+                text = stringResource(R.string.profile_account_desc),
                 style = MaterialTheme.typography.labelSmall,
                 color = c.textTertiary,
                 modifier = Modifier.padding(top = Spacing.xxs),
             )
             TextButton(onClick = onLogin) {
-                Text("登录 / 注册", color = c.accent)
+                Text(stringResource(R.string.profile_login_register), color = c.accent)
             }
         } else {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Text(
-                    text = member?.displayName ?: "已登录",
+                    text = member?.displayName ?: stringResource(R.string.profile_logged_in),
                     style = MaterialTheme.typography.titleMedium,
                     color = c.text,
                     modifier = Modifier.weight(1f),
@@ -256,10 +257,10 @@ private fun AccountCard(
                 // DTO 搬到 :shared 之后，跨模块的公开 val 属性不能再被智能转换，
                 // 必须先取到局部变量（编译器会报 SMARTCAST_IMPOSSIBLE）
                 val coin = info.coin
-                if (coin != null) InfoRow("金币", coin)
-                InfoRow("等级", info.level.toString())
+                if (coin != null) InfoRow(stringResource(R.string.profile_coin), coin)
+                InfoRow(stringResource(R.string.profile_level), info.level.toString())
                 // 官方此字段表示免广告会员；本应用本身无广告，这里只作为会员状态展示
-                InfoRow("免广告特权", if (info.adFree) "已开通" else "未开通")
+                InfoRow(stringResource(R.string.profile_adfree), if (info.adFree) stringResource(R.string.profile_adfree_on) else stringResource(R.string.profile_adfree_off))
             }
 
             // 四个入口**分成两行两列**，而不是挤在一行里按 weight 平分：
@@ -269,8 +270,8 @@ private fun AccountCard(
                 modifier = Modifier.fillMaxWidth().padding(top = Spacing.sm),
                 horizontalArrangement = Arrangement.spacedBy(Spacing.xs),
             ) {
-                EntryButton("我的收藏", Icons.Filled.BookmarkBorder, onOpenFavorites)
-                EntryButton("观看历史", Icons.Filled.History, onOpenHistory)
+                EntryButton(stringResource(R.string.profile_my_favorites), Icons.Filled.BookmarkBorder, onOpenFavorites)
+                EntryButton(stringResource(R.string.profile_history), Icons.Filled.History, onOpenHistory)
             }
             Row(
                 modifier = Modifier.fillMaxWidth().padding(top = Spacing.xs),
@@ -290,9 +291,9 @@ private fun AccountCard(
                 }
                 // 未读角标挂在"通知"上（语义属于通知），"我的追更"保持干净：
                 // 两个入口都带同一个数字会让人以为是两件不同的事
-                EntryButton("通知", Icons.Filled.Notifications, onOpenNotifications, badge = unread)
-                EntryButton("我的追更", Icons.Filled.NotificationsNone, onOpenTracking)
-                EntryButton("标签收藏", Icons.Filled.BookmarkAdd, onOpenTags)
+                EntryButton(stringResource(R.string.profile_notifications), Icons.Filled.Notifications, onOpenNotifications, badge = unread)
+                EntryButton(stringResource(R.string.profile_tracking), Icons.Filled.NotificationsNone, onOpenTracking)
+                EntryButton(stringResource(R.string.profile_tag_favorites), Icons.Filled.BookmarkAdd, onOpenTags)
             }
 
             Row(
@@ -306,7 +307,7 @@ private fun AccountCard(
                     modifier = Modifier.size(16.dp),
                 )
                 TextButton(onClick = onLogout) {
-                    Text("退出登录", color = c.textSecondary)
+                    Text(stringResource(R.string.profile_logout), color = c.textSecondary)
                 }
             }
         }
@@ -370,10 +371,10 @@ private fun BlockCard(onOpenBlock: () -> Unit) {
         ?: remember { mutableStateOf(BlockRules()) }
     val total = rules.words.size + rules.categories.size + rules.tags.size
 
-    SettingCard(title = "内容屏蔽") {
-        InfoRow("关键词", "${rules.words.size} 条")
-        InfoRow("分类", "${rules.categories.size} 条")
-        InfoRow("标签", "${rules.tags.size} 条")
+    SettingCard(title = stringResource(R.string.profile_block_title)) {
+        InfoRow(stringResource(R.string.profile_words), stringResource(R.string.profile_block_count, rules.words.size))
+        InfoRow(stringResource(R.string.profile_categories), stringResource(R.string.profile_block_count, rules.categories.size))
+        InfoRow(stringResource(R.string.profile_tags), stringResource(R.string.profile_block_count, rules.tags.size))
         Text(
             text = if (total == 0) {
                 "还没有屏蔽任何内容。可以按作品名、作者、分类或标签屏蔽，命中即从列表中隐藏。"
@@ -401,7 +402,7 @@ private fun BlockCard(onOpenBlock: () -> Unit) {
                     modifier = Modifier.size(18.dp),
                 )
                 Text(
-                    text = "管理屏蔽名单",
+                    text = stringResource(R.string.profile_manage_block),
                     style = MaterialTheme.typography.bodyMedium,
                     color = c.text,
                 )
@@ -429,8 +430,8 @@ private fun AppearanceCard(
     onUiOptionsChange: (UiOptions) -> Unit,
 ) {
     val c = JmTheme.colors
-    SettingCard(title = "外观") {
-        Text("风格", style = MaterialTheme.typography.bodyLarge, color = c.text)
+    SettingCard(title = stringResource(R.string.profile_appearance)) {
+        Text(stringResource(R.string.profile_style), style = MaterialTheme.typography.bodyLarge, color = c.text)
         Text(
             text = themeStyle.tagline,
             style = MaterialTheme.typography.labelSmall,
@@ -470,7 +471,7 @@ private fun AppearanceCard(
         }
 
         Text(
-            text = "主题",
+            text = stringResource(R.string.profile_theme),
             style = MaterialTheme.typography.bodyLarge,
             color = c.text,
             modifier = Modifier.padding(top = Spacing.lg),
@@ -495,9 +496,9 @@ private fun AppearanceCard(
                         )
                         Text(
                             text = when (mode) {
-                                ThemeMode.System -> "跟随系统"
-                                ThemeMode.Light -> "浅色"
-                                ThemeMode.Dark -> "深色"
+                                ThemeMode.System -> stringResource(R.string.profile_theme_system)
+                                ThemeMode.Light -> stringResource(R.string.profile_theme_light)
+                                ThemeMode.Dark -> stringResource(R.string.profile_theme_dark)
                             },
                             style = MaterialTheme.typography.labelSmall,
                         )
@@ -511,7 +512,7 @@ private fun AppearanceCard(
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Column(Modifier.weight(1f).padding(end = Spacing.md)) {
-                Text("动态取色", style = MaterialTheme.typography.bodyLarge, color = c.text)
+                Text(stringResource(R.string.profile_dynamic_color), style = MaterialTheme.typography.bodyLarge, color = c.text)
                 Text(
                     text = "取系统壁纸的配色（Android 12+）。Material 风格会整份跟随系统；" +
                         "另外几套玻璃只取强调色，层次仍按本站配色。",
@@ -538,7 +539,7 @@ private fun AppearanceCard(
             if (granted) SerialNotify.enable(notifyContext) else SerialNotify.disable(notifyContext)
         }
 
-        SettingCard(title = "连载更新提醒") {
+        SettingCard(title = stringResource(R.string.profile_serial_notify)) {
             OptionSwitch(
                 title = "你追的连载更新时通知我",
                 desc = "每半天左右让系统挑个合适时机检查一次，有变化才提醒；同一批更新只提醒一次。" +

@@ -26,4 +26,37 @@
     <string name="about_link_issues">问题反馈</string>
     <string name="about_license_title">许可</string>
     <string name="about_license">本项目以 AGPL-3.0-only 授权。禁漫、JMComic 及相关内容的权利归其权利人所有；本应用与官方无关，仅提供客户端实现。</string>
+
+    <!-- 我的页（第一批：标题与主要按钮） -->
+    <string name="profile_title">我的</string>
+    <string name="profile_account">账号</string>
+    <string name="profile_not_logged_in">未登录</string>
+    <string name="profile_account_desc">收藏与观看历史绑定账号，登录后可在本机同步查看。</string>
+    <string name="profile_login_register">登录 / 注册</string>
+    <string name="profile_logged_in">已登录</string>
+    <string name="profile_coin">金币</string>
+    <string name="profile_level">等级</string>
+    <string name="profile_adfree">免广告特权</string>
+    <string name="profile_adfree_on">已开通</string>
+    <string name="profile_adfree_off">未开通</string>
+    <string name="profile_my_favorites">我的收藏</string>
+    <string name="profile_history">观看历史</string>
+    <string name="profile_notifications">通知</string>
+    <string name="profile_tracking">我的追更</string>
+    <string name="profile_tag_favorites">标签收藏</string>
+    <string name="profile_logout">退出登录</string>
+    <string name="profile_block_title">内容屏蔽</string>
+    <string name="profile_words">关键词</string>
+    <string name="profile_categories">分类</string>
+    <string name="profile_tags">标签</string>
+    <string name="profile_block_count">%1 条</string>
+    <string name="profile_manage_block">管理屏蔽名单</string>
+    <string name="profile_appearance">外观</string>
+    <string name="profile_style">风格</string>
+    <string name="profile_theme">主题</string>
+    <string name="profile_theme_system">跟随系统</string>
+    <string name="profile_theme_light">浅色</string>
+    <string name="profile_theme_dark">深色</string>
+    <string name="profile_dynamic_color">动态取色</string>
+    <string name="profile_serial_notify">连载更新提醒</string>
 </resources>
