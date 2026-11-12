@@ -26,9 +26,9 @@ JMComic 的第三方客户端，Kotlin 和 Compose 写的。Android 是主项目
 [![Downloads](https://img.shields.io/github/downloads/moyingyilang/JMNeXt/total?label=总下载)](https://github.com/moyingyilang/JMNeXt/releases)
 [![License](https://img.shields.io/badge/license-AGPL--3.0--only-blue)](./LICENSE)
 
-当前最新版本为 **[2.2.3](https://github.com/moyingyilang/JMNeXt/releases/tag/v2.2.3)**（新图标与关于页）。
+当前最新版本为 **[2.2.4](https://github.com/moyingyilang/JMNeXt/releases/tag/v2.2.4)**（跟官方 2.1.13）。
 
-2.2.3 一共 21 个附件：15 个标准包 + 2 个 Android 追踪包 + 4 个桌面调试包。
+2.2.4 一共 21 个附件：15 个标准包 + 2 个 Android 追踪包 + 4 个桌面调试包。
 
 | 平台 | 架构 | 格式 | 大小 | 状态 |
 | --- | --- | --- | --- | --- |
