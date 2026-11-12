@@ -1,4 +1,6 @@
 package com.jmnext.ui.screens.detail
+import androidx.compose.ui.res.stringResource
+import com.jmnext.R
 import com.jmnext.data.prefs.FavoriteEntry
 import com.jmnext.data.prefs.FavoriteStore
 
@@ -628,12 +630,12 @@ fun DetailScreen(
     Column(modifier = modifier.fillMaxSize().jmVanishWhenLeaving()) {
         GlassTopBar(
             title = state.detail?.name?.takeIf { it.isNotBlank() }
-                ?: initialTitle.ifBlank { "作品详情" },
+                ?: initialTitle.ifBlank { stringResource(R.string.detail_title_placeholder) },
             navigation = {
                 IconButton(onClick = onBack) {
                     Icon(
                         imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                        contentDescription = "返回",
+                        contentDescription = stringResource(R.string.detail_back),
                         tint = c.accent,
                     )
                 }
@@ -730,7 +732,7 @@ fun DetailScreen(
 
     if (state.folderPickerVisible) {
         FolderPickerDialog(
-            title = "移入收藏夹",
+            title = stringResource(R.string.detail_move_to_favorites),
             folders = state.folders,
             onDismiss = { vm.dismissFolderPicker() },
             onPick = { folder -> vm.moveToFolder(folder.folderId) },
@@ -796,7 +798,7 @@ private fun DetailHeader(
             )
             if (author.isNotEmpty()) {
                 Text(
-                    text = "作者：$author",
+                    text = stringResource(R.string.detail_author_fmt, author),
                     style = MaterialTheme.typography.bodyMedium,
                     color = if (blockedAuthor) c.textTertiary else c.textSecondary,
                     maxLines = 1,
@@ -850,7 +852,7 @@ private fun DetailHeader(
                 }
             }
             addTime?.takeIf { it.isNotBlank() }?.let {
-                Text("更新：$it", style = MaterialTheme.typography.labelSmall, color = c.textTertiary)
+                Text(stringResource(R.string.detail_updated_fmt, it), style = MaterialTheme.typography.labelSmall, color = c.textTertiary)
             }
         }
     }
@@ -989,7 +991,7 @@ private fun DetailContent(
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
                         Text(
-                            text = "标签：点开搜索，长按屏蔽",
+                            text = stringResource(R.string.detail_tags_hint),
                             style = MaterialTheme.typography.labelSmall,
                             color = c.textTertiary,
                         )
@@ -1042,7 +1044,7 @@ private fun DetailContent(
                         )
                         blockedTags.firstOrNull()?.let { tag ->
                             TextButton(onClick = { onUnblockTag(tag) }) {
-                                Text("不再屏蔽", color = c.accent)
+                                Text(stringResource(R.string.detail_unblock), color = c.accent)
                             }
                         }
                     }
@@ -1087,13 +1089,13 @@ private fun DetailContent(
                         modifier = Modifier.size(18.dp),
                     )
                     Text(
-                        text = "下载整部作品",
+                        text = stringResource(R.string.detail_download_album),
                         style = MaterialTheme.typography.bodyMedium,
                         color = c.text,
                         modifier = Modifier.weight(1f).padding(start = Spacing.sm),
                     )
                     Text(
-                        text = "交给系统下载器",
+                        text = stringResource(R.string.detail_download_system),
                         style = MaterialTheme.typography.labelSmall,
                         color = c.textTertiary,
                     )
@@ -1120,7 +1122,7 @@ private fun DetailContent(
                             modifier = Modifier.size(18.dp),
                         )
                         Text(
-                            text = "收藏这些标签",
+                            text = stringResource(R.string.detail_favorite_tags),
                             style = MaterialTheme.typography.bodyMedium,
                             color = c.text,
                             modifier = Modifier.weight(1f).padding(start = Spacing.sm),
@@ -1149,7 +1151,7 @@ private fun DetailContent(
                         modifier = Modifier.size(20.dp),
                     )
                     Text(
-                        text = "评论",
+                        text = stringResource(R.string.detail_comments),
                         style = MaterialTheme.typography.titleMedium,
                         color = c.text,
                         modifier = Modifier.weight(1f).padding(start = Spacing.sm),
@@ -1204,7 +1206,7 @@ private fun DetailContent(
         if (detail.series.size > 1) {
             item(key = "chapters-head") {
                 Text(
-                    text = "章节目录（${detail.series.size}）",
+                    text = stringResource(R.string.detail_chapters_fmt, detail.series.size),
                     style = MaterialTheme.typography.titleLarge,
                     color = c.text,
                     modifier = Modifier.padding(horizontal = Spacing.lg),
@@ -1224,7 +1226,7 @@ private fun DetailContent(
         if (detail.relatedList.isNotEmpty()) {
             item(key = "related-head") {
                 Text(
-                    text = "相关推荐",
+                    text = stringResource(R.string.detail_related),
                     style = MaterialTheme.typography.titleLarge,
                     color = c.text,
                     modifier = Modifier.padding(horizontal = Spacing.lg),
@@ -1310,7 +1312,7 @@ private fun ChapterPager(
                 ) {
                     Icon(
                         Icons.Filled.ChevronLeft,
-                        contentDescription = "上一页",
+                        contentDescription = stringResource(R.string.detail_prev_page),
                         tint = if (safePage > 0) c.accent else c.textTertiary,
                         modifier = Modifier.size(20.dp),
                     )
@@ -1324,7 +1326,7 @@ private fun ChapterPager(
                 ) {
                     Icon(
                         Icons.Filled.ChevronRight,
-                        contentDescription = "下一页",
+                        contentDescription = stringResource(R.string.detail_next_page),
                         tint = if (safePage < pageCount - 1) c.accent else c.textTertiary,
                         modifier = Modifier.size(20.dp),
                     )

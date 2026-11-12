@@ -224,4 +224,21 @@
     <string name="auth_wait">请稍候…</string>
     <string name="auth_back">返回</string>
     <string name="auth_keystore_note">登录后会带上服务端签发的凭证，用于收藏与观看历史。凭证经 Android Keystore 加密后保存在应用私有目录，不会明文落盘。</string>
+
+    <!-- 详情 -->
+    <string name="detail_title_placeholder">作品详情</string>
+    <string name="detail_back">返回</string>
+    <string name="detail_move_to_favorites">移入收藏夹</string>
+    <string name="detail_author_fmt">作者：%1</string>
+    <string name="detail_updated_fmt">更新：%1</string>
+    <string name="detail_tags_hint">标签：点开搜索，长按屏蔽</string>
+    <string name="detail_unblock">不再屏蔽</string>
+    <string name="detail_download_album">下载整部作品</string>
+    <string name="detail_download_system">交给系统下载器</string>
+    <string name="detail_favorite_tags">收藏这些标签</string>
+    <string name="detail_comments">评论</string>
+    <string name="detail_chapters_fmt">章节目录（%1）</string>
+    <string name="detail_related">相关推荐</string>
+    <string name="detail_prev_page">上一页</string>
+    <string name="detail_next_page">下一页</string>
 </resources>

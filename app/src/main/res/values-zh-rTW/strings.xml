@@ -214,4 +214,20 @@
     <string name="auth_wait">請稍候…</string>
     <string name="auth_back">返回</string>
     <string name="auth_keystore_note">登入後會帶上伺服器簽發的憑證，用於收藏與觀看歷史。憑證經 Android Keystore 加密後保存在應用私有目錄，不會明文落盤。</string>
+
+    <string name="detail_title_placeholder">作品詳情</string>
+    <string name="detail_back">返回</string>
+    <string name="detail_move_to_favorites">移至收藏夾</string>
+    <string name="detail_author_fmt">作者：%1</string>
+    <string name="detail_updated_fmt">更新：%1</string>
+    <string name="detail_tags_hint">標籤：點開搜尋，長按封鎖</string>
+    <string name="detail_unblock">不再封鎖</string>
+    <string name="detail_download_album">下載整部作品</string>
+    <string name="detail_download_system">交給系統下載器</string>
+    <string name="detail_favorite_tags">收藏這些標籤</string>
+    <string name="detail_comments">評論</string>
+    <string name="detail_chapters_fmt">章節目錄（%1）</string>
+    <string name="detail_related">相關推薦</string>
+    <string name="detail_prev_page">上一頁</string>
+    <string name="detail_next_page">下一頁</string>
 </resources>
