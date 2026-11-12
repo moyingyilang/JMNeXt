@@ -514,8 +514,7 @@ private fun AppearanceCard(
             Column(Modifier.weight(1f).padding(end = Spacing.md)) {
                 Text(stringResource(R.string.profile_dynamic_color), style = MaterialTheme.typography.bodyLarge, color = c.text)
                 Text(
-                    text = "取系统壁纸的配色（Android 12+）。Material 风格会整份跟随系统；" +
-                        "另外几套玻璃只取强调色，层次仍按本站配色。",
+                    text = stringResource(R.string.appearance_dynamic_color_desc),
                     style = MaterialTheme.typography.labelSmall,
                     color = c.textTertiary,
                 )
@@ -874,8 +873,11 @@ private fun WallpaperCard() {
                 }
                 Text(
                     text = when (val iv = wall.intervalSeconds) {
-                        0 -> "自动更换：关闭"
-                        else -> "自动更换：每 " + (if (iv < 60) iv.toString() + " 秒" else if (iv % 3600 == 0) (iv / 3600).toString() + " 小时" else (iv / 60).toString() + " 分钟")
+                        0 -> stringResource(R.string.appearance_wallpaper_auto_off)
+                        else -> stringResource(
+                            R.string.appearance_wallpaper_auto_every,
+                            if (iv < 60) "$iv 秒" else if (iv % 3600 == 0) "${iv / 3600} 小时" else "${iv / 60} 分钟",
+                        )
                     },
                     style = MaterialTheme.typography.labelSmall,
                     color = c.textTertiary,
@@ -900,10 +902,10 @@ private fun WallpaperCard() {
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 TextButton(onClick = { scope.launch { store?.clearCache() } }) {
-                    Text("清除壁纸缓存", color = c.accent)
+                    Text(stringResource(R.string.appearance_wallpaper_clear_cache), color = c.accent)
                 }
                 Text(
-                    text = "清掉已缓存的候选图，立刻重新取一批",
+                    text = stringResource(R.string.appearance_wallpaper_clear_cache_desc),
                     style = MaterialTheme.typography.labelSmall,
                     color = c.textTertiary,
                     modifier = Modifier.weight(1f),
@@ -913,7 +915,7 @@ private fun WallpaperCard() {
 
         if (wall.mode != WallpaperMode.Off) {
             Text(
-                text = "模糊 ${wall.blur}",
+                text = stringResource(R.string.appearance_wallpaper_blur_fmt, wall.blur),
                 style = MaterialTheme.typography.labelSmall,
                 color = c.textSecondary,
                 modifier = Modifier.padding(top = Spacing.md),
@@ -925,7 +927,7 @@ private fun WallpaperCard() {
                 steps = 23,
             )
             Text(
-                text = "压暗 ${"%.2f".format(wall.dim)}　（壁纸越花越需要压暗，玻璃才压得住文字）",
+                text = stringResource(R.string.appearance_wallpaper_dim_fmt, "%.2f".format(wall.dim)),
                 style = MaterialTheme.typography.labelSmall,
                 color = c.textSecondary,
             )

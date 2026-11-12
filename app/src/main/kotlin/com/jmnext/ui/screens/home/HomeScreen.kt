@@ -1,4 +1,5 @@
 package com.jmnext.ui.screens.home
+import com.jmnext.R
 import androidx.compose.ui.res.stringResource
 
 import com.jmnext.ui.components.SectionTitle
@@ -93,13 +94,13 @@ fun HomeScreen(
     Column(modifier = modifier.fillMaxSize()) {
         GlassTopBar(
             title = stringResource(com.jmnext.R.string.app_name),
-            subtitle = if (state.loading) "加载中…" else null,
+            subtitle = if (state.loading) stringResource(R.string.home_loading) else null,
             actions = {
                 // 周刊入口（官方在顶栏放的就是日历图标）
                 IconButton(onClick = onOpenWeek) {
                     Icon(
                         imageVector = Icons.Filled.CalendarMonth,
-                        contentDescription = "周刊",
+                        contentDescription = stringResource(R.string.home_weekly),
                         tint = JmTheme.colors.accent,
                         modifier = Modifier.size(22.dp),
                     )
@@ -107,7 +108,7 @@ fun HomeScreen(
                 IconButton(onClick = { vm.refresh() }) {
                     Icon(
                         imageVector = Icons.Filled.Refresh,
-                        contentDescription = "刷新",
+                        contentDescription = stringResource(R.string.home_refresh),
                         tint = JmTheme.colors.accent,
                         modifier = Modifier.size(22.dp),
                     )
@@ -115,7 +116,7 @@ fun HomeScreen(
                 IconButton(onClick = onToggleTheme) {
                     Icon(
                         imageVector = if (dark) Icons.Filled.LightMode else Icons.Filled.DarkMode,
-                        contentDescription = if (dark) "切换到浅色" else "切换到深色",
+                        contentDescription = if (dark) stringResource(R.string.home_to_light) else stringResource(R.string.home_to_dark),
                         tint = JmTheme.colors.accent,
                         modifier = Modifier.size(22.dp),
                     )
@@ -313,7 +314,7 @@ private fun HomeContent(
                         onClick = { visibleSections += SECTION_STEP },
                     ) {
                         Text(
-                            text = "展开更多分区（还有 $remaining 个）",
+                            text = stringResource(R.string.home_expand_more, remaining),
                             style = MaterialTheme.typography.labelSmall,
                             color = JmTheme.colors.accent,
                             modifier = Modifier.padding(
@@ -327,7 +328,7 @@ private fun HomeContent(
         }
 
         // 最新上架
-        item(key = "latest-head") { SectionTitle("最新上架") }
+        item(key = "latest-head") { SectionTitle(stringResource(R.string.home_latest)) }
 
         if (state.latestError != null && state.latest.isEmpty()) {
             item { ErrorBox(message = state.latestError) }
@@ -397,7 +398,7 @@ private fun SectionTitle(
             // 只在**真的有**更新时才出现：没有更新的日子这一行保持干净，
             // 否则每天都挂着一个「0 部更新」，提示很快就没人看了
             Text(
-                text = "你追的 $updatedCount 部有更新",
+                text = stringResource(R.string.home_tracking_updated, updatedCount),
                 style = MaterialTheme.typography.labelSmall,
                 color = c.textOnAccent,
                 modifier = Modifier
@@ -414,7 +415,7 @@ private fun SectionTitle(
                 onClick = onMore,
             ) {
                 Text(
-                    text = "更多",
+                    text = stringResource(R.string.home_more),
                     style = MaterialTheme.typography.labelSmall,
                     color = c.accent,
                     modifier = Modifier.padding(horizontal = Spacing.md, vertical = Spacing.xs),

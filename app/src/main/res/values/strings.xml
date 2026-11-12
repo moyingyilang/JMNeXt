@@ -120,4 +120,23 @@
     <string name="appearance_predictive_on">返回手势进行中，当前页跟手淡出，松手前就能看出要退出。</string>
     <string name="appearance_predictive_unsupported">需要 Android 13 / 14；本机系统没有预测性返回手势，本项不生效。</string>
     <string name="appearance_serial_desc">每半天左右让系统挑个合适时机检查一次，有变化才提醒；同一批更新只提醒一次。只用连载列表和你本地的阅读时间，不上传你在看什么。默认关闭。</string>
+
+    <string name="appearance_dynamic_color_desc">取系统壁纸的配色（Android 12+）。Material 风格会整份跟随系统；另外几套玻璃只取强调色，层次仍按本站配色。</string>
+    <string name="appearance_wallpaper_auto_off">自动更换：关闭</string>
+    <string name="appearance_wallpaper_auto_every">自动更换：每 %1</string>
+    <string name="appearance_wallpaper_clear_cache">清除壁纸缓存</string>
+    <string name="appearance_wallpaper_clear_cache_desc">清掉已缓存的候选图，立刻重新取一批</string>
+    <string name="appearance_wallpaper_blur_fmt">模糊 %1</string>
+    <string name="appearance_wallpaper_dim_fmt">压暗 %1　（壁纸越花越需要压暗，玻璃才压得住文字）</string>
+
+    <!-- 首页 -->
+    <string name="home_loading">加载中…</string>
+    <string name="home_weekly">周刊</string>
+    <string name="home_refresh">刷新</string>
+    <string name="home_to_light">切换到浅色</string>
+    <string name="home_to_dark">切换到深色</string>
+    <string name="home_expand_more">展开更多分区（还有 %1 个）</string>
+    <string name="home_latest">最新上架</string>
+    <string name="home_more">更多</string>
+    <string name="home_tracking_updated">你追的 %1 部有更新</string>
 </resources>
