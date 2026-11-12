@@ -1,5 +1,8 @@
 package com.jmnext.ui.screens.auth
 
+import androidx.annotation.StringRes
+import androidx.compose.ui.res.stringResource
+import com.jmnext.R
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -56,10 +59,10 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 /** 三种表单形态。 */
-enum class AuthMode(val label: String) {
-    Login("登录"),
-    Register("注册"),
-    Forgot("忘记密码"),
+enum class AuthMode(@StringRes val labelRes: Int) {
+    Login(com.jmnext.R.string.auth_login),
+    Register(com.jmnext.R.string.auth_register),
+    Forgot(com.jmnext.R.string.auth_forgot),
 }
 
 data class AuthUiState(
@@ -197,12 +200,12 @@ fun AuthScreen(
 
     Column(modifier = modifier.fillMaxSize()) {
         GlassTopBar(
-            title = state.mode.label,
+            title = stringResource(state.mode.labelRes),
             navigation = {
                 IconButton(onClick = onBack) {
                     Icon(
                         imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                        contentDescription = "返回",
+                        contentDescription = stringResource(R.string.auth_back),
                         tint = c.accent,
                     )
                 }
@@ -234,7 +237,7 @@ fun AuthScreen(
                         onClick = { vm.setMode(mode) },
                         shape = SegmentedButtonDefaults.itemShape(index, AuthMode.entries.size),
                     ) {
-                        Text(mode.label, style = MaterialTheme.typography.labelSmall)
+                        Text(stringResource(mode.labelRes), style = MaterialTheme.typography.labelSmall)
                     }
                 }
             }
@@ -242,7 +245,7 @@ fun AuthScreen(
             OutlinedTextField(
                 value = username,
                 onValueChange = { username = it },
-                label = { Text("用户名") },
+                label = { Text(stringResource(R.string.auth_username)) },
                 singleLine = true,
                 modifier = Modifier.fillMaxWidth(),
                 keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
@@ -252,7 +255,7 @@ fun AuthScreen(
                 OutlinedTextField(
                     value = password,
                     onValueChange = { password = it },
-                    label = { Text("密码") },
+                    label = { Text(stringResource(R.string.auth_password)) },
                     singleLine = true,
                     visualTransformation = PasswordVisualTransformation(),
                     modifier = Modifier.fillMaxWidth(),
@@ -267,7 +270,7 @@ fun AuthScreen(
                 OutlinedTextField(
                     value = passwordConfirm,
                     onValueChange = { passwordConfirm = it },
-                    label = { Text("确认密码") },
+                    label = { Text(stringResource(R.string.auth_confirm_password)) },
                     singleLine = true,
                     visualTransformation = PasswordVisualTransformation(),
                     modifier = Modifier.fillMaxWidth(),
@@ -282,7 +285,7 @@ fun AuthScreen(
                 OutlinedTextField(
                     value = email,
                     onValueChange = { email = it },
-                    label = { Text("邮箱") },
+                    label = { Text(stringResource(R.string.auth_email)) },
                     singleLine = true,
                     modifier = Modifier.fillMaxWidth(),
                     keyboardOptions = KeyboardOptions(
@@ -293,9 +296,9 @@ fun AuthScreen(
             }
 
             if (state.mode == AuthMode.Register) {
-                Text("性别", style = MaterialTheme.typography.labelSmall, color = c.textTertiary)
+                Text(stringResource(R.string.auth_gender), style = MaterialTheme.typography.labelSmall, color = c.textTertiary)
                 Row(horizontalArrangement = Arrangement.spacedBy(Spacing.sm)) {
-                    listOf("m" to "男", "f" to "女").forEach { (key, label) ->
+                    listOf("m" to stringResource(R.string.auth_male), "f" to stringResource(R.string.auth_female)).forEach { (key, label) ->
                         FilterChip(
                             selected = gender == key,
                             onClick = { gender = key },
@@ -338,7 +341,7 @@ fun AuthScreen(
                 enabled = !state.submitting,
                 modifier = Modifier.fillMaxWidth(),
             ) {
-                Text(if (state.submitting) "请稍候…" else state.mode.label)
+                Text(if (state.submitting) stringResource(R.string.auth_wait) else stringResource(state.mode.labelRes))
             }
 
             Text(

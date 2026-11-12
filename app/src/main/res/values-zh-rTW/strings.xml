@@ -200,4 +200,18 @@
     <string name="cat_sort">排序</string>
     <string name="cat_empty">這個分類底下暫時沒有作品</string>
     <string name="cat_load_failed">暫時拿不到分類</string>
+
+    <string name="auth_login">登入</string>
+    <string name="auth_register">註冊</string>
+    <string name="auth_forgot">忘記密碼</string>
+    <string name="auth_username">使用者名稱</string>
+    <string name="auth_password">密碼</string>
+    <string name="auth_confirm_password">確認密碼</string>
+    <string name="auth_email">電子郵件</string>
+    <string name="auth_gender">性別</string>
+    <string name="auth_male">男</string>
+    <string name="auth_female">女</string>
+    <string name="auth_wait">請稍候…</string>
+    <string name="auth_back">返回</string>
+    <string name="auth_keystore_note">登入後會帶上伺服器簽發的憑證，用於收藏與觀看歷史。憑證經 Android Keystore 加密後保存在應用私有目錄，不會明文落盤。</string>
 </resources>

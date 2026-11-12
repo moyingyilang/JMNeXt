@@ -209,4 +209,19 @@
     <string name="cat_sort">排序</string>
     <string name="cat_empty">这个分类下暂时没有作品</string>
     <string name="cat_load_failed">暂时拿不到分类</string>
+
+    <!-- 登录注册 -->
+    <string name="auth_login">登录</string>
+    <string name="auth_register">注册</string>
+    <string name="auth_forgot">忘记密码</string>
+    <string name="auth_username">用户名</string>
+    <string name="auth_password">密码</string>
+    <string name="auth_confirm_password">确认密码</string>
+    <string name="auth_email">邮箱</string>
+    <string name="auth_gender">性别</string>
+    <string name="auth_male">男</string>
+    <string name="auth_female">女</string>
+    <string name="auth_wait">请稍候…</string>
+    <string name="auth_back">返回</string>
+    <string name="auth_keystore_note">登录后会带上服务端签发的凭证，用于收藏与观看历史。凭证经 Android Keystore 加密后保存在应用私有目录，不会明文落盘。</string>
 </resources>
