@@ -1,5 +1,7 @@
 package com.jmnext.ui.screens.notifications
 
+import androidx.compose.ui.res.stringResource
+import com.jmnext.R
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -90,10 +92,10 @@ fun NotificationsScreen(
 
     Column(modifier.fillMaxSize()) {
         GlassTopBar(
-            title = "通知",
+            title = stringResource(R.string.notif_title),
             navigation = {
                 IconButton(onClick = onBack) {
-                    Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "返回", tint = c.accent)
+                    Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(R.string.notif_back), tint = c.accent)
                 }
             },
         )
@@ -102,10 +104,10 @@ fun NotificationsScreen(
             horizontalArrangement = Arrangement.spacedBy(Spacing.xs),
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            TABS.forEach { (label, value) ->
+            TABS.forEach { (labelRes, value) ->
                 TextButton(onClick = { tab = value; page = 1 }) {
                     Text(
-                        text = label,
+                          text = stringResource(labelRes),
                         style = MaterialTheme.typography.labelLarge,
                         color = if (tab == value) c.accent else c.textSecondary,
                     )
@@ -113,9 +115,9 @@ fun NotificationsScreen(
             }
         }
         when {
-            loading -> Hint("正在读取通知…")
-            error != null -> Hint("读取失败：$error")
-            items_.isEmpty() -> Hint("还没有通知。")
+            loading -> Hint(stringResource(R.string.notif_loading))
+            error != null -> Hint(stringResource(R.string.notif_failed_fmt, error ?: ""))
+            items_.isEmpty() -> Hint(stringResource(R.string.notif_empty))
             else -> LazyColumn(
                 modifier = Modifier.fillMaxSize(),
                 contentPadding = androidx.compose.foundation.layout.PaddingValues(
@@ -144,7 +146,7 @@ fun NotificationsScreen(
                             onClick = { page += 1 },
                             modifier = Modifier.fillMaxWidth(),
                         ) {
-                            Text("加载更多（已显示 ${items_.size} / $total）")
+                            Text(stringResource(R.string.notif_load_more_fmt, items_.size, total))
                         }
                     }
                 }
@@ -187,7 +189,7 @@ private fun NotificationCard(
                     Box16(c.accent)
                 }
                 Text(
-                    text = if (item.typeText == NotificationItem.TYPE_COMIC_FOLLOW) "追更更新" else (item.titleText ?: "站内通知"),
+                    text = if (item.typeText == NotificationItem.TYPE_COMIC_FOLLOW) stringResource(R.string.notif_type_tracking) else (item.titleText ?: "站内通知"),
                     style = MaterialTheme.typography.bodyLarge,
                     color = c.text,
                 )
@@ -241,8 +243,9 @@ private fun Box16(color: androidx.compose.ui.graphics.Color) {
 }
 
 private const val TYPE_ALL = "all"
+// 标签文案在 Composable 里取，这里只存资源 id
 private val TABS = listOf(
-    "全部" to TYPE_ALL,
-    "追更" to NotificationItem.TYPE_COMIC_FOLLOW,
-    "站内通知" to NotificationItem.TYPE_SITE_NOTICE,
+    R.string.notif_tab_all to TYPE_ALL,
+    R.string.notif_tab_tracking to NotificationItem.TYPE_COMIC_FOLLOW,
+    R.string.notif_tab_site to NotificationItem.TYPE_SITE_NOTICE,
 )

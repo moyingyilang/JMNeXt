@@ -1,5 +1,7 @@
 package com.jmnext.ui.screens.tags
 
+import androidx.compose.ui.res.stringResource
+import com.jmnext.R
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -136,13 +138,13 @@ fun TagFavoritesScreen(
 
     Column(modifier = modifier.fillMaxSize()) {
         GlassTopBar(
-            title = "标签收藏",
+            title = stringResource(R.string.tagfav_title),
             subtitle = if (state.loggedIn) "${state.tags.size} / ${TagFavoritesViewModel.LIMIT}" else null,
             navigation = {
                 IconButton(onClick = onBack) {
                     Icon(
                         imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                        contentDescription = "返回",
+                        contentDescription = stringResource(R.string.notif_back),
                         tint = c.accent,
                     )
                 }
@@ -160,8 +162,8 @@ fun TagFavoritesScreen(
 
         when {
             !state.loggedIn -> MessageState(
-                title = "需要登录",
-                description = "标签收藏与账号绑定，登录后在这里查看",
+                title = stringResource(R.string.tagfav_need_login),
+                description = stringResource(R.string.tagfav_login_desc),
                 icon = Icons.Filled.BookmarkAdd,
                 onRetry = onLogin,
             )
@@ -172,8 +174,8 @@ fun TagFavoritesScreen(
                 ErrorBox(message = state.error.orEmpty(), onRetry = { vm.load() })
 
             state.tags.isEmpty() -> MessageState(
-                title = "还没有收藏标签",
-                description = "在作品详情页的标签上可以收藏",
+                title = stringResource(R.string.tagfav_empty_title),
+                description = stringResource(R.string.tagfav_empty_desc),
                 icon = Icons.Filled.BookmarkAdd,
             )
 
@@ -202,7 +204,7 @@ fun TagFavoritesScreen(
                             IconButton(onClick = { vm.remove(item.tag) }) {
                                 Icon(
                                     imageVector = Icons.Filled.Delete,
-                                    contentDescription = "取消收藏这个标签",
+                                    contentDescription = stringResource(R.string.tagfav_untag),
                                     tint = c.textTertiary,
                                     modifier = Modifier.size(20.dp),
                                 )
@@ -235,11 +237,11 @@ fun TagPickerDialog(
 
     androidx.compose.material3.AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text("收藏标签") },
+        title = { Text(stringResource(R.string.tagfav_dialog_title)) },
         text = {
             Column {
                 Text(
-                    text = "选中的标签会加入「我的 → 标签收藏」（上限 50）。",
+                    text = stringResource(R.string.tagfav_dialog_desc),
                     style = MaterialTheme.typography.labelSmall,
                     color = c.textTertiary,
                     modifier = Modifier.padding(bottom = Spacing.sm),
@@ -276,7 +278,7 @@ fun TagPickerDialog(
                 onClick = { onConfirm(selected.toList()) },
                 enabled = selected.isNotEmpty(),
             ) {
-                Text("收藏 ${selected.size} 个", color = c.accent)
+                Text(stringResource(R.string.tagfav_save_fmt, selected.size), color = c.accent)
             }
         },
         dismissButton = {

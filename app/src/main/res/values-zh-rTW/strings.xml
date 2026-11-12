@@ -248,4 +248,24 @@
     <string name="folder_new">新增收藏夾</string>
     <string name="folder_rename">重新命名收藏夾</string>
     <string name="folder_all">全部</string>
+
+    <string name="notif_title">通知</string>
+    <string name="notif_back">返回</string>
+    <string name="notif_loading">正在讀取通知…</string>
+    <string name="notif_failed_fmt">讀取失敗：%1</string>
+    <string name="notif_empty">還沒有通知。</string>
+    <string name="notif_load_more_fmt">載入更多（已顯示 %1 / %2）</string>
+    <string name="notif_tab_all">全部</string>
+    <string name="notif_tab_tracking">追更</string>
+    <string name="notif_tab_site">站內通知</string>
+    <string name="notif_type_tracking">追更更新</string>
+    <string name="tagfav_title">標籤收藏</string>
+    <string name="tagfav_need_login">需要登入</string>
+    <string name="tagfav_login_desc">標籤收藏與帳號綁定，登入後在這裡查看</string>
+    <string name="tagfav_empty_title">還沒有收藏標籤</string>
+    <string name="tagfav_empty_desc">在作品詳情頁的標籤上可以收藏</string>
+    <string name="tagfav_untag">取消收藏這個標籤</string>
+    <string name="tagfav_dialog_title">收藏標籤</string>
+    <string name="tagfav_dialog_desc">選取的標籤會加入「我的 → 標籤收藏」（上限 50）。</string>
+    <string name="tagfav_save_fmt">收藏 %1 個</string>
 </resources>
