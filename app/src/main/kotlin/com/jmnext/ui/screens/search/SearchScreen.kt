@@ -1,5 +1,7 @@
 package com.jmnext.ui.screens.search
 
+import androidx.compose.ui.res.stringResource
+import com.jmnext.R
 import com.jmnext.data.prefs.SharedPrefsKeyValueStore
 import com.jmnext.ui.components.jmAnimateItem
 import com.jmnext.ui.LocalTagBlocker
@@ -119,7 +121,7 @@ data class SearchUiState(
      */
     val searchId: Int = 0,
     /** 空关键词被提交时给一句提示，而不是什么都不做。 */
-    val hint: String? = null,
+    val hintRes: Int? = null,
     /**
      * 随机推荐。
      *
@@ -194,7 +196,7 @@ class SearchViewModel(
                 repo.randomRecommend()
             }.getOrDefault(emptyList()).randomOrNull()
             if (item == null) {
-                _state.update { it.copy(hint = "随机本子没拿到，稍后再试") }
+                _state.update { it.copy(hintRes = R.string.search_hint_random_failed) }
             } else {
                 onOpen(item.id)
             }
@@ -223,7 +225,7 @@ class SearchViewModel(
         if (s.loading) return
         if (q.isEmpty()) {
             // 点搜索图标而输入框是空的：什么都不发生会让人以为按钮坏了
-            _state.update { it.copy(hint = "请输入关键词") }
+            _state.update { it.copy(hintRes = R.string.search_hint_no_keyword) }
             return
         }
         val f = s.filters
@@ -238,7 +240,7 @@ class SearchViewModel(
                 loading = true,
                 loadingMore = false,
                 error = null,
-                hint = null,
+                hintRes = null,
                 loadMoreError = null,
                 exhausted = false,
                 history = prefs.searchHistory,
@@ -418,7 +420,7 @@ fun SearchScreen(
     }
 
     Column(modifier = modifier.fillMaxSize()) {
-        GlassTopBar(title = "搜索")
+        GlassTopBar(title = stringResource(R.string.search_title))
 
         OutlinedTextField(
             value = input,
@@ -427,20 +429,20 @@ fun SearchScreen(
                 vm.onQueryChange(it)
             },
             modifier = Modifier.fillMaxWidth().padding(horizontal = Spacing.lg, vertical = Spacing.sm),
-            placeholder = { Text("输入作品名、作者或标签", color = c.textTertiary) },
+            placeholder = { Text(stringResource(R.string.search_placeholder), color = c.textTertiary) },
             singleLine = true,
             trailingIcon = {
                 IconButton(onClick = { vm.search() }) {
-                    Icon(Icons.Filled.Search, contentDescription = "搜索", tint = c.accent)
+                    Icon(Icons.Filled.Search, contentDescription = stringResource(R.string.search_title), tint = c.accent)
                 }
             },
             keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
             keyboardActions = KeyboardActions(onSearch = { vm.search() }),
         )
 
-        state.hint?.let { hint ->
+        state.hintRes?.let { hintRes ->
             Text(
-                text = hint,
+                text = stringResource(hintRes),
                 style = MaterialTheme.typography.labelSmall,
                 color = c.accent,
                 modifier = Modifier.padding(horizontal = Spacing.lg),
@@ -453,7 +455,7 @@ fun SearchScreen(
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Text(
-                text = if (state.filters.year.isEmpty()) "年份：不限" else
+                text = if (state.filters.year.isEmpty()) stringResource(R.string.search_year_any) else
                     "年份：${state.filters.year}${if (state.filters.month.isEmpty()) " 年" else " 年 ${state.filters.month} 月"}",
                 style = MaterialTheme.typography.labelSmall,
                 color = c.textTertiary,
@@ -462,7 +464,7 @@ fun SearchScreen(
             IconButton(onClick = { showDateFilter = !showDateFilter }) {
                 Icon(
                     imageVector = if (showDateFilter) Icons.Filled.ExpandLess else Icons.Filled.ExpandMore,
-                    contentDescription = if (showDateFilter) "收起年份筛选" else "展开年份筛选",
+                    contentDescription = if (showDateFilter) stringResource(R.string.search_collapse_year) else stringResource(R.string.search_expand_year),
                     tint = c.accent,
                 )
             }
@@ -528,8 +530,8 @@ fun SearchScreen(
                 // 若此时把筛选藏起来就自相矛盾了。这里没有内容可滚，固定显示是合理的。
                 SearchFilterRows(state, vm)
                 MessageState(
-                    title = "没有找到相关作品",
-                    description = "换个关键词，或调整检索字段与年份",
+                    title = stringResource(R.string.search_empty_title),
+                    description = stringResource(R.string.search_empty_desc),
                     icon = Icons.Filled.Search,
                     modifier = Modifier.weight(1f),
                 )
@@ -690,13 +692,13 @@ private fun SuggestionPanel(
             Column(verticalArrangement = Arrangement.spacedBy(Spacing.xs)) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Text(
-                        text = "最近搜索",
+                        text = stringResource(R.string.search_recent),
                         style = MaterialTheme.typography.titleMedium,
                         color = c.text,
                         modifier = Modifier.weight(1f),
                     )
                     TextButton(onClick = onClearHistory) {
-                        Text("清空", color = c.textSecondary)
+                        Text(stringResource(R.string.search_clear), color = c.textSecondary)
                     }
                 }
                 WordChips(history, onPick)
@@ -706,7 +708,7 @@ private fun SuggestionPanel(
         if (hotTags.isNotEmpty()) {
             Column(verticalArrangement = Arrangement.spacedBy(Spacing.xs)) {
                 Text(
-                    text = "热门标签",
+                    text = stringResource(R.string.search_hot_tags),
                     style = MaterialTheme.typography.titleMedium,
                     color = c.text,
                 )
@@ -720,14 +722,14 @@ private fun SuggestionPanel(
             Column(verticalArrangement = Arrangement.spacedBy(Spacing.sm)) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Text(
-                        text = "随机推荐",
+                        text = stringResource(R.string.search_random_rec),
                         style = MaterialTheme.typography.titleMedium,
                         color = c.text,
                         modifier = Modifier.weight(1f),
                     )
                     // 「随便来一本」是这一行真正想要的用法：不用挑，直接看
-                    TextButton(onClick = onRandomOne) { Text("随便来一本") }
-                    TextButton(onClick = onShuffle) { Text("换一批") }
+                    TextButton(onClick = onRandomOne) { Text(stringResource(R.string.search_random_one)) }
+                    TextButton(onClick = onShuffle) { Text(stringResource(R.string.search_shuffle)) }
                 }
                 // 标签屏蔽（1.5.1）：命中集合是异步补上来的（没有标签规则时恒为空）
                 val tagBlocker = LocalTagBlocker.current
@@ -755,8 +757,8 @@ private fun SuggestionPanel(
 
         if (history.isEmpty() && hotTags.isEmpty() && recommend.isEmpty()) {
             MessageState(
-                title = "搜点什么",
-                description = "支持按作品名、作者、标签检索",
+                title = stringResource(R.string.search_start_title),
+                description = stringResource(R.string.search_start_desc),
                 icon = Icons.Filled.Search,
             )
         }

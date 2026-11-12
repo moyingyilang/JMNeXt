@@ -170,4 +170,26 @@
     <string name="wall_solid_desc">只用你选的一个颜色，不加载图片（零请求）</string>
     <string name="wall_picsum">Picsum 摄影</string>
     <string name="wall_picsum_desc">按设备方向取图：手机竖图、平板/桌面横图（picsum.photos，无需 key）</string>
+
+    <!-- 搜索 -->
+    <string name="search_title">搜索</string>
+    <string name="search_placeholder">输入作品名、作者或标签</string>
+    <string name="search_year_any">年份：不限</string>
+    <string name="search_year_fmt">年份：%1 年</string>
+    <string name="search_year_month_fmt">年份：%1 年 %2 月</string>
+    <string name="search_collapse_year">收起年份筛选</string>
+    <string name="search_expand_year">展开年份筛选</string>
+    <string name="search_empty_title">没有找到相关作品</string>
+    <string name="search_empty_desc">换个关键词，或调整检索字段与年份</string>
+    <string name="search_recent">最近搜索</string>
+    <string name="search_clear">清空</string>
+    <string name="search_hot_tags">热门标签</string>
+    <string name="search_random_rec">随机推荐</string>
+    <string name="search_random_one">随便来一本</string>
+    <string name="search_shuffle">换一批</string>
+    <string name="search_start_title">搜点什么</string>
+    <string name="search_start_desc">支持按作品名、作者、标签检索</string>
+
+    <string name="search_hint_random_failed">随机本子没拿到，稍后再试</string>
+    <string name="search_hint_no_keyword">请输入关键词</string>
 </resources>
