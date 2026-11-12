@@ -241,4 +241,23 @@
     <string name="detail_related">相关推荐</string>
     <string name="detail_prev_page">上一页</string>
     <string name="detail_next_page">下一页</string>
+
+    <!-- 收藏与历史 -->
+    <string name="fav_title">我的收藏</string>
+    <string name="fav_empty">还没有收藏，去详情页点收藏试试</string>
+    <string name="hist_title">观看历史</string>
+    <string name="hist_empty">还没有观看记录</string>
+    <string name="tracking_title">我的追更</string>
+    <string name="tracking_empty">还没有追更，去详情页点「追更」</string>
+    <string name="list_total_fmt">共 %1 项</string>
+    <string name="list_back">返回</string>
+    <string name="list_manage_folders">管理收藏夹</string>
+    <string name="list_need_login">需要登录</string>
+    <string name="list_login_desc_fmt">%1与账号绑定，登录后在这里查看</string>
+    <string name="list_untrack">取消追更</string>
+    <string name="list_move_to_folder">移入收藏夹</string>
+    <string name="list_delete_history">删除这条历史</string>
+    <string name="folder_new">新建收藏夹</string>
+    <string name="folder_rename">重命名收藏夹</string>
+    <string name="folder_all">全部</string>
 </resources>

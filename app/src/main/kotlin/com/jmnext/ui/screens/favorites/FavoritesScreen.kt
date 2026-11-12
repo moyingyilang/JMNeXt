@@ -1,4 +1,7 @@
 package com.jmnext.ui.screens.favorites
+import androidx.annotation.StringRes
+import androidx.compose.ui.res.stringResource
+import com.jmnext.R
 import com.jmnext.data.prefs.FavoriteEntry
 import com.jmnext.data.prefs.HistoryEntry
 import com.jmnext.data.prefs.FavoriteStore
@@ -76,16 +79,20 @@ import kotlinx.coroutines.launch
  * 数据形态与分页方式一致（都交给同一个 `ComicList` 渲染、每页 20 条），
  * 因此共用一个 ViewModel；差异只有接口与「收藏支持收藏夹」这一点。
  */
-enum class AccountListKind(val title: String, val icon: ImageVector, val emptyHint: String) {
-    Favorites("我的收藏", Icons.Filled.BookmarkBorder, "还没有收藏，去详情页点收藏试试"),
-    History("观看历史", Icons.Filled.History, "还没有观看记录"),
+enum class AccountListKind(
+    @StringRes val titleRes: Int,
+    val icon: ImageVector,
+    @StringRes val emptyHintRes: Int,
+) {
+    Favorites(com.jmnext.R.string.fav_title, Icons.Filled.BookmarkBorder, com.jmnext.R.string.fav_empty),
+    History(com.jmnext.R.string.hist_title, Icons.Filled.History, com.jmnext.R.string.hist_empty),
     /**
      * 追更。
      *
      * 与前两者的两点不同：列表接口是 **POST**（`album_tracking`），
      * 而且服务端有上限（官方界面写着 500）—— 因此这一屏不显示「共 N 项」而是「N / 500」。
      */
-    Tracking("我的追更", Icons.Filled.NotificationsNone, "还没有追更，去详情页点「追更」"),
+    Tracking(com.jmnext.R.string.tracking_title, Icons.Filled.NotificationsNone, com.jmnext.R.string.tracking_empty),
     ;
 
     /** 追更上限，与官方界面一致。 */
@@ -419,18 +426,18 @@ fun AccountListScreen(
 
     Column(modifier = modifier.fillMaxSize()) {
         GlassTopBar(
-            title = kind.title,
+            title = stringResource(kind.titleRes),
             subtitle = when {
                 !state.loggedIn -> null
                 kind.limit != null -> "${state.items.size} / ${kind.limit}"
-                state.total > 0 -> "共 ${state.total} 项"
+                state.total > 0 -> stringResource(R.string.list_total_fmt, state.total)
                 else -> null
             },
             navigation = {
                 IconButton(onClick = onBack) {
                     Icon(
                         imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                        contentDescription = "返回",
+                        contentDescription = stringResource(R.string.list_back),
                         tint = c.accent,
                     )
                 }
@@ -440,7 +447,7 @@ fun AccountListScreen(
                     IconButton(onClick = { dialog = FolderDialog.Manage }) {
                         Icon(
                             imageVector = Icons.Filled.Folder,
-                            contentDescription = "管理收藏夹",
+                            contentDescription = stringResource(R.string.list_manage_folders),
                             tint = c.accent,
                             modifier = Modifier.size(22.dp),
                         )
@@ -462,8 +469,8 @@ fun AccountListScreen(
 
         when {
             !state.loggedIn -> MessageState(
-                title = "需要登录",
-                description = "${kind.title}与账号绑定，登录后在这里查看",
+                title = stringResource(R.string.list_need_login),
+                description = stringResource(R.string.list_login_desc_fmt, stringResource(kind.titleRes)),
                 icon = kind.icon,
                 onRetry = onLogin,
             )
@@ -484,7 +491,7 @@ fun AccountListScreen(
                 }
 
                 if (state.items.isEmpty()) {
-                    MessageState(title = kind.emptyHint, icon = kind.icon)
+                    MessageState(title = stringResource(kind.emptyHintRes), icon = kind.icon)
                 } else {
                     LazyColumn(
                         modifier = Modifier.fillMaxSize(),
@@ -511,7 +518,7 @@ fun AccountListScreen(
                                             IconButton(onClick = { vm.untrack(comic.id) }) {
                                                 Icon(
                                                     imageVector = Icons.Filled.NotificationsOff,
-                                                    contentDescription = "取消追更",
+                                                    contentDescription = stringResource(R.string.list_untrack),
                                                     tint = c.textTertiary,
                                                     modifier = Modifier.size(20.dp),
                                                 )
@@ -524,7 +531,7 @@ fun AccountListScreen(
                                             ) {
                                                 Icon(
                                                     imageVector = Icons.AutoMirrored.Filled.DriveFileMove,
-                                                    contentDescription = "移入收藏夹",
+                                                    contentDescription = stringResource(R.string.list_move_to_folder),
                                                     tint = c.textTertiary,
                                                     modifier = Modifier.size(20.dp),
                                                 )
@@ -535,7 +542,7 @@ fun AccountListScreen(
                                             IconButton(onClick = { vm.deleteHistory(comic.id) }) {
                                                 Icon(
                                                     imageVector = Icons.Filled.DeleteOutline,
-                                                    contentDescription = "删除这条历史",
+                                                    contentDescription = stringResource(R.string.list_delete_history),
                                                     tint = c.textTertiary,
                                                     modifier = Modifier.size(20.dp),
                                                 )
@@ -573,7 +580,7 @@ fun AccountListScreen(
         )
 
         FolderDialog.Create -> FolderNameDialog(
-            title = "新建收藏夹",
+            title = stringResource(R.string.folder_new),
             initialName = "",
             onDismiss = { dialog = FolderDialog.None },
             onConfirm = { name ->
@@ -583,7 +590,7 @@ fun AccountListScreen(
         )
 
         is FolderDialog.Rename -> FolderNameDialog(
-            title = "重命名收藏夹",
+            title = stringResource(R.string.folder_rename),
             initialName = current.folder.name.orEmpty(),
             onDismiss = { dialog = FolderDialog.None },
             onConfirm = { name ->
@@ -625,13 +632,14 @@ private fun FolderRow(
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Text(
-            text = "收藏夹",
+            text = stringResource(R.string.folder_new),
             style = MaterialTheme.typography.labelSmall,
             color = c.textTertiary,
             modifier = Modifier.padding(start = Spacing.lg, end = Spacing.sm),
         )
+          val allFolders = listOf(FavoriteFolder("", stringResource(R.string.folder_all))) + folders
         LazyRow(horizontalArrangement = Arrangement.spacedBy(Spacing.xs)) {
-            items(listOf(FavoriteFolder("", "全部")) + folders) { folder ->
+            items(allFolders) { folder ->
                 FilterChip(
                     selected = selected == folder.folderId,
                     onClick = { onSelect(folder.folderId) },

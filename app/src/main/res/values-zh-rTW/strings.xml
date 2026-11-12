@@ -230,4 +230,22 @@
     <string name="detail_related">相關推薦</string>
     <string name="detail_prev_page">上一頁</string>
     <string name="detail_next_page">下一頁</string>
+
+    <string name="fav_title">我的收藏</string>
+    <string name="fav_empty">還沒有收藏，去詳情頁點收藏試試</string>
+    <string name="hist_title">觀看歷史</string>
+    <string name="hist_empty">還沒有觀看紀錄</string>
+    <string name="tracking_title">我的追更</string>
+    <string name="tracking_empty">還沒有追更，去詳情頁點「追更」</string>
+    <string name="list_total_fmt">共 %1 項</string>
+    <string name="list_back">返回</string>
+    <string name="list_manage_folders">管理收藏夾</string>
+    <string name="list_need_login">需要登入</string>
+    <string name="list_login_desc_fmt">%1與帳號綁定，登入後在這裡查看</string>
+    <string name="list_untrack">取消追更</string>
+    <string name="list_move_to_folder">移至收藏夾</string>
+    <string name="list_delete_history">刪除這筆歷史</string>
+    <string name="folder_new">新增收藏夾</string>
+    <string name="folder_rename">重新命名收藏夾</string>
+    <string name="folder_all">全部</string>
 </resources>
