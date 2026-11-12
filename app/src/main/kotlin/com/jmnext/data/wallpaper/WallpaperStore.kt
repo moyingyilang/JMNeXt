@@ -1,5 +1,6 @@
 package com.jmnext.data.wallpaper
 
+import androidx.annotation.StringRes
 import android.content.Context
 import androidx.core.content.edit
 import com.jmnext.data.remote.JmJson
@@ -55,15 +56,18 @@ private val BING_SIZE = Regex("_(\\d+)x(\\d+)(\\.jpg)", RegexOption.IGNORE_CASE)
  * **默认不是 Bing 而是 [Off]**，这一点与博客不同：博客是网页，背景图不影响阅读；
  * 本应用是阅读器，默认应该没有任何第三方请求，想要背景图的人自己去开。
  */
-enum class WallpaperMode(val label: String, val desc: String) {
-    Off("纯渐变", "不加载任何图片，只用内置渐变底（不发任何请求）"),
-    Bing("Bing 每日", "Bing 每日壁纸，来源 bing.biturl.top"),
-    Anime("二次元随机", "t.alcy.cc / t.mwm.moe / loliapi 三个源依次尝试"),
-    All("全部随机", "Bing 与二次元混合"),
-    Custom("自定义地址", "自己填一个图片直链"),
-    SystemWallpaper("跟随手机壁纸", "读取系统当前壁纸（Android）；换壁纸后回到应用或点「重新读取」生效"),
-    Solid("纯色", "只用你选的一个颜色，不加载图片（零请求）"),
-    Picsum("Picsum 摄影", "按设备方向取图：手机竖图、平板/桌面横图（picsum.photos，无需 key）"),
+enum class WallpaperMode(
+    @StringRes val labelRes: Int,
+    @StringRes val descRes: Int,
+) {
+    Off(com.jmnext.R.string.wall_off, com.jmnext.R.string.wall_off_desc),
+    Bing(com.jmnext.R.string.wall_bing, com.jmnext.R.string.wall_bing_desc),
+    Anime(com.jmnext.R.string.wall_anime, com.jmnext.R.string.wall_anime_desc),
+    All(com.jmnext.R.string.wall_all, com.jmnext.R.string.wall_all_desc),
+    Custom(com.jmnext.R.string.wall_custom, com.jmnext.R.string.wall_custom_desc),
+    SystemWallpaper(com.jmnext.R.string.wall_system, com.jmnext.R.string.wall_system_desc),
+    Solid(com.jmnext.R.string.wall_solid, com.jmnext.R.string.wall_solid_desc),
+    Picsum(com.jmnext.R.string.wall_picsum, com.jmnext.R.string.wall_picsum_desc),
 }
 
 /**

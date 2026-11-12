@@ -573,10 +573,10 @@ private fun AppearanceCard(
         // lite 没有玻璃（材质退化为实心），这一项摆出来只会误导
         if (!LiteFeatures.ENABLED) ExpandableOptionRow(
             title = stringResource(R.string.appearance_glass_quality),
-            options = GlassQuality.entries.map { it to it.label },
+            options = GlassQuality.entries.map { it to stringResource(it.labelRes) },
             selected = uiOptions.glassQuality,
             onSelect = { onUiOptionsChange(uiOptions.copy(glassQuality = it)) },
-            summary = uiOptions.glassQuality.label + " · " + uiOptions.glassQuality.desc.substringBefore(" ——"),
+            summary = stringResource(uiOptions.glassQuality.labelRes) + " · " + stringResource(uiOptions.glassQuality.descRes).substringBefore(" ——"),
         )
 
         OptionSwitch(
@@ -638,7 +638,7 @@ private fun AppearanceCard(
             modifier = Modifier.padding(top = Spacing.lg),
         )
         Text(
-            text = uiOptions.motionStyle.tagline,
+            text = stringResource(uiOptions.motionStyle.taglineRes),
             style = MaterialTheme.typography.labelSmall,
             color = c.textTertiary,
             modifier = Modifier.padding(top = Spacing.xxs),
@@ -646,7 +646,7 @@ private fun AppearanceCard(
         // 动效性格：三个值，改用可展开行（与壁纸来源同一套交互）
         ExpandableOptionRow(
             title = stringResource(R.string.appearance_motion_speed),
-            options = MotionStyle.entries.map { it to it.label },
+            options = MotionStyle.entries.map { it to stringResource(it.labelRes) },
             selected = uiOptions.motionStyle,
             onSelect = { onUiOptionsChange(uiOptions.copy(motionStyle = it)) },
             modifier = Modifier.padding(top = Spacing.sm),
@@ -815,7 +815,7 @@ private fun WallpaperCard() {
         // 来源有七八个选项，平铺成 chips 会挤成两三行；改成可展开的竖向列表（参照 bvds 的两段式展开）。
         com.jmnext.ui.components.ExpandableOptionRow(
             title = stringResource(R.string.appearance_wallpaper_source),
-            options = WallpaperMode.entries.map { it to it.label },
+            options = WallpaperMode.entries.map { it to stringResource(it.labelRes) },
             selected = wall.mode,
             onSelect = { mode ->
                 // 选「跟随手机壁纸」时先要权限：没有权限时 getDrawable 是**静默返回 null** 的，
@@ -834,7 +834,7 @@ private fun WallpaperCard() {
         )
 
         Text(
-            text = wall.mode.desc,
+            text = stringResource(wall.mode.descRes),
             style = MaterialTheme.typography.labelSmall,
             color = c.textTertiary,
             modifier = Modifier.padding(top = Spacing.sm),

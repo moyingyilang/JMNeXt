@@ -139,4 +139,35 @@
     <string name="home_latest">最新上架</string>
     <string name="home_more">更多</string>
     <string name="home_tracking_updated">你追的 %1 部有更新</string>
+
+    <string name="glass_high">高</string>
+    <string name="glass_high_desc">真实模糊，半径 12dp —— 最好看，低端机可能掉帧</string>
+    <string name="glass_medium">中</string>
+    <string name="glass_medium_desc">真实模糊，半径 8dp —— 默认，观感与性能折中</string>
+    <string name="glass_off">关</string>
+    <string name="glass_off_desc">不做背景采样，退回半透明填充 —— 最省电，适合低端机</string>
+    <string name="motion_fast">快</string>
+    <string name="motion_fast_desc">短促直接：切换干脆、位移很小 —— 最快的节奏</string>
+    <string name="motion_medium">中</string>
+    <string name="motion_medium_desc">出慢入快、时长适中、位移柔和 —— 默认节奏</string>
+    <string name="motion_slow">慢</string>
+    <string name="motion_slow_desc">转场更长、收尾更缓，前后层次最明显 —— 最慢的节奏</string>
+
+    <!-- 壁纸来源 -->
+    <string name="wall_off">纯渐变</string>
+    <string name="wall_off_desc">不加载任何图片，只用内置渐变底（不发任何请求）</string>
+    <string name="wall_bing">Bing 每日</string>
+    <string name="wall_bing_desc">Bing 每日壁纸，来源 bing.biturl.top</string>
+    <string name="wall_anime">二次元随机</string>
+    <string name="wall_anime_desc">t.alcy.cc / t.mwm.moe / loliapi 三个源依次尝试</string>
+    <string name="wall_all">全部随机</string>
+    <string name="wall_all_desc">Bing 与二次元混合</string>
+    <string name="wall_custom">自定义地址</string>
+    <string name="wall_custom_desc">自己填一个图片直链</string>
+    <string name="wall_system">跟随手机壁纸</string>
+    <string name="wall_system_desc">读取系统当前壁纸（Android）；换壁纸后回到应用或点「重新读取」生效</string>
+    <string name="wall_solid">纯色</string>
+    <string name="wall_solid_desc">只用你选的一个颜色，不加载图片（零请求）</string>
+    <string name="wall_picsum">Picsum 摄影</string>
+    <string name="wall_picsum_desc">按设备方向取图：手机竖图、平板/桌面横图（picsum.photos，无需 key）</string>
 </resources>

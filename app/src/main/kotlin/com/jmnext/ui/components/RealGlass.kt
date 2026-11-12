@@ -1,5 +1,6 @@
 package com.jmnext.ui.components
 
+import androidx.annotation.StringRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
@@ -112,13 +113,13 @@ object GlassHost {
  * [blurRadius] 为 null 表示这一档**不做** backdrop 采样。
  */
 enum class GlassQuality(
-    val label: String,
-    val desc: String,
+    @StringRes val labelRes: Int,
+    @StringRes val descRes: Int,
     val blurRadius: Dp?,
 ) {
-    High("高", "真实模糊，半径 12dp —— 最好看，低端机可能掉帧", 12.dp),
-    Medium("中", "真实模糊，半径 8dp —— 默认，观感与性能折中", 8.dp),
-    Off("关", "不做背景采样，退回半透明填充 —— 最省电，适合低端机", null);
+    High(com.jmnext.R.string.glass_high, com.jmnext.R.string.glass_high_desc, 12.dp),
+    Medium(com.jmnext.R.string.glass_medium, com.jmnext.R.string.glass_medium_desc, 8.dp),
+    Off(com.jmnext.R.string.glass_off, com.jmnext.R.string.glass_off_desc, null);
 
     val usesBackdrop: Boolean get() = blurRadius != null
 }

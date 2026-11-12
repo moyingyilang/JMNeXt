@@ -1,5 +1,6 @@
 package com.jmnext.ui.theme
 
+import androidx.annotation.StringRes
 import com.jmnext.LiteFeatures
 import androidx.compose.animation.core.Easing
 import androidx.compose.runtime.staticCompositionLocalOf
@@ -142,19 +143,13 @@ data class TypeScale(
  *   出现用 `OutCubic`、消失用 `InCubic`，时长取 Kirigami 的 long/veryLong（200/400ms）。
  *   表现出来是起步快、收尾长、位移更柔，不像原来那样「啪」地换掉。
  */
-enum class MotionStyle(val label: String, val tagline: String) {
-    Standard(
-        label = "快",
-        tagline = "短促直接：切换干脆、位移很小 —— 最快的节奏",
-    ),
-    Plasma(
-        label = "中",
-        tagline = "出慢入快、时长适中、位移柔和 —— 默认节奏",
-    ),
-    HyperOS(
-        label = "慢",
-        tagline = "转场更长、收尾更缓，前后层次最明显 —— 最慢的节奏",
-    ),
+enum class MotionStyle(
+    @StringRes val labelRes: Int,
+    @StringRes val taglineRes: Int,
+) {
+    Standard(com.jmnext.R.string.motion_fast, com.jmnext.R.string.motion_fast_desc),
+    Plasma(com.jmnext.R.string.motion_medium, com.jmnext.R.string.motion_medium_desc),
+    HyperOS(com.jmnext.R.string.motion_slow, com.jmnext.R.string.motion_slow_desc),
     ;
 
     companion object {
