@@ -41,8 +41,8 @@ JMComic 的第三方客户端，Kotlin 和 Compose 写的。Android 是主项目
 | Android 追踪包 | arm64 / armv7 | APK（`full-tracer` / `lite-tracer`），崩溃落盘 | 26 / 26 MB | 需日志时使用 |
 | 桌面调试包 | Linux aarch64 / x86_64、Windows x64 / arm64 | 与标准包同构，附 `debug.sh` / `debug.bat` | 同标准包 | 需详细日志时使用 |
 
-附件名统一为「平台-架构-版本」，例如 `Linux-aarch64-2.1.8.deb`、`Windows-x64-2.1.8.zip`、
-`Android-full-2.1.8.apk`。
+附件名统一为「平台-架构-版本」，例如 `Linux-aarch64-2.2.4.deb`、`Windows-x64-2.2.4.zip`、
+`Android-full-2.2.4.apk`。
 
 平台说明：
 
@@ -60,15 +60,15 @@ JMComic 的第三方客户端，Kotlin 和 Compose 写的。Android 是主项目
 Linux 便携包：
 
 ```bash
-tar xzf Linux-aarch64-2.1.8.tar.gz && ./bin/jmnext
+tar xzf Linux-aarch64-2.2.4.tar.gz && ./bin/jmnext
 ```
 
 deb、rpm 与 AppImage（x86_64 的包名中架构段为 `x86_64`，deb 为 `_amd64.deb`）：
 
 ```bash
-sudo dpkg -i Linux-aarch64-2.1.8.deb && jmnext
-sudo rpm -i Linux-aarch64-2.1.8.rpm && jmnext
-chmod +x Linux-aarch64-2.1.8.AppImage && ./Linux-aarch64-2.1.8.AppImage
+sudo dpkg -i Linux-aarch64-2.2.4.deb && jmnext
+sudo rpm -i Linux-aarch64-2.2.4.rpm && jmnext
+chmod +x Linux-aarch64-2.2.4.AppImage && ./Linux-aarch64-2.2.4.AppImage
 ```
 
 系统缺少 `libfuse.so.2` 时，AppImage 可加 `--appimage-extract-and-run` 免挂载运行。
@@ -156,9 +156,7 @@ Windows 解压 ZIP 后双击 `jmnext.bat`，或直接双击单体 exe。Android 
 | **2.0.0** | **正式版**：项目更名为 JMNeXt（大写 X 同时表示 cross / 跨平台与 extended / 扩展加强），包名、applicationId、展示名、产物名与日志名一并更换 |
 | 2.0.1 至 2.1.8 | 交付与命名统一、功能补齐、动效与共享元素、加载态、统一包、issue 修复、安全与可诊断性 |
 
-当前版本为 **2.1.8**，主题是修复与可诊断性：内存凭据处理（关闭 attach 导堆路径）、
-本地密钥文件权限收紧与可选口令保护（PBKDF2-HMAC-SHA256 12 万次 + AES-GCM）、偏好节点迁移、
-x64 exe 无文字问题修复、启动环境摘要与日志噪声治理、随机页「换一个」。
+当前版本为 **2.2.4**，跟着官方 2.1.13 走：客户端上报版本升到 2.1.13，两套 i18n 字典重新从官方包里抽。
 逐版本细节见 [CHANGELOG.md](CHANGELOG.md)。
 
 ## 构建与开发
