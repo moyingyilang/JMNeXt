@@ -417,4 +417,18 @@
     <string name="folder_rename_short">改名</string>
 
     <string name="folder_skip_only_fav">仅收藏，不归类</string>
+
+    <!-- 公共组件 -->
+    <string name="common_updated">更新</string>
+    <string name="common_load_failed_retry">加载失败，点击重试</string>
+    <string name="common_no_more">已经到底了</string>
+    <string name="common_load_more">上滑加载更多</string>
+    <string name="common_retry">重试</string>
+    <string name="common_load_failed">加载失败</string>
+    <!-- 首页随机与签到 -->
+    <string name="random_fab_cd">随机一本（长按查看一批）；已排除屏蔽名单</string>
+    <string name="checkin_no_active">现在没有进行中的签到活动</string>
+    <string name="checkin_already">今天已经签过了</string>
+    <string name="checkin_ok">签到成功</string>
+    <string name="checkin_failed">签到失败，稍后再试</string>
 </resources>

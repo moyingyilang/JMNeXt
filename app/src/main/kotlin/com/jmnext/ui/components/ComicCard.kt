@@ -1,5 +1,7 @@
 package com.jmnext.ui.components
 
+import androidx.compose.ui.res.stringResource
+import com.jmnext.R
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.combinedClickable
@@ -133,7 +135,7 @@ fun ComicCard(
             if (updated) {
                 // 角标放在左上：右下角是阅读进度的常见位置，且左上离封面主体最远、最不挡画面
                 Text(
-                    text = "更新",
+                    text = stringResource(R.string.common_updated),
                     style = MaterialTheme.typography.labelSmall,
                     color = c.textOnAccent,
                     modifier = Modifier

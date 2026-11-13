@@ -1,5 +1,7 @@
 package com.jmnext.ui.components
 
+import androidx.compose.ui.res.stringResource
+import com.jmnext.R
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -79,7 +81,7 @@ fun MessageState(
         }
         if (onRetry != null) {
             TextButton(onClick = onRetry, modifier = Modifier.padding(top = Spacing.sm)) {
-                Text("重试", color = c.accent)
+                Text(stringResource(R.string.common_retry), color = c.accent)
             }
         }
     }
@@ -92,7 +94,7 @@ fun ErrorBox(
     modifier: Modifier = Modifier,
     onRetry: (() -> Unit)? = null,
 ) = MessageState(
-    title = "加载失败",
+    title = stringResource(R.string.common_load_failed),
     description = message,
     icon = Icons.Filled.CloudOff,
     onRetry = onRetry,

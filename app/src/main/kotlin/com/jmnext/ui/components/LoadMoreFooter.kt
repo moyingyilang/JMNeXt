@@ -1,5 +1,7 @@
 package com.jmnext.ui.components
 
+import androidx.compose.ui.res.stringResource
+import com.jmnext.R
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -54,14 +56,14 @@ fun LoadMoreFooter(
 
             error != null -> TextButton(onClick = onRetry) {
                 Text(
-                    text = "加载失败，点击重试",
+                    text = stringResource(R.string.common_load_failed_retry),
                     style = MaterialTheme.typography.labelSmall,
                     color = c.accent,
                 )
             }
 
             exhausted -> Text(
-                text = "已经到底了",
+                text = stringResource(R.string.common_no_more),
                 style = MaterialTheme.typography.labelSmall,
                 color = c.textTertiary,
             )
@@ -69,7 +71,7 @@ fun LoadMoreFooter(
             else -> {
                 LaunchedEffect(Unit) { onLoadMore() }
                 Text(
-                    text = "上滑加载更多",
+                    text = stringResource(R.string.common_load_more),
                     style = MaterialTheme.typography.labelSmall,
                     color = c.textTertiary,
                 )

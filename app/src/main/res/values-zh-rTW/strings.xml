@@ -1,4 +1,5 @@
 <resources>
+    <string name="app_name">JMNeXt</string>
     <string name="about_title">關於</string>
     <string name="about_back">返回</string>
     <string name="about_tagline">禁漫（JMComic）第三方客戶端</string>
@@ -395,4 +396,16 @@
     <string name="folder_rename_short">改名</string>
 
     <string name="folder_skip_only_fav">僅收藏，不歸類</string>
+
+    <string name="common_updated">更新</string>
+    <string name="common_load_failed_retry">載入失敗，點擊重試</string>
+    <string name="common_no_more">已經到底了</string>
+    <string name="common_load_more">上滑載入更多</string>
+    <string name="common_retry">重試</string>
+    <string name="common_load_failed">載入失敗</string>
+    <string name="random_fab_cd">隨機一本（長按查看一批）；已排除封鎖名單</string>
+    <string name="checkin_no_active">現在沒有進行中的簽到活動</string>
+    <string name="checkin_already">今天已經簽過了</string>
+    <string name="checkin_ok">簽到成功</string>
+    <string name="checkin_failed">簽到失敗，稍後再試</string>
 </resources>

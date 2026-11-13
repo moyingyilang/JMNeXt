@@ -1,5 +1,8 @@
 package com.jmnext.ui.screens.home
 
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
+import com.jmnext.R
 import com.jmnext.ui.theme.Radius
 import com.jmnext.data.Daily
 import androidx.compose.ui.Alignment
@@ -103,7 +106,7 @@ fun RandomFab(
         ) {
             Icon(
                 imageVector = Icons.Filled.Casino,
-                contentDescription = "随机一本（长按查看一批）；已排除屏蔽名单",
+                contentDescription = stringResource(R.string.random_fab_cd),
                 tint = c.accent,
                 modifier = Modifier
                     .padding(14.dp)
@@ -133,6 +136,7 @@ fun DailyQuickFab(
     bottomInset: Dp,
     modifier: Modifier = Modifier,
 ) {
+    val ctx = LocalContext.current
     val c = JmTheme.colors
     val scope = rememberCoroutineScope()
     val loggedIn = repo.auth.isLoggedIn
@@ -186,20 +190,20 @@ fun DailyQuickFab(
                         val today = java.util.Calendar.getInstance().get(java.util.Calendar.DAY_OF_MONTH)
                         when {
                             id.isNullOrBlank() -> {
-                                notice = "现在没有进行中的签到活动"
-                                Notices.show("现在没有进行中的签到活动")
+                                notice = ctx.getString(R.string.checkin_no_active)
+                                Notices.show(ctx.getString(R.string.checkin_no_active))
                             }
                             Daily.isSignedToday(d.record, today) -> {
                                 // 服务端说今天签过了 —— 那就把状态置为已签，而不是只弹一句提示
                                 signedToday = true
                                 alreadyPrompted += 1
-                                notice = "今天已经签过了"
-                                Notices.show("今天已经签过了")
+                                notice = ctx.getString(R.string.checkin_already)
+                                Notices.show(ctx.getString(R.string.checkin_already))
                             }
                             else -> runCatching { repo.dailyCheck(uid, id) }.fold(
                                 onSuccess = { res ->
                                     signedToday = true
-                                    val ok = res.msg?.takeIf { it.isNotBlank() } ?: "签到成功"
+                                    val ok = res.msg?.takeIf { it.isNotBlank() } ?: ctx.getString(R.string.checkin_ok)
                                     notice = ok
                                     Notices.success(ok)
                                 },
@@ -209,7 +213,7 @@ fun DailyQuickFab(
                                         signedToday = true
                                         alreadyPrompted += 1
                                     }
-                                    val why = it.message?.takeIf { m -> m.isNotBlank() } ?: "签到失败，稍后再试"
+                                    val why = it.message?.takeIf { m -> m.isNotBlank() } ?: ctx.getString(R.string.checkin_failed)
                                     notice = why
                                     Notices.error(why)
                                 },
