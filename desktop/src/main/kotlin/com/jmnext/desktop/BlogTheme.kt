@@ -169,7 +169,7 @@ fun BlogTheme(
                     JmSurface(
                         modifier = Modifier.fillMaxSize(),
                         level = 1,
-                        fillAlpha = 0.86f,
+                        fillAlpha = 0.74f,
                         shape = androidx.compose.foundation.shape.RoundedCornerShape(jmSpec.radius.xl),
                     ) {
                         content()

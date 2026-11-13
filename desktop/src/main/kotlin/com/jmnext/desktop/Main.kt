@@ -304,7 +304,11 @@ private fun ComicCard(item: ListItem, updated: Boolean = false, onOpen: () -> Un
     val bitmap = rememberRemoteImage(coverUrl)
 
     Column(
-        modifier = Modifier.jmPressable { onOpen() },
+        modifier = Modifier
+            .jmPressable { onOpen() }
+            .clip(RoundedCornerShape(Radius.lg))
+            .background(MaterialTheme.colorScheme.surface.copy(alpha = 0.62f))
+            .padding(6.dp),
     ) {
         Box(
             modifier = Modifier
