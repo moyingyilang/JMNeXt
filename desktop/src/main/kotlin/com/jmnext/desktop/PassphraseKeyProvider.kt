@@ -1,5 +1,6 @@
 package com.jmnext.desktop
 
+import com.jmnext.desktop.i18n.I18n
 import com.jmnext.data.auth.SecretKeyProvider
 import java.awt.GraphicsEnvironment
 import java.io.File
@@ -69,7 +70,7 @@ class PassphraseKeyProvider(
 
     private fun passphrase(): CharArray? =
         System.getenv("JMNEXT_KEY_PASSPHRASE")?.toCharArray()
-            ?: prompt("请输入密钥口令（用于保护本机登录凭据）")
+            ?: prompt(I18n.tr("请输入密钥口令（用于保护本机登录凭据）"))
 
     private fun derive(pass: CharArray, salt: ByteArray): SecretKey {
         val spec = PBEKeySpec(pass, salt, ITERATIONS, 256)
@@ -138,7 +139,7 @@ class PassphraseKeyProvider(
             }
             val declined = File(dir, DECLINED_MARKER)
             if (declined.exists()) {
-                noticeUnprotectedOnce(dir, "你此前选择暂不使用口令保护")
+                noticeUnprotectedOnce(dir, I18n.tr("你此前选择暂不使用口令保护"))
                 return fallback()
             }
             if (File(dir, "$alias.key").exists()) {
@@ -150,7 +151,7 @@ class PassphraseKeyProvider(
                 FirstRunChoice.DECLINE -> {
                     runCatching { dir.mkdirs(); declined.writeText("declined") }
                     println("[凭据] 用户选择暂不使用口令保护（以后可设 JMNEXT_KEY_PASSPHRASE_ENABLE=1 开启）")
-                    noticeUnprotectedOnce(dir, "你选择了暂不使用口令保护")
+                    noticeUnprotectedOnce(dir, I18n.tr("你选择了暂不使用口令保护"))
                     fallback()
                 }
                 // issue #16：对话框没能弹出来（无图形环境/EDT 限制等）时**不能**写"拒绝"标记，
@@ -196,7 +197,7 @@ class PassphraseKeyProvider(
                             "可以读取并解密你的登录凭据（已有人公开了这样的读取程序）。\n\n" +
                             howTo + "\n" +
                             "（本提示只出现一次。）",
-                        "登录凭据保护提示",
+                        I18n.tr("登录凭据保护提示"),
                         JOptionPane.WARNING_MESSAGE
                     )
                     shown = true
@@ -221,9 +222,9 @@ class PassphraseKeyProvider(
                         "也能读走并解密（已有公开的读取示例）。设置口令后，没有口令就解不开。\n\n" +
                         "「设置口令」：每次启动需输入一次口令；\n" +
                         "「暂不使用」：与以前相同（本机其它程序可读），以后可再开启。"
-                    val opts = arrayOf("设置口令", "暂不使用")
+                    val opts = arrayOf(I18n.tr("设置口令"), I18n.tr("暂不使用"))
                     val r = JOptionPane.showOptionDialog(
-                        null, msg, "登录凭据保护", JOptionPane.DEFAULT_OPTION,
+                        null, msg, I18n.tr("登录凭据保护"), JOptionPane.DEFAULT_OPTION,
                         JOptionPane.QUESTION_MESSAGE, null, opts, opts[0]
                     )
                     // 关掉对话框（返回 CLOSED_OPTION）视为"没做选择"，不算拒绝，下次再问

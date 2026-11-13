@@ -187,3 +187,10 @@ dest_wallpaper_manual_only	只手动	只手動	只手動	Manual only	手動の�
 dest_wallpaper_online	在线壁纸	線上桌布	線上桌布	Online wallpaper	オンライン壁紙	Онлайн-обои	온라인 배경
 dest_wallpaper_pick_local	选择本地图片…	選擇本機圖片…	選擇本機圖片…	Choose a local image…	ローカル画像を選択…	Выбрать локальное изображение…	로컬 이미지 선택…
 dest_wallpaper_rotate	自动轮换：	自動輪換：	自動輪換：	Auto rotate:	自動切替：	Автосмена:	자동 전환:
+dest_cred_title_input	请输入密钥口令（用于保护本机登录凭据）	請輸入密鑰口令（用於保護本機登入憑證）	請輸入密鑰口令（用於保護本機登入憑證）	Enter the key passphrase (protects local login credentials)	キー用パスフレーズを入力（ローカルのログイン情報を保護します）	Введите пароль ключа (защищает локальные учётные данные)	키 암호문을 입력하세요(로컬 로그인 정보 보호)
+dest_cred_notice_title	登录凭据保护提示	登入憑證保護提示	登入憑證保護提示	Credential protection notice	ログイン情報の保護について	Уведомление о защите учётных данных	로그인 정보 보호 안내
+dest_cred_dialog_title	登录凭据保护	登入憑證保護	登入憑證保護	Credential protection	ログイン情報の保護	Защита учётных данных	로그인 정보 보호
+dest_cred_opt_set	设置口令	設定口令	設定口令	Set passphrase	パスフレーズを設定	Задать пароль	암호문 설정
+dest_cred_opt_skip	暂不使用	暫不使用	暫不使用	Not now	今は使わない	Не сейчас	나중에
+dest_cred_declined_before	你此前选择暂不使用口令保护	你此前選擇暫不使用口令保護	你此前選擇暫不使用口令保護	You previously chose not to use a passphrase	以前パスフレーズを使わない選択をしました	Вы ранее отказались от пароля	이전에 암호문을 사용하지 않기로 했습니다
+dest_cred_declined_now	你选择了暂不使用口令保护	你選擇了暫不使用口令保護	你選擇了暫不使用口令保護	You chose not to use a passphrase	パスフレーズを使わない選択をしました	Вы отказались от пароля	암호문을 사용하지 않기로 했습니다
