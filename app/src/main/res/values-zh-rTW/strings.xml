@@ -353,4 +353,20 @@
     <string name="dav_sync_failed_fmt">同步失敗：%1</string>
     <string name="dav_syncing">同步中…</string>
     <string name="dav_sync_now">立即同步</string>
+
+    <string name="more_title">更多</string>
+    <string name="more_loading">載入中…</string>
+    <string name="more_total_fmt">共 %1 項</string>
+    <string name="more_back">返回</string>
+    <string name="week_type_all">全部</string>
+    <string name="week_type_manga">漫畫</string>
+    <string name="week_type_hanman">韓漫</string>
+    <string name="week_day_mon">週一</string>
+    <string name="week_day_tue">週二</string>
+    <string name="week_day_wed">週三</string>
+    <string name="week_day_thu">週四</string>
+    <string name="week_day_fri">週五</string>
+    <string name="week_day_sat">週六</string>
+    <string name="week_day_sun">週日</string>
+    <string name="week_day_done">完結</string>
 </resources>

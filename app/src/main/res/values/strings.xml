@@ -372,4 +372,21 @@
     <string name="dav_sync_failed_fmt">同步失败：%1</string>
     <string name="dav_syncing">同步中…</string>
     <string name="dav_sync_now">立即同步</string>
+
+    <!-- 更多列表 / 周刊类型 -->
+    <string name="more_title">更多</string>
+    <string name="more_loading">加载中…</string>
+    <string name="more_total_fmt">共 %1 项</string>
+    <string name="more_back">返回</string>
+    <string name="week_type_all">全部</string>
+    <string name="week_type_manga">漫画</string>
+    <string name="week_type_hanman">韩漫</string>
+    <string name="week_day_mon">周一</string>
+    <string name="week_day_tue">周二</string>
+    <string name="week_day_wed">周三</string>
+    <string name="week_day_thu">周四</string>
+    <string name="week_day_fri">周五</string>
+    <string name="week_day_sat">周六</string>
+    <string name="week_day_sun">周日</string>
+    <string name="week_day_done">完结</string>
 </resources>

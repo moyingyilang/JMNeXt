@@ -1,5 +1,8 @@
 package com.jmnext.ui.screens.more
 
+import androidx.annotation.StringRes
+import androidx.compose.ui.res.stringResource
+import com.jmnext.R
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -55,10 +58,10 @@ import kotlinx.coroutines.launch
 import java.util.Calendar
 
 /** 连载更新表 `type` 的三个档位（官方 `ComicType`）。 */
-enum class WeeklyType(val key: String, val label: String) {
-    ALL(JmRepository.WEEKLY_TYPE_ALL, "全部"),
-    MANGA(JmRepository.WEEKLY_TYPE_MANGA, "漫画"),
-    HANMAN(JmRepository.WEEKLY_TYPE_HANMAN, "韩漫"),
+enum class WeeklyType(val key: String, @StringRes val labelRes: Int) {
+    ALL(JmRepository.WEEKLY_TYPE_ALL, com.jmnext.R.string.week_type_all),
+    MANGA(JmRepository.WEEKLY_TYPE_MANGA, com.jmnext.R.string.week_type_manga),
+    HANMAN(JmRepository.WEEKLY_TYPE_HANMAN, com.jmnext.R.string.week_type_hanman),
 }
 
 /**
@@ -68,15 +71,15 @@ enum class WeeklyType(val key: String, val label: String) {
  * 这个映射来自官方 `getWeekInfo`（把 JS 的「周日=0」换成「周一=1」，
  * 第 8 个标签「完结」记 0），不能按直觉从 0 起数。
  */
-enum class WeeklyDay(val key: Int, val label: String) {
-    MON(1, "周一"),
-    TUE(2, "周二"),
-    WED(3, "周三"),
-    THU(4, "周四"),
-    FRI(5, "周五"),
-    SAT(6, "周六"),
-    SUN(7, "周日"),
-    DONE(0, "完结"),
+enum class WeeklyDay(val key: Int, @StringRes val labelRes: Int) {
+    MON(1, com.jmnext.R.string.week_day_mon),
+    TUE(2, com.jmnext.R.string.week_day_tue),
+    WED(3, com.jmnext.R.string.week_day_wed),
+    THU(4, com.jmnext.R.string.week_day_thu),
+    FRI(5, com.jmnext.R.string.week_day_fri),
+    SAT(6, com.jmnext.R.string.week_day_sat),
+    SUN(7, com.jmnext.R.string.week_day_sun),
+    DONE(0, com.jmnext.R.string.week_day_done),
     ;
 
     companion object {
@@ -242,17 +245,17 @@ fun MoreListScreen(
 
     Column(modifier = modifier.fillMaxSize()) {
         GlassTopBar(
-            title = title.ifBlank { "更多" },
+            title = title.ifBlank { stringResource(R.string.more_title) },
             subtitle = when {
-                state.loading -> "加载中…"
-                state.total > 0 -> "共 ${state.total} 项"
+                state.loading -> stringResource(R.string.more_loading)
+                state.total > 0 -> stringResource(R.string.more_total_fmt, state.total)
                 else -> null
             },
             navigation = {
                 IconButton(onClick = onBack) {
                     Icon(
                         imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                        contentDescription = "返回",
+                        contentDescription = stringResource(R.string.more_back),
                         tint = c.accent,
                     )
                 }
@@ -325,13 +328,13 @@ private fun WeeklyFilterBar(
     Column(verticalArrangement = Arrangement.spacedBy(Spacing.xs)) {
         ChipRow(
             label = "类型",
-            options = WeeklyType.entries.map { it to it.label },
+            options = WeeklyType.entries.map { it to stringResource(it.labelRes) },
             selected = type,
             onSelect = onType,
         )
         ChipRow(
             label = "更新",
-            options = WeeklyDay.entries.map { it to it.label },
+            options = WeeklyDay.entries.map { it to stringResource(it.labelRes) },
             selected = day,
             onSelect = onDay,
         )
