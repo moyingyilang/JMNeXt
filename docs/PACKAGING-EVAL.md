@@ -43,3 +43,30 @@ Silo / FosterStack / Cloudflare Worker 这类远程缓存的价值在多机或 C
 3. 交叉架构仍用 jlink 拼运行时，但只拼一次并缓存
 
 这比换框架风险小，也和现有脚本兼容。
+
+## 六、真正省时间的地方：压缩算法（已改，实测 5 倍）
+
+`package-linux.sh` 分段计时（aarch64，146M 应用镜像）：
+
+| 阶段 | 改前 | 改后 |
+| --- | --- | --- |
+| 构建 | 0–3 秒 | 0–3 秒 |
+| 自检 | 1 秒 | 1 秒 |
+| 便携 tar.gz | 13 秒 | 13 秒 |
+| deb | 68 秒 | 2 秒 |
+| rpm | 101 秒 | 9 秒 |
+| AppImage | 10 秒 | 10 秒 |
+| 合计 | 194 秒 | 38 秒 |
+
+原因很简单：deb 与 rpm 默认用 xz -6 压 146M，慢在压缩；改用 zstd（`dpkg-deb -Zzstd -z3`、rpm 的 `_binary_payload w3.zstdio`）后几乎瞬间。
+
+代价是体积：
+
+| 产物 | xz | zstd |
+| --- | --- | --- |
+| deb | 54M | 66M |
+| rpm | 58M | 66M |
+
+现代 Debian/Ubuntu 与 Fedora 都支持 zstd 负载；要兼容很老的发行版时，把这两处改回 xz 即可（脚本里只改一行）。
+
+验证：`dpkg-deb -c` 可列出 197 个条目、`rpm -qip` 可读、payload 分别是 `data.tar.zst` 与 zstd。

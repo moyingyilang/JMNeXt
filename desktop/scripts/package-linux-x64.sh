@@ -79,7 +79,7 @@ Priority: optional
 Description: JMNeXt desktop client (x86_64)
  A third-party JMComic client built with Kotlin and Compose Desktop.
 CTL
-dpkg-deb --build --root-owner-group "$D" "$OUT/Linux-x86_64-$V.deb" >/dev/null
+dpkg-deb -Zzstd -z3 --build --root-owner-group "$D" "$OUT/Linux-x86_64-$V.deb" >/dev/null
 
 TOP=$(mktemp -d)
 mkdir -p "$TOP"/{BUILD,RPMS,SOURCES,SPECS,SRPMS}
@@ -128,7 +128,7 @@ if true; then  # 原生 rpmbuild + 自定义 rpmrc，见 docs/DESKTOP-PACKAGING.
     printf 'arch_compat: aarch64: x86_64\nbuildarch_compat: aarch64: x86_64\n' >> "$RPMRC"
   fi
   # 系统 rpmbuild 就是 aarch64，不需要私有解包那份
-  /usr/bin/rpmbuild -bb --rcfile "$RPMRC" --target x86_64 \
+  /usr/bin/rpmbuild -bb --rcfile "$RPMRC" --target x86_64 --define "_binary_payload w3.zstdio" \
     --define "_topdir $TOP" --define "_buildrootdir $TOP/BUILDROOT" --define "__strip /bin/true" \
     "$TOP/SPECS/jmnext.spec" >/tmp/rpm-x64.log 2>&1 || true
   if [ -n "$(find "$TOP/RPMS" -name "*.rpm" 2>/dev/null)" ]; then RPM_OK=1; fi

@@ -86,7 +86,7 @@ Description: JMNeXt desktop client
  A third-party JMComic client built with Kotlin and Compose Desktop.
 CTL
 sed -i "s/@V@/$V/" "$STAGE/DEBIAN/control"
-dpkg-deb --build --root-owner-group "$STAGE" "$OUT/Linux-aarch64-$V.deb" >/dev/null
+dpkg-deb -Zzstd -z3 --build --root-owner-group "$STAGE" "$OUT/Linux-aarch64-$V.deb" >/dev/null
 
 echo "== 5/6 rpm =="
 TOP=$(mktemp -d)
@@ -124,7 +124,7 @@ sed -i "s/@V@/$V/" "$TOP/SPECS/jmnext.spec"
 # aarch64 的 rpmbuild：装 rpm:amd64 时系统那份被换成 x86_64 了，故这里用私有解包的 arm64 版
 # 系统 rpmbuild 就是 aarch64（容器本身是 arm64），不需要私有解包那份
 RPMBUILD_AARCH64=/usr/bin/rpmbuild
-if "$RPMBUILD_AARCH64" -bb --define "_topdir $TOP" --define "_target_cpu aarch64" "$TOP/SPECS/jmnext.spec"; then
+if "$RPMBUILD_AARCH64" -bb --define "_topdir $TOP" --define "_target_cpu aarch64" --define "_binary_payload w3.zstdio" "$TOP/SPECS/jmnext.spec"; then
   find "$TOP/RPMS" -name "*.rpm" -exec cp {} "$OUT/Linux-aarch64-$V.rpm" \;
   echo "  rpm 成功"
 else
