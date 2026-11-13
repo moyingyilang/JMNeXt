@@ -569,4 +569,23 @@
     <string name="login_reason_favorite">收藏需要登录</string>
     <string name="login_reason_comment">发表评论需要登录</string>
     <string name="login_reason_tags">标签收藏需要登录</string>
+
+    <!-- 屏蔽添加与杂项 -->
+    <string name="block_remove_cd_fmt">移除 %1</string>
+    <string name="block_kind_word">关键词</string>
+    <string name="block_kind_tag">标签</string>
+    <string name="block_kind_category">分类名</string>
+    <string name="block_add_title_fmt">添加%1</string>
+    <string name="block_eg_word">例如：NTR</string>
+    <string name="block_eg_tag">例如：纯爱</string>
+    <string name="block_eg_category">例如：同人</string>
+    <string name="block_len_hint_fmt">%1~%2 个字符</string>
+    <string name="block_add">添加</string>
+    <string name="block_cancel">取消</string>
+    <string name="more_empty_week">这天的更新是空的</string>
+    <string name="more_empty_section">这个分区暂时没有内容</string>
+    <string name="more_type_label">类型</string>
+    <string name="more_day_label">更新</string>
+    <string name="folder_move_title">移入收藏夹</string>
+    <string name="common_unknown_error">未知错误</string>
 </resources>

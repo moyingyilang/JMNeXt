@@ -224,7 +224,7 @@ private fun BlockSection(
                                 ) {
                                     Icon(
                                         imageVector = Icons.Filled.Close,
-                                        contentDescription = "移除 $value",
+                                        contentDescription = stringResource(R.string.block_remove_cd_fmt, value),
                                         tint = c.accent,
                                         modifier = Modifier.size(14.dp),
                                     )
@@ -248,14 +248,14 @@ private fun AddBlockDialog(
     val c = JmTheme.colors
     var text by remember { mutableStateOf("") }
     val label = when (kind) {
-        BlockKind.Word -> "关键词"
-        BlockKind.Tag -> "标签"
-        BlockKind.Category -> "分类名"
+        BlockKind.Word -> stringResource(R.string.block_kind_word)
+        BlockKind.Tag -> stringResource(R.string.block_kind_tag)
+        BlockKind.Category -> stringResource(R.string.block_kind_category)
     }
 
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text("添加$label") },
+        title = { Text(stringResource(R.string.block_add_title_fmt, label)) },
         text = {
             Column {
                 OutlinedTextField(
@@ -265,16 +265,16 @@ private fun AddBlockDialog(
                     placeholder = {
                         Text(
                             text = when (kind) {
-                                BlockKind.Word -> "例如：NTR"
-                                BlockKind.Tag -> "例如：纯爱"
-                                BlockKind.Category -> "例如：同人"
+                                BlockKind.Word -> stringResource(R.string.block_eg_word)
+                                BlockKind.Tag -> stringResource(R.string.block_eg_tag)
+                                BlockKind.Category -> stringResource(R.string.block_eg_category)
                             },
                             color = c.textTertiary,
                         )
                     },
                 )
                 Text(
-                    text = "$MIN_LENGTH~$MAX_LENGTH 个字符",
+                    text = stringResource(R.string.block_len_hint_fmt, MIN_LENGTH, MAX_LENGTH),
                     style = MaterialTheme.typography.labelSmall,
                     color = c.textTertiary,
                     modifier = Modifier.padding(top = Spacing.xs),
@@ -283,11 +283,11 @@ private fun AddBlockDialog(
         },
         confirmButton = {
             TextButton(onClick = { onConfirm(text) }, enabled = text.isNotBlank()) {
-                Text("添加", color = c.accent)
+                Text(stringResource(R.string.block_add), color = c.accent)
             }
         },
         dismissButton = {
-            TextButton(onClick = onDismiss) { Text("取消", color = c.textSecondary) }
+            TextButton(onClick = onDismiss) { Text(stringResource(R.string.block_cancel), color = c.textSecondary) }
         },
     )
 }

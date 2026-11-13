@@ -280,7 +280,7 @@ fun MoreListScreen(
             )
 
             state.items.isEmpty() -> MessageState(
-                title = if (state.weekly) "这天的更新是空的" else "这个分区暂时没有内容",
+                title = if (state.weekly) stringResource(R.string.more_empty_week) else stringResource(R.string.more_empty_section),
                 onRetry = { vm.load() },
             )
 
@@ -327,13 +327,13 @@ private fun WeeklyFilterBar(
 ) {
     Column(verticalArrangement = Arrangement.spacedBy(Spacing.xs)) {
         ChipRow(
-            label = "类型",
+            label = stringResource(R.string.more_type_label),
             options = WeeklyType.entries.map { it to stringResource(it.labelRes) },
             selected = type,
             onSelect = onType,
         )
         ChipRow(
-            label = "更新",
+            label = stringResource(R.string.more_day_label),
             options = WeeklyDay.entries.map { it to stringResource(it.labelRes) },
             selected = day,
             onSelect = onDay,

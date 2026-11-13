@@ -609,7 +609,7 @@ fun AccountListScreen(
         )
 
         is FolderDialog.Move -> FolderPickerDialog(
-            title = "移入收藏夹",
+            title = stringResource(R.string.folder_move_title),
             folders = state.folders,
             onDismiss = { dialog = FolderDialog.None },
             onPick = { folder ->

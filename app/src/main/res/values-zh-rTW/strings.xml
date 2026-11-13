@@ -536,4 +536,22 @@
     <string name="login_reason_favorite">收藏需要登入</string>
     <string name="login_reason_comment">發表評論需要登入</string>
     <string name="login_reason_tags">標籤收藏需要登入</string>
+
+    <string name="block_remove_cd_fmt">移除 %1</string>
+    <string name="block_kind_word">關鍵字</string>
+    <string name="block_kind_tag">標籤</string>
+    <string name="block_kind_category">分類名</string>
+    <string name="block_add_title_fmt">新增%1</string>
+    <string name="block_eg_word">例如：NTR</string>
+    <string name="block_eg_tag">例如：純愛</string>
+    <string name="block_eg_category">例如：同人</string>
+    <string name="block_len_hint_fmt">%1~%2 個字元</string>
+    <string name="block_add">新增</string>
+    <string name="block_cancel">取消</string>
+    <string name="more_empty_week">這天的更新是空的</string>
+    <string name="more_empty_section">這個分區暫時沒有內容</string>
+    <string name="more_type_label">類型</string>
+    <string name="more_day_label">更新</string>
+    <string name="folder_move_title">移至收藏夾</string>
+    <string name="common_unknown_error">未知錯誤</string>
 </resources>

@@ -1,5 +1,6 @@
 package com.jmnext.ui.screens.settings
 
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import com.jmnext.R
 import androidx.compose.foundation.layout.Arrangement
@@ -49,6 +50,7 @@ import kotlinx.coroutines.launch
  */
 @Composable
 fun WebDavScreen(app: JmApp, onBack: () -> Unit) {
+    val ctx = androidx.compose.ui.platform.LocalContext.current
     val settings = remember { app.syncSettings }
     var cfg by remember { mutableStateOf(settings.load()) }
     var showPass by remember { mutableStateOf(false) }
@@ -72,7 +74,7 @@ fun WebDavScreen(app: JmApp, onBack: () -> Unit) {
         }
 
         Text(
-            "同步阅读历史、收藏与屏蔽名单。多台设备指向同一个文件即可互相同步。",
+            stringResource(R.string.dav_desc),
             style = MaterialTheme.typography.bodySmall,
         )
 
@@ -134,8 +136,8 @@ fun WebDavScreen(app: JmApp, onBack: () -> Unit) {
                     busy = true; message = ""; report = null
                     scope.launch {
                         app.syncService().syncNow().fold(
-                            onSuccess = { report = it; message = "同步完成" },
-                            onFailure = { message = "同步失败：${it.message}" },
+                            onSuccess = { report = it; message = ctx.getString(R.string.dav_sync_done) },
+                            onFailure = { message = ctx.getString(R.string.dav_sync_failed_fmt, it.message.orEmpty()) },
                         )
                         busy = false
                     }

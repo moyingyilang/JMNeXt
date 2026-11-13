@@ -283,7 +283,7 @@ fun TagPickerDialog(
         },
         dismissButton = {
             androidx.compose.material3.TextButton(onClick = onDismiss) {
-                Text("取消", color = c.textSecondary)
+                Text(stringResource(R.string.block_cancel), color = c.textSecondary)
             }
         },
     )
