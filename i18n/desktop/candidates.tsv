@@ -1,0 +1,1159 @@
+desktop/src/main/kotlin/com/jmnext/desktop/AboutScreen.kt:40	有更新
+desktop/src/main/kotlin/com/jmnext/desktop/AboutScreen.kt:51	关于
+desktop/src/main/kotlin/com/jmnext/desktop/AboutScreen.kt:53	版本
+desktop/src/main/kotlin/com/jmnext/desktop/AboutScreen.kt:54	版本号
+desktop/src/main/kotlin/com/jmnext/desktop/AboutScreen.kt:55	平台
+desktop/src/main/kotlin/com/jmnext/desktop/AboutScreen.kt:56	运行时
+desktop/src/main/kotlin/com/jmnext/desktop/AboutScreen.kt:57	界面
+desktop/src/main/kotlin/com/jmnext/desktop/AboutScreen.kt:57	Compose Desktop（主题取自 moyingyilang.github.io 的设计令牌）
+desktop/src/main/kotlin/com/jmnext/desktop/AboutScreen.kt:60	检查更新
+desktop/src/main/kotlin/com/jmnext/desktop/AboutScreen.kt:62	从 GitHub Releases 读取最新版本号与本机比较，只发一个请求、不上传任何信息。
+desktop/src/main/kotlin/com/jmnext/desktop/AboutScreen.kt:80	没取到更新信息（网络不通，或 GitHub 暂时不可用）
+desktop/src/main/kotlin/com/jmnext/desktop/AboutScreen.kt:81	有新版本：$tag
+desktop/src/main/kotlin/com/jmnext/desktop/AboutScreen.kt:82	已是最新版本（远端 $tag）
+desktop/src/main/kotlin/com/jmnext/desktop/AboutScreen.kt:84	[关于] $result
+desktop/src/main/kotlin/com/jmnext/desktop/AboutScreen.kt:87	检查中…
+desktop/src/main/kotlin/com/jmnext/desktop/AboutScreen.kt:87	检查更新
+desktop/src/main/kotlin/com/jmnext/desktop/AboutScreen.kt:100	下载更新包（$asset，推荐）
+desktop/src/main/kotlin/com/jmnext/desktop/AboutScreen.kt:100	或下载 $asset
+desktop/src/main/kotlin/com/jmnext/desktop/AboutScreen.kt:104	推荐包内含两套运行时，会自动按架构选择，无需分辨。
+desktop/src/main/kotlin/com/jmnext/desktop/AboutScreen.kt:108	打开发布页
+desktop/src/main/kotlin/com/jmnext/desktop/AboutScreen.kt:117	说明
+desktop/src/main/kotlin/com/jmnext/desktop/AboutScreen.kt:120	JMNeXt 是禁漫（JMComic）的第三方客户端，用 Kotlin 与 Compose 重写。
+desktop/src/main/kotlin/com/jmnext/desktop/AboutScreen.kt:121	不做插槽广告、不采集行为，登录凭证经系统密钥库加密保存。
+desktop/src/main/kotlin/com/jmnext/desktop/AboutScreen.kt:122	阅读支持条漫与双页、伪长图拼接无接缝；阅读进度与收藏本地保存，
+desktop/src/main/kotlin/com/jmnext/desktop/AboutScreen.kt:123	也能通过 WebDAV 在你自己的网盘上跨设备同步（历史、收藏、屏蔽名单）。
+desktop/src/main/kotlin/com/jmnext/desktop/AboutScreen.kt:124	屏蔽规则按关键词 / 分类 / 标签生效，命中即从列表里消失。
+desktop/src/main/kotlin/com/jmnext/desktop/AboutScreen.kt:125	桌面端与 Android 端共用同一份跨平台数据层（:shared），
+desktop/src/main/kotlin/com/jmnext/desktop/AboutScreen.kt:126	差异只在平台实现（键值存储、密钥来源、图像解码）与界面。
+desktop/src/main/kotlin/com/jmnext/desktop/AboutScreen.kt:131	链接
+desktop/src/main/kotlin/com/jmnext/desktop/AboutScreen.kt:132	项目主页
+desktop/src/main/kotlin/com/jmnext/desktop/AboutScreen.kt:134	发布页（下载新版本）
+desktop/src/main/kotlin/com/jmnext/desktop/AboutScreen.kt:136	问题反馈
+desktop/src/main/kotlin/com/jmnext/desktop/AboutScreen.kt:139	许可
+desktop/src/main/kotlin/com/jmnext/desktop/AboutScreen.kt:141	本项目以 AGPL-3.0-only 授权。禁漫、JMComic 及相关内容的权利归其权利人所有；
+desktop/src/main/kotlin/com/jmnext/desktop/AboutScreen.kt:142	本应用与官方无关，仅提供客户端实现。
+desktop/src/main/kotlin/com/jmnext/desktop/AppearanceScreen.kt:55	外观
+desktop/src/main/kotlin/com/jmnext/desktop/AppearanceScreen.kt:59	界面风格
+desktop/src/main/kotlin/com/jmnext/desktop/AppearanceScreen.kt:61	换的不只是透明度 —— 圆角与壁纸是否模糊一起换。手机上的实时背景模糊在桌面上拿不到，这里用等效近似。
+desktop/src/main/kotlin/com/jmnext/desktop/AppearanceScreen.kt:66	界面风格
+desktop/src/main/kotlin/com/jmnext/desktop/AppearanceScreen.kt:72	当前：${Appearance.style.label}（面板透明度 ${(Appearance.style.surfaceAlpha * 100).toInt()}%、圆角 ${Appearance.style.corner}dp
+desktop/src/main/kotlin/com/jmnext/desktop/AppearanceScreen.kt:73	、壁纸模糊
+desktop/src/main/kotlin/com/jmnext/desktop/AppearanceScreen.kt:73	、壁纸不模糊
+desktop/src/main/kotlin/com/jmnext/desktop/AppearanceScreen.kt:81	壁纸模糊：${Appearance.wallpaperBlur}dp
+desktop/src/main/kotlin/com/jmnext/desktop/AppearanceScreen.kt:88	面板浓度：${(Appearance.effectiveAlpha * 100).toInt()}%（在所选风格基础上再调）
+desktop/src/main/kotlin/com/jmnext/desktop/AppearanceScreen.kt:96	壁纸压暗：${Appearance.dim}%（0..100，到 100 壁纸等于纯黑）
+desktop/src/main/kotlin/com/jmnext/desktop/AppearanceScreen.kt:108	壁纸
+desktop/src/main/kotlin/com/jmnext/desktop/AppearanceScreen.kt:150	清除壁纸缓存
+desktop/src/main/kotlin/com/jmnext/desktop/AppearanceScreen.kt:160	外观
+desktop/src/main/kotlin/com/jmnext/desktop/AppearanceScreen.kt:160	选择本地壁纸：$chosen
+desktop/src/main/kotlin/com/jmnext/desktop/AppearanceScreen.kt:162	选择本地图片…
+desktop/src/main/kotlin/com/jmnext/desktop/AppearanceScreen.kt:170	清除
+desktop/src/main/kotlin/com/jmnext/desktop/AppearanceScreen.kt:175	如果选了没反应，就是这里的问题，我会改成用本地解码。
+desktop/src/main/kotlin/com/jmnext/desktop/AppearanceScreen.kt:184	深浅色
+desktop/src/main/kotlin/com/jmnext/desktop/AppearanceScreen.kt:185	浅色
+desktop/src/main/kotlin/com/jmnext/desktop/AppearanceScreen.kt:185	深色
+desktop/src/main/kotlin/com/jmnext/desktop/AppearanceScreen.kt:190	当前：深色
+desktop/src/main/kotlin/com/jmnext/desktop/AppearanceScreen.kt:190	当前：浅色
+desktop/src/main/kotlin/com/jmnext/desktop/AppearanceScreen.kt:199	漫画渲染
+desktop/src/main/kotlin/com/jmnext/desktop/AppearanceScreen.kt:215	只作用于漫画画面，不影响界面配色。墨水屏设备选「墨水屏」：去色并提高对比度。
+desktop/src/main/kotlin/com/jmnext/desktop/AppearanceScreen.kt:228	连载更新提醒
+desktop/src/main/kotlin/com/jmnext/desktop/AppearanceScreen.kt:230	你追的连载有更新时提醒（默认关）。桌面端仅在程序运行时有效；系统托盘不能用时改为在窗口内提示。
+desktop/src/main/kotlin/com/jmnext/desktop/AppearanceScreen.kt:235	开启
+desktop/src/main/kotlin/com/jmnext/desktop/AppearanceScreen.kt:235	关闭
+desktop/src/main/kotlin/com/jmnext/desktop/AppearanceScreen.kt:247	阅读形态
+desktop/src/main/kotlin/com/jmnext/desktop/AppearanceScreen.kt:249	进入阅读页时的默认形态：纵向连续滚动（与 Android 的默认值一致）或横向逐页。改完下次进阅读页生效。
+desktop/src/main/kotlin/com/jmnext/desktop/AppearanceScreen.kt:255	纵向滚动
+desktop/src/main/kotlin/com/jmnext/desktop/AppearanceScreen.kt:255	横向翻页
+desktop/src/main/kotlin/com/jmnext/desktop/AppearanceScreen.kt:268	当前：${if (ReaderModePref.mode == ReaderMode.Scroll) 
+desktop/src/main/kotlin/com/jmnext/desktop/AppearanceScreen.kt:268	横向翻页
+desktop/src/main/kotlin/com/jmnext/desktop/AppearanceScreen.kt:278	选择壁纸图片
+desktop/src/main/kotlin/com/jmnext/desktop/BlockScreen.kt:36	有 N 条被挡掉
+desktop/src/main/kotlin/com/jmnext/desktop/BlockScreen.kt:37	屏蔽没生效
+desktop/src/main/kotlin/com/jmnext/desktop/BlockScreen.kt:44	屏蔽设置
+desktop/src/main/kotlin/com/jmnext/desktop/BlockScreen.kt:45	本地屏蔽存储未初始化。
+desktop/src/main/kotlin/com/jmnext/desktop/BlockScreen.kt:53	屏蔽设置
+desktop/src/main/kotlin/com/jmnext/desktop/BlockScreen.kt:55	命中的作品会从所有列表里隐藏（首页、搜索、分类、周刊、随机、收藏…）。
+desktop/src/main/kotlin/com/jmnext/desktop/BlockScreen.kt:56	被挡掉的条数会在对应页面顶部提示，不会静默消失。
+desktop/src/main/kotlin/com/jmnext/desktop/BlockScreen.kt:63	关键词
+desktop/src/main/kotlin/com/jmnext/desktop/BlockScreen.kt:64	例如：NTR。命中标题、作者、简介里的任意一处即隐藏。
+desktop/src/main/kotlin/com/jmnext/desktop/BlockScreen.kt:70	标签
+desktop/src/main/kotlin/com/jmnext/desktop/BlockScreen.kt:71	命中作品标签即隐藏。标签来自作品详情，列表接口不下发，因此会多一次请求。
+desktop/src/main/kotlin/com/jmnext/desktop/BlockScreen.kt:77	分类名
+desktop/src/main/kotlin/com/jmnext/desktop/BlockScreen.kt:78	例如：同人。命中分区或分类名即隐藏。
+desktop/src/main/kotlin/com/jmnext/desktop/BlockScreen.kt:112	添加$title
+desktop/src/main/kotlin/com/jmnext/desktop/BlockScreen.kt:124	[屏蔽] 添加$title：$v
+desktop/src/main/kotlin/com/jmnext/desktop/BlockScreen.kt:128	添加
+desktop/src/main/kotlin/com/jmnext/desktop/BlockScreen.kt:133	（空）
+desktop/src/main/kotlin/com/jmnext/desktop/BlockScreen.kt:149	[屏蔽] 移除$title：$v
+desktop/src/main/kotlin/com/jmnext/desktop/BlockScreen.kt:150	移除
+desktop/src/main/kotlin/com/jmnext/desktop/BlogTheme.kt:24	照着感觉调的
+desktop/src/main/kotlin/com/jmnext/desktop/BlogTheme.kt:110	直
+desktop/src/main/kotlin/com/jmnext/desktop/BlogTheme.kt:110	骨
+desktop/src/main/kotlin/com/jmnext/desktop/BlogTheme.kt:110	汉字显示有毛病
+desktop/src/main/kotlin/com/jmnext/desktop/BlogTheme.kt:167	汉字显示有毛病
+desktop/src/main/kotlin/com/jmnext/desktop/CategoryScreen.kt:48	被挡掉多少条
+desktop/src/main/kotlin/com/jmnext/desktop/CategoryScreen.kt:57	全部
+desktop/src/main/kotlin/com/jmnext/desktop/CategoryScreen.kt:60	选中了哪个 slug
+desktop/src/main/kotlin/com/jmnext/desktop/CategoryScreen.kt:61	直接收回
+desktop/src/main/kotlin/com/jmnext/desktop/CategoryScreen.kt:63	全部
+desktop/src/main/kotlin/com/jmnext/desktop/CategoryScreen.kt:70	正在取分类…
+desktop/src/main/kotlin/com/jmnext/desktop/CategoryScreen.kt:75	按标签搜索
+desktop/src/main/kotlin/com/jmnext/desktop/CategoryScreen.kt:93	标签搜索
+desktop/src/main/kotlin/com/jmnext/desktop/CategoryScreen.kt:96	$name：已加载 ${items.size} 条
+desktop/src/main/kotlin/com/jmnext/desktop/CategoryScreen.kt:97	（本页屏蔽 ${paged.hidden} 条）
+desktop/src/main/kotlin/com/jmnext/desktop/CategoryScreen.kt:98	[分类] $status
+desktop/src/main/kotlin/com/jmnext/desktop/CategoryScreen.kt:102	加载失败：${it.message}
+desktop/src/main/kotlin/com/jmnext/desktop/CategoryScreen.kt:103	[分类] $status
+desktop/src/main/kotlin/com/jmnext/desktop/CategoryScreen.kt:116	用热门标签兜底：${list.size} 个
+desktop/src/main/kotlin/com/jmnext/desktop/CategoryScreen.kt:117	分类
+desktop/src/main/kotlin/com/jmnext/desktop/CategoryScreen.kt:121	热门标签也拿不到：
+desktop/src/main/kotlin/com/jmnext/desktop/CategoryScreen.kt:122	分类
+desktop/src/main/kotlin/com/jmnext/desktop/CategoryScreen.kt:122	热门标签兜底失败
+desktop/src/main/kotlin/com/jmnext/desktop/CategoryScreen.kt:145	分类 ${nodes.size} 个
+desktop/src/main/kotlin/com/jmnext/desktop/CategoryScreen.kt:146	，标签组 ${blocks.size} 组
+desktop/src/main/kotlin/com/jmnext/desktop/CategoryScreen.kt:147	分类
+desktop/src/main/kotlin/com/jmnext/desktop/CategoryScreen.kt:152	原因未知
+desktop/src/main/kotlin/com/jmnext/desktop/CategoryScreen.kt:153	分类加载失败：$treeError，改用热门标签兜底
+desktop/src/main/kotlin/com/jmnext/desktop/CategoryScreen.kt:154	分类
+desktop/src/main/kotlin/com/jmnext/desktop/CategoryScreen.kt:155	分类
+desktop/src/main/kotlin/com/jmnext/desktop/CategoryScreen.kt:155	分类加载失败
+desktop/src/main/kotlin/com/jmnext/desktop/CategoryScreen.kt:158	全部
+desktop/src/main/kotlin/com/jmnext/desktop/CategoryScreen.kt:172	标签「$tag」：已加载 ${items.size} 条 / 共 ${result.page.total}
+desktop/src/main/kotlin/com/jmnext/desktop/CategoryScreen.kt:173	（本页屏蔽 ${result.page.hidden} 条）
+desktop/src/main/kotlin/com/jmnext/desktop/CategoryScreen.kt:174	分类
+desktop/src/main/kotlin/com/jmnext/desktop/CategoryScreen.kt:178	按标签搜索失败：${it.message}
+desktop/src/main/kotlin/com/jmnext/desktop/CategoryScreen.kt:179	分类
+desktop/src/main/kotlin/com/jmnext/desktop/CategoryScreen.kt:179	按标签搜索失败 tag=$tag
+desktop/src/main/kotlin/com/jmnext/desktop/CategoryScreen.kt:189	点了没反应
+desktop/src/main/kotlin/com/jmnext/desktop/CategoryScreen.kt:195	分类
+desktop/src/main/kotlin/com/jmnext/desktop/CategoryScreen.kt:195	按标签搜索（交给外层路由）：$tag
+desktop/src/main/kotlin/com/jmnext/desktop/CategoryScreen.kt:200	标签：$tag
+desktop/src/main/kotlin/com/jmnext/desktop/CategoryScreen.kt:217	分类
+desktop/src/main/kotlin/com/jmnext/desktop/CategoryScreen.kt:218	全部
+desktop/src/main/kotlin/com/jmnext/desktop/CategoryScreen.kt:218	全部
+desktop/src/main/kotlin/com/jmnext/desktop/CategoryScreen.kt:218	全部
+desktop/src/main/kotlin/com/jmnext/desktop/CategoryScreen.kt:259	最新
+desktop/src/main/kotlin/com/jmnext/desktop/CategoryScreen.kt:260	最多爱心
+desktop/src/main/kotlin/com/jmnext/desktop/CategoryScreen.kt:261	总排行
+desktop/src/main/kotlin/com/jmnext/desktop/CategoryScreen.kt:262	月排行
+desktop/src/main/kotlin/com/jmnext/desktop/CategoryScreen.kt:263	周排行
+desktop/src/main/kotlin/com/jmnext/desktop/CategoryScreen.kt:276	热门标签兜底
+desktop/src/main/kotlin/com/jmnext/desktop/CategoryScreen.kt:276	分类 ${nodes.size} 个
+desktop/src/main/kotlin/com/jmnext/desktop/CategoryScreen.kt:277	返回热门标签
+desktop/src/main/kotlin/com/jmnext/desktop/CategoryScreen.kt:277	返回分类
+desktop/src/main/kotlin/com/jmnext/desktop/CategoryScreen.kt:286	加载更多
+desktop/src/main/kotlin/com/jmnext/desktop/CategoryScreen.kt:297	分类拿不到
+desktop/src/main/kotlin/com/jmnext/desktop/CategoryScreen.kt:299	热门标签也拿不到。可以点「重试」再取一次。
+desktop/src/main/kotlin/com/jmnext/desktop/CategoryScreen.kt:300	重试
+desktop/src/main/kotlin/com/jmnext/desktop/CategoryScreen.kt:302	热门标签（点标签按标签搜索）
+desktop/src/main/kotlin/com/jmnext/desktop/ChapterPickerDialog.kt:35	翻页后一眼能找到「我在哪」
+desktop/src/main/kotlin/com/jmnext/desktop/ChapterPickerDialog.kt:43	这页内容缺了一半
+desktop/src/main/kotlin/com/jmnext/desktop/ChapterPickerDialog.kt:63	选择章节
+desktop/src/main/kotlin/com/jmnext/desktop/ChapterPickerDialog.kt:94	第 $number 话
+desktop/src/main/kotlin/com/jmnext/desktop/ChapterPickerDialog.kt:107	上一页
+desktop/src/main/kotlin/com/jmnext/desktop/ChapterPickerDialog.kt:109	第 ${safePage + 1}/$pageCount 页
+desktop/src/main/kotlin/com/jmnext/desktop/ChapterPickerDialog.kt:113	下一页
+desktop/src/main/kotlin/com/jmnext/desktop/ChapterPickerDialog.kt:117	关闭
+desktop/src/main/kotlin/com/jmnext/desktop/ComicCover.kt:66	(无标题)
+desktop/src/main/kotlin/com/jmnext/desktop/ComicCover.kt:85	结果比预期少
+desktop/src/main/kotlin/com/jmnext/desktop/ComicCover.kt:91	有 $hidden 条结果被屏蔽规则挡掉（可在「屏蔽设置」里调整）
+desktop/src/main/kotlin/com/jmnext/desktop/CommentsScreen.kt:63	正在加载评论…
+desktop/src/main/kotlin/com/jmnext/desktop/CommentsScreen.kt:76	已加载 ${items.size} 条 / 共 $total 条
+desktop/src/main/kotlin/com/jmnext/desktop/CommentsScreen.kt:77	评论
+desktop/src/main/kotlin/com/jmnext/desktop/CommentsScreen.kt:81	加载失败：${it.message}
+desktop/src/main/kotlin/com/jmnext/desktop/CommentsScreen.kt:82	评论
+desktop/src/main/kotlin/com/jmnext/desktop/CommentsScreen.kt:82	加载失败 aid=$aid
+desktop/src/main/kotlin/com/jmnext/desktop/CommentsScreen.kt:96	返回
+desktop/src/main/kotlin/com/jmnext/desktop/CommentsScreen.kt:97	评论
+desktop/src/main/kotlin/com/jmnext/desktop/CommentsScreen.kt:101	正在回复谁
+desktop/src/main/kotlin/com/jmnext/desktop/CommentsScreen.kt:106	正在回复 
+desktop/src/main/kotlin/com/jmnext/desktop/CommentsScreen.kt:110	取消回复
+desktop/src/main/kotlin/com/jmnext/desktop/CommentsScreen.kt:120	写评论
+desktop/src/main/kotlin/com/jmnext/desktop/CommentsScreen.kt:120	回复
+desktop/src/main/kotlin/com/jmnext/desktop/CommentsScreen.kt:134	已发表
+desktop/src/main/kotlin/com/jmnext/desktop/CommentsScreen.kt:134	已回复
+desktop/src/main/kotlin/com/jmnext/desktop/CommentsScreen.kt:137	评论
+desktop/src/main/kotlin/com/jmnext/desktop/CommentsScreen.kt:137	发表成功（aid=$aid）
+desktop/src/main/kotlin/com/jmnext/desktop/CommentsScreen.kt:142	发表失败：${it.message}
+desktop/src/main/kotlin/com/jmnext/desktop/CommentsScreen.kt:143	评论
+desktop/src/main/kotlin/com/jmnext/desktop/CommentsScreen.kt:143	发表失败
+desktop/src/main/kotlin/com/jmnext/desktop/CommentsScreen.kt:148	发表
+desktop/src/main/kotlin/com/jmnext/desktop/CommentsScreen.kt:148	回复
+desktop/src/main/kotlin/com/jmnext/desktop/CommentsScreen.kt:150	需要登录
+desktop/src/main/kotlin/com/jmnext/desktop/CommentsScreen.kt:176	评论
+desktop/src/main/kotlin/com/jmnext/desktop/CommentsScreen.kt:176	已删除一条评论
+desktop/src/main/kotlin/com/jmnext/desktop/CommentsScreen.kt:180	删除失败：${it.message}
+desktop/src/main/kotlin/com/jmnext/desktop/CommentsScreen.kt:181	评论
+desktop/src/main/kotlin/com/jmnext/desktop/CommentsScreen.kt:181	删除失败
+desktop/src/main/kotlin/com/jmnext/desktop/CommentsScreen.kt:190	加载更多
+desktop/src/main/kotlin/com/jmnext/desktop/CommentsScreen.kt:245	回复
+desktop/src/main/kotlin/com/jmnext/desktop/CommentsScreen.kt:248	删除
+desktop/src/main/kotlin/com/jmnext/desktop/CreatorScreen.kt:51	作品库
+desktop/src/main/kotlin/com/jmnext/desktop/CreatorScreen.kt:52	画师与作品库
+desktop/src/main/kotlin/com/jmnext/desktop/CreatorScreen.kt:52	创作者库
+desktop/src/main/kotlin/com/jmnext/desktop/CreatorScreen.kt:77	正在取画师列表…
+desktop/src/main/kotlin/com/jmnext/desktop/CreatorScreen.kt:99	画师 ${authors.size} 位 / 共 ${r.total}
+desktop/src/main/kotlin/com/jmnext/desktop/CreatorScreen.kt:103	作品 ${works.size} 部 / 共 ${r.total}
+desktop/src/main/kotlin/com/jmnext/desktop/CreatorScreen.kt:107	作品库
+desktop/src/main/kotlin/com/jmnext/desktop/CreatorScreen.kt:107	（搜索：$query）
+desktop/src/main/kotlin/com/jmnext/desktop/CreatorScreen.kt:111	加载失败：${it.message}
+desktop/src/main/kotlin/com/jmnext/desktop/CreatorScreen.kt:112	作品库
+desktop/src/main/kotlin/com/jmnext/desktop/CreatorScreen.kt:112	加载失败 mode=$mode
+desktop/src/main/kotlin/com/jmnext/desktop/CreatorScreen.kt:125	正在取作品内容（信息 + 图片，可能要一会儿）…
+desktop/src/main/kotlin/com/jmnext/desktop/CreatorScreen.kt:139	取作品信息失败：
+desktop/src/main/kotlin/com/jmnext/desktop/CreatorScreen.kt:139	原因未知
+desktop/src/main/kotlin/com/jmnext/desktop/CreatorScreen.kt:140	作品内容没取到：
+desktop/src/main/kotlin/com/jmnext/desktop/CreatorScreen.kt:140	原因未知
+desktop/src/main/kotlin/com/jmnext/desktop/CreatorScreen.kt:140	（信息已显示）
+desktop/src/main/kotlin/com/jmnext/desktop/CreatorScreen.kt:141	已取到作品信息；这个作品没有可看的内容
+desktop/src/main/kotlin/com/jmnext/desktop/CreatorScreen.kt:142	作品内容已取到：${content.images.size} 张图
+desktop/src/main/kotlin/com/jmnext/desktop/CreatorScreen.kt:144	作品库
+desktop/src/main/kotlin/com/jmnext/desktop/CreatorScreen.kt:157	· 画师
+desktop/src/main/kotlin/com/jmnext/desktop/CreatorScreen.kt:157	画师
+desktop/src/main/kotlin/com/jmnext/desktop/CreatorScreen.kt:160	· 作品
+desktop/src/main/kotlin/com/jmnext/desktop/CreatorScreen.kt:160	作品
+desktop/src/main/kotlin/com/jmnext/desktop/CreatorScreen.kt:165	搜索画师
+desktop/src/main/kotlin/com/jmnext/desktop/CreatorScreen.kt:165	搜索作品
+desktop/src/main/kotlin/com/jmnext/desktop/CreatorScreen.kt:169	搜索
+desktop/src/main/kotlin/com/jmnext/desktop/CreatorScreen.kt:180	画师：${a.name ?: a.id}
+desktop/src/main/kotlin/com/jmnext/desktop/CreatorScreen.kt:185	返回列表
+desktop/src/main/kotlin/com/jmnext/desktop/CreatorScreen.kt:190	作品：$title
+desktop/src/main/kotlin/com/jmnext/desktop/CreatorScreen.kt:192	相关作品 ${related.size} 部（见下方）
+desktop/src/main/kotlin/com/jmnext/desktop/CreatorScreen.kt:194	关闭
+desktop/src/main/kotlin/com/jmnext/desktop/CreatorScreen.kt:200	没有可看的内容
+desktop/src/main/kotlin/com/jmnext/desktop/CreatorScreen.kt:208	正在取作品内容…
+desktop/src/main/kotlin/com/jmnext/desktop/CreatorScreen.kt:214	共 ${wc.totalPage} 页 / ${wc.images.size} 张图
+desktop/src/main/kotlin/com/jmnext/desktop/CreatorScreen.kt:235	图片未取到：$raw
+desktop/src/main/kotlin/com/jmnext/desktop/CreatorScreen.kt:248	这个作品没有可看的内容（作品库里有条目只有信息、没有图片）
+desktop/src/main/kotlin/com/jmnext/desktop/CreatorScreen.kt:258	作品内容没取到（可能这个作品没有内容，或接口失败；顶部状态栏里有原因）
+desktop/src/main/kotlin/com/jmnext/desktop/CreatorScreen.kt:269	相关作品 ${related.size} 部
+desktop/src/main/kotlin/com/jmnext/desktop/CreatorScreen.kt:298	返回作品列表
+desktop/src/main/kotlin/com/jmnext/desktop/CreatorScreen.kt:319	正在取 ${a.name ?: a.id} 的作品…
+desktop/src/main/kotlin/com/jmnext/desktop/CreatorScreen.kt:325	${a.name ?: a.id} 的作品 ${r.items.size} 部
+desktop/src/main/kotlin/com/jmnext/desktop/CreatorScreen.kt:329	取该作者作品失败：${it.message}
+desktop/src/main/kotlin/com/jmnext/desktop/CreatorScreen.kt:381	加载更多
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:59	收藏成功
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:76	随机
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:76	换一个
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:81	正在加载作品…
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:101	以为
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:106	[详情] 进入页面 comicId=$comicId
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:111	${it.name.orEmpty()} · ${it.series.size} 话 · 相关 ${it.relatedList.size} 部
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:113	[详情] 数据到达：${it.name} 作者${it.author.size}人 标签${it.tags.size}个 章节${it.series.size}话 相关${it.relatedList.size}部
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:117	加载失败：${it.message}
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:124	追更
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:129	详情
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:129	追更初始态：
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:140	详情
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:140	标星标签读取失败（留空继续）：
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:151	点了没反应
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:155	详情
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:155	按标签搜索（交给外层路由）：
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:162	正在按标签「$tag」搜索…
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:167	标签「$tag」：共 ${result.page.total} 条，本页 ${result.page.items.size} 条
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:168	（本页屏蔽 ${result.page.hidden} 条）
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:169	详情
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:174	按标签搜索失败：
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:175	详情
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:175	按标签搜索失败 tag=
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:185	屏蔽存储未初始化，无法屏蔽标签
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:189	「$tag」已经在屏蔽名单里
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:193	已屏蔽标签：$tag
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:194	已屏蔽标签：$tag（可在「屏蔽设置」里取消）
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:195	详情
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:201	请先登录再标星标签
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:210	已标星：
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:210	已取消标星：
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:212	详情
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:217	标星操作失败：
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:219	详情
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:219	标星操作失败 tag=
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:228	請先登入
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:234	已开始下载
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:238	下载需要登录
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:247	这个作品暂时不能下载
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:248	详情
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:248	下载不可用：
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:257	已开始下载
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:262	获取到下载地址但打开系统浏览器失败：
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:263	未知原因
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:263	；下载地址：$url
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:265	详情
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:265	下载 title=$title 浏览器打开=
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:270	获取下载地址失败：
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:271	详情
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:271	获取下载地址失败
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:278	随机
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:285	换一个
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:293	返回
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:297	正在加载作品…
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:344	已加入收藏
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:344	已取消收藏
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:345	[详情] 收藏切换：$favMessage
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:349	操作失败：${it.message}
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:350	[详情] $favMessage
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:355	已收藏
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:355	收藏
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:362	已经点过赞了
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:364	请先登录再点赞
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:373	点赞成功
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:375	点赞失败
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:377	详情
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:377	点赞：
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:379	成功
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:379	点赞完成
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:383	点赞失败：
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:384	详情
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:384	点赞失败
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:390	已赞 
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:390	点赞
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:402	详情
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:402	追更切换：
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:402	已追更
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:402	已取消追更
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:403	已追更
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:403	已取消追更
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:406	详情
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:406	追更切换失败
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:411	已追更
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:411	追更
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:412	评论
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:417	未登录
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:432	标题
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:433	作者
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:440	标签（点标签按标签搜索，右侧可屏蔽或标星）
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:445	屏蔽
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:463	已屏蔽
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:469	屏蔽
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:474	取消标星
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:474	标星
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:486	标签「$q」
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:502	关闭标签搜索结果
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:507	页数
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:510	剥完标签什么都不剩
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:518	下载需要登录
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:531	下载整部作品
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:536	交给系统浏览器下载
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:547	相关作品
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:568	开始阅读
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:576	该作品没有章节列表，直接阅读整本
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:594	从头开始
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:599	继续观看
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:605	第 ${chapter.sort ?: 
+desktop/src/main/kotlin/com/jmnext/desktop/DetailScreen.kt:605	} 话
+desktop/src/main/kotlin/com/jmnext/desktop/DiscoverPages.kt:49	正在取刊期…
+desktop/src/main/kotlin/com/jmnext/desktop/DiscoverPages.kt:60	已加载 ${items.size} 条
+desktop/src/main/kotlin/com/jmnext/desktop/DiscoverPages.kt:60	（本页屏蔽 ${paged.hidden} 条）
+desktop/src/main/kotlin/com/jmnext/desktop/DiscoverPages.kt:61	[周刊] $status
+desktop/src/main/kotlin/com/jmnext/desktop/DiscoverPages.kt:65	加载失败：${it.message}
+desktop/src/main/kotlin/com/jmnext/desktop/DiscoverPages.kt:66	[周刊] $status
+desktop/src/main/kotlin/com/jmnext/desktop/DiscoverPages.kt:81	[周刊] 刊期 ${issues.size} 个、类型 ${types.size} 个，默认取最新一期
+desktop/src/main/kotlin/com/jmnext/desktop/DiscoverPages.kt:82	没有可用的刊期
+desktop/src/main/kotlin/com/jmnext/desktop/DiscoverPages.kt:86	刊期加载失败：${it.message}
+desktop/src/main/kotlin/com/jmnext/desktop/DiscoverPages.kt:87	[周刊] $status
+desktop/src/main/kotlin/com/jmnext/desktop/DiscoverPages.kt:93	周刊
+desktop/src/main/kotlin/com/jmnext/desktop/DiscoverPages.kt:101	刊期
+desktop/src/main/kotlin/com/jmnext/desktop/DiscoverPages.kt:117	类型
+desktop/src/main/kotlin/com/jmnext/desktop/DiscoverPages.kt:141	加载更多
+desktop/src/main/kotlin/com/jmnext/desktop/FavoritesScreen.kt:46	收藏夹全是无名项
+desktop/src/main/kotlin/com/jmnext/desktop/FavoritesScreen.kt:67	加载中…
+desktop/src/main/kotlin/com/jmnext/desktop/FavoritesScreen.kt:67	需要登录后才能查看收藏
+desktop/src/main/kotlin/com/jmnext/desktop/FavoritesScreen.kt:81	全部
+desktop/src/main/kotlin/com/jmnext/desktop/FavoritesScreen.kt:82	$name：还没有作品
+desktop/src/main/kotlin/com/jmnext/desktop/FavoritesScreen.kt:82	$name：已加载 ${items.size} 条 / 共 $total 条
+desktop/src/main/kotlin/com/jmnext/desktop/FavoritesScreen.kt:83	收藏
+desktop/src/main/kotlin/com/jmnext/desktop/FavoritesScreen.kt:83	$status（文件夹 ${folders.size} 个）
+desktop/src/main/kotlin/com/jmnext/desktop/FavoritesScreen.kt:87	加载失败：${it.message}
+desktop/src/main/kotlin/com/jmnext/desktop/FavoritesScreen.kt:88	收藏
+desktop/src/main/kotlin/com/jmnext/desktop/FavoritesScreen.kt:88	加载失败
+desktop/src/main/kotlin/com/jmnext/desktop/FavoritesScreen.kt:104	· 收藏
+desktop/src/main/kotlin/com/jmnext/desktop/FavoritesScreen.kt:104	收藏
+desktop/src/main/kotlin/com/jmnext/desktop/FavoritesScreen.kt:107	· 追更
+desktop/src/main/kotlin/com/jmnext/desktop/FavoritesScreen.kt:107	追更
+desktop/src/main/kotlin/com/jmnext/desktop/FavoritesScreen.kt:112	加载更多
+desktop/src/main/kotlin/com/jmnext/desktop/FavoritesScreen.kt:139	· 全部
+desktop/src/main/kotlin/com/jmnext/desktop/FavoritesScreen.kt:139	全部
+desktop/src/main/kotlin/com/jmnext/desktop/FavoritesScreen.kt:166	收藏夹名称
+desktop/src/main/kotlin/com/jmnext/desktop/FavoritesScreen.kt:179	已新建收藏夹：
+desktop/src/main/kotlin/com/jmnext/desktop/FavoritesScreen.kt:181	收藏
+desktop/src/main/kotlin/com/jmnext/desktop/FavoritesScreen.kt:181	新建收藏夹：
+desktop/src/main/kotlin/com/jmnext/desktop/FavoritesScreen.kt:186	新建失败：${it.message}
+desktop/src/main/kotlin/com/jmnext/desktop/FavoritesScreen.kt:187	收藏
+desktop/src/main/kotlin/com/jmnext/desktop/FavoritesScreen.kt:187	新建收藏夹失败
+desktop/src/main/kotlin/com/jmnext/desktop/FavoritesScreen.kt:192	新建
+desktop/src/main/kotlin/com/jmnext/desktop/FavoritesScreen.kt:204	已改名
+desktop/src/main/kotlin/com/jmnext/desktop/FavoritesScreen.kt:210	改名失败：${it.message}
+desktop/src/main/kotlin/com/jmnext/desktop/FavoritesScreen.kt:211	收藏
+desktop/src/main/kotlin/com/jmnext/desktop/FavoritesScreen.kt:211	改名失败
+desktop/src/main/kotlin/com/jmnext/desktop/FavoritesScreen.kt:216	改名
+desktop/src/main/kotlin/com/jmnext/desktop/FavoritesScreen.kt:226	已删除收藏夹
+desktop/src/main/kotlin/com/jmnext/desktop/FavoritesScreen.kt:232	删除失败：${it.message}
+desktop/src/main/kotlin/com/jmnext/desktop/FavoritesScreen.kt:233	收藏
+desktop/src/main/kotlin/com/jmnext/desktop/FavoritesScreen.kt:233	删除收藏夹失败
+desktop/src/main/kotlin/com/jmnext/desktop/FavoritesScreen.kt:238	删除
+desktop/src/main/kotlin/com/jmnext/desktop/FavoritesScreen.kt:262	收藏
+desktop/src/main/kotlin/com/jmnext/desktop/FavoritesScreen.kt:262	已取消收藏：
+desktop/src/main/kotlin/com/jmnext/desktop/FavoritesScreen.kt:266	取消收藏失败：${it.message}
+desktop/src/main/kotlin/com/jmnext/desktop/FavoritesScreen.kt:267	收藏
+desktop/src/main/kotlin/com/jmnext/desktop/FavoritesScreen.kt:267	取消收藏失败
+desktop/src/main/kotlin/com/jmnext/desktop/FavoritesScreen.kt:272	取消收藏
+desktop/src/main/kotlin/com/jmnext/desktop/FileKeyProvider.kt:17	不改用系统凭据库
+desktop/src/main/kotlin/com/jmnext/desktop/FileKeyProvider.kt:48	宽泛主体
+desktop/src/main/kotlin/com/jmnext/desktop/FileKeyProvider.kt:79	[凭据] 已收紧密钥文件 ACL，移除宽泛主体：${dropped.joinToString()}
+desktop/src/main/kotlin/com/jmnext/desktop/FileKeyProvider.kt:81	[凭据] ACL 收紧失败（未改动原 ACL）：${it.message}
+desktop/src/main/kotlin/com/jmnext/desktop/HistoryScreen.kt:37	列表空但显示已加载 N 条
+desktop/src/main/kotlin/com/jmnext/desktop/HistoryScreen.kt:45	列表零高度
+desktop/src/main/kotlin/com/jmnext/desktop/HistoryScreen.kt:59	加载中…
+desktop/src/main/kotlin/com/jmnext/desktop/HistoryScreen.kt:59	需要登录后才能查看历史
+desktop/src/main/kotlin/com/jmnext/desktop/HistoryScreen.kt:70	还没有观看记录
+desktop/src/main/kotlin/com/jmnext/desktop/HistoryScreen.kt:70	已加载 ${items.size} 条 / 共 $total 条
+desktop/src/main/kotlin/com/jmnext/desktop/HistoryScreen.kt:71	历史
+desktop/src/main/kotlin/com/jmnext/desktop/HistoryScreen.kt:75	加载失败：${it.message}
+desktop/src/main/kotlin/com/jmnext/desktop/HistoryScreen.kt:76	历史
+desktop/src/main/kotlin/com/jmnext/desktop/HistoryScreen.kt:76	加载失败
+desktop/src/main/kotlin/com/jmnext/desktop/HistoryScreen.kt:90	历史
+desktop/src/main/kotlin/com/jmnext/desktop/HistoryScreen.kt:93	加载更多
+desktop/src/main/kotlin/com/jmnext/desktop/HistoryScreen.kt:119	历史
+desktop/src/main/kotlin/com/jmnext/desktop/HistoryScreen.kt:119	已删除一条：
+desktop/src/main/kotlin/com/jmnext/desktop/HistoryScreen.kt:123	那一行又回来了
+desktop/src/main/kotlin/com/jmnext/desktop/HistoryScreen.kt:124	删除失败：${it.message}
+desktop/src/main/kotlin/com/jmnext/desktop/HistoryScreen.kt:125	历史
+desktop/src/main/kotlin/com/jmnext/desktop/HistoryScreen.kt:125	删除失败（列表未变）
+desktop/src/main/kotlin/com/jmnext/desktop/HistoryScreen.kt:130	删除
+desktop/src/main/kotlin/com/jmnext/desktop/HomeSections.kt:52	看最新
+desktop/src/main/kotlin/com/jmnext/desktop/HomeSections.kt:54	首页
+desktop/src/main/kotlin/com/jmnext/desktop/HomeSections.kt:54	推荐分区 ${list.size} 个，展示 ${sections.size} 个（第 ${attempt + 1} 次尝试）
+desktop/src/main/kotlin/com/jmnext/desktop/HomeSections.kt:63	首页
+desktop/src/main/kotlin/com/jmnext/desktop/HomeSections.kt:63	推荐分区重试 $attempt 次仍失败，跳过（不影响最新列表）
+desktop/src/main/kotlin/com/jmnext/desktop/HomeSections.kt:75	(未命名分区)
+desktop/src/main/kotlin/com/jmnext/desktop/HomeSections.kt:80	更多
+desktop/src/main/kotlin/com/jmnext/desktop/LoadingHint.kt:17	正在加载
+desktop/src/main/kotlin/com/jmnext/desktop/LoadingHint.kt:19	正在加载…
+desktop/src/main/kotlin/com/jmnext/desktop/LoadingHint.kt:23	正在加载作品…
+desktop/src/main/kotlin/com/jmnext/desktop/LoadingHint.kt:23	加载失败：…
+desktop/src/main/kotlin/com/jmnext/desktop/LoadingHint.kt:25	进行中
+desktop/src/main/kotlin/com/jmnext/desktop/LoadingHint.kt:29	正在加载…
+desktop/src/main/kotlin/com/jmnext/desktop/LoadingHint.kt:44	状态行
+desktop/src/main/kotlin/com/jmnext/desktop/LoadingHint.kt:46	正在…
+desktop/src/main/kotlin/com/jmnext/desktop/LoadingHint.kt:48	进行中
+desktop/src/main/kotlin/com/jmnext/desktop/LoadingHint.kt:48	已完成/失败
+desktop/src/main/kotlin/com/jmnext/desktop/Log.kt:15	图片加载失败
+desktop/src/main/kotlin/com/jmnext/desktop/Log.kt:27	没有任何输出
+desktop/src/main/kotlin/com/jmnext/desktop/Log.kt:53	日志开始
+desktop/src/main/kotlin/com/jmnext/desktop/Log.kt:53	文件=${file.absolutePath}
+desktop/src/main/kotlin/com/jmnext/desktop/Log.kt:59	崩溃
+desktop/src/main/kotlin/com/jmnext/desktop/Log.kt:59	线程=${t.name} 类型=${e.javaClass.name}
+desktop/src/main/kotlin/com/jmnext/desktop/Log.kt:60	崩溃
+desktop/src/main/kotlin/com/jmnext/desktop/Log.kt:63	崩溃
+desktop/src/main/kotlin/com/jmnext/desktop/Log.kt:75	精简冗余日志
+desktop/src/main/kotlin/com/jmnext/desktop/Log.kt:84	这类错误发生了多少次
+desktop/src/main/kotlin/com/jmnext/desktop/Log.kt:90	$message（同类已出现 $n 次）
+desktop/src/main/kotlin/com/jmnext/desktop/Log.kt:104	软件渲染
+desktop/src/main/kotlin/com/jmnext/desktop/Log.kt:105	应用 $DESKTOP_VERSION | 系统 $os | 架构 $arch | 运行时 Java $java | 图形后端 $backend | 字体 ${fontInfo()}
+desktop/src/main/kotlin/com/jmnext/desktop/Log.kt:109	---- 启动环境 ----\n${envSummary()}\n------------------
+desktop/src/main/kotlin/com/jmnext/desktop/Log.kt:119	字体族数量
+desktop/src/main/kotlin/com/jmnext/desktop/Log.kt:126	微软雅黑
+desktop/src/main/kotlin/com/jmnext/desktop/Log.kt:126	宋体
+desktop/src/main/kotlin/com/jmnext/desktop/Log.kt:126	黑体
+desktop/src/main/kotlin/com/jmnext/desktop/Log.kt:131	$def（字体族 ${families.size}；中文字体 ${cjk ?: 
+desktop/src/main/kotlin/com/jmnext/desktop/Log.kt:131	}；样例 $sample）
+desktop/src/main/kotlin/com/jmnext/desktop/Log.kt:132	取不到：${it.javaClass.simpleName}: ${it.message}
+desktop/src/main/kotlin/com/jmnext/desktop/LoginScreen.kt:34	 或 
+desktop/src/main/kotlin/com/jmnext/desktop/LoginScreen.kt:37	操作失败
+desktop/src/main/kotlin/com/jmnext/desktop/LoginScreen.kt:57	注册
+desktop/src/main/kotlin/com/jmnext/desktop/LoginScreen.kt:58	找回密码
+desktop/src/main/kotlin/com/jmnext/desktop/LoginScreen.kt:59	登录
+desktop/src/main/kotlin/com/jmnext/desktop/LoginScreen.kt:64	登录后才能使用收藏、追更与评论。
+desktop/src/main/kotlin/com/jmnext/desktop/LoginScreen.kt:70	登录
+desktop/src/main/kotlin/com/jmnext/desktop/LoginScreen.kt:71	注册
+desktop/src/main/kotlin/com/jmnext/desktop/LoginScreen.kt:72	找回密码
+desktop/src/main/kotlin/com/jmnext/desktop/LoginScreen.kt:79	用户名
+desktop/src/main/kotlin/com/jmnext/desktop/LoginScreen.kt:86	密码
+desktop/src/main/kotlin/com/jmnext/desktop/LoginScreen.kt:97	确认密码
+desktop/src/main/kotlin/com/jmnext/desktop/LoginScreen.kt:105	邮箱
+desktop/src/main/kotlin/com/jmnext/desktop/LoginScreen.kt:110	性别：
+desktop/src/main/kotlin/com/jmnext/desktop/LoginScreen.kt:111	男
+desktop/src/main/kotlin/com/jmnext/desktop/LoginScreen.kt:111	女
+desktop/src/main/kotlin/com/jmnext/desktop/LoginScreen.kt:121	注册邮箱
+desktop/src/main/kotlin/com/jmnext/desktop/LoginScreen.kt:133	请输入有效的邮箱
+desktop/src/main/kotlin/com/jmnext/desktop/LoginScreen.kt:135	两次输入的密码不一致
+desktop/src/main/kotlin/com/jmnext/desktop/LoginScreen.kt:150	注册请求已提交
+desktop/src/main/kotlin/com/jmnext/desktop/LoginScreen.kt:151	登录
+desktop/src/main/kotlin/com/jmnext/desktop/LoginScreen.kt:151	注册结果：
+desktop/src/main/kotlin/com/jmnext/desktop/LoginScreen.kt:160	注册失败：${it.message}
+desktop/src/main/kotlin/com/jmnext/desktop/LoginScreen.kt:161	登录
+desktop/src/main/kotlin/com/jmnext/desktop/LoginScreen.kt:161	注册失败
+desktop/src/main/kotlin/com/jmnext/desktop/LoginScreen.kt:167	提交中…
+desktop/src/main/kotlin/com/jmnext/desktop/LoginScreen.kt:167	注册
+desktop/src/main/kotlin/com/jmnext/desktop/LoginScreen.kt:173	请输入有效的邮箱
+desktop/src/main/kotlin/com/jmnext/desktop/LoginScreen.kt:180	重置邮件已发送，请查收
+desktop/src/main/kotlin/com/jmnext/desktop/LoginScreen.kt:181	登录
+desktop/src/main/kotlin/com/jmnext/desktop/LoginScreen.kt:181	找回密码结果：
+desktop/src/main/kotlin/com/jmnext/desktop/LoginScreen.kt:185	找回密码失败：${it.message}
+desktop/src/main/kotlin/com/jmnext/desktop/LoginScreen.kt:186	登录
+desktop/src/main/kotlin/com/jmnext/desktop/LoginScreen.kt:186	找回密码失败
+desktop/src/main/kotlin/com/jmnext/desktop/LoginScreen.kt:192	提交中…
+desktop/src/main/kotlin/com/jmnext/desktop/LoginScreen.kt:192	发送重置邮件
+desktop/src/main/kotlin/com/jmnext/desktop/LoginScreen.kt:202	欢迎回来，${info.username ?: info.uid ?: 
+desktop/src/main/kotlin/com/jmnext/desktop/LoginScreen.kt:203	登录
+desktop/src/main/kotlin/com/jmnext/desktop/LoginScreen.kt:203	成功：${info.username} uid=${info.uid}
+desktop/src/main/kotlin/com/jmnext/desktop/LoginScreen.kt:209	登录失败：${it.message}
+desktop/src/main/kotlin/com/jmnext/desktop/LoginScreen.kt:210	登录
+desktop/src/main/kotlin/com/jmnext/desktop/LoginScreen.kt:210	失败
+desktop/src/main/kotlin/com/jmnext/desktop/LoginScreen.kt:215	登录中…
+desktop/src/main/kotlin/com/jmnext/desktop/LoginScreen.kt:215	登录
+desktop/src/main/kotlin/com/jmnext/desktop/LoginScreen.kt:222	登录
+desktop/src/main/kotlin/com/jmnext/desktop/LoginScreen.kt:222	已退出
+desktop/src/main/kotlin/com/jmnext/desktop/LoginScreen.kt:223	已退出登录
+desktop/src/main/kotlin/com/jmnext/desktop/LoginScreen.kt:225	退出登录
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:79	先判定新装/老装，再创建密钥材料
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:92	日志里看不到启动行
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:96	看不到漫画
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:102	[启动] 渲染后端：软件渲染（设 JMCOMIC_RENDER=GL 可改回 GPU）
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:105	窗口不出现
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:105	内容全黑
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:107	[启动] 渲染后端：GPU（你设置了 JMCOMIC_RENDER=GL）。
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:108	若窗口没有出现或内容全黑，去掉该环境变量即可回退软件渲染。
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:112	拿旧安装包测试、以为改动没编译
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:116	未知
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:117	启动
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:117	JMNeXt 桌面端 版本 $DESKTOP_VERSION，构建时间 $builtAt
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:120	环境
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:124	[崩溃] 线程 ${t.name}：
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:125	没有任何输出
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:131	[启动] 看起来是渲染后端初始化失败：去掉 JMCOMIC_RENDER=GL 再启动一次
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:132	（或把 run.bat 里那行改成 set JMCOMIC_RENDER=）即可回退软件渲染。
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:160	正在引导…
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:180	首页 ${items.size}/${result.total} 条
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:181	（屏蔽规则挡掉 ${result.hidden} 条）
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:182	，其中 $hit 部在追更里有更新
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:183	首页
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:187	加载失败：${it.message}
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:188	首页
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:208	首页
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:208	追更里有更新的作品 ${it.size} 部
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:209	首页
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:209	追更更新集合读取失败（留空继续）：${it.message}
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:214	[界面] 状态：$status
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:231	加载中…
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:231	刷新
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:234	加载更多
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:236	已加载 ${items.size} / $total
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:300	更新
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:307	(无标题)
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:342	点作品进详情
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:344	[界面] 打开作品：${item.name} (id=${item.id})
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:348	从随机进入的详情页
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:348	换一个
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:374	[导航] $route
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:391	知道了
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:406	已登录：${authState.member?.username ?: authState.member?.uid ?: 
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:408	未登录
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:420	退出登录
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:420	登录
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:425	会丢失登录态
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:425	删除屏蔽规则
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:429	退出登录
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:430	退出后需要重新登录才能使用收藏、追更等功能。
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:436	[登录] 已退出
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:437	已退出登录
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:439	退出
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:442	取消
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:461	首页
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:461	打开分区更多：$title (id=$id)
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:481	[界面] 换个随机作品：${next.name} (id=${next.id})
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:488	[界面] 打开章节：sort=${ch.sort} id=${ch.id}（顺序 ${ids.size} 项）
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:502	[界面] 切换章节 → $id
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:529	标签
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:529	按标签搜索：$q
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:558	（待补）
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:578	正在办事
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:604	首页
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:604	随机一本：${one.name} (id=${one.id})
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:607	首页
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:607	随机一本：没抽到可用的作品（列表为空）
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:618	抽…
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:618	随机
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:632	已經簽到過了
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:688	现在没有进行中的签到活动
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:691	今天已经签过了
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:696	签到成功
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:700	签到失败，稍后再试
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:704	首页
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:704	快捷签到：${notice ?: 
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:714	已签
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:715	签…
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:716	签到
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:722	今天已经签过了
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:722	签到成功
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:737	几号
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:738	已经签过了
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:739	已签
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:744	` 或 `
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:748	今天已经签过了
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:751	已簽到
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:751	已签到
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:752	已經簽到
+desktop/src/main/kotlin/com/jmnext/desktop/Main.kt:752	已经签到
+desktop/src/main/kotlin/com/jmnext/desktop/MoreListScreen.kt:66	正在加载「$shown」…
+desktop/src/main/kotlin/com/jmnext/desktop/MoreListScreen.kt:81	共 $total 条，已加载 ${items.size} 条
+desktop/src/main/kotlin/com/jmnext/desktop/MoreListScreen.kt:83	已加载 ${items.size} 条
+desktop/src/main/kotlin/com/jmnext/desktop/MoreListScreen.kt:84	（屏蔽规则挡掉 $hidden 条）
+desktop/src/main/kotlin/com/jmnext/desktop/MoreListScreen.kt:85	分区更多
+desktop/src/main/kotlin/com/jmnext/desktop/MoreListScreen.kt:85	「$shown」(id=$sectionId) 第 $next 页：$status
+desktop/src/main/kotlin/com/jmnext/desktop/MoreListScreen.kt:89	加载失败：${it.message}
+desktop/src/main/kotlin/com/jmnext/desktop/MoreListScreen.kt:90	分区更多
+desktop/src/main/kotlin/com/jmnext/desktop/MoreListScreen.kt:90	「$shown」(id=$sectionId) 第 $next 页
+desktop/src/main/kotlin/com/jmnext/desktop/MoreListScreen.kt:102	分区更多
+desktop/src/main/kotlin/com/jmnext/desktop/MoreListScreen.kt:111	加载中…
+desktop/src/main/kotlin/com/jmnext/desktop/MoreListScreen.kt:111	刷新
+desktop/src/main/kotlin/com/jmnext/desktop/MoreListScreen.kt:118	加载更多
+desktop/src/main/kotlin/com/jmnext/desktop/MoreListScreen.kt:142	周一
+desktop/src/main/kotlin/com/jmnext/desktop/MoreListScreen.kt:143	周二
+desktop/src/main/kotlin/com/jmnext/desktop/MoreListScreen.kt:144	周三
+desktop/src/main/kotlin/com/jmnext/desktop/MoreListScreen.kt:145	周四
+desktop/src/main/kotlin/com/jmnext/desktop/MoreListScreen.kt:146	周五
+desktop/src/main/kotlin/com/jmnext/desktop/MoreListScreen.kt:147	周六
+desktop/src/main/kotlin/com/jmnext/desktop/MoreListScreen.kt:148	周日
+desktop/src/main/kotlin/com/jmnext/desktop/MoreListScreen.kt:149	完结
+desktop/src/main/kotlin/com/jmnext/desktop/MoreListScreen.kt:154	全部
+desktop/src/main/kotlin/com/jmnext/desktop/MoreListScreen.kt:155	漫画
+desktop/src/main/kotlin/com/jmnext/desktop/MoreListScreen.kt:156	韩漫
+desktop/src/main/kotlin/com/jmnext/desktop/MoreListScreen.kt:198	正在加载连载更新…
+desktop/src/main/kotlin/com/jmnext/desktop/MoreListScreen.kt:210	已加载 ${items.size} 条
+desktop/src/main/kotlin/com/jmnext/desktop/MoreListScreen.kt:210	（已到底）
+desktop/src/main/kotlin/com/jmnext/desktop/MoreListScreen.kt:211	连载更新
+desktop/src/main/kotlin/com/jmnext/desktop/MoreListScreen.kt:211	$t / date=$d 第 $next 页：$status
+desktop/src/main/kotlin/com/jmnext/desktop/MoreListScreen.kt:215	加载失败：${it.message}
+desktop/src/main/kotlin/com/jmnext/desktop/MoreListScreen.kt:216	连载更新
+desktop/src/main/kotlin/com/jmnext/desktop/MoreListScreen.kt:216	$t / date=$d 第 $next 页
+desktop/src/main/kotlin/com/jmnext/desktop/MoreListScreen.kt:226	连载更新
+desktop/src/main/kotlin/com/jmnext/desktop/MoreListScreen.kt:233	类型
+desktop/src/main/kotlin/com/jmnext/desktop/MoreListScreen.kt:246	星期
+desktop/src/main/kotlin/com/jmnext/desktop/MoreListScreen.kt:260	加载中…
+desktop/src/main/kotlin/com/jmnext/desktop/MoreListScreen.kt:260	刷新
+desktop/src/main/kotlin/com/jmnext/desktop/MoreListScreen.kt:265	加载更多
+desktop/src/main/kotlin/com/jmnext/desktop/Motion.kt:13	手感不统一
+desktop/src/main/kotlin/com/jmnext/desktop/Motion.kt:17	有重量感
+desktop/src/main/kotlin/com/jmnext/desktop/Motion.kt:20	跟手
+desktop/src/main/kotlin/com/jmnext/desktop/Motion.kt:54	电脑上好像更黏
+desktop/src/main/kotlin/com/jmnext/desktop/Motion.kt:64	跟手
+desktop/src/main/kotlin/com/jmnext/desktop/Motion.kt:71	撤销
+desktop/src/main/kotlin/com/jmnext/desktop/Notices.kt:29	操作做完给个交代
+desktop/src/main/kotlin/com/jmnext/desktop/Notices.kt:34	弹个提示
+desktop/src/main/kotlin/com/jmnext/desktop/NotificationScreen.kt:57	全部
+desktop/src/main/kotlin/com/jmnext/desktop/NotificationScreen.kt:58	追更
+desktop/src/main/kotlin/com/jmnext/desktop/NotificationScreen.kt:59	站内通知
+desktop/src/main/kotlin/com/jmnext/desktop/NotificationScreen.kt:67	正在取通知…
+desktop/src/main/kotlin/com/jmnext/desktop/NotificationScreen.kt:77	已加载 ${items.size} 条 / 共 ${paged.total} 条
+desktop/src/main/kotlin/com/jmnext/desktop/NotificationScreen.kt:78	通知
+desktop/src/main/kotlin/com/jmnext/desktop/NotificationScreen.kt:78	$status（筛选：$tab）
+desktop/src/main/kotlin/com/jmnext/desktop/NotificationScreen.kt:82	加载失败：${it.message}
+desktop/src/main/kotlin/com/jmnext/desktop/NotificationScreen.kt:83	通知
+desktop/src/main/kotlin/com/jmnext/desktop/NotificationScreen.kt:83	加载失败 tab=$tab
+desktop/src/main/kotlin/com/jmnext/desktop/NotificationScreen.kt:91	标记已读
+desktop/src/main/kotlin/com/jmnext/desktop/NotificationScreen.kt:97	通知
+desktop/src/main/kotlin/com/jmnext/desktop/NotificationScreen.kt:97	已标记已读 id=
+desktop/src/main/kotlin/com/jmnext/desktop/NotificationScreen.kt:100	标记已读失败：
+desktop/src/main/kotlin/com/jmnext/desktop/NotificationScreen.kt:101	通知
+desktop/src/main/kotlin/com/jmnext/desktop/NotificationScreen.kt:101	标记已读失败 id=
+desktop/src/main/kotlin/com/jmnext/desktop/NotificationScreen.kt:115	通知
+desktop/src/main/kotlin/com/jmnext/desktop/NotificationScreen.kt:115	未读 ${it.total} 条
+desktop/src/main/kotlin/com/jmnext/desktop/NotificationScreen.kt:119	通知
+desktop/src/main/kotlin/com/jmnext/desktop/NotificationScreen.kt:119	未读数读取失败
+desktop/src/main/kotlin/com/jmnext/desktop/NotificationScreen.kt:129	通知
+desktop/src/main/kotlin/com/jmnext/desktop/NotificationScreen.kt:139	未读 $unread
+desktop/src/main/kotlin/com/jmnext/desktop/NotificationScreen.kt:143	加载更多
+desktop/src/main/kotlin/com/jmnext/desktop/NotificationScreen.kt:174	追更标签下全被解析成无标题
+desktop/src/main/kotlin/com/jmnext/desktop/NotificationScreen.kt:177	(未知作品)
+desktop/src/main/kotlin/com/jmnext/desktop/NotificationScreen.kt:181	更新
+desktop/src/main/kotlin/com/jmnext/desktop/NotificationScreen.kt:187	(无标题)
+desktop/src/main/kotlin/com/jmnext/desktop/NotificationScreen.kt:205	标记已读
+desktop/src/main/kotlin/com/jmnext/desktop/PageProgress.kt:9	继续阅读
+desktop/src/main/kotlin/com/jmnext/desktop/PageProgress.kt:9	读到第几页
+desktop/src/main/kotlin/com/jmnext/desktop/PageRail.kt:48	剩余空间
+desktop/src/main/kotlin/com/jmnext/desktop/PageRail.kt:64	纵向
+desktop/src/main/kotlin/com/jmnext/desktop/PageRail.kt:82	剩余空间
+desktop/src/main/kotlin/com/jmnext/desktop/PageRail.kt:90	阅读
+desktop/src/main/kotlin/com/jmnext/desktop/PageRail.kt:90	侧栏滑轨高 
+desktop/src/main/kotlin/com/jmnext/desktop/PageRail.kt:151	章节
+desktop/src/main/kotlin/com/jmnext/desktop/PageRail.kt:152	评论
+desktop/src/main/kotlin/com/jmnext/desktop/PageRail.kt:153	收藏
+desktop/src/main/kotlin/com/jmnext/desktop/PageRail.kt:154	点赞
+desktop/src/main/kotlin/com/jmnext/desktop/PageShell.kt:20	观感
+desktop/src/main/kotlin/com/jmnext/desktop/PageShell.kt:39	这一页还没接数据
+desktop/src/main/kotlin/com/jmnext/desktop/PageShell.kt:42	桌面端目标是与 Android full 版功能对齐，页面清单见 desktop/PARITY.md。
+desktop/src/main/kotlin/com/jmnext/desktop/PageShell.kt:50	将要做什么
+desktop/src/main/kotlin/com/jmnext/desktop/PageShell.kt:52	按关键词搜作品；命中屏蔽规则时在顶部提示被挡掉了多少条，并允许临时放行一次。
+desktop/src/main/kotlin/com/jmnext/desktop/PageShell.kt:53	按分区与分类筛选作品，支持排序与翻页。
+desktop/src/main/kotlin/com/jmnext/desktop/PageShell.kt:54	周刊：按类型看每周榜单。
+desktop/src/main/kotlin/com/jmnext/desktop/PageShell.kt:55	随机推荐一批作品；支持网格/列表两种排布，并按收藏标签的偏好排序。
+desktop/src/main/kotlin/com/jmnext/desktop/PageShell.kt:56	我收藏的作品；分作品与作者两栏。
+desktop/src/main/kotlin/com/jmnext/desktop/PageShell.kt:57	观看历史（服务端记录到作品粒度）。
+desktop/src/main/kotlin/com/jmnext/desktop/PageShell.kt:58	追更列表：有新话的作品排前面。
+desktop/src/main/kotlin/com/jmnext/desktop/PageShell.kt:59	收藏标签统计，并按标签筛选作品。
+desktop/src/main/kotlin/com/jmnext/desktop/PageShell.kt:60	画师与作品库：列出画师与作品两类（可分别搜索）；点作品看作品信息与可看内容。与主页漫画列表不同源 —— 它是 JM 的作品库（同人志那类）。
+desktop/src/main/kotlin/com/jmnext/desktop/PageShell.kt:61	系统通知：连载更新等；未读数量显示在导航上。
+desktop/src/main/kotlin/com/jmnext/desktop/PageShell.kt:62	屏蔽名单：关键词、标签、分区三类；命中即从所有列表隐藏。
+desktop/src/main/kotlin/com/jmnext/desktop/PageShell.kt:63	版本与变体、检查更新、项目说明与许可（与 Android 端同一套内容）。
+desktop/src/main/kotlin/com/jmnext/desktop/PageShell.kt:64	账号信息、签到、设置项（界面风格、动效、悬浮栏等）。
+desktop/src/main/kotlin/com/jmnext/desktop/PreferencesKeyValueStore.kt:20	只读迁移
+desktop/src/main/kotlin/com/jmnext/desktop/PreferencesKeyValueStore.kt:85	复活
+desktop/src/main/kotlin/com/jmnext/desktop/ProfileScreen.kt:38	签到成功
+desktop/src/main/kotlin/com/jmnext/desktop/ProfileScreen.kt:39	已經簽到過了
+desktop/src/main/kotlin/com/jmnext/desktop/ProfileScreen.kt:58	登录后可查看账号信息与签到
+desktop/src/main/kotlin/com/jmnext/desktop/ProfileScreen.kt:65	签到活动：${it.eventName ?: 
+desktop/src/main/kotlin/com/jmnext/desktop/ProfileScreen.kt:66	[我的] 读取签到活动成功（未签到）
+desktop/src/main/kotlin/com/jmnext/desktop/ProfileScreen.kt:70	签到活动读取失败：${it.message}
+desktop/src/main/kotlin/com/jmnext/desktop/ProfileScreen.kt:71	[我的] $status
+desktop/src/main/kotlin/com/jmnext/desktop/ProfileScreen.kt:76	我的
+desktop/src/main/kotlin/com/jmnext/desktop/ProfileScreen.kt:78	账号
+desktop/src/main/kotlin/com/jmnext/desktop/ProfileScreen.kt:82	未登录
+desktop/src/main/kotlin/com/jmnext/desktop/ProfileScreen.kt:83	去登录
+desktop/src/main/kotlin/com/jmnext/desktop/ProfileScreen.kt:85	已登录（会员信息未取到）
+desktop/src/main/kotlin/com/jmnext/desktop/ProfileScreen.kt:87	用户名
+desktop/src/main/kotlin/com/jmnext/desktop/ProfileScreen.kt:87	(无)
+desktop/src/main/kotlin/com/jmnext/desktop/ProfileScreen.kt:88	(无)
+desktop/src/main/kotlin/com/jmnext/desktop/ProfileScreen.kt:89	等级
+desktop/src/main/kotlin/com/jmnext/desktop/ProfileScreen.kt:90	金币
+desktop/src/main/kotlin/com/jmnext/desktop/ProfileScreen.kt:91	免广告特权
+desktop/src/main/kotlin/com/jmnext/desktop/ProfileScreen.kt:91	已开通
+desktop/src/main/kotlin/com/jmnext/desktop/ProfileScreen.kt:91	未开通
+desktop/src/main/kotlin/com/jmnext/desktop/ProfileScreen.kt:96	每日签到
+desktop/src/main/kotlin/com/jmnext/desktop/ProfileScreen.kt:112	已經簽到過了
+desktop/src/main/kotlin/com/jmnext/desktop/ProfileScreen.kt:113	签到成功
+desktop/src/main/kotlin/com/jmnext/desktop/ProfileScreen.kt:113	签到返回 code=${it.code}
+desktop/src/main/kotlin/com/jmnext/desktop/ProfileScreen.kt:114	[我的] 签到返回：$checkMsg
+desktop/src/main/kotlin/com/jmnext/desktop/ProfileScreen.kt:118	签到失败：${it.message}
+desktop/src/main/kotlin/com/jmnext/desktop/ProfileScreen.kt:119	[我的] $checkMsg
+desktop/src/main/kotlin/com/jmnext/desktop/ProfileScreen.kt:124	提交中…
+desktop/src/main/kotlin/com/jmnext/desktop/ProfileScreen.kt:124	签到
+desktop/src/main/kotlin/com/jmnext/desktop/ProfileScreen.kt:136	说明
+desktop/src/main/kotlin/com/jmnext/desktop/ProfileScreen.kt:138	桌面端与 Android 端共用同一份数据层；界面按桌面形态重做（左侧常驻导航、
+desktop/src/main/kotlin/com/jmnext/desktop/ProfileScreen.kt:139	阅读页纵向连续滚动）。Android 特有的设置项（悬浮底栏、壁纸、动效性格）在桌面上没有对应物，未搬过来。
+desktop/src/main/kotlin/com/jmnext/desktop/RandomScreen.kt:53	数据到了但列表不画
+desktop/src/main/kotlin/com/jmnext/desktop/RandomScreen.kt:60	先并发把这一批的标签取进 Map，再把 { id -> map[id] } 传给 rank
+desktop/src/main/kotlin/com/jmnext/desktop/RandomScreen.kt:79	正在取一批随机作品…
+desktop/src/main/kotlin/com/jmnext/desktop/RandomScreen.kt:92	刚好到期
+desktop/src/main/kotlin/com/jmnext/desktop/RandomScreen.kt:95	收藏标签统计已过期（或从未扫描），正在重新扫描…
+desktop/src/main/kotlin/com/jmnext/desktop/RandomScreen.kt:109	随机
+desktop/src/main/kotlin/com/jmnext/desktop/RandomScreen.kt:109	偏好排序：取得 ${tagsOf.size}/${batch.size} 部作品的标签（权重 ${counts.size} 个）
+desktop/src/main/kotlin/com/jmnext/desktop/RandomScreen.kt:115	这一批 ${it.size} 条（已按收藏偏好排序）
+desktop/src/main/kotlin/com/jmnext/desktop/RandomScreen.kt:115	这一批 ${it.size} 条
+desktop/src/main/kotlin/com/jmnext/desktop/RandomScreen.kt:116	随机
+desktop/src/main/kotlin/com/jmnext/desktop/RandomScreen.kt:120	加载失败：${it.message}
+desktop/src/main/kotlin/com/jmnext/desktop/RandomScreen.kt:121	随机
+desktop/src/main/kotlin/com/jmnext/desktop/RandomScreen.kt:121	加载失败
+desktop/src/main/kotlin/com/jmnext/desktop/RandomScreen.kt:135	随机本子
+desktop/src/main/kotlin/com/jmnext/desktop/RandomScreen.kt:137	取中…
+desktop/src/main/kotlin/com/jmnext/desktop/RandomScreen.kt:137	换一批
+desktop/src/main/kotlin/com/jmnext/desktop/RandomScreen.kt:138	切过去会变成什么
+desktop/src/main/kotlin/com/jmnext/desktop/RandomScreen.kt:143	随机
+desktop/src/main/kotlin/com/jmnext/desktop/RandomScreen.kt:143	版式切换为：$layout
+desktop/src/main/kotlin/com/jmnext/desktop/RandomScreen.kt:145	切换成列表
+desktop/src/main/kotlin/com/jmnext/desktop/RandomScreen.kt:145	切换成网格
+desktop/src/main/kotlin/com/jmnext/desktop/RandomScreen.kt:149	· 按收藏偏好排序
+desktop/src/main/kotlin/com/jmnext/desktop/RandomScreen.kt:149	按收藏偏好排序
+desktop/src/main/kotlin/com/jmnext/desktop/RandomScreen.kt:152	开启偏好排序后，取一批会额外请求这一批作品的详情以获取标签（每批约 20 到 30 次），首次还可能要扫描一次收藏标签。
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderBottomBar.kt:34	形式照搬
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderBottomBar.kt:35	不应该写一个翻页按钮在下面，像悬浮底栏一样吗
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderBottomBar.kt:57	纵向
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderBottomBar.kt:93	上一话
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderBottomBar.kt:103	下一话
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderBottomBar.kt:108	章节
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderBottomBar.kt:109	评论
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderBottomBar.kt:110	收藏
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderBottomBar.kt:111	点赞
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderScreen.kt:58	一屏放不下整页
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderScreen.kt:60	能不能真用起来
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderScreen.kt:63	继续阅读
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderScreen.kt:94	正在加载章节…
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderScreen.kt:107	${it.images.size} 页
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderScreen.kt:110	[阅读] 已加载 $status（章节 ${index + 1}/${chapterIds.size}）
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderScreen.kt:114	加载失败：${it.message}（点“重试”）
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderScreen.kt:116	[阅读] $status
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderScreen.kt:125	阅读
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderScreen.kt:125	恢复到第 ${saved + 1} 页
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderScreen.kt:140	阅读
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderScreen.kt:140	章节选择：series 到达（${series.size} 话），准备弹对话框
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderScreen.kt:160	返回
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderScreen.kt:161	重试
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderScreen.kt:163	正在加载章节…
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderScreen.kt:169	第 ${index + 1} / ${chapterIds.size} 话
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderScreen.kt:175	重试
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderScreen.kt:207	用户真正停留过的页
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderScreen.kt:208	被打断
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderScreen.kt:245	阅读
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderScreen.kt:245	本窗口预取深度 $depth（来自 SelfTuner）
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderScreen.kt:255	阅读
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderScreen.kt:255	预取第 
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderScreen.kt:255	 页
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderScreen.kt:255	失败
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderScreen.kt:255	成功
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderScreen.kt:255	（用时 
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderScreen.kt:274	下一话的图片列表
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderScreen.kt:276	章节信息
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderScreen.kt:287	阅读
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderScreen.kt:288	已预加载下一话信息（用时 ${System.currentTimeMillis() - t0} ms，图片 ${it.images.size} 张）
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderScreen.kt:294	阅读
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderScreen.kt:294	预加载下一话失败（不影响当前阅读）
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderScreen.kt:321	阅读
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderScreen.kt:321	键盘翻页 
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderScreen.kt:321	上一页
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderScreen.kt:321	下一页
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderScreen.kt:347	下一话
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderScreen.kt:353	下一话
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderScreen.kt:353	已经是最后一话
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderScreen.kt:357	回详情页
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderScreen.kt:369	鼠标移到底部/点击才出现、几秒隐藏
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderScreen.kt:375	横向
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderScreen.kt:375	纵向
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderScreen.kt:381	阅读
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderScreen.kt:381	跳页 → 第 ${page + 1} 页
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderScreen.kt:402	阅读
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderScreen.kt:402	阅读模式切换为 
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderScreen.kt:402	横向翻页
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderScreen.kt:402	纵向滚动
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderScreen.kt:407	阅读
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderScreen.kt:407	章节选择：开始请求 album(comicId)…
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderScreen.kt:415	阅读
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderScreen.kt:415	打开章节选择失败
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderScreen.kt:422	阅读
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderScreen.kt:422	收藏状态已切换（写操作，未验证）
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderScreen.kt:425	阅读
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderScreen.kt:425	切换收藏失败
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderScreen.kt:432	阅读
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderScreen.kt:432	已点赞（写操作，未验证）
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderScreen.kt:435	阅读
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderScreen.kt:435	点赞失败
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderScreen.kt:441	横向
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderScreen.kt:441	纵向
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderScreen.kt:475	阅读
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderScreen.kt:475	阅读模式切换为 
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderScreen.kt:475	横向翻页
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderScreen.kt:475	纵向滚动
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderScreen.kt:483	阅读
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderScreen.kt:483	打开章节选择失败
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderScreen.kt:488	阅读
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderScreen.kt:488	收藏状态已切换（写操作，未验证）
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderScreen.kt:489	阅读
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderScreen.kt:489	已点赞（写操作，未验证）
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderScreen.kt:514	[阅读] 第 ${index + 1} 页加载失败：$url
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderScreen.kt:530	第 ${index + 1} 页
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderScreen.kt:537	加载中
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderScreen.kt:542	第 ${index + 1} 页加载失败
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderScreen.kt:543	点这里重试
+desktop/src/main/kotlin/com/jmnext/desktop/ReaderScreen.kt:546	第 ${index + 1} 页 加载中…
+desktop/src/main/kotlin/com/jmnext/desktop/RemoteImage.kt:32	解码返回 null
+desktop/src/main/kotlin/com/jmnext/desktop/RemoteImage.kt:32	下载失败
+desktop/src/main/kotlin/com/jmnext/desktop/RemoteImage.kt:44	宿主机 SoC 空转
+desktop/src/main/kotlin/com/jmnext/desktop/RemoteImage.kt:44	应用连 API 都超时
+desktop/src/main/kotlin/com/jmnext/desktop/RemoteImage.kt:64	最久未使用在前
+desktop/src/main/kotlin/com/jmnext/desktop/RemoteImage.kt:97	普通
+desktop/src/main/kotlin/com/jmnext/desktop/RemoteImage.kt:100	图片
+desktop/src/main/kotlin/com/jmnext/desktop/RemoteImage.kt:100	Skiko 解码失败 url=$url bytes=${bytes.size}
+desktop/src/main/kotlin/com/jmnext/desktop/RemoteImage.kt:104	图片
+desktop/src/main/kotlin/com/jmnext/desktop/RemoteImage.kt:104	普通加载成功 ${bitmap.width}x${bitmap.height} ${bytes.size}B ${System.currentTimeMillis() - t0}ms
+desktop/src/main/kotlin/com/jmnext/desktop/RemoteImage.kt:116	反切片
+desktop/src/main/kotlin/com/jmnext/desktop/RemoteImage.kt:119	编码 PNG + ImageIO 再解一次 + getRGB/setRGB
+desktop/src/main/kotlin/com/jmnext/desktop/RemoteImage.kt:124	图片
+desktop/src/main/kotlin/com/jmnext/desktop/RemoteImage.kt:124	反切片：Skia 画布路径 
+desktop/src/main/kotlin/com/jmnext/desktop/RemoteImage.kt:128	图片
+desktop/src/main/kotlin/com/jmnext/desktop/RemoteImage.kt:128	反切片：PNG 兜底路径（画布路径未成功）url=
+desktop/src/main/kotlin/com/jmnext/desktop/RemoteImage.kt:136	拿到像素数组做反切片
+desktop/src/main/kotlin/com/jmnext/desktop/RemoteImage.kt:137	图片
+desktop/src/main/kotlin/com/jmnext/desktop/RemoteImage.kt:137	ImageIO 解不出，改用 Skiko 转码 url=$url bytes=${bytes.size} 头部=${bytes.take(12).joinToString(
+desktop/src/main/kotlin/com/jmnext/desktop/RemoteImage.kt:138	Skiko 解码 → 编码 PNG → ImageIO 再解码
+desktop/src/main/kotlin/com/jmnext/desktop/RemoteImage.kt:145	图片
+desktop/src/main/kotlin/com/jmnext/desktop/RemoteImage.kt:145	Skiko 也无法转码（连 Skia 都解不出）url=$url
+desktop/src/main/kotlin/com/jmnext/desktop/RemoteImage.kt:148	图片
+desktop/src/main/kotlin/com/jmnext/desktop/RemoteImage.kt:148	Skiko 转码为 PNG 成功 ${png.size}B（原 ${bytes.size}B，耗时 ${System.currentTimeMillis() - tTranscode0} ms）
+desktop/src/main/kotlin/com/jmnext/desktop/RemoteImage.kt:151	图片
+desktop/src/main/kotlin/com/jmnext/desktop/RemoteImage.kt:151	转成 PNG 后 ImageIO 仍解不出（异常情况，请把这条日志发我）url=$url
+desktop/src/main/kotlin/com/jmnext/desktop/RemoteImage.kt:168	图片
+desktop/src/main/kotlin/com/jmnext/desktop/RemoteImage.kt:168	反切片耗时明细：下载 
+desktop/src/main/kotlin/com/jmnext/desktop/RemoteImage.kt:168	ms，解码 
+desktop/src/main/kotlin/com/jmnext/desktop/RemoteImage.kt:168	ms，取像素 
+desktop/src/main/kotlin/com/jmnext/desktop/RemoteImage.kt:168	ms，还原 
+desktop/src/main/kotlin/com/jmnext/desktop/RemoteImage.kt:168	ms，回填 
+desktop/src/main/kotlin/com/jmnext/desktop/RemoteImage.kt:168	ms，转位图 
+desktop/src/main/kotlin/com/jmnext/desktop/RemoteImage.kt:172	图片
+desktop/src/main/kotlin/com/jmnext/desktop/RemoteImage.kt:172	反切片解码异常 url=$url
+desktop/src/main/kotlin/com/jmnext/desktop/RemoteImage.kt:174	图片
+desktop/src/main/kotlin/com/jmnext/desktop/RemoteImage.kt:174	反切片成功 ${bitmap.width}x${bitmap.height} ${bytes.size}B ${System.currentTimeMillis() - t0}ms
+desktop/src/main/kotlin/com/jmnext/desktop/RemoteImage.kt:182	把某些行搬到别的位置
+desktop/src/main/kotlin/com/jmnext/desktop/RemoteImage.kt:187	编码 PNG 666.7 ms + ImageIO 读 PNG 759.9 ms + getRGB 277.5 ms
+desktop/src/main/kotlin/com/jmnext/desktop/RemoteImage.kt:188	解码后的源图
+desktop/src/main/kotlin/com/jmnext/desktop/RemoteImage.kt:213	反切片总耗时
+desktop/src/main/kotlin/com/jmnext/desktop/RemoteImage.kt:215	图片
+desktop/src/main/kotlin/com/jmnext/desktop/RemoteImage.kt:215	反切片阶段：解码 
+desktop/src/main/kotlin/com/jmnext/desktop/RemoteImage.kt:215	ms，画 band 
+desktop/src/main/kotlin/com/jmnext/desktop/RemoteImage.kt:215	 个），转位图 
+desktop/src/main/kotlin/com/jmnext/desktop/RemoteImage.kt:224	图片
+desktop/src/main/kotlin/com/jmnext/desktop/RemoteImage.kt:224	跳过非 http 资源：
+desktop/src/main/kotlin/com/jmnext/desktop/RemoteImage.kt:236	图片
+desktop/src/main/kotlin/com/jmnext/desktop/RemoteImage.kt:240	图片
+desktop/src/main/kotlin/com/jmnext/desktop/RemoteImage.kt:240	[$kind] 下载 ${bytes.size}B HTTP $code ${System.currentTimeMillis() - t0}ms
+desktop/src/main/kotlin/com/jmnext/desktop/RemoteImage.kt:245	图片
+desktop/src/main/kotlin/com/jmnext/desktop/RemoteImage.kt:245	[$kind] 下载异常 url=$url → ${t?.javaClass?.simpleName}: ${t?.message}
+desktop/src/main/kotlin/com/jmnext/desktop/SearchScreen.kt:51	严重
+desktop/src/main/kotlin/com/jmnext/desktop/SearchScreen.kt:54	最新
+desktop/src/main/kotlin/com/jmnext/desktop/SearchScreen.kt:55	最多点阅
+desktop/src/main/kotlin/com/jmnext/desktop/SearchScreen.kt:56	最多图片
+desktop/src/main/kotlin/com/jmnext/desktop/SearchScreen.kt:57	最多爱心
+desktop/src/main/kotlin/com/jmnext/desktop/SearchScreen.kt:58	最旧
+desktop/src/main/kotlin/com/jmnext/desktop/SearchScreen.kt:62	站内搜索
+desktop/src/main/kotlin/com/jmnext/desktop/SearchScreen.kt:63	作品
+desktop/src/main/kotlin/com/jmnext/desktop/SearchScreen.kt:64	作者
+desktop/src/main/kotlin/com/jmnext/desktop/SearchScreen.kt:65	标签
+desktop/src/main/kotlin/com/jmnext/desktop/SearchScreen.kt:66	登场人物
+desktop/src/main/kotlin/com/jmnext/desktop/SearchScreen.kt:106	输入关键词后回车搜索
+desktop/src/main/kotlin/com/jmnext/desktop/SearchScreen.kt:116	没搜索时
+desktop/src/main/kotlin/com/jmnext/desktop/SearchScreen.kt:126	搜索
+desktop/src/main/kotlin/com/jmnext/desktop/SearchScreen.kt:126	热门标签读取失败（留空继续）：${it.message}
+desktop/src/main/kotlin/com/jmnext/desktop/SearchScreen.kt:129	搜索
+desktop/src/main/kotlin/com/jmnext/desktop/SearchScreen.kt:129	随机推荐读取失败（留空继续）：${it.message}
+desktop/src/main/kotlin/com/jmnext/desktop/SearchScreen.kt:154	搜索
+desktop/src/main/kotlin/com/jmnext/desktop/SearchScreen.kt:154	精确命中作品 id=$redirect，直接打开详情
+desktop/src/main/kotlin/com/jmnext/desktop/SearchScreen.kt:170	共 $total 条，已加载 ${items.size} 条
+desktop/src/main/kotlin/com/jmnext/desktop/SearchScreen.kt:172	搜索
+desktop/src/main/kotlin/com/jmnext/desktop/SearchScreen.kt:173	$status（本页屏蔽 ${result.page.hidden} 条；排序=$order 字段=$type 年=$year 月=$month
+desktop/src/main/kotlin/com/jmnext/desktop/SearchScreen.kt:174	，已本地二次排序）
+desktop/src/main/kotlin/com/jmnext/desktop/SearchScreen.kt:179	搜索失败：${it.message}
+desktop/src/main/kotlin/com/jmnext/desktop/SearchScreen.kt:180	搜索
+desktop/src/main/kotlin/com/jmnext/desktop/SearchScreen.kt:197	搜索作品
+desktop/src/main/kotlin/com/jmnext/desktop/SearchScreen.kt:202	没搜索
+desktop/src/main/kotlin/com/jmnext/desktop/SearchScreen.kt:206	输入关键词后回车搜索
+desktop/src/main/kotlin/com/jmnext/desktop/SearchScreen.kt:214	搜索中…
+desktop/src/main/kotlin/com/jmnext/desktop/SearchScreen.kt:214	搜索
+desktop/src/main/kotlin/com/jmnext/desktop/SearchScreen.kt:224	排序：
+desktop/src/main/kotlin/com/jmnext/desktop/SearchScreen.kt:237	字段：
+desktop/src/main/kotlin/com/jmnext/desktop/SearchScreen.kt:250	年月：
+desktop/src/main/kotlin/com/jmnext/desktop/SearchScreen.kt:254	年（如 2026）
+desktop/src/main/kotlin/com/jmnext/desktop/SearchScreen.kt:261	月（1-12）
+desktop/src/main/kotlin/com/jmnext/desktop/SearchScreen.kt:265	不限
+desktop/src/main/kotlin/com/jmnext/desktop/SearchScreen.kt:274	搜索历史：
+desktop/src/main/kotlin/com/jmnext/desktop/SearchScreen.kt:278	清空
+desktop/src/main/kotlin/com/jmnext/desktop/SearchScreen.kt:289	热门标签：
+desktop/src/main/kotlin/com/jmnext/desktop/SearchScreen.kt:301	随机推荐：
+desktop/src/main/kotlin/com/jmnext/desktop/SearchScreen.kt:308	换一批
+desktop/src/main/kotlin/com/jmnext/desktop/SearchScreen.kt:325	已按标签屏蔽 ${blockedItems.size} 条（命中：${tags.joinToString(
+desktop/src/main/kotlin/com/jmnext/desktop/SearchScreen.kt:329	允许一次
+desktop/src/main/kotlin/com/jmnext/desktop/SearchScreen.kt:345	加载更多
+desktop/src/main/kotlin/com/jmnext/desktop/SelfTuner.kt:12	暗中优化
+desktop/src/main/kotlin/com/jmnext/desktop/SelfTuner.kt:19	用满四个旋钮
+desktop/src/main/kotlin/com/jmnext/desktop/SelfTuner.kt:21	参数被读取、样本被记录
+desktop/src/main/kotlin/com/jmnext/desktop/SelfTuner.kt:21	学习是否真的改善体验
+desktop/src/main/kotlin/com/jmnext/desktop/SelfTuner.kt:22	已接上
+desktop/src/main/kotlin/com/jmnext/desktop/SelfTuner.kt:35	暗中优化
+desktop/src/main/kotlin/com/jmnext/desktop/SelfTuner.kt:44	自学习
+desktop/src/main/kotlin/com/jmnext/desktop/SelfTuner.kt:48	往前取几页
+desktop/src/main/kotlin/com/jmnext/desktop/SerialReminder.kt:20	未读数比上次看到的多
+desktop/src/main/kotlin/com/jmnext/desktop/SerialReminder.kt:23	不引入大依赖
+desktop/src/main/kotlin/com/jmnext/desktop/SerialReminder.kt:31	交给系统调度、实际可能更长
+desktop/src/main/kotlin/com/jmnext/desktop/SerialReminder.kt:71	提醒
+desktop/src/main/kotlin/com/jmnext/desktop/SerialReminder.kt:71	读取未读数失败（保留上次状态）：${it.message}
+desktop/src/main/kotlin/com/jmnext/desktop/SerialReminder.kt:76	你追的连载有 $count 条更新
+desktop/src/main/kotlin/com/jmnext/desktop/SerialReminder.kt:77	提醒
+desktop/src/main/kotlin/com/jmnext/desktop/SerialReminder.kt:84	提醒
+desktop/src/main/kotlin/com/jmnext/desktop/SerialReminder.kt:84	系统托盘不可用，降级为窗口内提示
+desktop/src/main/kotlin/com/jmnext/desktop/SerialReminder.kt:100	连载更新
+desktop/src/main/kotlin/com/jmnext/desktop/SerialReminder.kt:103	提醒
+desktop/src/main/kotlin/com/jmnext/desktop/SerialReminder.kt:103	托盘提醒失败，降级为窗口内提示：${it.message}
+desktop/src/main/kotlin/com/jmnext/desktop/SharedElement.kt:16	拿不到作用域就什么都不做
+desktop/src/main/kotlin/com/jmnext/desktop/SharedElement.kt:21	拿不到就什么都不做
+desktop/src/main/kotlin/com/jmnext/desktop/SharedElement.kt:22	没有过渡
+desktop/src/main/kotlin/com/jmnext/desktop/SharedElement.kt:64	漏提供作用域
+desktop/src/main/kotlin/com/jmnext/desktop/SideNav.kt:38	首页
+desktop/src/main/kotlin/com/jmnext/desktop/SideNav.kt:39	搜索
+desktop/src/main/kotlin/com/jmnext/desktop/SideNav.kt:40	分类
+desktop/src/main/kotlin/com/jmnext/desktop/SideNav.kt:41	周刊
+desktop/src/main/kotlin/com/jmnext/desktop/SideNav.kt:42	随机本子
+desktop/src/main/kotlin/com/jmnext/desktop/SideNav.kt:43	收藏
+desktop/src/main/kotlin/com/jmnext/desktop/SideNav.kt:44	历史
+desktop/src/main/kotlin/com/jmnext/desktop/SideNav.kt:45	追更
+desktop/src/main/kotlin/com/jmnext/desktop/SideNav.kt:46	标签
+desktop/src/main/kotlin/com/jmnext/desktop/SideNav.kt:47	画师与作品库
+desktop/src/main/kotlin/com/jmnext/desktop/SideNav.kt:48	通知
+desktop/src/main/kotlin/com/jmnext/desktop/SideNav.kt:49	屏蔽设置
+desktop/src/main/kotlin/com/jmnext/desktop/SideNav.kt:50	外观
+desktop/src/main/kotlin/com/jmnext/desktop/SideNav.kt:51	关于
+desktop/src/main/kotlin/com/jmnext/desktop/SideNav.kt:52	我的
+desktop/src/main/kotlin/com/jmnext/desktop/Smoke.kt:27	[冒烟] 配置目录：$configDir
+desktop/src/main/kotlin/com/jmnext/desktop/Smoke.kt:45	[冒烟] 引导完成（主机发现 + 图床主机）
+desktop/src/main/kotlin/com/jmnext/desktop/Smoke.kt:51	[冒烟] 登录成功：${member.username ?: 
+desktop/src/main/kotlin/com/jmnext/desktop/Smoke.kt:51	} 等级=${member.levelName ?: 
+desktop/src/main/kotlin/com/jmnext/desktop/Smoke.kt:53	[冒烟] 未提供 JM_USER / JM_PASS，跳过登录，只测公开接口
+desktop/src/main/kotlin/com/jmnext/desktop/Smoke.kt:55	[冒烟] 会话状态：loggedIn=${auth.isLoggedIn}
+desktop/src/main/kotlin/com/jmnext/desktop/Smoke.kt:58	[冒烟] 首页第一页：${page.items.size} 条 / 服务端共 ${page.total} 条 / 被屏蔽规则挡掉 ${page.hidden} 条
+desktop/src/main/kotlin/com/jmnext/desktop/Smoke.kt:59	(无标题)
+desktop/src/main/kotlin/com/jmnext/desktop/Smoke.kt:61	[冒烟] 封面地址示例：${repo.coverUrl(page.items.first())}
+desktop/src/main/kotlin/com/jmnext/desktop/Smoke.kt:62	[冒烟] 结束
+desktop/src/main/kotlin/com/jmnext/desktop/TagBlocker.kt:17	标签不在这里（接口不给）
+desktop/src/main/kotlin/com/jmnext/desktop/TagBlocker.kt:26	顺手补一层屏蔽
+desktop/src/main/kotlin/com/jmnext/desktop/TagBlocker.kt:49	屏蔽
+desktop/src/main/kotlin/com/jmnext/desktop/TagBlocker.kt:49	标签级屏蔽已启用（并发 3、缓存落盘、规则跟随屏蔽名单）
+desktop/src/main/kotlin/com/jmnext/desktop/TagBlocker.kt:66	含已屏蔽标签：xxx
+desktop/src/main/kotlin/com/jmnext/desktop/TagBlocking.kt:49	已按标签屏蔽 ${blocked.size} 条（命中：${tags.joinToString(
+desktop/src/main/kotlin/com/jmnext/desktop/TagBlocking.kt:53	允许一次
+desktop/src/main/kotlin/com/jmnext/desktop/TagsScreen.kt:56	还没有本地统计，点右侧按钮扫描一次
+desktop/src/main/kotlin/com/jmnext/desktop/TagsScreen.kt:56	本地统计 ${counts.size} 个标签
+desktop/src/main/kotlin/com/jmnext/desktop/TagsScreen.kt:57	只能看不能改
+desktop/src/main/kotlin/com/jmnext/desktop/TagsScreen.kt:67	标签
+desktop/src/main/kotlin/com/jmnext/desktop/TagsScreen.kt:67	标星标签 ${starred.size} 个
+desktop/src/main/kotlin/com/jmnext/desktop/TagsScreen.kt:71	标签
+desktop/src/main/kotlin/com/jmnext/desktop/TagsScreen.kt:71	标星标签读取失败：${it.message}
+desktop/src/main/kotlin/com/jmnext/desktop/TagsScreen.kt:83	标签
+desktop/src/main/kotlin/com/jmnext/desktop/TagsScreen.kt:83	已标星 
+desktop/src/main/kotlin/com/jmnext/desktop/TagsScreen.kt:83	已取消标星 
+desktop/src/main/kotlin/com/jmnext/desktop/TagsScreen.kt:88	标星操作失败：
+desktop/src/main/kotlin/com/jmnext/desktop/TagsScreen.kt:89	标签
+desktop/src/main/kotlin/com/jmnext/desktop/TagsScreen.kt:89	标星操作失败 type=
+desktop/src/main/kotlin/com/jmnext/desktop/TagsScreen.kt:98	标签
+desktop/src/main/kotlin/com/jmnext/desktop/TagsScreen.kt:108	正在扫描收藏（逐部作品请求，可能要一会儿）…
+desktop/src/main/kotlin/com/jmnext/desktop/TagsScreen.kt:114	扫描完成：${it.size} 个标签
+desktop/src/main/kotlin/com/jmnext/desktop/TagsScreen.kt:115	标签
+desktop/src/main/kotlin/com/jmnext/desktop/TagsScreen.kt:115	扫描完成，${it.size} 个标签
+desktop/src/main/kotlin/com/jmnext/desktop/TagsScreen.kt:119	扫描失败：${it.message}
+desktop/src/main/kotlin/com/jmnext/desktop/TagsScreen.kt:120	标签
+desktop/src/main/kotlin/com/jmnext/desktop/TagsScreen.kt:120	扫描失败
+desktop/src/main/kotlin/com/jmnext/desktop/TagsScreen.kt:125	扫描中…
+desktop/src/main/kotlin/com/jmnext/desktop/TagsScreen.kt:125	扫描收藏更新统计
+desktop/src/main/kotlin/com/jmnext/desktop/TagsScreen.kt:129	需要登录（收藏列表属于账号数据）
+desktop/src/main/kotlin/com/jmnext/desktop/TagsScreen.kt:138	　上次扫描：${java.time.Instant.ofEpochMilli(cachedAt).atZone(java.time.ZoneId.systemDefault()).toLocalDateTime().toString().take(16).replace('T', ' ')}
+desktop/src/main/kotlin/com/jmnext/desktop/TagsScreen.kt:146	收藏里的标签（本地统计）
+desktop/src/main/kotlin/com/jmnext/desktop/TagsScreen.kt:174	网站上的标星标签
+desktop/src/main/kotlin/com/jmnext/desktop/TagsScreen.kt:178	只能看不能改
+desktop/src/main/kotlin/com/jmnext/desktop/TagsScreen.kt:186	标签名
+desktop/src/main/kotlin/com/jmnext/desktop/TagsScreen.kt:193	添加标星
+desktop/src/main/kotlin/com/jmnext/desktop/TagsScreen.kt:215	移除
+desktop/src/main/kotlin/com/jmnext/desktop/TrackingScreen.kt:40	数据到了但列表不画
+desktop/src/main/kotlin/com/jmnext/desktop/TrackingScreen.kt:52	追更
+desktop/src/main/kotlin/com/jmnext/desktop/TrackingScreen.kt:86	加载中…
+desktop/src/main/kotlin/com/jmnext/desktop/TrackingScreen.kt:86	需要登录后才能查看追更
+desktop/src/main/kotlin/com/jmnext/desktop/TrackingScreen.kt:101	还没有追更的作品
+desktop/src/main/kotlin/com/jmnext/desktop/TrackingScreen.kt:101	已加载 ${items.size} 条 / 共 $total 条
+desktop/src/main/kotlin/com/jmnext/desktop/TrackingScreen.kt:102	（本页被屏蔽挡掉 ${paged.hidden} 条）
+desktop/src/main/kotlin/com/jmnext/desktop/TrackingScreen.kt:104	追更
+desktop/src/main/kotlin/com/jmnext/desktop/TrackingScreen.kt:108	加载失败：${it.message}
+desktop/src/main/kotlin/com/jmnext/desktop/TrackingScreen.kt:109	追更
+desktop/src/main/kotlin/com/jmnext/desktop/TrackingScreen.kt:109	加载失败
+desktop/src/main/kotlin/com/jmnext/desktop/TrackingScreen.kt:123	加载更多
+desktop/src/main/kotlin/com/jmnext/desktop/Version.kt:11	检查更新
+desktop/src/main/kotlin/com/jmnext/desktop/Wallpaper.kt:35	实时背景模糊
+desktop/src/main/kotlin/com/jmnext/desktop/Wallpaper.kt:44	毛玻璃
+desktop/src/main/kotlin/com/jmnext/desktop/Wallpaper.kt:45	半透明
+desktop/src/main/kotlin/com/jmnext/desktop/Wallpaper.kt:46	扁平模糊
+desktop/src/main/kotlin/com/jmnext/desktop/Wallpaper.kt:53	极光
+desktop/src/main/kotlin/com/jmnext/desktop/Wallpaper.kt:55	沙丘
+desktop/src/main/kotlin/com/jmnext/desktop/Wallpaper.kt:57	薄荷
+desktop/src/main/kotlin/com/jmnext/desktop/Wallpaper.kt:59	水墨
+desktop/src/main/kotlin/com/jmnext/desktop/Wallpaper.kt:145	玻璃
+desktop/src/main/kotlin/com/jmnext/desktop/Wallpaper.kt:188	在线优先
+desktop/src/main/kotlin/com/jmnext/desktop/Wallpaper.kt:214	外观
+desktop/src/main/kotlin/com/jmnext/desktop/Wallpaper.kt:214	本地壁纸解码失败：$path
+desktop/src/main/kotlin/com/jmnext/desktop/Wallpaper.kt:229	压暗没生效
+desktop/src/main/kotlin/com/jmnext/desktop/Wallpaper.kt:243	立起来
+desktop/src/main/kotlin/com/jmnext/desktop/WallpaperRemote.kt:20	预设渐变 + 本地图片 + 模糊压暗
+desktop/src/main/kotlin/com/jmnext/desktop/WallpaperRemote.kt:26	每日
+desktop/src/main/kotlin/com/jmnext/desktop/WallpaperRemote.kt:28	二次元图源
+desktop/src/main/kotlin/com/jmnext/desktop/WallpaperRemote.kt:56	今天已取过
+desktop/src/main/kotlin/com/jmnext/desktop/WallpaperRemote.kt:79	取图失败
+desktop/src/main/kotlin/com/jmnext/desktop/WallpaperRemote.kt:89	还没有填地址
+desktop/src/main/kotlin/com/jmnext/desktop/WallpaperRemote.kt:116	图源没有返回可用地址
+desktop/src/main/kotlin/com/jmnext/desktop/WallpaperRemote.kt:132	Bing 接口无响应
+desktop/src/main/kotlin/com/jmnext/desktop/WallpaperRemote.kt:134	Bing 接口返回无法解析
+desktop/src/main/kotlin/com/jmnext/desktop/WallpaperRemote.kt:151	二次元图源都不可用（${failures.joinToString(
+desktop/src/main/kotlin/com/jmnext/desktop/WallpaperRemoteSection.kt:26	在线壁纸
+desktop/src/main/kotlin/com/jmnext/desktop/WallpaperRemoteSection.kt:41	在线壁纸
+desktop/src/main/kotlin/com/jmnext/desktop/WallpaperRemoteSection.kt:69	换一张
+desktop/src/main/kotlin/com/jmnext/desktop/WallpaperRemoteSection.kt:72	取图中…
+desktop/src/main/kotlin/com/jmnext/desktop/WallpaperRemoteSection.kt:76	署名：$credit
+desktop/src/main/kotlin/com/jmnext/desktop/WallpaperRemoteSection.kt:83	取图失败：$err
+desktop/src/main/kotlin/com/jmnext/desktop/WallpaperRemoteSection.kt:93	自动轮换：
+desktop/src/main/kotlin/com/jmnext/desktop/WallpaperRemoteSection.kt:99	只手动
+desktop/src/main/kotlin/com/jmnext/desktop/WallpaperRemoteSection.kt:99	${minutes}分
+desktop/src/main/kotlin/com/jmnext/desktop/WallpaperRemoteSection.kt:112	图片直链
+desktop/src/main/kotlin/com/jmnext/desktop/WallpaperRemoteSection.kt:120	应用
+desktop/src/main/kotlin/com/jmnext/desktop/WallpaperRemoteSection.kt:125	在线壁纸默认关闭：阅读器默认不发任何第三方请求。取到的地址会在本地缓存轮换，
+desktop/src/main/kotlin/com/jmnext/desktop/WallpaperRemoteSection.kt:126	攒够几张后就不再打接口；Bing 每天只重取一次。
+desktop/src/main/kotlin/com/jmnext/desktop/PassphraseKeyProvider.kt:22	同机其它用户/离线拷贝
+desktop/src/main/kotlin/com/jmnext/desktop/PassphraseKeyProvider.kt:53	[凭据] 未提供口令，无法使用口令保护的密钥（本次会话不持久化令牌）
+desktop/src/main/kotlin/com/jmnext/desktop/PassphraseKeyProvider.kt:61	[凭据] 解不开被口令保护的密钥（口令错误或文件损坏）：${it.javaClass.simpleName}
+desktop/src/main/kotlin/com/jmnext/desktop/PassphraseKeyProvider.kt:72	请输入密钥口令（用于保护本机登录凭据）
+desktop/src/main/kotlin/com/jmnext/desktop/PassphraseKeyProvider.kt:82	包裹文件长度不合法
+desktop/src/main/kotlin/com/jmnext/desktop/PassphraseKeyProvider.kt:101	[凭据] 已用口令保护密钥：${file.name}（PBKDF2 迭代 $ITERATIONS 次）
+desktop/src/main/kotlin/com/jmnext/desktop/PassphraseKeyProvider.kt:124	暂不使用
+desktop/src/main/kotlin/com/jmnext/desktop/PassphraseKeyProvider.kt:126	设置口令
+desktop/src/main/kotlin/com/jmnext/desktop/PassphraseKeyProvider.kt:126	暂不使用
+desktop/src/main/kotlin/com/jmnext/desktop/PassphraseKeyProvider.kt:141	你此前选择暂不使用口令保护
+desktop/src/main/kotlin/com/jmnext/desktop/PassphraseKeyProvider.kt:145	检测到老安装：密钥以明文文件保存
+desktop/src/main/kotlin/com/jmnext/desktop/PassphraseKeyProvider.kt:152	[凭据] 用户选择暂不使用口令保护（以后可设 JMNEXT_KEY_PASSPHRASE_ENABLE=1 开启）
+desktop/src/main/kotlin/com/jmnext/desktop/PassphraseKeyProvider.kt:153	你选择了暂不使用口令保护
+desktop/src/main/kotlin/com/jmnext/desktop/PassphraseKeyProvider.kt:156	拒绝
+desktop/src/main/kotlin/com/jmnext/desktop/PassphraseKeyProvider.kt:157	没人问过就记为用户拒绝
+desktop/src/main/kotlin/com/jmnext/desktop/PassphraseKeyProvider.kt:160	[凭据] 无法弹出询问对话框（无图形环境或界面线程限制），本次沿用原实现；下次启动会再问
+desktop/src/main/kotlin/com/jmnext/desktop/PassphraseKeyProvider.kt:166	用户拒绝
+desktop/src/main/kotlin/com/jmnext/desktop/PassphraseKeyProvider.kt:166	根本没问成
+desktop/src/main/kotlin/com/jmnext/desktop/PassphraseKeyProvider.kt:169	拒绝询问
+desktop/src/main/kotlin/com/jmnext/desktop/PassphraseKeyProvider.kt:175	已提示
+desktop/src/main/kotlin/com/jmnext/desktop/PassphraseKeyProvider.kt:176	没人看过却记成已提示
+desktop/src/main/kotlin/com/jmnext/desktop/PassphraseKeyProvider.kt:181	要开启口令保护：删除配置目录下的 
+desktop/src/main/kotlin/com/jmnext/desktop/PassphraseKeyProvider.kt:182	 后重启，或设置环境变量 JMNEXT_KEY_PASSPHRASE_ENABLE=1。
+desktop/src/main/kotlin/com/jmnext/desktop/PassphraseKeyProvider.kt:184	[凭据] 未开启口令保护（$reason）：本机其它程序可读取并解密登录凭据。$howTo
+desktop/src/main/kotlin/com/jmnext/desktop/PassphraseKeyProvider.kt:185	[凭据] （当前环境无图形界面，本次不写提示标记，下次启动会再提示）
+desktop/src/main/kotlin/com/jmnext/desktop/PassphraseKeyProvider.kt:193	本机登录凭据未开启口令保护。\n\n
+desktop/src/main/kotlin/com/jmnext/desktop/PassphraseKeyProvider.kt:194	原因：$reason\n\n
+desktop/src/main/kotlin/com/jmnext/desktop/PassphraseKeyProvider.kt:195	现状：密钥以明文文件保存在配置目录，同一台机器上的其它程序\n
+desktop/src/main/kotlin/com/jmnext/desktop/PassphraseKeyProvider.kt:196	可以读取并解密你的登录凭据（已有人公开了这样的读取程序）。\n\n
+desktop/src/main/kotlin/com/jmnext/desktop/PassphraseKeyProvider.kt:198	（本提示只出现一次。）
+desktop/src/main/kotlin/com/jmnext/desktop/PassphraseKeyProvider.kt:199	登录凭据保护提示
+desktop/src/main/kotlin/com/jmnext/desktop/PassphraseKeyProvider.kt:207	[凭据] 已一次性提示：当前未开启口令保护（$reason）
+desktop/src/main/kotlin/com/jmnext/desktop/PassphraseKeyProvider.kt:209	[凭据] 未能弹出未开启口令保护的提示（$reason），本次不写标记，下次启动会再试
+desktop/src/main/kotlin/com/jmnext/desktop/PassphraseKeyProvider.kt:219	是否用口令保护本机登录凭据？\n\n
+desktop/src/main/kotlin/com/jmnext/desktop/PassphraseKeyProvider.kt:220	背景：桌面端要在本机保存登录令牌。若只存在文件里，同一台机器上的其它程序\n
+desktop/src/main/kotlin/com/jmnext/desktop/PassphraseKeyProvider.kt:221	也能读走并解密（已有公开的读取示例）。设置口令后，没有口令就解不开。\n\n
+desktop/src/main/kotlin/com/jmnext/desktop/PassphraseKeyProvider.kt:222	「设置口令」：每次启动需输入一次口令；\n
+desktop/src/main/kotlin/com/jmnext/desktop/PassphraseKeyProvider.kt:223	「暂不使用」：与以前相同（本机其它程序可读），以后可再开启。
+desktop/src/main/kotlin/com/jmnext/desktop/PassphraseKeyProvider.kt:224	设置口令
+desktop/src/main/kotlin/com/jmnext/desktop/PassphraseKeyProvider.kt:224	暂不使用
+desktop/src/main/kotlin/com/jmnext/desktop/PassphraseKeyProvider.kt:226	登录凭据保护
+desktop/src/main/kotlin/com/jmnext/desktop/PassphraseKeyProvider.kt:229	没做选择
+desktop/src/main/kotlin/com/jmnext/desktop/PassphraseKeyProvider.kt:245	弹窗没出现却记为已处理
+desktop/src/main/kotlin/com/jmnext/desktop/SelfCheck.kt:11	编译通过
+desktop/src/main/kotlin/com/jmnext/desktop/SelfCheck.kt:27	  通过: 
+desktop/src/main/kotlin/com/jmnext/desktop/SelfCheck.kt:27	  失败: 
+desktop/src/main/kotlin/com/jmnext/desktop/SelfCheck.kt:36	== 凭据存储自检 ==
+desktop/src/main/kotlin/com/jmnext/desktop/SelfCheck.kt:40	== 结果：通过 
+desktop/src/main/kotlin/com/jmnext/desktop/SelfCheck.kt:40	 项，失败 
+desktop/src/main/kotlin/com/jmnext/desktop/SelfCheck.kt:40	 项 ==
+desktop/src/main/kotlin/com/jmnext/desktop/SelfCheck.kt:54	口令保护：首次调用生成并包裹密钥
+desktop/src/main/kotlin/com/jmnext/desktop/SelfCheck.kt:59	口令保护：同一口令可解出同一把密钥
+desktop/src/main/kotlin/com/jmnext/desktop/SelfCheck.kt:63	口令保护：错口令 fail closed（返回 null 而不是明文兜底）
+desktop/src/main/kotlin/com/jmnext/desktop/SelfCheck.kt:68	口令保护：包裹文件损坏时 fail closed（返回 null，不抛）
+desktop/src/main/kotlin/com/jmnext/desktop/SelfCheck.kt:73	口令保护：forget 删除包裹文件（登出即销毁密钥材料）
+desktop/src/main/kotlin/com/jmnext/desktop/SelfCheck.kt:88	节点迁移：读到旧节点的值
+desktop/src/main/kotlin/com/jmnext/desktop/SelfCheck.kt:89	节点迁移：整型键按类型读回
+desktop/src/main/kotlin/com/jmnext/desktop/SelfCheck.kt:90	节点迁移：布尔键按类型读回
+desktop/src/main/kotlin/com/jmnext/desktop/SelfCheck.kt:91	节点迁移：长整型键按类型读回
+desktop/src/main/kotlin/com/jmnext/desktop/SelfCheck.kt:93	节点迁移：旧值已写入新节点
+desktop/src/main/kotlin/com/jmnext/desktop/SelfCheck.kt:94	节点迁移：旧节点仍保留（可回退）
+desktop/src/main/kotlin/com/jmnext/desktop/SelfCheck.kt:108	issue #15：旧节点不存在时，读写新节点不会创建旧节点
+desktop/src/main/kotlin/com/jmnext/desktop/SelfCheck.kt:114	clear：新节点已清空
+desktop/src/main/kotlin/com/jmnext/desktop/SelfCheck.kt:115	clear：旧节点也已清空（否则登出后旧密文会被复活）
+desktop/src/main/kotlin/com/jmnext/desktop/SelfCheck.kt:120	不再询问
+desktop/src/main/kotlin/com/jmnext/desktop/SelfCheck.kt:122	写下了不再询问的标记
+desktop/src/main/kotlin/com/jmnext/desktop/SelfCheck.kt:123	用户拒绝
+desktop/src/main/kotlin/com/jmnext/desktop/SelfCheck.kt:132	全新安装：maybeEnable 不抛异常
+desktop/src/main/kotlin/com/jmnext/desktop/SelfCheck.kt:133	全新安装：安全落回原实现
+desktop/src/main/kotlin/com/jmnext/desktop/SelfCheck.kt:135	全新安装：对话框不可用时**不写**拒绝标记（issue #16）
+desktop/src/main/kotlin/com/jmnext/desktop/SelfCheck.kt:138	下次启动会再问
+desktop/src/main/kotlin/com/jmnext/desktop/SelfCheck.kt:140	全新安装：再次调用仍不写拒绝标记，下次启动会继续询问
+desktop/src/main/kotlin/com/jmnext/desktop/SelfCheck.kt:142	未开启口令保护
+desktop/src/main/kotlin/com/jmnext/desktop/SelfCheck.kt:142	已提示
+desktop/src/main/kotlin/com/jmnext/desktop/SelfCheck.kt:143	没人看过却记成已提示
+desktop/src/main/kotlin/com/jmnext/desktop/SelfCheck.kt:144	老安装
+desktop/src/main/kotlin/com/jmnext/desktop/SelfCheck.kt:147	未开启口令保护：老安装场景仍安全落回原实现
+desktop/src/main/kotlin/com/jmnext/desktop/SelfCheck.kt:149	未开启口令保护：无图形环境不写「已提示」标记（下次启动仍会提示）
+desktop/src/main/kotlin/com/jmnext/desktop/ComicRender.kt:13	像纸

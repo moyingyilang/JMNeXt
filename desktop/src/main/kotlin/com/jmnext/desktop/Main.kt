@@ -146,7 +146,14 @@ private fun runApp() = application {
         title = "JMNeXt",
         state = rememberWindowState(width = 1100.dp, height = 820.dp),
     ) {
-        BlogTheme { App() }
+        val locale = remember { resolveLocale() }
+        val table = remember(locale) { com.jmnext.desktop.i18n.stringsFor(locale) }
+        androidx.compose.runtime.CompositionLocalProvider(
+            com.jmnext.desktop.i18n.LocalStrings provides table,
+            com.jmnext.desktop.i18n.LocalLocale provides locale,
+        ) {
+            BlogTheme { App() }
+        }
     }
 }
 
@@ -750,4 +757,26 @@ private fun dailyAlreadyChecked(message: String?): Boolean {
     val m = message ?: return false
     return m.contains("已簽到") || m.contains("已签到") ||
         m.contains("已經簽到") || m.contains("已经签到")
+}
+
+/**
+ * 决定界面语言。
+ *
+ * 优先级：环境变量 JMNEXT_LANG（便于测试与脚本截图）→ 系统 Locale → 简体。
+ * 系统给的是 zh-Hant-TW 这类标签，这里归一成 values-* 的写法。
+ */
+internal fun resolveLocale(): String {
+    val supported = listOf("zh-CN", "zh-rTW", "zh-rHK", "en", "ja", "ru", "ko")
+    fun normalize(tag: String): String {
+        val lower = tag.replace('_', '-').lowercase()
+        return when {
+            lower.startsWith("zh") && (lower.contains("tw") || lower.contains("hant")) -> "zh-rTW"
+            lower.startsWith("zh") && lower.contains("hk") -> "zh-rHK"
+            lower.startsWith("zh") -> "zh-CN"
+            else -> lower.substringBefore('-')
+        }
+    }
+    val fromEnv = System.getenv("JMNEXT_LANG")?.takeIf { it.isNotBlank() }
+    val candidate = fromEnv?.let(::normalize) ?: normalize(java.util.Locale.getDefault().toLanguageTag())
+    return supported.firstOrNull { it == candidate } ?: "zh-CN"
 }

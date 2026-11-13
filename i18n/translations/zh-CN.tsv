@@ -1,0 +1,544 @@
+app_name	JMNeXt
+about_title	关于
+about_back	返回
+about_tagline	禁漫（JMComic）第三方客户端
+about_version_line	版本 %1$s · %2$s
+about_version	版本
+about_version_code	版本号
+about_variant	变体
+about_lite_note	lite 版给低配机器用的：只留两种纯色界面，没有壁纸和模糊，图片淡入和条目动画也关了，阅读器预取更保守
+about_check_update	检查更新
+about_checking	检查中…
+about_check_failed	没取到更新信息（网络不通，或 GitHub 暂时不可用）
+about_check_new	有新版本：%1$s
+about_check_latest	已是最新版本（远端 %1$s）
+about_download_pkg	下载更新包（%1$s）
+about_asset_note	一个安装包同时支持 arm64 与 x86_64，无需区分架构。若直链打不开，可改用下面的发布页自行挑选。
+about_update_notes	更新内容：%1$s
+about_desc_title	说明
+about_desc	禁漫（JMComic）的第三方客户端，Kotlin 与 Compose 写的。没有插槽广告，也不记录你在看什么；登录凭证加密之后才写到本地\n\n阅读器有纵向滚动和双页两种，长图拼接不留接缝。收藏、进度、屏蔽名单都在本地，也能通过 WebDAV 同步到你自己的网盘。屏蔽按关键词、分类、标签走，命中就从列表里消失
+about_links	链接
+about_link_home	项目主页
+about_link_releases	发布页（下载新版本）
+about_link_issues	问题反馈
+about_license_title	许可
+about_license	本项目以 AGPL-3.0-only 授权。禁漫、JMComic 及相关内容的权利归其权利人所有；本应用与官方无关，仅提供客户端实现。
+profile_title	我的
+profile_account	账号
+profile_not_logged_in	未登录
+profile_account_desc	收藏与观看历史绑定账号，登录后可在本机同步查看。
+profile_login_register	登录 / 注册
+profile_logged_in	已登录
+profile_coin	金币
+profile_level	等级
+profile_adfree	免广告特权
+profile_adfree_on	已开通
+profile_adfree_off	未开通
+profile_my_favorites	我的收藏
+profile_history	观看历史
+profile_notifications	通知
+profile_tracking	我的追更
+profile_tag_favorites	标签收藏
+profile_logout	退出登录
+profile_block_title	内容屏蔽
+profile_words	关键词
+profile_categories	分类
+profile_tags	标签
+profile_block_count	%1$d 条
+profile_manage_block	管理屏蔽名单
+profile_appearance	外观
+profile_style	风格
+profile_theme	主题
+profile_theme_system	跟随系统
+profile_theme_light	浅色
+profile_theme_dark	深色
+profile_dynamic_color	动态取色
+profile_serial_notify	连载更新提醒
+reader_mode_scroll	纵向滚动
+reader_mode_page	横向翻页
+reader_mode_note	纵向滚动适合长条页，横向翻页适合单页构图的作品。阅读页顶栏可临时切换。
+comic_render	漫画渲染
+about_entry	关于
+about_version_fmt	版本：%1$s
+server_title	服务端
+server_official	服务端对应官方版本
+server_loading	读取中…
+server_read_failed	读取失败
+server_not_provided	未提供
+server_client_version	本客户端上报版本
+server_alignment	协议对齐
+server_aligned	一致
+server_may_changed	可能已变化
+server_reread	重新读取
+daily_title	每日签到
+daily_login_first	登录后再签到
+daily_loading	正在读取签到活动…
+daily_none	没读到签到活动（可能当前没有进行中的活动，或网络不通）。
+daily_today_signed	今天已签到
+daily_complete	本期已签完
+daily_sign	签到
+webdav_title	WebDAV 同步
+webdav_status	状态
+webdav_on	已开启
+webdav_off	未开启
+webdav_path	远端路径
+webdav_configure	去配置
+webdav_sync	配置 / 立即同步
+crash_title	崩溃日志（调试）
+crash_status	状态
+crash_none	没有崩溃记录。
+nav_home	首页
+nav_category	分类
+nav_search	搜索
+nav_profile	我的
+appearance_glass_quality	玻璃质量
+appearance_floating_bar	悬浮底栏
+appearance_translucent	通透模式
+appearance_monet_blur	莫奈取色套用在模糊上
+appearance_predictive_back	预测性返回
+appearance_motion	动效
+appearance_motion_speed	动效快慢
+appearance_wallpaper	壁纸
+appearance_wallpaper_source	来源
+appearance_wallpaper_change	换一张
+appearance_wallpaper_loading	取图中…
+appearance_wallpaper_auto	自动更换
+appearance_off	关闭
+appearance_floating_bar_desc	底栏变成浮在内容之上的胶囊，选中项带一块会滑过去的底。
+appearance_translucent_desc	玻璃不再覆盖底色，只留模糊与描边；文字自动加一圈反色柔光保证可读。
+appearance_monet_blur_desc	用系统动态取色的主色 / 次色 / 第三色给背景与模糊层上色。需要开动态取色且系统为 Android 12+，否则这个开关不生效。
+appearance_predictive_android15	Android 15 起由系统提供（返回手势中系统会推动整个窗口），本项不再生效，已停用。
+appearance_predictive_on	返回手势进行中，当前页跟手淡出，松手前就能看出要退出。
+appearance_predictive_unsupported	需要 Android 13 / 14；本机系统没有预测性返回手势，本项不生效。
+appearance_serial_desc	每半天左右让系统挑个合适时机检查一次，有变化才提醒；同一批更新只提醒一次。只用连载列表和你本地的阅读时间，不上传你在看什么。默认关闭。
+appearance_dynamic_color_desc	取系统壁纸的配色（Android 12+）。Material 风格会整份跟随系统；另外几套玻璃只取强调色，层次仍按本站配色。
+appearance_wallpaper_auto_off	自动更换：关闭
+appearance_wallpaper_auto_every	自动更换：每 %1$s
+appearance_wallpaper_clear_cache	清除壁纸缓存
+appearance_wallpaper_clear_cache_desc	清掉已缓存的候选图，立刻重新取一批
+appearance_wallpaper_blur_fmt	模糊 %1$d
+appearance_wallpaper_dim_fmt	压暗 %1$s　（壁纸越花越需要压暗，玻璃才压得住文字）
+home_loading	加载中…
+home_weekly	周刊
+home_refresh	刷新
+home_to_light	切换到浅色
+home_to_dark	切换到深色
+home_expand_more	展开更多分区（还有 %1$d 个）
+home_latest	最新上架
+home_more	更多
+home_tracking_updated	你追的 %1$d 部有更新
+glass_high	高
+glass_high_desc	真实模糊，半径 12dp —— 最好看，低端机可能掉帧
+glass_medium	中
+glass_medium_desc	真实模糊，半径 8dp —— 默认，观感与性能折中
+glass_off	关
+glass_off_desc	不做背景采样，退回半透明填充 —— 最省电，适合低端机
+motion_fast	快
+motion_fast_desc	短促直接：切换干脆、位移很小 —— 最快的节奏
+motion_medium	中
+motion_medium_desc	出慢入快、时长适中、位移柔和 —— 默认节奏
+motion_slow	慢
+motion_slow_desc	转场更长、收尾更缓，前后层次最明显 —— 最慢的节奏
+wall_off	纯渐变
+wall_off_desc	不加载任何图片，只用内置渐变底（不发任何请求）
+wall_bing	Bing 每日
+wall_bing_desc	Bing 每日壁纸，来源 bing.biturl.top
+wall_anime	二次元随机
+wall_anime_desc	t.alcy.cc / t.mwm.moe / loliapi 三个源依次尝试
+wall_all	全部随机
+wall_all_desc	Bing 与二次元混合
+wall_custom	自定义地址
+wall_custom_desc	自己填一个图片直链
+wall_system	跟随手机壁纸
+wall_system_desc	读取系统当前壁纸（Android）；换壁纸后回到应用或点「重新读取」生效
+wall_solid	纯色
+wall_solid_desc	只用你选的一个颜色，不加载图片（零请求）
+wall_picsum	Picsum 摄影
+wall_picsum_desc	按设备方向取图：手机竖图、平板/桌面横图（picsum.photos，无需 key）
+search_title	搜索
+search_placeholder	输入作品名、作者或标签
+search_year_any	年份：不限
+search_year_fmt	年份：%1$s 年
+search_year_month_fmt	年份：%1$s 年 %2$s 月
+search_collapse_year	收起年份筛选
+search_expand_year	展开年份筛选
+search_empty_title	没有找到相关作品
+search_empty_desc	换个关键词，或调整检索字段与年份
+search_recent	最近搜索
+search_clear	清空
+search_hot_tags	热门标签
+search_random_rec	随机推荐
+search_random_one	随便来一本
+search_shuffle	换一批
+search_start_title	搜点什么
+search_start_desc	支持按作品名、作者、标签检索
+search_hint_random_failed	随机本子没拿到，稍后再试
+search_hint_no_keyword	请输入关键词
+cat_title	分类
+cat_browse	按分类浏览
+cat_sort_latest	最新
+cat_sort_hearts	最多爱心
+cat_sort_total	总排行
+cat_sort_month	月排行
+cat_sort_week	周排行
+cat_label	分类
+cat_sub_label	子类
+cat_all	全部
+cat_creator_lib	画师与作品库
+cat_enter	进入 ›
+cat_sort	排序
+cat_empty	这个分类下暂时没有作品
+cat_load_failed	暂时拿不到分类
+auth_login	登录
+auth_register	注册
+auth_forgot	忘记密码
+auth_username	用户名
+auth_password	密码
+auth_confirm_password	确认密码
+auth_email	邮箱
+auth_gender	性别
+auth_male	男
+auth_female	女
+auth_wait	请稍候…
+auth_back	返回
+auth_keystore_note	登录后会带上服务端签发的凭证，用于收藏与观看历史。凭证经 Android Keystore 加密后保存在应用私有目录，不会明文落盘。
+detail_title_placeholder	作品详情
+detail_back	返回
+detail_move_to_favorites	移入收藏夹
+detail_author_fmt	作者：%1$s
+detail_updated_fmt	更新：%1$s
+detail_tags_hint	标签：点开搜索，长按屏蔽
+detail_unblock	不再屏蔽
+detail_download_album	下载整部作品
+detail_download_system	交给系统下载器
+detail_favorite_tags	收藏这些标签
+detail_comments	评论
+detail_chapters_fmt	章节目录（%1$d）
+detail_related	相关推荐
+detail_prev_page	上一页
+detail_next_page	下一页
+fav_title	我的收藏
+fav_empty	还没有收藏，去详情页点收藏试试
+hist_title	观看历史
+hist_empty	还没有观看记录
+tracking_title	我的追更
+tracking_empty	还没有追更，去详情页点「追更」
+list_total_fmt	共 %1$d 项
+list_back	返回
+list_manage_folders	管理收藏夹
+list_need_login	需要登录
+list_login_desc_fmt	%1$s与账号绑定，登录后在这里查看
+list_untrack	取消追更
+list_move_to_folder	移入收藏夹
+list_delete_history	删除这条历史
+folder_new	新建收藏夹
+folder_rename	重命名收藏夹
+folder_all	全部
+notif_title	通知
+notif_back	返回
+notif_loading	正在读取通知…
+notif_failed_fmt	读取失败：%1$s
+notif_empty	还没有通知。
+notif_load_more_fmt	加载更多（已显示 %1$d / %2$d）
+notif_tab_all	全部
+notif_tab_tracking	追更
+notif_tab_site	站内通知
+notif_type_tracking	追更更新
+tagfav_title	标签收藏
+tagfav_need_login	需要登录
+tagfav_login_desc	标签收藏与账号绑定，登录后在这里查看
+tagfav_empty_title	还没有收藏标签
+tagfav_empty_desc	在作品详情页的标签上可以收藏
+tagfav_untag	取消收藏这个标签
+tagfav_dialog_title	收藏标签
+tagfav_dialog_desc	选中的标签会加入「我的 → 标签收藏」（上限 50）。
+tagfav_save_fmt	收藏 %1$d 个
+week_title	周刊
+week_issue_fmt	%1$s · 共 %2$d 部
+week_back	返回
+week_issue_label	刊期
+week_type_label	类型
+week_empty_title	这一期没有作品
+week_empty_desc	换一个刊期或类型看看
+random_title	随机推荐
+random_note_blocked	已排除你屏蔽名单里的作品
+random_note_pref	已排除屏蔽名单 · 按你收藏偏好的标签排序
+random_back	返回
+random_view_list	切换成列表
+random_view_grid	切换成网格
+random_shuffle	换一批
+random_loading	正在随机…
+random_failed_fmt	没拿到：%1$s
+creator_authors	画师
+creator_works	作品
+creator_title	画师与作品库
+creator_total_fmt	共 %1$d 项
+creator_subtitle	来自作品库的画师与作品
+creator_search_authors	搜索画师
+creator_search_works	搜索作品
+creator_search	搜索
+creator_empty_authors	没有找到画师
+reader_empty	这一话没有可显示的图片
+reader_chapter_fmt	第 %1$d 话
+reader_title_fallback	阅读
+reader_pages_fmt	共 %1$d 页
+reader_back	返回
+reader_to_horizontal	切换到横向翻页
+reader_to_vertical	切换到纵向滚动
+reader_toggle_mono	切换黑白 / 全彩
+reader_mono	黑白
+reader_color	全彩
+reader_prev_chapter	上一话
+reader_next_chapter	下一话
+reader_mode_horizontal	横向
+reader_mode_vertical	纵向
+reader_chapters	章节
+reader_comments	评论
+reader_favorite	收藏
+reader_like	点赞
+reader_page_fmt	第 %1$d 页
+reader_page_failed	这一页加载失败 · 点击重试
+reader_pick_title	选择章节
+reader_pick_prev	上一页
+reader_pick_next	下一页
+reader_pick_close	关闭
+block_title	屏蔽设置
+block_subtitle	本地规则，不上传
+block_back	返回
+block_help	命中即隐藏，匹配忽略大小写。\n· 关键词：作品名或作者包含它\n· 分类：分类或子分类等于它（例如屏蔽「同人」）\n· 标签：列表接口不下发标签，因此改为在后台逐条读取作品详情取标签，命中即从列表中隐藏（只在存在标签规则时才会请求）
+block_words_title	关键词屏蔽
+block_words_hint	作品名或作者命中即隐藏 · %1$d 条
+block_categories_title	分类屏蔽
+block_categories_hint	整个分类不再出现 · %1$d 条
+block_tags_title	标签屏蔽
+block_tags_hint	打开作品时提示 · %1$d 条
+block_length_fmt	长度应为 %1$d~%2$d 个字符
+block_exists_fmt	「%1$s」已经在名单里
+block_added_fmt	已屏蔽「%1$s」
+block_add_cd_fmt	添加%1$s
+block_empty	还没有添加
+dav_back	返回
+dav_title	WebDAV 同步
+dav_desc	同步阅读历史、收藏与屏蔽名单。多台设备指向同一个文件即可互相同步。
+dav_server	服务器地址
+dav_server_hint	https://dav.example.com/remote.php/dav/files/用户名
+dav_user	用户名
+dav_password	密码（建议应用专用密码）
+dav_show	显示
+dav_hide	隐藏
+dav_path	远端文件路径
+dav_auto_sync	开启自动同步
+dav_help	地址形如 https://dav.example.com/remote.php/dav/files/用户名（Nextcloud），或 https://dav.jianguoyun.com/dav/（坚果云）。密码请用应用专用密码。
+dav_sync_done	同步完成
+dav_sync_failed_fmt	同步失败：%1$s
+dav_syncing	同步中…
+dav_sync_now	立即同步
+more_title	更多
+more_loading	加载中…
+more_total_fmt	共 %1$d 项
+more_back	返回
+week_type_all	全部
+week_type_manga	漫画
+week_type_hanman	韩漫
+week_day_mon	周一
+week_day_tue	周二
+week_day_wed	周三
+week_day_thu	周四
+week_day_fri	周五
+week_day_sat	周六
+week_day_sun	周日
+week_day_done	完结
+cmt_title	评论
+cmt_total_fmt	共 %1$d 条
+cmt_back	返回
+cmt_compose_logged	说点什么（会公开发布）
+cmt_compose_login	登录后可发表评论
+cmt_sending	发送中…
+cmt_send	发送
+cmt_empty_title	还没有评论
+cmt_empty_desc	这里会显示其他读者的留言
+cmt_delete	删除这条评论
+cmt_replies_fmt	%1$d 条回复
+folder_name	收藏夹名称
+folder_ok	确定
+folder_cancel	取消
+folder_delete_title	删除收藏夹
+folder_delete_confirm	确定删除「%1$s」吗？夹内的作品会回到「全部」，不会被取消收藏。
+folder_delete	删除
+folder_skip	不归类
+folder_none_in_move	还没有收藏夹，先在「管理收藏夹」里新建一个。
+folder_close	关闭
+folder_manage	管理收藏夹
+folder_empty	还没有收藏夹。收藏夹用于把收藏分组，例如按题材或进度。
+folder_rename_short	改名
+folder_skip_only_fav	仅收藏，不归类
+common_updated	更新
+common_load_failed_retry	加载失败，点击重试
+common_no_more	已经到底了
+common_load_more	上滑加载更多
+common_retry	重试
+common_load_failed	加载失败
+random_fab_cd	随机一本（长按查看一批）；已排除屏蔽名单
+checkin_no_active	现在没有进行中的签到活动
+checkin_already	今天已经签过了
+checkin_ok	签到成功
+checkin_failed	签到失败，稍后再试
+sort_latest	最新
+sort_views	最多点阅
+sort_images	最多图片
+sort_hearts	最多爱心
+sort_oldest	最旧
+field_site	站内搜索
+field_work	作品
+field_author	作者
+field_tag	标签
+field_character	登场人物
+daily_expand	查看签到历史
+daily_collapse	收起签到历史
+daily_reading	读取中…
+daily_history_failed_fmt	历史没读到：%1$s
+daily_history_empty	还没有签到历史。
+daily_record_cd	签到记录
+daily_month_fmt	%1$d月
+daily_image_cd	签到大图
+search_order_label	排序
+search_field_label	检索
+search_results_fmt	共 %1$d 条结果
+search_hidden_fmt	 · 已按屏蔽规则隐藏 %1$d 条
+search_tag_blocked_fmt	 · 标签屏蔽 %1$d 条
+search_tag_blocked_notice_fmt	有 %1$d 条结果被标签屏蔽挡住了
+search_hit_fmt	命中：%1$s（仅本次搜索放行，不改动屏蔽规则）
+search_allow_once	允许一次
+search_year_label	年
+search_month_label	月
+search_any	不限
+profile_block_empty	还没有屏蔽任何内容。可以按作品名、作者、分类或标签屏蔽，命中即从列表中隐藏。
+profile_block_active_fmt	已生效 %1$d 条规则。列表里看不到的作品可能正是被它们隐藏的。
+profile_tracking_desc	你追的连载更新时通知我
+profile_reading	阅读
+profile_default_reader	默认浏览形态
+profile_current	当前
+profile_apply_url	应用这个地址
+profile_seconds_fmt	%1$d 秒
+profile_hours_fmt	%1$d 小时
+profile_minutes_fmt	%1$d 分钟
+profile_image_fmt	图片：%1$s
+profile_event_fallback	签到活动
+profile_signed_fmt	已签 %1$d / %2$d 天
+profile_day_fmt	%1$d号
+profile_signed_tag	，已签到
+profile_unsigned_tag	，未签到
+profile_server_drift_fmt	服务端对应的官方版本已变为 %1$s，而本客户端仍按 %2$s 上报。这不代表立即不可用，但接口行为可能已按新版本调整，值得检查。
+profile_webdav_desc	同步阅读历史、收藏与屏蔽名单。多台设备指向同一文件即可互通。
+profile_webdav_empty	尚未填写服务器地址。支持 Nextcloud、坚果云等标准 WebDAV 服务。
+profile_logs_status	状态
+profile_crash_copied	崩溃日志已复制到剪贴板
+profile_crash_copy	复制最近一次
+profile_crash_deleted	已删除最近一次崩溃日志
+profile_crash_delete	删除
+profile_crash_path	位置：应用私有目录 files/logs/。追踪包（tracer）与 debug 包才会记录；正式包不写盘。
+auth_need_username	请输入用户名
+auth_need_password	请输入密码
+auth_bad_email	请输入有效的邮箱
+auth_short_password	密码至少 6 位
+auth_password_mismatch	两次输入的密码不一致
+auth_register_ok	注册成功，请登录
+auth_register_failed	注册失败
+auth_reset_sent	重置邮件已发送
+auth_send_failed	发送失败
+auth_welcome_fmt	欢迎回来，%1$s
+auth_login_again_fmt	%1$s · 登录后请再点一次刚才那个按钮
+detail_resume_fmt	继续阅读 · 第 %1$d 话
+detail_start_fmt	开始阅读 · 第 %1$d 话
+detail_start	开始阅读
+detail_untrack_cd	取消追更
+detail_track_cd	追更
+detail_unfavorite_cd	取消收藏
+detail_favorite_cd	收藏
+detail_liked_cd	已点赞
+detail_like_cd	点赞
+detail_pages_fmt	共 %1$d 页
+detail_comments_fmt	 · %1$d 评论
+detail_load_failed	没能加载出这部作品
+detail_works	作品
+detail_actors	演员
+detail_by_rules	按你的屏蔽规则
+detail_blocked_author_suffix	：已屏蔽作者
+detail_blocked_tags_fmt	：含「%1$s」
+detail_comment_total_fmt	%1$d 条
+detail_no_comments	暂无
+detail_track_updated	已更新追更状态
+detail_track_failed	追更失败
+detail_fav_tags_done_fmt	已收藏 %1$d 个标签
+detail_dl_failed_fmt	获取下载地址失败：%1$s
+detail_cannot_download	这个作品暂时不能下载
+detail_download_started	已开始下载
+detail_download_label_fmt	下载 %1$s
+detail_blocked_tag_fmt	已屏蔽标签「%1$s」
+detail_blocked_author_fmt	已屏蔽作者「%1$s」
+detail_unblocked_tag_fmt	已取消屏蔽「%1$s」
+detail_unblocked_author	已取消屏蔽该作者
+detail_liked_already	已经点过赞了
+cw_title	作品信息
+cw_not_found	没有这个作品的信息
+cw_date_fmt	日期：%1$s
+cw_no_content	这个作品没有可看的内容
+cw_no_content_desc	作品库里有些条目只有信息，没有图片
+cw_related	相关作品
+dav_summary_fmt	历史 %1$d 条、收藏 %2$d 条、屏蔽规则 %3$d 条
+dav_conflicts_fmt	冲突覆盖：历史 %1$d 条、收藏 %2$d 条（取较新一方）
+dav_merged	已合并远端文件并回写
+dav_created	远端文件不存在，已新建
+style_glass_tag	Windows 11 窗口玻璃：8dp 圆角 + 发丝描边 + Acrylic 颗粒
+style_flat_tag	平面化 + 高斯模糊：无描边、无颗粒、无高光，只留一层模糊的底
+style_miuix_tag	HyperOS：大圆角实心卡片、无描边、弹性按压
+style_material_tag	Material You 3：按 M3 颜色角色分层，开动态取色就跟系统壁纸走
+login_reason_track	追更需要登录
+login_reason_fav_tags	收藏标签需要登录
+login_reason_download	下载需要登录
+login_reason_like	点赞需要登录
+login_reason_favorite	收藏需要登录
+login_reason_comment	发表评论需要登录
+login_reason_tags	标签收藏需要登录
+block_remove_cd_fmt	移除 %1$s
+block_kind_word	关键词
+block_kind_tag	标签
+block_kind_category	分类名
+block_add_title_fmt	添加%1$s
+block_eg_word	例如：NTR
+block_eg_tag	例如：纯爱
+block_eg_category	例如：同人
+block_len_hint_fmt	%1$d~%2$d 个字符
+block_add	添加
+block_cancel	取消
+more_empty_week	这天的更新是空的
+more_empty_section	这个分区暂时没有内容
+more_type_label	类型
+more_day_label	更新
+folder_move_title	移入收藏夹
+common_unknown_error	未知错误
+creator_empty_works	没有找到作品
+random_empty	这次没抽到（可能候选都被屏蔽名单挡住了，或网络不通）。
+checkin_today_done	今天已签到
+checkin_quick	快捷签到
+detail_download_album_label	下载整部作品
+search_year_fmt_prefix	年份：
+common_network_issue	网络问题
+reader_switch_chapter_failed_fmt	切换章节失败：%1$s
+comments_posted	已发表
+comments_deleted	已删除
+comments_post_failed_fmt	发表失败：%1$s
+comments_delete_failed_fmt	删除失败：%1$s
+fav_untrack_failed_fmt	取消追更失败：%1$s
+fav_delete_failed_fmt	删除失败：%1$s
+tagfav_delete_failed_fmt	删除失败：%1$s
+common_unknown_error_fallback	未知错误
+render_color	彩色
+render_color_hint	原样显示
+render_gray	黑白
+render_gray_hint	只去色，层次保留
+render_ink	墨水屏
+render_ink_hint	去色并提高对比度，适合 e-ink
+render_note_fmt	%1$s。只作用于漫画画面，不影响界面配色；墨水屏设备选「墨水屏」会更清楚。
+detail_download_started_with_title	已开始下载：%1$s
+detail_download_started_with_size	已开始下载：%1$s（%2$s）
