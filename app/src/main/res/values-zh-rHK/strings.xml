@@ -95,7 +95,7 @@
 
     <string name="nav_home">首頁</string>
     <string name="nav_category">分類</string>
-    <string name="nav_search">搜索</string>
+    <string name="nav_search">搜尋</string>
     <string name="nav_profile">我的</string>
     <string name="appearance_glass_quality">玻璃質量</string>
     <string name="appearance_floating_bar">懸浮底欄</string>
@@ -167,7 +167,7 @@
     <string name="wall_picsum">Picsum 攝影</string>
     <string name="wall_picsum_desc">按設備方向取圖：手機豎圖、平板/桌面橫圖（picsum.photos，無需 key）</string>
 
-    <string name="search_title">搜索</string>
+    <string name="search_title">搜尋</string>
     <string name="search_placeholder">輸入作品名、作者或標籤</string>
     <string name="search_year_any">年份：不限</string>
     <string name="search_year_fmt">年份：%1 年</string>
@@ -176,7 +176,7 @@
     <string name="search_expand_year">展開年份篩選</string>
     <string name="search_empty_title">沒有找到相關作品</string>
     <string name="search_empty_desc">換個關鍵詞，或調整檢索字段與年份</string>
-    <string name="search_recent">最近搜索</string>
+    <string name="search_recent">最近搜尋</string>
     <string name="search_clear">清空</string>
     <string name="search_hot_tags">熱門標籤</string>
     <string name="search_random_rec">隨機推薦</string>
@@ -223,7 +223,7 @@
     <string name="detail_move_to_favorites">移入收藏夾</string>
     <string name="detail_author_fmt">作者：%1</string>
     <string name="detail_updated_fmt">更新：%1</string>
-    <string name="detail_tags_hint">標籤：點開搜索，長按屏蔽</string>
+    <string name="detail_tags_hint">標籤：點開搜尋，長按屏蔽</string>
     <string name="detail_unblock">不再屏蔽</string>
     <string name="detail_download_album">下載整部作品</string>
     <string name="detail_download_system">交給系統下載器</string>
@@ -294,9 +294,9 @@
     <string name="creator_title">畫師與作品庫</string>
     <string name="creator_total_fmt">共 %1 項</string>
     <string name="creator_subtitle">來自作品庫的畫師與作品</string>
-    <string name="creator_search_authors">搜索畫師</string>
-    <string name="creator_search_works">搜索作品</string>
-    <string name="creator_search">搜索</string>
+    <string name="creator_search_authors">搜尋畫師</string>
+    <string name="creator_search_works">搜尋作品</string>
+    <string name="creator_search">搜尋</string>
     <string name="creator_empty_authors">沒有找到畫師</string>
 
     <string name="reader_empty">這一話沒有可顯示的圖片</string>
@@ -416,7 +416,7 @@
     <string name="sort_images">最多圖片</string>
     <string name="sort_hearts">最多愛心</string>
     <string name="sort_oldest">最舊</string>
-    <string name="field_site">站內搜索</string>
+    <string name="field_site">站內搜尋</string>
     <string name="field_work">作品</string>
     <string name="field_author">作者</string>
     <string name="field_tag">標籤</string>
@@ -437,7 +437,7 @@
     <string name="search_hidden_fmt"> · 已按屏蔽規則隱藏 %1 條</string>
     <string name="search_tag_blocked_fmt"> · 標籤屏蔽 %1 條</string>
     <string name="search_tag_blocked_notice_fmt">有 %1 條結果被標籤屏蔽擋住了</string>
-    <string name="search_hit_fmt">命中：%1（僅本次搜索放行，不改動屏蔽規則）</string>
+    <string name="search_hit_fmt">命中：%1（僅本次搜尋放行，不改動屏蔽規則）</string>
     <string name="search_allow_once">允許一次</string>
     <string name="search_year_label">年</string>
     <string name="search_month_label">月</string>
