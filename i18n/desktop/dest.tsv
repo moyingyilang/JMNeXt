@@ -63,3 +63,29 @@ dest_detail_loading_work	正在加载作品…	正在載入作品…	正在載�
 dest_reader_loading_chapter	正在加载章节…	正在載入章節…	正在載入章節…	Loading chapter…	チャプターを読み込み中…	Загрузка главы…	챕터 불러오는 중…
 dest_creator_loading_work	正在取作品内容…	正在取作品內容…	正在取作品內容…	Fetching work content…	作品内容を取得中…	Получение содержимого работы…	작품 내용 가져오는 중…
 dest_comments_replying_prefix	正在回复 	正在回覆 	正在回覆 	Replying to 	返信先： 	Ответ: 	답글 대상: 
+dest_common_post	发表	發表	發表	Post	投稿	Отправить	게시
+dest_common_block	屏蔽	封鎖	封鎖	Block	ブロック	Блокировать	차단
+dest_common_clear	清除	清除	清除	Clear	クリア	Очистить	지우기
+dest_common_checkin_short	签…	簽…	簽…	Checking in…	チェックイン中…	Отмечаемся…	출석 중…
+dest_common_exit	退出	退出	退出	Exit	終了	Выйти	나가기
+dest_common_pages	页数	頁數	頁數	Pages	ページ数	Страниц	페이지 수
+dest_comments_write	写评论	寫評論	寫評論	Write a comment	コメントを書く	Написать комментарий	댓글 쓰기
+dest_profile_go_login	去登录	去登入	去登入	Sign in	ログインへ	Войти	로그인
+dest_wallpaper_manual_only	只手动	只手動	只手動	Manual only	手動のみ	Только вручную	수동만
+dest_search_field_label_colon	字段：	欄位：	欄位：	Field:	項目：	Поле:	항목:
+dest_appearance_dark_light	深浅色	深淺色	深淺色	Light/dark	ライト/ダーク	Светлая/тёмная	라이트/다크
+dest_common_got_it	知道了	知道了	知道了	Got it	了解	Понятно	알겠습니다
+dest_common_empty_paren	（空）	（空）	（空）	(empty)	（空）	(пусто)	(비어 있음)
+dest_detail_from_start	从头开始	從頭開始	從頭開始	From the start	最初から	С начала	처음부터
+dest_comments_cancel_reply	取消回复	取消回覆	取消回覆	Cancel reply	返信をやめる	Отменить ответ	답글 취소
+dest_tags_unstar	取消标星	取消標星	取消標星	Unstar	スター解除	Убрать из избранного	별표 해제
+dest_reader_back_detail	回详情页	回詳情頁	回詳情頁	Back to details	詳細へ戻る	К деталям	상세로 돌아가기
+dest_wallpaper_image_url	图片直链	圖片直鏈	圖片直鏈	Direct image URL	画像直リンク	Прямая ссылка	이미지 직접 링크
+dest_wallpaper_online	在线壁纸	線上桌布	線上桌布	Online wallpaper	オンライン壁紙	Онлайн-обои	온라인 배경
+dest_auth_register_email	注册邮箱	註冊信箱	註冊信箱	Sign-up email	登録メール	Почта для регистрации	가입 이메일
+dest_tags_add_star	添加标星	新增標星	新增標星	Add star	スター追加	Добавить в избранное	별표 추가
+dest_appearance_style	界面风格	介面風格	介面風格	UI style	UI スタイル	Стиль интерфейса	UI 스타일
+dest_auth_logging_in	登录中…	登入中…	登入中…	Signing in…	ログイン中…	Вход…	로그인 중…
+dest_detail_continue_watch	继续观看	繼續觀看	繼續觀看	Continue watching	続きを見る	Продолжить просмотр	계속 보기
+dest_nav_back_category	返回分类	返回分類	返回分類	Back to categories	カテゴリへ戻る	К категориям	분류로 돌아가기
+dest_common_back_list	返回列表	返回列表	返回列表	Back to list	一覧へ戻る	К списку	목록으로
