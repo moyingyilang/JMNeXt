@@ -1,5 +1,6 @@
 package com.jmnext.desktop
 
+import com.jmnext.desktop.i18n.I18n
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -65,7 +66,7 @@ fun FavoriteScreen(
     var total by remember { mutableStateOf(0) }
     var page by remember { mutableStateOf(1) }
     var busy by remember { mutableStateOf(false) }
-    var status by remember { mutableStateOf(if (loggedIn) "加载中…" else "需要登录后才能查看收藏") }
+    var status by remember { mutableStateOf(if (loggedIn) I18n.tr("加载中…") else I18n.tr("需要登录后才能查看收藏")) }
     var notice by remember { mutableStateOf<String?>(null) }
     // 收藏夹管理用的输入框内容（新建与改名共用）
     var folderName by remember { mutableStateOf("") }
@@ -79,13 +80,13 @@ fun FavoriteScreen(
                     if (payload.folderList.isNotEmpty()) folders = payload.folderList
                     total = if (payload.totalCount > 0) payload.totalCount else items.size
                     page = next
-                    val name = folders.firstOrNull { it.folderId == selected }?.name ?: "全部"
-                    status = if (items.isEmpty()) "$name：还没有作品" else "$name：已加载 ${items.size} 条 / 共 $total 条"
+                    val name = folders.firstOrNull { it.folderId == selected }?.name ?: I18n.tr("全部")
+                    status = if (items.isEmpty()) I18n.trf("%1\$s：还没有作品", name) else I18n.trf("%1\$s：已加载 %2\$d 条 / 共 %3\$d 条", name, items.size, total)
                     Log.line("收藏", "$status（文件夹 ${folders.size} 个）")
                 }
                 .onFailure {
                     if (it is CancellationException) return@onFailure
-                    status = "加载失败：${it.message}"
+                    status = I18n.tr("加载失败：") + it.message
                     Log.error("收藏", "加载失败", it)
                 }
             busy = false
@@ -177,14 +178,14 @@ StatusLine(status, busy)
                         scope.launch {
                             runCatching { repository.editFavoriteFolder(type = "add", folderName = name) }
                                 .onSuccess {
-                                    notice = "已新建收藏夹："
+                                    notice = I18n.tr("已新建收藏夹：")
                                     folderName = ""
                                     Log.line("收藏", "新建收藏夹：")
                                     load(1)
                                 }
                                 .onFailure {
                                     if (it is CancellationException) return@onFailure
-                                    notice = "新建失败：${it.message}"
+                                    notice = I18n.tr("新建失败：") + it.message
                                     Log.error("收藏", "新建收藏夹失败", it)
                                 }
                             busy = false
@@ -202,13 +203,13 @@ StatusLine(status, busy)
                             scope.launch {
                                 runCatching { repository.editFavoriteFolder(type = "edit", folderId = id, folderName = name) }
                                     .onSuccess {
-                                        notice = "已改名" 
+                                        notice = I18n.tr("已改名") 
                                         folderName = ""
                                         load(1)
                                     }
                                     .onFailure {
                                         if (it is CancellationException) return@onFailure
-                                        notice = "改名失败：${it.message}"
+                                        notice = I18n.tr("改名失败：") + it.message
                                         Log.error("收藏", "改名失败", it)
                                     }
                                 busy = false
@@ -224,13 +225,13 @@ StatusLine(status, busy)
                             scope.launch {
                                 runCatching { repository.editFavoriteFolder(type = "del", folderId = id) }
                                     .onSuccess {
-                                        notice = "已删除收藏夹"
+                                        notice = I18n.tr("已删除收藏夹")
                                         selected = null
                                         load(1)
                                     }
                                     .onFailure {
                                         if (it is CancellationException) return@onFailure
-                                        notice = "删除失败：${it.message}"
+                                        notice = I18n.tr("删除失败：") + it.message
                                         Log.error("收藏", "删除收藏夹失败", it)
                                     }
                                 busy = false
@@ -264,7 +265,7 @@ StatusLine(status, busy)
                                     }
                                     .onFailure {
                                         if (it is CancellationException) return@onFailure
-                                        notice = "取消收藏失败：${it.message}"
+                                        notice = I18n.tr("取消收藏失败：") + it.message
                                         Log.error("收藏", "取消收藏失败", it)
                                     }
                                 busy = false

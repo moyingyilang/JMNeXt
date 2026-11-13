@@ -1,4 +1,5 @@
 package com.jmnext.desktop
+import com.jmnext.desktop.i18n.I18n
 import com.jmnext.data.prefs.ComicRenderMode
 import com.jmnext.data.prefs.ReaderMode
 import com.jmnext.desktop.i18n.tl
@@ -70,8 +71,16 @@ fun AppearanceScreen() {
                 onSelect = { Appearance.style = it; refresh++ },
             )
             Text(
-                "当前：${Appearance.style.label}（面板透明度 ${(Appearance.style.surfaceAlpha * 100).toInt()}%、圆角 ${Appearance.style.corner}dp" +
-                    (if (Appearance.style.blurWallpaper) "、壁纸模糊" else "、壁纸不模糊") + "）",
+                I18n.trf(
+                    if (Appearance.style.blurWallpaper) {
+                        "当前：%1\$s（面板透明度 %2\$d%%、圆角 %3\$ddp、壁纸模糊）"
+                    } else {
+                        "当前：%1\$s（面板透明度 %2\$d%%、圆角 %3\$ddp、壁纸不模糊）"
+                    },
+                    Appearance.style.label,
+                    (Appearance.style.surfaceAlpha * 100).toInt(),
+                    Appearance.style.corner,
+                ),
                 style = MaterialTheme.typography.labelSmall,
                 color = MaterialTheme.colorScheme.primary,
             )
@@ -79,14 +88,14 @@ fun AppearanceScreen() {
 
         // 可调项：观感很主观，与其我猜，不如给你滑杆
         Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
-            Text("壁纸模糊：${Appearance.wallpaperBlur}dp", style = MaterialTheme.typography.titleMedium)
+            Text(I18n.trf("壁纸模糊：%1\$ddp", Appearance.wallpaperBlur), style = MaterialTheme.typography.titleMedium)
             androidx.compose.material3.Slider(
                 value = Appearance.wallpaperBlur.toFloat(),
                 onValueChange = { Appearance.wallpaperBlur = it.toInt(); refresh++ },
                 valueRange = 0f..256f,
                 modifier = Modifier.width(420.dp),
             )
-            Text("面板浓度：${(Appearance.effectiveAlpha * 100).toInt()}%（在所选风格基础上再调）",
+            Text(I18n.trf("面板浓度：%1\$d%%（在所选风格基础上再调）", (Appearance.effectiveAlpha * 100).toInt()),
                 style = MaterialTheme.typography.titleMedium)
             androidx.compose.material3.Slider(
                 value = Appearance.alphaScale,
@@ -94,7 +103,7 @@ fun AppearanceScreen() {
                 valueRange = 0f..1f,
                 modifier = Modifier.width(420.dp),
             )
-            Text("壁纸压暗：${Appearance.dim}%（0..100，到 100 壁纸等于纯黑）",
+            Text(I18n.trf("壁纸压暗：%1\$d%%（0..100，到 100 壁纸等于纯黑）", Appearance.dim),
                 style = MaterialTheme.typography.titleMedium)
             androidx.compose.material3.Slider(
                 value = Appearance.dim.toFloat(),
@@ -266,7 +275,10 @@ fun AppearanceScreen() {
                 }
             }
             Text(
-                "当前：${if (ReaderModePref.mode == ReaderMode.Scroll) "纵向滚动" else "横向翻页"}",
+                I18n.trf(
+                    "当前：%1\$s",
+                    I18n.tr(if (ReaderModePref.mode == ReaderMode.Scroll) "纵向滚动" else "横向翻页"),
+                ),
                 style = MaterialTheme.typography.labelSmall,
                 color = MaterialTheme.colorScheme.primary,
             )
@@ -276,7 +288,7 @@ fun AppearanceScreen() {
 
 /** 用 AWT 的文件选择框挑一张图片（桌面端自带，无需额外依赖）。返回绝对路径。 */
 private fun pickImageFile(): String? = runCatching {
-    val dialog = java.awt.FileDialog(null as java.awt.Frame?, "选择壁纸图片", java.awt.FileDialog.LOAD)
+    val dialog = java.awt.FileDialog(null as java.awt.Frame?, I18n.tr("选择壁纸图片"), java.awt.FileDialog.LOAD)
     dialog.setFilenameFilter { _, name ->
         val n = name.lowercase()
         n.endsWith(".png") || n.endsWith(".jpg") || n.endsWith(".jpeg") || n.endsWith(".webp")

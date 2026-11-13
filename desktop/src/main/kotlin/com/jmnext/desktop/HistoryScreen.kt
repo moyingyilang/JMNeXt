@@ -1,5 +1,6 @@
 package com.jmnext.desktop
 
+import com.jmnext.desktop.i18n.I18n
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -68,12 +69,12 @@ fun HistoryScreen(repository: JmRepository, onOpenComic: (ListItem) -> Unit) {
                     items = if (next == 1) payload.list else (items + payload.list).distinctBy { it.id }
                     total = if (payload.totalCount > 0) payload.totalCount else items.size
                     page = next
-                    status = if (items.isEmpty()) "还没有观看记录" else "已加载 ${items.size} 条 / 共 $total 条"
+                    status = if (items.isEmpty()) "还没有观看记录" else I18n.trf("已加载 %1\$d 条 / 共 %2\$d 条", items.size, total)
                     Log.line("历史", status)
                 }
                 .onFailure {
                     if (it is CancellationException) return@onFailure
-                    status = "加载失败：${it.message}"
+                    status = I18n.trf("加载失败：%1\$s", it.message)
                     Log.error("历史", "加载失败", it)
                 }
             busy = false
@@ -122,7 +123,7 @@ StatusLine(status, busy)
                                     .onFailure {
                                         if (it is CancellationException) return@onFailure
                                         // 失败必须说出来：否则表现只是"那一行又回来了"，没有解释
-                                        notice = "删除失败：${it.message}"
+                                        notice = I18n.trf("删除失败：%1\$s", it.message)
                                         Log.error("历史", "删除失败（列表未变）", it)
                                     }
                                 busy = false

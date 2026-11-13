@@ -1,5 +1,6 @@
 package com.jmnext.desktop
 
+import com.jmnext.desktop.i18n.I18n
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -75,7 +76,7 @@ fun CreatorScreen(repository: JmRepository) {
     var total by remember { mutableStateOf(0) }
     var page by remember { mutableStateOf(1) }
     var busy by remember { mutableStateOf(false) }
-    var status by remember { mutableStateOf("正在取画师列表…") }
+    var status by remember { mutableStateOf(I18n.tr("正在取画师列表…")) }
     var selectedAuthor by remember { mutableStateOf<CreatorAuthor?>(null) }
     var workInfo by remember { mutableStateOf<Pair<String, List<CreatorWork>>?>(null) }
     // 作品内容（creatorWorkContent）与它的加载标记；缺口：此前只取 creatorWorkInfo
@@ -97,11 +98,11 @@ fun CreatorScreen(repository: JmRepository) {
                     if (mode == "author") {
                         val list = r.items.filterIsInstance<CreatorAuthor>()
                         authors = if (next == 1) list else (authors + list).distinctBy { it.id }
-                        status = "画师 ${authors.size} 位 / 共 ${r.total}"
+                        status = I18n.trf("画师 %1\$d 位 / 共 %2\$d", authors.size, r.total)
                     } else {
                         val list = r.items.filterIsInstance<CreatorWork>()
                         works = if (next == 1) list else (works + list).distinctBy { it.id }
-                        status = "作品 ${works.size} 部 / 共 ${r.total}"
+                        status = I18n.trf("作品 %1\$d 部 / 共 %2\$d", works.size, r.total)
                     }
                     total = r.total
                     page = next
@@ -109,7 +110,7 @@ fun CreatorScreen(repository: JmRepository) {
                 }
                 .onFailure {
                     if (it is CancellationException) return@onFailure
-                    status = "加载失败：${it.message}"
+                    status = I18n.tr("加载失败：") + it.message
                     Log.error("作品库", "加载失败 mode=$mode", it)
                 }
             busy = false
@@ -123,7 +124,7 @@ fun CreatorScreen(repository: JmRepository) {
      * `images: []`），那不该让整页变成错误。信息失败才算真失败。
      */
     fun openWork(id: String, title: String?) {
-        status = "正在取作品内容（信息 + 图片，可能要一会儿）…"
+        status = I18n.tr("正在取作品内容（信息 + 图片，可能要一会儿）…")
         contentLoading = true
         scope.launch {
             val infoR = runCatching { repository.creatorWorkInfo(id) }
@@ -137,10 +138,10 @@ fun CreatorScreen(repository: JmRepository) {
             workContent = content
             contentLoading = false
             status = when {
-                info == null -> "取作品信息失败：" + (infoR.exceptionOrNull()?.message ?: "原因未知")
-                content == null -> "作品内容没取到：" + (contentR.exceptionOrNull()?.message ?: "原因未知") + "（信息已显示）"
-                content.images.isEmpty() && content.content.isNullOrBlank() -> "已取到作品信息；这个作品没有可看的内容"
-                else -> "作品内容已取到：${content.images.size} 张图"
+                info == null -> I18n.tr("取作品信息失败：") + (infoR.exceptionOrNull()?.message ?: I18n.tr("原因未知"))
+                content == null -> I18n.tr("作品内容没取到：") + (contentR.exceptionOrNull()?.message ?: I18n.tr("原因未知")) + I18n.tr("（信息已显示）")
+                content.images.isEmpty() && content.content.isNullOrBlank() -> I18n.tr("已取到作品信息；这个作品没有可看的内容")
+                else -> I18n.trf("作品内容已取到：%1\$d 张图", content.images.size)
             }
             Log.line("作品库", status)
         }
@@ -178,7 +179,7 @@ fun CreatorScreen(repository: JmRepository) {
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(10.dp),
             ) {
-                Text("画师：${a.name ?: a.id}", style = MaterialTheme.typography.titleMedium, color = MaterialTheme.colorScheme.primary)
+                Text(I18n.trf("画师：%1\$s", a.name ?: a.id), style = MaterialTheme.typography.titleMedium, color = MaterialTheme.colorScheme.primary)
                 TextButton(onClick = {
                     selectedAuthor = null
                     workInfo = null
@@ -188,9 +189,9 @@ fun CreatorScreen(repository: JmRepository) {
         }
         workInfo?.let { (title, related) ->
             Column(Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 6.dp)) {
-                Text("作品：$title", style = MaterialTheme.typography.titleMedium, color = MaterialTheme.colorScheme.primary)
+                Text(I18n.trf("作品：%1\$s", title), style = MaterialTheme.typography.titleMedium, color = MaterialTheme.colorScheme.primary)
                 if (related.isNotEmpty()) {
-                    Text("相关作品 ${related.size} 部（见下方）", style = MaterialTheme.typography.labelSmall)
+                    Text(I18n.trf("相关作品 %1\$d 部（见下方）", related.size), style = MaterialTheme.typography.labelSmall)
                 }
                 TextButton(onClick = { workInfo = null; workContent = null }) { Text(tl("关闭")) }
             }
@@ -212,7 +213,7 @@ fun CreatorScreen(repository: JmRepository) {
                 if (wc != null) {
                     item {
                         Text(
-                            "共 ${wc.totalPage} 页 / ${wc.images.size} 张图" +
+                            I18n.trf("共 %1\$d 页 / %2\$d 张图", wc.totalPage, wc.images.size) +
                                 (wc.addDate?.takeIf { it.isNotBlank() }?.let { " · $it" } ?: ""),
                             style = MaterialTheme.typography.labelSmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
@@ -233,7 +234,7 @@ fun CreatorScreen(repository: JmRepository) {
                                 )
                             } else {
                                 Text(
-                                    "图片未取到：$raw",
+                                    I18n.trf("图片未取到：%1\$s", raw),
                                     style = MaterialTheme.typography.labelSmall,
                                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                                 )
@@ -267,7 +268,7 @@ fun CreatorScreen(repository: JmRepository) {
                 if (related.isNotEmpty()) {
                     item {
                         Text(
-                            "相关作品 ${related.size} 部",
+                            I18n.trf("相关作品 %1\$d 部", related.size),
                             style = MaterialTheme.typography.titleMedium,
                             modifier = Modifier.padding(top = 8.dp),
                         )
@@ -317,17 +318,17 @@ fun CreatorScreen(repository: JmRepository) {
                         modifier = Modifier.clickable {
                             selectedAuthor = a
                             workInfo = null
-                            status = "正在取 ${a.name ?: a.id} 的作品…"
+                            status = I18n.trf("正在取 %1\$s 的作品…", a.name ?: a.id)
                             scope.launch {
                                 runCatching { repository.creatorWorksByAuthor(a.id) }
                                     .onSuccess { r ->
                                         works = r.items
                                         total = r.total
-                                        status = "${a.name ?: a.id} 的作品 ${r.items.size} 部"
+                                        status = I18n.trf("%1\$s 的作品 %2\$d 部", a.name ?: a.id, r.items.size)
                                     }
                                     .onFailure {
                                         if (it is CancellationException) return@onFailure
-                                        status = "取该作者作品失败：${it.message}"
+                                        status = I18n.tr("取该作者作品失败：") + it.message
                                     }
                             }
                         },

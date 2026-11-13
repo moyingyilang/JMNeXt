@@ -189,14 +189,14 @@ private fun HomeScreen(
                     page = next
                     total = result.total
                     val hit = items.count { it.id in updatedIds }
-                    status = "首页 ${items.size}/${result.total} 条" +
-                        (if (result.hidden > 0) "（屏蔽规则挡掉 ${result.hidden} 条）" else "") +
-                        (if (hit > 0) "，其中 $hit 部在追更里有更新" else "")
+                    status = I18n.trf("首页 %1\$d/%2\$d 条", items.size, result.total) +
+                        (if (result.hidden > 0) I18n.trf("（屏蔽规则挡掉 %1\$d 条）", result.hidden) else "") +
+                        (if (hit > 0) I18n.trf("，其中 %1\$d 部在追更里有更新", hit) else "")
                     Log.line("首页", status)
                 }
                 .onFailure {
                     if (it is CancellationException) return@onFailure
-                    status = "加载失败：${it.message}"
+                    status = I18n.trf("加载失败：%1\$s", it.message)
                     Log.error("首页", status, it)
                 }
             busy = false
@@ -245,7 +245,7 @@ private fun HomeScreen(
             Button(enabled = !busy && items.size < total, onClick = { reload(page + 1) }) {
                 Text(tl("加载更多"))
             }
-            Text("已加载 ${items.size} / $total", style = MaterialTheme.typography.labelSmall)
+            Text(I18n.trf("已加载 %1\$d / %2\$d", items.size, total), style = MaterialTheme.typography.labelSmall)
         }
 
         LazyVerticalGrid(
@@ -416,7 +416,7 @@ private fun App() {
                 )
                 Text(
                     text = if (authState.loggedIn) {
-                        "已登录：${authState.member?.username ?: authState.member?.uid ?: ""}"
+                        I18n.trf("已登录：%1\$s", authState.member?.username ?: authState.member?.uid ?: "")
                     } else {
                         tl("未登录")
                     },

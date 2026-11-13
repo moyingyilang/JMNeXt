@@ -1,121 +1,189 @@
 key	zh-CN	zh-rTW	zh-rHK	en	ja	ru	ko
+dest_about_bundle_note	推荐包内含两套运行时，会自动按架构选择，无需分辨。	推薦包內含兩套執行環境，會自動依架構選擇，無需分辨。	推薦包內含兩套執行環境，會自動依架構選擇，無需分辨。	The recommended bundle includes both runtimes and picks the right one automatically.	推奨パッケージには両方のランタイムが入っており、アーキテクチャに合わせて自動で選ばれます。	Рекомендуемый пакет включает обе среды выполнения и сам выбирает нужную.	권장 패키지에는 두 런타임이 모두 들어 있어 아키텍처에 맞게 자동으로 선택됩니다.
+dest_about_download_alt	或下载 %1$s	或下載 %1$s	或下載 %1$s	Or download %1$s	または %1$s をダウンロード	Или скачать %1$s	또는 %1$s 받기
+dest_about_download_recommended	下载更新包（%1$s，推荐）	下載更新包（%1$s，推薦）	下載更新包（%1$s，推薦）	Download update (%1$s, recommended)	更新パッケージをダウンロード（%1$s、推奨）	Скачать обновление (%1$s, рекомендуется)	업데이트 받기(%1$s, 권장)
+dest_about_open_release	打开发布页	開啟發佈頁	開啟發佈頁	Open releases page	リリースページを開く	Открыть страницу релизов	릴리스 페이지 열기
 dest_about_platform	平台	平台	平台	Platform	プラットフォーム	Платформа	플랫폼
 dest_about_runtime	运行时	執行環境	執行環境	Runtime	ランタイム	Среда выполнения	런타임
 dest_about_ui	界面	介面	介面	UI	UI	Интерфейс	UI
 dest_about_ui_value	Compose Desktop（主题取自 moyingyilang.github.io 的设计令牌）	Compose Desktop（主題取自 moyingyilang.github.io 的設計權杖）	Compose Desktop（主題取自 moyingyilang.github.io 的設計權杖）	Compose Desktop (theme tokens from moyingyilang.github.io)	Compose Desktop（テーマは moyingyilang.github.io のデザイントークン）	Compose Desktop (тема из дизайн-токенов moyingyilang.github.io)	Compose Desktop(moyingyilang.github.io의 디자인 토큰 테마)
 dest_about_update_note	从 GitHub Releases 读取最新版本号与本机比较，只发一个请求、不上传任何信息。	從 GitHub Releases 讀取最新版本號與本機比較，只發一個請求、不上傳任何資訊。	從 GitHub Releases 讀取最新版本號與本機比較，只發一個請求、不上傳任何資訊。	Reads the latest tag from GitHub Releases and compares it locally; one request, nothing uploaded.	GitHub Releases から最新のタグを取得してローカルで比較します。リクエストは1回だけで、何も送信しません。	Запрашивает последний тег из GitHub Releases и сравнивает локально; один запрос, ничего не отправляется.	GitHub Releases에서 최신 태그를 받아 로컬에서 비교합니다. 요청은 한 번뿐이고 아무것도 업로드하지 않습니다.
-dest_about_download_recommended	下载更新包（%1$s，推荐）	下載更新包（%1$s，推薦）	下載更新包（%1$s，推薦）	Download update (%1$s, recommended)	更新パッケージをダウンロード（%1$s、推奨）	Скачать обновление (%1$s, рекомендуется)	업데이트 받기(%1$s, 권장)
-dest_about_download_alt	或下载 %1$s	或下載 %1$s	或下載 %1$s	Or download %1$s	または %1$s をダウンロード	Или скачать %1$s	또는 %1$s 받기
-dest_about_bundle_note	推荐包内含两套运行时，会自动按架构选择，无需分辨。	推薦包內含兩套執行環境，會自動依架構選擇，無需分辨。	推薦包內含兩套執行環境，會自動依架構選擇，無需分辨。	The recommended bundle includes both runtimes and picks the right one automatically.	推奨パッケージには両方のランタイムが入っており、アーキテクチャに合わせて自動で選ばれます。	Рекомендуемый пакет включает обе среды выполнения и сам выбирает нужную.	권장 패키지에는 두 런타임이 모두 들어 있어 아키텍처에 맞게 자동으로 선택됩니다.
-dest_about_open_release	打开发布页	開啟發佈頁	開啟發佈頁	Open releases page	リリースページを開く	Открыть страницу релизов	릴리스 페이지 열기
+dest_appearance_change	换一个	換一個	換一個	Change	変更	Сменить	변경
+dest_appearance_dark	当前：深色	目前：深色	目前：深色	Current: dark	現在：ダーク	Сейчас: тёмная	현재: 다크
+dest_appearance_dark_light	深浅色	深淺色	深淺色	Light/dark	ライト/ダーク	Светлая/тёмная	라이트/다크
+dest_appearance_light	当前：浅色	目前：淺色	目前：淺色	Current: light	現在：ライト	Сейчас: светлая	현재: 라이트
+dest_appearance_style	界面风格	介面風格	介面風格	UI style	UI スタイル	Стиль интерфейса	UI 스타일
+dest_appearance_swap_note	换的不只是透明度 —— 圆角与壁纸是否模糊一起换。手机上的实时背景模糊在桌面上拿不到，这里用等效近似。	換的不只是透明度 —— 圓角與桌布是否模糊一起換。手機上的即時背景模糊在桌面上拿不到，這裡用等效近似。	換的不只是透明度 —— 圓角與桌布是否模糊一起換。手機上的即時背景模糊在桌面上拿不到，這裡用等效近似。	Switching changes more than opacity — corner radius and whether the wallpaper is blurred change too. Real-time background blur isn't available on desktop, so this approximates it.	切り替わるのは透明度だけではありません。角丸と壁紙のぼかしも一緒に変わります。スマホのリアルタイム背景ぼかしはデスクトップでは使えないため、近似で表現しています。	Меняется не только прозрачность: радиус углов и размытие обоев тоже. Настоящего размытия фона в реальном времени на десктопе нет, здесь используется приближение.	투명도만 바뀌는 게 아니라 모서리 반경과 배경 흐림 여부도 함께 바뀝니다. 휴대폰의 실시간 배경 흐림은 데스크톱에서 쓸 수 없어 근사로 처리합니다.
+dest_auth_gender	性别：	性別：	性別：	Gender:	性別：	Пол:	성별:
+dest_auth_logged_out	已退出登录	已登出	已登出	Signed out	ログアウトしました	Выход выполнен	로그아웃했습니다
+dest_auth_logging_in	登录中…	登入中…	登入中…	Signing in…	ログイン中…	Вход…	로그인 중…
+dest_auth_register_email	注册邮箱	註冊信箱	註冊信箱	Sign-up email	登録メール	Почта для регистрации	가입 이메일
+dest_auth_send_reset	发送重置邮件	發送重設郵件	發送重設郵件	Send reset email	リセットメールを送信	Отправить письмо сброса	재설정 메일 보내기
+dest_block_eg_category_hint	例如：同人。命中分区或分类名即隐藏。	例如：同人。命中分區或分類名即隱藏。	例如：同人。命中分區或分類名即隱藏。	Example: doujin. Hidden when the section or category name matches.	例：同人。区画名または分類名に一致すると非表示になります。	Пример: додзинси. Скрывается при совпадении раздела или категории.	예: 동인. 섹션 또는 분류명이 일치하면 숨깁니다.
+dest_block_eg_word_hint	例如：NTR。命中标题、作者、简介里的任意一处即隐藏。	例如：NTR。命中標題、作者、簡介裡的任意一處即隱藏。	例如：NTR。命中標題、作者、簡介裡的任意一處即隱藏。	Example: NTR. Hidden if it appears in the title, author or description.	例：NTR。タイトル・作者・紹介文のいずれかに含まれると非表示になります。	Пример: NTR. Скрывается, если встречается в названии, авторе или описании.	예: NTR. 제목, 작가, 소개 중 어디에든 있으면 숨깁니다.
+dest_block_store_missing	本地屏蔽存储未初始化。	本地封鎖儲存未初始化。	本地封鎖儲存未初始化。	The local block store isn't initialized.	ローカルのブロック保存が未初期化です。	Локальное хранилище блокировок не инициализировано.	로컬 차단 저장소가 초기화되지 않았습니다.
+dest_block_tags_note	命中作品标签即隐藏。标签来自作品详情，列表接口不下发，因此会多一次请求。	命中作品標籤即隱藏。標籤來自作品詳情，列表介面不下發，因此會多一次請求。	命中作品標籤即隱藏。標籤來自作品詳情，列表介面不下發，因此會多一次請求。	Hidden when a work's tags match. Tags come from the work details; the list API doesn't return them, so this costs one extra request.	作品タグが一致すると非表示。タグは作品詳細から取得します（一覧 API は返さないため、リクエストが 1 回増えます）。	Скрывается при совпадении тегов работы. Теги берутся из деталей: API списка их не отдаёт, поэтому это добавляет один запрос.	작품 태그가 일치하면 숨깁니다. 태그는 작품 상세에서 오며 목록 API는 주지 않으므로 요청이 한 번 더 발생합니다.
+dest_comments_cancel_reply	取消回复	取消回覆	取消回覆	Cancel reply	返信をやめる	Отменить ответ	답글 취소
+dest_comments_replying_prefix	正在回复 	正在回覆 	正在回覆 	Replying to 	返信先： 	Ответ: 	답글 대상: 
+dest_comments_write	写评论	寫評論	寫評論	Write a comment	コメントを書く	Написать комментарий	댓글 쓰기
+dest_common_apply	应用	套用	套用	Apply	適用	Применить	적용
+dest_common_back_list	返回列表	返回列表	返回列表	Back to list	一覧へ戻る	К списку	목록으로
+dest_common_block	屏蔽	封鎖	封鎖	Block	ブロック	Блокировать	차단
+dest_common_checkin_short	签…	簽…	簽…	Checking in…	チェックイン中…	Отмечаемся…	출석 중…
+dest_common_clear	清除	清除	清除	Clear	クリア	Очистить	지우기
+dest_common_draw	抽…	抽…	抽…	Picking…	抽選中…	Тянем…	뽑는 중…
+dest_common_empty_paren	（空）	（空）	（空）	(empty)	（空）	(пусто)	(비어 있음)
+dest_common_enable	开启	開啟	開啟	Enable	有効にする	Включить	켜기
+dest_common_exit	退出	退出	退出	Exit	終了	Выйти	나가기
+dest_common_fetching	取中…	取中…	取中…	Picking…	取得中…	Выбираем…	고르는 중…
+dest_common_got_it	知道了	知道了	知道了	Got it	了解	Понятно	알겠습니다
 dest_common_load_more	加载更多	載入更多	載入更多	Load more	さらに読み込む	Загрузить ещё	더 불러오기
-dest_common_remove	移除	移除	移除	Remove	削除	Удалить	제거
-dest_common_submitting	提交中…	提交中…	提交中…	Submitting…	送信中…	Отправка…	전송 중…
-dest_common_reply	回复	回覆	回覆	Reply	返信	Ответить	답글
+dest_common_month_hint	月（1-12）	月（1-12）	月（1-12）	Month (1-12)	月（1〜12）	Месяц (1–12)	월(1~12)
+dest_common_new	新建	新建	新建	New	新規	Создать	새로 만들기
 dest_common_no_title	(无标题)	(無標題)	(無標題)	(Untitled)	(無題)	(Без названия)	(제목 없음)
 dest_common_none_paren	(无)	(無)	(無)	(None)	(なし)	(Нет)	(없음)
+dest_common_pages	页数	頁數	頁數	Pages	ページ数	Страниц	페이지 수
+dest_common_post	发表	發表	發表	Post	投稿	Отправить	게시
+dest_common_remove	移除	移除	移除	Remove	削除	Удалить	제거
+dest_common_reply	回复	回覆	回覆	Reply	返信	Ответить	답글
+dest_common_retry_here	点这里重试	點這裡重試	點這裡重試	Tap here to retry	ここを押して再試行	Нажмите, чтобы повторить	여기를 눌러 다시 시도
+dest_common_retry_loading	正在加载…	正在載入…	正在載入…	Loading…	読み込み中…	Загрузка…	불러오는 중…
+dest_common_submitting	提交中…	提交中…	提交中…	Submitting…	送信中…	Отправка…	전송 중…
 dest_common_tbd	（待补）	（待補）	（待補）	(to be added)	（未実装）	(скоро)	(추가 예정)
+dest_common_title	标题	標題	標題	Title	タイトル	Название	제목
+dest_common_unknown_work	(未知作品)	(未知作品)	(未知作品)	(Unknown work)	(不明な作品)	(Неизвестная работа)	(알 수 없는 작품)
+dest_common_unnamed_section	(未命名分区)	(未命名分區)	(未命名分區)	(Unnamed section)	(名称未設定の区画)	(Раздел без названия)	(이름 없는 섹션)
+dest_common_weekday	星期	星期	星期	Weekday	曜日	День недели	요일
+dest_creator_back_works	返回作品列表	返回作品列表	返回作品列表	Back to works	作品一覧へ戻る	К списку работ	작품 목록으로
+dest_creator_fetch_failed_note	作品内容没取到（可能这个作品没有内容，或接口失败；顶部状态栏里有原因）	作品內容沒取到（可能這個作品沒有內容，或介面失敗；頂部狀態列裡有原因）	作品內容沒取到（可能這個作品沒有內容，或介面失敗；頂部狀態列裡有原因）	Couldn't fetch the work's content (it may be empty, or the API failed; the status bar above has the reason)	作品内容を取得できませんでした（内容がないか、API 失敗の可能性。上部の状態バーに理由があります）	Не удалось получить содержимое работы (возможно, оно пустое или API дал сбой; причина в строке состояния сверху)	작품 내용을 가져오지 못했습니다(내용이 없거나 API 실패일 수 있습니다. 상단 상태 표시줄에 이유가 있습니다)
+dest_creator_loading_work	正在取作品内容…	正在取作品內容…	正在取作品內容…	Fetching work content…	作品内容を取得中…	Получение содержимого работы…	작품 내용 가져오는 중…
+dest_creator_no_content_note	这个作品没有可看的内容（作品库里有条目只有信息、没有图片）	這個作品沒有可看的內容（作品庫裡有條目只有資訊、沒有圖片）	這個作品沒有可看的內容（作品庫裡有條目只有資訊、沒有圖片）	This work has nothing to read (some library entries have info only, no images)	この作品には読める内容がありません（作品ライブラリには情報だけで画像がない項目もあります）	У этой работы нет содержимого (в библиотеке есть записи только со сведениями, без изображений)	이 작품에는 볼 내용이 없습니다(라이브러리에 정보만 있고 이미지가 없는 항목도 있습니다)
+dest_detail_close_tag_search	关闭标签搜索结果	關閉標籤搜尋結果	關閉標籤搜尋結果	Close tag search results	タグ検索結果を閉じる	Закрыть результаты поиска по тегу	태그 검색 결과 닫기
+dest_detail_continue_watch	继续观看	繼續觀看	繼續觀看	Continue watching	続きを見る	Продолжить просмотр	계속 보기
+dest_detail_from_start	从头开始	從頭開始	從頭開始	From the start	最初から	С начала	처음부터
+dest_detail_hand_to_browser	交给系统浏览器下载	交給系統瀏覽器下載	交給系統瀏覽器下載	Hand to the system browser	システムのブラウザに任せる	Передать системному браузеру	시스템 브라우저로 넘기기
+dest_detail_liked_prefix	已赞 	已讚 	已讚	Liked 	いいね済み 	Нравится 	좋아요 
+dest_detail_loading_work	正在加载作品…	正在載入作品…	正在載入作品…	Loading work…	作品を読み込み中…	Загрузка работы…	작품 불러오는 중…
+dest_detail_no_chapters	该作品没有章节列表，直接阅读整本	該作品沒有章節列表，直接閱讀整本	該作品沒有章節列表，直接閱讀整本	This work has no chapter list; read it as a whole	この作品にはチャプター一覧がありません。全体をそのまま読みます	У этой работы нет списка глав — читайте целиком	이 작품에는 챕터 목록이 없어 전체를 바로 읽습니다
+dest_detail_tags_hint	标签（点标签按标签搜索，右侧可屏蔽或标星）	標籤（點標籤按標籤搜尋，右側可封鎖或標星）	標籤（點標籤按標籤搜尋，右側可封鎖或標星）	Tags (tap a tag to search by it; block or star it on the right)	タグ（タグを押すとタグ検索。右側でブロックまたはスター）	Теги (нажмите тег, чтобы искать по нему; справа можно заблокировать или добавить в избранное)	태그(태그를 누르면 태그 검색, 오른쪽에서 차단하거나 별표)
+dest_detail_tracked	已追更	已追更	已追更	Subscribed	フォロー中	Вы подписаны	구독 중
+dest_fav_blocked	已屏蔽	已封鎖	已封鎖	Blocked	ブロック済み	Заблокировано	차단됨
+dest_fav_favorited	已收藏	已收藏	已收藏	Favorited	お気に入り済み	В избранном	즐겨찾기됨
+dest_fav_need_login	需要登录（收藏列表属于账号数据）	需要登入（收藏列表屬於帳號資料）	需要登入（收藏列表屬於帳號資料）	Sign-in required (favorites belong to your account)	ログインが必要です（お気に入りはアカウントのデータ）	Нужен вход (избранное относится к аккаунту)	로그인이 필요합니다(즐겨찾기는 계정 데이터)
+dest_fmt_appearance_alpha	面板浓度：%1$d%%（在所选风格基础上再调）	面板濃度：%1$d%%（在所選風格的基礎上再調）	面板濃度：%1$d%%（在所選風格的基礎上再調）	Panel opacity: %1$d%% (adjusted on top of the selected style)	パネルの不透明度：%1$d%%（選択したスタイルを基準に調整）	Плотность панели: %1$d%% (поверх выбранного стиля)	패널 농도: %1$d%% (선택한 스타일 위에 추가 조정)
+dest_fmt_appearance_blur	壁纸模糊：%1$ddp	桌布模糊：%1$ddp	桌布模糊：%1$ddp	Wallpaper blur: %1$d dp	壁紙ぼかし：%1$ddp	Размытие обоев: %1$d dp	배경 흐림: %1$ddp
+dest_fmt_appearance_dim	壁纸压暗：%1$d%%（0..100，到 100 壁纸等于纯黑）	桌布壓暗：%1$d%%（0..100，到 100 桌布等於純黑）	桌布壓暗：%1$d%%（0..100，到 100 桌布等於純黑）	Wallpaper dim: %1$d%% (0..100; at 100 the wallpaper is pure black)	壁紙の暗さ：%1$d%%（0..100、100 で壁紙は真っ黒）	Затемнение обоев: %1$d%% (0..100, при 100 обои полностью чёрные)	배경 어둡게: %1$d%% (0..100, 100이면 배경이 완전 검정)
+dest_fmt_appearance_reader_mode	当前：%1$s	目前：%1$s	目前：%1$s	Current: %1$s	現在：%1$s	Сейчас: %1$s	현재: %1$s
+dest_fmt_appearance_style_blur	当前：%1$s（面板透明度 %2$d%%、圆角 %3$ddp、壁纸模糊）	目前：%1$s（面板透明度 %2$d%%、圓角 %3$ddp、桌布模糊）	目前：%1$s（面板透明度 %2$d%%、圓角 %3$ddp、桌布模糊）	Current: %1$s (panel opacity %2$d%%, corner radius %3$d dp, wallpaper blurred)	現在：%1$s（パネルの不透明度 %2$d%%、角丸 %3$ddp、壁紙ぼかしあり）	Сейчас: %1$s (непрозрачность панели %2$d%%, радиус углов %3$d dp, обои размыты)	현재: %1$s (패널 불투명도 %2$d%%, 모서리 반경 %3$ddp, 배경 흐림)
+dest_fmt_appearance_style_no_blur	当前：%1$s（面板透明度 %2$d%%、圆角 %3$ddp、壁纸不模糊）	目前：%1$s（面板透明度 %2$d%%、圓角 %3$ddp、桌布不模糊）	目前：%1$s（面板透明度 %2$d%%、圓角 %3$ddp、桌布不模糊）	Current: %1$s (panel opacity %2$d%%, corner radius %3$d dp, wallpaper not blurred)	現在：%1$s（パネルの不透明度 %2$d%%、角丸 %3$ddp、壁紙ぼかしなし）	Сейчас: %1$s (непрозрачность панели %2$d%%, радиус углов %3$d dp, обои не размыты)	현재: %1$s (패널 불투명도 %2$d%%, 모서리 반경 %3$ddp, 배경 흐림 없음)
+dest_fmt_block_add_label	添加%1$s	新增%1$s	新增%1$s	Add %1$s	%1$sを追加	Добавить %1$s	%1$s 추가
+dest_fmt_block_section_title	%1$s（%2$d）	%1$s（%2$d）	%1$s（%2$d）	%1$s (%2$d)	%1$s（%2$d）	%1$s (%2$d)	%1$s(%2$d)
+dest_fmt_blocked_notice	有 %1$d 条结果被屏蔽规则挡掉（可在「屏蔽设置」里调整）	有 %1$d 筆結果被封鎖規則擋掉（可在「封鎖設定」裡調整）	有 %1$d 筆結果被封鎖規則擋掉（可在「封鎖設定」裡調整）	%1$d results hidden by blocking rules (adjust in "Blocking")	%1$d 件の結果がブロック規則で非表示です（「ブロック設定」で調整できます）	%1$d результатов скрыто правилами блокировки (настройте в «Блокировки»)	%1$d개 결과가 차단 규칙으로 숨겨졌습니다(‘차단 설정’에서 조정 가능)
+dest_fmt_category_count	分类 %1$d 个	分類 %1$d 個	分類 %1$d 個	%1$d categories	カテゴリ %1$d 件	Категорий: %1$d	카테고리 %1$d개
+dest_fmt_category_load_failed	分类加载失败：%1$s，改用热门标签兜底	分類載入失敗：%1$s，改用熱門標籤作為後備	分類載入失敗：%1$s，改用熱門標籤作為後備	Failed to load categories: %1$s; falling back to popular tags	カテゴリの読み込みに失敗：%1$s。人気タグで代替します	Не удалось загрузить категории: %1$s; используем популярные теги	카테고리를 불러오지 못했습니다: %1$s, 인기 태그로 대체합니다
+dest_fmt_category_loaded	%1$s：已加载 %2$d 条	%1$s：已載入 %2$d 筆	%1$s：已載入 %2$d 筆	%1$s: loaded %2$d items	%1$s：%2$d 件を読み込みました	%1$s: загружено %2$d	%1$s: %2$d개 로드됨
+dest_fmt_chapter_number	第 %1$d 话	第 %1$d 話	第 %1$d 話	Chapter %1$d	第 %1$d 話	Глава %1$d	%1$d화
+dest_fmt_chapter_title	第 %1$s 话	第 %1$s 話	第 %1$s 話	Chapter %1$s	第 %1$s 話	Глава %1$s	%1$s화
+dest_fmt_comment_send_failed	发表失败：%1$s	發表失敗：%1$s	發表失敗：%1$s	Failed to post: %1$s	投稿に失敗：%1$s	Не удалось отправить: %1$s	게시 실패: %1$s
+dest_fmt_creator_authors_count	画师 %1$d 位 / 共 %2$d	畫師 %1$d 位 / 共 %2$d	畫師 %1$d 位 / 共 %2$d	%1$d creators / %2$d total	絵師 %1$d 人 / 全 %2$d 人	Художников: %1$d / всего %2$d	작가 %1$d명 / 총 %2$d명
+dest_fmt_creator_label	画师：%1$s	畫師：%1$s	畫師：%1$s	Creator: %1$s	絵師：%1$s	Художник: %1$s	작가: %1$s
+dest_fmt_creator_works_count	作品 %1$d 部 / 共 %2$d	作品 %1$d 部 / 共 %2$d	作品 %1$d 部 / 共 %2$d	%1$d works / %2$d total	作品 %1$d 件 / 全 %2$d 件	Работ: %1$d / всего %2$d	작품 %1$d개 / 총 %2$d개
+dest_fmt_creator_works_loading	正在取 %1$s 的作品…	正在取得 %1$s 的作品…	正在取得 %1$s 的作品…	Loading works by %1$s…	%1$s の作品を取得中…	Загрузка работ %1$s…	%1$s의 작품을 가져오는 중…
+dest_fmt_creator_works_of_author	%1$s 的作品 %2$d 部	%1$s 的作品 %2$d 部	%1$s 的作品 %2$d 部	%1$s: %2$d works	%1$s の作品 %2$d 件	%1$s: работ %2$d	%1$s의 작품 %2$d개
+dest_fmt_delete_failed	删除失败：%1$s	刪除失敗：%1$s	刪除失敗：%1$s	Delete failed: %1$s	削除失敗：%1$s	Ошибка удаления: %1$s	삭제 실패: %1$s
+dest_fmt_detail_header	%1$s · %2$d 话 · 相关 %3$d 部	%1$s · %2$d 話 · 相關 %3$d 部	%1$s · %2$d 話 · 相關 %3$d 部	%1$s · %2$d chapters · %3$d related	%1$s · %2$d 話 · 関連 %3$d 件	%1$s · глав: %2$d · связанных: %3$d	%1$s · %2$d화 · 관련 %3$d개
+dest_fmt_folder_empty	%1$s：还没有作品	%1$s：還沒有作品	%1$s：還沒有作品	%1$s: no works yet	%1$s：作品はまだありません	%1$s: работ пока нет	%1$s: 아직 작품이 없습니다
+dest_fmt_folder_loaded	%1$s：已加载 %2$d 条 / 共 %3$d 条	%1$s：已載入 %2$d 條 / 共 %3$d 條	%1$s：已加載 %2$d 條 / 共 %3$d 條	%1$s: %2$d loaded / %3$d total	%1$s：%2$d 件読み込み済み / 全 %3$d 件	%1$s: загружено %2$d / всего %3$d	%1$s: %2$d건 불러옴 / 총 %3$d건
+dest_fmt_home_blocked	（屏蔽规则挡掉 %1$d 条）	（封鎖規則擋掉 %1$d 條）	（屏蔽規則擋掉 %1$d 條）	(%1$d hidden by block rules)	（ブロック規則で %1$d 件を非表示）	(скрыто правилами блокировки: %1$d)	(차단 규칙으로 %1$d건 숨김)
+dest_fmt_home_count	首页 %1$d/%2$d 条	首頁 %1$d/%2$d 條	首頁 %1$d/%2$d 條	Home %1$d/%2$d items	ホーム %1$d/%2$d 件	Главная: %1$d/%2$d	홈 %1$d/%2$d건
+dest_fmt_home_tracking	，其中 %1$d 部在追更里有更新	，其中 %1$d 部在追更裡有更新	，其中 %1$d 部在追更裡有更新	, %1$d of them updated in your follows	、うち %1$d 件は追いかけリストで更新あり	, из них %1$d обновились в подписках	, 그중 %1$d개는 구독 목록에 업데이트가 있습니다
+dest_fmt_hot_tags_fallback	用热门标签兜底：%1$d 个	用熱門標籤作為後備：%1$d 個	用熱門標籤作為後備：%1$d 個	Falling back to popular tags: %1$d	人気タグで代替：%1$d 件	Используем популярные теги: %1$d	인기 태그로 대체: %1$d개
+dest_fmt_image_missing	图片未取到：%1$s	圖片未取到：%1$s	圖片未取到：%1$s	Image not loaded: %1$s	画像を取得できませんでした：%1$s	Изображение не получено: %1$s	이미지를 가져오지 못했습니다: %1$s
+dest_fmt_issue_load_failed	刊期加载失败：%1$s	刊期載入失敗：%1$s	刊期加載失敗：%1$s	Failed to load issues: %1$s	刊期の読み込み失敗：%1$s	Ошибка загрузки выпусков: %1$s	간행호 불러오기 실패: %1$s
+dest_fmt_load_failed	加载失败：%1$s	載入失敗：%1$s	加載失敗：%1$s	Load failed: %1$s	読み込み失敗：%1$s	Ошибка загрузки: %1$s	불러오기 실패: %1$s
+dest_fmt_loaded_count	已加载 %1$d 条	已載入 %1$d 條	已加載 %1$d 條	Loaded %1$d items	%1$d 件読み込み済み	Загружено %1$d	%1$d건 불러옴
+dest_fmt_loaded_slash	已加载 %1$d / %2$d	已載入 %1$d / %2$d	已加載 %1$d / %2$d	Loaded %1$d / %2$d	%1$d / %2$d 読み込み済み	Загружено %1$d / %2$d	%1$d / %2$d 불러옴
+dest_fmt_loaded_total	已加载 %1$d 条 / 共 %2$d 条	已載入 %1$d 條 / 共 %2$d 條	已加載 %1$d 條 / 共 %2$d 條	%1$d loaded / %2$d total	%1$d 件読み込み済み / 全 %2$d 件	Загружено %1$d / всего %2$d	%1$d건 불러옴 / 총 %2$d건
+dest_fmt_loading_section	正在加载「%1$s」…	正在載入「%1$s」…	正在載入「%1$s」…	Loading "%1$s"…	「%1$s」を読み込み中…	Загрузка «%1$s»…	"%1$s" 불러오는 중…
+dest_fmt_logged_in	已登录：%1$s	已登入：%1$s	已登錄：%1$s	Signed in as %1$s	ログイン中：%1$s	Вы вошли как %1$s	로그인됨: %1$s
+dest_fmt_page_blocked	（本页屏蔽 %1$d 条）	（本頁封鎖 %1$d 條）	（本頁屏蔽 %1$d 條）	(%1$d hidden on this page)	（このページで %1$d 件を非表示）	(скрыто на странице: %1$d)	(이 페이지에서 %1$d건 숨김)
+dest_fmt_page_indicator	第 %1$d/%2$d 页	第 %1$d/%2$d 頁	第 %1$d/%2$d 頁	Page %1$d/%2$d	%1$d/%2$d ページ	Стр. %1$d/%2$d	%1$d/%2$d 페이지
+dest_fmt_random_batch	这一批 %1$d 条	這一批 %1$d 條	這一批 %1$d 條	%1$d in this batch	この回 %1$d 件	%1$d за эту порцию	이번 묶음 %1$d개
+dest_fmt_random_batch_ranked	这一批 %1$d 条（已按收藏偏好排序）	這一批 %1$d 條（已依收藏偏好排序）	這一批 %1$d 條（已依收藏偏好排序）	%1$d in this batch (sorted by favorite preferences)	この回 %1$d 件（お気に入りの好みで並べ替え済み）	%1$d за эту порцию (сортировка по предпочтениям)	이번 묶음 %1$d개 (즐겨찾기 선호로 정렬됨)
+dest_fmt_reader_chapter_pos	第 %1$d / %2$d 话	第 %1$d / %2$d 話	第 %1$d / %2$d 話	Chapter %1$d / %2$d	第 %1$d / %2$d 話	Глава %1$d / %2$d	%1$d / %2$d 화
+dest_fmt_reader_failed_retry	加载失败：%1$s（点“重试”）	載入失敗：%1$s（點「重試」）	加載失敗：%1$s（點「重試」）	Load failed: %1$s (choose "Retry")	読み込み失敗：%1$s（「再試行」を押す）	Ошибка загрузки: %1$s (нажмите «Повторить»)	불러오기 실패: %1$s ("다시 시도" 클릭)
+dest_fmt_reader_page_failed	第 %1$d 页加载失败	第 %1$d 頁載入失敗	第 %1$d 頁加載失敗	Failed to load page %1$d	%1$d ページの読み込みに失敗	Не удалось загрузить страницу %1$d	%1$d페이지 불러오기 실패
+dest_fmt_reader_page_loading	第 %1$d 页 加载中…	第 %1$d 頁 載入中…	第 %1$d 頁 加載中…	Page %1$d loading…	%1$d ページ 読み込み中…	Страница %1$d загружается…	%1$d페이지 불러오는 중…
+dest_fmt_reader_pages	%1$d 页	%1$d 頁	%1$d 頁	%1$d pages	%1$d ページ	Страниц: %1$d	%1$d페이지
+dest_fmt_related_count	相关作品 %1$d 部	相關作品 %1$d 部	相關作品 %1$d 部	%1$d related works	関連作品 %1$d 件	Связанных работ: %1$d	관련 작품 %1$d개
+dest_fmt_related_hint	相关作品 %1$d 部（见下方）	相關作品 %1$d 部（見下方）	相關作品 %1$d 部（見下方）	%1$d related works (see below)	関連作品 %1$d 件（下に表示）	Связанных работ: %1$d (см. ниже)	관련 작품 %1$d개 (아래 참조)
+dest_fmt_tag_already_blocked	「%1$s」已经在屏蔽名单里	「%1$s」已經在封鎖名單裡	「%1$s」已經在屏蔽名單裡	“%1$s” is already in the block list	「%1$s」はすでにブロックリストにあります	«%1$s» уже в списке блокировки	‘%1$s’은(는) 이미 차단 목록에 있습니다
+dest_fmt_tag_blocked	已按标签屏蔽 %1$d 条（命中：%2$s）	已按標籤封鎖 %1$d 條（命中：%2$s）	已按標籤屏蔽 %1$d 條（命中：%2$s）	%1$d hidden by tag blocking (matched: %2$s)	タグブロックで %1$d 件非表示（一致：%2$s）	Скрыто блокировкой тегов: %1$d (совпадения: %2$s)	태그 차단으로 %1$d개 숨김 (일치: %2$s)
+dest_fmt_tag_blocked_note	已屏蔽标签：%1$s（可在「屏蔽设置」里取消）	已封鎖標籤：%1$s（可在「封鎖設定」裡取消）	已屏蔽標籤：%1$s（可在「屏蔽設置」裡取消）	Tag blocked: %1$s (undo in Block settings)	タグをブロックしました：%1$s（「ブロック設定」で解除できます）	Тег заблокирован: %1$s (отменить в настройках блокировки)	태그를 차단했습니다: %1$s (’차단 설정’에서 해제)
+dest_fmt_tag_group_suffix	，标签组 %1$d 组	，標籤組 %1$d 組	，標籤組 %1$d 組	, %1$d tag groups	、タググループ %1$d 件	, групп тегов: %1$d	, 태그 그룹 %1$d개
+dest_fmt_tag_loaded	标签「%1$s」：已加载 %2$d 条 / 共 %3$d 条	標籤「%1$s」：已載入 %2$d 筆 / 共 %3$d 筆	標籤「%1$s」：已載入 %2$d 筆 / 共 %3$d 筆	Tag "%1$s": %2$d of %3$d loaded	タグ「%1$s」：%2$d / %3$d 件を読み込み済み	Тег «%1$s»: загружено %2$d из %3$d	태그 「%1$s」: %2$d / %3$d개 로드됨
+dest_fmt_tag_result	标签「%1$s」：共 %2$d 条，本页 %3$d 条	標籤「%1$s」：共 %2$d 條，本頁 %3$d 條	標籤「%1$s」：共 %2$d 條，本頁 %3$d 條	Tag “%1$s”: %2$d results, %3$d on this page	タグ「%1$s」：全 %2$d 件、このページ %3$d 件	Тег «%1$s»: всего %2$d, на странице %3$d	태그 ‘%1$s’: 총 %2$d건, 이 페이지 %3$d건
+dest_fmt_tag_searching	正在按标签「%1$s」搜索…	正在依標籤「%1$s」搜尋…	正在依標籤「%1$s」搜尋…	Searching by tag “%1$s”…	タグ「%1$s」で検索中…	Поиск по тегу «%1$s»…	태그 ‘%1$s’로 검색 중…
+dest_fmt_tag_title	标签「%1$s」	標籤「%1$s」	標籤「%1$s」	Tag “%1$s”	タグ「%1$s」	Тег «%1$s»	태그 ‘%1$s’
+dest_fmt_tags_last_scan	上次扫描：%1$s	上次掃描：%1$s	上次掃描：%1$s	Last scan: %1$s	前回スキャン：%1$s	Последнее сканирование: %1$s	마지막 스캔: %1$s
+dest_fmt_tags_local_count	本地统计 %1$d 个标签	本地統計 %1$d 個標籤	本地統計 %1$d 個標籤	%1$d tags counted locally	ローカル集計 %1$d 個のタグ	Локальная статистика: %1$d тегов	로컬 집계 %1$d개 태그
+dest_fmt_tags_scan_done	扫描完成：%1$d 个标签	掃描完成：%1$d 個標籤	掃描完成：%1$d 個標籤	Scan done: %1$d tags	スキャン完了：%1$d 個のタグ	Сканирование завершено: %1$d тегов	스캔 완료: %1$d개 태그
+dest_fmt_tags_scan_failed	扫描失败：%1$s	掃描失敗：%1$s	掃描失敗：%1$s	Scan failed: %1$s	スキャン失敗：%1$s	Ошибка сканирования: %1$s	스캔 실패: %1$s
+dest_fmt_total_loaded	共 %1$d 条，已加载 %2$d 条	共 %1$d 條，已載入 %2$d 條	共 %1$d 條，已載入 %2$d 條	%1$d total, %2$d loaded	全 %1$d 件、%2$d 件読み込み済み	Всего %1$d, загружено %2$d	총 %1$d개, %2$d개 불러옴
+dest_fmt_tracking_page_blocked	（本页被屏蔽挡掉 %1$d 条）	（本頁被封鎖擋掉 %1$d 條）	（本頁被屏蔽擋掉 %1$d 條）	(%1$d hidden on this page)	（このページで %1$d 件非表示）	(%1$d скрыто на этой странице)	(이 페이지에서 %1$d개 숨김)
+dest_fmt_unread_count	未读 %1$d	未讀 %1$d	未讀 %1$d	%1$d unread	未読 %1$d	Непрочитано: %1$d	안 읽음 %1$d
+dest_fmt_wallpaper_credit	署名：%1$s	署名：%1$s	署名：%1$s	Credit: %1$s	クレジット：%1$s	Автор: %1$s	출처: %1$s
+dest_fmt_wallpaper_fetch_failed	取图失败：%1$s	取圖失敗：%1$s	取圖失敗：%1$s	Couldn't fetch the image: %1$s	画像の取得に失敗：%1$s	Не удалось получить изображение: %1$s	이미지 가져오기 실패: %1$s
+dest_fmt_wallpaper_minutes	%1$d分	%1$d 分	%1$d 分	%1$d min	%1$d 分	%1$d мин	%1$d분
+dest_fmt_work_content_ready	作品内容已取到：%1$d 张图	作品內容已取到：%1$d 張圖片	作品內容已取到：%1$d 張圖片	Work content loaded: %1$d images	作品の内容を取得しました：画像 %1$d 枚	Содержимое работы получено: изображений %1$d	작품 내용을 가져왔습니다: 이미지 %1$d장
+dest_fmt_work_label	作品：%1$s	作品：%1$s	作品：%1$s	Work: %1$s	作品：%1$s	Работа: %1$s	작품: %1$s
+dest_fmt_work_pages	共 %1$d 页 / %2$d 张图	共 %1$d 頁 / %2$d 張圖片	共 %1$d 頁 / %2$d 張圖片	%1$d pages / %2$d images	全 %1$d ページ / 画像 %2$d 枚	Страниц: %1$d / изображений: %2$d	총 %1$d페이지 / 이미지 %2$d장
+dest_login_forgot	找回密码	找回密碼	找回密碼	Forgot password	パスワードを忘れた	Забыли пароль	비밀번호 찾기
+dest_login_required_features	登录后才能使用收藏、追更与评论。	登入後才能使用收藏、追更與評論。	登入後才能使用收藏、追更與評論。	Sign in to use favorites, subscriptions and comments.	ログインするとお気に入り・フォロー・コメントが使えます。	Войдите, чтобы пользоваться избранным, подписками и комментариями.	로그인하면 즐겨찾기, 구독, 댓글을 사용할 수 있습니다.
+dest_logout_confirm_note	退出后需要重新登录才能使用收藏、追更等功能。	登出後需要重新登入才能使用收藏、追更等功能。	登出後需要重新登入才能使用收藏、追更等功能。	After signing out you'll need to sign in again to use favorites, subscriptions and so on.	ログアウトすると、お気に入りやフォローなどを使うには再ログインが必要です。	После выхода понадобится снова войти, чтобы пользоваться избранным, подписками и прочим.	로그아웃하면 즐겨찾기, 구독 등을 쓰기 위해 다시 로그인해야 합니다.
+dest_nav_back_category	返回分类	返回分類	返回分類	Back to categories	カテゴリへ戻る	К категориям	분류로 돌아가기
 dest_nav_history	历史	歷史	歷史	History	履歴	История	기록
 dest_nav_random	随机	隨機	隨機	Random	ランダム	Случайное	랜덤
 dest_nav_random_book	随机本子	隨機本子	隨機本子	Random work	ランダム作品	Случайная работа	랜덤 작품
-dest_login_forgot	找回密码	找回密碼	找回密碼	Forgot password	パスワードを忘れた	Забыли пароль	비밀번호 찾기
-dest_shell_not_planned	这一页还没接数据	這一頁還沒接資料	這一頁還沒接資料	This page isn't wired up yet	この画面はまだデータ未接続です	Эта страница ещё не подключена	이 화면은 아직 연결되지 않았습니다
-dest_shell_goal	桌面端目标是与 Android full 版功能对齐；这里列出还没搬过来的部分。	桌面端目標是與 Android full 版功能對齊；這裡列出還沒搬過來的部分。	桌面端目標是與 Android full 版功能對齊；這裡列出還沒搬過來的部分。	The desktop goal is parity with the Android full build; this lists what hasn't been ported yet.	デスクトップ版の目標は Android full 版との機能一致です。ここには未移植の項目を並べています。	Цель десктопной версии — паритет с Android full; здесь перечислено, что ещё не перенесено.	데스크톱 목표는 Android full 버전과 기능을 맞추는 것입니다. 아직 옮기지 않은 항목을 여기에 둡니다.
-dest_common_fetching	取中…	取中…	取中…	Picking…	取得中…	Выбираем…	고르는 중…
-dest_common_retry_loading	正在加载…	正在載入…	正在載入…	Loading…	読み込み中…	Загрузка…	불러오는 중…
-dest_fav_favorited	已收藏	已收藏	已收藏	Favorited	お気に入り済み	В избранном	즐겨찾기됨
-dest_fav_blocked	已屏蔽	已封鎖	已封鎖	Blocked	ブロック済み	Заблокировано	차단됨
+dest_notif_mark_read	标记已读	標記已讀	標記已讀	Mark as read	既読にする	Отметить прочитанным	읽음으로 표시
+dest_pref_sort_note	开启偏好排序后，取一批会额外请求这一批作品的详情以获取标签（每批约 20 到 30 次），首次还可能要扫描一次收藏标签。	開啟偏好排序後，取一批會額外請求這批作品的詳情以取得標籤（每批約 20 到 30 次），首次還可能要掃描一次收藏標籤。	開啟偏好排序後，取一批會額外請求這批作品的詳情以取得標籤（每批約 20 到 30 次），首次還可能要掃描一次收藏標籤。	With preference sorting on, each batch also fetches details for its works to read tags (about 20–30 requests per batch), and the first run may scan your saved tags once.	偏好ソートを有効にすると、1 回の取得ごとに作品詳細を追加取得してタグを読みます（1 回あたり約 20〜30 リクエスト）。初回は保存タグの走査も行います。	С включённой сортировкой по предпочтениям каждая порция дополнительно запрашивает детали работ ради тегов (20–30 запросов на порцию); при первом запуске может понадобиться разовый обход сохранённых тегов.	선호 정렬을 켜면 한 묶음마다 작품 상세를 추가로 요청해 태그를 읽습니다(묶음당 약 20~30회). 첫 실행에서는 저장한 태그를 한 번 훑을 수 있습니다.
+dest_profile_go_login	去登录	去登入	去登入	Sign in	ログインへ	Войти	로그인
 dest_profile_member_missing	已登录（会员信息未取到）	已登入（會員資訊未取到）	已登入（會員資訊未取到）	Signed in (member info unavailable)	ログイン済み（会員情報が取得できません）	Вход выполнен (данные участника недоступны)	로그인됨(회원 정보를 가져오지 못함)
-dest_reader_signed	已签	已簽	已簽	Signed	署名済み	Отмечено	출석함
+dest_random_sort_pref	按收藏偏好排序	依收藏偏好排序	依收藏偏好排序	Sort by favorite preferences	お気に入りの好みで並べ替え	Сортировка по предпочтениям	즐겨찾기 선호로 정렬
+dest_random_sort_pref_mark	· 按收藏偏好排序	· 依收藏偏好排序	· 依收藏偏好排序	· Sorted by favorite preferences	· お気に入りの好みで並べ替え	· Сортировка по предпочтениям	· 즐겨찾기 선호로 정렬
+dest_reader_back_detail	回详情页	回詳情頁	回詳情頁	Back to details	詳細へ戻る	К деталям	상세로 돌아가기
+dest_reader_default_note	进入阅读页时的默认形态：纵向连续滚动（与 Android 的默认值一致）或横向逐页。改完下次进阅读页生效。	進入閱讀頁時的預設形態：縱向連續捲動（與 Android 的預設值一致）或橫向逐頁。改完下次進閱讀頁生效。	進入閱讀頁時的預設形態：縱向連續捲動（與 Android 的預設值一致）或橫向逐頁。改完下次進閱讀頁生效。	Default layout when opening the reader: vertical continuous scroll (same as Android's default) or horizontal pages. Takes effect next time you open the reader.	リーダーを開いたときの既定の形式：縦の連続スクロール（Android の既定と同じ）または横のページ送り。変更は次にリーダーを開いたときに反映されます。	Формат по умолчанию при открытии читалки: вертикальная непрерывная прокрутка (как в Android) или постранично. Изменения применятся при следующем открытии читалки.	리더를 열 때의 기본 형태: 세로 연속 스크롤(Android 기본값과 동일) 또는 가로 페이지 넘김. 변경은 다음에 리더를 열 때 적용됩니다.
 dest_reader_last_chapter	已经是最后一话	已經是最後一話	已經是最後一話	This is the last chapter	これが最後の話です	Это последняя глава	마지막 화입니다
-dest_detail_liked_prefix	已赞 	已讚 	已讚	Liked 	いいね済み 	Нравится 	좋아요 
-dest_detail_tracked	已追更	已追更	已追更	Subscribed	フォロー中	Вы подписаны	구독 중
-dest_auth_logged_out	已退出登录	已登出	已登出	Signed out	ログアウトしました	Выход выполнен	로그아웃했습니다
+dest_reader_layout	阅读形态	閱讀形態	閱讀形態	Reading layout	閲覧形式	Режим чтения	보기 형태
+dest_reader_loading_chapter	正在加载章节…	正在載入章節…	正在載入章節…	Loading chapter…	チャプターを読み込み中…	Загрузка главы…	챕터 불러오는 중…
+dest_reader_signed	已签	已簽	已簽	Signed	署名済み	Отмечено	출석함
+dest_render_note	只作用于漫画画面，不影响界面配色。墨水屏设备选「墨水屏」：去色并提高对比度。	只作用於漫畫畫面，不影響介面配色。電子紙裝置選「電子紙」：去色並提高對比度。	只作用於漫畫畫面，不影響介面配色。電子紙裝置選「電子紙」：去色並提高對比度。	Only affects comic pages, not the UI colors. On e-ink devices choose "E-ink": desaturated with more contrast.	漫画の画面のみに作用し、UI の配色には影響しません。電子ペーパー端末では「電子ペーパー」を選ぶと、彩度を落としてコントラストを上げます。	Влияет только на страницы комикса, не на цвета интерфейса. На устройствах с электронными чернилами выберите «Электронные чернила»: обесцвечивание и повышенный контраст.	만화 화면에만 적용되고 UI 색에는 영향을 주지 않습니다. 전자종이 기기에서는 ‘전자종이’를 고르면 채도를 없애고 대비를 높입니다.
+dest_search_back_hot_tags	返回热门标签	返回熱門標籤	返回熱門標籤	Back to popular tags	人気タグへ戻る	К популярным тегам	인기 태그로
+dest_search_field_label_colon	字段：	欄位：	欄位：	Field:	項目：	Поле:	항목:
+dest_search_history	搜索历史：	搜尋歷史：	搜尋歷史：	Search history:	検索履歴：	История поиска:	검색 기록:
+dest_search_hot_tags_colon	热门标签：	熱門標籤：	熱門標籤：	Popular tags:	人気タグ：	Популярные теги:	인기 태그:
+dest_search_hot_tags_failed	热门标签也拿不到。可以点「重试」再取一次。	熱門標籤也拿不到。可以點「重試」再取一次。	熱門標籤也拿不到。可以點「重試」再取一次。	Couldn't load popular tags either. Tap "Retry" to try again.	人気タグも取得できません。「再試行」でもう一度お試しください。	Популярные теги тоже не загрузились. Нажмите «Повторить».	인기 태그도 가져오지 못했습니다. ‘다시 시도’를 눌러 주세요.
+dest_search_hot_tags_hint	热门标签（点标签按标签搜索）	熱門標籤（點標籤按標籤搜尋）	熱門標籤（點標籤按標籤搜尋）	Popular tags (tap a tag to search by it)	人気タグ（タグを押すとタグ検索）	Популярные теги (нажмите тег, чтобы искать по нему)	인기 태그(태그를 누르면 태그 검색)
+dest_search_order	排序：	排序：	排序：	Sort:	並び順：	Сортировка:	정렬:
+dest_search_random_head	随机推荐：	隨機推薦：	隨機推薦：	Random picks:	ランダムおすすめ：	Случайные подборки:	랜덤 추천:
+dest_search_searching	搜索中…	搜尋中…	搜尋中…	Searching…	検索中…	Поиск…	검색 중…
 dest_search_year_month	年月：	年月：	年月：	Year/month:	年月：	Год/месяц:	연/월:
 dest_search_year_placeholder	年（如 2026）	年（如 2026）	年（如 2026）	Year (e.g. 2026)	年（例：2026）	Год (например, 2026)	연도(예: 2026)
-dest_common_apply	应用	套用	套用	Apply	適用	Применить	적용
-dest_common_enable	开启	開啟	開啟	Enable	有効にする	Включить	켜기
-dest_pref_sort_note	开启偏好排序后，取一批会额外请求这一批作品的详情以获取标签（每批约 20 到 30 次），首次还可能要扫描一次收藏标签。	開啟偏好排序後，取一批會額外請求這批作品的詳情以取得標籤（每批約 20 到 30 次），首次還可能要掃描一次收藏標籤。	開啟偏好排序後，取一批會額外請求這批作品的詳情以取得標籤（每批約 20 到 30 次），首次還可能要掃描一次收藏標籤。	With preference sorting on, each batch also fetches details for its works to read tags (about 20–30 requests per batch), and the first run may scan your saved tags once.	偏好ソートを有効にすると、1 回の取得ごとに作品詳細を追加取得してタグを読みます（1 回あたり約 20〜30 リクエスト）。初回は保存タグの走査も行います。	С включённой сортировкой по предпочтениям каждая порция дополнительно запрашивает детали работ ради тегов (20–30 запросов на порцию); при первом запуске может понадобиться разовый обход сохранённых тегов.	선호 정렬을 켜면 한 묶음마다 작품 상세를 추가로 요청해 태그를 읽습니다(묶음당 약 20~30회). 첫 실행에서는 저장한 태그를 한 번 훑을 수 있습니다.
-dest_appearance_light	当前：浅色	目前：淺色	目前：淺色	Current: light	現在：ライト	Сейчас: светлая	현재: 라이트
-dest_appearance_dark	当前：深色	目前：深色	目前：深色	Current: dark	現在：ダーク	Сейчас: тёмная	현재: 다크
-dest_auth_gender	性别：	性別：	性別：	Gender:	性別：	Пол:	성별:
-dest_tags_scanning	扫描中…	掃描中…	掃描中…	Scanning…	スキャン中…	Сканирование…	스캔 중…
-dest_tags_scan_action	扫描收藏更新统计	掃描收藏更新統計	掃描收藏更新統計	Scan favorites for update stats	お気に入りの更新統計をスキャン	Сканировать избранное на статистику	즐겨찾기 업데이트 통계 스캔
-dest_common_draw	抽…	抽…	抽…	Picking…	抽選中…	Тянем…	뽑는 중…
-dest_random_sort_pref	按收藏偏好排序	依收藏偏好排序	依收藏偏好排序	Sort by favorite preferences	お気に入りの好みで並べ替え	Сортировка по предпочтениям	즐겨찾기 선호로 정렬
-dest_appearance_change	换一个	換一個	換一個	Change	変更	Сменить	변경
-dest_appearance_swap_note	换的不只是透明度 —— 圆角与壁纸是否模糊一起换。手机上的实时背景模糊在桌面上拿不到，这里用等效近似。	換的不只是透明度 —— 圓角與桌布是否模糊一起換。手機上的即時背景模糊在桌面上拿不到，這裡用等效近似。	換的不只是透明度 —— 圓角與桌布是否模糊一起換。手機上的即時背景模糊在桌面上拿不到，這裡用等效近似。	Switching changes more than opacity — corner radius and whether the wallpaper is blurred change too. Real-time background blur isn't available on desktop, so this approximates it.	切り替わるのは透明度だけではありません。角丸と壁紙のぼかしも一緒に変わります。スマホのリアルタイム背景ぼかしはデスクトップでは使えないため、近似で表現しています。	Меняется не только прозрачность: радиус углов и размытие обоев тоже. Настоящего размытия фона в реальном времени на десктопе нет, здесь используется приближение.	투명도만 바뀌는 게 아니라 모서리 반경과 배경 흐림 여부도 함께 바뀝니다. 휴대폰의 실시간 배경 흐림은 데스크톱에서 쓸 수 없어 근사로 처리합니다.
-dest_search_order	排序：	排序：	排序：	Sort:	並び順：	Сортировка:	정렬:
-dest_search_searching	搜索中…	搜尋中…	搜尋中…	Searching…	検索中…	Поиск…	검색 중…
-dest_search_history	搜索历史：	搜尋歷史：	搜尋歷史：	Search history:	検索履歴：	История поиска:	검색 기록:
-dest_tags_saved	收藏里的标签（本地统计）	收藏裡的標籤（本地統計）	收藏裡的標籤（本地統計）	Tags in your favorites (local stats)	お気に入り内のタグ（ローカル集計）	Теги в избранном (локальная статистика)	즐겨찾기 태그(로컬 집계)
-dest_common_new	新建	新建	新建	New	新規	Создать	새로 만들기
-dest_common_weekday	星期	星期	星期	Weekday	曜日	День недели	요일
-dest_common_month_hint	月（1-12）	月（1-12）	月（1-12）	Month (1-12)	月（1〜12）	Месяц (1–12)	월(1~12)
-dest_block_store_missing	本地屏蔽存储未初始化。	本地封鎖儲存未初始化。	本地封鎖儲存未初始化。	The local block store isn't initialized.	ローカルのブロック保存が未初期化です。	Локальное хранилище блокировок не инициализировано.	로컬 차단 저장소가 초기화되지 않았습니다.
-dest_tags_star	标星	標星	標星	Star	スター	В избранное	별표
-dest_tags_name_label	标签名	標籤名	標籤名	Tag name	タグ名	Имя тега	태그 이름
-dest_detail_tags_hint	标签（点标签按标签搜索，右侧可屏蔽或标星）	標籤（點標籤按標籤搜尋，右側可封鎖或標星）	標籤（點標籤按標籤搜尋，右側可封鎖或標星）	Tags (tap a tag to search by it; block or star it on the right)	タグ（タグを押すとタグ検索。右側でブロックまたはスター）	Теги (нажмите тег, чтобы искать по нему; справа можно заблокировать или добавить в избранное)	태그(태그를 누르면 태그 검색, 오른쪽에서 차단하거나 별표)
-dest_notif_mark_read	标记已读	標記已讀	標記已讀	Mark as read	既読にする	Отметить прочитанным	읽음으로 표시
-dest_common_title	标题	標題	標題	Title	タイトル	Название	제목
-dest_shell_parity_note	桌面端目标是与 Android full 版功能对齐，页面清单见 desktop/PARITY.md。	桌面端目標是與 Android full 版功能對齊，頁面清單見 desktop/PARITY.md。	桌面端目標是與 Android full 版功能對齊，頁面清單見 desktop/PARITY.md。	The desktop goal is parity with the Android full build; see desktop/PARITY.md for the page list.	デスクトップ版の目標は Android full 版との機能一致です。ページ一覧は desktop/PARITY.md を参照。	Цель десктопной версии — паритет с Android full; список страниц в desktop/PARITY.md.	데스크톱 목표는 Android full 버전과 기능을 맞추는 것이며, 페이지 목록은 desktop/PARITY.md에 있습니다.
-dest_detail_loading_work	正在加载作品…	正在載入作品…	正在載入作品…	Loading work…	作品を読み込み中…	Загрузка работы…	작품 불러오는 중…
-dest_reader_loading_chapter	正在加载章节…	正在載入章節…	正在載入章節…	Loading chapter…	チャプターを読み込み中…	Загрузка главы…	챕터 불러오는 중…
-dest_creator_loading_work	正在取作品内容…	正在取作品內容…	正在取作品內容…	Fetching work content…	作品内容を取得中…	Получение содержимого работы…	작품 내용 가져오는 중…
-dest_comments_replying_prefix	正在回复 	正在回覆 	正在回覆 	Replying to 	返信先： 	Ответ: 	답글 대상: 
-dest_common_post	发表	發表	發表	Post	投稿	Отправить	게시
-dest_common_block	屏蔽	封鎖	封鎖	Block	ブロック	Блокировать	차단
-dest_common_clear	清除	清除	清除	Clear	クリア	Очистить	지우기
-dest_common_checkin_short	签…	簽…	簽…	Checking in…	チェックイン中…	Отмечаемся…	출석 중…
-dest_common_exit	退出	退出	退出	Exit	終了	Выйти	나가기
-dest_common_pages	页数	頁數	頁數	Pages	ページ数	Страниц	페이지 수
-dest_comments_write	写评论	寫評論	寫評論	Write a comment	コメントを書く	Написать комментарий	댓글 쓰기
-dest_profile_go_login	去登录	去登入	去登入	Sign in	ログインへ	Войти	로그인
-dest_wallpaper_manual_only	只手动	只手動	只手動	Manual only	手動のみ	Только вручную	수동만
-dest_search_field_label_colon	字段：	欄位：	欄位：	Field:	項目：	Поле:	항목:
-dest_appearance_dark_light	深浅色	深淺色	深淺色	Light/dark	ライト/ダーク	Светлая/тёмная	라이트/다크
-dest_common_got_it	知道了	知道了	知道了	Got it	了解	Понятно	알겠습니다
-dest_common_empty_paren	（空）	（空）	（空）	(empty)	（空）	(пусто)	(비어 있음)
-dest_detail_from_start	从头开始	從頭開始	從頭開始	From the start	最初から	С начала	처음부터
-dest_comments_cancel_reply	取消回复	取消回覆	取消回覆	Cancel reply	返信をやめる	Отменить ответ	답글 취소
-dest_tags_unstar	取消标星	取消標星	取消標星	Unstar	スター解除	Убрать из избранного	별표 해제
-dest_reader_back_detail	回详情页	回詳情頁	回詳情頁	Back to details	詳細へ戻る	К деталям	상세로 돌아가기
-dest_wallpaper_image_url	图片直链	圖片直鏈	圖片直鏈	Direct image URL	画像直リンク	Прямая ссылка	이미지 직접 링크
-dest_wallpaper_online	在线壁纸	線上桌布	線上桌布	Online wallpaper	オンライン壁紙	Онлайн-обои	온라인 배경
-dest_auth_register_email	注册邮箱	註冊信箱	註冊信箱	Sign-up email	登録メール	Почта для регистрации	가입 이메일
-dest_tags_add_star	添加标星	新增標星	新增標星	Add star	スター追加	Добавить в избранное	별표 추가
-dest_appearance_style	界面风格	介面風格	介面風格	UI style	UI スタイル	Стиль интерфейса	UI 스타일
-dest_auth_logging_in	登录中…	登入中…	登入中…	Signing in…	ログイン中…	Вход…	로그인 중…
-dest_detail_continue_watch	继续观看	繼續觀看	繼續觀看	Continue watching	続きを見る	Продолжить просмотр	계속 보기
-dest_nav_back_category	返回分类	返回分類	返回分類	Back to categories	カテゴリへ戻る	К категориям	분류로 돌아가기
-dest_common_back_list	返回列表	返回列表	返回列表	Back to list	一覧へ戻る	К списку	목록으로
 dest_serial_title	连载更新	連載更新	連載更新	Serial updates	連載更新	Обновления серии	연재 업데이트
-dest_reader_layout	阅读形态	閱讀形態	閱讀形態	Reading layout	閲覧形式	Режим чтения	보기 형태
-dest_common_retry_here	点这里重试	點這裡重試	點這裡重試	Tap here to retry	ここを押して再試行	Нажмите, чтобы повторить	여기를 눌러 다시 시도
-dest_search_hot_tags_colon	热门标签：	熱門標籤：	熱門標籤：	Popular tags:	人気タグ：	Популярные теги:	인기 태그:
-dest_wallpaper_rotate	自动轮换：	自動輪換：	自動輪換：	Auto rotate:	自動切替：	Автосмена:	자동 전환:
-dest_search_random_head	随机推荐：	隨機推薦：	隨機推薦：	Random picks:	ランダムおすすめ：	Случайные подборки:	랜덤 추천:
-dest_common_unknown_work	(未知作品)	(未知作品)	(未知作品)	(Unknown work)	(不明な作品)	(Неизвестная работа)	(알 수 없는 작품)
-dest_auth_send_reset	发送重置邮件	發送重設郵件	發送重設郵件	Send reset email	リセットメールを送信	Отправить письмо сброса	재설정 메일 보내기
-dest_creator_back_works	返回作品列表	返回作品列表	返回作品列表	Back to works	作品一覧へ戻る	К списку работ	작품 목록으로
-dest_search_back_hot_tags	返回热门标签	返回熱門標籤	返回熱門標籤	Back to popular tags	人気タグへ戻る	К популярным тегам	인기 태그로
-dest_common_unnamed_section	(未命名分区)	(未命名分區)	(未命名分區)	(Unnamed section)	(名称未設定の区画)	(Раздел без названия)	(이름 없는 섹션)
-dest_wallpaper_pick_local	选择本地图片…	選擇本機圖片…	選擇本機圖片…	Choose a local image…	ローカル画像を選択…	Выбрать локальное изображение…	로컬 이미지 선택…
-dest_detail_close_tag_search	关闭标签搜索结果	關閉標籤搜尋結果	關閉標籤搜尋結果	Close tag search results	タグ検索結果を閉じる	Закрыть результаты поиска по тегу	태그 검색 결과 닫기
-dest_tags_starred_site	网站上的标星标签	網站上的標星標籤	網站上的標星標籤	Starred tags on the site	サイトのスター付きタグ	Теги в избранном на сайте	사이트 별표 태그
-dest_random_sort_pref_mark	· 按收藏偏好排序	· 依收藏偏好排序	· 依收藏偏好排序	· Sorted by favorite preferences	· お気に入りの好みで並べ替え	· Сортировка по предпочтениям	· 즐겨찾기 선호로 정렬
-dest_detail_hand_to_browser	交给系统浏览器下载	交給系統瀏覽器下載	交給系統瀏覽器下載	Hand to the system browser	システムのブラウザに任せる	Передать системному браузеру	시스템 브라우저로 넘기기
-dest_search_hot_tags_hint	热门标签（点标签按标签搜索）	熱門標籤（點標籤按標籤搜尋）	熱門標籤（點標籤按標籤搜尋）	Popular tags (tap a tag to search by it)	人気タグ（タグを押すとタグ検索）	Популярные теги (нажмите тег, чтобы искать по нему)	인기 태그(태그를 누르면 태그 검색)
-dest_login_required_features	登录后才能使用收藏、追更与评论。	登入後才能使用收藏、追更與評論。	登入後才能使用收藏、追更與評論。	Sign in to use favorites, subscriptions and comments.	ログインするとお気に入り・フォロー・コメントが使えます。	Войдите, чтобы пользоваться избранным, подписками и комментариями.	로그인하면 즐겨찾기, 구독, 댓글을 사용할 수 있습니다.
-dest_detail_no_chapters	该作品没有章节列表，直接阅读整本	該作品沒有章節列表，直接閱讀整本	該作品沒有章節列表，直接閱讀整本	This work has no chapter list; read it as a whole	この作品にはチャプター一覧がありません。全体をそのまま読みます	У этой работы нет списка глав — читайте целиком	이 작품에는 챕터 목록이 없어 전체를 바로 읽습니다
-dest_fav_need_login	需要登录（收藏列表属于账号数据）	需要登入（收藏列表屬於帳號資料）	需要登入（收藏列表屬於帳號資料）	Sign-in required (favorites belong to your account)	ログインが必要です（お気に入りはアカウントのデータ）	Нужен вход (избранное относится к аккаунту)	로그인이 필요합니다(즐겨찾기는 계정 데이터)
-dest_block_eg_category_hint	例如：同人。命中分区或分类名即隐藏。	例如：同人。命中分區或分類名即隱藏。	例如：同人。命中分區或分類名即隱藏。	Example: doujin. Hidden when the section or category name matches.	例：同人。区画名または分類名に一致すると非表示になります。	Пример: додзинси. Скрывается при совпадении раздела или категории.	예: 동인. 섹션 또는 분류명이 일치하면 숨깁니다.
-dest_search_hot_tags_failed	热门标签也拿不到。可以点「重试」再取一次。	熱門標籤也拿不到。可以點「重試」再取一次。	熱門標籤也拿不到。可以點「重試」再取一次。	Couldn't load popular tags either. Tap "Retry" to try again.	人気タグも取得できません。「再試行」でもう一度お試しください。	Популярные теги тоже не загрузились. Нажмите «Повторить».	인기 태그도 가져오지 못했습니다. ‘다시 시도’를 눌러 주세요.
-dest_logout_confirm_note	退出后需要重新登录才能使用收藏、追更等功能。	登出後需要重新登入才能使用收藏、追更等功能。	登出後需要重新登入才能使用收藏、追更等功能。	After signing out you'll need to sign in again to use favorites, subscriptions and so on.	ログアウトすると、お気に入りやフォローなどを使うには再ログインが必要です。	После выхода понадобится снова войти, чтобы пользоваться избранным, подписками и прочим.	로그아웃하면 즐겨찾기, 구독 등을 쓰기 위해 다시 로그인해야 합니다.
-dest_block_eg_word_hint	例如：NTR。命中标题、作者、简介里的任意一处即隐藏。	例如：NTR。命中標題、作者、簡介裡的任意一處即隱藏。	例如：NTR。命中標題、作者、簡介裡的任意一處即隱藏。	Example: NTR. Hidden if it appears in the title, author or description.	例：NTR。タイトル・作者・紹介文のいずれかに含まれると非表示になります。	Пример: NTR. Скрывается, если встречается в названии, авторе или описании.	예: NTR. 제목, 작가, 소개 중 어디에든 있으면 숨깁니다.
-dest_creator_no_content_note	这个作品没有可看的内容（作品库里有条目只有信息、没有图片）	這個作品沒有可看的內容（作品庫裡有條目只有資訊、沒有圖片）	這個作品沒有可看的內容（作品庫裡有條目只有資訊、沒有圖片）	This work has nothing to read (some library entries have info only, no images)	この作品には読める内容がありません（作品ライブラリには情報だけで画像がない項目もあります）	У этой работы нет содержимого (в библиотеке есть записи только со сведениями, без изображений)	이 작품에는 볼 내용이 없습니다(라이브러리에 정보만 있고 이미지가 없는 항목도 있습니다)
-dest_creator_fetch_failed_note	作品内容没取到（可能这个作品没有内容，或接口失败；顶部状态栏里有原因）	作品內容沒取到（可能這個作品沒有內容，或介面失敗；頂部狀態列裡有原因）	作品內容沒取到（可能這個作品沒有內容，或介面失敗；頂部狀態列裡有原因）	Couldn't fetch the work's content (it may be empty, or the API failed; the status bar above has the reason)	作品内容を取得できませんでした（内容がないか、API 失敗の可能性。上部の状態バーに理由があります）	Не удалось получить содержимое работы (возможно, оно пустое или API дал сбой; причина в строке состояния сверху)	작품 내용을 가져오지 못했습니다(내용이 없거나 API 실패일 수 있습니다. 상단 상태 표시줄에 이유가 있습니다)
-dest_block_tags_note	命中作品标签即隐藏。标签来自作品详情，列表接口不下发，因此会多一次请求。	命中作品標籤即隱藏。標籤來自作品詳情，列表介面不下發，因此會多一次請求。	命中作品標籤即隱藏。標籤來自作品詳情，列表介面不下發，因此會多一次請求。	Hidden when a work's tags match. Tags come from the work details; the list API doesn't return them, so this costs one extra request.	作品タグが一致すると非表示。タグは作品詳細から取得します（一覧 API は返さないため、リクエストが 1 回増えます）。	Скрывается при совпадении тегов работы. Теги берутся из деталей: API списка их не отдаёт, поэтому это добавляет один запрос.	작품 태그가 일치하면 숨깁니다. 태그는 작품 상세에서 오며 목록 API는 주지 않으므로 요청이 한 번 더 발생합니다.
-dest_render_note	只作用于漫画画面，不影响界面配色。墨水屏设备选「墨水屏」：去色并提高对比度。	只作用於漫畫畫面，不影響介面配色。電子紙裝置選「電子紙」：去色並提高對比度。	只作用於漫畫畫面，不影響介面配色。電子紙裝置選「電子紙」：去色並提高對比度。	Only affects comic pages, not the UI colors. On e-ink devices choose "E-ink": desaturated with more contrast.	漫画の画面のみに作用し、UI の配色には影響しません。電子ペーパー端末では「電子ペーパー」を選ぶと、彩度を落としてコントラストを上げます。	Влияет только на страницы комикса, не на цвета интерфейса. На устройствах с электронными чернилами выберите «Электронные чернила»: обесцвечивание и повышенный контраст.	만화 화면에만 적용되고 UI 색에는 영향을 주지 않습니다. 전자종이 기기에서는 ‘전자종이’를 고르면 채도를 없애고 대비를 높입니다.
 dest_serial_toggle_note	你追的连载有更新时提醒（默认关）。桌面端仅在程序运行时有效；系统托盘不能用时改为在窗口内提示。	你追的連載有更新時提醒（預設關）。桌面端僅在程式執行時有效；系統匣不能用時改為在視窗內提示。	你追的連載有更新時提醒（預設關）。桌面端僅在程式執行時有效；系統匣不能用時改為在視窗內提示。	Notify when a subscribed serial updates (off by default). On desktop this only works while the app is running; if the system tray is unavailable, the notice appears in the window.	フォロー中の連載が更新されたら通知します（既定はオフ）。デスクトップではアプリ実行中のみ有効です。システムトレイが使えない場合はウィンドウ内で通知します。	Уведомлять об обновлении серии в подписках (по умолчанию выключено). На десктопе работает только при запущенном приложении; если системный лоток недоступен, уведомление покажется в окне.	구독 중인 연재가 업데이트되면 알립니다(기본 꺼짐). 데스크톱에서는 앱이 실행 중일 때만 동작하며, 시스템 트레이를 쓸 수 없으면 창 안에서 알립니다.
-dest_reader_default_note	进入阅读页时的默认形态：纵向连续滚动（与 Android 的默认值一致）或横向逐页。改完下次进阅读页生效。	進入閱讀頁時的預設形態：縱向連續捲動（與 Android 的預設值一致）或橫向逐頁。改完下次進閱讀頁生效。	進入閱讀頁時的預設形態：縱向連續捲動（與 Android 的預設值一致）或橫向逐頁。改完下次進閱讀頁生效。	Default layout when opening the reader: vertical continuous scroll (same as Android's default) or horizontal pages. Takes effect next time you open the reader.	リーダーを開いたときの既定の形式：縦の連続スクロール（Android の既定と同じ）または横のページ送り。変更は次にリーダーを開いたときに反映されます。	Формат по умолчанию при открытии читалки: вертикальная непрерывная прокрутка (как в Android) или постранично. Изменения применятся при следующем открытии читалки.	리더를 열 때의 기본 형태: 세로 연속 스크롤(Android 기본값과 동일) 또는 가로 페이지 넘김. 변경은 다음에 리더를 열 때 적용됩니다.
+dest_shell_goal	桌面端目标是与 Android full 版功能对齐；这里列出还没搬过来的部分。	桌面端目標是與 Android full 版功能對齊；這裡列出還沒搬過來的部分。	桌面端目標是與 Android full 版功能對齊；這裡列出還沒搬過來的部分。	The desktop goal is parity with the Android full build; this lists what hasn't been ported yet.	デスクトップ版の目標は Android full 版との機能一致です。ここには未移植の項目を並べています。	Цель десктопной версии — паритет с Android full; здесь перечислено, что ещё не перенесено.	데스크톱 목표는 Android full 버전과 기능을 맞추는 것입니다. 아직 옮기지 않은 항목을 여기에 둡니다.
+dest_shell_not_planned	这一页还没接数据	這一頁還沒接資料	這一頁還沒接資料	This page isn't wired up yet	この画面はまだデータ未接続です	Эта страница ещё не подключена	이 화면은 아직 연결되지 않았습니다
+dest_shell_parity_note	桌面端目标是与 Android full 版功能对齐，页面清单见 desktop/PARITY.md。	桌面端目標是與 Android full 版功能對齊，頁面清單見 desktop/PARITY.md。	桌面端目標是與 Android full 版功能對齊，頁面清單見 desktop/PARITY.md。	The desktop goal is parity with the Android full build; see desktop/PARITY.md for the page list.	デスクトップ版の目標は Android full 版との機能一致です。ページ一覧は desktop/PARITY.md を参照。	Цель десктопной версии — паритет с Android full; список страниц в desktop/PARITY.md.	데스크톱 목표는 Android full 버전과 기능을 맞추는 것이며, 페이지 목록은 desktop/PARITY.md에 있습니다.
+dest_tags_add_star	添加标星	新增標星	新增標星	Add star	スター追加	Добавить в избранное	별표 추가
+dest_tags_name_label	标签名	標籤名	標籤名	Tag name	タグ名	Имя тега	태그 이름
+dest_tags_saved	收藏里的标签（本地统计）	收藏裡的標籤（本地統計）	收藏裡的標籤（本地統計）	Tags in your favorites (local stats)	お気に入り内のタグ（ローカル集計）	Теги в избранном (локальная статистика)	즐겨찾기 태그(로컬 집계)
+dest_tags_scan_action	扫描收藏更新统计	掃描收藏更新統計	掃描收藏更新統計	Scan favorites for update stats	お気に入りの更新統計をスキャン	Сканировать избранное на статистику	즐겨찾기 업데이트 통계 스캔
+dest_tags_scanning	扫描中…	掃描中…	掃描中…	Scanning…	スキャン中…	Сканирование…	스캔 중…
+dest_tags_star	标星	標星	標星	Star	スター	В избранное	별표
+dest_tags_starred_site	网站上的标星标签	網站上的標星標籤	網站上的標星標籤	Starred tags on the site	サイトのスター付きタグ	Теги в избранном на сайте	사이트 별표 태그
+dest_tags_unstar	取消标星	取消標星	取消標星	Unstar	スター解除	Убрать из избранного	별표 해제
+dest_wallpaper_image_url	图片直链	圖片直鏈	圖片直鏈	Direct image URL	画像直リンク	Прямая ссылка	이미지 직접 링크
+dest_wallpaper_manual_only	只手动	只手動	只手動	Manual only	手動のみ	Только вручную	수동만
+dest_wallpaper_online	在线壁纸	線上桌布	線上桌布	Online wallpaper	オンライン壁紙	Онлайн-обои	온라인 배경
+dest_wallpaper_pick_local	选择本地图片…	選擇本機圖片…	選擇本機圖片…	Choose a local image…	ローカル画像を選択…	Выбрать локальное изображение…	로컬 이미지 선택…
+dest_wallpaper_rotate	自动轮换：	自動輪換：	自動輪換：	Auto rotate:	自動切替：	Автосмена:	자동 전환:

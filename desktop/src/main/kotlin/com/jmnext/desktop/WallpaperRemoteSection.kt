@@ -19,6 +19,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.jmnext.desktop.i18n.I18n
 import com.jmnext.desktop.i18n.tl
 import com.jmnext.wallpaper.WallpaperMode
 import kotlinx.coroutines.launch
@@ -74,14 +75,14 @@ fun WallpaperRemoteSection(onChanged: () -> Unit) {
             }
             val credit = state.credit
             if (!credit.isNullOrBlank()) {
-                Text("署名：$credit", style = MaterialTheme.typography.labelSmall)
+                Text(I18n.trf("署名：%1\$s", credit), style = MaterialTheme.typography.labelSmall)
             }
         }
 
         val err = state.error
         if (!err.isNullOrBlank()) {
             Text(
-                "取图失败：$err",
+                I18n.trf("取图失败：%1\$s", err),
                 style = MaterialTheme.typography.labelSmall,
                 color = MaterialTheme.colorScheme.error,
             )
@@ -97,7 +98,7 @@ fun WallpaperRemoteSection(onChanged: () -> Unit) {
                     RemoteWallpaper.setInterval(minutes)
                     onChanged()
                 }) {
-                    Text((if (state.intervalMinutes == minutes) "· " else "") + if (minutes == 0) tl("只手动") else "${minutes}分")
+                    Text((if (state.intervalMinutes == minutes) "· " else "") + if (minutes == 0) tl("只手动") else I18n.trf("%1\$d分", minutes))
                 }
             }
         }

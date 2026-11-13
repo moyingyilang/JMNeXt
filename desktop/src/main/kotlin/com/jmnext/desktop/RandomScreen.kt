@@ -39,6 +39,7 @@ import com.jmnext.data.FavoriteTags
 import com.jmnext.data.JmRepository
 import com.jmnext.data.RandomRanking
 import com.jmnext.data.remote.dto.ListItem
+import com.jmnext.desktop.i18n.I18n
 import com.jmnext.desktop.i18n.tl
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.async
@@ -113,12 +114,16 @@ fun RandomScreen(repository: JmRepository, onOpenComic: (ListItem) -> Unit) {
             }
                 .onSuccess {
                     items = it
-                    status = if (ranked) "这一批 ${it.size} 条（已按收藏偏好排序）" else "这一批 ${it.size} 条"
+                    status = if (ranked) {
+                        I18n.trf("这一批 %1\$d 条（已按收藏偏好排序）", it.size)
+                    } else {
+                        I18n.trf("这一批 %1\$d 条", it.size)
+                    }
                     Log.line("随机", status)
                 }
                 .onFailure {
                     if (it is CancellationException) return@onFailure
-                    status = "加载失败：${it.message}"
+                    status = I18n.trf("加载失败：%1\$s", it.message)
                     Log.error("随机", "加载失败", it)
                 }
             busy = false

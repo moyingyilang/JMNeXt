@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.dp
 import com.jmnext.data.JmRepository
 import com.jmnext.data.prefs.BlockKind
 import com.jmnext.data.prefs.BlockStoreApi
+import com.jmnext.desktop.i18n.I18n
 import com.jmnext.desktop.i18n.tl
 
 /**
@@ -95,7 +96,7 @@ private fun BlockSection(
     var input by remember { mutableStateOf("") }
 
     Column(Modifier.fillMaxWidth().padding(bottom = 20.dp)) {
-        Text("$title（${values.size}）", style = MaterialTheme.typography.titleMedium)
+        Text(I18n.trf("%1\$s（%2\$d）", title, values.size), style = MaterialTheme.typography.titleMedium)
         Text(
             hint,
             style = MaterialTheme.typography.labelSmall,
@@ -110,7 +111,7 @@ private fun BlockSection(
             OutlinedTextField(
                 value = input,
                 onValueChange = { input = it },
-                label = { Text("添加$title") },
+                label = { Text(I18n.trf("添加%1\$s", title)) },
                 singleLine = true,
                 modifier = Modifier.width(320.dp),
             )

@@ -1,5 +1,6 @@
 package com.jmnext.desktop
 
+import com.jmnext.desktop.i18n.I18n
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -64,7 +65,7 @@ fun MoreListScreen(
     var busy by remember { mutableStateOf(false) }
     var exhausted by remember { mutableStateOf(false) }
     val shown = title.ifBlank { sectionId }
-    var status by remember { mutableStateOf("正在加载「$shown」…") }
+    var status by remember { mutableStateOf(I18n.trf("正在加载「%1\$s」…", shown)) }
     val scope = rememberCoroutineScope()
 
     fun load(next: Int) {
@@ -79,15 +80,15 @@ fun MoreListScreen(
                     // 空页即到底：接口给了 total 就以 total 为准，没给就靠空页判断
                     exhausted = paged.items.isEmpty()
                     status = (if (total > 0) {
-                        "共 $total 条，已加载 ${items.size} 条"
+                        I18n.trf("共 %1\$d 条，已加载 %2\$d 条", total, items.size)
                     } else {
-                        "已加载 ${items.size} 条"
-                    }) + if (hidden > 0) "（屏蔽规则挡掉 $hidden 条）" else ""
+                        I18n.trf("已加载 %1\$d 条", items.size)
+                    }) + if (hidden > 0) I18n.trf("（屏蔽规则挡掉 %1\$d 条）", hidden) else ""
                     Log.line("分区更多", "「$shown」(id=$sectionId) 第 $next 页：$status")
                 }
                 .onFailure {
                     if (it is CancellationException) return@onFailure
-                    status = "加载失败：${it.message}"
+                    status = I18n.tr("加载失败：") + it.message
                     Log.error("分区更多", "「$shown」(id=$sectionId) 第 $next 页", it)
                 }
             busy = false
@@ -196,7 +197,7 @@ fun WeeklyUpdateScreen(repository: JmRepository, onOpenComic: (ListItem) -> Unit
     var day by remember { mutableStateOf(todayWeekDay()) }
     var busy by remember { mutableStateOf(false) }
     var exhausted by remember { mutableStateOf(false) }
-    var status by remember { mutableStateOf("正在加载连载更新…") }
+    var status by remember { mutableStateOf(I18n.tr("正在加载连载更新…")) }
     val scope = rememberCoroutineScope()
 
     fun load(next: Int, t: String = type, d: Int = day) {
@@ -208,12 +209,12 @@ fun WeeklyUpdateScreen(repository: JmRepository, onOpenComic: (ListItem) -> Unit
                     page = next
                     // 不给 total：空页就是终点（推进页码只会重复请求空页）
                     exhausted = paged.items.isEmpty()
-                    status = "已加载 ${items.size} 条" + if (exhausted && next > 1) "（已到底）" else ""
+                    status = I18n.trf("已加载 %1\$d 条", items.size) + if (exhausted && next > 1) I18n.tr("（已到底）") else ""
                     Log.line("连载更新", "$t / date=$d 第 $next 页：$status")
                 }
                 .onFailure {
                     if (it is CancellationException) return@onFailure
-                    status = "加载失败：${it.message}"
+                    status = I18n.tr("加载失败：") + it.message
                     Log.error("连载更新", "$t / date=$d 第 $next 页", it)
                 }
             busy = false

@@ -20,6 +20,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import com.jmnext.data.JmRepository
 import com.jmnext.data.remote.dto.ListItem
+import com.jmnext.desktop.i18n.I18n
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.ui.draw.alpha
@@ -88,7 +89,7 @@ fun ComicCover(repository: JmRepository, item: ListItem, modifier: Modifier = Mo
 fun BlockedNotice(hidden: Int) {
     if (hidden <= 0) return
     Text(
-        text = "有 $hidden 条结果被屏蔽规则挡掉（可在「屏蔽设置」里调整）",
+        text = I18n.trf("有 %1\$d 条结果被屏蔽规则挡掉（可在「屏蔽设置」里调整）", hidden),
         style = MaterialTheme.typography.labelSmall,
         color = MaterialTheme.colorScheme.primary,
         modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp),

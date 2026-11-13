@@ -1,4 +1,5 @@
 package com.jmnext.desktop
+import com.jmnext.desktop.i18n.I18n
 import com.jmnext.desktop.i18n.tl
 import com.jmnext.selftune.PageSample
 import androidx.compose.foundation.focusable
@@ -105,14 +106,14 @@ fun ReaderScreen(
         runCatching { repository.read(chapterId) }
             .onSuccess {
                 payload = it
-                status = "${it.images.size} 页"
+                status = I18n.trf("%1\$d 页", it.images.size)
                 loading = false
                 runCatching { progress.record(comicId, chapterId) }
                 System.err.println("[阅读] 已加载 $status（章节 ${index + 1}/${chapterIds.size}）")
             }
             .onFailure {
                 if (it is CancellationException) return@onFailure
-                status = "加载失败：${it.message}（点“重试”）"
+                status = I18n.trf("加载失败：%1\$s（点“重试”）", it.message)
                 loading = false
                 System.err.println("[阅读] $status")
             }
@@ -167,7 +168,7 @@ fun ReaderScreen(
             }
             if (chapterIds.isNotEmpty() && index >= 0) {
                 Text(
-                    "第 ${index + 1} / ${chapterIds.size} 话",
+                    I18n.trf("第 %1\$d / %2\$d 话", index + 1, chapterIds.size),
                     style = MaterialTheme.typography.labelSmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
@@ -540,11 +541,11 @@ internal fun PageItem(repository: JmRepository, payload: ReadPayload, image: Rea
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier.clickable { attempt += 1 }.padding(24.dp),
             ) {
-                Text("第 ${index + 1} 页加载失败", style = MaterialTheme.typography.bodyMedium)
+                Text(I18n.trf("第 %1\$d 页加载失败", index + 1), style = MaterialTheme.typography.bodyMedium)
                 Text(tl("点这里重试"), style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.primary)
             }
 
-            else -> Text("第 ${index + 1} 页 加载中…", style = MaterialTheme.typography.labelSmall)
+            else -> Text(I18n.trf("第 %1\$d 页 加载中…", index + 1), style = MaterialTheme.typography.labelSmall)
         }
     }
 }

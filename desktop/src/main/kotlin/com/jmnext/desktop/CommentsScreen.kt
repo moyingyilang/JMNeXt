@@ -32,6 +32,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import com.jmnext.data.JmRepository
 import com.jmnext.data.remote.dto.CommentItem
+import com.jmnext.desktop.i18n.I18n
 import com.jmnext.desktop.i18n.tl
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.launch
@@ -74,12 +75,12 @@ fun CommentsScreen(repository: JmRepository, aid: String, onBack: () -> Unit) {
                     items = if (next == 1) payload.list else (items + payload.list).distinctBy { it.commentId }
                     total = payload.total?.toIntOrNull() ?: items.size
                     page = next
-                    status = "已加载 ${items.size} 条 / 共 $total 条"
+                    status = I18n.trf("已加载 %1\$d 条 / 共 %2\$d 条", items.size, total)
                     Log.line("评论", "$status aid=$aid")
                 }
                 .onFailure {
                     if (it is CancellationException) return@onFailure
-                    status = "加载失败：${it.message}"
+                    status = I18n.trf("加载失败：%1\$s", it.message)
                     Log.error("评论", "加载失败 aid=$aid", it)
                 }
             busy = false
@@ -140,7 +141,7 @@ fun CommentsScreen(repository: JmRepository, aid: String, onBack: () -> Unit) {
                                 }
                                 .onFailure {
                                     if (it is CancellationException) return@onFailure
-                                    notice = "发表失败：${it.message}"
+                                    notice = I18n.trf("发表失败：%1\$s", it.message)
                                     Log.error("评论", "发表失败", it)
                                 }
                             busy = false
@@ -178,7 +179,7 @@ fun CommentsScreen(repository: JmRepository, aid: String, onBack: () -> Unit) {
                                 }
                                 .onFailure {
                                     if (it is CancellationException) return@onFailure
-                                    notice = "删除失败：${it.message}"
+                                    notice = I18n.trf("删除失败：%1\$s", it.message)
                                     Log.error("评论", "删除失败", it)
                                 }
                             busy = false

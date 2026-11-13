@@ -41,6 +41,7 @@ import com.jmnext.data.prefs.ReadProgressStore
 import com.jmnext.data.remote.dto.AlbumDetail
 import com.jmnext.data.remote.dto.ListItem
 import com.jmnext.data.remote.dto.SeriesItem
+import com.jmnext.desktop.i18n.I18n
 import com.jmnext.desktop.i18n.tl
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.launch
@@ -79,7 +80,7 @@ fun DetailScreen(
     onRandomAgain: (() -> Unit)? = null,
 ) {
     var detail by remember(comicId) { mutableStateOf<AlbumDetail?>(null) }
-    var status by remember(comicId) { mutableStateOf("正在加载作品…") }
+    var status by remember(comicId) { mutableStateOf(I18n.tr("正在加载作品…")) }
     var loading by remember(comicId) { mutableStateOf(true) }
     var favorite by remember(comicId) { mutableStateOf(false) }
     // 追更状态：初始态由下面单独的 LaunchedEffect 从接口取（详情接口不下发这个字段）。
@@ -109,13 +110,13 @@ fun DetailScreen(
             .onSuccess {
                 detail = it
                 favorite = it.isFavorite
-                status = "${it.name.orEmpty()} · ${it.series.size} 话 · 相关 ${it.relatedList.size} 部"
+                status = I18n.trf("%1\$s · %2\$d 话 · 相关 %3\$d 部", it.name.orEmpty(), it.series.size, it.relatedList.size)
                 loading = false
                 System.err.println("[详情] 数据到达：${it.name} 作者${it.author.size}人 标签${it.tags.size}个 章节${it.series.size}话 相关${it.relatedList.size}部")
             }
             .onFailure {
                 if (it is CancellationException) return@onFailure
-                status = "加载失败：${it.message}"
+                status = I18n.tr("加载失败：") + it.message
                 loading = false
                 it.printStackTrace()
             }
@@ -160,19 +161,19 @@ fun DetailScreen(
         tagQuery = tag
         tagItems = emptyList()
         tagBusy = true
-        tagResultStatus = "正在按标签「$tag」搜索…"
+        tagResultStatus = I18n.trf("正在按标签「%1\$s」搜索…", tag)
         scope.launch {
             runCatching { repository.search(query = tag) }
                 .onSuccess { result ->
                     tagItems = result.page.items
-                    tagResultStatus = "标签「$tag」：共 ${result.page.total} 条，本页 ${result.page.items.size} 条" +
-                        if (result.page.hidden > 0) "（本页屏蔽 ${result.page.hidden} 条）" else ""
+                    tagResultStatus = I18n.trf("标签「%1\$s」：共 %2\$d 条，本页 %3\$d 条", tag, result.page.total, result.page.items.size) +
+                        if (result.page.hidden > 0) I18n.trf("（本页屏蔽 %1\$d 条）", result.page.hidden) else ""
                     Log.line("详情", tagResultStatus)
                 }
                 .onFailure {
                     if (it is CancellationException) return@onFailure
                     tagItems = emptyList()
-                    tagResultStatus = "按标签搜索失败：" + it.message
+                    tagResultStatus = I18n.tr("按标签搜索失败：") + it.message
                     Log.error("详情", "按标签搜索失败 tag=" + tag, it)
                 }
             tagBusy = false
@@ -183,23 +184,23 @@ fun DetailScreen(
     fun blockTag(tag: String) {
         val store = repository.blockStore
         if (store == null) {
-            tagMessage = "屏蔽存储未初始化，无法屏蔽标签"
+            tagMessage = I18n.tr("屏蔽存储未初始化，无法屏蔽标签")
             return
         }
         if (store.isBlocked(BlockKind.Tag, tag)) {
-            tagMessage = "「$tag」已经在屏蔽名单里"
+            tagMessage = I18n.trf("「%1\$s」已经在屏蔽名单里", tag)
             return
         }
         store.addTag(tag)
-            Notices.success("已屏蔽标签：$tag")
-        tagMessage = "已屏蔽标签：$tag（可在「屏蔽设置」里取消）"
+            Notices.success(I18n.tr("已屏蔽标签：") + tag)
+        tagMessage = I18n.trf("已屏蔽标签：%1\$s（可在「屏蔽设置」里取消）", tag)
         Log.line("详情", tagMessage.orEmpty())
     }
 
     /** 标星 / 取消标星：updateFavoriteTags("add" | "remove")，与 Android 端同一接口。 */
     fun starTag(tag: String) {
         if (!repository.auth.isLoggedIn) {
-            tagMessage = "请先登录再标星标签"
+            tagMessage = I18n.tr("请先登录再标星标签")
             return
         }
         val add = !starredTags.contains(tag)
@@ -208,14 +209,14 @@ fun DetailScreen(
         scope.launch {
             runCatching { repository.updateFavoriteTags(if (add) "add" else "remove", listOf(tag)) }
                 .onSuccess {
-                    tagMessage = (if (add) "已标星：" else "已取消标星：") + tag
+                    tagMessage = (if (add) I18n.tr("已标星：") else I18n.tr("已取消标星：")) + tag
                     Notices.success(tagMessage.orEmpty())
                     Log.line("详情", tagMessage.orEmpty())
                     reloadStarredTags()
                 }
                 .onFailure {
                     if (it is CancellationException) return@onFailure
-                    tagMessage = "标星操作失败：" + it.message
+                    tagMessage = I18n.tr("标星操作失败：") + it.message
                     Notices.error(tagMessage.orEmpty())
                     Log.error("详情", "标星操作失败 tag=" + tag, it)
                 }
@@ -236,7 +237,7 @@ fun DetailScreen(
      */
     fun downloadAlbum() {
         if (!repository.auth.isLoggedIn) {
-            downloadMessage = "下载需要登录"
+            downloadMessage = I18n.tr("下载需要登录")
             return
         }
         downloadBusy = true
@@ -245,7 +246,7 @@ fun DetailScreen(
             runCatching { repository.albumDownload(comicId) }
                 .onSuccess { payload ->
                     if (!payload.isOk) {
-                        downloadMessage = payload.msg ?: "这个作品暂时不能下载"
+                        downloadMessage = payload.msg ?: I18n.tr("这个作品暂时不能下载")
                         Log.line("详情", "下载不可用：" + downloadMessage)
                     } else {
                         val title = payload.title.orEmpty()
@@ -255,20 +256,20 @@ fun DetailScreen(
                         }
                         downloadMessage = if (opened.isSuccess) {
                             buildString {
-                                append("已开始下载")
+                                append(I18n.tr("已开始下载"))
                                 payload.title?.takeIf { it.isNotBlank() }?.let { append("：$it") }
                                 payload.fileSize?.takeIf { it.isNotBlank() }?.let { append("（$it）") }
                             }
                         } else {
-                            "获取到下载地址但打开系统浏览器失败：" +
-                                (opened.exceptionOrNull()?.message ?: "未知原因") + "；下载地址：$url"
+                            I18n.tr("获取到下载地址但打开系统浏览器失败：") +
+                                (opened.exceptionOrNull()?.message ?: I18n.tr("未知原因")) + I18n.tr("；下载地址：") + url
                         }
                         Log.line("详情", "下载 title=$title 浏览器打开=" + opened.isSuccess)
                     }
                 }
                 .onFailure {
                     if (it is CancellationException) return@onFailure
-                    downloadMessage = "获取下载地址失败：" + it.message
+                    downloadMessage = I18n.tr("获取下载地址失败：") + it.message
                     Log.error("详情", "获取下载地址失败", it)
                 }
             downloadBusy = false
@@ -342,12 +343,12 @@ fun DetailScreen(
                                 runCatching { repository.toggleFavorite(d.id) }
                                     .onSuccess {
                                         favorite = !favorite
-                                        favMessage = if (favorite) "已加入收藏" else "已取消收藏"
+                                        favMessage = if (favorite) I18n.tr("已加入收藏") else I18n.tr("已取消收藏")
                                         System.err.println("[详情] 收藏切换：$favMessage")
                                     }
                                     .onFailure {
                                         if (it is CancellationException) return@onFailure
-                                        favMessage = "操作失败：${it.message}"
+                                        favMessage = I18n.tr("操作失败：") + it.message
                                         System.err.println("[详情] $favMessage")
                                     }
                                 favBusy = false
@@ -360,9 +361,9 @@ fun DetailScreen(
                         enabled = !likeBusy,
                         onClick = {
                             if (d.liked) {
-                                likeMessage = "已经点过赞了"
+                                likeMessage = I18n.tr("已经点过赞了")
                             } else if (!repository.auth.isLoggedIn) {
-                                likeMessage = "请先登录再点赞"
+                                likeMessage = I18n.tr("请先登录再点赞")
                             } else {
                                 likeBusy = true
                                 likeMessage = null
@@ -371,17 +372,17 @@ fun DetailScreen(
                                         .onSuccess { action ->
                                             if (action.isOk) {
                                                 detail = d.copy(liked = true, likes = d.likes + 1)
-                                                likeMessage = action.msg ?: "点赞成功"
+                                                likeMessage = action.msg ?: I18n.tr("点赞成功")
                                             } else {
-                                                likeMessage = action.msg ?: "点赞失败"
+                                                likeMessage = action.msg ?: I18n.tr("点赞失败")
                                             }
                                             Log.line("详情", "点赞：" + likeMessage)
                                             val msg = likeMessage
-                                            if (msg?.contains("成功") == true) Notices.success(msg) else Notices.show(msg ?: "点赞完成")
+                                            if (msg?.contains("成功") == true) Notices.success(msg) else Notices.show(msg ?: I18n.tr("点赞完成"))
                                         }
                                         .onFailure {
                                             if (it is CancellationException) return@onFailure
-                                            likeMessage = "点赞失败：" + it.message
+                                            likeMessage = I18n.tr("点赞失败：") + it.message
                                             Log.error("详情", "点赞失败", it)
                                         }
                                     likeBusy = false
@@ -401,7 +402,7 @@ fun DetailScreen(
                                         .onSuccess {
                                             tracked = !tracked
                                             Log.line("详情", "追更切换：" + (if (tracked) "已追更" else "已取消追更"))
-                                            Notices.success(if (tracked) "已追更" else "已取消追更")
+                                            Notices.success(if (tracked) I18n.tr("已追更") else I18n.tr("已取消追更"))
                                         }
                                         .onFailure {
                                             if (it !is CancellationException) Log.error("详情", "追更切换失败", it)
@@ -484,7 +485,7 @@ fun DetailScreen(
                         // 就地铺开的标签搜索结果：点结果直接打开那一部的详情
                         tagQuery?.let { q ->
                             Text(
-                                tagResultStatus.ifBlank { "标签「$q」" },
+                                tagResultStatus.ifBlank { I18n.trf("标签「%1\$s」", q) },
                                 style = MaterialTheme.typography.labelSmall,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                                 modifier = Modifier.padding(top = 6.dp),
@@ -603,7 +604,7 @@ fun DetailScreen(
                     // 章节列表**正序**（用户要求：从上到下 1、2、3…，不要倒序）
                     items(d.series, key = { it.id }) { chapter ->
                         Text(
-                            text = "第 ${chapter.sort ?: "?"} 话" + (chapter.name?.takeIf { it.isNotBlank() }?.let { " · $it" } ?: ""),
+                            text = I18n.trf("第 %1\$s 话", chapter.sort ?: "?") + (chapter.name?.takeIf { it.isNotBlank() }?.let { " · $it" } ?: ""),
                             style = MaterialTheme.typography.bodyMedium,
                             modifier = Modifier
                                 .fillMaxWidth()

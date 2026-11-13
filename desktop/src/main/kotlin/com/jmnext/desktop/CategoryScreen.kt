@@ -36,6 +36,7 @@ import androidx.compose.ui.unit.dp
 import com.jmnext.data.remote.dto.CategoryBlock
 import com.jmnext.data.remote.dto.ListItem
 import com.jmnext.data.JmRepository
+import com.jmnext.desktop.i18n.I18n
 import com.jmnext.desktop.i18n.tl
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.launch
@@ -61,14 +62,14 @@ fun CategoryScreen(
     // 展开的是哪个父类，与"选中了哪个 slug"分开记。
     // 之前两者共用 current，点二级项时父类不再匹配 → 子项立刻收回（用户报的"直接收回"）。
     var expanded by remember { mutableStateOf<String?>(null) }
-    var currentName by remember { mutableStateOf("全部") }
+    var currentName by remember { mutableStateOf(I18n.tr("全部")) }
     // 排序档位取自 Android 端 CategorySort：比搜索多出月榜与周榜。
     var sort by remember { mutableStateOf("") }
     var items by remember { mutableStateOf<List<ListItem>>(emptyList()) }
     var hidden by remember { mutableStateOf(0) }
     var page by remember { mutableStateOf(1) }
     var busy by remember { mutableStateOf(false) }
-    var status by remember { mutableStateOf("正在取分类…") }
+    var status by remember { mutableStateOf(I18n.tr("正在取分类…")) }
     // 分组标签（`categories` 响应的 blocks）与分类树失败时的热门标签兜底（缺口：此前都没有）
     var blocks by remember { mutableStateOf<List<CategoryBlock>>(emptyList()) }
     var hotTags by remember { mutableStateOf<List<String>>(emptyList()) }
@@ -94,13 +95,13 @@ fun CategoryScreen(
                     // 走分类筛选就不再是"标签搜索"状态（否则「加载更多」会拿标签去翻分类页）
                     tagMode = null
                     tagPage = 1
-                    status = "$name：已加载 ${items.size} 条" +
-                        if (paged.hidden > 0) "（本页屏蔽 ${paged.hidden} 条）" else ""
+                    status = I18n.trf("%1\$s：已加载 %2\$d 条", name, items.size) +
+                        if (paged.hidden > 0) I18n.trf("（本页屏蔽 %1\$d 条）", paged.hidden) else ""
                     System.err.println("[分类] $status")
                 }
                 .onFailure {
                     if (it is CancellationException) return@onFailure
-                    status = "加载失败：${it.message}"
+                    status = I18n.tr("加载失败：") + it.message
                     System.err.println("[分类] $status")
                 }
             busy = false
@@ -114,12 +115,12 @@ fun CategoryScreen(
             runCatching { repository.hotTags() }
                 .onSuccess { list ->
                     hotTags = list
-                    status = "用热门标签兜底：${list.size} 个"
+                    status = I18n.trf("用热门标签兜底：%1\$d 个", list.size)
                     Log.line("分类", status)
                 }
                 .onFailure {
                     if (it is CancellationException) return@onFailure
-                    status = "热门标签也拿不到：" + it.message
+                    status = I18n.tr("热门标签也拿不到：") + it.message
                     Log.error("分类", "热门标签兜底失败", it)
                 }
             busy = false
@@ -143,20 +144,20 @@ fun CategoryScreen(
                 }
                 blocks = payload.blocks
                 treeError = null
-                status = "分类 ${nodes.size} 个" +
-                    if (blocks.isNotEmpty()) "，标签组 ${blocks.size} 组" else ""
+                status = I18n.trf("分类 %1\$d 个", nodes.size) +
+                    if (blocks.isNotEmpty()) I18n.trf("，标签组 %1\$d 组", blocks.size) else ""
                 Log.line("分类", status)
             } else {
                 nodes = emptyList()
                 blocks = emptyList()
                 val e = r.exceptionOrNull()
-                treeError = e?.message ?: "原因未知"
-                status = "分类加载失败：$treeError，改用热门标签兜底"
+                treeError = e?.message ?: I18n.tr("原因未知")
+                status = I18n.trf("分类加载失败：%1\$s，改用热门标签兜底", treeError)
                 Log.line("分类", status)
                 if (e != null) Log.error("分类", "分类加载失败", e)
             }
             busy = false
-            if (nodes.isEmpty()) loadHotTags() else filter(null, "全部", 1)
+            if (nodes.isEmpty()) loadHotTags() else filter(null, I18n.tr("全部"), 1)
         }
     }
 
@@ -170,13 +171,13 @@ fun CategoryScreen(
                     hidden = if (next == 1) result.page.hidden else hidden + result.page.hidden
                     tagMode = tag
                     tagPage = next
-                    status = "标签「$tag」：已加载 ${items.size} 条 / 共 ${result.page.total}" +
-                        if (result.page.hidden > 0) "（本页屏蔽 ${result.page.hidden} 条）" else ""
+                    status = I18n.trf("标签「%1\$s」：已加载 %2\$d 条 / 共 %3\$d 条", tag, items.size, result.page.total) +
+                        if (result.page.hidden > 0) I18n.trf("（本页屏蔽 %1\$d 条）", result.page.hidden) else ""
                     Log.line("分类", status)
                 }
                 .onFailure {
                     if (it is CancellationException) return@onFailure
-                    status = "按标签搜索失败：${it.message}"
+                    status = I18n.tr("按标签搜索失败：") + it.message
                     Log.error("分类", "按标签搜索失败 tag=$tag", it)
                 }
             busy = false
@@ -198,7 +199,7 @@ fun CategoryScreen(
             return
         }
         current = null
-        currentName = "标签：$tag"
+        currentName = I18n.tr("标签：") + tag
         sort = ""
         searchTag(tag, 1)
     }
@@ -216,7 +217,7 @@ fun CategoryScreen(
             verticalArrangement = Arrangement.spacedBy(2.dp),
         ) {
             Text(tl("分类"), style = MaterialTheme.typography.titleMedium, modifier = Modifier.padding(bottom = 6.dp))
-            NavChip(tl("全部"), current == null) { current = null; currentName = "全部"; filter(null, "全部", 1) }
+            NavChip(tl("全部"), current == null) { current = null; currentName = I18n.tr("全部"); filter(null, I18n.tr("全部"), 1) }
             nodes.forEach { (slug, name, subs) ->
                 NavChip(name, current == slug) {
                     current = slug
@@ -274,7 +275,7 @@ fun CategoryScreen(
                         tagMode = null
                         items = emptyList()
                         hidden = 0
-                        status = if (nodes.isEmpty()) "热门标签兜底" else "分类 ${nodes.size} 个"
+                        status = if (nodes.isEmpty()) I18n.tr("热门标签兜底") else I18n.trf("分类 %1\$d 个", nodes.size)
                     }) { Text(if (nodes.isEmpty()) tl("返回热门标签") else tl("返回分类"), style = MaterialTheme.typography.labelSmall) }
                 }
                 if (items.isNotEmpty()) {

@@ -32,6 +32,7 @@ import androidx.compose.ui.input.key.onKeyEvent
 import androidx.compose.ui.unit.dp
 import com.jmnext.data.JmRepository
 import com.jmnext.data.remote.dto.ListItem
+import com.jmnext.desktop.i18n.I18n
 import com.jmnext.desktop.i18n.tl
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.launch
@@ -104,7 +105,7 @@ fun SearchScreen(
     var total by remember { mutableStateOf(0) }
     var page by remember { mutableStateOf(1) }
     var busy by remember { mutableStateOf(false) }
-    var status by remember { mutableStateOf("输入关键词后回车搜索") }
+    var status by remember { mutableStateOf(I18n.tr("输入关键词后回车搜索")) }
     var order by remember { mutableStateOf("") }
     var type by remember { mutableStateOf("site") }
     var year by remember { mutableStateOf("") }
@@ -168,7 +169,7 @@ fun SearchScreen(
                     hidden += result.page.hidden
                     total = result.page.total
                     page = nextPage
-                    status = "共 $total 条，已加载 ${items.size} 条"
+                    status = I18n.trf("共 %1\$d 条，已加载 %2\$d 条", total, items.size)
                     Log.line(
                         "搜索",
                         "$status（本页屏蔽 ${result.page.hidden} 条；排序=$order 字段=$type 年=$year 月=$month" +
@@ -177,7 +178,7 @@ fun SearchScreen(
                 }
                 .onFailure {
                     if (it is CancellationException) return@onFailure
-                    status = "搜索失败：${it.message}"
+                    status = I18n.tr("搜索失败：") + it.message
                     Log.error("搜索", status, it)
                 }
             busy = false
@@ -204,7 +205,7 @@ fun SearchScreen(
                         e.key == Key.Escape -> {
                             query = ""
                             items = emptyList()
-                            status = "输入关键词后回车搜索"
+                            status = I18n.tr("输入关键词后回车搜索")
                             true
                         }
                         else -> false
@@ -323,7 +324,7 @@ StatusLine(status, busy, style = MaterialTheme.typography.labelSmall, color = Co
             ) {
                 val tags = blockedItems.flatMap { TagBlocker.blockedTagsOf(it.id) }.distinct().take(4)
                 Text(
-                    "已按标签屏蔽 ${blockedItems.size} 条（命中：${tags.joinToString("、")}）",
+                    I18n.trf("已按标签屏蔽 %1\$d 条（命中：%2\$s）", blockedItems.size, tags.joinToString("、")),
                     style = MaterialTheme.typography.labelSmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )

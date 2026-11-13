@@ -25,6 +25,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.jmnext.data.JmRepository
 import com.jmnext.data.remote.dto.ListItem
+import com.jmnext.desktop.i18n.I18n
 import com.jmnext.desktop.i18n.tl
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.launch
@@ -99,14 +100,18 @@ fun TrackingList(
                     items = if (next == 1) paged.items else (items + paged.items).distinctBy { it.id }
                     total = if (paged.total > 0) paged.total else items.size
                     page = next
-                    var text = if (items.isEmpty()) "还没有追更的作品" else "已加载 ${items.size} 条 / 共 $total 条"
-                    if (paged.hidden > 0) text += "（本页被屏蔽挡掉 ${paged.hidden} 条）"
+                    var text = if (items.isEmpty()) {
+                        "还没有追更的作品"
+                    } else {
+                        I18n.trf("已加载 %1\$d 条 / 共 %2\$d 条", items.size, total)
+                    }
+                    if (paged.hidden > 0) text += I18n.trf("（本页被屏蔽挡掉 %1\$d 条）", paged.hidden)
                     report(text)
                     Log.line("追更", text)
                 }
                 .onFailure {
                     if (it is CancellationException) return@onFailure
-                    report("加载失败：${it.message}")
+                    report(I18n.trf("加载失败：%1\$s", it.message))
                     Log.error("追更", "加载失败", it)
                 }
             busy = false

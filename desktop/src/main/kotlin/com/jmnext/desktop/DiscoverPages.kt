@@ -1,5 +1,6 @@
 package com.jmnext.desktop
 
+import com.jmnext.desktop.i18n.I18n
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -58,12 +59,12 @@ fun WeekScreen(repository: JmRepository, onOpenComic: (ListItem) -> Unit) {
                     items = if (next == 1) paged.items else (items + paged.items).distinctBy { it.id }
                     hidden += paged.hidden
                     page = next
-                    status = "已加载 ${items.size} 条" + if (paged.hidden > 0) "（本页屏蔽 ${paged.hidden} 条）" else ""
+                    status = I18n.trf("已加载 %1\$d 条", items.size) + if (paged.hidden > 0) I18n.trf("（本页屏蔽 %1\$d 条）", paged.hidden) else ""
                     System.err.println("[周刊] $status")
                 }
                 .onFailure {
                     if (it is CancellationException) return@onFailure
-                    status = "加载失败：${it.message}"
+                    status = I18n.trf("加载失败：%1\$s", it.message)
                     System.err.println("[周刊] $status")
                 }
             busy = false
@@ -84,7 +85,7 @@ fun WeekScreen(repository: JmRepository, onOpenComic: (ListItem) -> Unit) {
             }
             .onFailure {
                 if (it is CancellationException) return@onFailure
-                status = "刊期加载失败：${it.message}"
+                status = I18n.trf("刊期加载失败：%1\$s", it.message)
                 System.err.println("[周刊] $status")
             }
     }

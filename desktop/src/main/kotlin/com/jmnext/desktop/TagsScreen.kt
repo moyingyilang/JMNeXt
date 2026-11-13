@@ -30,6 +30,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import com.jmnext.data.FavoriteTags
 import com.jmnext.data.JmRepository
+import com.jmnext.desktop.i18n.I18n
 import com.jmnext.desktop.i18n.tl
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.launch
@@ -54,7 +55,7 @@ fun TagsScreen(repository: JmRepository, onSearch: (String) -> Unit) {
     var cachedAt by remember { mutableStateOf(store.cachedAt()) }
     var starred by remember { mutableStateOf<List<String>>(emptyList()) }
     var busy by remember { mutableStateOf(false) }
-    var status by remember { mutableStateOf(if (counts.isEmpty()) "还没有本地统计，点右侧按钮扫描一次" else "本地统计 ${counts.size} 个标签") }
+    var status by remember { mutableStateOf(if (counts.isEmpty()) I18n.tr("还没有本地统计，点右侧按钮扫描一次") else I18n.trf("本地统计 %1\$d 个标签", counts.size)) }
     // 添加标星用的输入框（审计发现桌面端此前"只能看不能改"）
     var draft by remember { mutableStateOf("") }
     val scope = rememberCoroutineScope()
@@ -86,7 +87,7 @@ fun TagsScreen(repository: JmRepository, onSearch: (String) -> Unit) {
                 }
                 .onFailure {
                     if (it is CancellationException) return@onFailure
-                    status = "标星操作失败：" + it.message
+                    status = I18n.tr("标星操作失败：") + it.message
                     Log.error("标签", "标星操作失败 type=" + type + " tag=" + tag, it)
                 }
             busy = false
@@ -106,18 +107,18 @@ fun TagsScreen(repository: JmRepository, onSearch: (String) -> Unit) {
                 enabled = !busy && repository.auth.isLoggedIn,
                 onClick = {
                     busy = true
-                    status = "正在扫描收藏（逐部作品请求，可能要一会儿）…"
+                    status = I18n.tr("正在扫描收藏（逐部作品请求，可能要一会儿）…")
                     scope.launch {
                         runCatching { store.refresh(repository) }
                             .onSuccess {
                                 counts = it
                                 cachedAt = store.cachedAt()
-                                status = "扫描完成：${it.size} 个标签"
+                                status = I18n.trf("扫描完成：%1\$d 个标签", it.size)
                                 Log.line("标签", "扫描完成，${it.size} 个标签")
                             }
                             .onFailure {
                                 if (it is CancellationException) return@onFailure
-                                status = "扫描失败：${it.message}"
+                                status = I18n.trf("扫描失败：%1\$s", it.message)
                                 Log.error("标签", "扫描失败", it)
                             }
                         busy = false
@@ -135,8 +136,17 @@ fun TagsScreen(repository: JmRepository, onSearch: (String) -> Unit) {
             }
         }
 
+        val lastScan = if (cachedAt > 0) {
+            "　" + I18n.trf(
+                "上次扫描：%1\$s",
+                java.time.Instant.ofEpochMilli(cachedAt).atZone(java.time.ZoneId.systemDefault())
+                    .toLocalDateTime().toString().take(16).replace('T', ' '),
+            )
+        } else {
+            ""
+        }
         Text(
-            status + (if (cachedAt > 0) "　上次扫描：${java.time.Instant.ofEpochMilli(cachedAt).atZone(java.time.ZoneId.systemDefault()).toLocalDateTime().toString().take(16).replace('T', ' ')}" else ""),
+            status + lastScan,
             style = MaterialTheme.typography.labelSmall,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             modifier = Modifier.padding(top = 8.dp, bottom = 14.dp),

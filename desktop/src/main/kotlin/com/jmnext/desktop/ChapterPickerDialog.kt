@@ -26,6 +26,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.jmnext.data.remote.dto.SeriesItem
+import com.jmnext.desktop.i18n.I18n
 import com.jmnext.desktop.i18n.tl
 
 /**
@@ -92,7 +93,7 @@ fun ChapterPickerDialog(
                             modifier = Modifier.padding(end = 12.dp),
                         )
                         Text(
-                            text = chapter.name?.takeIf { it.isNotBlank() } ?: "第 $number 话",
+                            text = chapter.name?.takeIf { it.isNotBlank() } ?: I18n.trf("第 %1\$d 话", number),
                             style = MaterialTheme.typography.bodyMedium,
                             color = if (isCurrent) MaterialTheme.colorScheme.primary
                             else MaterialTheme.colorScheme.onSurface,
@@ -107,7 +108,7 @@ fun ChapterPickerDialog(
             Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(4.dp)) {
                 TextButton(enabled = safePage > 0, onClick = { page = safePage - 1 }) { Text(tl("上一页")) }
                 Text(
-                    text = "第 ${safePage + 1}/$pageCount 页",
+                    text = I18n.trf("第 %1\$d/%2\$d 页", safePage + 1, pageCount),
                     style = MaterialTheme.typography.labelSmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )

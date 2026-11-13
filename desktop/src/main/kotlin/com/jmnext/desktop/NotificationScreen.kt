@@ -29,6 +29,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import com.jmnext.data.JmRepository
 import com.jmnext.data.remote.dto.NotificationItem
+import com.jmnext.desktop.i18n.I18n
 import com.jmnext.desktop.i18n.tl
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.launch
@@ -65,7 +66,7 @@ fun NotificationScreen(repository: JmRepository) {
     var unread by remember { mutableStateOf(0) }
     var page by remember { mutableStateOf(1) }
     var busy by remember { mutableStateOf(false) }
-    var status by remember { mutableStateOf("正在取通知…") }
+    var status by remember { mutableStateOf(I18n.tr("正在取通知…")) }
 
     fun load(next: Int) {
         busy = true
@@ -75,12 +76,12 @@ fun NotificationScreen(repository: JmRepository) {
                     items = if (next == 1) paged.list else (items + paged.list)
                         .distinctBy { it.idText ?: it.hashCode().toString() }
                     page = next
-                    status = "已加载 ${items.size} 条 / 共 ${paged.total} 条"
+                    status = I18n.trf("已加载 %1\$d 条 / 共 %2\$d 条", items.size, paged.total)
                     Log.line("通知", "$status（筛选：$tab）")
                 }
                 .onFailure {
                     if (it is CancellationException) return@onFailure
-                    status = "加载失败：${it.message}"
+                    status = I18n.trf("加载失败：%1\$s", it.message)
                     Log.error("通知", "加载失败 tab=$tab", it)
                 }
             busy = false
@@ -98,7 +99,7 @@ fun NotificationScreen(repository: JmRepository) {
                 .onSuccess { Log.line("通知", "已标记已读 id=" + id) }
                 .onFailure {
                     if (it is CancellationException) return@onFailure
-                    status = "标记已读失败：" + it.message
+                    status = I18n.tr("标记已读失败：") + it.message
                     Log.error("通知", "标记已读失败 id=" + id, it)
                 }
             runCatching { repository.notificationsUnread() }.onSuccess { unread = it.total }
@@ -137,7 +138,7 @@ fun NotificationScreen(repository: JmRepository) {
                 }
             }
             if (unread > 0) {
-                Text("未读 $unread", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.primary)
+                Text(I18n.trf("未读 %1\$d", unread), style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.primary)
             }
 StatusLine(status, busy)
             if (items.isNotEmpty()) {
