@@ -97,7 +97,7 @@ object SerialReminder {
                     tray.add(t)
                 }
             }
-            icon.displayMessage("连载更新", text, TrayIcon.MessageType.INFO)
+            icon.displayMessage(com.jmnext.desktop.i18n.I18n.tr("连载更新"), text, TrayIcon.MessageType.INFO)
             true
         }.getOrElse {
             Log.line("提醒", "托盘提醒失败，降级为窗口内提示：${it.message}")

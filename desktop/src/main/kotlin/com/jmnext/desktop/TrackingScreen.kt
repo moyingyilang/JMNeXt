@@ -25,6 +25,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.jmnext.data.JmRepository
 import com.jmnext.data.remote.dto.ListItem
+import com.jmnext.desktop.i18n.tl
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.launch
 
@@ -49,7 +50,7 @@ fun TrackingScreen(repository: JmRepository, onOpenComic: (ListItem) -> Unit) {
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(12.dp),
         ) {
-            Text("追更", style = MaterialTheme.typography.titleLarge)
+            Text(tl("追更"), style = MaterialTheme.typography.titleLarge)
             Text(status, style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
         }
         TrackingList(
@@ -120,7 +121,7 @@ fun TrackingList(
                 modifier = Modifier.fillMaxWidth().padding(horizontal = 4.dp, vertical = 4.dp),
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
             ) {
-                Button(enabled = !busy, onClick = { load(page + 1) }) { Text("加载更多") }
+                Button(enabled = !busy, onClick = { load(page + 1) }) { Text(tl("加载更多")) }
             }
         }
         LazyVerticalGrid(

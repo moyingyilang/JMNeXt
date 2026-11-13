@@ -29,6 +29,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import com.jmnext.data.JmRepository
 import com.jmnext.data.remote.dto.NotificationItem
+import com.jmnext.desktop.i18n.tl
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.launch
 
@@ -54,9 +55,9 @@ fun NotificationScreen(repository: JmRepository) {
 
     // 取值照抄 Android 的 TABS
     val tabs = listOf(
-        "全部" to "all",
-        "追更" to NotificationItem.TYPE_COMIC_FOLLOW,
-        "站内通知" to NotificationItem.TYPE_SITE_NOTICE,
+        tl("全部") to "all",
+        tl("追更") to NotificationItem.TYPE_COMIC_FOLLOW,
+        tl("站内通知") to NotificationItem.TYPE_SITE_NOTICE,
     )
 
     var tab by remember { mutableStateOf("all") }
@@ -126,7 +127,7 @@ fun NotificationScreen(repository: JmRepository) {
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(10.dp),
         ) {
-            Text("通知", style = MaterialTheme.typography.titleLarge)
+            Text(tl("通知"), style = MaterialTheme.typography.titleLarge)
             tabs.forEach { (label, value) ->
                 TextButton(enabled = !busy, onClick = { if (tab != value) tab = value }) {
                     Text(
@@ -140,7 +141,7 @@ fun NotificationScreen(repository: JmRepository) {
             }
 StatusLine(status, busy)
             if (items.isNotEmpty()) {
-                Button(enabled = !busy, onClick = { load(page + 1) }) { Text("加载更多") }
+                Button(enabled = !busy, onClick = { load(page + 1) }) { Text(tl("加载更多")) }
             }
         }
 
@@ -174,17 +175,17 @@ StatusLine(status, busy)
                             // 这就是此前"追更标签下全被解析成无标题"的原因。
                             item.followedUpdates().forEach { up ->
                                 Text(
-                                    up.comicTitleText ?: up.comicIdText ?: "(未知作品)",
+                                    up.comicTitleText ?: up.comicIdText ?: tl("(未知作品)"),
                                     style = MaterialTheme.typography.bodyMedium,
                                 )
                                 Text(
-                                    listOfNotNull("更新", up.updateDateText).joinToString(" "),
+                                    listOfNotNull(tl("更新"), up.updateDateText).joinToString(" "),
                                     style = MaterialTheme.typography.labelSmall,
                                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                                 )
                             }
                         } else {
-                            Text(item.titleText ?: "(无标题)", style = MaterialTheme.typography.bodyMedium)
+                            Text(item.titleText ?: tl("(无标题)"), style = MaterialTheme.typography.bodyMedium)
                             // 站内通知的正文是 HTML，DTO 有 siteNoticeHtml()，转纯文本再渲染
                             item.siteNoticeHtml()?.plainText()?.let { body ->
                                 Text(body, style = MaterialTheme.typography.bodySmall)
@@ -202,7 +203,7 @@ StatusLine(status, busy)
                         TextButton(
                             enabled = !busy,
                             onClick = { item.idText?.let { markRead(it) } },
-                        ) { Text("标记已读") }
+                        ) { Text(tl("标记已读")) }
                     }
                 }
             }

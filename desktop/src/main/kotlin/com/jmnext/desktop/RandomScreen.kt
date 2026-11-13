@@ -39,6 +39,7 @@ import com.jmnext.data.FavoriteTags
 import com.jmnext.data.JmRepository
 import com.jmnext.data.RandomRanking
 import com.jmnext.data.remote.dto.ListItem
+import com.jmnext.desktop.i18n.tl
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
@@ -132,9 +133,9 @@ fun RandomScreen(repository: JmRepository, onOpenComic: (ListItem) -> Unit) {
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(12.dp),
         ) {
-            Text("随机本子", style = MaterialTheme.typography.titleLarge)
+            Text(tl("随机本子"), style = MaterialTheme.typography.titleLarge)
 StatusLine(status, busy)
-            Button(enabled = !busy, onClick = { roll() }) { Text(if (busy) "取中…" else "换一批") }
+            Button(enabled = !busy, onClick = { roll() }) { Text(if (busy) tl("取中…") else tl("换一批")) }
             // 版式切换：按钮文字写"切过去会变成什么"（照 Android 的按钮语义）
             TextButton(
                 onClick = {
@@ -142,14 +143,14 @@ StatusLine(status, busy)
                     prefs.putString(PREF_RANDOM_LAYOUT, layout)
                     Log.line("随机", "版式切换为：$layout")
                 },
-            ) { Text(if (layout == LAYOUT_GRID) "切换成列表" else "切换成网格", style = MaterialTheme.typography.labelSmall) }
+            ) { Text(if (layout == LAYOUT_GRID) tl("切换成列表") else tl("切换成网格"), style = MaterialTheme.typography.labelSmall) }
             TextButton(
                 enabled = !busy,
                 onClick = { ranked = !ranked; roll() },
-            ) { Text(if (ranked) "· 按收藏偏好排序" else "按收藏偏好排序", style = MaterialTheme.typography.labelSmall) }
+            ) { Text(if (ranked) tl("· 按收藏偏好排序") else tl("按收藏偏好排序"), style = MaterialTheme.typography.labelSmall) }
         }
         Text(
-            "开启偏好排序后，取一批会额外请求这一批作品的详情以获取标签（每批约 20 到 30 次），首次还可能要扫描一次收藏标签。",
+            tl("开启偏好排序后，取一批会额外请求这一批作品的详情以获取标签（每批约 20 到 30 次），首次还可能要扫描一次收藏标签。"),
             style = MaterialTheme.typography.labelSmall,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             modifier = Modifier.padding(horizontal = 16.dp, vertical = 2.dp),

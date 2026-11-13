@@ -14,4 +14,4 @@ val DESKTOP_VERSION: String = runCatching {
     Class.forName("com.jmnext.desktop.VersionKt")
         .`package`?.implementationVersion
         ?.takeIf { it.isNotBlank() }
-}.getOrNull() ?: "2.4.0"
+}.getOrNull() ?: "2.3.0"

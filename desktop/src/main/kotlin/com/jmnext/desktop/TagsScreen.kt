@@ -30,6 +30,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import com.jmnext.data.FavoriteTags
 import com.jmnext.data.JmRepository
+import com.jmnext.desktop.i18n.tl
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.launch
 
@@ -95,7 +96,7 @@ fun TagsScreen(repository: JmRepository, onSearch: (String) -> Unit) {
     LaunchedEffect(Unit) { reloadStarred() }
 
     Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(24.dp)) {
-        Text("标签", style = MaterialTheme.typography.titleLarge)
+        Text(tl("标签"), style = MaterialTheme.typography.titleLarge)
 
         Row(
             modifier = Modifier.fillMaxWidth().padding(top = 10.dp),
@@ -122,11 +123,11 @@ fun TagsScreen(repository: JmRepository, onSearch: (String) -> Unit) {
                         busy = false
                     }
                 },
-            ) { Text(if (busy) "扫描中…" else "扫描收藏更新统计") }
+            ) { Text(if (busy) tl("扫描中…") else tl("扫描收藏更新统计")) }
 
             if (!repository.auth.isLoggedIn) {
                 Text(
-                    "需要登录（收藏列表属于账号数据）",
+                    tl("需要登录（收藏列表属于账号数据）"),
                     style = MaterialTheme.typography.labelSmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     modifier = Modifier.padding(top = 12.dp),
@@ -143,7 +144,7 @@ fun TagsScreen(repository: JmRepository, onSearch: (String) -> Unit) {
 
         // 一、本地扫描统计（按次数降序）
         if (counts.isNotEmpty()) {
-            Text("收藏里的标签（本地统计）", style = MaterialTheme.typography.titleMedium)
+            Text(tl("收藏里的标签（本地统计）"), style = MaterialTheme.typography.titleMedium)
             FlowRow(
                 modifier = Modifier.fillMaxWidth().padding(top = 8.dp),
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
@@ -171,7 +172,7 @@ fun TagsScreen(repository: JmRepository, onSearch: (String) -> Unit) {
         // 二、网站标星标签
         if (starred.isNotEmpty()) {
             Text(
-                "网站上的标星标签",
+                tl("网站上的标星标签"),
                 style = MaterialTheme.typography.titleMedium,
                 modifier = Modifier.padding(top = 22.dp),
             )
@@ -183,14 +184,14 @@ fun TagsScreen(repository: JmRepository, onSearch: (String) -> Unit) {
                 OutlinedTextField(
                     value = draft,
                     onValueChange = { draft = it },
-                    label = { Text("标签名") },
+                    label = { Text(tl("标签名")) },
                     singleLine = true,
                     modifier = Modifier.width(240.dp),
                 )
                 Button(
                     enabled = !busy && draft.isNotBlank(),
                     onClick = { updateStar("add", draft.trim()); draft = "" },
-                ) { Text("添加标星") }
+                ) { Text(tl("添加标星")) }
             }
             FlowRow(
                 modifier = Modifier.fillMaxWidth().padding(top = 8.dp),
@@ -212,7 +213,7 @@ fun TagsScreen(repository: JmRepository, onSearch: (String) -> Unit) {
                                 .padding(start = 12.dp, end = 6.dp, top = 7.dp, bottom = 7.dp),
                         )
                         // 取消标星：接口 type 取 remove（与 Android 端 updateFavoriteTags("remove", ...) 一致）
-                        TextButton(enabled = !busy, onClick = { updateStar("remove", tag) }) { Text("移除") }
+                        TextButton(enabled = !busy, onClick = { updateStar("remove", tag) }) { Text(tl("移除")) }
                     }
                 }
             }

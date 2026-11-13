@@ -1,5 +1,6 @@
 package com.jmnext.desktop
 
+import com.jmnext.desktop.i18n.tl
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -73,13 +74,14 @@ fun SideNav(selected: String, onSelect: (String) -> Unit, unreadNotifications: I
             // 聚焦时画 1dp 焦点框 —— 此前桌面端只能鼠标点，键盘用户根本进不去。
             var focused by remember { mutableStateOf(false) }
             val active = route == selected
+            val label = tl(title)
             Text(
                 // 未读通知数照 Android 的 ProfileScreen（EntryButton 的 badge 参数）：只在 > 0 时显示，
                 // 大于 99 显示 99+。桌面侧栏是纯文字，没法画小圆点，就把数字跟在标题后面。
                 text = if (route == "notifications" && unreadNotifications > 0) {
-                    title + "（" + (if (unreadNotifications > 99) "99+" else unreadNotifications.toString()) + "）"
+                    label + "（" + (if (unreadNotifications > 99) "99+" else unreadNotifications.toString()) + "）"
                 } else {
-                    title
+                    label
                 },
                 style = MaterialTheme.typography.bodyMedium,
                 color = if (active) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface,

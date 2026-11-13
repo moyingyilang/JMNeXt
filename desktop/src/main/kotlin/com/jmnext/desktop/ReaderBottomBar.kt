@@ -26,6 +26,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
+import com.jmnext.desktop.i18n.tl
 
 /**
  * 阅读页底部悬浮栏（桌面端，1.9.x）。**按 Android 阅读页的底栏位置与内容移植**。
@@ -90,7 +91,7 @@ fun ReaderBottomBar(
                         Modifier.fillMaxWidth().padding(top = 2.dp),
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
-                        TextButton(onClick = onPrevChapter, enabled = hasPrevChapter) { Text("上一话") }
+                        TextButton(onClick = onPrevChapter, enabled = hasPrevChapter) { Text(tl("上一话")) }
                         TextButton(onClick = onPrevPage, enabled = hasPrevPage, contentPadding = tight) { Text("<") }
                         Spacer(Modifier.width(4.dp))
                         Text(
@@ -100,15 +101,15 @@ fun ReaderBottomBar(
                         )
                         Spacer(Modifier.width(4.dp))
                         TextButton(onClick = onNextPage, enabled = hasNextPage, contentPadding = tight) { Text(">") }
-                        TextButton(onClick = onNextChapter, enabled = hasNextChapter) { Text("下一话") }
+                        TextButton(onClick = onNextChapter, enabled = hasNextChapter) { Text(tl("下一话")) }
 
                         Spacer(Modifier.weight(1f))
             Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
                             BarAction(modeLabel, onToggleMode)
-                            BarAction("章节", onOpenPicker)
-                            BarAction("评论", onOpenComments)
-                            BarAction("收藏", onToggleFavorite)
-                            BarAction("点赞", onToggleLike)
+                            BarAction(tl("章节"), onOpenPicker)
+                            BarAction(tl("评论"), onOpenComments)
+                            BarAction(tl("收藏"), onToggleFavorite)
+                            BarAction(tl("点赞"), onToggleLike)
                         }
                     }
                 }

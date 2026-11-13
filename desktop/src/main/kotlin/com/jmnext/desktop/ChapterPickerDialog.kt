@@ -26,6 +26,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.jmnext.data.remote.dto.SeriesItem
+import com.jmnext.desktop.i18n.tl
 
 /**
  * 章节选择对话框（桌面端，1.9.x）。
@@ -60,7 +61,7 @@ fun ChapterPickerDialog(
 
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text("选择章节") },
+        title = { Text(tl("选择章节")) },
         text = {
             // 按页取滚动状态（Android 那边踩过的坑，见文件头注释）
             val scroll = remember(safePage) { ScrollState(0) }
@@ -104,17 +105,17 @@ fun ChapterPickerDialog(
         },
         confirmButton = {
             Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(4.dp)) {
-                TextButton(enabled = safePage > 0, onClick = { page = safePage - 1 }) { Text("上一页") }
+                TextButton(enabled = safePage > 0, onClick = { page = safePage - 1 }) { Text(tl("上一页")) }
                 Text(
                     text = "第 ${safePage + 1}/$pageCount 页",
                     style = MaterialTheme.typography.labelSmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
-                TextButton(enabled = safePage < pageCount - 1, onClick = { page = safePage + 1 }) { Text("下一页") }
+                TextButton(enabled = safePage < pageCount - 1, onClick = { page = safePage + 1 }) { Text(tl("下一页")) }
             }
         },
         dismissButton = {
-            TextButton(onClick = onDismiss) { Text("关闭") }
+            TextButton(onClick = onDismiss) { Text(tl("关闭")) }
         },
     )
 }

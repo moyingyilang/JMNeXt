@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.dp
 import com.jmnext.data.JmRepository
 import com.jmnext.data.prefs.BlockKind
 import com.jmnext.data.prefs.BlockStoreApi
+import com.jmnext.desktop.i18n.tl
 
 /**
  * 屏蔽设置（2.0.0 桌面端）。
@@ -41,8 +42,8 @@ fun BlockScreen(repository: JmRepository, modifier: Modifier = Modifier) {
     val store = repository.blockStore
     if (store == null) {
         Column(modifier.fillMaxSize().padding(24.dp)) {
-            Text("屏蔽设置", style = MaterialTheme.typography.titleLarge)
-            Text("本地屏蔽存储未初始化。", style = MaterialTheme.typography.bodyMedium)
+            Text(tl("屏蔽设置"), style = MaterialTheme.typography.titleLarge)
+            Text(tl("本地屏蔽存储未初始化。"), style = MaterialTheme.typography.bodyMedium)
         }
         return
     }
@@ -50,32 +51,32 @@ fun BlockScreen(repository: JmRepository, modifier: Modifier = Modifier) {
     val rules by store.state.collectAsState()
 
     Column(modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(24.dp)) {
-        Text("屏蔽设置", style = MaterialTheme.typography.titleLarge)
+        Text(tl("屏蔽设置"), style = MaterialTheme.typography.titleLarge)
         Text(
-            "命中的作品会从所有列表里隐藏（首页、搜索、分类、周刊、随机、收藏…）。" +
-                "被挡掉的条数会在对应页面顶部提示，不会静默消失。",
+            tl("命中的作品会从所有列表里隐藏（首页、搜索、分类、周刊、随机、收藏…）。" +
+                "被挡掉的条数会在对应页面顶部提示，不会静默消失。"),
             style = MaterialTheme.typography.labelSmall,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             modifier = Modifier.padding(top = 6.dp, bottom = 16.dp),
         )
 
         BlockSection(
-            title = "关键词",
-            hint = "例如：NTR。命中标题、作者、简介里的任意一处即隐藏。",
+            title = tl("关键词"),
+            hint = tl("例如：NTR。命中标题、作者、简介里的任意一处即隐藏。"),
             values = rules.words,
             onAdd = { store.addWord(it) },
             onRemove = { store.removeWord(it) },
         )
         BlockSection(
-            title = "标签",
-            hint = "命中作品标签即隐藏。标签来自作品详情，列表接口不下发，因此会多一次请求。",
+            title = tl("标签"),
+            hint = tl("命中作品标签即隐藏。标签来自作品详情，列表接口不下发，因此会多一次请求。"),
             values = rules.tags,
             onAdd = { store.addTag(it) },
             onRemove = { store.removeTag(it) },
         )
         BlockSection(
-            title = "分类名",
-            hint = "例如：同人。命中分区或分类名即隐藏。",
+            title = tl("分类名"),
+            hint = tl("例如：同人。命中分区或分类名即隐藏。"),
             values = rules.categories,
             onAdd = { store.addCategory(it) },
             onRemove = { store.removeCategory(it) },
@@ -125,12 +126,12 @@ private fun BlockSection(
                         input = ""
                     }
                 },
-            ) { Text("添加") }
+            ) { Text(tl("添加")) }
         }
 
         if (values.isEmpty()) {
             Text(
-                "（空）",
+                tl("（空）"),
                 style = MaterialTheme.typography.labelSmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 modifier = Modifier.padding(top = 8.dp),
@@ -147,7 +148,7 @@ private fun BlockSection(
                         TextButton(onClick = {
                             onRemove(v)
                             System.err.println("[屏蔽] 移除$title：$v")
-                        }) { Text("移除") }
+                        }) { Text(tl("移除")) }
                     }
                 }
             }

@@ -26,6 +26,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.jmnext.data.JmRepository
 import com.jmnext.data.remote.dto.ListItem
+import com.jmnext.desktop.i18n.tl
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.launch
 
@@ -87,10 +88,10 @@ fun HistoryScreen(repository: JmRepository, onOpenComic: (ListItem) -> Unit) {
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(12.dp),
         ) {
-            Text("历史", style = MaterialTheme.typography.titleLarge)
+            Text(tl("历史"), style = MaterialTheme.typography.titleLarge)
 StatusLine(status, busy)
             if (items.isNotEmpty() && items.size < total) {
-                Button(enabled = !busy, onClick = { load(page + 1) }) { Text("加载更多") }
+                Button(enabled = !busy, onClick = { load(page + 1) }) { Text(tl("加载更多")) }
             }
             notice?.let {
                 Text(it, style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.primary)
@@ -127,7 +128,7 @@ StatusLine(status, busy)
                                 busy = false
                             }
                         },
-                    ) { Text("删除", style = MaterialTheme.typography.labelSmall) }
+                    ) { Text(tl("删除"), style = MaterialTheme.typography.labelSmall) }
                 }
             }
         }

@@ -19,6 +19,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.jmnext.desktop.i18n.tl
 import com.jmnext.wallpaper.WallpaperMode
 import kotlinx.coroutines.launch
 
@@ -38,7 +39,7 @@ fun WallpaperRemoteSection(onChanged: () -> Unit) {
     var customDraft by remember(state.mode) { mutableStateOf(state.customUrl) }
 
     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-        Text("在线壁纸", style = MaterialTheme.typography.titleMedium)
+        Text(tl("在线壁纸"), style = MaterialTheme.typography.titleMedium)
 
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             WallpaperMode.entries.forEach { m ->
@@ -66,10 +67,10 @@ fun WallpaperRemoteSection(onChanged: () -> Unit) {
             Button(onClick = {
                 scope.launch { RemoteWallpaper.next(force = true) }
                 onChanged()
-            }) { Text("换一张") }
+            }) { Text(tl("换一张")) }
 
             if (state.loading) {
-                Text("取图中…", style = MaterialTheme.typography.labelSmall)
+                Text(tl("取图中…"), style = MaterialTheme.typography.labelSmall)
             }
             val credit = state.credit
             if (!credit.isNullOrBlank()) {
@@ -90,13 +91,13 @@ fun WallpaperRemoteSection(onChanged: () -> Unit) {
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(8.dp),
         ) {
-            Text("自动轮换：", style = MaterialTheme.typography.labelMedium)
+            Text(tl("自动轮换："), style = MaterialTheme.typography.labelMedium)
             listOf(0, 15, 30, 60).forEach { minutes ->
                 TextButton(onClick = {
                     RemoteWallpaper.setInterval(minutes)
                     onChanged()
                 }) {
-                    Text((if (state.intervalMinutes == minutes) "· " else "") + if (minutes == 0) "只手动" else "${minutes}分")
+                    Text((if (state.intervalMinutes == minutes) "· " else "") + if (minutes == 0) tl("只手动") else "${minutes}分")
                 }
             }
         }
@@ -109,7 +110,7 @@ fun WallpaperRemoteSection(onChanged: () -> Unit) {
                 OutlinedTextField(
                     value = customDraft,
                     onValueChange = { customDraft = it },
-                    label = { Text("图片直链") },
+                    label = { Text(tl("图片直链")) },
                     singleLine = true,
                     modifier = Modifier.fillMaxWidth(0.75f),
                 )
@@ -117,13 +118,15 @@ fun WallpaperRemoteSection(onChanged: () -> Unit) {
                     RemoteWallpaper.setCustomUrl(customDraft)
                     onChanged()
                     scope.launch { RemoteWallpaper.next(force = true) }
-                }) { Text("应用") }
+                }) { Text(tl("应用")) }
             }
         }
 
         Text(
-            "在线壁纸默认关闭：阅读器默认不发任何第三方请求。取到的地址会在本地缓存轮换，" +
-                "攒够几张后就不再打接口；Bing 每天只重取一次。",
+            tl(
+                "在线壁纸默认关闭：阅读器默认不发任何第三方请求。取到的地址会在本地缓存轮换，" +
+                    "攒够几张后就不再打接口；Bing 每天只重取一次。",
+            ),
             style = MaterialTheme.typography.labelSmall,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             modifier = Modifier.padding(top = 2.dp),

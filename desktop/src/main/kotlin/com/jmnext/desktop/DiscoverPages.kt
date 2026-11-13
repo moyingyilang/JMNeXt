@@ -27,6 +27,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.jmnext.data.JmRepository
 import com.jmnext.data.remote.dto.ListItem
+import com.jmnext.desktop.i18n.tl
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.launch
 
@@ -90,7 +91,7 @@ fun WeekScreen(repository: JmRepository, onOpenComic: (ListItem) -> Unit) {
 
     Column(Modifier.fillMaxSize()) {
         Column(Modifier.padding(horizontal = 16.dp, vertical = 10.dp)) {
-            Text("周刊", style = MaterialTheme.typography.titleLarge)
+            Text(tl("周刊"), style = MaterialTheme.typography.titleLarge)
 StatusLine(status, busy)
             if (issues.isNotEmpty()) {
                 Row(
@@ -98,7 +99,7 @@ StatusLine(status, busy)
                     horizontalArrangement = Arrangement.spacedBy(8.dp),
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
-                    Text("刊期", style = MaterialTheme.typography.labelSmall)
+                    Text(tl("刊期"), style = MaterialTheme.typography.labelSmall)
                     issues.forEach { (id, title) ->
                         Button(
                             enabled = !busy && id != issueId,
@@ -114,7 +115,7 @@ StatusLine(status, busy)
                     horizontalArrangement = Arrangement.spacedBy(8.dp),
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
-                    Text("类型", style = MaterialTheme.typography.labelSmall)
+                    Text(tl("类型"), style = MaterialTheme.typography.labelSmall)
                     types.forEach { (id, title) ->
                         Button(
                             enabled = !busy && id != typeId,
@@ -138,7 +139,7 @@ StatusLine(status, busy)
                     Button(
                         enabled = !busy,
                         onClick = { issueId?.let { i -> typeId?.let { t -> loadList(i, t, page + 1) } } },
-                    ) { Text("加载更多") }
+                    ) { Text(tl("加载更多")) }
                 }
             }
         }

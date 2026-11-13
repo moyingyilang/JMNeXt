@@ -1,6 +1,7 @@
 package com.jmnext.desktop
 import com.jmnext.data.prefs.ComicRenderMode
 import com.jmnext.data.prefs.ReaderMode
+import com.jmnext.desktop.i18n.tl
 import com.jmnext.wallpaper.WallpaperMode
 
 import androidx.compose.foundation.background
@@ -52,18 +53,18 @@ fun AppearanceScreen() {
         Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(24.dp),
         verticalArrangement = Arrangement.spacedBy(18.dp),
     ) {
-        Text("外观", style = MaterialTheme.typography.titleLarge)
+        Text(tl("外观"), style = MaterialTheme.typography.titleLarge)
 
         // 风格
         Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-            Text("界面风格", style = MaterialTheme.typography.titleMedium)
+            Text(tl("界面风格"), style = MaterialTheme.typography.titleMedium)
             Text(
-                "换的不只是透明度 —— 圆角与壁纸是否模糊一起换。手机上的实时背景模糊在桌面上拿不到，这里用等效近似。",
+                tl("换的不只是透明度 —— 圆角与壁纸是否模糊一起换。手机上的实时背景模糊在桌面上拿不到，这里用等效近似。"),
                 style = MaterialTheme.typography.labelSmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
             ExpandableOptionRow(
-                title = "界面风格",
+                title = tl("界面风格"),
                 options = GlassStyle.entries.map { it to it.label },
                 selected = Appearance.style,
                 onSelect = { Appearance.style = it; refresh++ },
@@ -105,7 +106,7 @@ fun AppearanceScreen() {
 
         // 壁纸
         Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-            Text("壁纸", style = MaterialTheme.typography.titleMedium)
+            Text(tl("壁纸"), style = MaterialTheme.typography.titleMedium)
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 WallpaperPreset.entries.forEach { p ->
                     Column(
@@ -147,7 +148,7 @@ fun AppearanceScreen() {
                     RemoteWallpaper.clearCache()
                     refresh++
                 }
-            }) { Text("清除壁纸缓存") }
+            }) { Text(tl("清除壁纸缓存")) }
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(10.dp),
@@ -159,7 +160,7 @@ fun AppearanceScreen() {
                         refresh++
                         Log.line("外观", "选择本地壁纸：$chosen")
                     }
-                }) { Text("选择本地图片…") }
+                }) { Text(tl("选择本地图片…")) }
 
                 if (Appearance.wallpaperPath != null) {
                     Text(
@@ -167,12 +168,12 @@ fun AppearanceScreen() {
                         style = MaterialTheme.typography.labelSmall,
                         color = MaterialTheme.colorScheme.primary,
                     )
-                    TextButton(onClick = { Appearance.wallpaperPath = null; refresh++ }) { Text("清除") }
+                    TextButton(onClick = { Appearance.wallpaperPath = null; refresh++ }) { Text(tl("清除")) }
                 }
             }
             Text(
-                "本地图片壁纸这条路径**尚未验证**（当前实现借用了网络图片加载器读 file://，很可能不通）。" +
-                    "如果选了没反应，就是这里的问题，我会改成用本地解码。",
+                tl("本地图片壁纸这条路径**尚未验证**（当前实现借用了网络图片加载器读 file://，很可能不通）。" +
+                    "如果选了没反应，就是这里的问题，我会改成用本地解码。"),
                 style = MaterialTheme.typography.labelSmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
@@ -181,13 +182,13 @@ fun AppearanceScreen() {
         // 深浅色
         Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
             ExpandableOptionRow(
-                title = "深浅色",
-                options = listOf(false to "浅色", true to "深色"),
+                title = tl("深浅色"),
+                options = listOf(false to tl("浅色"), true to tl("深色")),
                 selected = Appearance.dark,
                 onSelect = { Appearance.dark = it; refresh++ },
             )
             Text(
-                if (Appearance.dark) "当前：深色" else "当前：浅色",
+                if (Appearance.dark) tl("当前：深色") else tl("当前：浅色"),
                 style = MaterialTheme.typography.labelSmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
@@ -196,7 +197,7 @@ fun AppearanceScreen() {
         // 漫画渲染：与 Android 同一套语义（彩色/黑白/墨水屏），系数共用 shared 的 ComicRenderMath。
         // 设置页只写，阅读页读 —— 选完下次进阅读页生效。
         Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-            Text("漫画渲染", style = MaterialTheme.typography.titleMedium)
+            Text(tl("漫画渲染"), style = MaterialTheme.typography.titleMedium)
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 ComicRenderMode.entries.forEach { m ->
                     val label = m.label
@@ -212,7 +213,7 @@ fun AppearanceScreen() {
                 }
             }
             Text(
-                "只作用于漫画画面，不影响界面配色。墨水屏设备选「墨水屏」：去色并提高对比度。",
+                tl("只作用于漫画画面，不影响界面配色。墨水屏设备选「墨水屏」：去色并提高对比度。"),
                 style = MaterialTheme.typography.labelSmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
@@ -225,14 +226,14 @@ fun AppearanceScreen() {
         // 桌面端只能在程序运行时提醒 —— Android 靠 AlarmManager 可在后台唤醒，桌面端没有等价机制；
         // 系统托盘不可用时改为在窗口内提示（见 SerialReminder）。
         Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-            Text("连载更新提醒", style = MaterialTheme.typography.titleMedium)
+            Text(tl("连载更新提醒"), style = MaterialTheme.typography.titleMedium)
             Text(
-                "你追的连载有更新时提醒（默认关）。桌面端仅在程序运行时有效；系统托盘不能用时改为在窗口内提示。",
+                tl("你追的连载有更新时提醒（默认关）。桌面端仅在程序运行时有效；系统托盘不能用时改为在窗口内提示。"),
                 style = MaterialTheme.typography.labelSmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                listOf(true to "开启", false to "关闭").forEach { (on, label) ->
+                listOf(true to tl("开启"), false to tl("关闭")).forEach { (on, label) ->
                     Button(
                         onClick = { SerialReminder.enabled = on; refresh++ },
                         modifier = Modifier.height(38.dp),
@@ -244,15 +245,15 @@ fun AppearanceScreen() {
         }
 
         Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-            Text("阅读形态", style = MaterialTheme.typography.titleMedium)
+            Text(tl("阅读形态"), style = MaterialTheme.typography.titleMedium)
             Text(
-                "进入阅读页时的默认形态：纵向连续滚动（与 Android 的默认值一致）或横向逐页。改完下次进阅读页生效。",
+                tl("进入阅读页时的默认形态：纵向连续滚动（与 Android 的默认值一致）或横向逐页。改完下次进阅读页生效。"),
                 style = MaterialTheme.typography.labelSmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 ReaderMode.entries.forEach { m ->
-                    val label = if (m == ReaderMode.Scroll) "纵向滚动" else "横向翻页"
+                    val label = if (m == ReaderMode.Scroll) tl("纵向滚动") else tl("横向翻页")
                     Button(
                         onClick = { ReaderModePref.mode = m; refresh++ },
                         modifier = Modifier.height(38.dp),

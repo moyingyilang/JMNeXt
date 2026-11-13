@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.dp
 import com.jmnext.data.JmRepository
 import com.jmnext.data.remote.dto.ListItem
 import com.jmnext.data.remote.dto.PromoteSection
+import com.jmnext.desktop.i18n.tl
 import kotlinx.coroutines.CancellationException
 
 /**
@@ -72,12 +73,12 @@ fun PromoteHeader(repository: JmRepository, onOpenComic: (ListItem) -> Unit, onO
                 modifier = Modifier.padding(start = 4.dp, top = 12.dp, bottom = 8.dp),
             ) {
                 Text(
-                    text = section.title ?: "(未命名分区)",
+                    text = section.title ?: tl("(未命名分区)"),
                     style = MaterialTheme.typography.titleMedium,
                     color = MaterialTheme.colorScheme.primary,
                 )
                 TextButton(onClick = { onOpenSection(section.id, section.title.orEmpty()) }) {
-                    Text("更多")
+                    Text(tl("更多"))
                 }
             }
             Row(

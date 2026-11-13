@@ -46,3 +46,23 @@ fun tl(zh: String): String = LocalByZh.current[zh] ?: zh
 @Composable
 fun tlf(zh: String, vararg args: Any?): String =
     String.format(LocalByZh.current[zh] ?: zh, *args)
+
+/**
+ * 给非 Compose 代码用的取词入口：命令行提示、Swing 对话框、协程里赋给状态变量的文案。
+ *
+ * Compose 里请用 tl()/tlf()；这里读的是同一份「中文原文 → 译文」表，
+ * 由入口在启动时注入，未注入时原样返回中文。
+ */
+object I18n {
+    @Volatile
+    private var byZh: Map<String, String> = emptyMap()
+
+    fun install(table: Map<String, String>) {
+        byZh = table
+    }
+
+    fun tr(zh: String): String = byZh[zh] ?: zh
+
+    fun trf(zh: String, vararg args: Any?): String =
+        String.format(byZh[zh] ?: zh, *args)
+}

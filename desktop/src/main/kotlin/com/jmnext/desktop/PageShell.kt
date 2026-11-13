@@ -13,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
+import com.jmnext.desktop.i18n.tl
 
 /**
  * 未实现页面的外壳（2.0.0 桌面端）。
@@ -36,10 +37,10 @@ fun PageShell(title: String, planned: String) {
                 .padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(6.dp),
         ) {
-            Text("这一页还没接数据", style = MaterialTheme.typography.titleMedium)
-            Text(planned, style = MaterialTheme.typography.bodyMedium)
+            Text(tl("这一页还没接数据"), style = MaterialTheme.typography.titleMedium)
+            Text(tl(planned), style = MaterialTheme.typography.bodyMedium)
             Text(
-                "桌面端目标是与 Android full 版功能对齐，页面清单见 desktop/PARITY.md。",
+                tl("桌面端目标是与 Android full 版功能对齐，页面清单见 desktop/PARITY.md。"),
                 style = MaterialTheme.typography.labelSmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )

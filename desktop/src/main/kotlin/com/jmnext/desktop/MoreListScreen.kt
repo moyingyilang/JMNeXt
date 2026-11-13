@@ -25,6 +25,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.jmnext.data.JmRepository
 import com.jmnext.data.remote.dto.ListItem
+import com.jmnext.desktop.i18n.tl
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.launch
 import androidx.compose.ui.graphics.Color
@@ -99,7 +100,7 @@ fun MoreListScreen(
     Column(Modifier.fillMaxSize()) {
         Column(Modifier.padding(horizontal = 16.dp, vertical = 10.dp)) {
             Text(
-                text = title.ifBlank { "分区更多" },
+                text = tl(title.ifBlank { "分区更多" }),
                 style = MaterialTheme.typography.titleLarge,
             )
             Row(
@@ -108,14 +109,14 @@ fun MoreListScreen(
                 horizontalArrangement = Arrangement.spacedBy(10.dp),
             ) {
                 Button(enabled = !busy, onClick = { load(0) }) {
-                    Text(if (busy) "加载中…" else "刷新")
+                    Text(if (busy) tl("加载中…") else tl("刷新"))
                 }
                 // total 给了就按 total 判到底，没给就等一次空页（exhausted）
                 val moreLeft = total <= 0 || items.size < total
                 Button(
                     enabled = !busy && items.isNotEmpty() && !exhausted && moreLeft,
                     onClick = { load(page + 1) },
-                ) { Text("加载更多") }
+                ) { Text(tl("加载更多")) }
 StatusLine(status, busy, style = MaterialTheme.typography.labelSmall, color = Color.Unspecified)
             }
         }
@@ -223,17 +224,17 @@ fun WeeklyUpdateScreen(repository: JmRepository, onOpenComic: (ListItem) -> Unit
 
     Column(Modifier.fillMaxSize()) {
         Column(Modifier.padding(horizontal = 16.dp, vertical = 10.dp)) {
-            Text("连载更新", style = MaterialTheme.typography.titleLarge)
+            Text(tl("连载更新"), style = MaterialTheme.typography.titleLarge)
 
             Row(
                 modifier = Modifier.fillMaxWidth().padding(top = 4.dp),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
             ) {
-                Text("类型", style = MaterialTheme.typography.labelSmall)
+                Text(tl("类型"), style = MaterialTheme.typography.labelSmall)
                 WEEKLY_TYPES.forEach { (key, label) ->
                     Button(enabled = !busy && key != type, onClick = { type = key; load(1, key, day) }) {
-                        Text(label, style = MaterialTheme.typography.labelSmall)
+                        Text(tl(label), style = MaterialTheme.typography.labelSmall)
                     }
                 }
             }
@@ -243,10 +244,10 @@ fun WeeklyUpdateScreen(repository: JmRepository, onOpenComic: (ListItem) -> Unit
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
             ) {
-                Text("星期", style = MaterialTheme.typography.labelSmall)
+                Text(tl("星期"), style = MaterialTheme.typography.labelSmall)
                 WEEKLY_DAYS.forEach { (key, label) ->
                     Button(enabled = !busy && key != day, onClick = { day = key; load(1, type, key) }) {
-                        Text(label, style = MaterialTheme.typography.labelSmall)
+                        Text(tl(label), style = MaterialTheme.typography.labelSmall)
                     }
                 }
             }
@@ -257,12 +258,12 @@ fun WeeklyUpdateScreen(repository: JmRepository, onOpenComic: (ListItem) -> Unit
                 horizontalArrangement = Arrangement.spacedBy(10.dp),
             ) {
                 Button(enabled = !busy, onClick = { load(1) }) {
-                    Text(if (busy) "加载中…" else "刷新")
+                    Text(if (busy) tl("加载中…") else tl("刷新"))
                 }
                 Button(
                     enabled = !busy && items.isNotEmpty() && !exhausted,
                     onClick = { load(page + 1) },
-                ) { Text("加载更多") }
+                ) { Text(tl("加载更多")) }
 StatusLine(status, busy, style = MaterialTheme.typography.labelSmall, color = Color.Unspecified)
             }
         }
