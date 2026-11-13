@@ -70,8 +70,10 @@ data class AuthUiState(
     val submitting: Boolean = false,
     /** 失败提示（红色展示）。 */
     val error: String? = null,
+    @StringRes val errorRes: Int? = null,
     /** 成功提示（用于注册/找回这类不直接进入登录态的操作）。 */
     val notice: String? = null,
+    @StringRes val noticeRes: Int? = null,
     val loggedIn: Boolean = false,
 )
 
@@ -85,13 +87,13 @@ class AuthViewModel(private val repo: JmRepository) : ViewModel() {
     }
 
     fun login(username: String, password: String) {
-        if (!validate(username.isNotBlank(), "请输入用户名")) return
-        if (!validate(password.isNotBlank(), "请输入密码")) return
+        if (!validate(username.isNotBlank(), R.string.auth_need_username)) return
+        if (!validate(password.isNotBlank(), R.string.auth_need_password)) return
 
         submit {
             repo.bootstrap()
             val info = repo.login(username.trim(), password)
-            _state.update { it.copy(loggedIn = true, notice = "欢迎回来，${info.displayName}") }
+            _state.update { it.copy(loggedIn = true, noticeRes = R.string.auth_welcome_fmt, notice = info.displayName) }
         }
     }
 
@@ -102,11 +104,11 @@ class AuthViewModel(private val repo: JmRepository) : ViewModel() {
         email: String,
         gender: String,
     ) {
-        if (!validate(username.isNotBlank(), "请输入用户名")) return
-        if (!validate(email.contains('@'), "请输入有效的邮箱")) return
-        if (!validate(password.length >= 6, "密码至少 6 位")) return
+        if (!validate(username.isNotBlank(), R.string.auth_need_username)) return
+        if (!validate(email.contains('@'), R.string.auth_bad_email)) return
+        if (!validate(password.length >= 6, R.string.auth_short_password)) return
         // 两次输入不一致是最常见的注册失败原因，本地先拦掉，省一次往返
-        if (!validate(password == passwordConfirm, "两次输入的密码不一致")) return
+        if (!validate(password == passwordConfirm, R.string.auth_password_mismatch)) return
 
         submit {
             val result = repo.register(
@@ -119,28 +121,28 @@ class AuthViewModel(private val repo: JmRepository) : ViewModel() {
             if (result.isOk) {
                 // 注册接口不返回凭证，成功后引导去登录而不是假装已登录
                 _state.update {
-                    it.copy(mode = AuthMode.Login, notice = result.msg ?: "注册成功，请登录")
+                    it.copy(mode = AuthMode.Login, notice = result.msg?.takeIf { it.isNotBlank() }, noticeRes = R.string.auth_register_ok)
                 }
             } else {
-                _state.update { it.copy(error = result.msg ?: "注册失败") }
+                _state.update { it.copy(error = result.msg?.takeIf { it.isNotBlank() }, errorRes = R.string.auth_register_failed) }
             }
         }
     }
 
     fun forgot(email: String) {
-        if (!validate(email.contains('@'), "请输入有效的邮箱")) return
+        if (!validate(email.contains('@'), R.string.auth_bad_email)) return
         submit {
             val result = repo.forgotPassword(email.trim())
             if (result.isOk) {
-                _state.update { it.copy(mode = AuthMode.Login, notice = result.msg ?: "重置邮件已发送") }
+                _state.update { it.copy(mode = AuthMode.Login, notice = result.msg?.takeIf { it.isNotBlank() }, noticeRes = R.string.auth_reset_sent) }
             } else {
-                _state.update { it.copy(error = result.msg ?: "发送失败") }
+                _state.update { it.copy(error = result.msg?.takeIf { it.isNotBlank() }, errorRes = R.string.auth_send_failed) }
             }
         }
     }
 
-    private fun validate(ok: Boolean, message: String): Boolean {
-        if (!ok) _state.update { it.copy(error = message) }
+    private fun validate(ok: Boolean, @StringRes messageRes: Int): Boolean {
+        if (!ok) _state.update { it.copy(error = null, errorRes = messageRes) }
         return ok
     }
 
@@ -216,7 +218,7 @@ fun AuthScreen(
         // 就不知道那次点击是没生效、还是登录后会自动补上（目前不会，需要再点一次）
         if (reason.isNotBlank()) {
             Text(
-                text = "$reason · 登录后请再点一次刚才那个按钮",
+                text = stringResource(R.string.auth_login_again_fmt, reason),
                 style = MaterialTheme.typography.labelSmall,
                 color = c.accent,
                 modifier = Modifier.fillMaxWidth().padding(horizontal = Spacing.lg, vertical = Spacing.sm),
@@ -308,7 +310,11 @@ fun AuthScreen(
                 }
             }
 
-            state.error?.let {
+            val errorText = state.errorRes?.let { stringResource(it) } ?: state.error
+            val noticeText = state.noticeRes?.let { id ->
+                if (id == R.string.auth_welcome_fmt) stringResource(id, state.notice.orEmpty()) else stringResource(id)
+            } ?: state.notice
+            errorText?.let {
                 GlassSurface(level = GlassLevel.Card, modifier = Modifier.fillMaxWidth()) {
                     Text(
                         text = it,
@@ -318,7 +324,7 @@ fun AuthScreen(
                     )
                 }
             }
-            state.notice?.let {
+            noticeText?.let {
                 GlassSurface(level = GlassLevel.Card, modifier = Modifier.fillMaxWidth()) {
                     Text(
                         text = it,
@@ -345,8 +351,7 @@ fun AuthScreen(
             }
 
             Text(
-                text = "登录后会带上服务端签发的凭证，用于收藏与观看历史。" +
-                    "凭证经 Android Keystore 加密后保存在应用私有目录，不会明文落盘。",
+                text = stringResource(R.string.auth_keystore_note),
                 style = MaterialTheme.typography.labelSmall,
                 color = c.textTertiary,
             )
