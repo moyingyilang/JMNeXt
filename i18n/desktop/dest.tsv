@@ -8,3 +8,37 @@ dest_about_download_recommended	下载更新包（%1$s，推荐）	下載更新�
 dest_about_download_alt	或下载 %1$s	或下載 %1$s	或下載 %1$s	Or download %1$s	または %1$s をダウンロード	Или скачать %1$s	또는 %1$s 받기
 dest_about_bundle_note	推荐包内含两套运行时，会自动按架构选择，无需分辨。	推薦包內含兩套執行環境，會自動依架構選擇，無需分辨。	推薦包內含兩套執行環境，會自動依架構選擇，無需分辨。	The recommended bundle includes both runtimes and picks the right one automatically.	推奨パッケージには両方のランタイムが入っており、アーキテクチャに合わせて自動で選ばれます。	Рекомендуемый пакет включает обе среды выполнения и сам выбирает нужную.	권장 패키지에는 두 런타임이 모두 들어 있어 아키텍처에 맞게 자동으로 선택됩니다.
 dest_about_open_release	打开发布页	開啟發佈頁	開啟發佈頁	Open releases page	リリースページを開く	Открыть страницу релизов	릴리스 페이지 열기
+dest_common_load_more	加载更多	載入更多	載入更多	Load more	さらに読み込む	Загрузить ещё	더 불러오기
+dest_common_remove	移除	移除	移除	Remove	削除	Удалить	제거
+dest_common_submitting	提交中…	提交中…	提交中…	Submitting…	送信中…	Отправка…	전송 중…
+dest_common_reply	回复	回覆	回覆	Reply	返信	Ответить	답글
+dest_common_no_title	(无标题)	(無標題)	(無標題)	(Untitled)	(無題)	(Без названия)	(제목 없음)
+dest_common_none_paren	(无)	(無)	(無)	(None)	(なし)	(Нет)	(없음)
+dest_common_tbd	（待补）	（待補）	（待補）	(to be added)	（未実装）	(скоро)	(추가 예정)
+dest_nav_history	历史	歷史	歷史	History	履歴	История	기록
+dest_nav_random	随机	隨機	隨機	Random	ランダム	Случайное	랜덤
+dest_nav_random_book	随机本子	隨機本子	隨機本子	Random work	ランダム作品	Случайная работа	랜덤 작품
+dest_login_forgot	找回密码	找回密碼	找回密碼	Forgot password	パスワードを忘れた	Забыли пароль	비밀번호 찾기
+dest_shell_not_planned	这一页还没接数据	這一頁還沒接資料	這一頁還沒接資料	This page isn't wired up yet	この画面はまだデータ未接続です	Эта страница ещё не подключена	이 화면은 아직 연결되지 않았습니다
+dest_shell_goal	桌面端目标是与 Android full 版功能对齐；这里列出还没搬过来的部分。	桌面端目標是與 Android full 版功能對齊；這裡列出還沒搬過來的部分。	桌面端目標是與 Android full 版功能對齊；這裡列出還沒搬過來的部分。	The desktop goal is parity with the Android full build; this lists what hasn't been ported yet.	デスクトップ版の目標は Android full 版との機能一致です。ここには未移植の項目を並べています。	Цель десктопной версии — паритет с Android full; здесь перечислено, что ещё не перенесено.	데스크톱 목표는 Android full 버전과 기능을 맞추는 것입니다. 아직 옮기지 않은 항목을 여기에 둡니다.
+dest_common_fetching	取中…	取中…	取中…	Picking…	取得中…	Выбираем…	고르는 중…
+dest_common_retry_loading	正在加载…	正在載入…	正在載入…	Loading…	読み込み中…	Загрузка…	불러오는 중…
+dest_fav_favorited	已收藏	已收藏	已收藏	Favorited	お気に入り済み	В избранном	즐겨찾기됨
+dest_fav_blocked	已屏蔽	已封鎖	已封鎖	Blocked	ブロック済み	Заблокировано	차단됨
+dest_profile_member_missing	已登录（会员信息未取到）	已登入（會員資訊未取到）	已登入（會員資訊未取到）	Signed in (member info unavailable)	ログイン済み（会員情報が取得できません）	Вход выполнен (данные участника недоступны)	로그인됨(회원 정보를 가져오지 못함)
+dest_reader_signed	已签	已簽	已簽	Signed	署名済み	Отмечено	출석함
+dest_reader_last_chapter	已经是最后一话	已經是最後一話	已經是最後一話	This is the last chapter	これが最後の話です	Это последняя глава	마지막 화입니다
+dest_detail_liked_prefix	已赞 	已讚 	已讚	Liked 	いいね済み 	Нравится 	좋아요 
+dest_detail_tracked	已追更	已追更	已追更	Subscribed	フォロー中	Вы подписаны	구독 중
+dest_auth_logged_out	已退出登录	已登出	已登出	Signed out	ログアウトしました	Выход выполнен	로그아웃했습니다
+dest_search_year_month	年月：	年月：	年月：	Year/month:	年月：	Год/месяц:	연/월:
+dest_search_year_placeholder	年（如 2026）	年（如 2026）	年（如 2026）	Year (e.g. 2026)	年（例：2026）	Год (например, 2026)	연도(예: 2026)
+dest_common_apply	应用	套用	套用	Apply	適用	Применить	적용
+dest_common_enable	开启	開啟	開啟	Enable	有効にする	Включить	켜기
+dest_pref_sort_note	开启偏好排序后，取一批会额外请求这一批作品的详情以获取标签（每批约 20 到 30 次），首次还可能要扫描一次收藏标签。	開啟偏好排序後，取一批會額外請求這批作品的詳情以取得標籤（每批約 20 到 30 次），首次還可能要掃描一次收藏標籤。	開啟偏好排序後，取一批會額外請求這批作品的詳情以取得標籤（每批約 20 到 30 次），首次還可能要掃描一次收藏標籤。	With preference sorting on, each batch also fetches details for its works to read tags (about 20–30 requests per batch), and the first run may scan your saved tags once.	偏好ソートを有効にすると、1 回の取得ごとに作品詳細を追加取得してタグを読みます（1 回あたり約 20〜30 リクエスト）。初回は保存タグの走査も行います。	С включённой сортировкой по предпочтениям каждая порция дополнительно запрашивает детали работ ради тегов (20–30 запросов на порцию); при первом запуске может понадобиться разовый обход сохранённых тегов.	선호 정렬을 켜면 한 묶음마다 작품 상세를 추가로 요청해 태그를 읽습니다(묶음당 약 20~30회). 첫 실행에서는 저장한 태그를 한 번 훑을 수 있습니다.
+dest_appearance_light	当前：浅色	目前：淺色	目前：淺色	Current: light	現在：ライト	Сейчас: светлая	현재: 라이트
+dest_appearance_dark	当前：深色	目前：深色	目前：深色	Current: dark	現在：ダーク	Сейчас: тёмная	현재: 다크
+dest_auth_gender	性别：	性別：	性別：	Gender:	性別：	Пол:	성별:
+dest_tags_scanning	扫描中…	掃描中…	掃描中…	Scanning…	スキャン中…	Сканирование…	스캔 중…
+dest_tags_scan_action	扫描收藏更新统计	掃描收藏更新統計	掃描收藏更新統計	Scan favorites for update stats	お気に入りの更新統計をスキャン	Сканировать избранное на статистику	즐겨찾기 업데이트 통계 스캔
+dest_common_draw	抽…	抽…	抽…	Picking…	抽選中…	Тянем…	뽑는 중…
