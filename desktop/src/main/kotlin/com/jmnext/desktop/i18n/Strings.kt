@@ -29,3 +29,20 @@ fun t(key: String): String = LocalStrings.current[key] ?: key
 @Composable
 fun tf(key: String, vararg args: Any?): String =
     String.format(LocalStrings.current[key] ?: key, *args)
+
+/** 中文原文 → 当前语言译文的表，供 tl() 使用。 */
+val LocalByZh = compositionLocalOf<Map<String, String>> { emptyMap() }
+
+/**
+ * 按中文原文取译文。
+ *
+ * 桌面端现有文案是写死的中文，逐条改成键名成本高；这里先用中文原文当查找键：
+ * 有对应译文就用译文，没有就原样返回中文。等整屏迁移完再逐步换成键名。
+ */
+@Composable
+fun tl(zh: String): String = LocalByZh.current[zh] ?: zh
+
+/** 带参数的版本：参数照常按 %1$s / %2$d 填。 */
+@Composable
+fun tlf(zh: String, vararg args: Any?): String =
+    String.format(LocalByZh.current[zh] ?: zh, *args)

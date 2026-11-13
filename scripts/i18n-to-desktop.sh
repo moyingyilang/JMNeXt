@@ -72,4 +72,35 @@ mkdir -p "$(dirname "$OUT")"
     echo '    STRINGS[locale] ?: STRINGS.getValue("zh-CN")'
 } > "$OUT"
 
+{
+    echo
+    echo '/** 中文原文 → 该语言的译文；桌面端现有文案以中文为键，便于逐屏替换。 */'
+    echo 'internal val BY_ZH: Map<String, Map<String, String>> = mapOf('
+    for loc in $LOCALES; do
+        echo "    \"$loc\" to mapOf("
+        # 先放 Android 的键（以 zh-CN 值作键），再放桌面独有的 dest_ 文案
+        while IFS=$'\t' read -r key zh; do
+            [ -n "$zh" ] || continue
+            val=$(awk -F'\t' -v k="$key" '$1==k{v=$2} END{if (v!="") print v}' "$TMP/$loc.tsv")
+            [ -n "$val" ] || continue
+            [ "$zh" = "$val" ] && continue
+            printf '        "%s" to "%s",\n' "$(kotlin_literal "$zh")" "$(kotlin_literal "$val")"
+        done < "$TMP/zh-CN.tsv"
+        awk -F'\t' -v loc="$loc" '
+            NR==1 { for (i=1;i<=NF;i++) { if ($i==loc) col=i; if ($i=="zh-CN") zhcol=i } next }
+            col>0 && zhcol>0 && $zhcol!="" && $col!="" && $zhcol!=$col {
+                printf "%s\t%s\n", $zhcol, $col
+            }
+        ' "$TMP/dest.tsv" | while IFS=$'\t' read -r zh val; do
+            printf '        "%s" to "%s",\n' "$(kotlin_literal "$zh")" "$(kotlin_literal "$val")"
+        done
+        echo '    ),'
+    done
+    echo ')'
+    echo
+    echo '/** 按中文原文取译文；没有对应译文就返回原文。 */'
+    echo 'internal fun byZhFor(locale: String): Map<String, String> ='
+    echo '    BY_ZH[locale] ?: emptyMap()'
+} >> "$OUT"
+
 printf '已生成 %s（%s 个键 × %s 门语言）\n' "$OUT" "$(wc -l < "$KEYS" | tr -d ' ')" "$(echo $LOCALES | wc -w | tr -d ' ')"

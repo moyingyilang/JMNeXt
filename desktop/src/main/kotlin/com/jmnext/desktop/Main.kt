@@ -150,6 +150,7 @@ private fun runApp() = application {
         val table = remember(locale) { com.jmnext.desktop.i18n.stringsFor(locale) }
         androidx.compose.runtime.CompositionLocalProvider(
             com.jmnext.desktop.i18n.LocalStrings provides table,
+            com.jmnext.desktop.i18n.LocalByZh provides remember(locale) { com.jmnext.desktop.i18n.byZhFor(locale) },
             com.jmnext.desktop.i18n.LocalLocale provides locale,
         ) {
             BlogTheme { App() }
