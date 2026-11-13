@@ -49,7 +49,7 @@
     <string name="profile_words">关键词</string>
     <string name="profile_categories">分类</string>
     <string name="profile_tags">标签</string>
-    <string name="profile_block_count">%1 条</string>
+    <string name="profile_block_count">%1$d 条</string>
     <string name="profile_manage_block">管理屏蔽名单</string>
     <string name="profile_appearance">外观</string>
     <string name="profile_style">风格</string>
@@ -65,7 +65,7 @@
     <string name="reader_mode_note">纵向滚动适合长条页，横向翻页适合单页构图的作品。阅读页顶栏可临时切换。</string>
     <string name="comic_render">漫画渲染</string>
     <string name="about_entry">关于</string>
-    <string name="about_version_fmt">版本：%1</string>
+    <string name="about_version_fmt">版本：%1$s</string>
     <string name="server_title">服务端</string>
     <string name="server_official">服务端对应官方版本</string>
     <string name="server_loading">读取中…</string>
@@ -123,11 +123,11 @@
 
     <string name="appearance_dynamic_color_desc">取系统壁纸的配色（Android 12+）。Material 风格会整份跟随系统；另外几套玻璃只取强调色，层次仍按本站配色。</string>
     <string name="appearance_wallpaper_auto_off">自动更换：关闭</string>
-    <string name="appearance_wallpaper_auto_every">自动更换：每 %1</string>
+    <string name="appearance_wallpaper_auto_every">自动更换：每 %1$s</string>
     <string name="appearance_wallpaper_clear_cache">清除壁纸缓存</string>
     <string name="appearance_wallpaper_clear_cache_desc">清掉已缓存的候选图，立刻重新取一批</string>
-    <string name="appearance_wallpaper_blur_fmt">模糊 %1</string>
-    <string name="appearance_wallpaper_dim_fmt">压暗 %1　（壁纸越花越需要压暗，玻璃才压得住文字）</string>
+    <string name="appearance_wallpaper_blur_fmt">模糊 %1$d</string>
+    <string name="appearance_wallpaper_dim_fmt">压暗 %1$s　（壁纸越花越需要压暗，玻璃才压得住文字）</string>
 
     <!-- 首页 -->
     <string name="home_loading">加载中…</string>
@@ -135,10 +135,10 @@
     <string name="home_refresh">刷新</string>
     <string name="home_to_light">切换到浅色</string>
     <string name="home_to_dark">切换到深色</string>
-    <string name="home_expand_more">展开更多分区（还有 %1 个）</string>
+    <string name="home_expand_more">展开更多分区（还有 %1$d 个）</string>
     <string name="home_latest">最新上架</string>
     <string name="home_more">更多</string>
-    <string name="home_tracking_updated">你追的 %1 部有更新</string>
+    <string name="home_tracking_updated">你追的 %1$d 部有更新</string>
 
     <string name="glass_high">高</string>
     <string name="glass_high_desc">真实模糊，半径 12dp —— 最好看，低端机可能掉帧</string>
@@ -175,8 +175,8 @@
     <string name="search_title">搜索</string>
     <string name="search_placeholder">输入作品名、作者或标签</string>
     <string name="search_year_any">年份：不限</string>
-    <string name="search_year_fmt">年份：%1 年</string>
-    <string name="search_year_month_fmt">年份：%1 年 %2 月</string>
+    <string name="search_year_fmt">年份：%1$s 年</string>
+    <string name="search_year_month_fmt">年份：%1$s 年 %2$s 月</string>
     <string name="search_collapse_year">收起年份筛选</string>
     <string name="search_expand_year">展开年份筛选</string>
     <string name="search_empty_title">没有找到相关作品</string>
@@ -229,15 +229,15 @@
     <string name="detail_title_placeholder">作品详情</string>
     <string name="detail_back">返回</string>
     <string name="detail_move_to_favorites">移入收藏夹</string>
-    <string name="detail_author_fmt">作者：%1</string>
-    <string name="detail_updated_fmt">更新：%1</string>
+    <string name="detail_author_fmt">作者：%1$s</string>
+    <string name="detail_updated_fmt">更新：%1$s</string>
     <string name="detail_tags_hint">标签：点开搜索，长按屏蔽</string>
     <string name="detail_unblock">不再屏蔽</string>
     <string name="detail_download_album">下载整部作品</string>
     <string name="detail_download_system">交给系统下载器</string>
     <string name="detail_favorite_tags">收藏这些标签</string>
     <string name="detail_comments">评论</string>
-    <string name="detail_chapters_fmt">章节目录（%1）</string>
+    <string name="detail_chapters_fmt">章节目录（%1$d）</string>
     <string name="detail_related">相关推荐</string>
     <string name="detail_prev_page">上一页</string>
     <string name="detail_next_page">下一页</string>
@@ -249,11 +249,11 @@
     <string name="hist_empty">还没有观看记录</string>
     <string name="tracking_title">我的追更</string>
     <string name="tracking_empty">还没有追更，去详情页点「追更」</string>
-    <string name="list_total_fmt">共 %1 项</string>
+    <string name="list_total_fmt">共 %1$d 项</string>
     <string name="list_back">返回</string>
     <string name="list_manage_folders">管理收藏夹</string>
     <string name="list_need_login">需要登录</string>
-    <string name="list_login_desc_fmt">%1与账号绑定，登录后在这里查看</string>
+    <string name="list_login_desc_fmt">%1$s与账号绑定，登录后在这里查看</string>
     <string name="list_untrack">取消追更</string>
     <string name="list_move_to_folder">移入收藏夹</string>
     <string name="list_delete_history">删除这条历史</string>
@@ -265,9 +265,9 @@
     <string name="notif_title">通知</string>
     <string name="notif_back">返回</string>
     <string name="notif_loading">正在读取通知…</string>
-    <string name="notif_failed_fmt">读取失败：%1</string>
+    <string name="notif_failed_fmt">读取失败：%1$s</string>
     <string name="notif_empty">还没有通知。</string>
-    <string name="notif_load_more_fmt">加载更多（已显示 %1 / %2）</string>
+    <string name="notif_load_more_fmt">加载更多（已显示 %1$d / %2$d）</string>
     <string name="notif_tab_all">全部</string>
     <string name="notif_tab_tracking">追更</string>
     <string name="notif_tab_site">站内通知</string>
@@ -281,11 +281,11 @@
     <string name="tagfav_untag">取消收藏这个标签</string>
     <string name="tagfav_dialog_title">收藏标签</string>
     <string name="tagfav_dialog_desc">选中的标签会加入「我的 → 标签收藏」（上限 50）。</string>
-    <string name="tagfav_save_fmt">收藏 %1 个</string>
+    <string name="tagfav_save_fmt">收藏 %1$d 个</string>
 
     <!-- 周刊 -->
     <string name="week_title">周刊</string>
-    <string name="week_issue_fmt">%1 · 共 %2 部</string>
+    <string name="week_issue_fmt">%1$s · 共 %2$d 部</string>
     <string name="week_back">返回</string>
     <string name="week_issue_label">刊期</string>
     <string name="week_type_label">类型</string>
@@ -301,11 +301,11 @@
     <string name="random_view_grid">切换成网格</string>
     <string name="random_shuffle">换一批</string>
     <string name="random_loading">正在随机…</string>
-    <string name="random_failed_fmt">没拿到：%1</string>
+    <string name="random_failed_fmt">没拿到：%1$s</string>
     <string name="creator_authors">画师</string>
     <string name="creator_works">作品</string>
     <string name="creator_title">画师与作品库</string>
-    <string name="creator_total_fmt">共 %1 项</string>
+    <string name="creator_total_fmt">共 %1$d 项</string>
     <string name="creator_subtitle">来自作品库的画师与作品</string>
     <string name="creator_search_authors">搜索画师</string>
     <string name="creator_search_works">搜索作品</string>
@@ -314,9 +314,9 @@
 
     <!-- 阅读器 -->
     <string name="reader_empty">这一话没有可显示的图片</string>
-    <string name="reader_chapter_fmt">第 %1 话</string>
+    <string name="reader_chapter_fmt">第 %1$d 话</string>
     <string name="reader_title_fallback">阅读</string>
-    <string name="reader_pages_fmt">共 %1 页</string>
+    <string name="reader_pages_fmt">共 %1$d 页</string>
     <string name="reader_back">返回</string>
     <string name="reader_to_horizontal">切换到横向翻页</string>
     <string name="reader_to_vertical">切换到纵向滚动</string>
@@ -331,7 +331,7 @@
     <string name="reader_comments">评论</string>
     <string name="reader_favorite">收藏</string>
     <string name="reader_like">点赞</string>
-    <string name="reader_page_fmt">第 %1 页</string>
+    <string name="reader_page_fmt">第 %1$d 页</string>
     <string name="reader_page_failed">这一页加载失败 · 点击重试</string>
     <string name="reader_pick_title">选择章节</string>
     <string name="reader_pick_prev">上一页</string>
@@ -344,15 +344,15 @@
     <string name="block_back">返回</string>
     <string name="block_help">命中即隐藏，匹配忽略大小写。\n· 关键词：作品名或作者包含它\n· 分类：分类或子分类等于它（例如屏蔽「同人」）\n· 标签：列表接口不下发标签，因此改为在后台逐条读取作品详情取标签，命中即从列表中隐藏（只在存在标签规则时才会请求）</string>
     <string name="block_words_title">关键词屏蔽</string>
-    <string name="block_words_hint">作品名或作者命中即隐藏 · %1 条</string>
+    <string name="block_words_hint">作品名或作者命中即隐藏 · %1$d 条</string>
     <string name="block_categories_title">分类屏蔽</string>
-    <string name="block_categories_hint">整个分类不再出现 · %1 条</string>
+    <string name="block_categories_hint">整个分类不再出现 · %1$d 条</string>
     <string name="block_tags_title">标签屏蔽</string>
-    <string name="block_tags_hint">打开作品时提示 · %1 条</string>
-    <string name="block_length_fmt">长度应为 %1~%2 个字符</string>
-    <string name="block_exists_fmt">「%1」已经在名单里</string>
-    <string name="block_added_fmt">已屏蔽「%1」</string>
-    <string name="block_add_cd_fmt">添加%1</string>
+    <string name="block_tags_hint">打开作品时提示 · %1$d 条</string>
+    <string name="block_length_fmt">长度应为 %1$d~%2$d 个字符</string>
+    <string name="block_exists_fmt">「%1$s」已经在名单里</string>
+    <string name="block_added_fmt">已屏蔽「%1$s」</string>
+    <string name="block_add_cd_fmt">添加%1$s</string>
     <string name="block_empty">还没有添加</string>
 
     <!-- WebDAV -->
@@ -369,14 +369,14 @@
     <string name="dav_auto_sync">开启自动同步</string>
     <string name="dav_help">地址形如 https://dav.example.com/remote.php/dav/files/用户名（Nextcloud），或 https://dav.jianguoyun.com/dav/（坚果云）。密码请用应用专用密码。</string>
     <string name="dav_sync_done">同步完成</string>
-    <string name="dav_sync_failed_fmt">同步失败：%1</string>
+    <string name="dav_sync_failed_fmt">同步失败：%1$s</string>
     <string name="dav_syncing">同步中…</string>
     <string name="dav_sync_now">立即同步</string>
 
     <!-- 更多列表 / 周刊类型 -->
     <string name="more_title">更多</string>
     <string name="more_loading">加载中…</string>
-    <string name="more_total_fmt">共 %1 项</string>
+    <string name="more_total_fmt">共 %1$d 项</string>
     <string name="more_back">返回</string>
     <string name="week_type_all">全部</string>
     <string name="week_type_manga">漫画</string>
@@ -392,7 +392,7 @@
 
     <!-- 评论 -->
     <string name="cmt_title">评论</string>
-    <string name="cmt_total_fmt">共 %1 条</string>
+    <string name="cmt_total_fmt">共 %1$d 条</string>
     <string name="cmt_back">返回</string>
     <string name="cmt_compose_logged">说点什么（会公开发布）</string>
     <string name="cmt_compose_login">登录后可发表评论</string>
@@ -401,13 +401,13 @@
     <string name="cmt_empty_title">还没有评论</string>
     <string name="cmt_empty_desc">这里会显示其他读者的留言</string>
     <string name="cmt_delete">删除这条评论</string>
-    <string name="cmt_replies_fmt">%1 条回复</string>
+    <string name="cmt_replies_fmt">%1$d 条回复</string>
     <!-- 收藏夹 -->
     <string name="folder_name">收藏夹名称</string>
     <string name="folder_ok">确定</string>
     <string name="folder_cancel">取消</string>
     <string name="folder_delete_title">删除收藏夹</string>
-    <string name="folder_delete_confirm">确定删除「%1」吗？夹内的作品会回到「全部」，不会被取消收藏。</string>
+    <string name="folder_delete_confirm">确定删除「%1$s」吗？夹内的作品会回到「全部」，不会被取消收藏。</string>
     <string name="folder_delete">删除</string>
     <string name="folder_skip">不归类</string>
     <string name="folder_none_in_move">还没有收藏夹，先在「管理收藏夹」里新建一个。</string>
@@ -447,20 +447,20 @@
     <string name="daily_expand">查看签到历史</string>
     <string name="daily_collapse">收起签到历史</string>
     <string name="daily_reading">读取中…</string>
-    <string name="daily_history_failed_fmt">历史没读到：%1</string>
+    <string name="daily_history_failed_fmt">历史没读到：%1$s</string>
     <string name="daily_history_empty">还没有签到历史。</string>
     <string name="daily_record_cd">签到记录</string>
-    <string name="daily_month_fmt">%1月</string>
+    <string name="daily_month_fmt">%1$d月</string>
     <string name="daily_image_cd">签到大图</string>
 
     <string name="search_order_label">排序</string>
     <string name="search_field_label">检索</string>
 
-    <string name="search_results_fmt">共 %1 条结果</string>
-    <string name="search_hidden_fmt"> · 已按屏蔽规则隐藏 %1 条</string>
-    <string name="search_tag_blocked_fmt"> · 标签屏蔽 %1 条</string>
-    <string name="search_tag_blocked_notice_fmt">有 %1 条结果被标签屏蔽挡住了</string>
-    <string name="search_hit_fmt">命中：%1（仅本次搜索放行，不改动屏蔽规则）</string>
+    <string name="search_results_fmt">共 %1$d 条结果</string>
+    <string name="search_hidden_fmt"> · 已按屏蔽规则隐藏 %1$d 条</string>
+    <string name="search_tag_blocked_fmt"> · 标签屏蔽 %1$d 条</string>
+    <string name="search_tag_blocked_notice_fmt">有 %1$d 条结果被标签屏蔽挡住了</string>
+    <string name="search_hit_fmt">命中：%1$s（仅本次搜索放行，不改动屏蔽规则）</string>
     <string name="search_allow_once">允许一次</string>
     <string name="search_year_label">年</string>
     <string name="search_month_label">月</string>
@@ -468,22 +468,22 @@
 
     <!-- 我的页尾批 -->
     <string name="profile_block_empty">还没有屏蔽任何内容。可以按作品名、作者、分类或标签屏蔽，命中即从列表中隐藏。</string>
-    <string name="profile_block_active_fmt">已生效 %1 条规则。列表里看不到的作品可能正是被它们隐藏的。</string>
+    <string name="profile_block_active_fmt">已生效 %1$d 条规则。列表里看不到的作品可能正是被它们隐藏的。</string>
     <string name="profile_tracking_desc">你追的连载更新时通知我</string>
     <string name="profile_reading">阅读</string>
     <string name="profile_default_reader">默认浏览形态</string>
     <string name="profile_current">当前</string>
     <string name="profile_apply_url">应用这个地址</string>
-    <string name="profile_seconds_fmt">%1 秒</string>
-    <string name="profile_hours_fmt">%1 小时</string>
-    <string name="profile_minutes_fmt">%1 分钟</string>
-    <string name="profile_image_fmt">图片：%1</string>
+    <string name="profile_seconds_fmt">%1$d 秒</string>
+    <string name="profile_hours_fmt">%1$d 小时</string>
+    <string name="profile_minutes_fmt">%1$d 分钟</string>
+    <string name="profile_image_fmt">图片：%1$s</string>
     <string name="profile_event_fallback">签到活动</string>
-    <string name="profile_signed_fmt">已签 %1 / %2 天</string>
-    <string name="profile_day_fmt">%1号</string>
+    <string name="profile_signed_fmt">已签 %1$d / %2$d 天</string>
+    <string name="profile_day_fmt">%1$d号</string>
     <string name="profile_signed_tag">，已签到</string>
     <string name="profile_unsigned_tag">，未签到</string>
-    <string name="profile_server_drift_fmt">服务端对应的官方版本已变为 %1，而本客户端仍按 %2 上报。这不代表立即不可用，但接口行为可能已按新版本调整，值得检查。</string>
+    <string name="profile_server_drift_fmt">服务端对应的官方版本已变为 %1$s，而本客户端仍按 %2$s 上报。这不代表立即不可用，但接口行为可能已按新版本调整，值得检查。</string>
     <string name="profile_webdav_desc">同步阅读历史、收藏与屏蔽名单。多台设备指向同一文件即可互通。</string>
     <string name="profile_webdav_empty">尚未填写服务器地址。支持 Nextcloud、坚果云等标准 WebDAV 服务。</string>
     <string name="profile_logs_status">状态</string>
@@ -504,12 +504,12 @@
     <string name="auth_reset_sent">重置邮件已发送</string>
     <string name="auth_send_failed">发送失败</string>
 
-    <string name="auth_welcome_fmt">欢迎回来，%1</string>
-    <string name="auth_login_again_fmt">%1 · 登录后请再点一次刚才那个按钮</string>
+    <string name="auth_welcome_fmt">欢迎回来，%1$s</string>
+    <string name="auth_login_again_fmt">%1$s · 登录后请再点一次刚才那个按钮</string>
 
     <!-- 详情续 -->
-    <string name="detail_resume_fmt">继续阅读 · 第 %1 话</string>
-    <string name="detail_start_fmt">开始阅读 · 第 %1 话</string>
+    <string name="detail_resume_fmt">继续阅读 · 第 %1$d 话</string>
+    <string name="detail_start_fmt">开始阅读 · 第 %1$d 话</string>
     <string name="detail_start">开始阅读</string>
     <string name="detail_untrack_cd">取消追更</string>
     <string name="detail_track_cd">追更</string>
@@ -517,42 +517,42 @@
     <string name="detail_favorite_cd">收藏</string>
     <string name="detail_liked_cd">已点赞</string>
     <string name="detail_like_cd">点赞</string>
-    <string name="detail_pages_fmt">共 %1 页</string>
-    <string name="detail_comments_fmt"> · %1 评论</string>
+    <string name="detail_pages_fmt">共 %1$d 页</string>
+    <string name="detail_comments_fmt"> · %1$d 评论</string>
     <string name="detail_load_failed">没能加载出这部作品</string>
     <string name="detail_works">作品</string>
     <string name="detail_actors">演员</string>
     <string name="detail_by_rules">按你的屏蔽规则</string>
     <string name="detail_blocked_author_suffix">：已屏蔽作者</string>
-    <string name="detail_blocked_tags_fmt">：含「%1」</string>
-    <string name="detail_comment_total_fmt">%1 条</string>
+    <string name="detail_blocked_tags_fmt">：含「%1$s」</string>
+    <string name="detail_comment_total_fmt">%1$d 条</string>
     <string name="detail_no_comments">暂无</string>
 
     <!-- 详情动作提示 -->
     <string name="detail_track_updated">已更新追更状态</string>
     <string name="detail_track_failed">追更失败</string>
-    <string name="detail_fav_tags_done_fmt">已收藏 %1 个标签</string>
-    <string name="detail_dl_failed_fmt">获取下载地址失败：%1</string>
+    <string name="detail_fav_tags_done_fmt">已收藏 %1$d 个标签</string>
+    <string name="detail_dl_failed_fmt">获取下载地址失败：%1$s</string>
     <string name="detail_cannot_download">这个作品暂时不能下载</string>
     <string name="detail_download_started">已开始下载</string>
-    <string name="detail_download_label_fmt">下载 %1</string>
-    <string name="detail_blocked_tag_fmt">已屏蔽标签「%1」</string>
-    <string name="detail_blocked_author_fmt">已屏蔽作者「%1」</string>
-    <string name="detail_unblocked_tag_fmt">已取消屏蔽「%1」</string>
+    <string name="detail_download_label_fmt">下载 %1$s</string>
+    <string name="detail_blocked_tag_fmt">已屏蔽标签「%1$s」</string>
+    <string name="detail_blocked_author_fmt">已屏蔽作者「%1$s」</string>
+    <string name="detail_unblocked_tag_fmt">已取消屏蔽「%1$s」</string>
     <string name="detail_unblocked_author">已取消屏蔽该作者</string>
     <string name="detail_liked_already">已经点过赞了</string>
 
     <!-- 创作者作品 -->
     <string name="cw_title">作品信息</string>
     <string name="cw_not_found">没有这个作品的信息</string>
-    <string name="cw_date_fmt">日期：%1</string>
+    <string name="cw_date_fmt">日期：%1$s</string>
     <string name="cw_no_content">这个作品没有可看的内容</string>
     <string name="cw_no_content_desc">作品库里有些条目只有信息，没有图片</string>
     <string name="cw_related">相关作品</string>
 
     <!-- WebDAV 同步结果 -->
-    <string name="dav_summary_fmt">历史 %1 条、收藏 %2 条、屏蔽规则 %3 条</string>
-    <string name="dav_conflicts_fmt">冲突覆盖：历史 %1 条、收藏 %2 条（取较新一方）</string>
+    <string name="dav_summary_fmt">历史 %1$d 条、收藏 %2$d 条、屏蔽规则 %3$d 条</string>
+    <string name="dav_conflicts_fmt">冲突覆盖：历史 %1$d 条、收藏 %2$d 条（取较新一方）</string>
     <string name="dav_merged">已合并远端文件并回写</string>
     <string name="dav_created">远端文件不存在，已新建</string>
     <!-- 风格 -->
@@ -571,15 +571,15 @@
     <string name="login_reason_tags">标签收藏需要登录</string>
 
     <!-- 屏蔽添加与杂项 -->
-    <string name="block_remove_cd_fmt">移除 %1</string>
+    <string name="block_remove_cd_fmt">移除 %1$s</string>
     <string name="block_kind_word">关键词</string>
     <string name="block_kind_tag">标签</string>
     <string name="block_kind_category">分类名</string>
-    <string name="block_add_title_fmt">添加%1</string>
+    <string name="block_add_title_fmt">添加%1$s</string>
     <string name="block_eg_word">例如：NTR</string>
     <string name="block_eg_tag">例如：纯爱</string>
     <string name="block_eg_category">例如：同人</string>
-    <string name="block_len_hint_fmt">%1~%2 个字符</string>
+    <string name="block_len_hint_fmt">%1$d~%2$d 个字符</string>
     <string name="block_add">添加</string>
     <string name="block_cancel">取消</string>
     <string name="more_empty_week">这天的更新是空的</string>
@@ -597,14 +597,14 @@
     <string name="detail_download_album_label">下载整部作品</string>
     <string name="search_year_fmt_prefix">年份：</string>
     <string name="common_network_issue">网络问题</string>
-    <string name="reader_switch_chapter_failed_fmt">切换章节失败：%1</string>
+    <string name="reader_switch_chapter_failed_fmt">切换章节失败：%1$s</string>
     <string name="comments_posted">已发表</string>
     <string name="comments_deleted">已删除</string>
-    <string name="comments_post_failed_fmt">发表失败：%1</string>
-    <string name="comments_delete_failed_fmt">删除失败：%1</string>
-    <string name="fav_untrack_failed_fmt">取消追更失败：%1</string>
-    <string name="fav_delete_failed_fmt">删除失败：%1</string>
-    <string name="tagfav_delete_failed_fmt">删除失败：%1</string>
+    <string name="comments_post_failed_fmt">发表失败：%1$s</string>
+    <string name="comments_delete_failed_fmt">删除失败：%1$s</string>
+    <string name="fav_untrack_failed_fmt">取消追更失败：%1$s</string>
+    <string name="fav_delete_failed_fmt">删除失败：%1$s</string>
+    <string name="tagfav_delete_failed_fmt">删除失败：%1$s</string>
 
     <string name="common_unknown_error_fallback">未知错误</string>
 
@@ -615,8 +615,8 @@
     <string name="render_gray_hint">只去色，层次保留</string>
     <string name="render_ink">墨水屏</string>
     <string name="render_ink_hint">去色并提高对比度，适合 e-ink</string>
-    <string name="render_note_fmt">%1。只作用于漫画画面，不影响界面配色；墨水屏设备选「墨水屏」会更清楚。</string>
+    <string name="render_note_fmt">%1$s。只作用于漫画画面，不影响界面配色；墨水屏设备选「墨水屏」会更清楚。</string>
 
-    <string name="detail_download_started_with_title">已开始下载：%1</string>
-    <string name="detail_download_started_with_size">已开始下载：%1（%2）</string>
+    <string name="detail_download_started_with_title">已开始下载：%1$s</string>
+    <string name="detail_download_started_with_size">已开始下载：%1$s（%2$s）</string>
 </resources>
