@@ -336,4 +336,21 @@
     <string name="block_added_fmt">已封鎖「%1」</string>
     <string name="block_add_cd_fmt">新增%1</string>
     <string name="block_empty">還沒有新增</string>
+
+    <string name="dav_back">返回</string>
+    <string name="dav_title">WebDAV 同步</string>
+    <string name="dav_desc">同步閱讀歷史、收藏與封鎖名單。多台裝置指向同一個檔案即可互相同步。</string>
+    <string name="dav_server">伺服器位址</string>
+    <string name="dav_server_hint">https://dav.example.com/remote.php/dav/files/使用者名稱</string>
+    <string name="dav_user">使用者名稱</string>
+    <string name="dav_password">密碼（建議應用程式專用密碼）</string>
+    <string name="dav_show">顯示</string>
+    <string name="dav_hide">隱藏</string>
+    <string name="dav_path">遠端檔案路徑</string>
+    <string name="dav_auto_sync">開啟自動同步</string>
+    <string name="dav_help">位址形如 https://dav.example.com/remote.php/dav/files/使用者名稱（Nextcloud），或 https://dav.jianguoyun.com/dav/（堅果雲）。密碼請用應用程式專用密碼。</string>
+    <string name="dav_sync_done">同步完成</string>
+    <string name="dav_sync_failed_fmt">同步失敗：%1</string>
+    <string name="dav_syncing">同步中…</string>
+    <string name="dav_sync_now">立即同步</string>
 </resources>

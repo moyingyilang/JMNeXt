@@ -1,5 +1,7 @@
 package com.jmnext.ui.screens.settings
 
+import androidx.compose.ui.res.stringResource
+import com.jmnext.R
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -65,8 +67,8 @@ fun WebDavScreen(app: JmApp, onBack: () -> Unit) {
         verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
         Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-            TextButton(onClick = onBack) { Text("返回") }
-            Text("WebDAV 同步", style = MaterialTheme.typography.titleLarge, modifier = Modifier.padding(start = 8.dp))
+            TextButton(onClick = onBack) { Text(stringResource(R.string.dav_back)) }
+            Text(stringResource(R.string.dav_title), style = MaterialTheme.typography.titleLarge, modifier = Modifier.padding(start = 8.dp))
         }
 
         Text(
@@ -77,8 +79,8 @@ fun WebDavScreen(app: JmApp, onBack: () -> Unit) {
         OutlinedTextField(
             value = cfg.url,
             onValueChange = { save(cfg.copy(url = it.trim())) },
-            label = { Text("服务器地址") },
-            placeholder = { Text("https://dav.example.com/remote.php/dav/files/用户名") },
+            label = { Text(stringResource(R.string.dav_server)) },
+            placeholder = { Text(stringResource(R.string.dav_server_hint)) },
             singleLine = true,
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Uri, imeAction = ImeAction.Next),
             modifier = Modifier.fillMaxWidth(),
@@ -87,7 +89,7 @@ fun WebDavScreen(app: JmApp, onBack: () -> Unit) {
         OutlinedTextField(
             value = cfg.user,
             onValueChange = { save(cfg.copy(user = it)) },
-            label = { Text("用户名") },
+            label = { Text(stringResource(R.string.dav_user)) },
             singleLine = true,
             keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
             modifier = Modifier.fillMaxWidth(),
@@ -96,12 +98,12 @@ fun WebDavScreen(app: JmApp, onBack: () -> Unit) {
         OutlinedTextField(
             value = cfg.pass,
             onValueChange = { save(cfg.copy(pass = it)) },
-            label = { Text("密码（建议应用专用密码）") },
+            label = { Text(stringResource(R.string.dav_password)) },
             singleLine = true,
             visualTransformation = if (showPass) VisualTransformation.None else PasswordVisualTransformation(),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password, imeAction = ImeAction.Next),
             trailingIcon = {
-                TextButton(onClick = { showPass = !showPass }) { Text(if (showPass) "隐藏" else "显示") }
+                TextButton(onClick = { showPass = !showPass }) { Text(if (showPass) stringResource(R.string.dav_hide) else stringResource(R.string.dav_show)) }
             },
             modifier = Modifier.fillMaxWidth(),
         )
@@ -109,13 +111,13 @@ fun WebDavScreen(app: JmApp, onBack: () -> Unit) {
         OutlinedTextField(
             value = cfg.path,
             onValueChange = { save(cfg.copy(path = it.trim().ifBlank { "/JMNeXt/sync.json" })) },
-            label = { Text("远端文件路径") },
+            label = { Text(stringResource(R.string.dav_path)) },
             singleLine = true,
             modifier = Modifier.fillMaxWidth(),
         )
 
         Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-            Text("开启自动同步", modifier = Modifier.padding(end = 12.dp))
+            Text(stringResource(R.string.dav_auto_sync), modifier = Modifier.padding(end = 12.dp))
             Switch(checked = cfg.enabled, onCheckedChange = { save(cfg.copy(enabled = it)) })
         }
 
@@ -138,7 +140,7 @@ fun WebDavScreen(app: JmApp, onBack: () -> Unit) {
                         busy = false
                     }
                 },
-            ) { Text(if (busy) "同步中…" else "立即同步") }
+            ) { Text(if (busy) stringResource(R.string.dav_syncing) else stringResource(R.string.dav_sync_now)) }
             if (busy) CircularProgressIndicator(Modifier.padding(4.dp))
         }
 
