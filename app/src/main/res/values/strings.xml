@@ -607,4 +607,13 @@
     <string name="tagfav_delete_failed_fmt">删除失败：%1</string>
 
     <string name="common_unknown_error_fallback">未知错误</string>
+
+    <!-- 漫画渲染 -->
+    <string name="render_color">彩色</string>
+    <string name="render_color_hint">原样显示</string>
+    <string name="render_gray">黑白</string>
+    <string name="render_gray_hint">只去色，层次保留</string>
+    <string name="render_ink">墨水屏</string>
+    <string name="render_ink_hint">去色并提高对比度，适合 e-ink</string>
+    <string name="render_note_fmt">%1。只作用于漫画画面，不影响界面配色；墨水屏设备选「墨水屏」会更清楚。</string>
 </resources>

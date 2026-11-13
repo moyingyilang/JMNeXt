@@ -1022,12 +1022,12 @@ private fun ReadingCard(
                     },
                     shape = SegmentedButtonDefaults.itemShape(index, ComicRenderMode.entries.size),
                 ) {
-                    Text(m.label, style = MaterialTheme.typography.labelSmall)
+                    Text(stringResource(renderLabel(m)), style = MaterialTheme.typography.labelSmall)
                 }
             }
         }
         Text(
-            text = comicRenderMode.hint + "。只作用于漫画画面，不影响界面配色；墨水屏设备选「墨水屏」会更清楚。",
+            text = stringResource(R.string.render_note_fmt, stringResource(renderHint(comicRenderMode))),
             style = MaterialTheme.typography.labelSmall,
             color = c.textTertiary,
             modifier = Modifier.padding(top = Spacing.sm),
@@ -1479,4 +1479,20 @@ private fun CrashLogCard() {
             modifier = Modifier.padding(top = Spacing.xs),
         )
     }
+}
+
+/** 漫画渲染模式的显示名：shared 模块没有 Android 资源，映射放在界面层。 */
+@androidx.annotation.StringRes
+private fun renderLabel(mode: ComicRenderMode): Int = when (mode) {
+    ComicRenderMode.Color -> R.string.render_color
+    ComicRenderMode.Grayscale -> R.string.render_gray
+    ComicRenderMode.Ink -> R.string.render_ink
+}
+
+/** 同一档位的说明。 */
+@androidx.annotation.StringRes
+private fun renderHint(mode: ComicRenderMode): Int = when (mode) {
+    ComicRenderMode.Color -> R.string.render_color_hint
+    ComicRenderMode.Grayscale -> R.string.render_gray_hint
+    ComicRenderMode.Ink -> R.string.render_ink_hint
 }

@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">JMNeXt</string>
-    <!-- 由 scripts/i18n-tw.sh 从 values/strings.xml 生成，别手改 -->
+    <!-- 由 scripts/i18n-gen.sh zh-TW s2twp 生成，别手改 -->
 
     <string name="about_title">關於</string>
     <string name="about_back">返回</string>
@@ -574,4 +574,12 @@
     <string name="tagfav_delete_failed_fmt">刪除失敗：%1</string>
 
     <string name="common_unknown_error_fallback">未知錯誤</string>
+
+    <string name="render_color">彩色</string>
+    <string name="render_color_hint">原樣顯示</string>
+    <string name="render_gray">黑白</string>
+    <string name="render_gray_hint">只去色，層次保留</string>
+    <string name="render_ink">墨水屏</string>
+    <string name="render_ink_hint">去色並提高對比度，適合 e-ink</string>
+    <string name="render_note_fmt">%1。只作用於漫畫畫面，不影響介面配色；墨水屏裝置選「墨水屏」會更清楚。</string>
 </resources>

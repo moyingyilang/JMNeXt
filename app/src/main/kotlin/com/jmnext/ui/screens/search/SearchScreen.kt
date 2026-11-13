@@ -455,8 +455,11 @@ fun SearchScreen(
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Text(
-                text = if (state.filters.year.isEmpty()) stringResource(R.string.search_year_any) else
-                    "年份：${state.filters.year}${if (state.filters.month.isEmpty()) " 年" else " 年 ${state.filters.month} 月"}",
+                text = when {
+                    state.filters.year.isEmpty() -> stringResource(R.string.search_year_any)
+                    state.filters.month.isEmpty() -> stringResource(R.string.search_year_fmt, state.filters.year)
+                    else -> stringResource(R.string.search_year_month_fmt, state.filters.year, state.filters.month)
+                },
                 style = MaterialTheme.typography.labelSmall,
                 color = c.textTertiary,
                 modifier = Modifier.weight(1f),
