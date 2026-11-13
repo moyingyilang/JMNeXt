@@ -42,6 +42,7 @@ import com.jmnext.data.JmRepository
 import com.jmnext.data.remote.dto.CreatorAuthor
 import com.jmnext.data.remote.dto.CreatorWork
 import com.jmnext.data.remote.dto.CreatorWorkContent
+import com.jmnext.desktop.i18n.tl
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.launch
 
@@ -154,19 +155,19 @@ fun CreatorScreen(repository: JmRepository) {
             horizontalArrangement = Arrangement.spacedBy(10.dp),
         ) {
             Button(onClick = { if (mode != "author") { mode = "author"; selectedAuthor = null; workInfo = null } }) {
-                Text(if (mode == "author") "· 画师" else "画师")
+                Text((if (mode == "author") "· " else "") + tl("画师"))
             }
             Button(onClick = { if (mode != "work") { mode = "work"; selectedAuthor = null; workInfo = null } }) {
-                Text(if (mode == "work") "· 作品" else "作品")
+                Text((if (mode == "work") "· " else "") + tl("作品"))
             }
             OutlinedTextField(
                 value = query,
                 onValueChange = { query = it },
-                label = { Text(if (mode == "author") "搜索画师" else "搜索作品") },
+                label = { Text(if (mode == "author") tl("搜索画师") else tl("搜索作品")) },
                 singleLine = true,
                 modifier = Modifier.width(300.dp),
             )
-            Button(enabled = !busy, onClick = { page = 1; load(1) }) { Text("搜索") }
+            Button(enabled = !busy, onClick = { page = 1; load(1) }) { Text(tl("搜索")) }
             StatusLine(status, busy)
         }
 
@@ -182,7 +183,7 @@ fun CreatorScreen(repository: JmRepository) {
                     selectedAuthor = null
                     workInfo = null
                     load(1)
-                }) { Text("返回列表") }
+                }) { Text(tl("返回列表")) }
             }
         }
         workInfo?.let { (title, related) ->
@@ -191,7 +192,7 @@ fun CreatorScreen(repository: JmRepository) {
                 if (related.isNotEmpty()) {
                     Text("相关作品 ${related.size} 部（见下方）", style = MaterialTheme.typography.labelSmall)
                 }
-                TextButton(onClick = { workInfo = null; workContent = null }) { Text("关闭") }
+                TextButton(onClick = { workInfo = null; workContent = null }) { Text(tl("关闭")) }
             }
         }
 
@@ -205,7 +206,7 @@ fun CreatorScreen(repository: JmRepository) {
                 verticalArrangement = Arrangement.spacedBy(10.dp),
             ) {
                 if (contentLoading) {
-                    item { Text("正在取作品内容…", style = MaterialTheme.typography.labelSmall) }
+                    item { Text(tl("正在取作品内容…"), style = MaterialTheme.typography.labelSmall) }
                 }
                 val wc = workContent
                 if (wc != null) {
@@ -245,7 +246,7 @@ fun CreatorScreen(repository: JmRepository) {
                     if (wc.images.isEmpty() && wc.content.isNullOrBlank()) {
                         item {
                             Text(
-                                "这个作品没有可看的内容（作品库里有条目只有信息、没有图片）",
+                                tl("这个作品没有可看的内容（作品库里有条目只有信息、没有图片）"),
                                 style = MaterialTheme.typography.bodyMedium,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                             )
@@ -255,7 +256,7 @@ fun CreatorScreen(repository: JmRepository) {
                 if (!contentLoading && wc == null) {
                     item {
                         Text(
-                            "作品内容没取到（可能这个作品没有内容，或接口失败；顶部状态栏里有原因）",
+                            tl("作品内容没取到（可能这个作品没有内容，或接口失败；顶部状态栏里有原因）"),
                             style = MaterialTheme.typography.bodyMedium,
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
                         )
@@ -295,7 +296,7 @@ fun CreatorScreen(repository: JmRepository) {
                     }
                 }
                 item {
-                    TextButton(onClick = { workInfo = null; workContent = null }) { Text("返回作品列表") }
+                    TextButton(onClick = { workInfo = null; workContent = null }) { Text(tl("返回作品列表")) }
                 }
             }
             return@Column
@@ -378,7 +379,7 @@ fun CreatorScreen(repository: JmRepository) {
 
             if ((mode == "author" && authors.size < total) || (mode == "work" && works.size < total)) {
                 item {
-                    Button(enabled = !busy, onClick = { load(page + 1) }) { Text("加载更多") }
+                    Button(enabled = !busy, onClick = { load(page + 1) }) { Text(tl("加载更多")) }
                 }
             }
         }

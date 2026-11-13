@@ -23,6 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import com.jmnext.data.JmRepository
+import com.jmnext.desktop.i18n.tl
 import kotlinx.coroutines.launch
 
 /**
@@ -54,36 +55,36 @@ fun LoginScreen(repository: JmRepository, onDone: () -> Unit) {
     ) {
         Text(
             when (mode) {
-                "register" -> "注册"
-                "forgot" -> "找回密码"
-                else -> "登录"
+                "register" -> tl("注册")
+                "forgot" -> tl("找回密码")
+                else -> tl("登录")
             },
             style = MaterialTheme.typography.titleLarge,
         )
         Text(
-            "登录后才能使用收藏、追更与评论。",
+            tl("登录后才能使用收藏、追更与评论。"),
             style = MaterialTheme.typography.labelSmall,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
 
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            TextButton(onClick = { mode = "login"; message = null }) { Text((if (mode == "login") "· " else "") + "登录") }
-            TextButton(onClick = { mode = "register"; message = null }) { Text((if (mode == "register") "· " else "") + "注册") }
-            TextButton(onClick = { mode = "forgot"; message = null }) { Text((if (mode == "forgot") "· " else "") + "找回密码") }
+            TextButton(onClick = { mode = "login"; message = null }) { Text((if (mode == "login") "· " else "") + tl("登录")) }
+            TextButton(onClick = { mode = "register"; message = null }) { Text((if (mode == "register") "· " else "") + tl("注册")) }
+            TextButton(onClick = { mode = "forgot"; message = null }) { Text((if (mode == "forgot") "· " else "") + tl("找回密码")) }
         }
 
         if (mode != "forgot") {
             OutlinedTextField(
                 value = username,
                 onValueChange = { username = it },
-                label = { Text("用户名") },
+                label = { Text(tl("用户名")) },
                 singleLine = true,
                 modifier = Modifier.width(360.dp),
             )
             OutlinedTextField(
                 value = password,
                 onValueChange = { password = it },
-                label = { Text("密码") },
+                label = { Text(tl("密码")) },
                 singleLine = true,
                 visualTransformation = PasswordVisualTransformation(),
                 modifier = Modifier.width(360.dp),
@@ -94,7 +95,7 @@ fun LoginScreen(repository: JmRepository, onDone: () -> Unit) {
             OutlinedTextField(
                 value = passwordConfirm,
                 onValueChange = { passwordConfirm = it },
-                label = { Text("确认密码") },
+                label = { Text(tl("确认密码")) },
                 singleLine = true,
                 visualTransformation = PasswordVisualTransformation(),
                 modifier = Modifier.width(360.dp),
@@ -102,13 +103,13 @@ fun LoginScreen(repository: JmRepository, onDone: () -> Unit) {
             OutlinedTextField(
                 value = email,
                 onValueChange = { email = it },
-                label = { Text("邮箱") },
+                label = { Text(tl("邮箱")) },
                 singleLine = true,
                 modifier = Modifier.width(360.dp),
             )
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                Text("性别：", style = MaterialTheme.typography.labelMedium)
-                listOf("m" to "男", "f" to "女").forEach { (key, label) ->
+                Text(tl("性别："), style = MaterialTheme.typography.labelMedium)
+                listOf("m" to tl("男"), "f" to tl("女")).forEach { (key, label) ->
                     TextButton(onClick = { gender = key }) { Text((if (gender == key) "· " else "") + label) }
                 }
             }
@@ -118,7 +119,7 @@ fun LoginScreen(repository: JmRepository, onDone: () -> Unit) {
             OutlinedTextField(
                 value = email,
                 onValueChange = { email = it },
-                label = { Text("注册邮箱") },
+                label = { Text(tl("注册邮箱")) },
                 singleLine = true,
                 modifier = Modifier.width(360.dp),
             )
@@ -164,7 +165,7 @@ fun LoginScreen(repository: JmRepository, onDone: () -> Unit) {
                             }
                         }
                     },
-                ) { Text(if (busy) "提交中…" else "注册") }
+                ) { Text(if (busy) tl("提交中…") else tl("注册")) }
 
                 "forgot" -> Button(
                     enabled = !busy && email.isNotBlank(),
@@ -189,7 +190,7 @@ fun LoginScreen(repository: JmRepository, onDone: () -> Unit) {
                             }
                         }
                     },
-                ) { Text(if (busy) "提交中…" else "发送重置邮件") }
+                ) { Text(if (busy) tl("提交中…") else tl("发送重置邮件")) }
 
                 else -> Button(
                     enabled = !busy && username.isNotBlank() && password.isNotBlank(),
@@ -212,7 +213,7 @@ fun LoginScreen(repository: JmRepository, onDone: () -> Unit) {
                             busy = false
                         }
                     },
-                ) { Text(if (busy) "登录中…" else "登录") }
+                ) { Text(if (busy) tl("登录中…") else tl("登录")) }
             }
 
             if (repository.auth.isLoggedIn) {
@@ -222,7 +223,7 @@ fun LoginScreen(repository: JmRepository, onDone: () -> Unit) {
                         Log.line("登录", "已退出")
                         message = "已退出登录"
                     }
-                }) { Text("退出登录") }
+                }) { Text(tl("退出登录")) }
             }
         }
 

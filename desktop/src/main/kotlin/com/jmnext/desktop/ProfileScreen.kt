@@ -25,6 +25,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import com.jmnext.data.JmRepository
+import com.jmnext.desktop.i18n.tl
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.launch
 
@@ -73,27 +74,27 @@ fun ProfileScreen(repository: JmRepository, onGoLogin: () -> Unit) {
     }
 
     Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(24.dp)) {
-        Text("我的", style = MaterialTheme.typography.titleLarge)
+        Text(tl("我的"), style = MaterialTheme.typography.titleLarge)
 
-        Card("账号") {
+        Card(tl("账号")) {
             val member = authState.member
             when {
                 !authState.loggedIn -> {
-                    Text("未登录", style = MaterialTheme.typography.bodyMedium)
-                    Button(onClick = onGoLogin, modifier = Modifier.padding(top = 6.dp)) { Text("去登录") }
+                    Text(tl("未登录"), style = MaterialTheme.typography.bodyMedium)
+                    Button(onClick = onGoLogin, modifier = Modifier.padding(top = 6.dp)) { Text(tl("去登录")) }
                 }
-                member == null -> Text("已登录（会员信息未取到）", style = MaterialTheme.typography.bodyMedium)
+                member == null -> Text(tl("已登录（会员信息未取到）"), style = MaterialTheme.typography.bodyMedium)
                 else -> {
-                    InfoRow("用户名", member.username ?: "(无)")
-                    InfoRow("UID", member.uid ?: "(无)")
-                    InfoRow("等级", "${member.level} ${member.levelName ?: ""}")
-                    member.coin?.let { InfoRow("金币", it) }
-                    InfoRow("免广告特权", if (member.adFree) "已开通" else "未开通")
+                    InfoRow(tl("用户名"), member.username ?: tl("(无)"))
+                    InfoRow("UID", member.uid ?: tl("(无)"))
+                    InfoRow(tl("等级"), "${member.level} ${member.levelName ?: ""}")
+                    member.coin?.let { InfoRow(tl("金币"), it) }
+                    InfoRow(tl("免广告特权"), if (member.adFree) tl("已开通") else tl("未开通"))
                 }
             }
         }
 
-        Card("每日签到") {
+        Card(tl("每日签到")) {
 StatusLine(status, busy)
             Row(
                 modifier = Modifier.padding(top = 8.dp),
@@ -121,7 +122,7 @@ StatusLine(status, busy)
                             busy = false
                         }
                     },
-                ) { Text(if (busy) "提交中…" else "签到") }
+                ) { Text(if (busy) tl("提交中…") else tl("签到")) }
                 Text(
                     eventName ?: "",
                     style = MaterialTheme.typography.labelSmall,
@@ -133,10 +134,10 @@ StatusLine(status, busy)
             }
         }
 
-        Card("说明") {
+        Card(tl("说明")) {
             Text(
-                "桌面端与 Android 端共用同一份数据层；界面按桌面形态重做（左侧常驻导航、" +
-                    "阅读页纵向连续滚动）。Android 特有的设置项（悬浮底栏、壁纸、动效性格）在桌面上没有对应物，未搬过来。",
+                tl("桌面端与 Android 端共用同一份数据层；界面按桌面形态重做（左侧常驻导航、" +
+                    "阅读页纵向连续滚动）。Android 特有的设置项（悬浮底栏、壁纸、动效性格）在桌面上没有对应物，未搬过来。"),
                 style = MaterialTheme.typography.bodySmall,
             )
         }

@@ -36,6 +36,7 @@ import androidx.compose.ui.unit.dp
 import com.jmnext.data.remote.dto.CategoryBlock
 import com.jmnext.data.remote.dto.ListItem
 import com.jmnext.data.JmRepository
+import com.jmnext.desktop.i18n.tl
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.launch
 
@@ -214,8 +215,8 @@ fun CategoryScreen(
                 .padding(12.dp),
             verticalArrangement = Arrangement.spacedBy(2.dp),
         ) {
-            Text("分类", style = MaterialTheme.typography.titleMedium, modifier = Modifier.padding(bottom = 6.dp))
-            NavChip("全部", current == null) { current = null; currentName = "全部"; filter(null, "全部", 1) }
+            Text(tl("分类"), style = MaterialTheme.typography.titleMedium, modifier = Modifier.padding(bottom = 6.dp))
+            NavChip(tl("全部"), current == null) { current = null; currentName = "全部"; filter(null, "全部", 1) }
             nodes.forEach { (slug, name, subs) ->
                 NavChip(name, current == slug) {
                     current = slug
@@ -252,15 +253,15 @@ fun CategoryScreen(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(12.dp),
             ) {
-                Text(currentName, style = MaterialTheme.typography.titleLarge)
+                Text(tl(currentName), style = MaterialTheme.typography.titleLarge)
             StatusLine(status, busy)
                 // 排序档位：换档后从第一页重新加载
                 listOf(
-                    "" to "最新",
-                    "tf" to "最多爱心",
-                    "mv" to "总排行",
-                    "mv_m" to "月排行",
-                    "mp_w" to "周排行",
+                    "" to tl("最新"),
+                    "tf" to tl("最多爱心"),
+                    "mv" to tl("总排行"),
+                    "mv_m" to tl("月排行"),
+                    "mp_w" to tl("周排行"),
                 ).forEach { (key, label) ->
                     TextButton(onClick = { sort = key; filter(current, currentName, 1) }) {
                         Text(if (sort == key) "· $label" else label, style = MaterialTheme.typography.labelSmall)
@@ -274,7 +275,7 @@ fun CategoryScreen(
                         items = emptyList()
                         hidden = 0
                         status = if (nodes.isEmpty()) "热门标签兜底" else "分类 ${nodes.size} 个"
-                    }) { Text(if (nodes.isEmpty()) "返回热门标签" else "返回分类", style = MaterialTheme.typography.labelSmall) }
+                    }) { Text(if (nodes.isEmpty()) tl("返回热门标签") else tl("返回分类"), style = MaterialTheme.typography.labelSmall) }
                 }
                 if (items.isNotEmpty()) {
                     Button(
@@ -283,7 +284,7 @@ fun CategoryScreen(
                             val t = tagMode
                             if (t != null) searchTag(t, tagPage + 1) else filter(current, currentName, page + 1)
                         },
-                    ) { Text("加载更多") }
+                    ) { Text(tl("加载更多")) }
                 }
             }
             BlockedNotice(hidden)
@@ -296,10 +297,10 @@ fun CategoryScreen(
                 ) {
                     Text("分类拿不到" + (treeError?.let { "：$it" } ?: ""), style = MaterialTheme.typography.titleMedium)
                     if (hotTags.isEmpty()) {
-                        Text("热门标签也拿不到。可以点「重试」再取一次。", style = MaterialTheme.typography.bodyMedium)
-                        Button(enabled = !busy, onClick = { loadCategories() }) { Text("重试") }
+                        Text(tl("热门标签也拿不到。可以点「重试」再取一次。"), style = MaterialTheme.typography.bodyMedium)
+                        Button(enabled = !busy, onClick = { loadCategories() }) { Text(tl("重试")) }
                     } else {
-                        Text("热门标签（点标签按标签搜索）", style = MaterialTheme.typography.titleMedium)
+                        Text(tl("热门标签（点标签按标签搜索）"), style = MaterialTheme.typography.titleMedium)
                         FlowRow(
                             modifier = Modifier.fillMaxWidth(),
                             horizontalArrangement = Arrangement.spacedBy(8.dp),

@@ -32,6 +32,7 @@ import androidx.compose.ui.input.key.onKeyEvent
 import androidx.compose.ui.unit.dp
 import com.jmnext.data.JmRepository
 import com.jmnext.data.remote.dto.ListItem
+import com.jmnext.desktop.i18n.tl
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.launch
 import androidx.compose.ui.graphics.Color
@@ -194,7 +195,7 @@ fun SearchScreen(
             OutlinedTextField(
                 value = query,
                 onValueChange = { query = it },
-                label = { Text("搜索作品") },
+                label = { Text(tl("搜索作品")) },
                 singleLine = true,
                 modifier = Modifier.width(360.dp).onKeyEvent { e ->
                     when {
@@ -211,7 +212,7 @@ fun SearchScreen(
                 },
             )
             Button(enabled = !busy && query.isNotBlank(), onClick = { runSearch(1) }) {
-                Text(if (busy) "搜索中…" else "搜索")
+                Text(if (busy) tl("搜索中…") else tl("搜索"))
             }
 StatusLine(status, busy, style = MaterialTheme.typography.labelSmall, color = Color.Unspecified)
         }
@@ -221,10 +222,10 @@ StatusLine(status, busy, style = MaterialTheme.typography.labelSmall, color = Co
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(4.dp),
         ) {
-            Text("排序：", style = MaterialTheme.typography.labelMedium)
+            Text(tl("排序："), style = MaterialTheme.typography.labelMedium)
             SEARCH_ORDERS.forEach { (key, label) ->
                 TextButton(enabled = !busy, onClick = { order = key }) {
-                    Text((if (order == key) "· " else "") + label)
+                    Text((if (order == key) "· " else "") + tl(label))
                 }
             }
         }
@@ -234,10 +235,10 @@ StatusLine(status, busy, style = MaterialTheme.typography.labelSmall, color = Co
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(4.dp),
         ) {
-            Text("字段：", style = MaterialTheme.typography.labelMedium)
+            Text(tl("字段："), style = MaterialTheme.typography.labelMedium)
             SEARCH_TYPES.forEach { (key, label) ->
                 TextButton(enabled = !busy, onClick = { type = key }) {
-                    Text((if (type == key) "· " else "") + label)
+                    Text((if (type == key) "· " else "") + tl(label))
                 }
             }
         }
@@ -247,22 +248,22 @@ StatusLine(status, busy, style = MaterialTheme.typography.labelSmall, color = Co
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(8.dp),
         ) {
-            Text("年月：", style = MaterialTheme.typography.labelMedium)
+            Text(tl("年月："), style = MaterialTheme.typography.labelMedium)
             OutlinedTextField(
                 value = year,
                 onValueChange = { input -> year = input.filter { it.isDigit() }.take(4) },
-                label = { Text("年（如 2026）") },
+                label = { Text(tl("年（如 2026）")) },
                 singleLine = true,
                 modifier = Modifier.width(150.dp),
             )
             OutlinedTextField(
                 value = month,
                 onValueChange = { input -> month = input.filter { it.isDigit() }.take(2) },
-                label = { Text("月（1-12）") },
+                label = { Text(tl("月（1-12）")) },
                 singleLine = true,
                 modifier = Modifier.width(130.dp),
             )
-            TextButton(enabled = !busy, onClick = { year = ""; month = "" }) { Text("不限") }
+            TextButton(enabled = !busy, onClick = { year = ""; month = "" }) { Text(tl("不限")) }
         }
 
         if (history.isNotEmpty()) {
@@ -271,11 +272,11 @@ StatusLine(status, busy, style = MaterialTheme.typography.labelSmall, color = Co
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(4.dp),
             ) {
-                Text("搜索历史：", style = MaterialTheme.typography.labelMedium)
+                Text(tl("搜索历史："), style = MaterialTheme.typography.labelMedium)
                 history.forEach { h ->
                     TextButton(enabled = !busy, onClick = { query = h; runSearch(1) }) { Text(h) }
                 }
-                TextButton(enabled = !busy, onClick = { history = historyStore.clear() }) { Text("清空") }
+                TextButton(enabled = !busy, onClick = { history = historyStore.clear() }) { Text(tl("清空")) }
             }
         }
 
@@ -286,7 +287,7 @@ StatusLine(status, busy, style = MaterialTheme.typography.labelSmall, color = Co
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.spacedBy(4.dp),
                 ) {
-                    Text("热门标签：", style = MaterialTheme.typography.labelMedium)
+                    Text(tl("热门标签："), style = MaterialTheme.typography.labelMedium)
                     // 顺序由服务端给，不自行排序（照 Android）
                     hotTags.take(12).forEach { tag ->
                         TextButton(enabled = !busy, onClick = { query = tag; type = "tag"; runSearch(1) }) { Text(tag) }
@@ -298,14 +299,14 @@ StatusLine(status, busy, style = MaterialTheme.typography.labelSmall, color = Co
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(4.dp),
             ) {
-                Text("随机推荐：", style = MaterialTheme.typography.labelMedium)
+                Text(tl("随机推荐："), style = MaterialTheme.typography.labelMedium)
                 recommend.take(6).forEach { item ->
                     // 用标题按钮而不是封面：ComicCover 是给网格用的，塞进行内排版会变形
                     TextButton(enabled = !busy, onClick = { onOpenComic(item) }) {
                         Text(item.name.orEmpty().take(12))
                     }
                 }
-                TextButton(enabled = !suggestBusy, onClick = { reloadSuggest() }) { Text("换一批") }
+                TextButton(enabled = !suggestBusy, onClick = { reloadSuggest() }) { Text(tl("换一批")) }
             }
         }
 
@@ -326,7 +327,7 @@ StatusLine(status, busy, style = MaterialTheme.typography.labelSmall, color = Co
                     style = MaterialTheme.typography.labelSmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
-                TextButton(onClick = { TagBlocker.allowOnce(blockedItems.map { it.id }.toSet()) }) { Text("允许一次") }
+                TextButton(onClick = { TagBlocker.allowOnce(blockedItems.map { it.id }.toSet()) }) { Text(tl("允许一次")) }
             }
         }
 
@@ -342,7 +343,7 @@ StatusLine(status, busy, style = MaterialTheme.typography.labelSmall, color = Co
             }
             if (items.isNotEmpty() && items.size < total) {
                 item {
-                    Button(onClick = { runSearch(page + 1) }, enabled = !busy) { Text("加载更多") }
+                    Button(onClick = { runSearch(page + 1) }, enabled = !busy) { Text(tl("加载更多")) }
                 }
             }
         }

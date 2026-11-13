@@ -29,6 +29,7 @@ import androidx.compose.ui.unit.dp
 import com.jmnext.data.JmRepository
 import com.jmnext.data.remote.dto.FavoriteFolder
 import com.jmnext.data.remote.dto.ListItem
+import com.jmnext.desktop.i18n.tl
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.launch
 
@@ -101,15 +102,15 @@ fun FavoriteScreen(
         ) {
             // 标签：收藏 / 追更（Android 端追更就在这一页里）
             TextButton(enabled = !busy, onClick = { if (tab != "favorite") tab = "favorite" }) {
-                Text(if (tab == "favorite") "· 收藏" else "收藏", style = MaterialTheme.typography.titleMedium)
+                Text(if (tab == "favorite") "· " + tl("收藏") else tl("收藏"), style = MaterialTheme.typography.titleMedium)
             }
             TextButton(enabled = !busy, onClick = { if (tab != "tracking") tab = "tracking" }) {
-                Text(if (tab == "tracking") "· 追更" else "追更", style = MaterialTheme.typography.titleMedium)
+                Text(if (tab == "tracking") "· " + tl("追更") else tl("追更"), style = MaterialTheme.typography.titleMedium)
             }
             if (tab == "favorite") {
 StatusLine(status, busy)
                 if (items.isNotEmpty() && items.size < total) {
-                    Button(enabled = !busy, onClick = { load(page + 1) }) { Text("加载更多") }
+                    Button(enabled = !busy, onClick = { load(page + 1) }) { Text(tl("加载更多")) }
                 }
                 notice?.let {
                     Text(it, style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.primary)
@@ -136,7 +137,7 @@ StatusLine(status, busy)
                 Button(
                     enabled = !busy && selected != null,
                     onClick = { selected = null; page = 1; load(1) },
-                ) { Text(if (selected == null) "· 全部" else "全部", style = MaterialTheme.typography.labelSmall) }
+                ) { Text(if (selected == null) "· " + tl("全部") else tl("全部"), style = MaterialTheme.typography.labelSmall) }
                 folders.forEach { f ->
                     Button(
                         enabled = !busy && f.folderId != selected,
@@ -163,7 +164,7 @@ StatusLine(status, busy)
                 OutlinedTextField(
                     value = folderName,
                     onValueChange = { folderName = it },
-                    label = { Text("收藏夹名称") },
+                    label = { Text(tl("收藏夹名称")) },
                     singleLine = true,
                     modifier = Modifier.width(220.dp),
                 )
@@ -189,7 +190,7 @@ StatusLine(status, busy)
                             busy = false
                         }
                     },
-                ) { Text("新建") }
+                ) { Text(tl("新建")) }
                 if (selected != null) {
                     Button(
                         enabled = !busy && folderName.isNotBlank(),
@@ -213,7 +214,7 @@ StatusLine(status, busy)
                                 busy = false
                             }
                         },
-                    ) { Text("改名") }
+                    ) { Text(tl("改名")) }
                     Button(
                         enabled = !busy,
                         onClick = {
@@ -235,7 +236,7 @@ StatusLine(status, busy)
                                 busy = false
                             }
                         },
-                    ) { Text("删除") }
+                    ) { Text(tl("删除")) }
                 }
             }
         }
@@ -269,7 +270,7 @@ StatusLine(status, busy)
                                 busy = false
                             }
                         },
-                    ) { Text("取消收藏", style = MaterialTheme.typography.labelSmall) }
+                    ) { Text(tl("取消收藏"), style = MaterialTheme.typography.labelSmall) }
                 }
             }
         }

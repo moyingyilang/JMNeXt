@@ -32,6 +32,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import com.jmnext.data.JmRepository
 import com.jmnext.data.remote.dto.CommentItem
+import com.jmnext.desktop.i18n.tl
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.launch
 
@@ -93,8 +94,8 @@ fun CommentsScreen(repository: JmRepository, aid: String, onBack: () -> Unit) {
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(8.dp),
         ) {
-            TextButton(onClick = onBack) { Text("返回") }
-            Text("评论", style = MaterialTheme.typography.titleMedium)
+            TextButton(onClick = onBack) { Text(tl("返回")) }
+            Text(tl("评论"), style = MaterialTheme.typography.titleMedium)
             StatusLine(status, busy)
         }
 
@@ -103,11 +104,11 @@ fun CommentsScreen(repository: JmRepository, aid: String, onBack: () -> Unit) {
             replyTo?.let { target ->
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Text(
-                        "正在回复 " + target.authorName,
+                        tl("正在回复 ") + target.authorName,
                         style = MaterialTheme.typography.labelSmall,
                         color = MaterialTheme.colorScheme.primary,
                     )
-                    TextButton(onClick = { replyTo = null }) { Text("取消回复") }
+                    TextButton(onClick = { replyTo = null }) { Text(tl("取消回复")) }
                 }
             }
             Row(
@@ -117,7 +118,7 @@ fun CommentsScreen(repository: JmRepository, aid: String, onBack: () -> Unit) {
                 OutlinedTextField(
                     value = input,
                     onValueChange = { input = it },
-                    label = { Text(if (replyTo == null) "写评论" else "回复") },
+                    label = { Text(if (replyTo == null) tl("写评论") else tl("回复")) },
                     singleLine = true,
                     modifier = Modifier.width(520.dp),
                 )
@@ -145,9 +146,9 @@ fun CommentsScreen(repository: JmRepository, aid: String, onBack: () -> Unit) {
                             busy = false
                         }
                     },
-                ) { Text(if (replyTo == null) "发表" else "回复") }
+                ) { Text(if (replyTo == null) tl("发表") else tl("回复")) }
                 if (!authState.loggedIn) {
-                    Text("需要登录", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    Text(tl("需要登录"), style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 }
             }
             notice?.let {
@@ -187,7 +188,7 @@ fun CommentsScreen(repository: JmRepository, aid: String, onBack: () -> Unit) {
             }
             if (items.isNotEmpty() && items.size < total) {
                 item {
-                    Button(enabled = !busy, onClick = { load(page + 1) }) { Text("加载更多") }
+                    Button(enabled = !busy, onClick = { load(page + 1) }) { Text(tl("加载更多")) }
                 }
             }
         }
@@ -242,10 +243,10 @@ private fun CommentRow(
         }
 
         Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
-            TextButton(onClick = { onReply(comment) }) { Text("回复", style = MaterialTheme.typography.labelSmall) }
+            TextButton(onClick = { onReply(comment) }) { Text(tl("回复"), style = MaterialTheme.typography.labelSmall) }
             // 只对自己的评论显示删除：uid 与当前账号比对，避免误删他人
             if (myUid != null && comment.uid == myUid) {
-                TextButton(onClick = { onDelete(comment) }) { Text("删除", style = MaterialTheme.typography.labelSmall) }
+                TextButton(onClick = { onDelete(comment) }) { Text(tl("删除"), style = MaterialTheme.typography.labelSmall) }
             }
         }
 

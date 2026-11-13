@@ -1,4 +1,5 @@
 package com.jmnext.desktop
+import com.jmnext.desktop.i18n.tl
 import com.jmnext.selftune.PageSample
 import androidx.compose.foundation.focusable
 import androidx.compose.ui.focus.FocusRequester
@@ -157,10 +158,10 @@ fun ReaderScreen(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(8.dp),
         ) {
-            TextButton(onClick = onBack) { Text("返回") }
+            TextButton(onClick = onBack) { Text(tl("返回")) }
             // 加载中与失败分开：失败显示可复制的错误文案（含"重试"提示），加载中才转圈
             if (loading) {
-                LoadingHint("正在加载章节…")
+                LoadingHint(tl("正在加载章节…"))
             } else {
                 Text(status, style = MaterialTheme.typography.titleMedium)
             }
@@ -172,7 +173,7 @@ fun ReaderScreen(
                 )
             }
             if (payload == null) {
-                TextButton(onClick = { retryToken += 1 }) { Text("重试") }
+                TextButton(onClick = { retryToken += 1 }) { Text(tl("重试")) }
             }
             Row(Modifier.weight(1f), horizontalArrangement = Arrangement.End) {
             }
@@ -350,11 +351,11 @@ fun ReaderScreen(
                     horizontalArrangement = Arrangement.Center,
                 ) {
                     Button(enabled = nextId != null, onClick = { nextId?.let(onSwitchChapter) }) {
-                        Text(if (nextId != null) "下一话" else "已经是最后一话")
+                        Text(if (nextId != null) tl("下一话") else tl("已经是最后一话"))
                     }
                     if (nextId != null) {
                         Box(Modifier.padding(start = 12.dp)) {
-                            TextButton(onClick = onBack) { Text("回详情页") }
+                            TextButton(onClick = onBack) { Text(tl("回详情页")) }
                         }
                     }
                 }
@@ -372,7 +373,7 @@ fun ReaderScreen(
         // 作用域，风险大，故先不做。
         }
         PageRail(
-            modeLabel = if (mode == ReaderMode.Page) "横向" else "纵向",
+            modeLabel = if (mode == ReaderMode.Page) tl("横向") else tl("纵向"),
             modifier = Modifier.align(androidx.compose.ui.Alignment.CenterEnd).width(40.dp),
             current = if (mode == ReaderMode.Page) pagerState.currentPage else currentPage,
             total = p.images.size,
@@ -438,7 +439,7 @@ Log.line("阅读", "章节选择：开始请求 album(comicId)…")
             },
         )
         ReaderBottomBar(
-            modeLabel = if (mode == ReaderMode.Page) "横向" else "纵向",
+            modeLabel = if (mode == ReaderMode.Page) tl("横向") else tl("纵向"),
             modifier = Modifier.align(androidx.compose.ui.Alignment.BottomCenter),
             visible = true,
             current = if (mode == ReaderMode.Page) pagerState.currentPage else currentPage,
@@ -540,7 +541,7 @@ internal fun PageItem(repository: JmRepository, payload: ReadPayload, image: Rea
                 modifier = Modifier.clickable { attempt += 1 }.padding(24.dp),
             ) {
                 Text("第 ${index + 1} 页加载失败", style = MaterialTheme.typography.bodyMedium)
-                Text("点这里重试", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.primary)
+                Text(tl("点这里重试"), style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.primary)
             }
 
             else -> Text("第 ${index + 1} 页 加载中…", style = MaterialTheme.typography.labelSmall)

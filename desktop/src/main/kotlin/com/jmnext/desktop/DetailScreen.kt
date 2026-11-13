@@ -41,6 +41,7 @@ import com.jmnext.data.prefs.ReadProgressStore
 import com.jmnext.data.remote.dto.AlbumDetail
 import com.jmnext.data.remote.dto.ListItem
 import com.jmnext.data.remote.dto.SeriesItem
+import com.jmnext.desktop.i18n.tl
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.launch
 import androidx.compose.animation.core.animateFloatAsState
@@ -282,7 +283,7 @@ fun DetailScreen(
                 Modifier.fillMaxWidth().padding(horizontal = 16.dp),
                 horizontalArrangement = Arrangement.End,
             ) {
-                TextButton(onClick = onRandomAgain) { Text("换一个") }
+                TextButton(onClick = onRandomAgain) { Text(tl("换一个")) }
             }
         }
         Row(
@@ -290,11 +291,11 @@ fun DetailScreen(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(8.dp),
         ) {
-            TextButton(onClick = onBack) { Text("返回") }
+            TextButton(onClick = onBack) { Text(tl("返回")) }
             // 状态/错误文案可选：用户常要把它贴给别人看（详情页加载失败、接口报错都走这里）
                 // 加载中与失败分开表达：失败时不该转圈（此前两者共用同一个 status）
                 if (loading) {
-                    LoadingHint("正在加载作品…")
+                    LoadingHint(tl("正在加载作品…"))
                 } else {
                     SelectionContainer { Text(status, style = MaterialTheme.typography.titleMedium) }
                 }
@@ -352,7 +353,7 @@ fun DetailScreen(
                                 favBusy = false
                             }
                         },
-                    ) { Text(if (favorite) "已收藏" else "收藏") }
+                    ) { Text(if (favorite) tl("已收藏") else tl("收藏")) }
 
                     // 点赞：与 Android 端一致 —— 已点过就不再打接口；成功后本地 liked=true、likes+1
                     Button(
@@ -387,7 +388,7 @@ fun DetailScreen(
                                 }
                             }
                         },
-                    ) { Text(if (d.liked) "已赞 " + d.likes else "点赞") }
+                    ) { Text(if (d.liked) tl("已赞 ") + d.likes else tl("点赞")) }
 
                     // 未登录不显示：否则点了必然失败，还得多跳一次登录页（照抄 Android 端）
                     if (repository.auth.isLoggedIn) {
@@ -408,13 +409,13 @@ fun DetailScreen(
                                     trackBusy = false
                                 }
                             },
-                        ) { Text(if (tracked) "已追更" else "追更") }
-                    TextButton(onClick = { onOpenComments(d.id) }) { Text("评论") }
+                        ) { Text(if (tracked) tl("已追更") else tl("追更")) }
+                    TextButton(onClick = { onOpenComments(d.id) }) { Text(tl("评论")) }
                     }
 
                     if (!repository.auth.isLoggedIn) {
                         Text(
-                            "未登录",
+                            tl("未登录"),
                             style = MaterialTheme.typography.labelSmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
                             modifier = Modifier.padding(top = 12.dp),
@@ -429,15 +430,15 @@ fun DetailScreen(
                 // 原处这份会造成同一个入口出现两次，已移除；进度的读取在右栏顶部就地完成。
 
 
-                InfoLine("标题", d.name.orEmpty())
-                InfoLine("作者", d.author.joinToString(" / "))
+                InfoLine(tl("标题"), d.name.orEmpty())
+                InfoLine(tl("作者"), d.author.joinToString(" / "))
                 // 标签：点标签按标签搜索、可屏蔽、可标星（审计缺口：此前只当纯文本显示）。
                 // Android 是「点=搜索、长按=屏蔽」；桌面端没有长按，改成每个标签跟两个明确按钮，
                 // 不藏隐藏手势（藏了没人发现，等于没做）。
                 if (d.tags.isNotEmpty()) {
                     Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
                         Text(
-                            "标签（点标签按标签搜索，右侧可屏蔽或标星）",
+                            tl("标签（点标签按标签搜索，右侧可屏蔽或标星）"),
                             style = MaterialTheme.typography.labelSmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
                         )
@@ -460,18 +461,18 @@ fun DetailScreen(
                                 )
                                 if (blocked) {
                                     Text(
-                                        "已屏蔽",
+                                        tl("已屏蔽"),
                                         style = MaterialTheme.typography.labelSmall,
                                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                                     )
                                 } else {
                                     TextButton(enabled = !tagBusy, onClick = { blockTag(tag) }) {
-                                        Text("屏蔽", style = MaterialTheme.typography.labelSmall)
+                                        Text(tl("屏蔽"), style = MaterialTheme.typography.labelSmall)
                                     }
                                 }
                                 TextButton(enabled = !tagBusy, onClick = { starTag(tag) }) {
                                     Text(
-                                        if (starredTags.contains(tag)) "取消标星" else "标星",
+                                        if (starredTags.contains(tag)) tl("取消标星") else tl("标星"),
                                         style = MaterialTheme.typography.labelSmall,
                                     )
                                 }
@@ -499,12 +500,12 @@ fun DetailScreen(
                                 )
                             }
                             TextButton(onClick = { tagQuery = null; tagItems = emptyList(); tagResultStatus = "" }) {
-                                Text("关闭标签搜索结果", style = MaterialTheme.typography.labelSmall)
+                                Text(tl("关闭标签搜索结果"), style = MaterialTheme.typography.labelSmall)
                             }
                         }
                     }
                 }
-                InfoLine("页数", d.totalPhotos.toString())
+                InfoLine(tl("页数"), d.totalPhotos.toString())
                 if (!d.description.isNullOrBlank()) {
                     // 简介也是 HTML（Android 的详情页同样走 plainText）。
                     // plainText 在"剥完标签什么都不剩"时返回 null，此时渲染空串而不是回退原文。
@@ -528,12 +529,12 @@ fun DetailScreen(
                     horizontalArrangement = Arrangement.spacedBy(8.dp),
                 ) {
                     Text(
-                        "下载整部作品",
+                        tl("下载整部作品"),
                         style = MaterialTheme.typography.bodyMedium,
                         modifier = Modifier.weight(1f),
                     )
                     Text(
-                        "交给系统浏览器下载",
+                        tl("交给系统浏览器下载"),
                         style = MaterialTheme.typography.labelSmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )
@@ -544,7 +545,7 @@ fun DetailScreen(
 
                 // 相关作品（横向滚动）：接口直接给的就是 ListItem，可直接用现成卡片
                 if (d.relatedList.isNotEmpty()) {
-                    Text("相关作品", style = MaterialTheme.typography.titleMedium, modifier = Modifier.padding(top = 8.dp))
+                    Text(tl("相关作品"), style = MaterialTheme.typography.titleMedium, modifier = Modifier.padding(top = 8.dp))
                     Row(
                         modifier = Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()),
                         horizontalArrangement = Arrangement.spacedBy(12.dp),
@@ -565,7 +566,7 @@ fun DetailScreen(
                 LazyColumn(modifier = Modifier.fillMaxSize().padding(start = 16.dp)) {
                     item {
                         Text(
-                            text = "开始阅读",
+                            text = tl("开始阅读"),
                             style = MaterialTheme.typography.titleMedium,
                             color = MaterialTheme.colorScheme.primary,
                             modifier = Modifier
@@ -573,7 +574,7 @@ fun DetailScreen(
                                 .clickable { onOpenChapter(SeriesItem(id = d.id, sort = null, name = null), listOf(d.id)) }
                                 .padding(vertical = 12.dp, horizontal = 4.dp),
                         )
-                        Text("该作品没有章节列表，直接阅读整本", style = MaterialTheme.typography.labelSmall)
+                        Text(tl("该作品没有章节列表，直接阅读整本"), style = MaterialTheme.typography.labelSmall)
                     }
                 }
             } else {
@@ -591,12 +592,12 @@ fun DetailScreen(
                             modifier = Modifier.fillMaxWidth().padding(vertical = 6.dp),
                             horizontalArrangement = Arrangement.spacedBy(8.dp),
                         ) {
-                            Button(onClick = { onOpenChapter(d.series.first(), ids) }) { Text("从头开始") }
+                            Button(onClick = { onOpenChapter(d.series.first(), ids) }) { Text(tl("从头开始")) }
                             // 无记录时置灰（用户确认过：置灰而不是隐藏，便于一眼看出有没有进度）
                             Button(
                                 enabled = idx >= 0,
                                 onClick = { if (idx >= 0) onOpenChapter(d.series[idx], ids) },
-                            ) { Text("继续观看") }
+                            ) { Text(tl("继续观看")) }
                         }
                     }
                     // 章节列表**正序**（用户要求：从上到下 1、2、3…，不要倒序）

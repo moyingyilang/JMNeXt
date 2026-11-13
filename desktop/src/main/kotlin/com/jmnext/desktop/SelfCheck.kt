@@ -37,6 +37,7 @@ object SelfCheck {
         checkPassphrase()
         checkPreferences()
         checkFreshInstallDecision()
+        checkI18n()
         println("== 结果：通过 " + pass + " 项，失败 " + fail + " 项 ==")
         return fail
     }
@@ -44,6 +45,22 @@ object SelfCheck {
     @JvmStatic
     fun main(args: Array<String>) {
         if (run() > 0) System.exit(1)
+    }
+
+    /** 多语言表自检：表非空、简中键齐、各语言没有空值。 */
+    private fun checkI18n() {
+        println("== 多语言自检 ==")
+        val zh = com.jmnext.desktop.i18n.stringsFor("zh-CN")
+        check("多语言：简中表非空", zh.isNotEmpty())
+        check("多语言：简中表没有空值", zh.values.none { it.isBlank() })
+        for (loc in listOf("zh-rTW", "zh-rHK", "en", "ja", "ru", "ko")) {
+            val t = com.jmnext.desktop.i18n.stringsFor(loc)
+            check("多语言： 有内容", t.isNotEmpty())
+            check("多语言： 没有空值", t.values.none { it.isBlank() })
+            check("多语言： 键集合与简中一致", t.keys == zh.keys)
+        }
+        val byZh = com.jmnext.desktop.i18n.byZhFor("en")
+        check("多语言：英文反查表非空", byZh.isNotEmpty())
     }
 
     /** 口令保护：包裹 -> 解开 -> 错口令 fail closed -> forget 删除文件。 */

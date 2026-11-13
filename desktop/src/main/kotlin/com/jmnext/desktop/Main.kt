@@ -52,6 +52,7 @@ import com.jmnext.data.auth.SecureStore
 import com.jmnext.data.prefs.BlockStore
 import com.jmnext.data.prefs.ReadProgressStore
 import com.jmnext.data.remote.dto.ListItem
+import com.jmnext.desktop.i18n.tl
 import java.io.File
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.fadeIn
@@ -236,10 +237,10 @@ private fun HomeScreen(
             horizontalArrangement = Arrangement.spacedBy(10.dp),
         ) {
             Button(enabled = !busy, onClick = { reload(1) }) {
-                Text(if (busy) "加载中…" else "刷新")
+                Text(if (busy) tl("加载中…") else tl("刷新"))
             }
             Button(enabled = !busy && items.size < total, onClick = { reload(page + 1) }) {
-                Text("加载更多")
+                Text(tl("加载更多"))
             }
             Text("已加载 ${items.size} / $total", style = MaterialTheme.typography.labelSmall)
         }
@@ -305,14 +306,14 @@ private fun ComicCard(item: ListItem, updated: Boolean = false, onOpen: () -> Un
         // 「追更里有更新」角标：数据来自服务端追更通知（见 HomeScreen 的 updatedIds）
         if (updated) {
             Text(
-                "更新",
+                tl("更新"),
                 style = MaterialTheme.typography.labelSmall,
                 color = MaterialTheme.colorScheme.primary,
                 modifier = Modifier.padding(top = 4.dp),
             )
         }
         Text(
-            text = item.name ?: "(无标题)",
+            text = item.name ?: tl("(无标题)"),
             style = MaterialTheme.typography.bodyMedium,
             maxLines = 2,
             modifier = Modifier.padding(top = 8.dp),
@@ -339,6 +340,7 @@ private sealed interface Screen {
 @Composable
 private fun App() {
     var screen by remember { mutableStateOf<Screen>(Screen.Home) }
+    val logoutMsg = tl("已退出登录")
     var showLogoutConfirm by remember { mutableStateOf(false) }
     val scope = rememberCoroutineScope()
     val authState by repository.auth.state.collectAsState()
@@ -396,7 +398,7 @@ private fun App() {
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.primary,
                     )
-                    TextButton(onClick = { serialNotice = null }) { Text("知道了") }
+                    TextButton(onClick = { serialNotice = null }) { Text(tl("知道了")) }
                 }
             }
             Row(
@@ -413,7 +415,7 @@ private fun App() {
                     text = if (authState.loggedIn) {
                         "已登录：${authState.member?.username ?: authState.member?.uid ?: ""}"
                     } else {
-                        "未登录"
+                        tl("未登录")
                     },
                     style = MaterialTheme.typography.labelSmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
@@ -425,7 +427,7 @@ private fun App() {
                     } else {
                         screen = Screen.Login
                     }
-                }) { Text(if (authState.loggedIn) "退出登录" else "登录") }
+                }) { Text(if (authState.loggedIn) tl("退出登录") else tl("登录")) }
             }
 
             Box(Modifier.weight(1f)) {
@@ -434,20 +436,20 @@ private fun App() {
             if (showLogoutConfirm) {
                 AlertDialog(
                     onDismissRequest = { showLogoutConfirm = false },
-                    title = { Text("退出登录") },
-                    text = { Text("退出后需要重新登录才能使用收藏、追更等功能。") },
+                    title = { Text(tl("退出登录")) },
+                    text = { Text(tl("退出后需要重新登录才能使用收藏、追更等功能。")) },
                     confirmButton = {
                         TextButton(onClick = {
                             showLogoutConfirm = false
                             scope.launch {
                                 repository.logout()
                                 System.err.println("[登录] 已退出")
-                                Notices.success("已退出登录")
+                                Notices.success(logoutMsg)
                             }
-                        }) { Text("退出") }
+                        }) { Text(tl("退出")) }
                     },
                     dismissButton = {
-                        TextButton(onClick = { showLogoutConfirm = false }) { Text("取消") }
+                        TextButton(onClick = { showLogoutConfirm = false }) { Text(tl("取消")) }
                     },
                 )
             }
@@ -563,7 +565,7 @@ private fun App() {
 
                     is Screen.Page -> {
                         val title = NAV_ITEMS.firstOrNull { it.first == s.route }?.second ?: s.route
-                        PageShell(title = title, planned = PAGE_PLANS[s.route] ?: "（待补）")
+                        PageShell(title = title, planned = PAGE_PLANS[s.route] ?: tl("（待补）"))
                     }
                 }
                 }
@@ -623,7 +625,7 @@ private fun RandomFab(
         contentAlignment = Alignment.Center,
     ) {
         Text(
-            if (busy) "抽…" else "随机",
+            if (busy) tl("抽…") else tl("随机"),
             style = MaterialTheme.typography.labelMedium,
             color = MaterialTheme.colorScheme.onPrimary,
         )
@@ -648,6 +650,7 @@ private fun RandomFab(
 @Composable
 private fun DailyQuickFab(repository: JmRepository, modifier: Modifier = Modifier) {
     val scope = rememberCoroutineScope()
+    val checkinTexts = listOf(tl("现在没有进行中的签到活动"), tl("今天已经签过了"), tl("签到成功"), tl("签到失败，稍后再试"))
     val loggedIn = repository.auth.isLoggedIn
     var signedToday by remember { mutableStateOf(false) }
     var notice by remember { mutableStateOf<String?>(null) }
@@ -693,19 +696,19 @@ private fun DailyQuickFab(repository: JmRepository, modifier: Modifier = Modifie
                                 val id = d?.dailyId
                                 val today = java.util.Calendar.getInstance().get(java.util.Calendar.DAY_OF_MONTH)
                                 when {
-                                    id.isNullOrBlank() -> notice = "现在没有进行中的签到活动"
+                                    id.isNullOrBlank() -> notice = checkinTexts[0]
                                     d != null && dailySignedToday(d.record, today) -> {
                                         signedToday = true
-                                        notice = "今天已经签过了"
+                                        notice = checkinTexts[1]
                                     }
                                     else -> runCatching { repository.dailyCheck(uid = uid, dailyId = id) }.fold(
                                         onSuccess = { res ->
                                             signedToday = true
-                                            notice = res.msg?.takeIf { it.isNotBlank() } ?: "签到成功"
+                                            notice = res.msg?.takeIf { it.isNotBlank() } ?: checkinTexts[2]
                                         },
                                         onFailure = {
                                             if (dailyAlreadyChecked(it.message)) signedToday = true
-                                            notice = it.message?.takeIf { m -> m.isNotBlank() } ?: "签到失败，稍后再试"
+                                            notice = it.message?.takeIf { m -> m.isNotBlank() } ?: checkinTexts[3]
                                         },
                                     )
                                 }
@@ -719,9 +722,9 @@ private fun DailyQuickFab(repository: JmRepository, modifier: Modifier = Modifie
         ) {
             Text(
                 when {
-                    signedToday -> "已签"
-                    busy -> "签…"
-                    else -> "签到"
+                    signedToday -> tl("已签")
+                    busy -> tl("签…")
+                    else -> tl("签到")
                 },
                 style = MaterialTheme.typography.labelMedium,
                 color = MaterialTheme.colorScheme.onSurface,
