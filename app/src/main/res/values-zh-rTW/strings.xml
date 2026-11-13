@@ -320,4 +320,20 @@
     <string name="reader_pick_prev">上一頁</string>
     <string name="reader_pick_next">下一頁</string>
     <string name="reader_pick_close">關閉</string>
+
+    <string name="block_title">封鎖設定</string>
+    <string name="block_subtitle">本地規則，不上傳</string>
+    <string name="block_back">返回</string>
+    <string name="block_help">命中即隱藏，比對忽略大小寫。\n· 關鍵字：作品名或作者包含它\n· 分類：分類或子分類等於它（例如封鎖「同人」）\n· 標籤：列表介面不下發標籤，因此改為在背景逐筆讀取作品詳情取標籤，命中即從列表中隱藏（只在有標籤規則時才會請求）</string>
+    <string name="block_words_title">關鍵字封鎖</string>
+    <string name="block_words_hint">作品名或作者命中即隱藏 · %1 條</string>
+    <string name="block_categories_title">分類封鎖</string>
+    <string name="block_categories_hint">整個分類不再出現 · %1 條</string>
+    <string name="block_tags_title">標籤封鎖</string>
+    <string name="block_tags_hint">開啟作品時提示 · %1 條</string>
+    <string name="block_length_fmt">長度應為 %1~%2 個字元</string>
+    <string name="block_exists_fmt">「%1」已經在名單裡</string>
+    <string name="block_added_fmt">已封鎖「%1」</string>
+    <string name="block_add_cd_fmt">新增%1</string>
+    <string name="block_empty">還沒有新增</string>
 </resources>

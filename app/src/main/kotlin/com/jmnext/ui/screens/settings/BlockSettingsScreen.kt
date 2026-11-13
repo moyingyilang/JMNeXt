@@ -1,5 +1,8 @@
 package com.jmnext.ui.screens.settings
 
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
+import com.jmnext.R
 import com.jmnext.data.prefs.BlockKind
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -59,6 +62,7 @@ fun BlockSettingsScreen(
     onBack: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    val ctx = LocalContext.current
     val repo = LocalRepository.current
     val store = repo.blockStore
     val rules by store?.state?.collectAsStateWithLifecycle() ?: remember { mutableStateOf(BlockRules()) }
@@ -68,13 +72,13 @@ fun BlockSettingsScreen(
 
     Column(modifier = modifier.fillMaxSize()) {
         GlassTopBar(
-            title = "屏蔽设置",
-            subtitle = "本地规则，不上传",
+            title = stringResource(R.string.block_title),
+            subtitle = stringResource(R.string.block_subtitle),
             navigation = {
                 IconButton(onClick = onBack) {
                     Icon(
                         imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                        contentDescription = "返回",
+                        contentDescription = stringResource(R.string.block_back),
                         tint = c.accent,
                     )
                 }
@@ -95,10 +99,7 @@ fun BlockSettingsScreen(
             item(key = "hint") {
                 GlassSurface(level = GlassLevel.Card) {
                     Text(
-                        text = "命中即隐藏，匹配忽略大小写。\n" +
-                            "· 关键词：作品名或作者包含它\n" +
-                            "· 分类：分类或子分类等于它（例如屏蔽「同人」）\n" +
-                            "· 标签：列表接口不下发标签，因此改为**在后台逐条读取作品详情**取标签，命中即从列表中隐藏（只在存在标签规则时才会请求）",
+                          text = stringResource(R.string.block_help),
                         style = MaterialTheme.typography.labelSmall,
                         color = c.textSecondary,
                         modifier = Modifier.padding(Spacing.md),
@@ -108,8 +109,8 @@ fun BlockSettingsScreen(
 
             item(key = "words") {
                 BlockSection(
-                    title = "关键词屏蔽",
-                    hint = "作品名或作者命中即隐藏 · ${rules.words.size} 条",
+                    title = stringResource(R.string.block_words_title),
+                    hint = stringResource(R.string.block_words_hint, rules.words.size),
                     values = rules.words.toList(),
                     onAdd = { dialog = BlockKind.Word },
                     onRemove = { store?.removeWord(it) },
@@ -118,8 +119,8 @@ fun BlockSettingsScreen(
 
             item(key = "categories") {
                 BlockSection(
-                    title = "分类屏蔽",
-                    hint = "整个分类不再出现 · ${rules.categories.size} 条",
+                    title = stringResource(R.string.block_categories_title),
+                    hint = stringResource(R.string.block_categories_hint, rules.categories.size),
                     values = rules.categories.toList(),
                     onAdd = { dialog = BlockKind.Category },
                     onRemove = { store?.removeCategory(it) },
@@ -128,8 +129,8 @@ fun BlockSettingsScreen(
 
             item(key = "tags") {
                 BlockSection(
-                    title = "标签屏蔽",
-                    hint = "打开作品时提示 · ${rules.tags.size} 条",
+                    title = stringResource(R.string.block_tags_title),
+                    hint = stringResource(R.string.block_tags_hint, rules.tags.size),
                     values = rules.tags.toList(),
                     onAdd = { dialog = BlockKind.Tag },
                     onRemove = { store?.removeTag(it) },
@@ -146,9 +147,9 @@ fun BlockSettingsScreen(
                 val trimmed = value.trim()
                 notice = when {
                     trimmed.length < MIN_LENGTH || trimmed.length > MAX_LENGTH ->
-                        "长度应为 $MIN_LENGTH~$MAX_LENGTH 个字符"
+                        ctx.getString(R.string.block_length_fmt, MIN_LENGTH, MAX_LENGTH)
 
-                    store?.isBlocked(kind, trimmed) == true -> "「$trimmed」已经在名单里"
+                    store?.isBlocked(kind, trimmed) == true -> ctx.getString(R.string.block_exists_fmt, trimmed)
 
                     else -> {
                         when (kind) {
@@ -156,7 +157,7 @@ fun BlockSettingsScreen(
                             BlockKind.Tag -> store?.addTag(trimmed)
                             BlockKind.Category -> store?.addCategory(trimmed)
                         }
-                        "已屏蔽「$trimmed」"
+                        ctx.getString(R.string.block_added_fmt, trimmed)
                     }
                 }
                 dialog = null
@@ -183,13 +184,13 @@ private fun BlockSection(
                 Text(hint, style = MaterialTheme.typography.labelSmall, color = c.textTertiary)
             }
             IconButton(onClick = onAdd) {
-                Icon(Icons.Filled.Add, contentDescription = "添加$title", tint = c.accent)
+                Icon(Icons.Filled.Add, contentDescription = stringResource(R.string.block_add_cd_fmt, title), tint = c.accent)
             }
         }
 
         if (values.isEmpty()) {
             Text(
-                text = "还没有添加",
+                text = stringResource(R.string.block_empty),
                 style = MaterialTheme.typography.labelSmall,
                 color = c.textTertiary,
                 modifier = Modifier.padding(start = Spacing.xs),

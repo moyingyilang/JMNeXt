@@ -337,4 +337,21 @@
     <string name="reader_pick_prev">上一页</string>
     <string name="reader_pick_next">下一页</string>
     <string name="reader_pick_close">关闭</string>
+
+    <!-- 屏蔽设置 -->
+    <string name="block_title">屏蔽设置</string>
+    <string name="block_subtitle">本地规则，不上传</string>
+    <string name="block_back">返回</string>
+    <string name="block_help">命中即隐藏，匹配忽略大小写。\n· 关键词：作品名或作者包含它\n· 分类：分类或子分类等于它（例如屏蔽「同人」）\n· 标签：列表接口不下发标签，因此改为在后台逐条读取作品详情取标签，命中即从列表中隐藏（只在存在标签规则时才会请求）</string>
+    <string name="block_words_title">关键词屏蔽</string>
+    <string name="block_words_hint">作品名或作者命中即隐藏 · %1 条</string>
+    <string name="block_categories_title">分类屏蔽</string>
+    <string name="block_categories_hint">整个分类不再出现 · %1 条</string>
+    <string name="block_tags_title">标签屏蔽</string>
+    <string name="block_tags_hint">打开作品时提示 · %1 条</string>
+    <string name="block_length_fmt">长度应为 %1~%2 个字符</string>
+    <string name="block_exists_fmt">「%1」已经在名单里</string>
+    <string name="block_added_fmt">已屏蔽「%1」</string>
+    <string name="block_add_cd_fmt">添加%1</string>
+    <string name="block_empty">还没有添加</string>
 </resources>
