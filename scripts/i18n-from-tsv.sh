@@ -21,6 +21,8 @@ tmp=$(mktemp)
     echo '<resources>'
     while IFS=$'\t' read -r key value; do
         case "$key" in ''|'#'*) continue ;; esac
+        # XML 与 Android 转义：& 要写成实体，单引号要写成 \'（否则 aapt2 报错）
+        value=$(printf "%s" "$value" | sed "s/&/\&amp;/g; s/\x27/\\\\\x27/g")
         printf '    <string name="%s">%s</string>\n' "$key" "$value"
     done < "$TSV"
     echo '</resources>'

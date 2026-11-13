@@ -1,0 +1,544 @@
+app_name	JMNeXt
+about_title	About
+about_back	Back
+about_tagline	A third-party client for JMComic
+about_version_line	Version %1$s · %2$s
+about_version	Version
+about_version_code	Version code
+about_variant	Variant
+about_lite_note	The lite build is for low-end devices: only two solid-color themes, no wallpaper or blur, image fades and list animations are off, and the reader prefetches less
+about_check_update	Check for updates
+about_checking	Checking…
+about_check_failed	Couldn't fetch update info (network down, or GitHub temporarily unavailable)
+about_check_new	New version available: %1$s
+about_check_latest	Already up to date (remote %1$s)
+about_download_pkg	Download update (%1$s)
+about_asset_note	One APK supports both arm64 and x86_64, no need to pick an architecture. If the direct link doesn't open, use the releases page below.
+about_update_notes	What's new: %1$s
+about_desc_title	Notes
+about_desc	A third-party client for JMComic, written in Kotlin and Compose. No interstitial ads, and it doesn't record what you read; login credentials are encrypted before being written to disk\n\nThere are two reader layouts, vertical scrolling and page flipping, with seamless stitching for long images. Favorites, progress and block lists live on your device, and can sync to your own cloud drive via WebDAV. Blocking works by keyword, category or tag, and matching works disappear from lists
+about_links	Links
+about_link_home	Project home
+about_link_releases	Releases (download new versions)
+about_link_issues	Report an issue
+about_license_title	License
+about_license	This project is licensed under AGPL-3.0-only. JMComic and related content belong to their respective rights holders; this app is not affiliated with the official service and only provides a client implementation.
+profile_title	Me
+profile_account	Account
+profile_not_logged_in	Not signed in
+profile_account_desc	Favorites and history are tied to your account; sign in to see them on this device.
+profile_login_register	Sign in / Sign up
+profile_logged_in	Signed in
+profile_coin	Coins
+profile_level	Level
+profile_adfree	Ad-free perk
+profile_adfree_on	Active
+profile_adfree_off	Inactive
+profile_my_favorites	My favorites
+profile_history	Watch history
+profile_notifications	Notifications
+profile_tracking	My subscriptions
+profile_tag_favorites	Saved tags
+profile_logout	Sign out
+profile_block_title	Content blocking
+profile_words	Keywords
+profile_categories	Categories
+profile_tags	Tags
+profile_block_count	%1$d rules
+profile_manage_block	Manage block list
+profile_appearance	Appearance
+profile_style	Style
+profile_theme	Theme
+profile_theme_system	Follow system
+profile_theme_light	Light
+profile_theme_dark	Dark
+profile_dynamic_color	Dynamic color
+profile_serial_notify	Update notifications
+reader_mode_scroll	Vertical scroll
+reader_mode_page	Page flip
+reader_mode_note	Vertical scroll suits long strips; page flip suits single-page artwork. You can switch temporarily from the reader's top bar.
+comic_render	Comic rendering
+about_entry	About
+about_version_fmt	Version: %1$s
+server_title	Server
+server_official	Server's official version
+server_loading	Reading…
+server_read_failed	Read failed
+server_not_provided	Not provided
+server_client_version	Version this client reports
+server_alignment	Protocol alignment
+server_aligned	Aligned
+server_may_changed	May have changed
+server_reread	Read again
+daily_title	Daily check-in
+daily_login_first	Sign in to check in
+daily_loading	Loading check-in event…
+daily_none	No check-in event found (none running right now, or the network is down).
+daily_today_signed	Checked in today
+daily_complete	All done for this round
+daily_sign	Check in
+webdav_title	WebDAV sync
+webdav_status	Status
+webdav_on	On
+webdav_off	Off
+webdav_path	Remote path
+webdav_configure	Configure
+webdav_sync	Configure / Sync now
+crash_title	Crash logs (debug)
+crash_status	Status
+crash_none	No crash records.
+nav_home	Home
+nav_category	Categories
+nav_search	Search
+nav_profile	Me
+appearance_glass_quality	Glass quality
+appearance_floating_bar	Floating tab bar
+appearance_translucent	Translucent mode
+appearance_monet_blur	Monet colors on blur
+appearance_predictive_back	Predictive back
+appearance_motion	Motion
+appearance_motion_speed	Motion speed
+appearance_wallpaper	Wallpaper
+appearance_wallpaper_source	Source
+appearance_wallpaper_change	Change
+appearance_wallpaper_loading	Fetching…
+appearance_wallpaper_auto	Auto change
+appearance_off	Off
+appearance_floating_bar_desc	The tab bar becomes a pill floating above the content, with a sliding indicator behind the selected item.
+appearance_translucent_desc	The glass no longer covers the base color, keeping only blur and outline; text gets a halo in the opposite color so it stays legible.
+appearance_monet_blur_desc	Tints the background and blur layer with the system's dynamic primary / secondary / tertiary colors. Requires dynamic color and Android 12+; otherwise this switch has no effect.
+appearance_predictive_android15	Provided by the system since Android 15 (the system pushes the whole window during a back gesture), so this option no longer applies and is disabled.
+appearance_predictive_on	During a back gesture the current page fades with your finger, so you can tell it will exit before releasing.
+appearance_predictive_unsupported	Requires Android 13 / 14; this device has no predictive back gesture, so this option has no effect.
+appearance_serial_desc	About twice a day the system picks a suitable moment to check, and only notifies when something changed; the same batch is reported once. It only uses the subscription list and your local reading times, and never uploads what you read. Off by default.
+appearance_dynamic_color_desc	Take colors from the system wallpaper (Android 12+). The Material style follows the system entirely; the other glass styles only take the accent, keeping their own layered colors.
+appearance_wallpaper_auto_off	Auto change: off
+appearance_wallpaper_auto_every	Auto change: every %1$s
+appearance_wallpaper_clear_cache	Clear wallpaper cache
+appearance_wallpaper_clear_cache_desc	Drop cached candidates and fetch a new batch immediately
+appearance_wallpaper_blur_fmt	Blur %1$d
+appearance_wallpaper_dim_fmt	Dim %1$s (the busier the wallpaper, the more dimming the glass needs to keep text readable)
+home_loading	Loading…
+home_weekly	Weekly
+home_refresh	Refresh
+home_to_light	Switch to light
+home_to_dark	Switch to dark
+home_expand_more	Show more sections (%1$d left)
+home_latest	Just added
+home_more	More
+home_tracking_updated	%1$d of your subscriptions have updates
+glass_high	High
+glass_high_desc	Real blur, 12dp radius — best looking, may drop frames on low-end devices
+glass_medium	Medium
+glass_medium_desc	Real blur, 8dp radius — default, a balance of looks and performance
+glass_off	Off
+glass_off_desc	No backdrop sampling, falls back to translucent fill — most battery-friendly, good for low-end devices
+motion_fast	Fast
+motion_fast_desc	Short and direct: crisp switches with tiny movement — the quickest rhythm
+motion_medium	Medium
+motion_medium_desc	Slow in, quick out, moderate duration, soft movement — the default rhythm
+motion_slow	Slow
+motion_slow_desc	Longer transitions with gentler endings, the most pronounced layering — the slowest rhythm
+wall_off	Solid gradient
+wall_off_desc	No images at all, only the built-in gradient (no requests)
+wall_bing	Bing daily
+wall_bing_desc	Bing's daily wallpaper from bing.biturl.top
+wall_anime	Random anime
+wall_anime_desc	Tries t.alcy.cc / t.mwm.moe / loliapi in order
+wall_all	All random
+wall_all_desc	Bing mixed with anime
+wall_custom	Custom URL
+wall_custom_desc	Paste a direct image URL yourself
+wall_system	Follow device wallpaper
+wall_system_desc	Reads the current system wallpaper (Android); takes effect after changing it and returning to the app, or tapping "Read again"
+wall_solid	Solid color
+wall_solid_desc	Only the color you pick, no images (zero requests)
+wall_picsum	Picsum photos
+wall_picsum_desc	Orientation-aware: portrait on phones, landscape on tablets/desktop (picsum.photos, no key needed)
+search_title	Search
+search_placeholder	Title, author or tag
+search_year_any	Year: any
+search_year_fmt	Year: %1$s
+search_year_month_fmt	Year: %1$s / %2$s
+search_collapse_year	Collapse year filter
+search_expand_year	Expand year filter
+search_empty_title	No matching works
+search_empty_desc	Try another keyword, or adjust the search field and year
+search_recent	Recent searches
+search_clear	Clear
+search_hot_tags	Popular tags
+search_random_rec	Random picks
+search_random_one	Surprise me
+search_shuffle	Shuffle
+search_start_title	Search something
+search_start_desc	Search by title, author or tag
+search_hint_random_failed	Couldn't get a random pick, try again later
+search_hint_no_keyword	Enter a keyword
+cat_title	Categories
+cat_browse	Browse by category
+cat_sort_latest	Latest
+cat_sort_hearts	Most liked
+cat_sort_total	All-time ranking
+cat_sort_month	Monthly ranking
+cat_sort_week	Weekly ranking
+cat_label	Category
+cat_sub_label	Subcategory
+cat_all	All
+cat_creator_lib	Artists &works
+cat_enter	Enter ›
+cat_sort	Sort
+cat_empty	Nothing in this category yet
+cat_load_failed	Couldn't load categories
+auth_login	Sign in
+auth_register	Sign up
+auth_forgot	Forgot password
+auth_username	Username
+auth_password	Password
+auth_confirm_password	Confirm password
+auth_email	Email
+auth_gender	Gender
+auth_male	Male
+auth_female	Female
+auth_wait	Please wait…
+auth_back	Back
+auth_keystore_note	Signing in uses a token issued by the server, for favorites and watch history. The token is encrypted with the Android Keystore and stored in the app's private directory, never in plain text.
+detail_title_placeholder	Work details
+detail_back	Back
+detail_move_to_favorites	Move to folder
+detail_author_fmt	Author: %1$s
+detail_updated_fmt	Updated: %1$s
+detail_tags_hint	Tags: tap to search, long-press to block
+detail_unblock	Unblock
+detail_download_album	Download whole work
+detail_download_system	Hand to system downloader
+detail_favorite_tags	Favorite these tags
+detail_comments	Comments
+detail_chapters_fmt	Chapters (%1$d)
+detail_related	Related
+detail_prev_page	Previous page
+detail_next_page	Next page
+fav_title	My favorites
+fav_empty	No favorites yet. Tap the heart on a work's detail page.
+hist_title	Watch history
+hist_empty	No watch history yet
+tracking_title	My subscriptions
+tracking_empty	No subscriptions yet. Tap "Subscribe" on a work's detail page.
+list_total_fmt	%1$d items
+list_back	Back
+list_manage_folders	Manage folders
+list_need_login	Sign-in required
+list_login_desc_fmt	%1$s is tied to your account; sign in to see it here
+list_untrack	Unsubscribe
+list_move_to_folder	Move to folder
+list_delete_history	Delete this entry
+folder_new	New folder
+folder_rename	Rename folder
+folder_all	All
+notif_title	Notifications
+notif_back	Back
+notif_loading	Loading notifications…
+notif_failed_fmt	Load failed: %1$s
+notif_empty	No notifications yet.
+notif_load_more_fmt	Load more (%1$d / %2$d shown)
+notif_tab_all	All
+notif_tab_tracking	Subscriptions
+notif_tab_site	Site notices
+notif_type_tracking	Subscription update
+tagfav_title	Saved tags
+tagfav_need_login	Sign-in required
+tagfav_login_desc	Saved tags are tied to your account; sign in to see them here
+tagfav_empty_title	No saved tags yet
+tagfav_empty_desc	You can save tags from a work's detail page
+tagfav_untag	Remove this tag
+tagfav_dialog_title	Save tags
+tagfav_dialog_desc	Selected tags are added to "Me → Saved tags" (up to 50).
+tagfav_save_fmt	Save %1$d
+week_title	Weekly
+week_issue_fmt	%1$s · %2$d works
+week_back	Back
+week_issue_label	Issue
+week_type_label	Type
+week_empty_title	No works in this issue
+week_empty_desc	Try another issue or type
+random_title	Random picks
+random_note_blocked	Works on your block list are excluded
+random_note_pref	Block list excluded · sorted by tags you favor
+random_back	Back
+random_view_list	Switch to list
+random_view_grid	Switch to grid
+random_shuffle	Shuffle
+random_loading	Randomizing…
+random_failed_fmt	Failed: %1$s
+creator_authors	Artists
+creator_works	Works
+creator_title	Artists &works
+creator_total_fmt	%1$d items
+creator_subtitle	Artists and works from the library
+creator_search_authors	Search artists
+creator_search_works	Search works
+creator_search	Search
+creator_empty_authors	No artists found
+reader_empty	This chapter has no displayable images
+reader_chapter_fmt	Chapter %1$d
+reader_title_fallback	Reader
+reader_pages_fmt	%1$d pages
+reader_back	Back
+reader_to_horizontal	Switch to page flip
+reader_to_vertical	Switch to vertical scroll
+reader_toggle_mono	Toggle mono / color
+reader_mono	Mono
+reader_color	Color
+reader_prev_chapter	Previous chapter
+reader_next_chapter	Next chapter
+reader_mode_horizontal	Horizontal
+reader_mode_vertical	Vertical
+reader_chapters	Chapters
+reader_comments	Comments
+reader_favorite	Favorite
+reader_like	Like
+reader_page_fmt	Page %1$d
+reader_page_failed	This page failed to load · tap to retry
+reader_pick_title	Choose a chapter
+reader_pick_prev	Previous page
+reader_pick_next	Next page
+reader_pick_close	Close
+block_title	Blocking
+block_subtitle	Local rules, never uploaded
+block_back	Back
+block_help	Matches are hidden, case-insensitive.\n· Keyword: the title or author contains it\n· Category: the category or subcategory equals it (e.g. block "doujin")\n· Tag: the list API doesn't return tags, so details are read one by one in the background to get tags, and matches are hidden from lists (only requested when tag rules exist)
+block_words_title	Keyword blocking
+block_words_hint	Hidden when the title or author matches · %1$d rules
+block_categories_title	Category blocking
+block_categories_hint	The whole category disappears · %1$d rules
+block_tags_title	Tag blocking
+block_tags_hint	Warned when opening a work · %1$d rules
+block_length_fmt	Length must be %1$d~%2$d characters
+block_exists_fmt	"%1$s" is already on the list
+block_added_fmt	Blocked "%1$s"
+block_add_cd_fmt	Add %1$s
+block_empty	Nothing added yet
+dav_back	Back
+dav_title	WebDAV sync
+dav_desc	Sync reading history, favorites and the block list. Point several devices at the same file to keep them in step.
+dav_server	Server address
+dav_server_hint	https://dav.example.com/remote.php/dav/files/username
+dav_user	Username
+dav_password	Password (an app-specific one is recommended)
+dav_show	Show
+dav_hide	Hide
+dav_path	Remote file path
+dav_auto_sync	Enable automatic sync
+dav_help	Use an address like https://dav.example.com/remote.php/dav/files/username (Nextcloud), or https://dav.jianguoyun.com/dav/ (Jianguo Cloud). Use an app-specific password.
+dav_sync_done	Sync complete
+dav_sync_failed_fmt	Sync failed: %1$s
+dav_syncing	Syncing…
+dav_sync_now	Sync now
+more_title	More
+more_loading	Loading…
+more_total_fmt	%1$d items
+more_back	Back
+week_type_all	All
+week_type_manga	Manga
+week_type_hanman	Korean
+week_day_mon	Mon
+week_day_tue	Tue
+week_day_wed	Wed
+week_day_thu	Thu
+week_day_fri	Fri
+week_day_sat	Sat
+week_day_sun	Sun
+week_day_done	Completed
+cmt_title	Comments
+cmt_total_fmt	%1$d comments
+cmt_back	Back
+cmt_compose_logged	Say something (posted publicly)
+cmt_compose_login	Sign in to comment
+cmt_sending	Sending…
+cmt_send	Send
+cmt_empty_title	No comments yet
+cmt_empty_desc	Other readers' comments will appear here
+cmt_delete	Delete this comment
+cmt_replies_fmt	%1$d replies
+folder_name	Folder name
+folder_ok	OK
+folder_cancel	Cancel
+folder_delete_title	Delete folder
+folder_delete_confirm	Delete "%1$s"? Works inside return to "All" and won't be un-favorited.
+folder_delete	Delete
+folder_skip	Uncategorized
+folder_none_in_move	No folders yet. Create one under "Manage folders".
+folder_close	Close
+folder_manage	Manage folders
+folder_empty	No folders yet. Folders group favorites, e.g. by genre or progress.
+folder_rename_short	Rename
+folder_skip_only_fav	Favorite only, no folder
+common_updated	Update
+common_load_failed_retry	Load failed, tap to retry
+common_no_more	That's everything
+common_load_more	Scroll up to load more
+common_retry	Retry
+common_load_failed	Load failed
+random_fab_cd	Random work (long-press for a batch); block list excluded
+checkin_no_active	No check-in event running right now
+checkin_already	Already checked in today
+checkin_ok	Checked in
+checkin_failed	Check-in failed, try again later
+sort_latest	Latest
+sort_views	Most viewed
+sort_images	Most images
+sort_hearts	Most liked
+sort_oldest	Oldest
+field_site	Site-wide
+field_work	Work
+field_author	Author
+field_tag	Tag
+field_character	Character
+daily_expand	Show check-in history
+daily_collapse	Hide check-in history
+daily_reading	Loading…
+daily_history_failed_fmt	Couldn't load history: %1$s
+daily_history_empty	No check-in history yet.
+daily_record_cd	Check-in record
+daily_month_fmt	Month %1$d
+daily_image_cd	Check-in image
+search_order_label	Sort
+search_field_label	Field
+search_results_fmt	%1$d results
+search_hidden_fmt	 · %1$d hidden by block rules
+search_tag_blocked_fmt	 · %1$d blocked by tag rules
+search_tag_blocked_notice_fmt	%1$d results are hidden by tag blocking
+search_hit_fmt	Matched: %1$s (allowed for this search only, block rules unchanged)
+search_allow_once	Allow once
+search_year_label	Year
+search_month_label	Month
+search_any	Any
+profile_block_empty	Nothing is blocked yet. Block by title, author, category or tag; matches are hidden from lists.
+profile_block_active_fmt	%1$d rules active. Works missing from lists may be hidden by them.
+profile_tracking_desc	Notify me when my subscriptions update
+profile_reading	Reading
+profile_default_reader	Default reading layout
+profile_current	Current
+profile_apply_url	Apply this URL
+profile_seconds_fmt	%1$d s
+profile_hours_fmt	%1$d h
+profile_minutes_fmt	%1$d min
+profile_image_fmt	Image: %1$s
+profile_event_fallback	Check-in event
+profile_signed_fmt	Checked in %1$d / %2$d days
+profile_day_fmt	Day %1$d
+profile_signed_tag	, checked in
+profile_unsigned_tag	, not checked in
+profile_server_drift_fmt	The server's official version changed to %1$s while this client still reports %2$s. That doesn't mean it's broken right away, but the API may have been adjusted for the new version, so it's worth checking.
+profile_webdav_desc	Sync reading history, favorites and the block list. Point several devices at the same file to keep them in step.
+profile_webdav_empty	No server address yet. Any standard WebDAV service works, such as Nextcloud or Jianguo Cloud.
+profile_logs_status	Status
+profile_crash_copied	Crash log copied to clipboard
+profile_crash_copy	Copy latest
+profile_crash_deleted	Latest crash log deleted
+profile_crash_delete	Delete
+profile_crash_path	Location: app-private files/logs/. Only tracer and debug builds record logs; release builds never write to disk.
+auth_need_username	Enter a username
+auth_need_password	Enter a password
+auth_bad_email	Enter a valid email
+auth_short_password	Password must be at least 6 characters
+auth_password_mismatch	The passwords don't match
+auth_register_ok	Registered, please sign in
+auth_register_failed	Registration failed
+auth_reset_sent	Reset email sent
+auth_send_failed	Sending failed
+auth_welcome_fmt	Welcome back, %1$s
+auth_login_again_fmt	%1$s · after signing in, tap that button again
+detail_resume_fmt	Continue · chapter %1$d
+detail_start_fmt	Start reading · chapter %1$d
+detail_start	Start reading
+detail_untrack_cd	Unsubscribe
+detail_track_cd	Subscribe
+detail_unfavorite_cd	Remove from favorites
+detail_favorite_cd	Favorite
+detail_liked_cd	Liked
+detail_like_cd	Like
+detail_pages_fmt	%1$d pages
+detail_comments_fmt	 · %1$d comments
+detail_load_failed	Couldn't load this work
+detail_works	Works
+detail_actors	Actors
+detail_by_rules	By your block rules
+detail_blocked_author_suffix	: author blocked
+detail_blocked_tags_fmt	: contains "%1$s"
+detail_comment_total_fmt	%1$d comments
+detail_no_comments	None
+detail_track_updated	Subscription updated
+detail_track_failed	Subscription failed
+detail_fav_tags_done_fmt	Saved %1$d tags
+detail_dl_failed_fmt	Couldn't get download URL: %1$s
+detail_cannot_download	This work can't be downloaded right now
+detail_download_started	Download started
+detail_download_label_fmt	Download %1$s
+detail_blocked_tag_fmt	Blocked tag "%1$s"
+detail_blocked_author_fmt	Blocked author "%1$s"
+detail_unblocked_tag_fmt	Unblocked "%1$s"
+detail_unblocked_author	Unblocked this author
+detail_liked_already	Already liked
+cw_title	Work info
+cw_not_found	No info for this work
+cw_date_fmt	Date: %1$s
+cw_no_content	This work has nothing to read
+cw_no_content_desc	Some entries in the library only have info, no images
+cw_related	Related works
+dav_summary_fmt	%1$d history entries, %2$d favorites, %3$d block rules
+dav_conflicts_fmt	Conflicts overwritten: %1$d history, %2$d favorites (newer side wins)
+dav_merged	Merged with the remote file and wrote it back
+dav_created	Remote file didn't exist, created it
+style_glass_tag	Windows 11 window glass: 8dp corners + hairline stroke + Acrylic grain
+style_flat_tag	Flat + Gaussian blur: no stroke, no grain, no highlight, just a blurred base
+style_miuix_tag	HyperOS: large-radius solid cards, no stroke, springy press
+style_material_tag	Material You 3: layered by M3 color roles, follows the system wallpaper with dynamic color on
+login_reason_track	Sign in to subscribe
+login_reason_fav_tags	Sign in to save tags
+login_reason_download	Sign in to download
+login_reason_like	Sign in to like
+login_reason_favorite	Sign in to favorite
+login_reason_comment	Sign in to comment
+login_reason_tags	Sign in to save tags
+block_remove_cd_fmt	Remove %1$s
+block_kind_word	keyword
+block_kind_tag	tag
+block_kind_category	category
+block_add_title_fmt	Add %1$s
+block_eg_word	e.g. NTR
+block_eg_tag	e.g. romance
+block_eg_category	e.g. doujin
+block_len_hint_fmt	%1$d~%2$d characters
+block_add	Add
+block_cancel	Cancel
+more_empty_week	No updates on this day
+more_empty_section	Nothing in this section yet
+more_type_label	Type
+more_day_label	Update
+folder_move_title	Move to folder
+common_unknown_error	Unknown error
+creator_empty_works	No works found
+random_empty	Nothing this time (all candidates may be blocked, or the network is down).
+checkin_today_done	Checked in today
+checkin_quick	Quick check-in
+detail_download_album_label	Download whole work
+search_year_fmt_prefix	Year:
+common_network_issue	Network problem
+reader_switch_chapter_failed_fmt	Couldn't switch chapter: %1$s
+comments_posted	Posted
+comments_deleted	Deleted
+comments_post_failed_fmt	Post failed: %1$s
+comments_delete_failed_fmt	Delete failed: %1$s
+fav_untrack_failed_fmt	Unsubscribe failed: %1$s
+fav_delete_failed_fmt	Delete failed: %1$s
+tagfav_delete_failed_fmt	Delete failed: %1$s
+common_unknown_error_fallback	Unknown error
+render_color	Color
+render_color_hint	Shown as-is
+render_gray	Mono
+render_gray_hint	Desaturated only, tones preserved
+render_ink	E-ink
+render_ink_hint	Desaturated with more contrast, for e-ink
+render_note_fmt	%1$s. Only affects comic pages, not the UI colors; on e-ink devices "E-ink" is clearer.
+detail_download_started_with_title	Download started: %1$s
+detail_download_started_with_size	Download started: %1$s (%2$s)
