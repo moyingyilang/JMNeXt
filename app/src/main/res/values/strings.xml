@@ -549,4 +549,24 @@
     <string name="cw_no_content">这个作品没有可看的内容</string>
     <string name="cw_no_content_desc">作品库里有些条目只有信息，没有图片</string>
     <string name="cw_related">相关作品</string>
+
+    <!-- WebDAV 同步结果 -->
+    <string name="dav_summary_fmt">历史 %1 条、收藏 %2 条、屏蔽规则 %3 条</string>
+    <string name="dav_conflicts_fmt">冲突覆盖：历史 %1 条、收藏 %2 条（取较新一方）</string>
+    <string name="dav_merged">已合并远端文件并回写</string>
+    <string name="dav_created">远端文件不存在，已新建</string>
+    <!-- 风格 -->
+    <string name="style_glass_tag">Windows 11 窗口玻璃：8dp 圆角 + 发丝描边 + Acrylic 颗粒</string>
+    <string name="style_flat_tag">平面化 + 高斯模糊：无描边、无颗粒、无高光，只留一层模糊的底</string>
+    <string name="style_miuix_tag">HyperOS：大圆角实心卡片、无描边、弹性按压</string>
+    <string name="style_material_tag">Material You 3：按 M3 颜色角色分层，开动态取色就跟系统壁纸走</string>
+
+    <!-- 需要登录的提示 -->
+    <string name="login_reason_track">追更需要登录</string>
+    <string name="login_reason_fav_tags">收藏标签需要登录</string>
+    <string name="login_reason_download">下载需要登录</string>
+    <string name="login_reason_like">点赞需要登录</string>
+    <string name="login_reason_favorite">收藏需要登录</string>
+    <string name="login_reason_comment">发表评论需要登录</string>
+    <string name="login_reason_tags">标签收藏需要登录</string>
 </resources>

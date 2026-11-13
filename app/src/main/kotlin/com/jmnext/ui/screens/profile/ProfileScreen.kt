@@ -432,7 +432,7 @@ private fun AppearanceCard(
     SettingCard(title = stringResource(R.string.profile_appearance)) {
         Text(stringResource(R.string.profile_style), style = MaterialTheme.typography.bodyLarge, color = c.text)
         Text(
-            text = themeStyle.tagline,
+            text = stringResource(themeStyle.taglineRes),
             style = MaterialTheme.typography.labelSmall,
             color = c.textTertiary,
             modifier = Modifier.padding(top = Spacing.xxs),

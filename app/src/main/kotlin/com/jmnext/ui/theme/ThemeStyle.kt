@@ -28,22 +28,25 @@ import androidx.compose.ui.unit.sp
  * 默认是 [WindowGlass]：那是本应用原来的样子（博客的 Fluent × MIUI 玻璃），
  * 升级不该把老用户的界面换掉。
  */
-enum class ThemeStyle(val label: String, val tagline: String) {
+enum class ThemeStyle(
+    val label: String,
+    @StringRes val taglineRes: Int,
+) {
     WindowGlass(
         label = "WindowGlass",
-        tagline = "Windows 11 窗口玻璃：8dp 圆角 + 发丝描边 + Acrylic 颗粒",
+        taglineRes = com.jmnext.R.string.style_glass_tag,
     ),
     FlatBlur(
         label = "FlatBlur",
-        tagline = "平面化 + 高斯模糊：无描边、无颗粒、无高光，只留一层模糊的底",
+        taglineRes = com.jmnext.R.string.style_flat_tag,
     ),
     Miuix(
         label = "Miuix",
-        tagline = "HyperOS：大圆角实心卡片、无描边、弹性按压",
+        taglineRes = com.jmnext.R.string.style_miuix_tag,
     ),
     Material(
         label = "Material",
-        tagline = "Material You 3：按 M3 颜色角色分层，开动态取色就跟系统壁纸走",
+        taglineRes = com.jmnext.R.string.style_material_tag,
     ),
     ;
 

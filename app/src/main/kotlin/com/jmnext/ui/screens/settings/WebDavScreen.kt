@@ -155,11 +155,11 @@ fun WebDavScreen(app: JmApp, onBack: () -> Unit) {
         report?.let { r ->
             Text(
                 buildString {
-                    appendLine("历史 ${r.historyCount} 条、收藏 ${r.favoriteCount} 条、屏蔽规则 ${r.blockedCount} 条")
+                    appendLine(stringResource(R.string.dav_summary_fmt, r.historyCount, r.favoriteCount, r.blockedCount))
                     if (r.historyConflicts + r.favoriteConflicts > 0) {
-                        appendLine("冲突覆盖：历史 ${r.historyConflicts} 条、收藏 ${r.favoriteConflicts} 条（取较新一方）")
+                        appendLine(stringResource(R.string.dav_conflicts_fmt, r.historyConflicts, r.favoriteConflicts))
                     }
-                    append(if (r.remoteExisted) "已合并远端文件并回写" else "远端文件不存在，已新建")
+                    append(if (r.remoteExisted) stringResource(R.string.dav_merged) else stringResource(R.string.dav_created))
                 },
                 style = MaterialTheme.typography.bodySmall,
             )

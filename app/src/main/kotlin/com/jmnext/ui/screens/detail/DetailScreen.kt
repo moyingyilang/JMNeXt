@@ -291,9 +291,9 @@ class DetailViewModel(
      * 与收藏同一套路：**同一个 POST 既是追更也是取关**，结果以服务端返回的文案为准，
      * 界面状态跟着服务端走而不是本地取反。
      */
-    fun toggleTracking(onNeedLogin: (String) -> Unit) {
+    fun toggleTracking(onNeedLogin: (Int) -> Unit) {
         if (!repo.auth.isLoggedIn) {
-            onNeedLogin("追更需要登录")
+            onNeedLogin(R.string.login_reason_track)
             return
         }
         viewModelScope.launch {
@@ -325,14 +325,14 @@ class DetailViewModel(
      * 未登录时先引导登录：这个接口要凭证，直接发只会拿回 401 ——
      * 与点赞/收藏/追更保持一致，不让用户白点一次。
      */
-    fun favoriteTags(tags: List<String>, onNeedLogin: (String) -> Unit) {
+    fun favoriteTags(tags: List<String>, onNeedLogin: (Int) -> Unit) {
         if (tags.isEmpty()) {
             setTagPicker(false)
             return
         }
         if (!repo.auth.isLoggedIn) {
             setTagPicker(false)
-            onNeedLogin("收藏标签需要登录")
+            onNeedLogin(R.string.login_reason_fav_tags)
             return
         }
         viewModelScope.launch {
@@ -353,9 +353,9 @@ class DetailViewModel(
      * 需要登录，而且**失败不是 401**：实测未登录时是 HTTP 200 + `{"status":"0","msg":"請先登入"}`，
      * 所以判断落在 `status` 上；把这种响应当成功会给出一个空链接。
      */
-    fun requestDownload(onNeedLogin: (String) -> Unit, onReady: (String, String) -> Unit) {
+    fun requestDownload(onNeedLogin: (Int) -> Unit, onReady: (String, String) -> Unit) {
         if (!repo.auth.isLoggedIn) {
-            onNeedLogin("下载需要登录")
+            onNeedLogin(R.string.login_reason_download)
             return
         }
         viewModelScope.launch {
@@ -444,11 +444,11 @@ class DetailViewModel(
      * 点赞数是服务端计数，这里只做**乐观 +1**，不做本地持久化 ——
      * 真正的口径以服务端为准，下次拉详情会被纠正。
      */
-    fun like(onNeedLogin: (String) -> Unit) {
+    fun like(onNeedLogin: (Int) -> Unit) {
         if (!repo.auth.isLoggedIn) {
             // 直接把「为什么」交给调用方显示：只说「去登录」而不说原因，
             // 用户不知道这次点击是没生效还是等登录后会自动补上
-            onNeedLogin("点赞需要登录")
+            onNeedLogin(R.string.login_reason_like)
             return
         }
         val detail = _state.value.detail ?: return
@@ -495,10 +495,10 @@ class DetailViewModel(
      * 收藏结果以服务端返回的 `type` 为准（`remove` 即已取消，`add`/`move`/`edit` 即已收藏），
      * 而不是本地取反：这样即使本地状态早已过时（例如在别处操作过），界面也会被纠正回真实状态。
      */
-    fun toggleFavorite(onNeedLogin: (String) -> Unit) {
+    fun toggleFavorite(onNeedLogin: (Int) -> Unit) {
         if (_state.value.togglingFavorite) return
         if (!repo.auth.isLoggedIn) {
-            onNeedLogin("收藏需要登录")
+            onNeedLogin(R.string.login_reason_favorite)
             return
         }
         _state.update { it.copy(togglingFavorite = true) }
@@ -557,7 +557,7 @@ fun DetailScreen(
     onOpenComic: (ComicTarget) -> Unit,
     onReadChapter: (String) -> Unit,
     onOpenTag: (String) -> Unit,
-    onNeedLogin: (String) -> Unit,
+    onNeedLogin: (Int) -> Unit,
     onOpenComments: () -> Unit,
     modifier: Modifier = Modifier,
     /**

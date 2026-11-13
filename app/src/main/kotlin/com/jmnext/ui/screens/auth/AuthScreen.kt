@@ -216,9 +216,10 @@ fun AuthScreen(
 
         // 说清楚是为什么来的：用户点的是「收藏」，直接落到一个登录页而不给原因，
         // 就不知道那次点击是没生效、还是登录后会自动补上（目前不会，需要再点一次）
-        if (reason.isNotBlank()) {
+        val reasonRes = reason.toIntOrNull() ?: 0
+        if (reasonRes != 0) {
             Text(
-                text = stringResource(R.string.auth_login_again_fmt, reason),
+                text = stringResource(R.string.auth_login_again_fmt, stringResource(reasonRes)),
                 style = MaterialTheme.typography.labelSmall,
                 color = c.accent,
                 modifier = Modifier.fillMaxWidth().padding(horizontal = Spacing.lg, vertical = Spacing.sm),

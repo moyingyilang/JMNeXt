@@ -166,7 +166,8 @@ private fun moreFor(sectionId: String, title: String): String =
 private fun searchFor(tag: String): String = "search?$ARG_QUERY=${Uri.encode(tag)}"
 
 /** 打开登录页，并带上「为什么需要登录」。 */
-private fun authFor(reason: String): String = "auth?$ARG_REASON=${Uri.encode(reason)}"
+private fun authFor(@StringRes reasonRes: Int): String =
+    "auth?$ARG_REASON=$reasonRes"
 
 /**
  * 打开详情页时从列表侧带过去的东西。
@@ -631,7 +632,7 @@ fun JmNavHost(
                     isDark = isDark,
                     uiOptions = uiOptions,
                     onUiOptionsChange = onUiOptionsChange,
-                    onLogin = { nav.push(authFor("")) },
+                    onLogin = { nav.push(authFor(0)) },
                     onLogout = {
                         // 登出要走接口，但本地登出不依赖它成功（见 JmRepository.logout）
                         scope.launch { repo.logout() }
@@ -669,7 +670,7 @@ fun JmNavHost(
                     kind = AccountListKind.Favorites,
                     onBack = { nav.popBackStack() },
                     onOpenComic = { target -> nav.push(detailFor(target)) },
-                    onLogin = { nav.push(authFor("")) },
+                    onLogin = { nav.push(authFor(0)) },
                 )
             }
 
@@ -707,7 +708,7 @@ fun JmNavHost(
                 CommentsScreen(
                     comicId = backStack.arguments?.getString("aid").orEmpty(),
                     onBack = { nav.popBackStack() },
-                    onNeedLogin = { nav.push(authFor("发表评论需要登录")) },
+                    onNeedLogin = { nav.push(authFor(com.jmnext.R.string.login_reason_comment)) },
                 )
             }
 
@@ -734,14 +735,14 @@ fun JmNavHost(
                     kind = AccountListKind.Tracking,
                     onBack = { nav.popBackStack() },
                     onOpenComic = { target -> nav.push(detailFor(target)) },
-                    onLogin = { nav.push(authFor("追更需要登录")) },
+                    onLogin = { nav.push(authFor(com.jmnext.R.string.login_reason_track)) },
                 )
             }
 
             composable(ROUTE_TAGS) {
                 TagFavoritesScreen(
                     onBack = { nav.popBackStack() },
-                    onLogin = { nav.push(authFor("标签收藏需要登录")) },
+                    onLogin = { nav.push(authFor(com.jmnext.R.string.login_reason_tags)) },
                     onOpenTag = { tag -> nav.push(searchFor(tag)) },
                 )
             }
@@ -760,7 +761,7 @@ fun JmNavHost(
                     kind = AccountListKind.History,
                     onBack = { nav.popBackStack() },
                     onOpenComic = { target -> nav.push(detailFor(target)) },
-                    onLogin = { nav.push(authFor("")) },
+                    onLogin = { nav.push(authFor(0)) },
                 )
             }
 

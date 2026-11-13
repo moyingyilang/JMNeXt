@@ -519,4 +519,21 @@
     <string name="cw_no_content">這個作品沒有可看的內容</string>
     <string name="cw_no_content_desc">作品庫裡有些條目只有資訊，沒有圖片</string>
     <string name="cw_related">相關作品</string>
+
+    <string name="dav_summary_fmt">歷史 %1 條、收藏 %2 條、封鎖規則 %3 條</string>
+    <string name="dav_conflicts_fmt">衝突覆蓋：歷史 %1 條、收藏 %2 條（取較新一方）</string>
+    <string name="dav_merged">已合併遠端檔案並回寫</string>
+    <string name="dav_created">遠端檔案不存在，已新建</string>
+    <string name="style_glass_tag">Windows 11 視窗玻璃：8dp 圓角 + 髮絲描邊 + Acrylic 顆粒</string>
+    <string name="style_flat_tag">平面化 + 高斯模糊：無描邊、無顆粒、無高光，只留一層模糊的底</string>
+    <string name="style_miuix_tag">HyperOS：大圓角實心卡片、無描邊、彈性按壓</string>
+    <string name="style_material_tag">Material You 3：按 M3 顏色角色分層，開動態取色就跟系統桌布走</string>
+
+    <string name="login_reason_track">追更需要登入</string>
+    <string name="login_reason_fav_tags">收藏標籤需要登入</string>
+    <string name="login_reason_download">下載需要登入</string>
+    <string name="login_reason_like">按讚需要登入</string>
+    <string name="login_reason_favorite">收藏需要登入</string>
+    <string name="login_reason_comment">發表評論需要登入</string>
+    <string name="login_reason_tags">標籤收藏需要登入</string>
 </resources>
