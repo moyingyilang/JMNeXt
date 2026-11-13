@@ -1,5 +1,7 @@
 package com.jmnext.ui.screens.favorites
 
+import androidx.compose.ui.res.stringResource
+import com.jmnext.R
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -61,7 +63,7 @@ fun FolderNameDialog(
             OutlinedTextField(
                 value = name,
                 onValueChange = { name = it },
-                label = { Text("收藏夹名称") },
+                label = { Text(stringResource(R.string.folder_name)) },
                 singleLine = true,
                 modifier = Modifier.fillMaxWidth(),
             )
@@ -71,11 +73,11 @@ fun FolderNameDialog(
                 onClick = { onConfirm(name.trim()) },
                 enabled = name.isNotBlank(),
             ) {
-                Text("确定", color = c.accent)
+                Text(stringResource(R.string.folder_ok), color = c.accent)
             }
         },
         dismissButton = {
-            TextButton(onClick = onDismiss) { Text("取消", color = c.textSecondary) }
+            TextButton(onClick = onDismiss) { Text(stringResource(R.string.folder_cancel), color = c.textSecondary) }
         },
     )
 }
@@ -90,15 +92,15 @@ fun FolderDeleteDialog(
     val c = JmTheme.colors
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text("删除收藏夹") },
+        title = { Text(stringResource(R.string.folder_delete_title)) },
         text = {
-            Text("确定删除「${folder.name ?: folder.folderId}」吗？夹内的作品会回到「全部」，不会被取消收藏。")
+            Text(stringResource(R.string.folder_delete_confirm, folder.name ?: folder.folderId))
         },
         confirmButton = {
-            TextButton(onClick = onConfirm) { Text("删除", color = c.error) }
+            TextButton(onClick = onConfirm) { Text(stringResource(R.string.folder_delete), color = c.error) }
         },
         dismissButton = {
-            TextButton(onClick = onDismiss) { Text("取消", color = c.textSecondary) }
+            TextButton(onClick = onDismiss) { Text(stringResource(R.string.folder_cancel), color = c.textSecondary) }
         },
     )
 }
@@ -116,7 +118,7 @@ fun FolderPickerDialog(
     onPick: (FavoriteFolder) -> Unit,
     /** 可选的「不归类」出口。收藏后引导归类时用得上：归类应当是可选动作，不是必经步骤。 */
     onSkip: (() -> Unit)? = null,
-    skipLabel: String = "不归类",
+    skipLabel: String? = null,
 ) {
     val c = JmTheme.colors
     AlertDialog(
@@ -124,7 +126,7 @@ fun FolderPickerDialog(
         title = { Text(title) },
         text = {
             if (folders.isEmpty()) {
-                Text("还没有收藏夹，先在「管理收藏夹」里新建一个。")
+                Text(stringResource(R.string.folder_none_in_move))
             } else {
                 Column(
                     modifier = Modifier
@@ -153,7 +155,7 @@ fun FolderPickerDialog(
         },
         confirmButton = {
             TextButton(onClick = onSkip ?: onDismiss) {
-                Text(if (onSkip != null) skipLabel else "关闭", color = c.textSecondary)
+                Text(if (onSkip != null) skipLabel ?: stringResource(R.string.folder_skip_only_fav) else stringResource(R.string.folder_close), color = c.textSecondary)
             }
         },
     )
@@ -173,7 +175,7 @@ fun ManageFoldersDialog(
     val c = JmTheme.colors
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text("管理收藏夹") },
+        title = { Text(stringResource(R.string.folder_manage)) },
         text = {
             Column(
                 modifier = Modifier
@@ -183,7 +185,7 @@ fun ManageFoldersDialog(
             ) {
                 if (folders.isEmpty()) {
                     Text(
-                        text = "还没有收藏夹。收藏夹用于把收藏分组，例如按题材或进度。",
+                        text = stringResource(R.string.folder_empty),
                         style = MaterialTheme.typography.bodyMedium,
                         color = c.textTertiary,
                     )
@@ -200,10 +202,10 @@ fun ManageFoldersDialog(
                             modifier = Modifier.weight(1f),
                         )
                         TextButton(onClick = { onRename(folder) }) {
-                            Text("改名", color = c.accent)
+                            Text(stringResource(R.string.folder_rename_short), color = c.accent)
                         }
                         TextButton(onClick = { onDelete(folder) }) {
-                            Text("删除", color = c.error)
+                            Text(stringResource(R.string.folder_delete), color = c.error)
                         }
                     }
                 }

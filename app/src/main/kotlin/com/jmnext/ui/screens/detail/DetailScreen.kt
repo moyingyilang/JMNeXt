@@ -737,7 +737,7 @@ fun DetailScreen(
             onDismiss = { vm.dismissFolderPicker() },
             onPick = { folder -> vm.moveToFolder(folder.folderId) },
             onSkip = { vm.dismissFolderPicker() },
-            skipLabel = "仅收藏，不归类",
+            skipLabel = stringResource(R.string.folder_skip_only_fav),
         )
     }
 }

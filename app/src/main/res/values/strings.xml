@@ -389,4 +389,32 @@
     <string name="week_day_sat">周六</string>
     <string name="week_day_sun">周日</string>
     <string name="week_day_done">完结</string>
+
+    <!-- 评论 -->
+    <string name="cmt_title">评论</string>
+    <string name="cmt_total_fmt">共 %1 条</string>
+    <string name="cmt_back">返回</string>
+    <string name="cmt_compose_logged">说点什么（会公开发布）</string>
+    <string name="cmt_compose_login">登录后可发表评论</string>
+    <string name="cmt_sending">发送中…</string>
+    <string name="cmt_send">发送</string>
+    <string name="cmt_empty_title">还没有评论</string>
+    <string name="cmt_empty_desc">这里会显示其他读者的留言</string>
+    <string name="cmt_delete">删除这条评论</string>
+    <string name="cmt_replies_fmt">%1 条回复</string>
+    <!-- 收藏夹 -->
+    <string name="folder_name">收藏夹名称</string>
+    <string name="folder_ok">确定</string>
+    <string name="folder_cancel">取消</string>
+    <string name="folder_delete_title">删除收藏夹</string>
+    <string name="folder_delete_confirm">确定删除「%1」吗？夹内的作品会回到「全部」，不会被取消收藏。</string>
+    <string name="folder_delete">删除</string>
+    <string name="folder_skip">不归类</string>
+    <string name="folder_none_in_move">还没有收藏夹，先在「管理收藏夹」里新建一个。</string>
+    <string name="folder_close">关闭</string>
+    <string name="folder_manage">管理收藏夹</string>
+    <string name="folder_empty">还没有收藏夹。收藏夹用于把收藏分组，例如按题材或进度。</string>
+    <string name="folder_rename_short">改名</string>
+
+    <string name="folder_skip_only_fav">仅收藏，不归类</string>
 </resources>

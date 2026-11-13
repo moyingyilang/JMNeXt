@@ -369,4 +369,30 @@
     <string name="week_day_sat">週六</string>
     <string name="week_day_sun">週日</string>
     <string name="week_day_done">完結</string>
+
+    <string name="cmt_title">評論</string>
+    <string name="cmt_total_fmt">共 %1 條</string>
+    <string name="cmt_back">返回</string>
+    <string name="cmt_compose_logged">說點什麼（會公開發布）</string>
+    <string name="cmt_compose_login">登入後可發表評論</string>
+    <string name="cmt_sending">傳送中…</string>
+    <string name="cmt_send">傳送</string>
+    <string name="cmt_empty_title">還沒有評論</string>
+    <string name="cmt_empty_desc">這裡會顯示其他讀者的留言</string>
+    <string name="cmt_delete">刪除這則評論</string>
+    <string name="cmt_replies_fmt">%1 條回覆</string>
+    <string name="folder_name">收藏夾名稱</string>
+    <string name="folder_ok">確定</string>
+    <string name="folder_cancel">取消</string>
+    <string name="folder_delete_title">刪除收藏夾</string>
+    <string name="folder_delete_confirm">確定刪除「%1」嗎？夾內的作品會回到「全部」，不會被取消收藏。</string>
+    <string name="folder_delete">刪除</string>
+    <string name="folder_skip">不歸類</string>
+    <string name="folder_none_in_move">還沒有收藏夾，先在「管理收藏夾」裡新建一個。</string>
+    <string name="folder_close">關閉</string>
+    <string name="folder_manage">管理收藏夾</string>
+    <string name="folder_empty">還沒有收藏夾。收藏夾用於把收藏分組，例如按題材或進度。</string>
+    <string name="folder_rename_short">改名</string>
+
+    <string name="folder_skip_only_fav">僅收藏，不歸類</string>
 </resources>

@@ -1,5 +1,7 @@
 package com.jmnext.ui.screens.comments
 
+import androidx.compose.ui.res.stringResource
+import com.jmnext.R
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -252,13 +254,13 @@ fun CommentsScreen(
 
     Column(modifier = modifier.fillMaxSize()) {
         GlassTopBar(
-            title = "评论",
-            subtitle = if (state.total > 0) "共 ${state.total} 条" else null,
+            title = stringResource(R.string.cmt_title),
+            subtitle = if (state.total > 0) stringResource(R.string.cmt_total_fmt, state.total) else null,
             navigation = {
                 IconButton(onClick = onBack) {
                     Icon(
                         imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                        contentDescription = "返回",
+                        contentDescription = stringResource(R.string.cmt_back),
                         tint = c.accent,
                     )
                 }
@@ -278,7 +280,7 @@ fun CommentsScreen(
                 modifier = Modifier.weight(1f),
                 placeholder = {
                     Text(
-                        text = if (state.selfUid != null) "说点什么（会公开发布）" else "登录后可发表评论",
+                        text = if (state.selfUid != null) stringResource(R.string.cmt_compose_logged) else stringResource(R.string.cmt_compose_login),
                         color = c.textTertiary,
                     )
                 },
@@ -289,7 +291,7 @@ fun CommentsScreen(
                 onClick = { vm.send(onNeedLogin) },
                 enabled = !state.sending && state.draft.isNotBlank(),
             ) {
-                Text(if (state.sending) "发送中…" else "发送", color = c.accent)
+                Text(if (state.sending) stringResource(R.string.cmt_sending) else stringResource(R.string.cmt_send), color = c.accent)
             }
         }
 
@@ -309,8 +311,8 @@ fun CommentsScreen(
                 ErrorBox(message = state.error.orEmpty(), onRetry = { vm.load() })
 
             state.comments.isEmpty() -> MessageState(
-                title = "还没有评论",
-                description = "这里会显示其他读者的留言",
+                title = stringResource(R.string.cmt_empty_title),
+                description = stringResource(R.string.cmt_empty_desc),
                 icon = Icons.Filled.ChatBubbleOutline,
             )
 
@@ -398,7 +400,7 @@ private fun CommentCard(
                         ) {
                             Icon(
                                 imageVector = Icons.Filled.DeleteOutline,
-                                contentDescription = "删除这条评论",
+                                contentDescription = stringResource(R.string.cmt_delete),
                                 tint = c.textTertiary,
                                 modifier = Modifier.size(16.dp),
                             )
@@ -420,7 +422,7 @@ private fun CommentCard(
             // 而官方在详情页也只做展示
             if (comment.replies.isNotEmpty()) {
                 Text(
-                    text = "${comment.replies.size} 条回复",
+                    text = stringResource(R.string.cmt_replies_fmt, comment.replies.size),
                     style = MaterialTheme.typography.labelSmall,
                     color = c.accent,
                     modifier = Modifier.padding(top = Spacing.xs),
