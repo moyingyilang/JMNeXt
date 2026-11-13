@@ -1,4 +1,6 @@
 package com.jmnext.ui.screens.reader
+import androidx.compose.ui.res.stringResource
+import com.jmnext.R
 import com.jmnext.data.prefs.HistoryEntry
 import com.jmnext.data.prefs.HistoryStore
 import com.jmnext.data.ImageBytes
@@ -350,7 +352,7 @@ fun ReaderScreen(
                 ErrorBox(message = state.error.orEmpty(), onRetry = { vm.load() })
 
             payload == null || payload.images.isEmpty() -> ErrorBox(
-                message = "这一话没有可显示的图片",
+                message = stringResource(R.string.reader_empty),
                 onRetry = { vm.load() },
             )
 
@@ -435,16 +437,16 @@ fun ReaderScreen(
                 ) {
                     GlassTopBar(
                         title = payload.name?.takeIf { it.isNotBlank() }
-                            ?: if (index > 0) "第 $index 话" else "阅读",
+                            ?: if (index > 0) stringResource(R.string.reader_chapter_fmt, index) else stringResource(R.string.reader_title_fallback),
                         subtitle = buildString {
-                            append("共 ${payload.images.size} 页")
+                            append(stringResource(R.string.reader_pages_fmt, payload.images.size))
                             if (state.series.isNotEmpty()) append(" · ${index}/${state.series.size}")
                         },
                         navigation = {
                             IconButton(onClick = onBack) {
                                 Icon(
                                     imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                                    contentDescription = "返回",
+                                    contentDescription = stringResource(R.string.reader_back),
                                     tint = c.accent,
                                 )
                             }
@@ -464,9 +466,9 @@ fun ReaderScreen(
                                         Icons.Filled.SwapHoriz
                                     },
                                     contentDescription = if (mode == ReaderMode.Scroll) {
-                                        "切换到横向翻页"
+                                        stringResource(R.string.reader_to_horizontal)
                                     } else {
-                                        "切换到纵向滚动"
+                                        stringResource(R.string.reader_to_vertical)
                                     },
                                     tint = c.accent,
                                     modifier = Modifier.size(22.dp),
@@ -487,7 +489,7 @@ fun ReaderScreen(
                                 Row(verticalAlignment = Alignment.CenterVertically) {
                                     Icon(
                                         imageVector = Icons.Filled.Contrast,
-                                        contentDescription = "切换黑白 / 全彩",
+                                        contentDescription = stringResource(R.string.reader_toggle_mono),
                                         tint = c.accent,
                                         modifier = Modifier.size(20.dp),
                                     )
@@ -495,9 +497,9 @@ fun ReaderScreen(
                                     Text(
                                         // 显示**当前**状态（用户要求：把现在的样子写在上面）
                                         text = if (readerComicRenderMode.value == ComicRenderMode.Grayscale) {
-                                            "黑白"
+                                            stringResource(R.string.reader_mono)
                                         } else {
-                                            "全彩"
+                                            stringResource(R.string.reader_color)
                                         },
                                         color = c.accent,
                                         style = MaterialTheme.typography.labelSmall,
@@ -676,7 +678,7 @@ private fun PageSeekRow(
         IconButton(onClick = onPrev, enabled = enabled && hasPrev) {
             Icon(
                 imageVector = Icons.Filled.ChevronLeft,
-                contentDescription = "上一话",
+                contentDescription = stringResource(R.string.reader_prev_chapter),
                 tint = if (enabled && hasPrev) c.text else c.textTertiary,
             )
         }
@@ -699,7 +701,7 @@ private fun PageSeekRow(
         IconButton(onClick = onNext, enabled = enabled && hasNext) {
             Icon(
                 imageVector = Icons.Filled.ChevronRight,
-                contentDescription = "下一话",
+                contentDescription = stringResource(R.string.reader_next_chapter),
                 tint = if (enabled && hasNext) c.text else c.textTertiary,
             )
         }
@@ -728,29 +730,29 @@ private fun ReaderActions(
     ) {
         ReaderAction(
             icon = if (mode == ReaderMode.Scroll) Icons.Filled.SwapVert else Icons.Filled.SwapHoriz,
-            label = if (mode == ReaderMode.Scroll) "横向" else "纵向",
+            label = if (mode == ReaderMode.Scroll) stringResource(R.string.reader_mode_horizontal) else stringResource(R.string.reader_mode_vertical),
             showLabel = showLabels, tint = c.text, enabled = enabled, onClick = onToggleMode,
         )
         ReaderAction(
             icon = Icons.AutoMirrored.Filled.List,
-            label = "章节",
+            label = stringResource(R.string.reader_chapters),
             showLabel = showLabels, tint = c.text, enabled = enabled, onClick = onOpenPicker,
         )
         ReaderAction(
             icon = Icons.AutoMirrored.Filled.Comment,
-            label = "评论",
+            label = stringResource(R.string.reader_comments),
             showLabel = showLabels, tint = c.text, enabled = enabled, onClick = onOpenComments,
         )
         ReaderAction(
             icon = if (favorited) Icons.Filled.Bookmark else Icons.Filled.BookmarkBorder,
-            label = "收藏",
+            label = stringResource(R.string.reader_favorite),
             showLabel = showLabels,
             tint = if (favorited) c.accent else c.text,
             enabled = enabled, onClick = onToggleFavorite,
         )
         ReaderAction(
             icon = if (liked) Icons.Filled.Favorite else Icons.Filled.FavoriteBorder,
-            label = "点赞",
+            label = stringResource(R.string.reader_like),
             showLabel = showLabels,
             tint = if (liked) c.accent else c.text,
             enabled = enabled, onClick = onToggleLike,
@@ -1051,7 +1053,7 @@ private fun ReaderImage(
     Box(modifier) {
         Image(
             painter = painter,
-            contentDescription = "第 ${image.page} 页",
+            contentDescription = stringResource(R.string.reader_page_fmt, image.page),
             contentScale = contentScale,
             colorFilter = comicRenderFilter(renderMode),
             modifier = Modifier.fillMaxSize(),
@@ -1061,7 +1063,7 @@ private fun ReaderImage(
             // 图片失败此前没有任何提示：滚动模式下是一段说不清的空白，
             // 翻页模式下是一整页黑屏，都无法重试，只能整章重新进
             is AsyncImagePainter.State.Error -> PageFallback(
-                text = "这一页加载失败 · 点击重试",
+                text = stringResource(R.string.reader_page_failed),
                 placeholderRatio = ratio,
                 onClick = { attempt++ },
             )

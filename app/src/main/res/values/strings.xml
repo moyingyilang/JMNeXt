@@ -311,4 +311,30 @@
     <string name="creator_search_works">搜索作品</string>
     <string name="creator_search">搜索</string>
     <string name="creator_empty_authors">没有找到画师</string>
+
+    <!-- 阅读器 -->
+    <string name="reader_empty">这一话没有可显示的图片</string>
+    <string name="reader_chapter_fmt">第 %1 话</string>
+    <string name="reader_title_fallback">阅读</string>
+    <string name="reader_pages_fmt">共 %1 页</string>
+    <string name="reader_back">返回</string>
+    <string name="reader_to_horizontal">切换到横向翻页</string>
+    <string name="reader_to_vertical">切换到纵向滚动</string>
+    <string name="reader_toggle_mono">切换黑白 / 全彩</string>
+    <string name="reader_mono">黑白</string>
+    <string name="reader_color">全彩</string>
+    <string name="reader_prev_chapter">上一话</string>
+    <string name="reader_next_chapter">下一话</string>
+    <string name="reader_mode_horizontal">横向</string>
+    <string name="reader_mode_vertical">纵向</string>
+    <string name="reader_chapters">章节</string>
+    <string name="reader_comments">评论</string>
+    <string name="reader_favorite">收藏</string>
+    <string name="reader_like">点赞</string>
+    <string name="reader_page_fmt">第 %1 页</string>
+    <string name="reader_page_failed">这一页加载失败 · 点击重试</string>
+    <string name="reader_pick_title">选择章节</string>
+    <string name="reader_pick_prev">上一页</string>
+    <string name="reader_pick_next">下一页</string>
+    <string name="reader_pick_close">关闭</string>
 </resources>

@@ -295,4 +295,29 @@
     <string name="creator_search_works">搜尋作品</string>
     <string name="creator_search">搜尋</string>
     <string name="creator_empty_authors">沒有找到畫師</string>
+
+    <string name="reader_empty">這一話沒有可顯示的圖片</string>
+    <string name="reader_chapter_fmt">第 %1 話</string>
+    <string name="reader_title_fallback">閱讀</string>
+    <string name="reader_pages_fmt">共 %1 頁</string>
+    <string name="reader_back">返回</string>
+    <string name="reader_to_horizontal">切換到橫向翻頁</string>
+    <string name="reader_to_vertical">切換到縱向滾動</string>
+    <string name="reader_toggle_mono">切換黑白 / 全彩</string>
+    <string name="reader_mono">黑白</string>
+    <string name="reader_color">全彩</string>
+    <string name="reader_prev_chapter">上一話</string>
+    <string name="reader_next_chapter">下一話</string>
+    <string name="reader_mode_horizontal">橫向</string>
+    <string name="reader_mode_vertical">縱向</string>
+    <string name="reader_chapters">章節</string>
+    <string name="reader_comments">評論</string>
+    <string name="reader_favorite">收藏</string>
+    <string name="reader_like">點讚</string>
+    <string name="reader_page_fmt">第 %1 頁</string>
+    <string name="reader_page_failed">這一頁載入失敗 · 點擊重試</string>
+    <string name="reader_pick_title">選擇章節</string>
+    <string name="reader_pick_prev">上一頁</string>
+    <string name="reader_pick_next">下一頁</string>
+    <string name="reader_pick_close">關閉</string>
 </resources>

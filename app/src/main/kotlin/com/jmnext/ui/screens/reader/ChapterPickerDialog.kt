@@ -1,5 +1,7 @@
 package com.jmnext.ui.screens.reader
 
+import androidx.compose.ui.res.stringResource
+import com.jmnext.R
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -65,7 +67,7 @@ fun ChapterPickerDialog(
 
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text("选择章节") },
+        title = { Text(stringResource(R.string.reader_pick_title)) },
         text = {
             // 滚动状态按页码取，而不是整屏共用一个：`rememberScrollState()` 会在
             // 翻页后继续沿用上一页的偏移，新一页一打开就停在底部，看起来像「这页内容缺了一半」
@@ -95,7 +97,7 @@ fun ChapterPickerDialog(
                                 modifier = Modifier.padding(end = Spacing.md),
                             )
                             Text(
-                                text = chapter.name?.takeIf { it.isNotBlank() } ?: "第 $number 话",
+                                text = chapter.name?.takeIf { it.isNotBlank() } ?: stringResource(R.string.reader_chapter_fmt, number),
                                 style = MaterialTheme.typography.bodyLarge,
                                 color = if (isCurrent) c.accent else c.text,
                                 maxLines = 1,
@@ -114,7 +116,7 @@ fun ChapterPickerDialog(
                 ) {
                     Icon(
                         Icons.Filled.ChevronLeft,
-                        contentDescription = "上一页",
+                        contentDescription = stringResource(R.string.reader_pick_prev),
                         tint = if (safePage > 0) c.accent else c.textTertiary,
                     )
                 }
@@ -129,14 +131,14 @@ fun ChapterPickerDialog(
                 ) {
                     Icon(
                         Icons.Filled.ChevronRight,
-                        contentDescription = "下一页",
+                        contentDescription = stringResource(R.string.reader_pick_next),
                         tint = if (safePage < pageCount - 1) c.accent else c.textTertiary,
                     )
                 }
             }
         },
         dismissButton = {
-            TextButton(onClick = onDismiss) { Text("关闭", color = c.textSecondary) }
+            TextButton(onClick = onDismiss) { Text(stringResource(R.string.reader_pick_close), color = c.textSecondary) }
         },
     )
 }
