@@ -1,4 +1,5 @@
 package com.jmnext.ui.screens.reader
+import androidx.annotation.StringRes
 import androidx.compose.ui.res.stringResource
 import com.jmnext.R
 import com.jmnext.data.prefs.HistoryEntry
@@ -128,6 +129,7 @@ import kotlin.math.roundToInt
 data class ReaderUiState(
     val loading: Boolean = true,
     val error: String? = null,
+    @StringRes val errorRes: Int? = null,
     val payload: ReadPayload? = null,
     /** 当前作品的全部章节，用于上一话/下一话切换。 */
     val series: List<SeriesItem> = emptyList(),
@@ -251,8 +253,8 @@ class ReaderViewModel(
                     currentChapterId = if (payload != null) chapterId else it.currentChapterId,
                     payload = payload ?: it.payload,
                     // 失败时说清楚是「换话失败」，而不是让错误文字悬在那儿不提当前是哪一话
-                    error = chapter.exceptionOrNull()
-                        ?.let { e -> "切换章节失败：${e.message ?: "未知错误"}" },
+                    error = chapter.exceptionOrNull()?.message,
+                    errorRes = if (chapter.isFailure) R.string.reader_switch_chapter_failed_fmt else null,
                 )
             }
             // 进度按实际生效的那一话记录：失败时记的是仍然显示着的那一话
@@ -347,7 +349,6 @@ fun ReaderScreen(
         val payload = state.payload
         when {
             state.loading -> LoadingBox()
-
             state.error != null && payload == null ->
                 ErrorBox(message = state.error.orEmpty(), onRetry = { vm.load() })
 
@@ -411,7 +412,7 @@ fun ReaderScreen(
                 }
 
                 // 有内容时的错误提示（例如换话失败）：内容留在屏幕上，但必须说清楚刚才那一步没成
-                state.error?.let { message ->
+                (state.errorRes?.let { stringResource(it, state.error.orEmpty()) } ?: state.error)?.let { message ->
                     AnimatedVisibility(
                         visible = barsVisible,
                         enter = slideInVertically { -it },

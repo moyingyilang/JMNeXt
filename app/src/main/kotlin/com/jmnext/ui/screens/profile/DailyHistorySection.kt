@@ -51,6 +51,7 @@ fun DailyHistorySection(
     uid: String,
     modifier: Modifier = Modifier,
 ) {
+    val ctx = androidx.compose.ui.platform.LocalContext.current
     val c = JmTheme.colors
     var expanded by remember { mutableStateOf(false) }
     var years by remember { mutableStateOf<List<String>>(emptyList()) }
@@ -76,7 +77,7 @@ fun DailyHistorySection(
                     java.util.Calendar.getInstance().get(java.util.Calendar.YEAR),
                 )
             }
-            .onFailure { error = it.message?.takeIf { m -> m.isNotBlank() } ?: "网络问题" }
+            .onFailure { error = it.message?.takeIf { m -> m.isNotBlank() } ?: ctx.getString(R.string.common_network_issue) }
         loading = false
     }
 
@@ -87,7 +88,7 @@ fun DailyHistorySection(
         error = null
         runCatching { repo.dailyHistory(y) }
             .onSuccess { entries = it.list }
-            .onFailure { error = it.message?.takeIf { m -> m.isNotBlank() } ?: "网络问题" }
+            .onFailure { error = it.message?.takeIf { m -> m.isNotBlank() } ?: ctx.getString(R.string.common_network_issue) }
         loading = false
     }
 

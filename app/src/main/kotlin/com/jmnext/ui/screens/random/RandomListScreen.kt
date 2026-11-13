@@ -101,6 +101,7 @@ fun RandomListScreen(
     val prefs = remember(context) { AppPrefs(SharedPrefsKeyValueStore(context, "jm_prefs")) }
     var layout by remember { mutableStateOf(prefs.randomLayout) }
     var items_ by remember { mutableStateOf<List<ListItem>>(emptyList()) }
+    val ctx = androidx.compose.ui.platform.LocalContext.current
     var loading by remember { mutableStateOf(true) }
     var error by remember { mutableStateOf<String?>(null) }
     var round by remember { mutableStateOf(0) }
@@ -192,7 +193,7 @@ fun RandomListScreen(
         error = null
         runCatching { repo.bootstrap(); repo.randomRecommend() }
             .onSuccess { items_ = it }
-            .onFailure { error = it.message?.takeIf { m -> m.isNotBlank() } ?: "网络问题" }
+            .onFailure { error = it.message?.takeIf { m -> m.isNotBlank() } ?: ctx.getString(R.string.common_network_issue) }
         loading = false
     }
 

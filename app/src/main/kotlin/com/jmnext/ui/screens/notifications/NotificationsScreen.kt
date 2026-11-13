@@ -68,6 +68,7 @@ fun NotificationsScreen(
     var total by remember { mutableStateOf(0) }
     var page by remember { mutableStateOf(1) }
     var loading by remember { mutableStateOf(true) }
+    val ctx = androidx.compose.ui.platform.LocalContext.current
     var error by remember { mutableStateOf<String?>(null) }
 
     // 服务端按页返回（官方界面每页 20 条），所以这里也必须翻页 ——
@@ -85,7 +86,7 @@ fun NotificationsScreen(
             }
             .onFailure {
                 // 只有第一页失败才报错；追加失败时保留已显示的内容，不把整屏清掉
-                if (page == 1) error = it.message?.takeIf { m -> m.isNotBlank() } ?: "网络问题"
+                if (page == 1) error = it.message?.takeIf { m -> m.isNotBlank() } ?: ctx.getString(R.string.common_network_issue)
             }
         loading = false
     }

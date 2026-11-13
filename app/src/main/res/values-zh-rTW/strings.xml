@@ -572,4 +572,6 @@
     <string name="fav_untrack_failed_fmt">取消追更失敗：%1</string>
     <string name="fav_delete_failed_fmt">刪除失敗：%1</string>
     <string name="tagfav_delete_failed_fmt">刪除失敗：%1</string>
+
+    <string name="common_unknown_error_fallback">未知錯誤</string>
 </resources>
