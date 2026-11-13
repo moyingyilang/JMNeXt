@@ -1,6 +1,7 @@
 package com.jmnext.desktop
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -157,7 +158,23 @@ fun BlogTheme(
             // 壁纸铺在最底层，上面所有面板是半透明的，于是形成玻璃观感
             Box(Modifier.fillMaxSize()) {
                 WallpaperLayer()
-                content()
+                // 内容整体落在一块玻璃面板上：Android 每一页都是面板，
+                // 桌面端之前把文字直接铺在壁纸上，配浅色壁纸时读不清。
+                // 留 10dp 边让壁纸从四周透出来，玻璃感才成立。
+                androidx.compose.foundation.layout.Box(
+                    Modifier
+                        .fillMaxSize()
+                        .padding(10.dp),
+                ) {
+                    JmSurface(
+                        modifier = Modifier.fillMaxSize(),
+                        level = 1,
+                        fillAlpha = 0.86f,
+                        shape = androidx.compose.foundation.shape.RoundedCornerShape(jmSpec.radius.xl),
+                    ) {
+                        content()
+                    }
+                }
             }
         }
     }

@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.sp
  * [SurfaceSpec.noise] 只能近似；[SurfaceSpec.pressScale] 在桌面按下态生效。
  */
 
-/** 圆角阶梯，随风格变化。 */
+    /** Wallpaper scrim: same as Android's wallpaperScrim. */
 data class RadiusScale(
     val xs: Dp,
     val sm: Dp,
@@ -56,6 +56,8 @@ data class SurfaceSpec(
 )
 
 data class JmSpec(
+    /** Wallpaper scrim: same as Android's wallpaperScrim. */
+    val wallpaperScrim: Float,
     val radius: RadiusScale,
     val surface: SurfaceSpec,
     val type: TypeScale,
@@ -65,6 +67,7 @@ object JmSpecs {
 
     /** Windows 11：窗口 8、控件 4；Acrylic 有描边与高光。 */
     val windowGlass = JmSpec(
+        wallpaperScrim = 0.34f,
         radius = RadiusScale(xs = 2.dp, sm = 4.dp, md = 6.dp, lg = 8.dp, xl = 12.dp),
         surface = SurfaceSpec(
             fillAlphaScale = 1f,
@@ -90,6 +93,7 @@ object JmSpecs {
 
     /** 扁平模糊：平面化，圆角更大，不画高光。 */
     val flatBlur = JmSpec(
+        wallpaperScrim = 0.22f,
         radius = RadiusScale(xs = 8.dp, sm = 12.dp, md = 16.dp, lg = 20.dp, xl = 28.dp),
         surface = SurfaceSpec(
             fillAlphaScale = 1f,
@@ -106,6 +110,7 @@ object JmSpecs {
 
     /** MIUI / HyperOS：大圆角、实心卡片、1dp 描边分层、按下有弹性。 */
     val miuix = JmSpec(
+        wallpaperScrim = 0.12f,
         radius = RadiusScale(xs = 4.dp, sm = 8.dp, md = 12.dp, lg = 16.dp, xl = 24.dp),
         surface = SurfaceSpec(
             fillAlphaScale = 1f,
@@ -122,6 +127,7 @@ object JmSpecs {
 
     /** Material 3：M3 的 typescale 与 elevation。 */
     val material = JmSpec(
+        wallpaperScrim = 0f,
         radius = RadiusScale(xs = 4.dp, sm = 8.dp, md = 12.dp, lg = 16.dp, xl = 28.dp),
         surface = SurfaceSpec(
             fillAlphaScale = 1f,

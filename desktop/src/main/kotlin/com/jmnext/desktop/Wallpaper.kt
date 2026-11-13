@@ -243,6 +243,16 @@ fun WallpaperLayer(modifier: Modifier = Modifier) {
                     .background(Color.Black.copy(alpha = Appearance.dim / 100f)),
             )
         }
+        // 按风格压暗壁纸：Android 的 wallpaperScrim。没有这层时，浅色文字压在高对比
+        // 二次元图上会糊成一片（截图里顶栏那行「未登录」就是这样）。
+        val scrim = LocalJmSpec.current.wallpaperScrim
+        if (scrim > 0f && (remote.showsImage || Appearance.wallpaperPath != null)) {
+            Box(
+                Modifier
+                    .fillMaxSize()
+                    .background(Color.Black.copy(alpha = scrim)),
+            )
+        }
     }
 }
 

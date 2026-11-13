@@ -1,4 +1,6 @@
 package com.jmnext.desktop
+import androidx.compose.foundation.border
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.size
@@ -138,6 +140,12 @@ fun main(args: Array<String>) {
     }
     // 非 Compose 代码（CLI、Swing 对话框、协程里赋值的提示）走 I18n.tr，这里注入当前语言的表
     com.jmnext.desktop.i18n.I18n.install(com.jmnext.desktop.i18n.byZhFor(resolveLocale()))
+    // æªå¾ä¸è°è¯ç¨ï¼JMNEXT_WALLPAPER_MODE=Anime æ¶ç´æ¥ç¨äºæ¬¡åå£çº¸ï¼çå¾æç¹
+    System.getenv("JMNEXT_WALLPAPER_MODE")?.let { name ->
+        com.jmnext.wallpaper.WallpaperMode.entries
+            .firstOrNull { it.name.equals(name, ignoreCase = true) }
+            ?.let { RemoteWallpaper.setMode(it) }
+    }
     runApp()
 }
 
@@ -296,13 +304,19 @@ private fun ComicCard(item: ListItem, updated: Boolean = false, onOpen: () -> Un
     val bitmap = rememberRemoteImage(coverUrl)
 
     Column(
-        modifier = Modifier.clickable { onOpen() },
+        modifier = Modifier.jmPressable { onOpen() },
     ) {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
                 .aspectRatio(3f / 4f)
-                .clip(RoundedCornerShape(Radius.lg))
+                    .clip(RoundedCornerShape(Radius.lg))
+                    .let { m ->
+                        val hair = LocalJmSpec.current.surface.hairline
+                        if (hair > androidx.compose.ui.unit.Dp(0f)) {
+                            m.border(androidx.compose.foundation.BorderStroke(hair, MaterialTheme.colorScheme.outline), RoundedCornerShape(Radius.lg))
+                        } else m
+                    }
                 .background(MaterialTheme.colorScheme.surfaceVariant),
         ) {
             if (bitmap != null) {
