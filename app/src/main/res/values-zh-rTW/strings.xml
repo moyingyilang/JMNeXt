@@ -479,4 +479,24 @@
 
     <string name="auth_welcome_fmt">歡迎回來，%1</string>
     <string name="auth_login_again_fmt">%1 · 登入後請再點一次剛才那個按鈕</string>
+
+    <string name="detail_resume_fmt">繼續閱讀 · 第 %1 話</string>
+    <string name="detail_start_fmt">開始閱讀 · 第 %1 話</string>
+    <string name="detail_start">開始閱讀</string>
+    <string name="detail_untrack_cd">取消追更</string>
+    <string name="detail_track_cd">追更</string>
+    <string name="detail_unfavorite_cd">取消收藏</string>
+    <string name="detail_favorite_cd">收藏</string>
+    <string name="detail_liked_cd">已按讚</string>
+    <string name="detail_like_cd">按讚</string>
+    <string name="detail_pages_fmt">共 %1 頁</string>
+    <string name="detail_comments_fmt"> · %1 評論</string>
+    <string name="detail_load_failed">沒能載入出這部作品</string>
+    <string name="detail_works">作品</string>
+    <string name="detail_actors">演員</string>
+    <string name="detail_by_rules">按你的封鎖規則</string>
+    <string name="detail_blocked_author_suffix">：已封鎖作者</string>
+    <string name="detail_blocked_tags_fmt">：含「%1」</string>
+    <string name="detail_comment_total_fmt">%1 條</string>
+    <string name="detail_no_comments">暫無</string>
 </resources>

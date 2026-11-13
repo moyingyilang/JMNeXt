@@ -150,11 +150,11 @@ data class ReadEntry(
     /** 在目录中的序号；0 表示该作品没有目录。 */
     val index: Int,
 ) {
-    val label: String
+    val labelRes: Int
         get() = when {
-            isResume && index > 0 -> "继续阅读 · 第 $index 话"
-            index > 0 -> "开始阅读 · 第 $index 话"
-            else -> "开始阅读"
+            isResume && index > 0 -> com.jmnext.R.string.detail_resume_fmt
+            index > 0 -> com.jmnext.R.string.detail_start_fmt
+            else -> com.jmnext.R.string.detail_start
         }
 }
 
@@ -652,7 +652,7 @@ fun DetailScreen(
                                 } else {
                                     Icons.Filled.NotificationsNone
                                 },
-                                contentDescription = if (state.tracked) "取消追更" else "追更",
+                                contentDescription = if (state.tracked) stringResource(R.string.detail_untrack_cd) else stringResource(R.string.detail_track_cd),
                                 tint = if (state.tracked) c.accent else c.textSecondary,
                                 modifier = Modifier.size(22.dp),
                             )
@@ -668,7 +668,7 @@ fun DetailScreen(
                             } else {
                                 Icons.Filled.BookmarkBorder
                             },
-                            contentDescription = if (detail.isFavorite) "取消收藏" else "收藏",
+                            contentDescription = if (detail.isFavorite) stringResource(R.string.detail_unfavorite_cd) else stringResource(R.string.detail_favorite_cd),
                             tint = if (detail.isFavorite) c.accent else c.textSecondary,
                             modifier = Modifier.size(22.dp),
                         )
@@ -839,7 +839,7 @@ private fun DetailHeader(
                             } else {
                                 Icons.Filled.FavoriteBorder
                             },
-                            contentDescription = if (liked) "已点赞" else "点赞",
+                            contentDescription = if (liked) stringResource(R.string.detail_liked_cd) else stringResource(R.string.detail_like_cd),
                             tint = if (liked) c.accent else c.textTertiary,
                             modifier = Modifier.size(14.dp),
                         )
@@ -885,6 +885,8 @@ private fun DetailContent(
     onUnblockTag: (String) -> Unit,
 ) {
     val c = JmTheme.colors
+    val worksLabel = stringResource(R.string.detail_works)
+    val actorsLabel = stringResource(R.string.detail_actors)
     // 默认停在第一章所在的那一页目录
     var chapterPage by rememberSaveable { mutableIntStateOf(0) }
 
@@ -910,8 +912,8 @@ private fun DetailContent(
                 author = detail?.author?.joinToString("、").orEmpty(),
                 pageInfo = detail?.let { d ->
                     buildString {
-                        append("共 ${d.totalPhotos} 页")
-                        if (d.commentTotal > 0) append(" · ${d.commentTotal} 评论")
+                        append(stringResource(R.string.detail_pages_fmt, d.totalPhotos))
+                        if (d.commentTotal > 0) append(stringResource(R.string.detail_comments_fmt, d.commentTotal))
                     }
                 }.orEmpty(),
                 liked = detail?.liked == true,
@@ -936,7 +938,7 @@ private fun DetailContent(
 
                     // 兜底：加载结束却没有内容也没有错误（例如异常没有 message）时，
                     // 之前这里什么都不渲染，用户面对的是一张只有顶栏的白屏，且没有重试入口
-                    else -> ErrorBox(message = "没能加载出这部作品", onRetry = onRetry)
+                    else -> ErrorBox(message = stringResource(R.string.detail_load_failed), onRetry = onRetry)
                 }
             }
             return@LazyColumn
@@ -958,8 +960,8 @@ private fun DetailContent(
 
         // 作品 / 演员：这两个字段此前被忽略，但它们是官方详情页展示的一部分
         val metaRows = buildList {
-            if (detail.works.isNotEmpty()) add("作品" to detail.works)
-            if (detail.actors.isNotEmpty()) add("演员" to detail.actors)
+            if (detail.works.isNotEmpty()) add(worksLabel to detail.works)
+            if (detail.actors.isNotEmpty()) add(actorsLabel to detail.actors)
         }
         metaRows.forEach { (label, values) ->
             item(key = "meta-$label") {
@@ -1032,10 +1034,10 @@ private fun DetailContent(
                         )
                         Text(
                             text = buildString {
-                                append("按你的屏蔽规则")
-                                if (blockedAuthor) append("：已屏蔽作者")
+                                append(stringResource(R.string.detail_by_rules))
+                                if (blockedAuthor) append(stringResource(R.string.detail_blocked_author_suffix))
                                 if (blockedTags.isNotEmpty()) {
-                                    append("：含「${blockedTags.joinToString("、")}」")
+                                    append(stringResource(R.string.detail_blocked_tags_fmt, blockedTags.joinToString("、")))
                                 }
                             },
                             style = MaterialTheme.typography.labelSmall,
@@ -1157,7 +1159,7 @@ private fun DetailContent(
                         modifier = Modifier.weight(1f).padding(start = Spacing.sm),
                     )
                     Text(
-                        text = if (detail.commentTotal > 0) "${detail.commentTotal} 条" else "暂无",
+                        text = if (detail.commentTotal > 0) stringResource(R.string.detail_comment_total_fmt, detail.commentTotal) else stringResource(R.string.detail_no_comments),
                         style = MaterialTheme.typography.bodyMedium,
                         color = c.textTertiary,
                     )
@@ -1192,7 +1194,7 @@ private fun DetailContent(
                             modifier = Modifier.size(24.dp),
                         )
                         Text(
-                            text = entry.label,
+                            text = if (entry.index > 0) stringResource(entry.labelRes, entry.index) else stringResource(entry.labelRes),
                             style = MaterialTheme.typography.titleMedium,
                             color = c.text,
                             modifier = Modifier.padding(start = Spacing.sm),
@@ -1289,7 +1291,7 @@ private fun ChapterPager(
                         modifier = Modifier.width(48.dp),
                     )
                     Text(
-                        text = chapter.name?.takeIf { it.isNotBlank() } ?: "第 $number 话",
+                        text = chapter.name?.takeIf { it.isNotBlank() } ?: stringResource(R.string.reader_chapter_fmt, number),
                         style = MaterialTheme.typography.bodyLarge,
                         color = c.text,
                         maxLines = 1,

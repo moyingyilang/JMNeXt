@@ -506,4 +506,25 @@
 
     <string name="auth_welcome_fmt">欢迎回来，%1</string>
     <string name="auth_login_again_fmt">%1 · 登录后请再点一次刚才那个按钮</string>
+
+    <!-- 详情续 -->
+    <string name="detail_resume_fmt">继续阅读 · 第 %1 话</string>
+    <string name="detail_start_fmt">开始阅读 · 第 %1 话</string>
+    <string name="detail_start">开始阅读</string>
+    <string name="detail_untrack_cd">取消追更</string>
+    <string name="detail_track_cd">追更</string>
+    <string name="detail_unfavorite_cd">取消收藏</string>
+    <string name="detail_favorite_cd">收藏</string>
+    <string name="detail_liked_cd">已点赞</string>
+    <string name="detail_like_cd">点赞</string>
+    <string name="detail_pages_fmt">共 %1 页</string>
+    <string name="detail_comments_fmt"> · %1 评论</string>
+    <string name="detail_load_failed">没能加载出这部作品</string>
+    <string name="detail_works">作品</string>
+    <string name="detail_actors">演员</string>
+    <string name="detail_by_rules">按你的屏蔽规则</string>
+    <string name="detail_blocked_author_suffix">：已屏蔽作者</string>
+    <string name="detail_blocked_tags_fmt">：含「%1」</string>
+    <string name="detail_comment_total_fmt">%1 条</string>
+    <string name="detail_no_comments">暂无</string>
 </resources>
