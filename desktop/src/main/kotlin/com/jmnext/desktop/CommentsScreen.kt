@@ -212,7 +212,7 @@ private fun CommentRow(
         modifier = Modifier
             .fillMaxWidth()
             .padding(start = (depth * 20).dp)
-            .clip(androidx.compose.foundation.shape.RoundedCornerShape(10.dp))
+            .clip(androidx.compose.foundation.shape.RoundedCornerShape(Radius.lg))
             .background(MaterialTheme.colorScheme.surfaceVariant)
             .padding(10.dp),
         verticalArrangement = Arrangement.spacedBy(4.dp),

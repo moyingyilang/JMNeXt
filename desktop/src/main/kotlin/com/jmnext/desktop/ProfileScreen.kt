@@ -152,7 +152,7 @@ private fun Card(title: String, content: @Composable () -> Unit) {
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(top = 6.dp)
-                .clip(RoundedCornerShape(12.dp))
+                .clip(RoundedCornerShape(Radius.md))
                 .background(MaterialTheme.colorScheme.surfaceVariant)
                 .padding(14.dp),
             verticalArrangement = Arrangement.spacedBy(5.dp),

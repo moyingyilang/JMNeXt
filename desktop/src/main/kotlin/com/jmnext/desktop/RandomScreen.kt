@@ -178,7 +178,7 @@ StatusLine(status, busy)
                         val bmp = rememberRemoteImage(coverUrl)
                         Box(
                             modifier = Modifier.width(84.dp).aspectRatio(3f / 4f)
-                                .clip(RoundedCornerShape(8.dp))
+                                .clip(RoundedCornerShape(Radius.sm))
                                 .background(MaterialTheme.colorScheme.surfaceVariant),
                         ) {
                             if (bmp != null) {

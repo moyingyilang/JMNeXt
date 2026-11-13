@@ -87,7 +87,7 @@ fun SideNav(selected: String, onSelect: (String) -> Unit, unreadNotifications: I
                 color = if (active) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .clip(RoundedCornerShape(8.dp))
+                    .clip(RoundedCornerShape(Radius.sm))
                     .background(
                         if (active) MaterialTheme.colorScheme.primaryContainer
                         else MaterialTheme.colorScheme.surface,
@@ -99,7 +99,7 @@ fun SideNav(selected: String, onSelect: (String) -> Unit, unreadNotifications: I
                               Modifier.border(
                                   width = 1.dp,
                                   color = MaterialTheme.colorScheme.primary,
-                                  shape = RoundedCornerShape(8.dp),
+                                  shape = RoundedCornerShape(Radius.sm),
                               )
                           } else {
                               Modifier

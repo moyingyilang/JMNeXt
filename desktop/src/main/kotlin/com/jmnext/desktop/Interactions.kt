@@ -65,7 +65,7 @@ fun Modifier.jmClickable(
     )
     var m = this
         .graphicsLayer { scaleX = scale; scaleY = scale }
-        .clip(RoundedCornerShape(10.dp))
+        .clip(RoundedCornerShape(Radius.lg))
         .background(if (hovered && enabled) MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.35f) else Color.Transparent)
         .hoverable(interactionSource = interaction, enabled = enabled)
         .onFocusChanged { focused = it.isFocused }
@@ -73,7 +73,7 @@ fun Modifier.jmClickable(
         m = m.border(
             width = 2.dp,
             color = MaterialTheme.colorScheme.primary.copy(alpha = 0.85f * ringAlpha),
-            shape = RoundedCornerShape(10.dp),
+            shape = RoundedCornerShape(Radius.lg),
         )
     }
     return m.clickable(

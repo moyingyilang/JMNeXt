@@ -324,7 +324,7 @@ fun DetailScreen(
                     modifier = Modifier
                         .fillMaxWidth()
                         .aspectRatio(3f / 4f)
-                        .clip(RoundedCornerShape(10.dp))
+                        .clip(RoundedCornerShape(Radius.lg))
                         .jmSharedElement(jmCoverKey(d.id))
                         .background(MaterialTheme.colorScheme.surfaceVariant),
                 ) {
@@ -522,7 +522,7 @@ fun DetailScreen(
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .clip(RoundedCornerShape(8.dp))
+                        .clip(RoundedCornerShape(Radius.sm))
                         .background(MaterialTheme.colorScheme.surfaceVariant)
                         .clickable(enabled = !downloadBusy) { downloadAlbum() }
                         .padding(horizontal = 12.dp, vertical = 10.dp),

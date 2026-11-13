@@ -88,7 +88,7 @@ fun NoticeHost(
                     },
                     modifier = Modifier
                         .padding(bottom = 28.dp)
-                        .clip(RoundedCornerShape(10.dp))
+                        .clip(RoundedCornerShape(Radius.lg))
                         .background(
                             when (cur.kind) {
                                 NoticeKind.ERROR -> MaterialTheme.colorScheme.errorContainer

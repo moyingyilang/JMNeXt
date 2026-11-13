@@ -149,7 +149,7 @@ fun AppearanceScreen(onLocaleChange: (String) -> Unit = {}) {
                     Column(
                         Modifier
                             .width(96.dp)
-                            .clip(RoundedCornerShape(10.dp))
+                            .clip(RoundedCornerShape(Radius.lg))
                             .clickable {
                                 Appearance.preset = p
                                 Appearance.wallpaperPath = null
@@ -164,7 +164,7 @@ fun AppearanceScreen(onLocaleChange: (String) -> Unit = {}) {
                             Modifier
                                 .fillMaxWidth()
                                 .height(56.dp)
-                                .clip(RoundedCornerShape(8.dp))
+                                .clip(RoundedCornerShape(Radius.sm))
                                 .background(Brush.linearGradient(if (Appearance.dark) p.dark else p.light)),
                         ) {}
                         Text(

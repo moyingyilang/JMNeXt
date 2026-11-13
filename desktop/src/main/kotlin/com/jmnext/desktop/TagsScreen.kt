@@ -211,7 +211,7 @@ fun TagsScreen(repository: JmRepository, onSearch: (String) -> Unit) {
                 starred.sorted().forEach { tag ->
                     Row(
                         modifier = Modifier
-                            .clip(RoundedCornerShape(999.dp))
+                            .clip(RoundedCornerShape(Radius.pill))
                             .background(MaterialTheme.colorScheme.surfaceVariant),
                         horizontalArrangement = Arrangement.spacedBy(2.dp),
                     ) {

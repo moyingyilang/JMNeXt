@@ -154,7 +154,7 @@ StatusLine(status, busy)
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .clip(RoundedCornerShape(10.dp))
+                        .clip(RoundedCornerShape(Radius.lg))
                         .background(MaterialTheme.colorScheme.surfaceVariant)
                         .padding(12.dp),
                     verticalAlignment = Alignment.CenterVertically,

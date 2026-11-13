@@ -359,7 +359,7 @@ private fun TagChip(tag: String, onClick: () -> Unit) {
         style = MaterialTheme.typography.labelSmall,
         color = MaterialTheme.colorScheme.primary,
         modifier = Modifier
-            .clip(RoundedCornerShape(999.dp))
+            .clip(RoundedCornerShape(Radius.pill))
             .background(MaterialTheme.colorScheme.primaryContainer)
             .clickable { onClick() }
             .padding(horizontal = 10.dp, vertical = 5.dp),
@@ -374,7 +374,7 @@ private fun NavChip(label: String, active: Boolean, onClick: () -> Unit) {
         color = if (active) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface,
         modifier = Modifier
             .fillMaxWidth()
-            .clip(RoundedCornerShape(8.dp))
+            .clip(RoundedCornerShape(Radius.sm))
             .background(if (active) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.surface)
             .clickable { onClick() }
             .padding(horizontal = 10.dp, vertical = 7.dp),

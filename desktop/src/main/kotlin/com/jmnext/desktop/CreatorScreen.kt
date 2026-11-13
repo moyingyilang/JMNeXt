@@ -283,7 +283,7 @@ fun CreatorScreen(repository: JmRepository) {
                                     val rbmp = rememberRemoteImage(r.image)
                                     Box(
                                         modifier = Modifier.fillMaxWidth().aspectRatio(3f / 4f)
-                                            .clip(RoundedCornerShape(10.dp))
+                                            .clip(RoundedCornerShape(Radius.lg))
                                             .background(MaterialTheme.colorScheme.surfaceVariant),
                                     ) {
                                         if (rbmp != null) {
@@ -360,7 +360,7 @@ fun CreatorScreen(repository: JmRepository) {
                         val bmp = rememberRemoteImage(w.image)
                         Box(
                             modifier = Modifier.fillMaxWidth().aspectRatio(3f / 4f)
-                                .clip(RoundedCornerShape(10.dp))
+                                .clip(RoundedCornerShape(Radius.lg))
                                 .background(MaterialTheme.colorScheme.surfaceVariant),
                         ) {
                             if (bmp != null) {

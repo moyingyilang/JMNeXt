@@ -50,7 +50,7 @@ fun ComicCover(repository: JmRepository, item: ListItem, modifier: Modifier = Mo
             modifier = Modifier
                 .fillMaxWidth()
                 .aspectRatio(3f / 4f)
-                .clip(RoundedCornerShape(10.dp))
+                .clip(RoundedCornerShape(Radius.lg))
                 .jmSharedElement(jmCoverKey(item.id))
                 .background(MaterialTheme.colorScheme.surfaceVariant),
         ) {

@@ -32,7 +32,7 @@ fun PageShell(title: String, planned: String) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .clip(RoundedCornerShape(12.dp))
+                .clip(RoundedCornerShape(Radius.md))
                 .background(MaterialTheme.colorScheme.surfaceVariant)
                 .padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(6.dp),
