@@ -16,11 +16,16 @@ val LocalStrings = compositionLocalOf<Map<String, String>> {
 /** 当前语言码，供需要按语言分支的地方使用。 */
 val LocalLocale = compositionLocalOf { "zh-CN" }
 
-/** 取一条文案；键不存在时返回键本身，方便一眼看出漏翻。 */
+/**
+ * 取一条文案；键不存在时返回键本身，方便一眼看出漏翻。
+ *
+ * 名字取 t / tf 而不是 s / sf：Compose 与常见工具里有不少单字母符号，
+ * s() 会和它们撞重载解析（已经踩过一次）。
+ */
 @Composable
-fun s(key: String): String = LocalStrings.current[key] ?: key
+fun t(key: String): String = LocalStrings.current[key] ?: key
 
 /** 带参数的一条文案，占位符写法与 Android 的 %1$s / %2$d 一致。 */
 @Composable
-fun sf(key: String, vararg args: Any?): String =
+fun tf(key: String, vararg args: Any?): String =
     String.format(LocalStrings.current[key] ?: key, *args)

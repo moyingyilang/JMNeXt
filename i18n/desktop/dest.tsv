@@ -1,0 +1,10 @@
+key	zh-CN	zh-rTW	zh-rHK	en	ja	ru	ko
+dest_about_platform	平台	平台	平台	Platform	プラットフォーム	Платформа	플랫폼
+dest_about_runtime	运行时	執行環境	執行環境	Runtime	ランタイム	Среда выполнения	런타임
+dest_about_ui	界面	介面	介面	UI	UI	Интерфейс	UI
+dest_about_ui_value	Compose Desktop（主题取自 moyingyilang.github.io 的设计令牌）	Compose Desktop（主題取自 moyingyilang.github.io 的設計權杖）	Compose Desktop（主題取自 moyingyilang.github.io 的設計權杖）	Compose Desktop (theme tokens from moyingyilang.github.io)	Compose Desktop（テーマは moyingyilang.github.io のデザイントークン）	Compose Desktop (тема из дизайн-токенов moyingyilang.github.io)	Compose Desktop(moyingyilang.github.io의 디자인 토큰 테마)
+dest_about_update_note	从 GitHub Releases 读取最新版本号与本机比较，只发一个请求、不上传任何信息。	從 GitHub Releases 讀取最新版本號與本機比較，只發一個請求、不上傳任何資訊。	從 GitHub Releases 讀取最新版本號與本機比較，只發一個請求、不上傳任何資訊。	Reads the latest tag from GitHub Releases and compares it locally; one request, nothing uploaded.	GitHub Releases から最新のタグを取得してローカルで比較します。リクエストは1回だけで、何も送信しません。	Запрашивает последний тег из GitHub Releases и сравнивает локально; один запрос, ничего не отправляется.	GitHub Releases에서 최신 태그를 받아 로컬에서 비교합니다. 요청은 한 번뿐이고 아무것도 업로드하지 않습니다.
+dest_about_download_recommended	下载更新包（%1$s，推荐）	下載更新包（%1$s，推薦）	下載更新包（%1$s，推薦）	Download update (%1$s, recommended)	更新パッケージをダウンロード（%1$s、推奨）	Скачать обновление (%1$s, рекомендуется)	업데이트 받기(%1$s, 권장)
+dest_about_download_alt	或下载 %1$s	或下載 %1$s	或下載 %1$s	Or download %1$s	または %1$s をダウンロード	Или скачать %1$s	또는 %1$s 받기
+dest_about_bundle_note	推荐包内含两套运行时，会自动按架构选择，无需分辨。	推薦包內含兩套執行環境，會自動依架構選擇，無需分辨。	推薦包內含兩套執行環境，會自動依架構選擇，無需分辨。	The recommended bundle includes both runtimes and picks the right one automatically.	推奨パッケージには両方のランタイムが入っており、アーキテクチャに合わせて自動で選ばれます。	Рекомендуемый пакет включает обе среды выполнения и сам выбирает нужную.	권장 패키지에는 두 런타임이 모두 들어 있어 아키텍처에 맞게 자동으로 선택됩니다.
+dest_about_open_release	打开发布页	開啟發佈頁	開啟發佈頁	Open releases page	リリースページを開く	Открыть страницу релизов	릴리스 페이지 열기

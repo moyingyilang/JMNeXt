@@ -1,5 +1,8 @@
 package com.jmnext.desktop
 
+import com.jmnext.desktop.i18n.t
+import com.jmnext.desktop.i18n.tf
+
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -46,22 +49,21 @@ fun AboutScreen(repository: JmRepository) {
     var checking by remember { mutableStateOf(false) }
     var result by remember { mutableStateOf<String?>(null) }
     var updatable by remember { mutableStateOf<String?>(null) }
+        val strings = com.jmnext.desktop.i18n.LocalStrings.current
 
     Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(24.dp)) {
-        Text("关于", style = MaterialTheme.typography.titleLarge)
+        Text(t("about_title"), style = MaterialTheme.typography.titleLarge)
 
-        Section("版本") {
-            InfoRow("版本号", DESKTOP_VERSION)
-            InfoRow("平台", "${System.getProperty("os.name")} / ${System.getProperty("os.arch")}")
-            InfoRow("运行时", "JVM ${System.getProperty("java.version")}")
-            InfoRow("界面", "Compose Desktop（主题取自 moyingyilang.github.io 的设计令牌）")
+        Section(t("about_version")) {
+            InfoRow(t("about_version_code"), DESKTOP_VERSION)
+            InfoRow(t("dest_about_platform"), "${System.getProperty("os.name")} / ${System.getProperty("os.arch")}")
+            InfoRow(t("dest_about_runtime"), "JVM " + System.getProperty("java.version"))
+            InfoRow(t("dest_about_ui"), t("dest_about_ui_value"))
         }
 
-        Section("检查更新") {
+        Section(t("about_check_update")) {
             Text(
-                "从 GitHub Releases 读取最新版本号与本机比较，只发一个请求、不上传任何信息。",
-                style = MaterialTheme.typography.labelSmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                t("dest_about_update_note"),
             )
             Row(
                 modifier = Modifier.padding(top = 8.dp),
@@ -77,14 +79,14 @@ fun AboutScreen(repository: JmRepository) {
                             val tag = runCatching { fetchLatestTag(repository.okHttp) }.getOrNull()
                             checking = false
                             result = when {
-                                tag == null -> "没取到更新信息（网络不通，或 GitHub 暂时不可用）"
-                                UpdateCheck.isNewer(tag, DESKTOP_VERSION) -> "有新版本：$tag".also { updatable = tag }
-                                else -> "已是最新版本（远端 $tag）"
+                                tag == null -> strings["about_check_failed"] ?: ""
+                                UpdateCheck.isNewer(tag, DESKTOP_VERSION) -> String.format(strings.getValue("about_check_new"), tag).also { updatable = tag }
+                                else -> String.format(strings.getValue("about_check_latest"), tag)
                             }
                             System.err.println("[关于] $result")
                         }
                     },
-                ) { Text(if (checking) "检查中…" else "检查更新") }
+                ) { Text(if (checking) t("about_checking") else t("about_check_update")) }
 
                 updatable?.let { tag ->
                     // 按本机系统与架构给直链（issue #5 的桌面端对应问题：发布页附件多，用户不知道该下哪个）。
@@ -97,15 +99,15 @@ fun AboutScreen(repository: JmRepository) {
                     Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
                         names.forEachIndexed { i, asset ->
                             TextButton(onClick = { uri.openUri(UpdateCheck.assetUrl(tag, asset)) }) {
-                                Text(if (i == 0) "下载更新包（$asset，推荐）" else "或下载 $asset")
+                                Text(if (i == 0) tf("dest_about_download_recommended", asset) else tf("dest_about_download_alt", asset))
                             }
                         }
                         Text(
-                            text = "推荐包内含两套运行时，会自动按架构选择，无需分辨。",
+                            text = t("dest_about_bundle_note"),
                             style = MaterialTheme.typography.labelSmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
                         )
-                        TextButton(onClick = { uri.openUri(UpdateCheck.releaseUrl(tag)) }) { Text("打开发布页") }
+                        TextButton(onClick = { uri.openUri(UpdateCheck.releaseUrl(tag)) }) { Text(t("dest_about_open_release")) }
                     }
                 }
             }
@@ -114,32 +116,25 @@ fun AboutScreen(repository: JmRepository) {
             }
         }
 
-        Section("说明") {
+        Section(t("about_desc_title")) {
             Text(
                 // 与手机端同一口径：说明这一栏讲项目本身，不讲实现细节与材质
-                "JMNeXt 是禁漫（JMComic）的第三方客户端，用 Kotlin 与 Compose 重写。" +
-                    "不做插槽广告、不采集行为，登录凭证经系统密钥库加密保存。" +
-                    "阅读支持条漫与双页、伪长图拼接无接缝；阅读进度与收藏本地保存，" +
-                    "也能通过 WebDAV 在你自己的网盘上跨设备同步（历史、收藏、屏蔽名单）。" +
-                    "屏蔽规则按关键词 / 分类 / 标签生效，命中即从列表里消失。" +
-                    "桌面端与 Android 端共用同一份跨平台数据层（:shared），" +
-                    "差异只在平台实现（键值存储、密钥来源、图像解码）与界面。",
+                t("about_desc"),
                 style = MaterialTheme.typography.bodyMedium,
             )
         }
 
-        Section("链接") {
+        Section(t("about_links")) {
             TextButton(onClick = { uri.openUri("https://github.com/${UpdateCheck.REPO}") }) { Text("项目主页") }
             TextButton(onClick = { uri.openUri("https://github.com/${UpdateCheck.REPO}/releases") }) {
-                Text("发布页（下载新版本）")
+                Text(t("about_link_releases"))
             }
             TextButton(onClick = { uri.openUri("https://github.com/${UpdateCheck.REPO}/issues") }) { Text("问题反馈") }
         }
 
-        Section("许可") {
+        Section(t("about_license_title")) {
             Text(
-                "本项目以 AGPL-3.0-only 授权。禁漫、JMComic 及相关内容的权利归其权利人所有；" +
-                    "本应用与官方无关，仅提供客户端实现。",
+                t("about_license"),
                 style = MaterialTheme.typography.labelSmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )

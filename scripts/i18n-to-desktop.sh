@@ -5,6 +5,7 @@
 #   zh-CN → i18n/translations/zh-CN.tsv（由 values/strings.xml 导出）
 #   en/ja/ru/ko → i18n/translations/<代码>.tsv（人工译文源）
 #   zh-rTW/zh-rHK → app/src/main/res/values-<代码>/strings.xml（生成产物）
+# 键名以 dest_ 开头的只在桌面端存在，值取自 i18n/desktop/dest.tsv（第一行是表头）。
 set -euo pipefail
 cd "$(dirname "$0")/.." || exit 1
 
@@ -14,7 +15,7 @@ LOCALES="zh-CN zh-rTW zh-rHK en ja ru ko"
 TMP=$(mktemp -d)
 trap 'rm -rf "$TMP"' EXIT
 
-dump_locale() { # $1=locale  $2=输出文件
+dump_locale() {
     case "$1" in
         zh-rTW|zh-rHK)
             perl -ne 'print "$1\t$2\n" if /<string name="([^"]*)">(.*)<\/string>/' \
@@ -29,23 +30,38 @@ dump_locale() { # $1=locale  $2=输出文件
 for loc in $LOCALES; do
     dump_locale "$loc" "$TMP/$loc.tsv"
 done
+cp i18n/desktop/dest.tsv "$TMP/dest.tsv"
+
+dest_value() {
+    awk -F'\t' -v k="$2" -v loc="$1" '
+        NR==1 { for (i=1;i<=NF;i++) if ($i==loc) col=i; next }
+        $1==k && col>0 { print $col; exit }
+    ' "$TMP/dest.tsv"
+}
+
+# 生成一行 Kotlin 字符串字面量：转义反斜杠、引号、美元符号（Kotlin 会把 $ 当模板）
+kotlin_literal() {
+    printf '%s' "$1" | sed -e 's/\\/\\\\/g' -e 's/"/\\"/g' -e 's/\$/\\$/g'
+}
 
 mkdir -p "$(dirname "$OUT")"
 {
     echo 'package com.jmnext.desktop.i18n'
     echo
     echo '// 由 scripts/i18n-to-desktop.sh 生成，别手改'
-    echo '// 键来自 i18n/desktop/desktop-keys.txt'
+    echo '// 键来自 i18n/desktop/desktop-keys.txt，桌面独有文案来自 i18n/desktop/dest.tsv'
     echo
     echo 'internal val STRINGS: Map<String, Map<String, String>> = mapOf('
     for loc in $LOCALES; do
         echo "    \"$loc\" to mapOf("
         while IFS= read -r key; do
             [ -n "$key" ] || continue
-            value=$(awk -F'\t' -v k="$key" '$1==k{v=$2} END{if (v!="") print v}' "$TMP/$loc.tsv")
+            case "$key" in
+                dest_*) value=$(dest_value "$loc" "$key") ;;
+                *)      value=$(awk -F'\t' -v k="$key" '$1==k{v=$2} END{if (v!="") print v}' "$TMP/$loc.tsv") ;;
+            esac
             [ -n "$value" ] || continue
-            value=$(printf '%s' "$value" | sed 's/\\/\\\\/g; s/"/\\"/g')
-            printf '        "%s" to "%s",\n' "$key" "$value"
+            printf '        "%s" to "%s",\n' "$key" "$(kotlin_literal "$value")"
         done < "$KEYS"
         echo '    ),'
     done
