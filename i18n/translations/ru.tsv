@@ -1,0 +1,544 @@
+app_name	JMNeXt
+about_title	О приложении
+about_back	Назад
+about_tagline	Сторонний клиент JMComic
+about_version_line	Версия %1$s · %2$s
+about_version	Версия
+about_version_code	Код версии
+about_variant	Сборка
+about_lite_note	Сборка lite для слабых устройств: только две одноцветные темы, без обоев и размытия, отключены плавное появление картинок и анимации списков, предзагрузка в читалке сдержаннее
+about_check_update	Проверить обновления
+about_checking	Проверка…
+about_check_failed	Не удалось получить сведения об обновлении (нет сети или GitHub временно недоступен)
+about_check_new	Доступна новая версия: %1$s
+about_check_latest	Уже последняя версия (на сервере %1$s)
+about_download_pkg	Скачать обновление (%1$s)
+about_asset_note	Один APK поддерживает и arm64, и x86_64 — архитектуру выбирать не нужно. Если прямая ссылка не открывается, воспользуйтесь страницей релизов ниже.
+about_update_notes	Что нового: %1$s
+about_desc_title	Описание
+about_desc	Сторонний клиент JMComic на Kotlin и Compose. Без межстраничной рекламы, без записи того, что вы читаете; учётные данные шифруются перед сохранением на устройстве\n\nВ читалке два режима — вертикальная прокрутка и постраничный, длинные изображения склеиваются без швов. Избранное, прогресс и списки блокировок хранятся на устройстве и могут синхронизироваться с вашим облаком через WebDAV. Блокировка работает по ключевым словам, категориям и тегам, совпадения исчезают из списков
+about_links	Ссылки
+about_link_home	Страница проекта
+about_link_releases	Релизы (скачать новые версии)
+about_link_issues	Сообщить о проблеме
+about_license_title	Лицензия
+about_license	Проект распространяется по лицензии AGPL-3.0-only. Права на JMComic и связанный контент принадлежат их правообладателям; приложение не связано с официальным сервисом и лишь реализует клиент.
+profile_title	Профиль
+profile_account	Аккаунт
+profile_not_logged_in	Вход не выполнен
+profile_account_desc	Избранное и история привязаны к аккаунту; войдите, чтобы видеть их на этом устройстве.
+profile_login_register	Войти / Зарегистрироваться
+profile_logged_in	Вход выполнен
+profile_coin	Монеты
+profile_level	Уровень
+profile_adfree	Привилегия без рекламы
+profile_adfree_on	Активна
+profile_adfree_off	Неактивна
+profile_my_favorites	Моё избранное
+profile_history	История просмотров
+profile_notifications	Уведомления
+profile_tracking	Мои подписки
+profile_tag_favorites	Сохранённые теги
+profile_logout	Выйти
+profile_block_title	Блокировка контента
+profile_words	Ключевые слова
+profile_categories	Категории
+profile_tags	Теги
+profile_block_count	Правил: %1$d
+profile_manage_block	Управлять списком блокировок
+profile_appearance	Оформление
+profile_style	Стиль
+profile_theme	Тема
+profile_theme_system	Как в системе
+profile_theme_light	Светлая
+profile_theme_dark	Тёмная
+profile_dynamic_color	Динамический цвет
+profile_serial_notify	Уведомления об обновлениях
+reader_mode_scroll	Вертикальная прокрутка
+reader_mode_page	Постранично
+reader_mode_note	Прокрутка подходит для длинных полос, постраничный режим — для работ из отдельных страниц. Переключить можно с верхней панели читалки.
+comic_render	Отрисовка комикса
+about_entry	О приложении
+about_version_fmt	Версия: %1$s
+server_title	Сервер
+server_official	Официальная версия сервера
+server_loading	Чтение…
+server_read_failed	Не удалось прочитать
+server_not_provided	Не указано
+server_client_version	Версия, которую сообщает клиент
+server_alignment	Согласованность протокола
+server_aligned	Совпадает
+server_may_changed	Возможно, изменилось
+server_reread	Перечитать
+daily_title	Ежедневная отметка
+daily_login_first	Войдите, чтобы отметиться
+daily_loading	Загрузка события отметок…
+daily_none	Событие отметок не найдено (сейчас нет активного события или нет сети).
+daily_today_signed	Сегодня уже отмечено
+daily_complete	Всё отмечено за этот период
+daily_sign	Отметиться
+webdav_title	Синхронизация WebDAV
+webdav_status	Состояние
+webdav_on	Включена
+webdav_off	Выключена
+webdav_path	Удалённый путь
+webdav_configure	Настроить
+webdav_sync	Настроить / Синхронизировать
+crash_title	Журналы сбоев (отладка)
+crash_status	Состояние
+crash_none	Записей о сбоях нет.
+nav_home	Главная
+nav_category	Категории
+nav_search	Поиск
+nav_profile	Профиль
+appearance_glass_quality	Качество стекла
+appearance_floating_bar	Плавающая панель
+appearance_translucent	Режим прозрачности
+appearance_monet_blur	Цвета Monet для размытия
+appearance_predictive_back	Предсказуемый возврат
+appearance_motion	Анимация
+appearance_motion_speed	Скорость анимации
+appearance_wallpaper	Обои
+appearance_wallpaper_source	Источник
+appearance_wallpaper_change	Сменить
+appearance_wallpaper_loading	Загрузка…
+appearance_wallpaper_auto	Автосмена
+appearance_off	Выкл.
+appearance_floating_bar_desc	Панель становится пилюлей, парящей над контентом, а под выбранным пунктом скользит подложка.
+appearance_translucent_desc	Стекло больше не закрывает фон: остаются только размытие и обводка, а текст получает ореол противоположного цвета для читаемости.
+appearance_monet_blur_desc	Окрашивает фон и слой размытия в основной / вторичный / третичный цвета динамической палитры. Нужны динамический цвет и Android 12+, иначе переключатель не действует.
+appearance_predictive_android15	Начиная с Android 15 это обеспечивает система (при жесте «назад» сдвигается всё окно), поэтому пункт больше не действует и отключён.
+appearance_predictive_on	Во время жеста «назад» текущая страница затухает вслед за пальцем, так что до отпускания видно, что произойдёт выход.
+appearance_predictive_unsupported	Требуется Android 13 / 14; на этом устройстве нет жеста предсказуемого возврата, поэтому пункт не действует.
+appearance_serial_desc	Примерно дважды в день система выбирает подходящий момент для проверки и сообщает только при изменениях; одна и та же пачка обновлений сообщается один раз. Используются только список подписок и локальное время чтения, что вы читаете — не отправляется. По умолчанию выключено.
+appearance_dynamic_color_desc	Брать цвета системных обоев (Android 12+). Стиль Material следует за системой полностью; остальные стёкла берут только акцент, сохраняя свои слои.
+appearance_wallpaper_auto_off	Автосмена: выкл.
+appearance_wallpaper_auto_every	Автосмена: каждые %1$s
+appearance_wallpaper_clear_cache	Очистить кеш обоев
+appearance_wallpaper_clear_cache_desc	Удалить кешированные кандидаты и сразу загрузить новые
+appearance_wallpaper_blur_fmt	Размытие %1$d
+appearance_wallpaper_dim_fmt	Затемнение %1$s (чем пестрее обои, тем сильнее нужно затемнение, чтобы текст оставался читаемым)
+home_loading	Загрузка…
+home_weekly	Неделя
+home_refresh	Обновить
+home_to_light	Светлая тема
+home_to_dark	Тёмная тема
+home_expand_more	Показать больше разделов (осталось %1$d)
+home_latest	Только что добавлено
+home_more	Ещё
+home_tracking_updated	Обновились %1$d из ваших подписок
+glass_high	Высокое
+glass_high_desc	Настоящее размытие, радиус 12dp — красивее всего, на слабых устройствах возможны пропуски кадров
+glass_medium	Среднее
+glass_medium_desc	Настоящее размытие, радиус 8dp — по умолчанию, баланс вида и производительности
+glass_off	Выкл.
+glass_off_desc	Без размытия фона, полупрозрачная заливка — самый экономный вариант для слабых устройств
+motion_fast	Быстро
+motion_fast_desc	Коротко и прямо: резкие переключения, малые смещения — самый быстрый ритм
+motion_medium	Средне
+motion_medium_desc	Медленный вход, быстрый выход, средняя длительность, мягкие смещения — ритм по умолчанию
+motion_slow	Медленно
+motion_slow_desc	Более длинные переходы с плавным завершением, слои заметнее всего — самый медленный ритм
+wall_off	Однотонный градиент
+wall_off_desc	Без изображений, только встроенный градиент (без запросов)
+wall_bing	Bing ежедневно
+wall_bing_desc	Ежедневные обои Bing с bing.biturl.top
+wall_anime	Случайное аниме
+wall_anime_desc	По очереди пробуются t.alcy.cc / t.mwm.moe / loliapi
+wall_all	Всё случайное
+wall_all_desc	Bing вперемешку с аниме
+wall_custom	Свой URL
+wall_custom_desc	Вставьте прямую ссылку на изображение
+wall_system	Обои устройства
+wall_system_desc	Берёт текущие системные обои (Android); применится после смены обоев и возврата в приложение или нажатия «Перечитать»
+wall_solid	Сплошной цвет
+wall_solid_desc	Только выбранный цвет, без изображений (без запросов)
+wall_picsum	Фото Picsum
+wall_picsum_desc	С учётом ориентации: вертикально на телефонах, горизонтально на планшетах и десктопе (picsum.photos, без ключа)
+search_title	Поиск
+search_placeholder	Название, автор или тег
+search_year_any	Год: любой
+search_year_fmt	Год: %1$s
+search_year_month_fmt	Год: %1$s / %2$s
+search_collapse_year	Свернуть фильтр по году
+search_expand_year	Развернуть фильтр по году
+search_empty_title	Подходящих работ не найдено
+search_empty_desc	Попробуйте другое слово или измените поле поиска и год
+search_recent	Недавние запросы
+search_clear	Очистить
+search_hot_tags	Популярные теги
+search_random_rec	Случайные подборки
+search_random_one	Удивите меня
+search_shuffle	Перемешать
+search_start_title	Что искать
+search_start_desc	Поиск по названию, автору или тегу
+search_hint_random_failed	Не удалось получить случайную работу, попробуйте позже
+search_hint_no_keyword	Введите ключевое слово
+cat_title	Категории
+cat_browse	Обзор по категориям
+cat_sort_latest	Новое
+cat_sort_hearts	Больше всего лайков
+cat_sort_total	Общий рейтинг
+cat_sort_month	Месячный рейтинг
+cat_sort_week	Недельный рейтинг
+cat_label	Категория
+cat_sub_label	Подкатегория
+cat_all	Все
+cat_creator_lib	Авторы и работы
+cat_enter	Войти ›
+cat_sort	Сортировка
+cat_empty	В этой категории пока нет работ
+cat_load_failed	Не удалось загрузить категории
+auth_login	Войти
+auth_register	Регистрация
+auth_forgot	Забыли пароль
+auth_username	Имя пользователя
+auth_password	Пароль
+auth_confirm_password	Повторите пароль
+auth_email	Эл. почта
+auth_gender	Пол
+auth_male	Мужской
+auth_female	Женский
+auth_wait	Подождите…
+auth_back	Назад
+auth_keystore_note	При входе используется токен, выданный сервером, для избранного и истории. Токен шифруется через Android Keystore и хранится в приватном каталоге приложения, открытым текстом не пишется.
+detail_title_placeholder	О работе
+detail_back	Назад
+detail_move_to_favorites	В папку
+detail_author_fmt	Автор: %1$s
+detail_updated_fmt	Обновлено: %1$s
+detail_tags_hint	Теги: нажмите для поиска, удерживайте для блокировки
+detail_unblock	Разблокировать
+detail_download_album	Скачать всю работу
+detail_download_system	Через системный загрузчик
+detail_favorite_tags	Сохранить теги
+detail_comments	Комментарии
+detail_chapters_fmt	Главы (%1$d)
+detail_related	Похожие
+detail_prev_page	Предыдущая страница
+detail_next_page	Следующая страница
+fav_title	Моё избранное
+fav_empty	Избранного пока нет. Нажмите сердечко на странице работы.
+hist_title	История просмотров
+hist_empty	Истории пока нет
+tracking_title	Мои подписки
+tracking_empty	Подписок пока нет. Нажмите «Подписаться» на странице работы.
+list_total_fmt	Всего: %1$d
+list_back	Назад
+list_manage_folders	Управлять папками
+list_need_login	Нужен вход
+list_login_desc_fmt	%1$s привязано к аккаунту; войдите, чтобы видеть здесь
+list_untrack	Отписаться
+list_move_to_folder	В папку
+list_delete_history	Удалить запись
+folder_new	Новая папка
+folder_rename	Переименовать папку
+folder_all	Все
+notif_title	Уведомления
+notif_back	Назад
+notif_loading	Загрузка уведомлений…
+notif_failed_fmt	Ошибка загрузки: %1$s
+notif_empty	Уведомлений пока нет.
+notif_load_more_fmt	Загрузить ещё (показано %1$d / %2$d)
+notif_tab_all	Все
+notif_tab_tracking	Подписки
+notif_tab_site	Уведомления сайта
+notif_type_tracking	Обновление подписки
+tagfav_title	Сохранённые теги
+tagfav_need_login	Нужен вход
+tagfav_login_desc	Сохранённые теги привязаны к аккаунту; войдите, чтобы видеть здесь
+tagfav_empty_title	Сохранённых тегов пока нет
+tagfav_empty_desc	Теги можно сохранять со страницы работы
+tagfav_untag	Убрать этот тег
+tagfav_dialog_title	Сохранить теги
+tagfav_dialog_desc	Выбранные теги попадут в «Профиль → Сохранённые теги» (до 50).
+tagfav_save_fmt	Сохранить %1$d
+week_title	Неделя
+week_issue_fmt	%1$s · всего %2$d работ
+week_back	Назад
+week_issue_label	Выпуск
+week_type_label	Тип
+week_empty_title	В этом выпуске нет работ
+week_empty_desc	Попробуйте другой выпуск или тип
+random_title	Случайные подборки
+random_note_blocked	Работы из списка блокировок исключены
+random_note_pref	Список блокировок исключён · сортировка по любимым тегам
+random_back	Назад
+random_view_list	Показать списком
+random_view_grid	Показать сеткой
+random_shuffle	Перемешать
+random_loading	Случайный выбор…
+random_failed_fmt	Не удалось: %1$s
+creator_authors	Авторы
+creator_works	Работы
+creator_title	Авторы и работы
+creator_total_fmt	Всего: %1$d
+creator_subtitle	Авторы и работы из библиотеки
+creator_search_authors	Искать авторов
+creator_search_works	Искать работы
+creator_search	Поиск
+creator_empty_authors	Авторы не найдены
+reader_empty	В этой главе нет изображений для показа
+reader_chapter_fmt	Глава %1$d
+reader_title_fallback	Читалка
+reader_pages_fmt	Страниц: %1$d
+reader_back	Назад
+reader_to_horizontal	Перейти к постраничному режиму
+reader_to_vertical	Перейти к вертикальной прокрутке
+reader_toggle_mono	Переключить ч/б / цвет
+reader_mono	Ч/б
+reader_color	Цвет
+reader_prev_chapter	Предыдущая глава
+reader_next_chapter	Следующая глава
+reader_mode_horizontal	Горизонтально
+reader_mode_vertical	Вертикально
+reader_chapters	Главы
+reader_comments	Комментарии
+reader_favorite	В избранное
+reader_like	Нравится
+reader_page_fmt	Страница %1$d
+reader_page_failed	Страница не загрузилась · нажмите, чтобы повторить
+reader_pick_title	Выбор главы
+reader_pick_prev	Предыдущая страница
+reader_pick_next	Следующая страница
+reader_pick_close	Закрыть
+block_title	Блокировки
+block_subtitle	Локальные правила, никуда не отправляются
+block_back	Назад
+block_help	Совпадения скрываются, регистр не важен.\n· Ключевое слово: название или автор содержит его\n· Категория: категория или подкатегория равна ему (например, блокировать «додзинси»)\n· Тег: API списка не отдаёт теги, поэтому в фоне по одному читаются детали работ и берутся теги; совпадения скрываются из списков (запросы только при наличии правил по тегам)
+block_words_title	Блокировка по словам
+block_words_hint	Скрывается при совпадении названия или автора · правил: %1$d
+block_categories_title	Блокировка категорий
+block_categories_hint	Целая категория исчезает · правил: %1$d
+block_tags_title	Блокировка тегов
+block_tags_hint	Предупреждение при открытии работы · правил: %1$d
+block_length_fmt	Длина должна быть %1$d–%2$d символов
+block_exists_fmt	«%1$s» уже в списке
+block_added_fmt	Заблокировано «%1$s»
+block_add_cd_fmt	Добавить %1$s
+block_empty	Пока ничего не добавлено
+dav_back	Назад
+dav_title	Синхронизация WebDAV
+dav_desc	Синхронизация истории чтения, избранного и списка блокировок. Несколько устройств, указывающих на один файл, синхронизируются между собой.
+dav_server	Адрес сервера
+dav_server_hint	https://dav.example.com/remote.php/dav/files/имя
+dav_user	Имя пользователя
+dav_password	Пароль (лучше отдельный для приложения)
+dav_show	Показать
+dav_hide	Скрыть
+dav_path	Путь к файлу на сервере
+dav_auto_sync	Включить автосинхронизацию
+dav_help	Адрес вида https://dav.example.com/remote.php/dav/files/имя (Nextcloud) или https://dav.jianguoyun.com/dav/ (Jianguo Cloud). Используйте отдельный пароль приложения.
+dav_sync_done	Синхронизация завершена
+dav_sync_failed_fmt	Ошибка синхронизации: %1$s
+dav_syncing	Синхронизация…
+dav_sync_now	Синхронизировать
+more_title	Ещё
+more_loading	Загрузка…
+more_total_fmt	Всего: %1$d
+more_back	Назад
+week_type_all	Все
+week_type_manga	Манга
+week_type_hanman	Корейские
+week_day_mon	Пн
+week_day_tue	Вт
+week_day_wed	Ср
+week_day_thu	Чт
+week_day_fri	Пт
+week_day_sat	Сб
+week_day_sun	Вс
+week_day_done	Завершено
+cmt_title	Комментарии
+cmt_total_fmt	Комментариев: %1$d
+cmt_back	Назад
+cmt_compose_logged	Написать (будет опубликовано)
+cmt_compose_login	Войдите, чтобы комментировать
+cmt_sending	Отправка…
+cmt_send	Отправить
+cmt_empty_title	Комментариев пока нет
+cmt_empty_desc	Здесь появятся комментарии других читателей
+cmt_delete	Удалить этот комментарий
+cmt_replies_fmt	Ответов: %1$d
+folder_name	Название папки
+folder_ok	ОК
+folder_cancel	Отмена
+folder_delete_title	Удалить папку
+folder_delete_confirm	Удалить «%1$s»? Работы вернутся в «Все» и останутся в избранном.
+folder_delete	Удалить
+folder_skip	Без папки
+folder_none_in_move	Папок пока нет. Создайте её в «Управлять папками».
+folder_close	Закрыть
+folder_manage	Управлять папками
+folder_empty	Папок пока нет. Папки группируют избранное, например по жанру или прогрессу.
+folder_rename_short	Переименовать
+folder_skip_only_fav	Только в избранное, без папки
+common_updated	Обновление
+common_load_failed_retry	Ошибка загрузки, нажмите для повтора
+common_no_more	Это всё
+common_load_more	Прокрутите вверх, чтобы загрузить ещё
+common_retry	Повторить
+common_load_failed	Ошибка загрузки
+random_fab_cd	Случайная работа (удержание — пачка); список блокировок исключён
+checkin_no_active	Сейчас нет активного события отметок
+checkin_already	Сегодня уже отмечено
+checkin_ok	Отметка поставлена
+checkin_failed	Не удалось отметиться, попробуйте позже
+sort_latest	Новое
+sort_views	По просмотрам
+sort_images	По числу страниц
+sort_hearts	По лайкам
+sort_oldest	Старое
+field_site	По сайту
+field_work	Работа
+field_author	Автор
+field_tag	Тег
+field_character	Персонаж
+daily_expand	Показать историю отметок
+daily_collapse	Скрыть историю отметок
+daily_reading	Чтение…
+daily_history_failed_fmt	Не удалось загрузить историю: %1$s
+daily_history_empty	Истории отметок пока нет.
+daily_record_cd	Запись отметки
+daily_month_fmt	%1$d-й месяц
+daily_image_cd	Изображение отметки
+search_order_label	Сортировка
+search_field_label	Поле
+search_results_fmt	Результатов: %1$d
+search_hidden_fmt	 · скрыто правилами блокировки: %1$d
+search_tag_blocked_fmt	 · заблокировано по тегам: %1$d
+search_tag_blocked_notice_fmt	%1$d результатов скрыто блокировкой тегов
+search_hit_fmt	Совпадение: %1$s (только для этого поиска, правила блокировки не меняются)
+search_allow_once	Разрешить раз
+search_year_label	Год
+search_month_label	Месяц
+search_any	Любой
+profile_block_empty	Пока ничего не заблокировано. Блокировать можно по названию, автору, категории или тегу; совпадения скрываются из списков.
+profile_block_active_fmt	Активно правил: %1$d. Работы, которых нет в списках, могут быть скрыты ими.
+profile_tracking_desc	Сообщать, когда обновляются мои подписки
+profile_reading	Чтение
+profile_default_reader	Режим чтения по умолчанию
+profile_current	Текущий
+profile_apply_url	Применить адрес
+profile_seconds_fmt	%1$d с
+profile_hours_fmt	%1$d ч
+profile_minutes_fmt	%1$d мин
+profile_image_fmt	Изображение: %1$s
+profile_event_fallback	Событие отметок
+profile_signed_fmt	Отмечено %1$d / %2$d дней
+profile_day_fmt	%1$d-е число
+profile_signed_tag	, отмечено
+profile_unsigned_tag	, не отмечено
+profile_server_drift_fmt	Официальная версия сервера изменилась на %1$s, а клиент по-прежнему сообщает %2$s. Это не значит, что всё сразу сломается, но API могли подстроить под новую версию — стоит проверить.
+profile_webdav_desc	Синхронизация истории чтения, избранного и списка блокировок. Несколько устройств, указывающих на один файл, синхронизируются между собой.
+profile_webdav_empty	Адрес сервера не заполнен. Подходит любой стандартный WebDAV, например Nextcloud или Jianguo Cloud.
+profile_logs_status	Состояние
+profile_crash_copied	Журнал сбоя скопирован в буфер
+profile_crash_copy	Копировать последний
+profile_crash_deleted	Последний журнал сбоя удалён
+profile_crash_delete	Удалить
+profile_crash_path	Расположение: приватный каталог приложения files/logs/. Записывают только сборки tracer и debug; релизная ничего не пишет на диск.
+auth_need_username	Введите имя пользователя
+auth_need_password	Введите пароль
+auth_bad_email	Введите корректный адрес эл. почты
+auth_short_password	Пароль должен быть не короче 6 символов
+auth_password_mismatch	Пароли не совпадают
+auth_register_ok	Регистрация завершена, войдите
+auth_register_failed	Ошибка регистрации
+auth_reset_sent	Письмо для сброса отправлено
+auth_send_failed	Ошибка отправки
+auth_welcome_fmt	С возвращением, %1$s
+auth_login_again_fmt	%1$s · после входа нажмите ту кнопку ещё раз
+detail_resume_fmt	Продолжить · глава %1$d
+detail_start_fmt	Начать чтение · глава %1$d
+detail_start	Начать чтение
+detail_untrack_cd	Отписаться
+detail_track_cd	Подписаться
+detail_unfavorite_cd	Убрать из избранного
+detail_favorite_cd	В избранное
+detail_liked_cd	Понравилось
+detail_like_cd	Нравится
+detail_pages_fmt	Страниц: %1$d
+detail_comments_fmt	 · комментариев: %1$d
+detail_load_failed	Не удалось загрузить работу
+detail_works	Работы
+detail_actors	Актёры
+detail_by_rules	По вашим правилам блокировки
+detail_blocked_author_suffix	: автор заблокирован
+detail_blocked_tags_fmt	: содержит «%1$s»
+detail_comment_total_fmt	Комментариев: %1$d
+detail_no_comments	Нет
+detail_track_updated	Статус подписки обновлён
+detail_track_failed	Ошибка подписки
+detail_fav_tags_done_fmt	Сохранено тегов: %1$d
+detail_dl_failed_fmt	Не удалось получить ссылку: %1$s
+detail_cannot_download	Эту работу сейчас нельзя скачать
+detail_download_started	Загрузка начата
+detail_download_label_fmt	Скачать %1$s
+detail_blocked_tag_fmt	Тег «%1$s» заблокирован
+detail_blocked_author_fmt	Автор «%1$s» заблокирован
+detail_unblocked_tag_fmt	«%1$s» разблокирован
+detail_unblocked_author	Этот автор разблокирован
+detail_liked_already	Уже отмечено «нравится»
+cw_title	Сведения о работе
+cw_not_found	Нет сведений об этой работе
+cw_date_fmt	Дата: %1$s
+cw_no_content	В этой работе нет ничего для чтения
+cw_no_content_desc	В библиотеке есть записи только со сведениями, без изображений
+cw_related	Похожие работы
+dav_summary_fmt	История: %1$d, избранное: %2$d, правил блокировки: %3$d
+dav_conflicts_fmt	Конфликты перезаписаны: история %1$d, избранное %2$d (побеждает более новая сторона)
+dav_merged	Объединено с удалённым файлом и записано обратно
+dav_created	Удалённого файла не было — создан
+style_glass_tag	Стекло окна Windows 11: скругления 8dp + тонкая обводка + зерно Acrylic
+style_flat_tag	Плоско + размытие по Гауссу: без обводки, зерна и бликов, только размытая подложка
+style_miuix_tag	HyperOS: крупные скруглённые сплошные карточки, без обводки, пружинное нажатие
+style_material_tag	Material You 3: слои по ролям цветов M3; с динамическим цветом следует обоям
+login_reason_track	Для подписки нужно войти
+login_reason_fav_tags	Чтобы сохранять теги, войдите
+login_reason_download	Для скачивания нужно войти
+login_reason_like	Чтобы отметить «нравится», войдите
+login_reason_favorite	Для избранного нужно войти
+login_reason_comment	Чтобы комментировать, войдите
+login_reason_tags	Чтобы сохранять теги, войдите
+block_remove_cd_fmt	Удалить %1$s
+block_kind_word	ключевое слово
+block_kind_tag	тег
+block_kind_category	категорию
+block_add_title_fmt	Добавить %1$s
+block_eg_word	например, NTR
+block_eg_tag	например, романтика
+block_eg_category	например, додзинси
+block_len_hint_fmt	%1$d–%2$d символов
+block_add	Добавить
+block_cancel	Отмена
+more_empty_week	В этот день обновлений нет
+more_empty_section	В этом разделе пока ничего нет
+more_type_label	Тип
+more_day_label	Обновление
+folder_move_title	В папку
+common_unknown_error	Неизвестная ошибка
+creator_empty_works	Работы не найдены
+random_empty	В этот раз ничего не выпало (возможно, кандидаты скрыты списком блокировок или нет сети).
+checkin_today_done	Сегодня уже отмечено
+checkin_quick	Быстрая отметка
+detail_download_album_label	Скачать всю работу
+search_year_fmt_prefix	Год:
+common_network_issue	Проблема с сетью
+reader_switch_chapter_failed_fmt	Не удалось сменить главу: %1$s
+comments_posted	Отправлено
+comments_deleted	Удалено
+comments_post_failed_fmt	Не удалось отправить: %1$s
+comments_delete_failed_fmt	Не удалось удалить: %1$s
+fav_untrack_failed_fmt	Не удалось отписаться: %1$s
+fav_delete_failed_fmt	Не удалось удалить: %1$s
+tagfav_delete_failed_fmt	Не удалось удалить: %1$s
+common_unknown_error_fallback	Неизвестная ошибка
+render_color	Цвет
+render_color_hint	Как есть
+render_gray	Ч/б
+render_gray_hint	Только обесцвечивание, тона сохраняются
+render_ink	Электронные чернила
+render_ink_hint	Обесцвечивание с повышенным контрастом, для e-ink
+render_note_fmt	%1$s. Влияет только на страницы комикса, не на цвета интерфейса; на устройствах с электронными чернилами «Электронные чернила» будет читаться лучше.
+detail_download_started_with_title	Загрузка начата: %1$s
+detail_download_started_with_size	Загрузка начата: %1$s (%2$s)
