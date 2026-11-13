@@ -114,6 +114,8 @@ data class AccountListUiState(
     val exhausted: Boolean = false,
     /** 收藏夹操作的结果提示，展示一次后清除。 */
     val notice: String? = null,
+    @StringRes val noticeRes: Int? = null,
+    val noticeArg: String? = null,
 )
 
 class AccountListViewModel(
@@ -291,7 +293,8 @@ class AccountListViewModel(
                 _state.update {
                     it.copy(
                         items = before,
-                        notice = "取消追更失败：${result.exceptionOrNull()?.message ?: "未知错误"}",
+                          noticeRes = R.string.fav_untrack_failed_fmt,
+                          noticeArg = result.exceptionOrNull()?.message,
                     )
                 }
             }
@@ -316,7 +319,8 @@ class AccountListViewModel(
                     it.copy(
                         items = before,
                         loadMoreError = null,
-                        notice = "删除失败：${result.exceptionOrNull()?.message ?: "未知错误"}",
+                          noticeRes = R.string.fav_delete_failed_fmt,
+                          noticeArg = result.exceptionOrNull()?.message,
                     )
                 }
             }
@@ -456,7 +460,11 @@ fun AccountListScreen(
             },
         )
 
-        state.notice?.let { notice ->
+        val noticeText = state.noticeRes?.let { id ->
+            val arg = state.noticeArg
+            if (arg.isNullOrEmpty()) stringResource(id) else stringResource(id, arg)
+        } ?: state.notice
+        noticeText?.let { notice ->
             Text(
                 text = notice,
                 style = MaterialTheme.typography.bodyMedium,

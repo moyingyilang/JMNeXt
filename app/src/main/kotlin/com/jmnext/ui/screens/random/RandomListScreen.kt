@@ -228,7 +228,7 @@ fun RandomListScreen(
         when {
             loading -> Hint(stringResource(R.string.random_loading))
             error != null -> Hint(stringResource(R.string.random_failed_fmt, error ?: ""))
-            items_.isEmpty() -> Hint("这次没抽到（可能候选都被屏蔽名单挡住了，或网络不通）。")
+            items_.isEmpty() -> Hint(stringResource(R.string.random_empty))
             layout == LAYOUT_GRID -> LazyVerticalGrid(
                 columns = GridCells.Fixed(3),
                 state = gridState,

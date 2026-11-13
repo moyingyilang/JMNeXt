@@ -556,4 +556,20 @@
     <string name="more_day_label">更新</string>
     <string name="folder_move_title">移入收藏夾</string>
     <string name="common_unknown_error">未知錯誤</string>
+
+    <string name="creator_empty_works">沒有找到作品</string>
+    <string name="random_empty">這次沒抽到（可能候選都被封鎖名單擋住了，或網路不通）。</string>
+    <string name="checkin_today_done">今天已簽到</string>
+    <string name="checkin_quick">快捷簽到</string>
+    <string name="detail_download_album_label">下載整部作品</string>
+    <string name="search_year_fmt_prefix">年份：</string>
+    <string name="common_network_issue">網路問題</string>
+    <string name="reader_switch_chapter_failed_fmt">切換章節失敗：%1</string>
+    <string name="comments_posted">已發表</string>
+    <string name="comments_deleted">已刪除</string>
+    <string name="comments_post_failed_fmt">發表失敗：%1</string>
+    <string name="comments_delete_failed_fmt">刪除失敗：%1</string>
+    <string name="fav_untrack_failed_fmt">取消追更失敗：%1</string>
+    <string name="fav_delete_failed_fmt">刪除失敗：%1</string>
+    <string name="tagfav_delete_failed_fmt">刪除失敗：%1</string>
 </resources>

@@ -212,10 +212,10 @@ fun ManageFoldersDialog(
             }
         },
         confirmButton = {
-            TextButton(onClick = onCreate) { Text("新建收藏夹", color = c.accent) }
+            TextButton(onClick = onCreate) { Text(stringResource(R.string.folder_new), color = c.accent) }
         },
         dismissButton = {
-            TextButton(onClick = onDismiss) { Text("关闭", color = c.textSecondary) }
+            TextButton(onClick = onDismiss) { Text(stringResource(R.string.folder_close), color = c.textSecondary) }
         },
     )
 }

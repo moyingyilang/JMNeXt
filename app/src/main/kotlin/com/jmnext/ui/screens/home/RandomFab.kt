@@ -225,7 +225,7 @@ fun DailyQuickFab(
         ) {
             Icon(
                 imageVector = if (signedToday) Icons.Filled.Check else Icons.Filled.CalendarMonth,
-                contentDescription = if (signedToday) "今天已签到" else "快捷签到",
+                contentDescription = if (signedToday) stringResource(R.string.checkin_today_done) else stringResource(R.string.checkin_quick),
                 tint = c.text,
                 modifier = Modifier.padding(14.dp),
             )

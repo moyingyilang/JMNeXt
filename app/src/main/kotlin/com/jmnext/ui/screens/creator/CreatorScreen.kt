@@ -350,7 +350,7 @@ fun CreatorScreen(
                 }
 
             else -> if (state.works.isEmpty()) {
-                MessageState(title = "没有找到作品", icon = Icons.AutoMirrored.Filled.MenuBook, onRetry = { vm.load() })
+                MessageState(title = stringResource(R.string.creator_empty_works), icon = Icons.AutoMirrored.Filled.MenuBook, onRetry = { vm.load() })
             } else {
                 LazyVerticalGrid(
                     columns = GridCells.Adaptive(minSize = CardSizes.grid),

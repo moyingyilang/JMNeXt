@@ -1,5 +1,6 @@
 package com.jmnext.ui.screens.tags
 
+import androidx.annotation.StringRes
 import androidx.compose.ui.res.stringResource
 import com.jmnext.R
 import androidx.compose.foundation.layout.Arrangement
@@ -60,6 +61,8 @@ data class TagFavoritesUiState(
     val loggedIn: Boolean = false,
     val tags: List<TagItem> = emptyList(),
     val notice: String? = null,
+    @StringRes val noticeRes: Int? = null,
+    val noticeArg: String? = null,
 )
 
 /**
@@ -106,7 +109,7 @@ class TagFavoritesViewModel(private val repo: JmRepository) : ViewModel() {
             val action = result.getOrNull()
             if (result.isFailure || (action != null && !action.isOk)) {
                 val message = action?.msg ?: result.exceptionOrNull()?.message ?: "未知错误"
-                _state.update { it.copy(tags = before, notice = "删除失败：$message") }
+                _state.update { it.copy(tags = before, noticeRes = R.string.tagfav_delete_failed_fmt, noticeArg = message) }
             }
         }
     }
@@ -151,7 +154,11 @@ fun TagFavoritesScreen(
             },
         )
 
-        state.notice?.let { notice ->
+        val noticeText = state.noticeRes?.let { id ->
+            val arg = state.noticeArg
+            if (arg.isNullOrEmpty()) stringResource(id) else stringResource(id, arg)
+        } ?: state.notice
+        noticeText?.let { notice ->
             Text(
                 text = notice,
                 style = MaterialTheme.typography.labelSmall,

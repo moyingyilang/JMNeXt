@@ -334,7 +334,7 @@ fun CategoryScreen(
                 }
 
                 CategoryChipRow(
-                    label = "排序",
+                    label = stringResource(R.string.cat_sort),
                     options = CategorySort.entries.map { it.key to stringResource(it.labelRes) },
                     selected = state.sort.key,
                     onSelect = { key ->

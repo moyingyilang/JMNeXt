@@ -1,5 +1,6 @@
 package com.jmnext.ui.screens.comments
 
+import androidx.annotation.StringRes
 import androidx.compose.ui.res.stringResource
 import com.jmnext.R
 import androidx.compose.foundation.background
@@ -81,6 +82,8 @@ data class CommentsUiState(
     val sending: Boolean = false,
     /** 发表 / 删除的结果提示，展示一次后清除。 */
     val notice: String? = null,
+    @StringRes val noticeRes: Int? = null,
+    val noticeArg: String? = null,
     /** 当前登录用户的 uid，用来判断哪些评论是自己发的（只有自己能删）。 */
     val selfUid: String? = null,
 )
@@ -187,10 +190,13 @@ class CommentsViewModel(
                 it.copy(
                     sending = false,
                     draft = if (ok) "" else it.draft,
-                    notice = when {
-                        ok -> action?.msg ?: "已发表"
-                        else -> "发表失败：${action?.msg ?: result.exceptionOrNull()?.message ?: "未知错误"}"
+                    notice = action?.msg.takeUnless { it.isNullOrBlank() },
+                    noticeRes = if (ok) {
+                        R.string.comments_posted
+                    } else {
+                        R.string.comments_post_failed_fmt
                     },
+                    noticeArg = if (ok) null else (action?.msg ?: result.exceptionOrNull()?.message ?: ""),
                 )
             }
             // 发表成功后重新拉第一页：服务端的排序由它决定，本地插入会与真实顺序不一致
@@ -211,11 +217,8 @@ class CommentsViewModel(
             _state.update {
                 it.copy(
                     comments = if (ok) it.comments else before,
-                    notice = if (ok) {
-                        "已删除"
-                    } else {
-                        "删除失败：${action?.msg ?: result.exceptionOrNull()?.message ?: "未知错误"}"
-                    },
+                    noticeRes = if (ok) R.string.comments_deleted else R.string.comments_delete_failed_fmt,
+                    noticeArg = if (ok) null else (action?.msg ?: result.exceptionOrNull()?.message ?: ""),
                 )
             }
         }
@@ -295,7 +298,11 @@ fun CommentsScreen(
             }
         }
 
-        state.notice.plainText()?.let { notice ->
+        val noticeText = state.noticeRes?.let { id ->
+            val arg = state.noticeArg
+            if (arg.isNullOrEmpty()) stringResource(id) else stringResource(id, arg)
+        } ?: state.notice.plainText()
+        noticeText?.let { notice ->
             Text(
                 text = notice,
                 style = MaterialTheme.typography.labelSmall,

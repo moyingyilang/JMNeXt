@@ -588,4 +588,21 @@
     <string name="more_day_label">更新</string>
     <string name="folder_move_title">移入收藏夹</string>
     <string name="common_unknown_error">未知错误</string>
+
+    <!-- 零星收尾 -->
+    <string name="creator_empty_works">没有找到作品</string>
+    <string name="random_empty">这次没抽到（可能候选都被屏蔽名单挡住了，或网络不通）。</string>
+    <string name="checkin_today_done">今天已签到</string>
+    <string name="checkin_quick">快捷签到</string>
+    <string name="detail_download_album_label">下载整部作品</string>
+    <string name="search_year_fmt_prefix">年份：</string>
+    <string name="common_network_issue">网络问题</string>
+    <string name="reader_switch_chapter_failed_fmt">切换章节失败：%1</string>
+    <string name="comments_posted">已发表</string>
+    <string name="comments_deleted">已删除</string>
+    <string name="comments_post_failed_fmt">发表失败：%1</string>
+    <string name="comments_delete_failed_fmt">删除失败：%1</string>
+    <string name="fav_untrack_failed_fmt">取消追更失败：%1</string>
+    <string name="fav_delete_failed_fmt">删除失败：%1</string>
+    <string name="tagfav_delete_failed_fmt">删除失败：%1</string>
 </resources>
