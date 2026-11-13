@@ -23,15 +23,15 @@ JMComic 的第三方客户端，Kotlin + Compose 写的。Android 是主项目�
 Linux 便携包：
 
 ```bash
-tar xzf Linux-aarch64-2.4.0.tar.gz && ./bin/jmnext
+tar xzf Linux-aarch64-2.3.0.tar.gz && ./bin/jmnext
 ```
 
 deb、rpm、AppImage：
 
 ```bash
-sudo dpkg -i Linux-aarch64-2.4.0.deb && jmnext
-sudo rpm -i Linux-aarch64-2.4.0.rpm && jmnext
-chmod +x Linux-aarch64-2.4.0.AppImage && ./Linux-aarch64-2.4.0.AppImage
+sudo dpkg -i Linux-aarch64-2.3.0.deb && jmnext
+sudo rpm -i Linux-aarch64-2.3.0.rpm && jmnext
+chmod +x Linux-aarch64-2.3.0.AppImage && ./Linux-aarch64-2.3.0.AppImage
 ```
 
 AppImage 提示缺 `libfuse.so.2` 时加 `--appimage-extract-and-run`。运行时要有图形环境和 OpenGL，纯无头环境会在建窗口那步失败——这是 Compose Desktop 的脾气，不是本项目的问题。
@@ -99,7 +99,7 @@ Android 装上就能用。`full` 和 `lite` 的包名不同，可以同时装；
 
 
 
-跟官方客户端版本走。官方 2.1.13 对应我们的 2.4.0：上报版本与两套 i18n 字典一起更新。
+跟官方客户端版本走。官方 2.1.13 对应我们的 2.3.0：上报版本与两套 i18n 字典一起更新。
 
 有更新就两端一起出包，版本号保持一致——哪怕这次只改了 Android。这条是硬性要求，写在发版手册里。
 

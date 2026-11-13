@@ -58,6 +58,18 @@ for my $line (@dest_lines) {
     push @keys, $k;
 }
 
+# merge parallel-batch templates (pending-*.tsv, 8 columns, no header)
+for my $pf (glob 'i18n/desktop/pending-*.tsv') {
+    for my $line (grep { /\S/ } split /\n/, slurp($pf)) {
+        my @f = split /\t/, $line;
+        my $k = shift @f;
+        next unless defined $k and $k =~ /^dest_/;
+        for my $i (0 .. $#f) { $dest{$k}{$head[$i + 1]} = $f[$i] }
+        next if $have{$k}++;
+        push @keys, $k;
+    }
+}
+
 my %loc;
 for my $l (@LOCALES) {
     $loc{$l} = ($l eq 'zh-rTW' || $l eq 'zh-rHK')

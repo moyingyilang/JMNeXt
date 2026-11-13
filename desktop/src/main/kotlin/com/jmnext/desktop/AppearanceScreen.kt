@@ -46,7 +46,7 @@ import java.io.File
  * 本地图片壁纸用 AWT 的文件选择框（桌面端可用，且不需要额外依赖）。
  */
 @Composable
-fun AppearanceScreen() {
+fun AppearanceScreen(onLocaleChange: (String) -> Unit = {}) {
     var refresh by remember { mutableStateOf(0) }
     val scope = rememberCoroutineScope()
 
@@ -55,6 +55,34 @@ fun AppearanceScreen() {
         verticalArrangement = Arrangement.spacedBy(18.dp),
     ) {
         Text(tl("外观"), style = MaterialTheme.typography.titleLarge)
+        // 语言
+        Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
+            Text(tl("界面语言"), style = MaterialTheme.typography.titleMedium)
+            Text(
+                tl("切换后立即生效，并记住下次启动用的语言。"),
+                style = MaterialTheme.typography.labelSmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
+            val currentLang = com.jmnext.desktop.i18n.LocalLocale.current
+            val langOptions = listOf(
+                "zh-CN" to "简体中文",
+                "zh-rTW" to "繁體中文（台灣）",
+                "zh-rHK" to "繁體中文（香港）",
+                "en" to "English",
+                "ja" to "日本語",
+                "ru" to "Русский",
+                "ko" to "한국어",
+            )
+            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                langOptions.forEach { (code, label) ->
+                    Button(
+                        onClick = { onLocaleChange(code) },
+                        enabled = code != currentLang,
+                    ) { Text(label, style = MaterialTheme.typography.labelSmall) }
+                }
+            }
+        }
+
 
         // 风格
         Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -66,7 +94,7 @@ fun AppearanceScreen() {
             )
             ExpandableOptionRow(
                 title = tl("界面风格"),
-                options = GlassStyle.entries.map { it to it.label },
+                options = GlassStyle.entries.map { it to tl(it.label) },
                 selected = Appearance.style,
                 onSelect = { Appearance.style = it; refresh++ },
             )
@@ -77,7 +105,7 @@ fun AppearanceScreen() {
                     } else {
                         "当前：%1\$s（面板透明度 %2\$d%%、圆角 %3\$ddp、壁纸不模糊）"
                     },
-                    Appearance.style.label,
+                    tl(Appearance.style.label),
                     (Appearance.style.surfaceAlpha * 100).toInt(),
                     Appearance.style.corner,
                 ),
@@ -140,7 +168,7 @@ fun AppearanceScreen() {
                                 .background(Brush.linearGradient(if (Appearance.dark) p.dark else p.light)),
                         ) {}
                         Text(
-                            (if (Appearance.preset == p && Appearance.wallpaperPath == null) "· " else "") + p.label,
+                            (if (Appearance.preset == p && Appearance.wallpaperPath == null) "· " else "") + tl(p.label),
                             style = MaterialTheme.typography.labelSmall,
                             modifier = Modifier.padding(top = 4.dp),
                         )

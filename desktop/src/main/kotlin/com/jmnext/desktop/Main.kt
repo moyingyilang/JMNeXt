@@ -150,14 +150,22 @@ private fun runApp() = application {
         title = "JMNeXt",
         state = rememberWindowState(width = 1100.dp, height = 820.dp),
     ) {
-        val locale = remember { resolveLocale() }
+        var locale by remember { mutableStateOf(resolveLocaleFromPrefs()) }
         val table = remember(locale) { com.jmnext.desktop.i18n.stringsFor(locale) }
         androidx.compose.runtime.CompositionLocalProvider(
             com.jmnext.desktop.i18n.LocalStrings provides table,
             com.jmnext.desktop.i18n.LocalByZh provides remember(locale) { com.jmnext.desktop.i18n.byZhFor(locale) },
             com.jmnext.desktop.i18n.LocalLocale provides locale,
         ) {
-            BlogTheme { App() }
+            BlogTheme {
+                App(
+                    onLocaleChange = { next ->
+                        locale = next
+                        com.jmnext.desktop.i18n.I18n.install(com.jmnext.desktop.i18n.byZhFor(next))
+                        runCatching { PreferencesKeyValueStore("jm_ui").putString("locale", next) }
+                    },
+                )
+            }
         }
     }
 }
@@ -341,7 +349,7 @@ private sealed interface Screen {
 }
 
 @Composable
-private fun App() {
+private fun App(onLocaleChange: (String) -> Unit = {}) {
     var screen by remember { mutableStateOf<Screen>(Screen.Home) }
     val logoutMsg = tl("已退出登录")
     var showLogoutConfirm by remember { mutableStateOf(false) }
@@ -537,7 +545,7 @@ private fun App() {
                         onBack = { screen = Screen.Detail(s.route.removePrefix("comments:"), "") },
                     )
                     is Screen.Page if s.route == "block" -> BlockScreen(repository)
-                    is Screen.Page if s.route == "appearance" -> AppearanceScreen()
+                    is Screen.Page if s.route == "appearance" -> AppearanceScreen(onLocaleChange)
                     is Screen.Page if s.route == "tags" -> TagsScreen(repository, onSearch = { q ->
                         Log.line("标签", "按标签搜索：$q")
                         screen = Screen.Page("search")
@@ -772,6 +780,11 @@ private fun dailyAlreadyChecked(message: String?): Boolean {
  * 优先级：环境变量 JMNEXT_LANG（便于测试与脚本截图）→ 系统 Locale → 简体。
  * 系统给的是 zh-Hant-TW 这类标签，这里归一成 values-* 的写法。
  */
+/** åçç¨æ·è®¾ç½®éå­çè¯­è¨ï¼æ²¡æå°±æç¯å¢åé/ç³»ç»è¯­è¨ã */
+internal fun resolveLocaleFromPrefs(): String =
+    runCatching { PreferencesKeyValueStore("jm_ui").getString("locale", null) }
+        .getOrNull()?.takeIf { it.isNotBlank() } ?: resolveLocale()
+
 internal fun resolveLocale(): String {
     val supported = listOf("zh-CN", "zh-rTW", "zh-rHK", "en", "ja", "ru", "ko")
     fun normalize(tag: String): String {

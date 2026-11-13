@@ -5,6 +5,7 @@ plugins {
     // 报错会是满屏的 "Unresolved reference 'serializer'"，而不是一句"缺少插件"。
     id("org.jetbrains.kotlin.plugin.serialization") version "2.4.20"
     id("org.jetbrains.compose") version "1.12.1"
+    id("org.jetbrains.compose.hot-reload") version "1.2.0"
 }
 
 // 仓库统一在 settings.gradle.kts 里声明（那里设了 FAIL_ON_PROJECT_REPOS）

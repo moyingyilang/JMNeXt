@@ -194,3 +194,14 @@ dest_cred_opt_set	设置口令	設定口令	設定口令	Set passphrase	パス�
 dest_cred_opt_skip	暂不使用	暫不使用	暫不使用	Not now	今は使わない	Не сейчас	나중에
 dest_cred_declined_before	你此前选择暂不使用口令保护	你此前選擇暫不使用口令保護	你此前選擇暫不使用口令保護	You previously chose not to use a passphrase	以前パスフレーズを使わない選択をしました	Вы ранее отказались от пароля	이전에 암호문을 사용하지 않기로 했습니다
 dest_cred_declined_now	你选择了暂不使用口令保护	你選擇了暫不使用口令保護	你選擇了暫不使用口令保護	You chose not to use a passphrase	パスフレーズを使わない選択をしました	Вы отказались от пароля	암호문을 사용하지 않기로 했습니다
+dest_appearance_language	界面语言	介面語言	介面語言	Language	表示言語	Язык интерфейса	인터페이스 언어
+dest_appearance_language_note	切换后立即生效，并记住下次启动用的语言。	切換後立即生效，並記住下次啟動用的語言。	切換後立即生效，並記住下次啟動用的語言。	Takes effect immediately and is remembered for next launch.	切り替えるとすぐ反映され、次回起動時の言語として保存されます。	Применяется сразу и запоминается для следующего запуска.	바로 적용되며 다음 실행 때 사용할 언어로 저장됩니다.
+dest_style_glass	毛玻璃	毛玻璃	毛玻璃	Frosted glass	すりガラス	Матовое стекло	반투명 유리
+dest_style_translucent	半透明	半透明	半透明	Translucent	半透明	Полупрозрачный	반투명
+dest_style_flat	扁平模糊	扁平模糊	扁平模糊	Flat blur	フラットぼかし	Плоское размытие	플랫 블러
+dest_style_miui	MIUI	MIUI	MIUI	MIUI	MIUI	MIUI	MIUI
+dest_style_material	Material	Material	Material	Material	Material	Material	Material
+dest_preset_aurora	极光	極光	極光	Aurora	オーロラ	Аврора	오로라
+dest_preset_dune	沙丘	沙丘	沙丘	Dune	砂丘	Дюна	모래 언덕
+dest_preset_mint	薄荷	薄荷	薄荷	Mint	ミント	Мята	민트
+dest_preset_ink	水墨	水墨	水墨	Ink	水墨	Тушь	수묵
