@@ -140,6 +140,11 @@ fun main(args: Array<String>) {
     }
     // 非 Compose 代码（CLI、Swing 对话框、协程里赋值的提示）走 I18n.tr，这里注入当前语言的表
     com.jmnext.desktop.i18n.I18n.install(com.jmnext.desktop.i18n.byZhFor(resolveLocale()))
+    // æªå¾ä¸è°è¯ç¨ï¼JMNEXT_STYLE=Material ç´æ¥æå®çé¢é£æ ¼
+    System.getenv("JMNEXT_STYLE")?.let { name ->
+        GlassStyle.entries.firstOrNull { it.name.equals(name, ignoreCase = true) }
+            ?.let { Appearance.style = it }
+    }
     // æªå¾ä¸è°è¯ç¨ï¼JMNEXT_WALLPAPER_MODE=Anime æ¶ç´æ¥ç¨äºæ¬¡åå£çº¸ï¼çå¾æç¹
     System.getenv("JMNEXT_WALLPAPER_MODE")?.let { name ->
         com.jmnext.wallpaper.WallpaperMode.entries
