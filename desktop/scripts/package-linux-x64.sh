@@ -21,8 +21,8 @@ GATE_EXPECT="$OUT/Linux-x86_64-$V.tar.gz $OUT/Linux-x86_64-$V.deb $OUT/Linux-x86
 if ! gate_begin linux-x86_64 "$OUT" build/compose/binaries/main/app/jmnext src/main/resources/icon.png; then exit 0; fi
 APP=build/compose/binaries/main/app/jmnext
 X64_RUNTIME=${X64_RUNTIME:-/root/x64-runtime}
-SKIKO_JAR=${SKIKO_JAR:-/root/skiko-win-none.jar}     # 名字起错了，内容是 linux-x64 的
-[ -f "$SKIKO_JAR" ] || { echo "缺少 x86_64 的 Skiko jar"; exit 1; }
+SKIKO_JAR=${SKIKO_JAR:-/root/skiko-linux-x64.jar}   # fallback: /root/skiko-win-none.jar (same content)
+[ -f "$SKIKO_JAR" ] || SKIKO_JAR=/root/skiko-win-none.jar
 [ -d "$X64_RUNTIME" ] || { echo "缺少 x86_64 运行时：$X64_RUNTIME"; exit 1; }
 
 echo "== 1/5 组装 x86_64 应用目录 =="

@@ -13,16 +13,15 @@ for a in aarch64 x86_64; do
   esac
   [ -f "$src" ] || { echo "  跳过：缺 $src"; continue; }
   rm -rf "$T/l"; mkdir -p "$T/l"; tar xzf "$src" -C "$T/l"
-  top=$(ls "$T/l" | head -1)
-  cat > "$T/l/$top/debug.sh" <<'EOF'
+  cat > "$T/l/debug.sh" <<'EOF'
 #!/bin/sh
 # 带详细日志启动：日志同时打到终端与 debug.log
 cd "$(dirname "$0")" || exit 1
 JMNEXT_VERBOSE=1 ./bin/jmnext "$@" 2>&1 | tee debug.log
 EOF
-  chmod +x "$T/l/$top/debug.sh"
+  chmod +x "$T/l/debug.sh"
   name=$([ "$a" = aarch64 ] && echo Linux-aarch64 || echo Linux-x86_64)
-  ( cd "$T/l" && tar czf "/tmp/$name-$V-debug.tar.gz" "$top" )
+  ( cd "$T/l" && tar czf "/tmp/$name-$V-debug.tar.gz" . )
   mv "/tmp/$name-$V-debug.tar.gz" "$out/"
   echo "  $name 调试包完成"
 done
