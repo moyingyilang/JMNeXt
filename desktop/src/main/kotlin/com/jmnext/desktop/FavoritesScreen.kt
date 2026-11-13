@@ -109,7 +109,8 @@ fun FavoriteScreen(
                 Text(if (tab == "tracking") "· " + tl("追更") else tl("追更"), style = MaterialTheme.typography.titleMedium)
             }
             if (tab == "favorite") {
-StatusLine(status, busy)
+              // 空态/未登录时由中间的 MessageState 表达，不在顶部重复一行
+              if (items.isNotEmpty() || busy) StatusLine(status, busy)
                 if (items.isNotEmpty() && items.size < total) {
                     Button(enabled = !busy, onClick = { load(page + 1) }) { Text(tl("加载更多")) }
                 }
@@ -242,6 +243,13 @@ StatusLine(status, busy)
             }
         }
 
+        if (items.isEmpty() && !busy) {
+            MessageState(
+                title = status,
+                modifier = Modifier.fillMaxWidth().weight(1f),
+                onRetry = if (loggedIn) ({ load(1) }) else null,
+            )
+        } else {
         LazyVerticalGrid(
             columns = GridCells.Adaptive(168.dp),
             contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp),
@@ -274,6 +282,7 @@ StatusLine(status, busy)
                     ) { Text(tl("取消收藏"), style = MaterialTheme.typography.labelSmall) }
                 }
             }
+        }
         }
     }
 }
