@@ -126,6 +126,8 @@ data class DetailUiState(
     @StringRes val actionNoticeRes: Int? = null,
     /** 配合 actionNoticeRes 的占位参数（标签名、作者名）。 */
     val actionNoticeArg: String? = null,
+    /** 第二个占位参数（下载提示里的文件大小）。 */
+    val actionNoticeArg2: String? = null,
     /** 标签收藏选择器是否打开。 */
     val tagPickerVisible: Boolean = false,
     /** 屏蔽命中情况：非空表示这部作品含被屏蔽的标签 / 作者。 */
@@ -371,12 +373,20 @@ class DetailViewModel(
                 }
 
                 else -> {
-                    val label = buildString {
-                        append("已开始下载")
-                        payload.title?.takeIf { it.isNotBlank() }?.let { append("：$it") }
-                        payload.fileSize?.takeIf { it.isNotBlank() }?.let { append("（$it）") }
+                    val title = payload.title?.takeIf { it.isNotBlank() }
+                    val size = payload.fileSize?.takeIf { it.isNotBlank() }
+                    _state.update {
+                        it.copy(
+                            actionNotice = null,
+                            actionNoticeRes = when {
+                                title == null -> R.string.detail_download_started
+                                size == null -> R.string.detail_download_started_with_title
+                                else -> R.string.detail_download_started_with_size
+                            },
+                            actionNoticeArg = title,
+                            actionNoticeArg2 = size,
+                        )
                     }
-                    _state.update { it.copy(actionNotice = label) }
                     onReady(payload.downloadUrl.orEmpty(), payload.title.orEmpty())
                 }
             }

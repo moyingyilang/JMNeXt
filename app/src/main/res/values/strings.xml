@@ -616,4 +616,7 @@
     <string name="render_ink">墨水屏</string>
     <string name="render_ink_hint">去色并提高对比度，适合 e-ink</string>
     <string name="render_note_fmt">%1。只作用于漫画画面，不影响界面配色；墨水屏设备选「墨水屏」会更清楚。</string>
+
+    <string name="detail_download_started_with_title">已开始下载：%1</string>
+    <string name="detail_download_started_with_size">已开始下载：%1（%2）</string>
 </resources>
