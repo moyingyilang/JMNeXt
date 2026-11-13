@@ -161,7 +161,7 @@ fun WallpaperLayer(modifier: Modifier = Modifier) {
     val colors = if (dark) preset.dark else preset.light
     // Glass blur needs more than the slider value: 5dp reads as "slightly soft" at desktop size.
     // Desktop windows are large and the wallpaper has fine detail, so boost it.
-    val blurBoost = if (Appearance.style.blurWallpaper) 1.8f else 0f
+    val blurBoost = if (Appearance.style.blurWallpaper) 3.0f else 0f
     val blurRadius = Appearance.wallpaperBlur.toFloat() * blurBoost
 
     // 在线壁纸：进入非纯渐变模式时先取一张；设了自动轮换就按间隔换。
