@@ -36,6 +36,7 @@ fun JmTopBar(
     title: String,
     modifier: Modifier = Modifier,
     subtitle: String? = null,
+    navigation: (@Composable () -> Unit)? = null,
     onTitleClick: (() -> Unit)? = null,
     actions: @Composable RowScope.() -> Unit = {},
 ) {
@@ -64,6 +65,7 @@ fun JmTopBar(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(12.dp),
     ) {
+        navigation?.invoke()
         Column(
             modifier = Modifier
                 .weight(1f)

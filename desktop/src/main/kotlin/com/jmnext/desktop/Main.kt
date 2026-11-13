@@ -430,12 +430,21 @@ private fun App(onLocaleChange: (String) -> Unit = {}) {
                     TextButton(onClick = { serialNotice = null }) { Text(tl("知道了")) }
                 }
             }
+              val pageRoute = (screen as? Screen.Page)?.route
+              val pageTitle = pageRoute
+                  ?.let { r -> NAV_ITEMS.firstOrNull { it.first == r }?.second }
+                  ?: "JMNeXt"
               JmTopBar(
-                  title = "JMNeXt",
+                  title = pageTitle,
                   subtitle = if (authState.loggedIn) {
                       I18n.trf("已登录：%1\$s", authState.member?.username ?: authState.member?.uid ?: "")
                   } else {
                       tl("未登录")
+                  },
+                  navigation = if (screen is Screen.Page) {
+                      { TextButton(onClick = { screen = Screen.Home }) { Text(tl("返回")) } }
+                  } else {
+                      null
                   },
                   onTitleClick = { screen = Screen.Home },
               ) {
