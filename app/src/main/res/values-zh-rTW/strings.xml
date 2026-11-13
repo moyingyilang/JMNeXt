@@ -440,4 +440,30 @@
     <string name="search_year_label">年</string>
     <string name="search_month_label">月</string>
     <string name="search_any">不限</string>
+
+    <string name="profile_block_empty">還沒有封鎖任何內容。可以按作品名、作者、分類或標籤封鎖，命中即從列表中隱藏。</string>
+    <string name="profile_block_active_fmt">已生效 %1 條規則。列表裡看不到的作品可能正是被它們隱藏的。</string>
+    <string name="profile_tracking_desc">你追的連載更新時通知我</string>
+    <string name="profile_reading">閱讀</string>
+    <string name="profile_default_reader">預設瀏覽形態</string>
+    <string name="profile_current">目前</string>
+    <string name="profile_apply_url">套用這個位址</string>
+    <string name="profile_seconds_fmt">%1 秒</string>
+    <string name="profile_hours_fmt">%1 小時</string>
+    <string name="profile_minutes_fmt">%1 分鐘</string>
+    <string name="profile_image_fmt">圖片：%1</string>
+    <string name="profile_event_fallback">簽到活動</string>
+    <string name="profile_signed_fmt">已簽 %1 / %2 天</string>
+    <string name="profile_day_fmt">%1號</string>
+    <string name="profile_signed_tag">，已簽到</string>
+    <string name="profile_unsigned_tag">，未簽到</string>
+    <string name="profile_server_drift_fmt">伺服器對應的官方版本已變為 %1，而本客戶端仍按 %2 上報。這不代表立即不可用，但介面行為可能已按新版本調整，值得檢查。</string>
+    <string name="profile_webdav_desc">同步閱讀歷史、收藏與封鎖名單。多台裝置指向同一個檔案即可互通。</string>
+    <string name="profile_webdav_empty">尚未填寫伺服器位址。支援 Nextcloud、堅果雲等標準 WebDAV 服務。</string>
+    <string name="profile_logs_status">狀態</string>
+    <string name="profile_crash_copied">崩潰日誌已複製到剪貼簿</string>
+    <string name="profile_crash_copy">複製最近一次</string>
+    <string name="profile_crash_deleted">已刪除最近一次崩潰日誌</string>
+    <string name="profile_crash_delete">刪除</string>
+    <string name="profile_crash_path">位置：應用私有目錄 files/logs/。追蹤包（tracer）與 debug 包才會記錄；正式包不寫盤。</string>
 </resources>

@@ -465,4 +465,31 @@
     <string name="search_year_label">年</string>
     <string name="search_month_label">月</string>
     <string name="search_any">不限</string>
+
+    <!-- 我的页尾批 -->
+    <string name="profile_block_empty">还没有屏蔽任何内容。可以按作品名、作者、分类或标签屏蔽，命中即从列表中隐藏。</string>
+    <string name="profile_block_active_fmt">已生效 %1 条规则。列表里看不到的作品可能正是被它们隐藏的。</string>
+    <string name="profile_tracking_desc">你追的连载更新时通知我</string>
+    <string name="profile_reading">阅读</string>
+    <string name="profile_default_reader">默认浏览形态</string>
+    <string name="profile_current">当前</string>
+    <string name="profile_apply_url">应用这个地址</string>
+    <string name="profile_seconds_fmt">%1 秒</string>
+    <string name="profile_hours_fmt">%1 小时</string>
+    <string name="profile_minutes_fmt">%1 分钟</string>
+    <string name="profile_image_fmt">图片：%1</string>
+    <string name="profile_event_fallback">签到活动</string>
+    <string name="profile_signed_fmt">已签 %1 / %2 天</string>
+    <string name="profile_day_fmt">%1号</string>
+    <string name="profile_signed_tag">，已签到</string>
+    <string name="profile_unsigned_tag">，未签到</string>
+    <string name="profile_server_drift_fmt">服务端对应的官方版本已变为 %1，而本客户端仍按 %2 上报。这不代表立即不可用，但接口行为可能已按新版本调整，值得检查。</string>
+    <string name="profile_webdav_desc">同步阅读历史、收藏与屏蔽名单。多台设备指向同一文件即可互通。</string>
+    <string name="profile_webdav_empty">尚未填写服务器地址。支持 Nextcloud、坚果云等标准 WebDAV 服务。</string>
+    <string name="profile_logs_status">状态</string>
+    <string name="profile_crash_copied">崩溃日志已复制到剪贴板</string>
+    <string name="profile_crash_copy">复制最近一次</string>
+    <string name="profile_crash_deleted">已删除最近一次崩溃日志</string>
+    <string name="profile_crash_delete">删除</string>
+    <string name="profile_crash_path">位置：应用私有目录 files/logs/。追踪包（tracer）与 debug 包才会记录；正式包不写盘。</string>
 </resources>

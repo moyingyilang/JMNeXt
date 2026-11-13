@@ -377,11 +377,10 @@ private fun BlockCard(onOpenBlock: () -> Unit) {
         InfoRow(stringResource(R.string.profile_tags), stringResource(R.string.profile_block_count, rules.tags.size))
         Text(
             text = if (total == 0) {
-                "还没有屏蔽任何内容。可以按作品名、作者、分类或标签屏蔽，命中即从列表中隐藏。"
+                stringResource(R.string.profile_block_empty)
             } else {
-                "已生效 $total 条规则。列表里看不到的作品可能正是被它们隐藏的。"
+                stringResource(R.string.profile_block_active_fmt, total)
             },
-            style = MaterialTheme.typography.labelSmall,
             color = c.textTertiary,
             modifier = Modifier.padding(top = Spacing.sm),
         )
@@ -540,7 +539,7 @@ private fun AppearanceCard(
 
         SettingCard(title = stringResource(R.string.profile_serial_notify)) {
             OptionSwitch(
-                title = "你追的连载更新时通知我",
+                title = stringResource(R.string.profile_tracking_desc),
                 desc = stringResource(R.string.appearance_serial_desc),
                 checked = serialNotify,
                 onCheckedChange = { want ->
@@ -595,8 +594,7 @@ private fun AppearanceCard(
 
         OptionSwitch(
             title = stringResource(R.string.appearance_monet_blur),
-            desc = "用系统动态取色的主色 / 次色 / 第三色给背景与模糊层上色。" +
-                "需要开动态取色且系统为 Android 12+，否则这个开关不生效。",
+            desc = stringResource(R.string.appearance_monet_blur_desc),
             checked = uiOptions.monetBlur,
             onCheckedChange = { onUiOptionsChange(uiOptions.copy(monetBlur = it)) },
         )
@@ -773,7 +771,7 @@ private fun StyleOption(
                         modifier = Modifier.weight(1f),
                     )
                     if (selected) {
-                        Text("当前", style = MaterialTheme.typography.labelSmall, color = palette.accent)
+                        Text(stringResource(R.string.profile_current), style = MaterialTheme.typography.labelSmall, color = palette.accent)
                     }
                 }
             }
@@ -853,7 +851,7 @@ private fun WallpaperCard() {
                 modifier = Modifier.fillMaxWidth().padding(top = Spacing.sm),
             )
             TextButton(onClick = { scope.launch { store?.next(force = true) } }) {
-                Text("应用这个地址", color = c.accent)
+                Text(stringResource(R.string.profile_apply_url), color = c.accent)
             }
         }
 
@@ -876,7 +874,7 @@ private fun WallpaperCard() {
                         0 -> stringResource(R.string.appearance_wallpaper_auto_off)
                         else -> stringResource(
                             R.string.appearance_wallpaper_auto_every,
-                            if (iv < 60) "$iv 秒" else if (iv % 3600 == 0) "${iv / 3600} 小时" else "${iv / 60} 分钟",
+                            if (iv < 60) stringResource(R.string.profile_seconds_fmt, iv) else if (iv % 3600 == 0) stringResource(R.string.profile_hours_fmt, iv / 3600) else stringResource(R.string.profile_minutes_fmt, iv / 60),
                         )
                     },
                     style = MaterialTheme.typography.labelSmall,
@@ -890,8 +888,8 @@ private fun WallpaperCard() {
             ExpandableOptionRow(
                 title = stringResource(R.string.appearance_wallpaper_auto),
                 options = listOf(
-                    0 to stringResource(R.string.appearance_off), 10 to "10 秒", 30 to "30 秒", 60 to "1 分钟",
-                    300 to "5 分钟", 1800 to "30 分钟", 3600 to "1 小时",
+                    0 to stringResource(R.string.appearance_off), 10 to stringResource(R.string.profile_seconds_fmt, 10), 30 to stringResource(R.string.profile_seconds_fmt, 30), 60 to stringResource(R.string.profile_minutes_fmt, 1),
+                    300 to stringResource(R.string.profile_minutes_fmt, 5), 1800 to stringResource(R.string.profile_minutes_fmt, 30), 3600 to stringResource(R.string.profile_hours_fmt, 1),
                 ),
                 selected = wall.intervalSeconds,
                 onSelect = { store?.setIntervalSeconds(it) },
@@ -940,7 +938,7 @@ private fun WallpaperCard() {
 
         wall.credit?.takeIf { it.isNotBlank() }?.let {
             Text(
-                text = "图片：$it",
+                text = stringResource(R.string.profile_image_fmt, it),
                 style = MaterialTheme.typography.labelSmall,
                 color = c.textTertiary,
                 modifier = Modifier.padding(top = Spacing.sm),
@@ -979,8 +977,8 @@ private fun ReadingCard(
         AppPrefs(SharedPrefsKeyValueStore(renderCtx, "jm_prefs"))
     }
     var comicRenderMode by remember { mutableStateOf(renderPrefs.comicRenderMode) }
-    SettingCard(title = "阅读") {
-        Text("默认浏览形态", style = MaterialTheme.typography.bodyLarge, color = c.text)
+    SettingCard(title = stringResource(R.string.profile_reading)) {
+        Text(stringResource(R.string.profile_default_reader), style = MaterialTheme.typography.bodyLarge, color = c.text)
         SingleChoiceSegmentedButtonRow(
             modifier = Modifier.fillMaxWidth().padding(top = Spacing.sm),
         ) {
@@ -1141,9 +1139,7 @@ private fun ServerCard() {
 
         if (!aligned) {
             Text(
-                text = "服务端对应的官方版本已变为 $serverVersion，而本客户端仍按 $clientVersion 上报。" +
-                    "这不代表立即不可用，但接口行为可能已按新版本调整，值得检查。",
-                style = MaterialTheme.typography.labelSmall,
+                text = stringResource(R.string.profile_server_drift_fmt, serverVersion, clientVersion),
                 color = c.error,
                 modifier = Modifier.padding(top = Spacing.xs),
             )
@@ -1299,13 +1295,13 @@ private fun DailyCard(onLogin: () -> Unit) {
                     java.util.Calendar.getInstance().get(java.util.Calendar.DAY_OF_MONTH),
                 )
                 Text(
-                    text = d.eventName ?: "签到活动",
+                    text = d.eventName ?: stringResource(R.string.profile_event_fallback),
                     style = MaterialTheme.typography.bodyLarge,
                     color = c.text,
                     modifier = Modifier.padding(top = Spacing.sm),
                 )
                 Text(
-                    text = "已签 ${Daily.signedCount(d.record)} / ${Daily.totalDays(d.record)} 天",
+                    text = stringResource(R.string.profile_signed_fmt, Daily.signedCount(d.record), Daily.totalDays(d.record)),
                     style = MaterialTheme.typography.bodySmall,
                     color = c.textSecondary,
                 )
@@ -1322,8 +1318,8 @@ private fun DailyCard(onLogin: () -> Unit) {
                                         .semantics {
                                             // 无障碍读到的应是"几号、签没签"，而不是一个空方块
                                             contentDescription = buildString {
-                                                dayOfMonth(day.date)?.let { append("${it}号") }
-                                                append(if (day.signed) "，已签到" else "，未签到")
+                                                dayOfMonth(day.date)?.let { append(dailyContext.getString(R.string.profile_day_fmt, it)) }
+                                                append(if (day.signed) dailyContext.getString(R.string.profile_signed_tag) else dailyContext.getString(R.string.profile_unsigned_tag))
                                             }
                                         },
                                     contentAlignment = Alignment.Center,
@@ -1356,14 +1352,14 @@ private fun DailyCard(onLogin: () -> Unit) {
                                     .fold(
                                         onSuccess = { res ->
                                             if (Daily.isAlreadyChecked(res.msg)) {
-                                                "今天已经签过了"
+                                                dailyContext.getString(R.string.daily_today_signed)
                                             } else {
                                                 // 打完卡立刻重拉，让格子上的状态与按钮跟着变
                                                 daily = runCatching { repo.daily(uid) }.getOrNull()
-                                                res.msg?.takeIf { it.isNotBlank() } ?: "签到成功"
+                                                res.msg?.takeIf { it.isNotBlank() } ?: dailyContext.getString(R.string.checkin_ok)
                                             }
                                         },
-                                        onFailure = { "签到失败，稍后再试" },
+                                        onFailure = { dailyContext.getString(R.string.checkin_failed) },
                                     )
                             }
                         },
@@ -1409,9 +1405,9 @@ private fun WebDavCard(onOpen: () -> Unit) {
         InfoRow(stringResource(R.string.webdav_path), cfg.path.ifBlank { "—" })
         Text(
             text = if (cfg.isUsable) {
-                "同步阅读历史、收藏与屏蔽名单。多台设备指向同一文件即可互通。"
+                stringResource(R.string.profile_webdav_desc)
             } else {
-                "尚未填写服务器地址。支持 Nextcloud、坚果云等标准 WebDAV 服务。"
+                stringResource(R.string.profile_webdav_empty)
             },
             style = MaterialTheme.typography.labelSmall,
             color = c.textTertiary,
@@ -1451,7 +1447,7 @@ private fun CrashLogCard() {
     }
 
     SettingCard(title = stringResource(R.string.crash_title)) {
-        InfoRow("状态", info)
+        InfoRow(stringResource(R.string.profile_logs_status), info)
         Row(
             modifier = Modifier.fillMaxWidth().padding(top = Spacing.sm),
             horizontalArrangement = Arrangement.spacedBy(Spacing.sm),
@@ -1463,21 +1459,21 @@ private fun CrashLogCard() {
                     val cm = ctx.getSystemService(android.content.Context.CLIPBOARD_SERVICE)
                         as android.content.ClipboardManager
                     cm.setPrimaryClip(android.content.ClipData.newPlainText("jmnext-crash", text))
-                    com.jmnext.ui.Notices.show("崩溃日志已复制到剪贴板")
+                    com.jmnext.ui.Notices.show(ctx.getString(R.string.profile_crash_copied))
                 },
-            ) { Text("复制最近一次") }
+            ) { Text(stringResource(R.string.profile_crash_copy)) }
 
             TextButton(
                 enabled = last != null,
                 onClick = {
                     last?.delete()
                     reload++
-                    com.jmnext.ui.Notices.show("已删除最近一次崩溃日志")
+                    com.jmnext.ui.Notices.show(ctx.getString(R.string.profile_crash_deleted))
                 },
-            ) { Text("删除", color = c.error) }
+            ) { Text(stringResource(R.string.profile_crash_delete), color = c.error) }
         }
         Text(
-            text = "位置：应用私有目录 files/logs/。追踪包（tracer）与 debug 包才会记录；正式包不写盘。",
+            text = stringResource(R.string.profile_crash_path),
             style = MaterialTheme.typography.labelSmall,
             color = c.textTertiary,
             modifier = Modifier.padding(top = Spacing.xs),
