@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">JMNeXt</string>
+    <!-- 由 scripts/i18n-tw.sh 从 values/strings.xml 生成，别手改 -->
+
     <string name="about_title">關於</string>
     <string name="about_back">返回</string>
     <string name="about_tagline">禁漫（JMComic）第三方客戶端</string>
@@ -14,21 +16,21 @@
     <string name="about_check_new">有新版本：%1$s</string>
     <string name="about_check_latest">已是最新版本（遠端 %1$s）</string>
     <string name="about_download_pkg">下載更新包（%1$s）</string>
-    <string name="about_asset_note">一個安裝包同時支援 arm64 與 x86_64，無需區分架構。若直連打不開，可改用下面的發佈頁自行挑選。</string>
+    <string name="about_asset_note">一個安裝包同時支援 arm64 與 x86_64，無需區分架構。若直鏈打不開，可改用下面的發佈頁自行挑選。</string>
     <string name="about_update_notes">更新內容：%1$s</string>
     <string name="about_desc_title">說明</string>
-    <string name="about_desc">禁漫（JMComic）的第三方客戶端，Kotlin 與 Compose 寫的。沒有插槽廣告，也不記錄你在看什麼；登入憑證加密之後才寫到本地\n\n閱讀器有縱向滾動和雙頁兩種，長圖拼接不留接縫。收藏、進度、封鎖名單都在本地，也能透過 WebDAV 同步到你自己的網路硬碟。封鎖按關鍵字、分類、標籤走，命中就從列表裡消失</string>
+    <string name="about_desc">禁漫（JMComic）的第三方客戶端，Kotlin 與 Compose 寫的。沒有插槽廣告，也不記錄你在看什麼；登入憑證加密之後才寫到本地\n\n閱讀器有縱向滾動和雙頁兩種，長圖拼接不留接縫。收藏、進度、封鎖名單都在本地，也能通過 WebDAV 同步到你自己的網路硬碟。封鎖按關鍵詞、分類、標籤走，命中就從列表裡消失</string>
     <string name="about_links">連結</string>
     <string name="about_link_home">專案首頁</string>
     <string name="about_link_releases">發佈頁（下載新版本）</string>
     <string name="about_link_issues">問題回報</string>
     <string name="about_license_title">授權</string>
-    <string name="about_license">本專案以 AGPL-3.0-only 授權。禁漫、JMComic 及相關內容的權利歸其權利人所有；本應用與官方無關，僅提供客戶端實作。</string>
+    <string name="about_license">本專案以 AGPL-3.0-only 授權。禁漫、JMComic 及相關內容的權利歸其權利人所有；本應用與官方無關，僅提供客戶端實現。</string>
 
     <string name="profile_title">我的</string>
-    <string name="profile_account">帳號</string>
+    <string name="profile_account">賬號</string>
     <string name="profile_not_logged_in">未登入</string>
-    <string name="profile_account_desc">收藏與觀看歷史綁定帳號，登入後可在本機同步查看。</string>
+    <string name="profile_account_desc">收藏與觀看歷史繫結賬號，登入後可在本機同步檢視。</string>
     <string name="profile_login_register">登入 / 註冊</string>
     <string name="profile_logged_in">已登入</string>
     <string name="profile_coin">金幣</string>
@@ -41,9 +43,9 @@
     <string name="profile_notifications">通知</string>
     <string name="profile_tracking">我的追更</string>
     <string name="profile_tag_favorites">標籤收藏</string>
-    <string name="profile_logout">登出</string>
+    <string name="profile_logout">退出登入</string>
     <string name="profile_block_title">內容封鎖</string>
-    <string name="profile_words">關鍵字</string>
+    <string name="profile_words">關鍵詞</string>
     <string name="profile_categories">分類</string>
     <string name="profile_tags">標籤</string>
     <string name="profile_block_count">%1 條</string>
@@ -63,8 +65,8 @@
     <string name="comic_render">漫畫渲染</string>
     <string name="about_entry">關於</string>
     <string name="about_version_fmt">版本：%1</string>
-    <string name="server_title">伺服器</string>
-    <string name="server_official">伺服器對應官方版本</string>
+    <string name="server_title">服務端</string>
+    <string name="server_official">服務端對應官方版本</string>
     <string name="server_loading">讀取中…</string>
     <string name="server_read_failed">讀取失敗</string>
     <string name="server_not_provided">未提供</string>
@@ -76,7 +78,7 @@
     <string name="daily_title">每日簽到</string>
     <string name="daily_login_first">登入後再簽到</string>
     <string name="daily_loading">正在讀取簽到活動…</string>
-    <string name="daily_none">沒讀到簽到活動（可能目前沒有進行中的活動，或網路不通）。</string>
+    <string name="daily_none">沒讀到簽到活動（可能當前沒有進行中的活動，或網路不通）。</string>
     <string name="daily_today_signed">今天已簽到</string>
     <string name="daily_complete">本期已簽完</string>
     <string name="daily_sign">簽到</string>
@@ -85,20 +87,20 @@
     <string name="webdav_on">已開啟</string>
     <string name="webdav_off">未開啟</string>
     <string name="webdav_path">遠端路徑</string>
-    <string name="webdav_configure">去設定</string>
-    <string name="webdav_sync">設定 / 立即同步</string>
+    <string name="webdav_configure">去配置</string>
+    <string name="webdav_sync">配置 / 立即同步</string>
     <string name="crash_title">崩潰日誌（除錯）</string>
     <string name="crash_status">狀態</string>
-    <string name="crash_none">沒有崩潰紀錄。</string>
+    <string name="crash_none">沒有崩潰記錄。</string>
 
     <string name="nav_home">首頁</string>
     <string name="nav_category">分類</string>
     <string name="nav_search">搜尋</string>
     <string name="nav_profile">我的</string>
-    <string name="appearance_glass_quality">玻璃品質</string>
+    <string name="appearance_glass_quality">玻璃質量</string>
     <string name="appearance_floating_bar">懸浮底欄</string>
     <string name="appearance_translucent">通透模式</string>
-    <string name="appearance_monet_blur">莫內取色套用在模糊上</string>
+    <string name="appearance_monet_blur">莫奈取色套用在模糊上</string>
     <string name="appearance_predictive_back">預測性返回</string>
     <string name="appearance_motion">動效</string>
     <string name="appearance_motion_speed">動效快慢</string>
@@ -109,11 +111,11 @@
     <string name="appearance_wallpaper_auto">自動更換</string>
     <string name="appearance_off">關閉</string>
 
-    <string name="appearance_floating_bar_desc">底欄變成浮在內容之上的膠囊，選取項帶一塊會滑過去的底。</string>
+    <string name="appearance_floating_bar_desc">底欄變成浮在內容之上的膠囊，選中項帶一塊會滑過去的底。</string>
     <string name="appearance_translucent_desc">玻璃不再覆蓋底色，只留模糊與描邊；文字自動加一圈反色柔光保證可讀。</string>
     <string name="appearance_monet_blur_desc">用系統動態取色的主色 / 次色 / 第三色給背景與模糊層上色。需要開動態取色且系統為 Android 12+，否則這個開關不生效。</string>
     <string name="appearance_predictive_android15">Android 15 起由系統提供（返回手勢中系統會推動整個視窗），本項不再生效，已停用。</string>
-    <string name="appearance_predictive_on">返回手勢進行中，目前頁面跟手淡出，鬆手前就能看出要退出。</string>
+    <string name="appearance_predictive_on">返回手勢進行中，當前頁跟手淡出，鬆手前就能看出要退出。</string>
     <string name="appearance_predictive_unsupported">需要 Android 13 / 14；本機系統沒有預測性返回手勢，本項不生效。</string>
     <string name="appearance_serial_desc">每半天左右讓系統挑個合適時機檢查一次，有變化才提醒；同一批更新只提醒一次。只用連載列表和你本地的閱讀時間，不上傳你在看什麼。預設關閉。</string>
 
@@ -130,17 +132,17 @@
     <string name="home_refresh">重新整理</string>
     <string name="home_to_light">切換到淺色</string>
     <string name="home_to_dark">切換到深色</string>
-    <string name="home_expand_more">展開更多分區（還有 %1 個）</string>
+    <string name="home_expand_more">展開更多分割槽（還有 %1 個）</string>
     <string name="home_latest">最新上架</string>
     <string name="home_more">更多</string>
     <string name="home_tracking_updated">你追的 %1 部有更新</string>
 
     <string name="glass_high">高</string>
-    <string name="glass_high_desc">真實模糊，半徑 12dp —— 最好看，低階機可能掉幀</string>
+    <string name="glass_high_desc">真實模糊，半徑 12dp —— 最好看，低端機可能掉幀</string>
     <string name="glass_medium">中</string>
-    <string name="glass_medium_desc">真實模糊，半徑 8dp —— 預設，觀感與效能折衷</string>
+    <string name="glass_medium_desc">真實模糊，半徑 8dp —— 預設，觀感與效能折中</string>
     <string name="glass_off">關</string>
-    <string name="glass_off_desc">不做背景取樣，退回半透明填充 —— 最省電，適合低階機</string>
+    <string name="glass_off_desc">不做背景取樣，退回半透明填充 —— 最省電，適合低端機</string>
     <string name="motion_fast">快</string>
     <string name="motion_fast_desc">短促直接：切換乾脆、位移很小 —— 最快的節奏</string>
     <string name="motion_medium">中</string>
@@ -148,32 +150,32 @@
     <string name="motion_slow">慢</string>
     <string name="motion_slow_desc">轉場更長、收尾更緩，前後層次最明顯 —— 最慢的節奏</string>
 
-    <string name="wall_off">純漸層</string>
-    <string name="wall_off_desc">不載入任何圖片，只用內建漸層底（不發任何請求）</string>
+    <string name="wall_off">純漸變</string>
+    <string name="wall_off_desc">不載入任何圖片，只用內建漸變底（不發任何請求）</string>
     <string name="wall_bing">Bing 每日</string>
     <string name="wall_bing_desc">Bing 每日桌布，來源 bing.biturl.top</string>
     <string name="wall_anime">二次元隨機</string>
-    <string name="wall_anime_desc">t.alcy.cc / t.mwm.moe / loliapi 三個來源依次嘗試</string>
+    <string name="wall_anime_desc">t.alcy.cc / t.mwm.moe / loliapi 三個源依次嘗試</string>
     <string name="wall_all">全部隨機</string>
     <string name="wall_all_desc">Bing 與二次元混合</string>
-    <string name="wall_custom">自訂網址</string>
-    <string name="wall_custom_desc">自己填一個圖片直連</string>
+    <string name="wall_custom">自定義地址</string>
+    <string name="wall_custom_desc">自己填一個圖片直鏈</string>
     <string name="wall_system">跟隨手機桌布</string>
-    <string name="wall_system_desc">讀取系統目前桌布（Android）；換桌布後回到應用或點「重新讀取」生效</string>
+    <string name="wall_system_desc">讀取系統當前桌布（Android）；換桌布後回到應用或點「重新讀取」生效</string>
     <string name="wall_solid">純色</string>
     <string name="wall_solid_desc">只用你選的一個顏色，不載入圖片（零請求）</string>
     <string name="wall_picsum">Picsum 攝影</string>
-    <string name="wall_picsum_desc">按裝置方向取圖：手機直圖、平板/桌面橫圖（picsum.photos，無需 key）</string>
+    <string name="wall_picsum_desc">按裝置方向取圖：手機豎圖、平板/桌面橫圖（picsum.photos，無需 key）</string>
 
     <string name="search_title">搜尋</string>
     <string name="search_placeholder">輸入作品名、作者或標籤</string>
     <string name="search_year_any">年份：不限</string>
     <string name="search_year_fmt">年份：%1 年</string>
     <string name="search_year_month_fmt">年份：%1 年 %2 月</string>
-    <string name="search_collapse_year">收去年份篩選</string>
+    <string name="search_collapse_year">收起年份篩選</string>
     <string name="search_expand_year">展開年份篩選</string>
     <string name="search_empty_title">沒有找到相關作品</string>
-    <string name="search_empty_desc">換個關鍵字，或調整檢索欄位與年份</string>
+    <string name="search_empty_desc">換個關鍵詞，或調整檢索欄位與年份</string>
     <string name="search_recent">最近搜尋</string>
     <string name="search_clear">清空</string>
     <string name="search_hot_tags">熱門標籤</string>
@@ -184,7 +186,7 @@
     <string name="search_start_desc">支援按作品名、作者、標籤檢索</string>
 
     <string name="search_hint_random_failed">隨機本子沒拿到，稍後再試</string>
-    <string name="search_hint_no_keyword">請輸入關鍵字</string>
+    <string name="search_hint_no_keyword">請輸入關鍵詞</string>
 
     <string name="cat_title">分類</string>
     <string name="cat_browse">按分類瀏覽</string>
@@ -192,14 +194,14 @@
     <string name="cat_sort_hearts">最多愛心</string>
     <string name="cat_sort_total">總排行</string>
     <string name="cat_sort_month">月排行</string>
-    <string name="cat_sort_week">週排行</string>
+    <string name="cat_sort_week">周排行</string>
     <string name="cat_label">分類</string>
     <string name="cat_sub_label">子類</string>
     <string name="cat_all">全部</string>
     <string name="cat_creator_lib">畫師與作品庫</string>
     <string name="cat_enter">進入 ›</string>
     <string name="cat_sort">排序</string>
-    <string name="cat_empty">這個分類底下暫時沒有作品</string>
+    <string name="cat_empty">這個分類下暫時沒有作品</string>
     <string name="cat_load_failed">暫時拿不到分類</string>
 
     <string name="auth_login">登入</string>
@@ -208,17 +210,17 @@
     <string name="auth_username">使用者名稱</string>
     <string name="auth_password">密碼</string>
     <string name="auth_confirm_password">確認密碼</string>
-    <string name="auth_email">電子郵件</string>
+    <string name="auth_email">郵箱</string>
     <string name="auth_gender">性別</string>
     <string name="auth_male">男</string>
     <string name="auth_female">女</string>
     <string name="auth_wait">請稍候…</string>
     <string name="auth_back">返回</string>
-    <string name="auth_keystore_note">登入後會帶上伺服器簽發的憑證，用於收藏與觀看歷史。憑證經 Android Keystore 加密後保存在應用私有目錄，不會明文落盤。</string>
+    <string name="auth_keystore_note">登入後會帶上服務端簽發的憑證，用於收藏與觀看歷史。憑證經 Android Keystore 加密後儲存在應用私有目錄，不會明文落盤。</string>
 
     <string name="detail_title_placeholder">作品詳情</string>
     <string name="detail_back">返回</string>
-    <string name="detail_move_to_favorites">移至收藏夾</string>
+    <string name="detail_move_to_favorites">移入收藏夾</string>
     <string name="detail_author_fmt">作者：%1</string>
     <string name="detail_updated_fmt">更新：%1</string>
     <string name="detail_tags_hint">標籤：點開搜尋，長按封鎖</string>
@@ -235,18 +237,18 @@
     <string name="fav_title">我的收藏</string>
     <string name="fav_empty">還沒有收藏，去詳情頁點收藏試試</string>
     <string name="hist_title">觀看歷史</string>
-    <string name="hist_empty">還沒有觀看紀錄</string>
+    <string name="hist_empty">還沒有觀看記錄</string>
     <string name="tracking_title">我的追更</string>
     <string name="tracking_empty">還沒有追更，去詳情頁點「追更」</string>
     <string name="list_total_fmt">共 %1 項</string>
     <string name="list_back">返回</string>
     <string name="list_manage_folders">管理收藏夾</string>
     <string name="list_need_login">需要登入</string>
-    <string name="list_login_desc_fmt">%1與帳號綁定，登入後在這裡查看</string>
+    <string name="list_login_desc_fmt">%1與賬號繫結，登入後在這裡檢視</string>
     <string name="list_untrack">取消追更</string>
-    <string name="list_move_to_folder">移至收藏夾</string>
-    <string name="list_delete_history">刪除這筆歷史</string>
-    <string name="folder_new">新增收藏夾</string>
+    <string name="list_move_to_folder">移入收藏夾</string>
+    <string name="list_delete_history">刪除這條歷史</string>
+    <string name="folder_new">新建收藏夾</string>
     <string name="folder_rename">重新命名收藏夾</string>
     <string name="folder_all">全部</string>
 
@@ -262,21 +264,21 @@
     <string name="notif_type_tracking">追更更新</string>
     <string name="tagfav_title">標籤收藏</string>
     <string name="tagfav_need_login">需要登入</string>
-    <string name="tagfav_login_desc">標籤收藏與帳號綁定，登入後在這裡查看</string>
+    <string name="tagfav_login_desc">標籤收藏與賬號繫結，登入後在這裡檢視</string>
     <string name="tagfav_empty_title">還沒有收藏標籤</string>
     <string name="tagfav_empty_desc">在作品詳情頁的標籤上可以收藏</string>
     <string name="tagfav_untag">取消收藏這個標籤</string>
     <string name="tagfav_dialog_title">收藏標籤</string>
-    <string name="tagfav_dialog_desc">選取的標籤會加入「我的 → 標籤收藏」（上限 50）。</string>
+    <string name="tagfav_dialog_desc">選中的標籤會加入「我的 → 標籤收藏」（上限 50）。</string>
     <string name="tagfav_save_fmt">收藏 %1 個</string>
 
     <string name="week_title">週刊</string>
     <string name="week_issue_fmt">%1 · 共 %2 部</string>
     <string name="week_back">返回</string>
     <string name="week_issue_label">刊期</string>
-    <string name="week_type_label">類型</string>
+    <string name="week_type_label">型別</string>
     <string name="week_empty_title">這一期沒有作品</string>
-    <string name="week_empty_desc">換一個刊期或類型看看</string>
+    <string name="week_empty_desc">換一個刊期或型別看看</string>
 
     <string name="random_title">隨機推薦</string>
     <string name="random_note_blocked">已排除你封鎖名單裡的作品</string>
@@ -304,9 +306,9 @@
     <string name="reader_back">返回</string>
     <string name="reader_to_horizontal">切換到橫向翻頁</string>
     <string name="reader_to_vertical">切換到縱向滾動</string>
-    <string name="reader_toggle_mono">切換黑白 / 全彩</string>
+    <string name="reader_toggle_mono">切換黑白 / 全綵</string>
     <string name="reader_mono">黑白</string>
-    <string name="reader_color">全彩</string>
+    <string name="reader_color">全綵</string>
     <string name="reader_prev_chapter">上一話</string>
     <string name="reader_next_chapter">下一話</string>
     <string name="reader_mode_horizontal">橫向</string>
@@ -314,9 +316,9 @@
     <string name="reader_chapters">章節</string>
     <string name="reader_comments">評論</string>
     <string name="reader_favorite">收藏</string>
-    <string name="reader_like">點讚</string>
+    <string name="reader_like">點贊</string>
     <string name="reader_page_fmt">第 %1 頁</string>
-    <string name="reader_page_failed">這一頁載入失敗 · 點擊重試</string>
+    <string name="reader_page_failed">這一頁載入失敗 · 點選重試</string>
     <string name="reader_pick_title">選擇章節</string>
     <string name="reader_pick_prev">上一頁</string>
     <string name="reader_pick_next">下一頁</string>
@@ -325,8 +327,8 @@
     <string name="block_title">封鎖設定</string>
     <string name="block_subtitle">本地規則，不上傳</string>
     <string name="block_back">返回</string>
-    <string name="block_help">命中即隱藏，比對忽略大小寫。\n· 關鍵字：作品名或作者包含它\n· 分類：分類或子分類等於它（例如封鎖「同人」）\n· 標籤：列表介面不下發標籤，因此改為在背景逐筆讀取作品詳情取標籤，命中即從列表中隱藏（只在有標籤規則時才會請求）</string>
-    <string name="block_words_title">關鍵字封鎖</string>
+    <string name="block_help">命中即隱藏，匹配忽略大小寫。\n· 關鍵詞：作品名或作者包含它\n· 分類：分類或子分類等於它（例如封鎖「同人」）\n· 標籤：列表介面不下發標籤，因此改為在後臺逐條讀取作品詳情取標籤，命中即從列表中隱藏（只在存在標籤規則時才會請求）</string>
+    <string name="block_words_title">關鍵詞封鎖</string>
     <string name="block_words_hint">作品名或作者命中即隱藏 · %1 條</string>
     <string name="block_categories_title">分類封鎖</string>
     <string name="block_categories_hint">整個分類不再出現 · %1 條</string>
@@ -340,16 +342,16 @@
 
     <string name="dav_back">返回</string>
     <string name="dav_title">WebDAV 同步</string>
-    <string name="dav_desc">同步閱讀歷史、收藏與封鎖名單。多台裝置指向同一個檔案即可互相同步。</string>
-    <string name="dav_server">伺服器位址</string>
+    <string name="dav_desc">同步閱讀歷史、收藏與封鎖名單。多臺裝置指向同一個檔案即可互相同步。</string>
+    <string name="dav_server">伺服器地址</string>
     <string name="dav_server_hint">https://dav.example.com/remote.php/dav/files/使用者名稱</string>
     <string name="dav_user">使用者名稱</string>
-    <string name="dav_password">密碼（建議應用程式專用密碼）</string>
+    <string name="dav_password">密碼（建議應用專用密碼）</string>
     <string name="dav_show">顯示</string>
     <string name="dav_hide">隱藏</string>
     <string name="dav_path">遠端檔案路徑</string>
     <string name="dav_auto_sync">開啟自動同步</string>
-    <string name="dav_help">位址形如 https://dav.example.com/remote.php/dav/files/使用者名稱（Nextcloud），或 https://dav.jianguoyun.com/dav/（堅果雲）。密碼請用應用程式專用密碼。</string>
+    <string name="dav_help">地址形如 https://dav.example.com/remote.php/dav/files/使用者名稱（Nextcloud），或 https://dav.jianguoyun.com/dav/（堅果雲）。密碼請用應用專用密碼。</string>
     <string name="dav_sync_done">同步完成</string>
     <string name="dav_sync_failed_fmt">同步失敗：%1</string>
     <string name="dav_syncing">同步中…</string>
@@ -380,7 +382,7 @@
     <string name="cmt_send">傳送</string>
     <string name="cmt_empty_title">還沒有評論</string>
     <string name="cmt_empty_desc">這裡會顯示其他讀者的留言</string>
-    <string name="cmt_delete">刪除這則評論</string>
+    <string name="cmt_delete">刪除這條評論</string>
     <string name="cmt_replies_fmt">%1 條回覆</string>
     <string name="folder_name">收藏夾名稱</string>
     <string name="folder_ok">確定</string>
@@ -398,12 +400,12 @@
     <string name="folder_skip_only_fav">僅收藏，不歸類</string>
 
     <string name="common_updated">更新</string>
-    <string name="common_load_failed_retry">載入失敗，點擊重試</string>
+    <string name="common_load_failed_retry">載入失敗，點選重試</string>
     <string name="common_no_more">已經到底了</string>
     <string name="common_load_more">上滑載入更多</string>
     <string name="common_retry">重試</string>
     <string name="common_load_failed">載入失敗</string>
-    <string name="random_fab_cd">隨機一本（長按查看一批）；已排除封鎖名單</string>
+    <string name="random_fab_cd">隨機一本（長按檢視一批）；已排除封鎖名單</string>
     <string name="checkin_no_active">現在沒有進行中的簽到活動</string>
     <string name="checkin_already">今天已經簽過了</string>
     <string name="checkin_ok">簽到成功</string>
@@ -419,12 +421,12 @@
     <string name="field_author">作者</string>
     <string name="field_tag">標籤</string>
     <string name="field_character">登場人物</string>
-    <string name="daily_expand">查看簽到歷史</string>
+    <string name="daily_expand">檢視簽到歷史</string>
     <string name="daily_collapse">收起簽到歷史</string>
     <string name="daily_reading">讀取中…</string>
     <string name="daily_history_failed_fmt">歷史沒讀到：%1</string>
     <string name="daily_history_empty">還沒有簽到歷史。</string>
-    <string name="daily_record_cd">簽到紀錄</string>
+    <string name="daily_record_cd">簽到記錄</string>
     <string name="daily_month_fmt">%1月</string>
     <string name="daily_image_cd">簽到大圖</string>
 
@@ -446,20 +448,20 @@
     <string name="profile_tracking_desc">你追的連載更新時通知我</string>
     <string name="profile_reading">閱讀</string>
     <string name="profile_default_reader">預設瀏覽形態</string>
-    <string name="profile_current">目前</string>
-    <string name="profile_apply_url">套用這個位址</string>
+    <string name="profile_current">當前</string>
+    <string name="profile_apply_url">應用這個地址</string>
     <string name="profile_seconds_fmt">%1 秒</string>
     <string name="profile_hours_fmt">%1 小時</string>
     <string name="profile_minutes_fmt">%1 分鐘</string>
     <string name="profile_image_fmt">圖片：%1</string>
     <string name="profile_event_fallback">簽到活動</string>
-    <string name="profile_signed_fmt">已簽 %1 / %2 天</string>
+    <string name="profile_signed_fmt">已籤 %1 / %2 天</string>
     <string name="profile_day_fmt">%1號</string>
     <string name="profile_signed_tag">，已簽到</string>
     <string name="profile_unsigned_tag">，未簽到</string>
-    <string name="profile_server_drift_fmt">伺服器對應的官方版本已變為 %1，而本客戶端仍按 %2 上報。這不代表立即不可用，但介面行為可能已按新版本調整，值得檢查。</string>
-    <string name="profile_webdav_desc">同步閱讀歷史、收藏與封鎖名單。多台裝置指向同一個檔案即可互通。</string>
-    <string name="profile_webdav_empty">尚未填寫伺服器位址。支援 Nextcloud、堅果雲等標準 WebDAV 服務。</string>
+    <string name="profile_server_drift_fmt">服務端對應的官方版本已變為 %1，而本客戶端仍按 %2 上報。這不代表立即不可用，但介面行為可能已按新版本調整，值得檢查。</string>
+    <string name="profile_webdav_desc">同步閱讀歷史、收藏與封鎖名單。多臺裝置指向同一檔案即可互通。</string>
+    <string name="profile_webdav_empty">尚未填寫伺服器地址。支援 Nextcloud、堅果雲等標準 WebDAV 服務。</string>
     <string name="profile_logs_status">狀態</string>
     <string name="profile_crash_copied">崩潰日誌已複製到剪貼簿</string>
     <string name="profile_crash_copy">複製最近一次</string>
@@ -469,13 +471,13 @@
 
     <string name="auth_need_username">請輸入使用者名稱</string>
     <string name="auth_need_password">請輸入密碼</string>
-    <string name="auth_bad_email">請輸入有效的電子郵件</string>
+    <string name="auth_bad_email">請輸入有效的郵箱</string>
     <string name="auth_short_password">密碼至少 6 位</string>
     <string name="auth_password_mismatch">兩次輸入的密碼不一致</string>
     <string name="auth_register_ok">註冊成功，請登入</string>
     <string name="auth_register_failed">註冊失敗</string>
-    <string name="auth_reset_sent">重設郵件已寄出</string>
-    <string name="auth_send_failed">寄送失敗</string>
+    <string name="auth_reset_sent">重置郵件已傳送</string>
+    <string name="auth_send_failed">傳送失敗</string>
 
     <string name="auth_welcome_fmt">歡迎回來，%1</string>
     <string name="auth_login_again_fmt">%1 · 登入後請再點一次剛才那個按鈕</string>
@@ -487,11 +489,11 @@
     <string name="detail_track_cd">追更</string>
     <string name="detail_unfavorite_cd">取消收藏</string>
     <string name="detail_favorite_cd">收藏</string>
-    <string name="detail_liked_cd">已按讚</string>
-    <string name="detail_like_cd">按讚</string>
+    <string name="detail_liked_cd">已點贊</string>
+    <string name="detail_like_cd">點贊</string>
     <string name="detail_pages_fmt">共 %1 頁</string>
     <string name="detail_comments_fmt"> · %1 評論</string>
-    <string name="detail_load_failed">沒能載入出這部作品</string>
+    <string name="detail_load_failed">沒能加載出這部作品</string>
     <string name="detail_works">作品</string>
     <string name="detail_actors">演員</string>
     <string name="detail_by_rules">按你的封鎖規則</string>
@@ -503,7 +505,7 @@
     <string name="detail_track_updated">已更新追更狀態</string>
     <string name="detail_track_failed">追更失敗</string>
     <string name="detail_fav_tags_done_fmt">已收藏 %1 個標籤</string>
-    <string name="detail_dl_failed_fmt">取得下載位址失敗：%1</string>
+    <string name="detail_dl_failed_fmt">獲取下載地址失敗：%1</string>
     <string name="detail_cannot_download">這個作品暫時不能下載</string>
     <string name="detail_download_started">已開始下載</string>
     <string name="detail_download_label_fmt">下載 %1</string>
@@ -532,13 +534,13 @@
     <string name="login_reason_track">追更需要登入</string>
     <string name="login_reason_fav_tags">收藏標籤需要登入</string>
     <string name="login_reason_download">下載需要登入</string>
-    <string name="login_reason_like">按讚需要登入</string>
+    <string name="login_reason_like">點贊需要登入</string>
     <string name="login_reason_favorite">收藏需要登入</string>
     <string name="login_reason_comment">發表評論需要登入</string>
     <string name="login_reason_tags">標籤收藏需要登入</string>
 
     <string name="block_remove_cd_fmt">移除 %1</string>
-    <string name="block_kind_word">關鍵字</string>
+    <string name="block_kind_word">關鍵詞</string>
     <string name="block_kind_tag">標籤</string>
     <string name="block_kind_category">分類名</string>
     <string name="block_add_title_fmt">新增%1</string>
@@ -549,9 +551,9 @@
     <string name="block_add">新增</string>
     <string name="block_cancel">取消</string>
     <string name="more_empty_week">這天的更新是空的</string>
-    <string name="more_empty_section">這個分區暫時沒有內容</string>
-    <string name="more_type_label">類型</string>
+    <string name="more_empty_section">這個分割槽暫時沒有內容</string>
+    <string name="more_type_label">型別</string>
     <string name="more_day_label">更新</string>
-    <string name="folder_move_title">移至收藏夾</string>
+    <string name="folder_move_title">移入收藏夾</string>
     <string name="common_unknown_error">未知錯誤</string>
 </resources>
