@@ -430,35 +430,23 @@ private fun App(onLocaleChange: (String) -> Unit = {}) {
                     TextButton(onClick = { serialNotice = null }) { Text(tl("知道了")) }
                 }
             }
-            Row(
-                modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 6.dp),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(12.dp),
-            ) {
-                Text(
-                    text = "JMNeXt",
-                    style = MaterialTheme.typography.titleMedium,
-                    modifier = Modifier.clickable { screen = Screen.Home },
-                )
-                Text(
-                    text = if (authState.loggedIn) {
-                        I18n.trf("已登录：%1\$s", authState.member?.username ?: authState.member?.uid ?: "")
-                    } else {
-                        tl("未登录")
-                    },
-                    style = MaterialTheme.typography.labelSmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    modifier = Modifier.weight(1f),
-                )
-                TextButton(onClick = {
-                    if (authState.loggedIn) {
-                        showLogoutConfirm = true
-                    } else {
-                        screen = Screen.Login
-                    }
-                }) { Text(if (authState.loggedIn) tl("退出登录") else tl("登录")) }
-            }
-
+              JmTopBar(
+                  title = "JMNeXt",
+                  subtitle = if (authState.loggedIn) {
+                      I18n.trf("已登录：%1\$s", authState.member?.username ?: authState.member?.uid ?: "")
+                  } else {
+                      tl("未登录")
+                  },
+                  onTitleClick = { screen = Screen.Home },
+              ) {
+                  TextButton(onClick = {
+                      if (authState.loggedIn) {
+                          showLogoutConfirm = true
+                      } else {
+                          screen = Screen.Login
+                      }
+                  }) { Text(if (authState.loggedIn) tl("退出登录") else tl("登录")) }
+              }
             Box(Modifier.weight(1f)) {
                 NoticeHost()   // 瞬时反馈覆盖层（不挡操作，底部居中）
             // 退出登录是"会丢失登录态"的操作：先确认再执行（与"删除屏蔽规则"不同——那个可逆，不需要确认）
