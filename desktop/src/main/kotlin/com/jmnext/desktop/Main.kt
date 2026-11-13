@@ -782,8 +782,11 @@ private fun dailyAlreadyChecked(message: String?): Boolean {
  */
 /** åçç¨æ·è®¾ç½®éå­çè¯­è¨ï¼æ²¡æå°±æç¯å¢åé/ç³»ç»è¯­è¨ã */
 internal fun resolveLocaleFromPrefs(): String =
-    runCatching { PreferencesKeyValueStore("jm_ui").getString("locale", null) }
-        .getOrNull()?.takeIf { it.isNotBlank() } ?: resolveLocale()
+    // ç¯å¢åéä¼åï¼èæ¬ä¸æªå¾è¦è½å¼ºå¶æå®è¯­è¨ï¼ä¸è½è¢«ä¸æ¬¡çé¢ééè¿çåå¥½çä½
+    System.getenv("JMNEXT_LANG")?.takeIf { it.isNotBlank() }
+        ?: runCatching { PreferencesKeyValueStore("jm_ui").getString("locale", null) }
+            .getOrNull()?.takeIf { it.isNotBlank() }
+        ?: resolveLocale()
 
 internal fun resolveLocale(): String {
     val supported = listOf("zh-CN", "zh-rTW", "zh-rHK", "en", "ja", "ru", "ko")

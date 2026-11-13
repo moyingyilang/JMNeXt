@@ -92,11 +92,19 @@ fun SideNav(selected: String, onSelect: (String) -> Unit, unreadNotifications: I
                         if (active) MaterialTheme.colorScheme.primaryContainer
                         else MaterialTheme.colorScheme.surface,
                     )
-                    .border(
-                        width = if (focused) 1.dp else 0.dp,
-                        color = MaterialTheme.colorScheme.primary,
-                        shape = RoundedCornerShape(8.dp),
-                    )
+                      // 只在聚焦时画描边：宽度写 0.dp 时 Compose 仍会画一条发丝线，
+                      // 于是侧栏每一项都像被框住（截图里那圈蓝边就是这个）。
+                      .then(
+                          if (focused) {
+                              Modifier.border(
+                                  width = 1.dp,
+                                  color = MaterialTheme.colorScheme.primary,
+                                  shape = RoundedCornerShape(8.dp),
+                              )
+                          } else {
+                              Modifier
+                          },
+                      )
                     .onFocusChanged { focused = it.isFocused }
                     .focusable()
                     .onKeyEvent { event ->

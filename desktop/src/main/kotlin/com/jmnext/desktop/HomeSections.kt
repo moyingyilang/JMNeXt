@@ -72,15 +72,14 @@ fun PromoteHeader(repository: JmRepository, onOpenComic: (ListItem) -> Unit, onO
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.padding(start = 4.dp, top = 12.dp, bottom = 8.dp),
             ) {
-                Text(
-                    text = section.title ?: tl("(未命名分区)"),
-                    style = MaterialTheme.typography.titleMedium,
-                    color = MaterialTheme.colorScheme.primary,
-                )
-                TextButton(onClick = { onOpenSection(section.id, section.title.orEmpty()) }) {
-                    Text(tl("更多"))
-                }
-            }
+                  SectionTitle(
+                      text = section.title ?: tl("(未命名分区)"),
+                      modifier = Modifier.weight(1f),
+                  )
+                  TextButton(onClick = { onOpenSection(section.id, section.title.orEmpty()) }) {
+                      Text(tl("更多"))
+                  }
+              }
             Row(
                 modifier = Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()),
                 horizontalArrangement = Arrangement.spacedBy(12.dp),

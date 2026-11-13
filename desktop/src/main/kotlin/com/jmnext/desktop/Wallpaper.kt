@@ -147,6 +147,15 @@ object Appearance {
  */
 @Composable
 fun WallpaperLayer(modifier: Modifier = Modifier) {
+    // 纯色底：设 JMNEXT_WALLPAPER=off 时不画渐变壁纸，便于单独看玻璃与描边的效果。
+    if (System.getenv("JMNEXT_WALLPAPER")?.lowercase() in setOf("off", "none", "0")) {
+        Box(
+            modifier
+                .fillMaxSize()
+                .background(if (Appearance.dark) Color(0xFF16181E) else Color(0xFFF6F7FA)),
+        )
+        return
+    }
     val preset = Appearance.preset
     val dark = Appearance.dark
     val colors = if (dark) preset.dark else preset.light
