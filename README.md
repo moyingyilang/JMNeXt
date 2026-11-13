@@ -71,6 +71,33 @@ Android 装上就能用。`full` 和 `lite` 的包名不同，可以同时装；
 构建慢在哪、哪些开关试过没用，写在 [docs/BUILD-SPEED.md](docs/BUILD-SPEED.md)。
 
 ## 版本
+## 语言 / Languages
+
+这几门是我们自己在维护的：
+
+| 语言 | 目录 | 说明 |
+| --- | --- | --- |
+| 简体中文 | `values/` | 默认，其余语言的基准 |
+| 繁体中文（台湾） | `values-zh-rTW/` | 由脚本从简中生成，词表覆盖过 |
+| 繁体中文（香港） | `values-zh-rHK/` | 同上，用 `s2hk` |
+| English | `values-en/` | 人工译，`i18n/translations/en.tsv` |
+| 日本語 | `values-ja/` | 人工译，`i18n/translations/ja.tsv` |
+| Русский | `values-ru/` | 人工译，`i18n/translations/ru.tsv` |
+| 한국어 | `values-ko/` | 人工译，`i18n/translations/ko.tsv` |
+
+英日俄韩四门是我译的，**没过母语者眼**。哪句读着别扭，直接改 `i18n/translations/<代码>.tsv` 再跑一遍生成脚本，比改 XML 省事。
+
+其余语言欢迎你翻。步骤就三步：
+
+1. 复制 `i18n/translations/en.tsv` 成 `<你的语言代码>.tsv`，逐行把值换成译文。键别动，`%1$s`、`%2$d` 这类占位符和 `\n` 也照抄
+2. `./scripts/i18n-from-tsv.sh <代码>` 生成 `values-<代码>/strings.xml`；TSV 少键或多键会直接拒绝，不会产出半份翻译
+3. `./scripts/i18n-check.sh` 确认键和占位符都对齐，然后提 PR
+
+语言代码按 Android 的规矩写：`de`、`fr`、`es`、`pt-BR`（地区要带 `r` 前缀，脚本会自动处理）。细节在 [docs/I18N.md](docs/I18N.md)。
+
+翻译一门语言大约 544 条，建议先翻界面主路径（底部导航、我的、设置、详情、阅读器），长文案可以留中文，缺的键会回落到简中。
+
+
 
 跟官方客户端版本走。官方 2.1.13 对应我们的 2.2.4：上报版本与两套 i18n 字典一起更新。
 
