@@ -499,4 +499,24 @@
     <string name="detail_blocked_tags_fmt">：含「%1」</string>
     <string name="detail_comment_total_fmt">%1 條</string>
     <string name="detail_no_comments">暫無</string>
+
+    <string name="detail_track_updated">已更新追更狀態</string>
+    <string name="detail_track_failed">追更失敗</string>
+    <string name="detail_fav_tags_done_fmt">已收藏 %1 個標籤</string>
+    <string name="detail_dl_failed_fmt">取得下載位址失敗：%1</string>
+    <string name="detail_cannot_download">這個作品暫時不能下載</string>
+    <string name="detail_download_started">已開始下載</string>
+    <string name="detail_download_label_fmt">下載 %1</string>
+    <string name="detail_blocked_tag_fmt">已封鎖標籤「%1」</string>
+    <string name="detail_blocked_author_fmt">已封鎖作者「%1」</string>
+    <string name="detail_unblocked_tag_fmt">已取消封鎖「%1」</string>
+    <string name="detail_unblocked_author">已取消封鎖該作者</string>
+    <string name="detail_liked_already">已經點過讚了</string>
+
+    <string name="cw_title">作品資訊</string>
+    <string name="cw_not_found">沒有這個作品的資訊</string>
+    <string name="cw_date_fmt">日期：%1</string>
+    <string name="cw_no_content">這個作品沒有可看的內容</string>
+    <string name="cw_no_content_desc">作品庫裡有些條目只有資訊，沒有圖片</string>
+    <string name="cw_related">相關作品</string>
 </resources>

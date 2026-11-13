@@ -1,5 +1,7 @@
 package com.jmnext.ui.screens.creator
 
+import androidx.compose.ui.res.stringResource
+import com.jmnext.R
 import androidx.compose.material.icons.automirrored.filled.MenuBook
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -123,13 +125,13 @@ fun CreatorWorkScreen(
 
     Column(modifier = modifier.fillMaxSize()) {
         GlassTopBar(
-            title = info?.title?.takeIf { it.isNotBlank() } ?: "作品信息",
-            subtitle = info?.authorName?.takeIf { it.isNotBlank() }?.let { "作者：$it" },
+            title = info?.title?.takeIf { it.isNotBlank() } ?: stringResource(R.string.cw_title),
+            subtitle = info?.authorName?.takeIf { it.isNotBlank() }?.let { stringResource(R.string.detail_author_fmt, it) },
             navigation = {
                 IconButton(onClick = onBack) {
                     Icon(
                         imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                        contentDescription = "返回",
+                        contentDescription = stringResource(R.string.reader_back),
                         tint = c.accent,
                     )
                 }
@@ -142,7 +144,7 @@ fun CreatorWorkScreen(
             state.error != null -> ErrorBox(message = state.error.orEmpty(), onRetry = { vm.load() })
 
             info == null -> MessageState(
-                title = "没有这个作品的信息",
+                title = stringResource(R.string.cw_not_found),
                 icon = Icons.AutoMirrored.Filled.MenuBook,
                 onRetry = { vm.load() },
             )
@@ -155,10 +157,10 @@ fun CreatorWorkScreen(
                 item(key = "meta") {
                     Column(Modifier.fillMaxWidth().padding(horizontal = Spacing.lg)) {
                         info.date?.takeIf { it.isNotBlank() }?.let {
-                            Text("日期：$it", style = MaterialTheme.typography.labelSmall, color = c.textTertiary)
+                            Text(stringResource(R.string.cw_date_fmt, it), style = MaterialTheme.typography.labelSmall, color = c.textTertiary)
                         }
                         info.authorName?.takeIf { it.isNotBlank() }?.let {
-                            Text("作者：$it", style = MaterialTheme.typography.labelSmall, color = c.textTertiary)
+                            Text(stringResource(R.string.detail_author_fmt, it), style = MaterialTheme.typography.labelSmall, color = c.textTertiary)
                         }
                     }
                 }
@@ -192,8 +194,8 @@ fun CreatorWorkScreen(
                 if (images.isEmpty() && state.content?.content.isNullOrBlank()) {
                     item(key = "empty") {
                         MessageState(
-                            title = "这个作品没有可看的内容",
-                            description = "作品库里有些条目只有信息，没有图片",
+                            title = stringResource(R.string.cw_no_content),
+                            description = stringResource(R.string.cw_no_content_desc),
                             icon = Icons.AutoMirrored.Filled.MenuBook,
                         )
                     }
@@ -202,7 +204,7 @@ fun CreatorWorkScreen(
                 if (info.relatedWorks.isNotEmpty()) {
                     item(key = "related-head") {
                         Text(
-                            text = "相关作品",
+                            text = stringResource(R.string.cw_related),
                             style = MaterialTheme.typography.titleMedium,
                             color = c.text,
                             modifier = Modifier.padding(horizontal = Spacing.lg, vertical = Spacing.sm),

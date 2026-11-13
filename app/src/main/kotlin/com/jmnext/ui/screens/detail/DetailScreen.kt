@@ -1,4 +1,5 @@
 package com.jmnext.ui.screens.detail
+import androidx.annotation.StringRes
 import androidx.compose.ui.res.stringResource
 import com.jmnext.R
 import com.jmnext.data.prefs.FavoriteEntry
@@ -122,6 +123,9 @@ data class DetailUiState(
     val tracked: Boolean = false,
     /** 追更 / 下载 / 标签收藏的结果提示。 */
     val actionNotice: String? = null,
+    @StringRes val actionNoticeRes: Int? = null,
+    /** 配合 actionNoticeRes 的占位参数（标签名、作者名）。 */
+    val actionNoticeArg: String? = null,
     /** 标签收藏选择器是否打开。 */
     val tagPickerVisible: Boolean = false,
     /** 屏蔽命中情况：非空表示这部作品含被屏蔽的标签 / 作者。 */
@@ -129,6 +133,7 @@ data class DetailUiState(
     val blockedAuthor: Boolean = false,
     /** 点赞动作的结果提示。 */
     val likeNotice: String? = null,
+    @StringRes val likeNoticeRes: Int? = null,
 )
 
 /**
@@ -302,8 +307,10 @@ class DetailViewModel(
                     // 拿它当权威最稳。原先按「本地取反」写，一旦本地状态与服务器不一致
                     // （比如状态查询不可靠时），界面就会显示成与实际相反的状态。
                     tracked = if (ok && message != null) message.trackedOrFalse() else it.tracked,
-                    actionNotice = message ?: result.exceptionOrNull()?.message
-                        ?: if (ok) "已更新追更状态" else "追更失败",
+                    actionNotice = message ?: result.exceptionOrNull()?.message,
+                    actionNoticeRes = if (message == null && result.exceptionOrNull() == null) {
+                        if (ok) R.string.detail_track_updated else R.string.detail_track_failed
+                    } else null,
                 )
             }
         }
@@ -334,8 +341,7 @@ class DetailViewModel(
             _state.update {
                 it.copy(
                     tagPickerVisible = false,
-                    actionNotice = action?.msg ?: result.exceptionOrNull()?.message
-                        ?: "已收藏 ${tags.size} 个标签",
+                    actionNoticeRes = R.string.detail_fav_tags_done_fmt,
                 )
             }
         }
@@ -357,11 +363,11 @@ class DetailViewModel(
             val payload = result.getOrNull()
             when {
                 result.isFailure -> _state.update {
-                    it.copy(actionNotice = "获取下载地址失败：${result.exceptionOrNull()?.message}")
+                    it.copy(actionNoticeRes = R.string.detail_dl_failed_fmt, actionNotice = result.exceptionOrNull()?.message)
                 }
 
                 payload == null || !payload.isOk -> _state.update {
-                    it.copy(actionNotice = payload?.msg ?: "这个作品暂时不能下载")
+                    it.copy(actionNotice = payload?.msg, actionNoticeRes = if (payload?.msg == null) R.string.detail_cannot_download else null)
                 }
 
                 else -> {
@@ -390,14 +396,15 @@ class DetailViewModel(
         _state.update {
             it.copy(
                 blockedTags = (it.blockedTags + tag).distinct(),
-                actionNotice = "已屏蔽标签「$tag」",
+                actionNotice = null,
+                  actionNoticeRes = R.string.detail_blocked_tag_fmt, actionNoticeArg = tag,
             )
         }
     }
 
     fun blockAuthor(author: String) {
         repo.blockStore?.addWord(author)
-        _state.update { it.copy(blockedAuthor = true, actionNotice = "已屏蔽作者「$author」") }
+        _state.update { it.copy(blockedAuthor = true, actionNotice = null, actionNoticeRes = R.string.detail_blocked_author_fmt, actionNoticeArg = author) }
     }
 
     /** 取消屏蔽（从提示条上点「不再屏蔽」）。 */
@@ -406,7 +413,8 @@ class DetailViewModel(
         _state.update {
             it.copy(
                 blockedTags = it.blockedTags - tag,
-                actionNotice = "已取消屏蔽「$tag」",
+                actionNotice = null,
+                  actionNoticeRes = R.string.detail_unblocked_tag_fmt, actionNoticeArg = tag,
             )
         }
     }
@@ -420,7 +428,7 @@ class DetailViewModel(
             rules?.words?.firstOrNull { author.contains(it, ignoreCase = true) }
                 ?.let { store.removeWord(it) }
         }
-        _state.update { it.copy(blockedAuthor = false, actionNotice = "已取消屏蔽该作者") }
+        _state.update { it.copy(blockedAuthor = false, actionNotice = null, actionNoticeRes = R.string.detail_unblocked_author) }
     }
 
     fun consumeFavoriteNotice() = _state.update { it.copy(favoriteNotice = null) }
@@ -445,7 +453,7 @@ class DetailViewModel(
         }
         val detail = _state.value.detail ?: return
         if (detail.liked) {
-            _state.update { it.copy(likeNotice = "已经点过赞了") }
+            _state.update { it.copy(likeNoticeRes = R.string.detail_liked_already) }
             return
         }
         viewModelScope.launch {
@@ -677,7 +685,14 @@ fun DetailScreen(
             },
         )
 
-        (state.actionNotice ?: state.favoriteNotice ?: state.likeNotice).plainText()?.let { notice ->
+        val actionId = state.actionNoticeRes
+        val likeId = state.likeNoticeRes
+        val noticeText = when {
+            actionId != null -> state.actionNoticeArg?.let { stringResource(actionId, it) } ?: stringResource(actionId)
+            likeId != null -> stringResource(likeId)
+            else -> (state.actionNotice ?: state.favoriteNotice ?: state.likeNotice).plainText()
+        }
+        noticeText?.let { notice ->
             GlassSurface(
                 modifier = Modifier.fillMaxWidth(),
                 level = GlassLevel.Card,

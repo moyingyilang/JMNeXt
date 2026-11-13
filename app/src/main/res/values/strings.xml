@@ -527,4 +527,26 @@
     <string name="detail_blocked_tags_fmt">：含「%1」</string>
     <string name="detail_comment_total_fmt">%1 条</string>
     <string name="detail_no_comments">暂无</string>
+
+    <!-- 详情动作提示 -->
+    <string name="detail_track_updated">已更新追更状态</string>
+    <string name="detail_track_failed">追更失败</string>
+    <string name="detail_fav_tags_done_fmt">已收藏 %1 个标签</string>
+    <string name="detail_dl_failed_fmt">获取下载地址失败：%1</string>
+    <string name="detail_cannot_download">这个作品暂时不能下载</string>
+    <string name="detail_download_started">已开始下载</string>
+    <string name="detail_download_label_fmt">下载 %1</string>
+    <string name="detail_blocked_tag_fmt">已屏蔽标签「%1」</string>
+    <string name="detail_blocked_author_fmt">已屏蔽作者「%1」</string>
+    <string name="detail_unblocked_tag_fmt">已取消屏蔽「%1」</string>
+    <string name="detail_unblocked_author">已取消屏蔽该作者</string>
+    <string name="detail_liked_already">已经点过赞了</string>
+
+    <!-- 创作者作品 -->
+    <string name="cw_title">作品信息</string>
+    <string name="cw_not_found">没有这个作品的信息</string>
+    <string name="cw_date_fmt">日期：%1</string>
+    <string name="cw_no_content">这个作品没有可看的内容</string>
+    <string name="cw_no_content_desc">作品库里有些条目只有信息，没有图片</string>
+    <string name="cw_related">相关作品</string>
 </resources>
