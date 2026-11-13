@@ -69,6 +69,7 @@ fun BlogTheme(
     // 外观页改的是 Appearance.dark，而主题读的是系统值，两者不通。
     val systemDark = isSystemInDarkTheme()
     val useDark = if (Appearance.userChoseDark) Appearance.dark else systemDark
+    val jmSpec = JmSpecs.of(Appearance.style)
 
     val scheme = if (useDark) {
         darkColorScheme(
@@ -112,12 +113,12 @@ fun BlogTheme(
     val typography = Typography(
         titleMedium = MaterialTheme.typography.titleMedium.copy(
             fontFamily = cjk,
-            fontSize = 17.sp,
+            fontSize = jmSpec.type.title,
             fontWeight = FontWeight.SemiBold,
         ),
-        bodyMedium = MaterialTheme.typography.bodyMedium.copy(fontFamily = cjk, fontSize = 15.sp, lineHeight = 22.sp),
-        bodySmall = MaterialTheme.typography.bodySmall.copy(fontFamily = cjk, fontSize = 13.6.sp, lineHeight = 20.sp),
-        labelSmall = MaterialTheme.typography.labelSmall.copy(fontFamily = cjk, fontSize = 12.5.sp),
+        bodyMedium = MaterialTheme.typography.bodyMedium.copy(fontFamily = cjk, fontSize = jmSpec.type.body, lineHeight = 22.sp),
+        bodySmall = MaterialTheme.typography.bodySmall.copy(fontFamily = cjk, fontSize = jmSpec.type.label, lineHeight = 20.sp),
+        labelSmall = MaterialTheme.typography.labelSmall.copy(fontFamily = cjk, fontSize = jmSpec.type.caption),
         // 其余样式也统一到同一字体族：否则大标题、按钮文字等会退回默认字体，汉字又可能出问题
         displayLarge = MaterialTheme.typography.displayLarge.copy(fontFamily = cjk),
         displayMedium = MaterialTheme.typography.displayMedium.copy(fontFamily = cjk),
@@ -128,34 +129,36 @@ fun BlogTheme(
         // 四档层级与手机端一致：页标题 24 / 区块 17 / 正文 15 / 说明 12.5
         titleLarge = MaterialTheme.typography.titleLarge.copy(
             fontFamily = cjk,
-            fontSize = 24.sp,
+            fontSize = jmSpec.type.display,
             fontWeight = FontWeight.SemiBold,
             lineHeight = 32.sp,
         ),
         titleSmall = MaterialTheme.typography.titleSmall.copy(fontFamily = cjk),
         bodyLarge = MaterialTheme.typography.bodyLarge.copy(
             fontFamily = cjk,
-            fontSize = 16.sp,
+            fontSize = jmSpec.type.subtitle,
             lineHeight = 24.sp,
         ),
         labelLarge = MaterialTheme.typography.labelLarge.copy(fontFamily = cjk),
         labelMedium = MaterialTheme.typography.labelMedium.copy(fontFamily = cjk),
     )
 
-    MaterialTheme(
-        colorScheme = scheme,
-        shapes = Shapes(
-            extraSmall = RoundedCornerShape(Tokens.rSm / 2),
-            small = RoundedCornerShape(Tokens.rSm),
-            medium = RoundedCornerShape(Tokens.rMd),
-            large = RoundedCornerShape(Tokens.rLg),
-        ),
-        typography = typography,
-    ) {
-        // 壁纸铺在最底层，上面所有面板是半透明的，于是形成玻璃观感
-        Box(Modifier.fillMaxSize()) {
-            WallpaperLayer()
-            content()
+    androidx.compose.runtime.CompositionLocalProvider(LocalJmSpec provides jmSpec) {
+        MaterialTheme(
+            colorScheme = scheme,
+            shapes = Shapes(
+                extraSmall = RoundedCornerShape(jmSpec.radius.xs),
+                small = RoundedCornerShape(jmSpec.radius.sm),
+                medium = RoundedCornerShape(jmSpec.radius.md),
+                large = RoundedCornerShape(jmSpec.radius.lg),
+            ),
+            typography = typography,
+        ) {
+            // 壁纸铺在最底层，上面所有面板是半透明的，于是形成玻璃观感
+            Box(Modifier.fillMaxSize()) {
+                WallpaperLayer()
+                content()
+            }
         }
     }
 }

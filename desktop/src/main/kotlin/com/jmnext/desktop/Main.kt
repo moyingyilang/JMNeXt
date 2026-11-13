@@ -302,7 +302,7 @@ private fun ComicCard(item: ListItem, updated: Boolean = false, onOpen: () -> Un
             modifier = Modifier
                 .fillMaxWidth()
                 .aspectRatio(3f / 4f)
-                .clip(RoundedCornerShape(10.dp))
+                .clip(RoundedCornerShape(Radius.lg))
                 .background(MaterialTheme.colorScheme.surfaceVariant),
         ) {
             if (bitmap != null) {

@@ -1,0 +1,196 @@
+package com.jmnext.desktop
+
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.ReadOnlyComposable
+import androidx.compose.runtime.staticCompositionLocalOf
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.TextUnit
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+
+/**
+ * 桌面端的设计令牌，数值与 Android 的 `ui/theme/ThemeStyle.kt` 一一对应。
+ *
+ * 之前桌面端把圆角与字号写死在几处，切风格时只有面板透明度在动，
+ * 观感上就成了「风格切了但没切」。这里把 Android 的圆角阶梯、字号层级、
+ * 表面参数搬过来，由 [LocalJmSpec] 随风格下发。
+ *
+ * 说明：桌面没有 Android 的实时背景模糊，[SurfaceSpec.backdropSaturate] 与
+ * [SurfaceSpec.noise] 只能近似；[SurfaceSpec.pressScale] 在桌面按下态生效。
+ */
+
+/** 圆角阶梯，随风格变化。 */
+data class RadiusScale(
+    val xs: Dp,
+    val sm: Dp,
+    val md: Dp,
+    val lg: Dp,
+    val xl: Dp,
+)
+
+/** 字号层级，随风格变化。 */
+data class TypeScale(
+    val display: TextUnit,
+    val title: TextUnit,
+    val subtitle: TextUnit,
+    val body: TextUnit,
+    val label: TextUnit,
+    val caption: TextUnit,
+    val titleWeight: FontWeight,
+    val subtitleWeight: FontWeight,
+    val bodyWeight: FontWeight,
+    val lineHeightFactor: Float,
+)
+
+/** 表面材质参数。 */
+data class SurfaceSpec(
+    val fillAlphaScale: Float,
+    val accentTint: Float,
+    val hairline: Dp,
+    val innerHighlight: Boolean,
+    val backdropSaturate: Float,
+    val noise: Float,
+    val shadows: List<Dp>,
+    val pressScale: Float,
+)
+
+data class JmSpec(
+    val radius: RadiusScale,
+    val surface: SurfaceSpec,
+    val type: TypeScale,
+)
+
+object JmSpecs {
+
+    /** Windows 11：窗口 8、控件 4；Acrylic 有描边与高光。 */
+    val windowGlass = JmSpec(
+        radius = RadiusScale(xs = 2.dp, sm = 4.dp, md = 6.dp, lg = 8.dp, xl = 12.dp),
+        surface = SurfaceSpec(
+            fillAlphaScale = 1f,
+            accentTint = 0f,
+            hairline = 1.dp,
+            innerHighlight = true,
+            backdropSaturate = 1.65f,
+            noise = 0.5f,
+            shadows = listOf(0.dp, 0.dp, 0.dp),
+            pressScale = 0.985f,
+        ),
+        type = standardType(),
+    )
+
+    /** 半透明：与 WindowGlass 同一套几何，差别在填充更透、铺一点强调色。 */
+    val translucent = windowGlass.copy(
+        surface = windowGlass.surface.copy(
+            fillAlphaScale = 0.78f,
+            accentTint = 0.12f,
+            hairline = 1.dp,
+        ),
+    )
+
+    /** 扁平模糊：平面化，圆角更大，不画高光。 */
+    val flatBlur = JmSpec(
+        radius = RadiusScale(xs = 8.dp, sm = 12.dp, md = 16.dp, lg = 20.dp, xl = 28.dp),
+        surface = SurfaceSpec(
+            fillAlphaScale = 1f,
+            accentTint = 0f,
+            hairline = 0.dp,
+            innerHighlight = false,
+            backdropSaturate = 1f,
+            noise = 0f,
+            shadows = listOf(0.dp, 0.dp, 1.dp),
+            pressScale = 0.99f,
+        ),
+        type = standardType(),
+    )
+
+    /** MIUI / HyperOS：大圆角、实心卡片、1dp 描边分层、按下有弹性。 */
+    val miuix = JmSpec(
+        radius = RadiusScale(xs = 4.dp, sm = 8.dp, md = 12.dp, lg = 16.dp, xl = 24.dp),
+        surface = SurfaceSpec(
+            fillAlphaScale = 1f,
+            accentTint = 0f,
+            hairline = 1.dp,
+            innerHighlight = false,
+            backdropSaturate = 1f,
+            noise = 0f,
+            shadows = listOf(0.dp, 0.dp, 0.dp),
+            pressScale = 0.96f,
+        ),
+        type = standardType(),
+    )
+
+    /** Material 3：M3 的 typescale 与 elevation。 */
+    val material = JmSpec(
+        radius = RadiusScale(xs = 4.dp, sm = 8.dp, md = 12.dp, lg = 16.dp, xl = 28.dp),
+        surface = SurfaceSpec(
+            fillAlphaScale = 1f,
+            accentTint = 0f,
+            hairline = 0.dp,
+            innerHighlight = false,
+            backdropSaturate = 1f,
+            noise = 0f,
+            shadows = listOf(0.dp, 1.dp, 6.dp),
+            pressScale = 0.98f,
+        ),
+        type = TypeScale(
+            display = 28.sp,
+            title = 22.sp,
+            subtitle = 16.sp,
+            body = 16.sp,
+            label = 14.sp,
+            caption = 12.sp,
+            titleWeight = FontWeight.Medium,
+            subtitleWeight = FontWeight.Medium,
+            bodyWeight = FontWeight.Normal,
+            lineHeightFactor = 1.50f,
+        ),
+    )
+
+    private fun standardType() = TypeScale(
+        display = 28.sp,
+        title = 20.sp,
+        subtitle = 16.sp,
+        body = 15.5.sp,
+        label = 13.sp,
+        caption = 11.5.sp,
+        titleWeight = FontWeight.SemiBold,
+        subtitleWeight = FontWeight.Medium,
+        bodyWeight = FontWeight.Normal,
+        lineHeightFactor = 1.72f,
+    )
+
+    fun of(style: GlassStyle): JmSpec = when (style) {
+        GlassStyle.WindowGlass -> windowGlass
+        GlassStyle.Translucent -> translucent
+        GlassStyle.FlatBlur -> flatBlur
+        GlassStyle.Miuix -> miuix
+        GlassStyle.Material -> material
+    }
+}
+
+val LocalJmSpec = staticCompositionLocalOf { JmSpecs.windowGlass }
+
+/** 圆角令牌，用法同 Android：`Radius.lg`。 */
+object Radius {
+    private val s: RadiusScale
+        @Composable @ReadOnlyComposable get() = LocalJmSpec.current.radius
+
+    val xs: Dp @Composable @ReadOnlyComposable get() = s.xs
+    val sm: Dp @Composable @ReadOnlyComposable get() = s.sm
+    val md: Dp @Composable @ReadOnlyComposable get() = s.md
+    val lg: Dp @Composable @ReadOnlyComposable get() = s.lg
+    val xl: Dp @Composable @ReadOnlyComposable get() = s.xl
+    val pill: Dp = 999.dp
+}
+
+/** 间距令牌：4dp 基准栅格，与 Android 的 Spacing 相同。 */
+object Spacing {
+    val xxs: Dp = 2.dp
+    val xs: Dp = 4.dp
+    val sm: Dp = 8.dp
+    val md: Dp = 12.dp
+    val lg: Dp = 16.dp
+    val xl: Dp = 24.dp
+    val xxl: Dp = 32.dp
+}
