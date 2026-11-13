@@ -1,0 +1,544 @@
+app_name	JMNeXt
+about_title	このアプリについて
+about_back	戻る
+about_tagline	JMComic のサードパーティクライアント
+about_version_line	バージョン %1$s · %2$s
+about_version	バージョン
+about_version_code	バージョンコード
+about_variant	ビルド種別
+about_lite_note	lite 版は低スペック端末向けです：単色テーマ2種のみ、壁紙とぼかしなし、画像のフェードとリストのアニメーションも無効、リーダーの先読みも控えめ
+about_check_update	アップデートを確認
+about_checking	確認中…
+about_check_failed	更新情報を取得できませんでした（通信不可、または GitHub が一時的に利用不可）
+about_check_new	新しいバージョンがあります：%1$s
+about_check_latest	最新です（リモート %1$s）
+about_download_pkg	更新パッケージをダウンロード（%1$s）
+about_asset_note	1つの APK で arm64 と x86_64 の両方に対応しており、アーキテクチャを選ぶ必要はありません。直リンクが開けない場合は下のリリースページから選んでください。
+about_update_notes	更新内容：%1$s
+about_desc_title	説明
+about_desc	Kotlin と Compose で書かれた JMComic のサードパーティクライアントです。インタースティシャル広告はなく、閲覧内容も記録しません。ログイン情報は暗号化してから端末に保存します\n\nリーダーは縦スクロールと見開きの2種類で、長い画像も継ぎ目なく連結します。お気に入り、進捗、ブロックリストは端末内に保存され、WebDAV で自分のクラウドに同期できます。ブロックはキーワード・カテゴリ・タグで指定でき、一致した作品は一覧から消えます
+about_links	リンク
+about_link_home	プロジェクトページ
+about_link_releases	リリース（新バージョンの配布）
+about_link_issues	不具合報告
+about_license_title	ライセンス
+about_license	本プロジェクトは AGPL-3.0-only でライセンスされています。JMComic および関連コンテンツの権利は各権利者に帰属します。本アプリは公式とは無関係で、クライアント実装のみを提供します。
+profile_title	マイページ
+profile_account	アカウント
+profile_not_logged_in	未ログイン
+profile_account_desc	お気に入りと視聴履歴はアカウントに紐づきます。ログインするとこの端末で確認できます。
+profile_login_register	ログイン / 新規登録
+profile_logged_in	ログイン済み
+profile_coin	コイン
+profile_level	レベル
+profile_adfree	広告非表示特典
+profile_adfree_on	有効
+profile_adfree_off	無効
+profile_my_favorites	お気に入り
+profile_history	視聴履歴
+profile_notifications	通知
+profile_tracking	フォロー中の作品
+profile_tag_favorites	保存したタグ
+profile_logout	ログアウト
+profile_block_title	コンテンツブロック
+profile_words	キーワード
+profile_categories	カテゴリ
+profile_tags	タグ
+profile_block_count	%1$d 件
+profile_manage_block	ブロックリストを管理
+profile_appearance	外観
+profile_style	スタイル
+profile_theme	テーマ
+profile_theme_system	システムに従う
+profile_theme_light	ライト
+profile_theme_dark	ダーク
+profile_dynamic_color	ダイナミックカラー
+profile_serial_notify	更新通知
+reader_mode_scroll	縦スクロール
+reader_mode_page	ページめくり
+reader_mode_note	縦スクロールは縦長の作品に、ページめくりは1ページ単位の作品に向いています。リーダーの上部バーから一時的に切り替えられます。
+comic_render	漫画の描画
+about_entry	このアプリについて
+about_version_fmt	バージョン：%1$s
+server_title	サーバー
+server_official	サーバー側の公式バージョン
+server_loading	読み取り中…
+server_read_failed	読み取り失敗
+server_not_provided	未提供
+server_client_version	本クライアントが報告するバージョン
+server_alignment	プロトコル整合
+server_aligned	一致
+server_may_changed	変更された可能性あり
+server_reread	再読み取り
+daily_title	デイリーチェックイン
+daily_login_first	ログインしてからチェックイン
+daily_loading	チェックイン情報を読み取り中…
+daily_none	チェックイン情報を取得できませんでした（実施中のイベントがないか、通信不良です）。
+daily_today_signed	本日はチェックイン済み
+daily_complete	今回分は完了
+daily_sign	チェックイン
+webdav_title	WebDAV 同期
+webdav_status	状態
+webdav_on	有効
+webdav_off	無効
+webdav_path	リモートパス
+webdav_configure	設定する
+webdav_sync	設定 / 今すぐ同期
+crash_title	クラッシュログ（デバッグ）
+crash_status	状態
+crash_none	クラッシュ記録はありません。
+nav_home	ホーム
+nav_category	カテゴリ
+nav_search	検索
+nav_profile	マイページ
+appearance_glass_quality	ガラス品質
+appearance_floating_bar	フローティングタブバー
+appearance_translucent	透過モード
+appearance_monet_blur	Monet カラーをぼかしに適用
+appearance_predictive_back	予測型戻る
+appearance_motion	モーション
+appearance_motion_speed	モーション速度
+appearance_wallpaper	壁紙
+appearance_wallpaper_source	取得元
+appearance_wallpaper_change	変更
+appearance_wallpaper_loading	取得中…
+appearance_wallpaper_auto	自動変更
+appearance_off	オフ
+appearance_floating_bar_desc	タブバーがコンテンツの上に浮かぶピルになり、選択中の項目の背後で下地がスライドします。
+appearance_translucent_desc	ガラスが下地を覆わなくなり、ぼかしと縁取りだけが残ります。文字には反対色の柔らかい縁取りを付けて読みやすくします。
+appearance_monet_blur_desc	システムのダイナミックカラーの主色 / 副色 / 第三色で背景とぼかし層を着色します。ダイナミックカラーを有効にし、Android 12 以上が必要です。それ以外ではこのスイッチは効きません。
+appearance_predictive_android15	Android 15 以降はシステムが提供するため（戻るジェスチャーでウィンドウ全体が動く）、この項目は無効になりました。
+appearance_predictive_on	戻るジェスチャー中は現在のページが指に追従してフェードし、離す前に終了すると分かります。
+appearance_predictive_unsupported	Android 13 / 14 が必要です。この端末には予測型戻るジェスチャーがないため、この項目は効きません。
+appearance_serial_desc	半日ほどごとにシステムが適切なタイミングで確認し、変化があったときだけ通知します。同じ更新のまとまりは一度だけ通知します。フォロー中の作品と端末内の閲覧時刻だけを使い、何を読んだかは送信しません。既定はオフです。
+appearance_dynamic_color_desc	システムの壁紙から配色を取得します（Android 12 以上）。Material スタイルは全体がシステムに従い、他のガラスはアクセント色だけを取り込み、階層は独自配色のままです。
+appearance_wallpaper_auto_off	自動変更：オフ
+appearance_wallpaper_auto_every	自動変更：%1$s ごと
+appearance_wallpaper_clear_cache	壁紙キャッシュを削除
+appearance_wallpaper_clear_cache_desc	キャッシュ済みの候補を削除し、すぐに新しい候補を取得します
+appearance_wallpaper_blur_fmt	ぼかし %1$d
+appearance_wallpaper_dim_fmt	暗さ %1$s（壁紙が派手なほど、文字を保つために暗くする必要があります）
+home_loading	読み込み中…
+home_weekly	週刊
+home_refresh	更新
+home_to_light	ライトに切り替え
+home_to_dark	ダークに切り替え
+home_expand_more	セクションをさらに表示（残り %1$d）
+home_latest	新着
+home_more	もっと見る
+home_tracking_updated	フォロー中の %1$d 作品に更新があります
+glass_high	高
+glass_high_desc	本物のぼかし、半径 12dp — 最も美しいが、低スペック端末ではコマ落ちすることがあります
+glass_medium	中
+glass_medium_desc	本物のぼかし、半径 8dp — 既定。見た目と性能のバランス
+glass_off	オフ
+glass_off_desc	背景サンプリングなし、半透明の塗りに戻します — 最も省電力で低スペック向け
+motion_fast	速い
+motion_fast_desc	短く直接的：切り替えが機敏で移動が小さい — 最も速いリズム
+motion_medium	中
+motion_medium_desc	ゆっくり入って速く出る、時間は中庸、移動は柔らか — 既定のリズム
+motion_slow	遅い
+motion_slow_desc	遷移が長く終わりが緩やか、前後の階層が最も明確 — 最も遅いリズム
+wall_off	単色グラデーション
+wall_off_desc	画像は一切読み込まず、内蔵グラデーションのみ（リクエストなし）
+wall_bing	Bing デイリー
+wall_bing_desc	bing.biturl.top の Bing デイリー壁紙
+wall_anime	ランダム二次元
+wall_anime_desc	t.alcy.cc / t.mwm.moe / loliapi を順に試します
+wall_all	全ランダム
+wall_all_desc	Bing と二次元の混合
+wall_custom	カスタム URL
+wall_custom_desc	画像の直リンクを自分で入力
+wall_system	端末の壁紙に従う
+wall_system_desc	現在のシステム壁紙を読み取ります（Android）。壁紙を変更してアプリに戻るか「再読み取り」で反映されます
+wall_solid	単色
+wall_solid_desc	選んだ色だけを使い、画像は読み込みません（リクエストなし）
+wall_picsum	Picsum 写真
+wall_picsum_desc	端末の向きに合わせて取得：スマホは縦、タブレット/デスクトップは横（picsum.photos、キー不要）
+search_title	検索
+search_placeholder	作品名・作者・タグを入力
+search_year_any	年：指定なし
+search_year_fmt	年：%1$s 年
+search_year_month_fmt	年：%1$s 年 %2$s 月
+search_collapse_year	年の絞り込みを閉じる
+search_expand_year	年の絞り込みを開く
+search_empty_title	該当する作品が見つかりません
+search_empty_desc	キーワードを変えるか、検索対象と年を調整してください
+search_recent	最近の検索
+search_clear	消去
+search_hot_tags	人気タグ
+search_random_rec	ランダムおすすめ
+search_random_one	おまかせ
+search_shuffle	入れ替え
+search_start_title	何をお探しですか
+search_start_desc	作品名・作者・タグで検索できます
+search_hint_random_failed	ランダム取得に失敗しました。後でもう一度お試しください
+search_hint_no_keyword	キーワードを入力してください
+cat_title	カテゴリ
+cat_browse	カテゴリから探す
+cat_sort_latest	新着
+cat_sort_hearts	いいね順
+cat_sort_total	総合ランキング
+cat_sort_month	月間ランキング
+cat_sort_week	週間ランキング
+cat_label	カテゴリ
+cat_sub_label	サブカテゴリ
+cat_all	すべて
+cat_creator_lib	絵師と作品ライブラリ
+cat_enter	入る ›
+cat_sort	並び順
+cat_empty	このカテゴリにはまだ作品がありません
+cat_load_failed	カテゴリを取得できません
+auth_login	ログイン
+auth_register	新規登録
+auth_forgot	パスワードを忘れた
+auth_username	ユーザー名
+auth_password	パスワード
+auth_confirm_password	パスワードの確認
+auth_email	メールアドレス
+auth_gender	性別
+auth_male	男性
+auth_female	女性
+auth_wait	お待ちください…
+auth_back	戻る
+auth_keystore_note	ログインするとサーバー発行のトークンを使い、お気に入りと視聴履歴に利用します。トークンは Android Keystore で暗号化してアプリ専用領域に保存し、平文では書き込みません。
+detail_title_placeholder	作品の詳細
+detail_back	戻る
+detail_move_to_favorites	フォルダへ移動
+detail_author_fmt	作者：%1$s
+detail_updated_fmt	更新：%1$s
+detail_tags_hint	タグ：タップで検索、長押しでブロック
+detail_unblock	ブロック解除
+detail_download_album	作品全体をダウンロード
+detail_download_system	システムのダウンローダーに任せる
+detail_favorite_tags	このタグを保存
+detail_comments	コメント
+detail_chapters_fmt	チャプター一覧（%1$d）
+detail_related	関連作品
+detail_prev_page	前のページ
+detail_next_page	次のページ
+fav_title	お気に入り
+fav_empty	まだお気に入りがありません。作品の詳細ページでハートを押してください。
+hist_title	視聴履歴
+hist_empty	視聴履歴はまだありません
+tracking_title	フォロー中の作品
+tracking_empty	まだフォローがありません。作品の詳細ページで「フォロー」を押してください。
+list_total_fmt	%1$d 件
+list_back	戻る
+list_manage_folders	フォルダを管理
+list_need_login	ログインが必要です
+list_login_desc_fmt	%1$s はアカウントに紐づきます。ログインするとここで確認できます
+list_untrack	フォロー解除
+list_move_to_folder	フォルダへ移動
+list_delete_history	この履歴を削除
+folder_new	新しいフォルダ
+folder_rename	フォルダ名を変更
+folder_all	すべて
+notif_title	通知
+notif_back	戻る
+notif_loading	通知を読み取り中…
+notif_failed_fmt	読み取り失敗：%1$s
+notif_empty	通知はまだありません。
+notif_load_more_fmt	さらに読み込む（%1$d / %2$d 表示中）
+notif_tab_all	すべて
+notif_tab_tracking	フォロー
+notif_tab_site	サイト通知
+notif_type_tracking	フォロー作品の更新
+tagfav_title	保存したタグ
+tagfav_need_login	ログインが必要です
+tagfav_login_desc	保存したタグはアカウントに紐づきます。ログインするとここで確認できます
+tagfav_empty_title	保存したタグはまだありません
+tagfav_empty_desc	作品の詳細ページのタグから保存できます
+tagfav_untag	このタグの保存を解除
+tagfav_dialog_title	タグを保存
+tagfav_dialog_desc	選んだタグは「マイページ → 保存したタグ」に追加されます（上限 50）。
+tagfav_save_fmt	%1$d 件を保存
+week_title	週刊
+week_issue_fmt	%1$s · 全 %2$d 作品
+week_back	戻る
+week_issue_label	号
+week_type_label	種類
+week_empty_title	この号に作品はありません
+week_empty_desc	別の号や種類を選んでみてください
+random_title	ランダムおすすめ
+random_note_blocked	ブロックリストの作品は除外されています
+random_note_pref	ブロックリストを除外 · お気に入りのタグで並べ替え
+random_back	戻る
+random_view_list	リスト表示に切り替え
+random_view_grid	グリッド表示に切り替え
+random_shuffle	入れ替え
+random_loading	ランダム取得中…
+random_failed_fmt	取得できませんでした：%1$s
+creator_authors	絵師
+creator_works	作品
+creator_title	絵師と作品ライブラリ
+creator_total_fmt	%1$d 件
+creator_subtitle	作品ライブラリの絵師と作品
+creator_search_authors	絵師を検索
+creator_search_works	作品を検索
+creator_search	検索
+creator_empty_authors	絵師が見つかりません
+reader_empty	この話には表示できる画像がありません
+reader_chapter_fmt	第 %1$d 話
+reader_title_fallback	リーダー
+reader_pages_fmt	全 %1$d ページ
+reader_back	戻る
+reader_to_horizontal	見開きに切り替え
+reader_to_vertical	縦スクロールに切り替え
+reader_toggle_mono	モノクロ / カラーを切り替え
+reader_mono	モノクロ
+reader_color	カラー
+reader_prev_chapter	前の話
+reader_next_chapter	次の話
+reader_mode_horizontal	横
+reader_mode_vertical	縦
+reader_chapters	チャプター
+reader_comments	コメント
+reader_favorite	お気に入り
+reader_like	いいね
+reader_page_fmt	%1$d ページ
+reader_page_failed	このページは読み込みに失敗しました · タップで再試行
+reader_pick_title	チャプターを選択
+reader_pick_prev	前のページ
+reader_pick_next	次のページ
+reader_pick_close	閉じる
+block_title	ブロック設定
+block_subtitle	端末内のルール。アップロードしません
+block_back	戻る
+block_help	一致した作品は非表示になります。大文字小文字は区別しません。\n· キーワード：作品名または作者に含まれる\n· カテゴリ：カテゴリまたはサブカテゴリが一致（例：「同人」をブロック）\n· タグ：一覧 API はタグを返さないため、バックグラウンドで作品詳細を1件ずつ読んでタグを取得し、一致したものを一覧から隠します（タグのルールがある場合のみ取得）
+block_words_title	キーワードブロック
+block_words_hint	作品名か作者が一致すると非表示 · %1$d 件
+block_categories_title	カテゴリブロック
+block_categories_hint	カテゴリごと表示されなくなります · %1$d 件
+block_tags_title	タグブロック
+block_tags_hint	作品を開いたときに通知 · %1$d 件
+block_length_fmt	長さは %1$d〜%2$d 文字にしてください
+block_exists_fmt	「%1$s」はすでにリストにあります
+block_added_fmt	「%1$s」をブロックしました
+block_add_cd_fmt	%1$s を追加
+block_empty	まだ追加されていません
+dav_back	戻る
+dav_title	WebDAV 同期
+dav_desc	読書履歴・お気に入り・ブロックリストを同期します。複数の端末を同じファイルに向ければ相互に同期できます。
+dav_server	サーバーアドレス
+dav_server_hint	https://dav.example.com/remote.php/dav/files/ユーザー名
+dav_user	ユーザー名
+dav_password	パスワード（アプリ専用パスワード推奨）
+dav_show	表示
+dav_hide	隠す
+dav_path	リモートファイルのパス
+dav_auto_sync	自動同期を有効にする
+dav_help	https://dav.example.com/remote.php/dav/files/ユーザー名（Nextcloud）や https://dav.jianguoyun.com/dav/（堅果雲）のようなアドレスを使います。パスワードはアプリ専用のものをお使いください。
+dav_sync_done	同期が完了しました
+dav_sync_failed_fmt	同期に失敗しました：%1$s
+dav_syncing	同期中…
+dav_sync_now	今すぐ同期
+more_title	もっと見る
+more_loading	読み込み中…
+more_total_fmt	%1$d 件
+more_back	戻る
+week_type_all	すべて
+week_type_manga	漫画
+week_type_hanman	韓国漫画
+week_day_mon	月
+week_day_tue	火
+week_day_wed	水
+week_day_thu	木
+week_day_fri	金
+week_day_sat	土
+week_day_sun	日
+week_day_done	完結
+cmt_title	コメント
+cmt_total_fmt	%1$d 件のコメント
+cmt_back	戻る
+cmt_compose_logged	コメントする（公開されます）
+cmt_compose_login	ログインするとコメントできます
+cmt_sending	送信中…
+cmt_send	送信
+cmt_empty_title	コメントはまだありません
+cmt_empty_desc	他の読者のコメントがここに表示されます
+cmt_delete	このコメントを削除
+cmt_replies_fmt	%1$d 件の返信
+folder_name	フォルダ名
+folder_ok	OK
+folder_cancel	キャンセル
+folder_delete_title	フォルダを削除
+folder_delete_confirm	「%1$s」を削除しますか？中の作品は「すべて」に戻り、お気に入りは解除されません。
+folder_delete	削除
+folder_skip	分類しない
+folder_none_in_move	フォルダがありません。「フォルダを管理」で作成してください。
+folder_close	閉じる
+folder_manage	フォルダを管理
+folder_empty	フォルダはまだありません。お気に入りをジャンルや進捗でまとめられます。
+folder_rename_short	名前を変更
+folder_skip_only_fav	お気に入りのみ、分類しない
+common_updated	更新
+common_load_failed_retry	読み込み失敗、タップで再試行
+common_no_more	最後まで表示しました
+common_load_more	上にスクロールでさらに読み込む
+common_retry	再試行
+common_load_failed	読み込み失敗
+random_fab_cd	ランダムに1作品（長押しでまとめて）；ブロックリストは除外
+checkin_no_active	現在実施中のチェックインイベントはありません
+checkin_already	本日はすでにチェックイン済みです
+checkin_ok	チェックインしました
+checkin_failed	チェックインに失敗しました。後でもう一度お試しください
+sort_latest	新着
+sort_views	閲覧数順
+sort_images	画像数順
+sort_hearts	いいね順
+sort_oldest	古い順
+field_site	サイト内
+field_work	作品
+field_author	作者
+field_tag	タグ
+field_character	登場人物
+daily_expand	チェックイン履歴を見る
+daily_collapse	チェックイン履歴を閉じる
+daily_reading	読み取り中…
+daily_history_failed_fmt	履歴を取得できませんでした：%1$s
+daily_history_empty	チェックイン履歴はまだありません。
+daily_record_cd	チェックイン記録
+daily_month_fmt	%1$d 月
+daily_image_cd	チェックイン画像
+search_order_label	並び順
+search_field_label	検索対象
+search_results_fmt	%1$d 件の結果
+search_hidden_fmt	 · ブロック規則で %1$d 件を非表示
+search_tag_blocked_fmt	 · タグブロック %1$d 件
+search_tag_blocked_notice_fmt	%1$d 件の結果がタグブロックで隠れています
+search_hit_fmt	一致：%1$s（今回の検索のみ許可、ブロック規則は変更しません）
+search_allow_once	今回だけ許可
+search_year_label	年
+search_month_label	月
+search_any	指定なし
+profile_block_empty	まだ何もブロックしていません。作品名・作者・カテゴリ・タグでブロックでき、一致した作品は一覧から隠れます。
+profile_block_active_fmt	%1$d 件の規則が有効です。一覧に出てこない作品はこれらで隠れている可能性があります。
+profile_tracking_desc	フォロー中の作品が更新されたら通知する
+profile_reading	リーダー
+profile_default_reader	既定の閲覧形式
+profile_current	現在
+profile_apply_url	このアドレスを適用
+profile_seconds_fmt	%1$d 秒
+profile_hours_fmt	%1$d 時間
+profile_minutes_fmt	%1$d 分
+profile_image_fmt	画像：%1$s
+profile_event_fallback	チェックインイベント
+profile_signed_fmt	%1$d / %2$d 日チェックイン済み
+profile_day_fmt	%1$d 日
+profile_signed_tag	、チェックイン済み
+profile_unsigned_tag	、未チェックイン
+profile_server_drift_fmt	サーバー側の公式バージョンが %1$s に変わりましたが、本クライアントは %2$s を報告しています。すぐに使えなくなるわけではありませんが、API の挙動が新バージョンに合わせて調整されている可能性があるため確認する価値があります。
+profile_webdav_desc	読書履歴・お気に入り・ブロックリストを同期します。複数の端末を同じファイルに向ければ相互に同期できます。
+profile_webdav_empty	サーバーアドレスが未入力です。Nextcloud や堅果雲など標準の WebDAV サービスに対応しています。
+profile_logs_status	状態
+profile_crash_copied	クラッシュログをクリップボードにコピーしました
+profile_crash_copy	最新をコピー
+profile_crash_deleted	最新のクラッシュログを削除しました
+profile_crash_delete	削除
+profile_crash_path	場所：アプリ専用の files/logs/。tracer と debug ビルドのみ記録し、正式ビルドはディスクに書き込みません。
+auth_need_username	ユーザー名を入力してください
+auth_need_password	パスワードを入力してください
+auth_bad_email	有効なメールアドレスを入力してください
+auth_short_password	パスワードは6文字以上にしてください
+auth_password_mismatch	パスワードが一致しません
+auth_register_ok	登録しました。ログインしてください
+auth_register_failed	登録に失敗しました
+auth_reset_sent	リセットメールを送信しました
+auth_send_failed	送信に失敗しました
+auth_welcome_fmt	おかえりなさい、%1$s さん
+auth_login_again_fmt	%1$s · ログイン後にもう一度そのボタンを押してください
+detail_resume_fmt	続きを読む · 第 %1$d 話
+detail_start_fmt	読み始める · 第 %1$d 話
+detail_start	読み始める
+detail_untrack_cd	フォロー解除
+detail_track_cd	フォロー
+detail_unfavorite_cd	お気に入り解除
+detail_favorite_cd	お気に入り
+detail_liked_cd	いいね済み
+detail_like_cd	いいね
+detail_pages_fmt	全 %1$d ページ
+detail_comments_fmt	 · %1$d 件のコメント
+detail_load_failed	この作品を読み込めませんでした
+detail_works	作品
+detail_actors	出演者
+detail_by_rules	ブロック規則により
+detail_blocked_author_suffix	：作者をブロック中
+detail_blocked_tags_fmt	：「%1$s」を含む
+detail_comment_total_fmt	%1$d 件
+detail_no_comments	なし
+detail_track_updated	フォロー状態を更新しました
+detail_track_failed	フォローに失敗しました
+detail_fav_tags_done_fmt	%1$d 件のタグを保存しました
+detail_dl_failed_fmt	ダウンロード URL を取得できませんでした：%1$s
+detail_cannot_download	この作品は現在ダウンロードできません
+detail_download_started	ダウンロードを開始しました
+detail_download_label_fmt	%1$s をダウンロード
+detail_blocked_tag_fmt	タグ「%1$s」をブロックしました
+detail_blocked_author_fmt	作者「%1$s」をブロックしました
+detail_unblocked_tag_fmt	「%1$s」のブロックを解除しました
+detail_unblocked_author	この作者のブロックを解除しました
+detail_liked_already	すでにいいねしています
+cw_title	作品情報
+cw_not_found	この作品の情報がありません
+cw_date_fmt	日付：%1$s
+cw_no_content	この作品には読める内容がありません
+cw_no_content_desc	作品ライブラリには情報だけで画像がない項目もあります
+cw_related	関連作品
+dav_summary_fmt	履歴 %1$d 件、お気に入り %2$d 件、ブロック規則 %3$d 件
+dav_conflicts_fmt	競合を上書き：履歴 %1$d 件、お気に入り %2$d 件（新しい側を優先）
+dav_merged	リモートファイルと統合し、書き戻しました
+dav_created	リモートファイルが存在しないため新規作成しました
+style_glass_tag	Windows 11 のウィンドウガラス：8dp 角丸 + ヘアライン枠 + Acrylic 粒子
+style_flat_tag	フラット + ガウスぼかし：枠なし、粒子なし、ハイライトなし、ぼかした下地のみ
+style_miuix_tag	HyperOS：大きな角丸のソリッドカード、枠なし、弾む押し心地
+style_material_tag	Material You 3：M3 の色役割で階層化、ダイナミックカラーを有効にすると壁紙に追従
+login_reason_track	フォローにはログインが必要です
+login_reason_fav_tags	タグの保存にはログインが必要です
+login_reason_download	ダウンロードにはログインが必要です
+login_reason_like	いいねにはログインが必要です
+login_reason_favorite	お気に入りにはログインが必要です
+login_reason_comment	コメントの投稿にはログインが必要です
+login_reason_tags	タグの保存にはログインが必要です
+block_remove_cd_fmt	%1$s を削除
+block_kind_word	キーワード
+block_kind_tag	タグ
+block_kind_category	カテゴリ名
+block_add_title_fmt	%1$s を追加
+block_eg_word	例：NTR
+block_eg_tag	例：純愛
+block_eg_category	例：同人
+block_len_hint_fmt	%1$d〜%2$d 文字
+block_add	追加
+block_cancel	キャンセル
+more_empty_week	この日の更新はありません
+more_empty_section	このセクションにはまだ何もありません
+more_type_label	種類
+more_day_label	更新
+folder_move_title	フォルダへ移動
+common_unknown_error	不明なエラー
+creator_empty_works	作品が見つかりません
+random_empty	今回は取得できませんでした（候補がブロックリストで隠れているか、通信不良です）。
+checkin_today_done	本日はチェックイン済み
+checkin_quick	クイックチェックイン
+detail_download_album_label	作品全体をダウンロード
+search_year_fmt_prefix	年：
+common_network_issue	通信エラー
+reader_switch_chapter_failed_fmt	話の切り替えに失敗しました：%1$s
+comments_posted	投稿しました
+comments_deleted	削除しました
+comments_post_failed_fmt	投稿に失敗しました：%1$s
+comments_delete_failed_fmt	削除に失敗しました：%1$s
+fav_untrack_failed_fmt	フォロー解除に失敗しました：%1$s
+fav_delete_failed_fmt	削除に失敗しました：%1$s
+tagfav_delete_failed_fmt	削除に失敗しました：%1$s
+common_unknown_error_fallback	不明なエラー
+render_color	カラー
+render_color_hint	そのまま表示
+render_gray	モノクロ
+render_gray_hint	彩度のみ除去、階調は保持
+render_ink	電子ペーパー
+render_ink_hint	彩度を除きコントラストを上げる、e-ink 向け
+render_note_fmt	%1$s。漫画の画面のみに作用し、UI の配色には影響しません。電子ペーパー端末では「電子ペーパー」を選ぶとより見やすくなります。
+detail_download_started_with_title	ダウンロードを開始しました：%1$s
+detail_download_started_with_size	ダウンロードを開始しました：%1$s（%2$s）
