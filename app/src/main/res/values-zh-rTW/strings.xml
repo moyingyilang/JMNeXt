@@ -408,4 +408,36 @@
     <string name="checkin_already">今天已經簽過了</string>
     <string name="checkin_ok">簽到成功</string>
     <string name="checkin_failed">簽到失敗，稍後再試</string>
+
+    <string name="sort_latest">最新</string>
+    <string name="sort_views">最多點閱</string>
+    <string name="sort_images">最多圖片</string>
+    <string name="sort_hearts">最多愛心</string>
+    <string name="sort_oldest">最舊</string>
+    <string name="field_site">站內搜尋</string>
+    <string name="field_work">作品</string>
+    <string name="field_author">作者</string>
+    <string name="field_tag">標籤</string>
+    <string name="field_character">登場人物</string>
+    <string name="daily_expand">查看簽到歷史</string>
+    <string name="daily_collapse">收起簽到歷史</string>
+    <string name="daily_reading">讀取中…</string>
+    <string name="daily_history_failed_fmt">歷史沒讀到：%1</string>
+    <string name="daily_history_empty">還沒有簽到歷史。</string>
+    <string name="daily_record_cd">簽到紀錄</string>
+    <string name="daily_month_fmt">%1月</string>
+    <string name="daily_image_cd">簽到大圖</string>
+
+    <string name="search_order_label">排序</string>
+    <string name="search_field_label">檢索</string>
+
+    <string name="search_results_fmt">共 %1 條結果</string>
+    <string name="search_hidden_fmt"> · 已按封鎖規則隱藏 %1 條</string>
+    <string name="search_tag_blocked_fmt"> · 標籤封鎖 %1 條</string>
+    <string name="search_tag_blocked_notice_fmt">有 %1 條結果被標籤封鎖擋住了</string>
+    <string name="search_hit_fmt">命中：%1（僅本次搜尋放行，不改動封鎖規則）</string>
+    <string name="search_allow_once">允許一次</string>
+    <string name="search_year_label">年</string>
+    <string name="search_month_label">月</string>
+    <string name="search_any">不限</string>
 </resources>

@@ -1,5 +1,7 @@
 package com.jmnext.ui.screens.profile
 
+import androidx.compose.ui.res.stringResource
+import com.jmnext.R
 import androidx.compose.foundation.layout.Box
 import coil3.compose.AsyncImage
 import androidx.compose.ui.unit.dp
@@ -92,14 +94,14 @@ fun DailyHistorySection(
     Column(modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(Spacing.xs)) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             Text(
-                text = if (expanded) "收起签到历史" else "查看签到历史",
+                text = if (expanded) stringResource(R.string.daily_collapse) else stringResource(R.string.daily_expand),
                 style = MaterialTheme.typography.bodySmall,
                 color = c.accent,
                 modifier = Modifier.clickable { expanded = !expanded }.padding(vertical = Spacing.xs),
             )
             if (loading) {
                 Text(
-                    text = "读取中…",
+                    text = stringResource(R.string.daily_reading),
                     style = MaterialTheme.typography.labelSmall,
                     color = c.textTertiary,
                     modifier = Modifier.padding(start = Spacing.sm),
@@ -111,7 +113,7 @@ fun DailyHistorySection(
 
         error?.let {
             Text(
-                text = "历史没读到：$it",
+                text = stringResource(R.string.daily_history_failed_fmt, it),
                 style = MaterialTheme.typography.bodySmall,
                 color = c.textSecondary,
             )
@@ -120,7 +122,7 @@ fun DailyHistorySection(
 
         if (years.isEmpty() && !loading) {
             Text(
-                text = "还没有签到历史。",
+                text = stringResource(R.string.daily_history_empty),
                 style = MaterialTheme.typography.bodySmall,
                 color = c.textSecondary,
             )
@@ -154,7 +156,7 @@ fun DailyHistorySection(
                     if (url != null) {
                         AsyncImage(
                             model = url,
-                            contentDescription = entry.dateText ?: "签到记录",
+                            contentDescription = entry.dateText ?: stringResource(R.string.daily_record_cd),
                             contentScale = ContentScale.Crop,
                             modifier = Modifier
                                 .size(64.dp)
@@ -173,7 +175,7 @@ fun DailyHistorySection(
                     // 月份角标：源码在缩略图左上角写"N月"，这样不点开也知道是哪个月的
                     entry.monthText?.let { m ->
                         Text(
-                            text = "${m}月",
+                            text = stringResource(R.string.daily_month_fmt, m),
                             style = MaterialTheme.typography.labelSmall,
                             color = c.textOnAccent,
                             modifier = Modifier
@@ -191,7 +193,7 @@ fun DailyHistorySection(
             // 就地放大而不是弹窗：少一层返回栈，也不会挡住卡片本身的信息
             AsyncImage(
                 model = url,
-                contentDescription = "签到大图",
+                contentDescription = stringResource(R.string.daily_image_cd),
                 contentScale = ContentScale.Fit,
                 modifier = Modifier
                     .fillMaxWidth()

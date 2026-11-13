@@ -558,11 +558,11 @@ fun SearchScreen(
                     item(key = "count") {
                         Text(
                             text = buildString {
-                                append("共 ${state.total} 条结果")
-                                if (state.hidden > 0) append(" · 已按屏蔽规则隐藏 ${state.hidden} 条")
+                                append(stringResource(R.string.search_results_fmt, state.total))
+                                if (state.hidden > 0) append(stringResource(R.string.search_hidden_fmt, state.hidden))
                                 // 标签屏蔽是本地异步补上的，与上面服务端/关键词那部分分开算
                                 if (tagBlocked.isNotEmpty()) {
-                                    append(" · 标签屏蔽 ${tagBlocked.size} 条")
+                                    append(stringResource(R.string.search_tag_blocked_fmt, tagBlocked.size))
                                 }
                             },
                             style = MaterialTheme.typography.labelSmall,
@@ -637,21 +637,21 @@ private fun TagBlockedNotice(
                 verticalArrangement = Arrangement.spacedBy(Spacing.xxs),
             ) {
                 Text(
-                    text = "有 $count 条结果被标签屏蔽挡住了",
+                    text = stringResource(R.string.search_tag_blocked_notice_fmt, count),
                     style = MaterialTheme.typography.bodyMedium,
                     color = c.text,
                 )
                 if (tags.isNotEmpty()) {
                     Text(
                         // 「命中标签」用顿号连接：标签里出现逗号是常事，再用逗号分隔会读不清
-                        text = "命中：${tags.joinToString("、")}（仅本次搜索放行，不改动屏蔽规则）",
+                        text = stringResource(R.string.search_hit_fmt, tags.joinToString("、")),
                         style = MaterialTheme.typography.labelSmall,
                         color = c.textSecondary,
                     )
                 }
             }
             TextButton(onClick = onAllowOnce) {
-                Text("允许一次", color = c.accent)
+                Text(stringResource(R.string.search_allow_once), color = c.accent)
             }
         }
     }
@@ -796,15 +796,15 @@ private fun WordChips(words: List<String>, onPick: (String) -> Unit) {
 private fun SearchFilterRows(state: SearchUiState, vm: SearchViewModel) {
     Column(verticalArrangement = Arrangement.spacedBy(Spacing.xs)) {
         FilterRow(
-            label = "排序",
-            options = SearchFilters.Order.entries.map { it.key to it.label },
+            label = stringResource(R.string.search_order_label),
+            options = SearchFilters.Order.entries.map { it.key to stringResource(it.labelRes) },
             selected = state.filters.order,
             enabled = !state.loading,
             onSelect = { key -> vm.updateFilters { it.copy(order = key) } },
         )
         FilterRow(
-            label = "检索",
-            options = SearchFilters.Type.entries.map { it.key to it.label },
+            label = stringResource(R.string.search_field_label),
+            options = SearchFilters.Type.entries.map { it.key to stringResource(it.labelRes) },
             selected = state.filters.type,
             enabled = !state.loading,
             onSelect = { key -> vm.updateFilters { it.copy(type = key) } },
@@ -864,8 +864,8 @@ private fun DateFilterRows(
     val months = remember { (1..12).map { it.toString() } }
 
     FilterRow(
-        label = "年",
-        options = listOf("" to "不限") + years.map { it to it },
+        label = stringResource(R.string.search_year_label),
+        options = listOf("" to stringResource(R.string.search_any)) + years.map { it to it },
         selected = filters.year,
         enabled = enabled,
         onSelect = { y -> onChange(y, if (y.isEmpty()) "" else filters.month) },
@@ -873,8 +873,8 @@ private fun DateFilterRows(
 
     if (filters.year.isNotEmpty()) {
         FilterRow(
-            label = "月",
-            options = listOf("" to "不限") + months.map { it to it },
+            label = stringResource(R.string.search_month_label),
+            options = listOf("" to stringResource(R.string.search_any)) + months.map { it to it },
             selected = filters.month,
             enabled = enabled,
             onSelect = { m -> onChange(filters.year, m) },

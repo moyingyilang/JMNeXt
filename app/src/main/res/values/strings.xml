@@ -431,4 +431,38 @@
     <string name="checkin_already">今天已经签过了</string>
     <string name="checkin_ok">签到成功</string>
     <string name="checkin_failed">签到失败，稍后再试</string>
+
+    <!-- 搜索筛选 -->
+    <string name="sort_latest">最新</string>
+    <string name="sort_views">最多点阅</string>
+    <string name="sort_images">最多图片</string>
+    <string name="sort_hearts">最多爱心</string>
+    <string name="sort_oldest">最旧</string>
+    <string name="field_site">站内搜索</string>
+    <string name="field_work">作品</string>
+    <string name="field_author">作者</string>
+    <string name="field_tag">标签</string>
+    <string name="field_character">登场人物</string>
+    <!-- 签到历史 -->
+    <string name="daily_expand">查看签到历史</string>
+    <string name="daily_collapse">收起签到历史</string>
+    <string name="daily_reading">读取中…</string>
+    <string name="daily_history_failed_fmt">历史没读到：%1</string>
+    <string name="daily_history_empty">还没有签到历史。</string>
+    <string name="daily_record_cd">签到记录</string>
+    <string name="daily_month_fmt">%1月</string>
+    <string name="daily_image_cd">签到大图</string>
+
+    <string name="search_order_label">排序</string>
+    <string name="search_field_label">检索</string>
+
+    <string name="search_results_fmt">共 %1 条结果</string>
+    <string name="search_hidden_fmt"> · 已按屏蔽规则隐藏 %1 条</string>
+    <string name="search_tag_blocked_fmt"> · 标签屏蔽 %1 条</string>
+    <string name="search_tag_blocked_notice_fmt">有 %1 条结果被标签屏蔽挡住了</string>
+    <string name="search_hit_fmt">命中：%1（仅本次搜索放行，不改动屏蔽规则）</string>
+    <string name="search_allow_once">允许一次</string>
+    <string name="search_year_label">年</string>
+    <string name="search_month_label">月</string>
+    <string name="search_any">不限</string>
 </resources>

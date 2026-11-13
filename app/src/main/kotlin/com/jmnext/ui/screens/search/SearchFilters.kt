@@ -1,5 +1,7 @@
 package com.jmnext.ui.screens.search
 
+import androidx.annotation.StringRes
+
 /**
  * 搜索筛选条件。
  *
@@ -27,20 +29,20 @@ data class SearchFilters(
             year.isEmpty() && month.isEmpty()
 
     /** 排序选项。 */
-    enum class Order(val key: String, val label: String) {
-        LATEST("", "最新"),
-        MOST_VIEWS("mv", "最多点阅"),
-        MOST_IMAGES("mp", "最多图片"),
-        MOST_HEARTS("tf", "最多爱心"),
-        OLDEST("old", "最旧"),
+    enum class Order(val key: String, @StringRes val labelRes: Int) {
+        LATEST("", com.jmnext.R.string.sort_latest),
+        MOST_VIEWS("mv", com.jmnext.R.string.sort_views),
+        MOST_IMAGES("mp", com.jmnext.R.string.sort_images),
+        MOST_HEARTS("tf", com.jmnext.R.string.sort_hearts),
+        OLDEST("old", com.jmnext.R.string.sort_oldest),
     }
 
     /** 检索字段。文案取自官方内联的 i18n 值（原文为繁体，此处统一为简体以与界面一致）。 */
-    enum class Type(val key: String, val label: String) {
-        SITE("site", "站内搜索"),
-        WORK("work", "作品"),
-        AUTHOR("author", "作者"),
-        TAG("tag", "标签"),
-        CHARACTER("character", "登场人物"),
+    enum class Type(val key: String, @StringRes val labelRes: Int) {
+        SITE("site", com.jmnext.R.string.field_site),
+        WORK("work", com.jmnext.R.string.field_work),
+        AUTHOR("author", com.jmnext.R.string.field_author),
+        TAG("tag", com.jmnext.R.string.field_tag),
+        CHARACTER("character", com.jmnext.R.string.field_character),
     }
 }
