@@ -42,3 +42,24 @@ dest_auth_gender	性别：	性別：	性別：	Gender:	性別：	Пол:	성별:
 dest_tags_scanning	扫描中…	掃描中…	掃描中…	Scanning…	スキャン中…	Сканирование…	스캔 중…
 dest_tags_scan_action	扫描收藏更新统计	掃描收藏更新統計	掃描收藏更新統計	Scan favorites for update stats	お気に入りの更新統計をスキャン	Сканировать избранное на статистику	즐겨찾기 업데이트 통계 스캔
 dest_common_draw	抽…	抽…	抽…	Picking…	抽選中…	Тянем…	뽑는 중…
+dest_random_sort_pref	按收藏偏好排序	依收藏偏好排序	依收藏偏好排序	Sort by favorite preferences	お気に入りの好みで並べ替え	Сортировка по предпочтениям	즐겨찾기 선호로 정렬
+dest_appearance_change	换一个	換一個	換一個	Change	変更	Сменить	변경
+dest_appearance_swap_note	换的不只是透明度 —— 圆角与壁纸是否模糊一起换。手机上的实时背景模糊在桌面上拿不到，这里用等效近似。	換的不只是透明度 —— 圓角與桌布是否模糊一起換。手機上的即時背景模糊在桌面上拿不到，這裡用等效近似。	換的不只是透明度 —— 圓角與桌布是否模糊一起換。手機上的即時背景模糊在桌面上拿不到，這裡用等效近似。	Switching changes more than opacity — corner radius and whether the wallpaper is blurred change too. Real-time background blur isn't available on desktop, so this approximates it.	切り替わるのは透明度だけではありません。角丸と壁紙のぼかしも一緒に変わります。スマホのリアルタイム背景ぼかしはデスクトップでは使えないため、近似で表現しています。	Меняется не только прозрачность: радиус углов и размытие обоев тоже. Настоящего размытия фона в реальном времени на десктопе нет, здесь используется приближение.	투명도만 바뀌는 게 아니라 모서리 반경과 배경 흐림 여부도 함께 바뀝니다. 휴대폰의 실시간 배경 흐림은 데스크톱에서 쓸 수 없어 근사로 처리합니다.
+dest_search_order	排序：	排序：	排序：	Sort:	並び順：	Сортировка:	정렬:
+dest_search_searching	搜索中…	搜尋中…	搜尋中…	Searching…	検索中…	Поиск…	검색 중…
+dest_search_history	搜索历史：	搜尋歷史：	搜尋歷史：	Search history:	検索履歴：	История поиска:	검색 기록:
+dest_tags_saved	收藏里的标签（本地统计）	收藏裡的標籤（本地統計）	收藏裡的標籤（本地統計）	Tags in your favorites (local stats)	お気に入り内のタグ（ローカル集計）	Теги в избранном (локальная статистика)	즐겨찾기 태그(로컬 집계)
+dest_common_new	新建	新建	新建	New	新規	Создать	새로 만들기
+dest_common_weekday	星期	星期	星期	Weekday	曜日	День недели	요일
+dest_common_month_hint	月（1-12）	月（1-12）	月（1-12）	Month (1-12)	月（1〜12）	Месяц (1–12)	월(1~12)
+dest_block_store_missing	本地屏蔽存储未初始化。	本地封鎖儲存未初始化。	本地封鎖儲存未初始化。	The local block store isn't initialized.	ローカルのブロック保存が未初期化です。	Локальное хранилище блокировок не инициализировано.	로컬 차단 저장소가 초기화되지 않았습니다.
+dest_tags_star	标星	標星	標星	Star	スター	В избранное	별표
+dest_tags_name_label	标签名	標籤名	標籤名	Tag name	タグ名	Имя тега	태그 이름
+dest_detail_tags_hint	标签（点标签按标签搜索，右侧可屏蔽或标星）	標籤（點標籤按標籤搜尋，右側可封鎖或標星）	標籤（點標籤按標籤搜尋，右側可封鎖或標星）	Tags (tap a tag to search by it; block or star it on the right)	タグ（タグを押すとタグ検索。右側でブロックまたはスター）	Теги (нажмите тег, чтобы искать по нему; справа можно заблокировать или добавить в избранное)	태그(태그를 누르면 태그 검색, 오른쪽에서 차단하거나 별표)
+dest_notif_mark_read	标记已读	標記已讀	標記已讀	Mark as read	既読にする	Отметить прочитанным	읽음으로 표시
+dest_common_title	标题	標題	標題	Title	タイトル	Название	제목
+dest_shell_parity_note	桌面端目标是与 Android full 版功能对齐，页面清单见 desktop/PARITY.md。	桌面端目標是與 Android full 版功能對齊，頁面清單見 desktop/PARITY.md。	桌面端目標是與 Android full 版功能對齊，頁面清單見 desktop/PARITY.md。	The desktop goal is parity with the Android full build; see desktop/PARITY.md for the page list.	デスクトップ版の目標は Android full 版との機能一致です。ページ一覧は desktop/PARITY.md を参照。	Цель десктопной версии — паритет с Android full; список страниц в desktop/PARITY.md.	데스크톱 목표는 Android full 버전과 기능을 맞추는 것이며, 페이지 목록은 desktop/PARITY.md에 있습니다.
+dest_detail_loading_work	正在加载作品…	正在載入作品…	正在載入作品…	Loading work…	作品を読み込み中…	Загрузка работы…	작품 불러오는 중…
+dest_reader_loading_chapter	正在加载章节…	正在載入章節…	正在載入章節…	Loading chapter…	チャプターを読み込み中…	Загрузка главы…	챕터 불러오는 중…
+dest_creator_loading_work	正在取作品内容…	正在取作品內容…	正在取作品內容…	Fetching work content…	作品内容を取得中…	Получение содержимого работы…	작품 내용 가져오는 중…
+dest_comments_replying_prefix	正在回复 	正在回覆 	正在回覆 	Replying to 	返信先： 	Ответ: 	답글 대상: 

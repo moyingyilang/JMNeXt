@@ -52,6 +52,7 @@ import com.jmnext.data.auth.SecureStore
 import com.jmnext.data.prefs.BlockStore
 import com.jmnext.data.prefs.ReadProgressStore
 import com.jmnext.data.remote.dto.ListItem
+import com.jmnext.desktop.i18n.I18n
 import com.jmnext.desktop.i18n.tl
 import java.io.File
 import androidx.compose.animation.AnimatedContent
@@ -135,6 +136,8 @@ fun main(args: Array<String>) {
         }
         e.printStackTrace()
     }
+    // 非 Compose 代码（CLI、Swing 对话框、协程里赋值的提示）走 I18n.tr，这里注入当前语言的表
+    com.jmnext.desktop.i18n.I18n.install(com.jmnext.desktop.i18n.byZhFor(resolveLocale()))
     runApp()
 }
 
@@ -166,7 +169,7 @@ private fun HomeScreen(
     onOpenRandom: () -> Unit = {},
 ) {
     var items by remember { mutableStateOf<List<ListItem>>(emptyList()) }
-    var status by remember { mutableStateOf("正在引导…") }
+    var status by remember { mutableStateOf(I18n.tr("正在引导…")) }
     var page by remember { mutableStateOf(1) }
     var total by remember { mutableStateOf(0) }
     var busy by remember { mutableStateOf(false) }

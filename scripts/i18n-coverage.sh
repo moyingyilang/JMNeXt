@@ -8,7 +8,7 @@ for f in desktop/src/main/kotlin/com/jmnext/desktop/*.kt; do
     n=$(grep -nE '"[^"]*[一-龥][^"]*"' "$f" \
         | grep -vE ':\s*(\*|//)' \
         | grep -vE 'System\.err\.println|Log\.(line|error|info)' \
-        | grep -vE '\btl\(|\btlf\(' \
+        | grep -vE '\btl\(|\btlf\(|I18n\.tr[i]?\(' \
         | wc -l | tr -d ' ')
     if [ "$n" -gt 0 ]; then
         printf '%-46s %6s\n' "$(basename "$f")" "$n"
