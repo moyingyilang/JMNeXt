@@ -133,18 +133,15 @@ android {
     androidComponents {
         onVariants { variant ->
             val base = variant.outputs.firstOrNull()?.versionName?.get() ?: return@onVariants
-            val suffix = when {
-                variant.flavorName == "lite" && variant.buildType == "debug" -> ".litedebug"
-                variant.flavorName == "lite" -> ".lite"
-                variant.buildType == "debug" -> ".debug"
-                else -> ""
-            }
-            variant.outputs.forEach { it.versionName.set(base + suffix) }
-              // 产物命名统一为 JMNeXt-<ver>-android-<arch>-<flavor>-<buildType>.apk，
-              // 规则见 docs/release-process.md；当前没有 ABI 拆分，arch 记 universal。
+              // 变体信息进 SemVer 的构建元数据（+ 之后不参与比较）：
+              // 2.3.0+android.universal.full.release
+              val buildId = "$PRODUCT_VERSION+android.universal.${variant.flavorName}.${variant.buildType}"
+              variant.outputs.forEach { it.versionName.set(buildId) }
+                // 产物名用 _ 代替 + 作分隔（有些下载站会把 + 当空格）；
+                // 构建标识本身仍是 2.3.0+android.universal.full.release。
               variant.outputs.forEach { output ->
                   output.outputFileName.set(
-                      "JMNeXt-$PRODUCT_VERSION-android-universal-${variant.flavorName}-${variant.buildType}.apk",
+                      "JMNeXt-${PRODUCT_VERSION}_android.universal.${variant.flavorName}.${variant.buildType}.apk",
                   )
               }
         }

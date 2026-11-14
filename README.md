@@ -23,15 +23,15 @@ JMComic 的第三方客户端，Kotlin + Compose 写的。Android 是主项目�
 Linux 便携包：
 
 ```bash
-tar xzf JMNeXt-2.3.0-linux-arm64-standard.tar.gz && ./bin/jmnext
+tar xzf JMNeXt-2.3.0_linux.arm64.standard.tar.gz && ./bin/jmnext
 ```
 
 deb、rpm、AppImage：
 
 ```bash
-sudo dpkg -i JMNeXt-2.3.0-linux-arm64-standard.deb && jmnext
-sudo rpm -i JMNeXt-2.3.0-linux-arm64-standard.rpm && jmnext
-chmod +x JMNeXt-2.3.0-linux-arm64-standard.AppImage && ./JMNeXt-2.3.0-linux-arm64-standard.AppImage
+sudo dpkg -i JMNeXt-2.3.0_linux.arm64.standard.deb && jmnext
+sudo rpm -i JMNeXt-2.3.0_linux.arm64.standard.rpm && jmnext
+chmod +x JMNeXt-2.3.0_linux.arm64.standard.AppImage && ./JMNeXt-2.3.0_linux.arm64.standard.AppImage
 ```
 
 AppImage 提示缺 `libfuse.so.2` 时加 `--appimage-extract-and-run`。运行时要有图形环境和 OpenGL，纯无头环境会在建窗口那步失败——这是 Compose Desktop 的脾气，不是本项目的问题。

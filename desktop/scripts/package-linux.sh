@@ -16,7 +16,7 @@ V=${VERSION:-$(grep -oE '[0-9]+.[0-9]+.[0-9]+' src/main/kotlin/com/jmnext/deskto
 [ -n "$V" ] || { echo '拿不到版本号（Version.kt）'; exit 1; }
 OUT=${1:-dist}
 . "$(dirname "$0")/lib-gate.sh"
-GATE_EXPECT="$OUT/JMNeXt-$V-linux-arm64-standard.tar.gz $OUT/JMNeXt-$V-linux-arm64-standard.deb $OUT/JMNeXt-$V-linux-arm64-standard.rpm $OUT/JMNeXt-$V-linux-arm64-standard.AppImage"
+GATE_EXPECT="$OUT/JMNeXt-${V}_linux.arm64.standard.tar.gz $OUT/JMNeXt-${V}_linux.arm64.standard.deb $OUT/JMNeXt-${V}_linux.arm64.standard.rpm $OUT/JMNeXt-${V}_linux.arm64.standard.AppImage"
 if ! gate_begin linux-aarch64 "$OUT" build/compose/binaries/main/app/jmnext src/main/resources/icon.png; then exit 0; fi
 GRADLE=${GRADLE:-/opt/gradle-9.8.0/bin/gradle}
 APP=build/compose/binaries/main/app/jmnext
@@ -60,7 +60,7 @@ echo "  应用 jar 1 个、启动类正确、标记检查通过"
 
 echo "== 3/6 便携包 =="
 rm -rf "$OUT" && mkdir -p "$OUT"
-tar czf "$OUT/JMNeXt-$V-linux-arm64-standard.tar.gz" -C "$APP" .
+tar czf "$OUT/JMNeXt-${V}_linux.arm64.standard.tar.gz" -C "$APP" .
 
 echo "== 4/6 deb =="
 STAGE=$(mktemp -d)/jmnext
@@ -86,7 +86,7 @@ Description: JMNeXt desktop client
  A third-party JMComic client built with Kotlin and Compose Desktop.
 CTL
 sed -i "s/@V@/$V/" "$STAGE/DEBIAN/control"
-dpkg-deb -Zzstd -z3 --build --root-owner-group "$STAGE" "$OUT/JMNeXt-$V-linux-arm64-standard.deb" >/dev/null
+dpkg-deb -Zzstd -z3 --build --root-owner-group "$STAGE" "$OUT/JMNeXt-${V}_linux.arm64.standard.deb" >/dev/null
 
 echo "== 5/6 rpm =="
 TOP=$(mktemp -d)
@@ -125,7 +125,7 @@ sed -i "s/@V@/$V/" "$TOP/SPECS/jmnext.spec"
 # 系统 rpmbuild 就是 aarch64（容器本身是 arm64），不需要私有解包那份
 RPMBUILD_AARCH64=/usr/bin/rpmbuild
 if "$RPMBUILD_AARCH64" -bb --define "_topdir $TOP" --define "_target_cpu aarch64" --define "_binary_payload w3.zstdio" "$TOP/SPECS/jmnext.spec"; then
-  find "$TOP/RPMS" -name "*.rpm" -exec cp {} "$OUT/JMNeXt-$V-linux-arm64-standard.rpm" \;
+  find "$TOP/RPMS" -name "*.rpm" -exec cp {} "$OUT/JMNeXt-${V}_linux.arm64.standard.rpm" \;
   echo "  rpm 成功"
 else
   echo "  rpm 失败：详情见上面 rpmbuild 的输出（已记档，不影响其它产物）"
@@ -143,8 +143,8 @@ if [ -f /root/runtime-aarch64 ]; then
     > "$APPDIR/jmnext.desktop"
   SQ=$(mktemp -u).squashfs
   mksquashfs "$APPDIR" "$SQ" -root-owned -noappend -comp gzip -quiet
-  cat /root/runtime-aarch64 "$SQ" > "$OUT/JMNeXt-$V-linux-arm64-standard.AppImage"
-  chmod 755 "$OUT/JMNeXt-$V-linux-arm64-standard.AppImage"
+  cat /root/runtime-aarch64 "$SQ" > "$OUT/JMNeXt-${V}_linux.arm64.standard.AppImage"
+  chmod 755 "$OUT/JMNeXt-${V}_linux.arm64.standard.AppImage"
   rm -f "$SQ"
 else
   echo "  跳过：缺少 AppImage runtime（/root/runtime-aarch64）"
