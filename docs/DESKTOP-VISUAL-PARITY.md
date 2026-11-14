@@ -64,3 +64,23 @@ Android 是「顶栏 + 内容 + 底部浮动栏」，桌面是「左侧常驻侧
 
 - 桌面没有 Android 的实时背景模糊，`Backdrop` 的饱和度与噪点只能近似
 - Android 的 `GlassTopBar` 依赖系统状态栏高度，桌面没有对应物
+
+## 六、当前对齐进度（逐项实测）
+
+对照方式：直接解析两端源码里的令牌表做集合比对，再以 xvfb 截图确认没有回归。
+Android 侧截图需要连设备，本轮没有 adb 连接，因此逐屏像素对照仍待补。
+
+| 维度 | 状态 | 证据 |
+| --- | --- | --- |
+| 圆角阶梯 | 一致 | 两端各四组 `RadiusScale`，排序后比对完全相同 |
+| 字号层级 | 一致 | 桌面四套 `TypeScale` 与 Android 四套（含 `FontSize` 常量那套）逐字段相同 |
+| 表面参数 | 一致 | fillAlpha / accentTint / hairline / shadows 相同；`pressScale` 仅桌面有，Miuix 已改为 0.97 |
+| 动效时长 | 一致 | 新增 `MotionSpec(fast, base, slow, springy)`，四种风格对应 Android 的 `MotionSpec` |
+| 间距 | 一致 | `Spacing` 4dp 栅格；页面内 padding 已改用令牌 |
+| 区块标题 / 卡片 / 状态盒 / 顶栏 / 玻璃 | 已接入 | 组件位于 `SectionHeader.kt` / `Surfaces.kt` / `StateBox.kt` / `TopBar.kt` |
+
+### 仍缺的
+
+- **端到端截图对照**：本轮只有桌面截图，且与上一轮逐字节相同（说明改动不改变静态画面）。Android 侧需要连设备截屏后才能补这一列
+- **逐屏覆盖**：收藏、历史、追更、分类、搜索、详情、阅读器尚未逐屏走一遍令牌替换后的观感确认
+- **玻璃的真实感**：桌面没有实时背景模糊，`backdropSaturate` 与噪点只能近似
