@@ -56,7 +56,10 @@ compose.desktop {
                 org.jetbrains.compose.desktop.application.dsl.TargetFormat.AppImage,
             )
             packageName = "jmnext"  // deb/rpm 对包名字符有限制，大写与下划线不合法
-            packageVersion = "2.2.2"
+            // 与 Version.kt 同源：读文件里的三段号，避免发版时两处不一致
+            packageVersion = Regex("\\d+\\.\\d+\\.\\d+")
+                .find(file("src/main/kotlin/com/jmnext/desktop/Version.kt").readText())
+                ?.value ?: error("Version.kt 里找不到三段式版本号")
             description = "JMNeXt 桌面版"
             vendor = "moyingyilang"
         }

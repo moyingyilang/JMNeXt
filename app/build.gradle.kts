@@ -18,6 +18,14 @@ val keystoreProps = Properties().apply {
     if (keystorePropsFile.exists()) keystorePropsFile.inputStream().use { load(it) }
 }
 
+/** äº§åçæ¬ï¼SemVer ä¸æ®µå¼ï¼Android ä¸æ¡é¢ç«¯å±ç¨ãåçååä¸ç¨æ·ç¡®è®¤ã */
+val PRODUCT_VERSION = "2.3.0"
+
+private val PRODUCT_VERSION_PARTS = PRODUCT_VERSION.split(".").map { it.toInt() }
+val PRODUCT_VERSION_MAJOR = PRODUCT_VERSION_PARTS[0]
+val PRODUCT_VERSION_MINOR = PRODUCT_VERSION_PARTS[1]
+val PRODUCT_VERSION_PATCH = PRODUCT_VERSION_PARTS[2]
+
 android {
     namespace = "com.jmnext"
     compileSdk = 37
@@ -47,8 +55,10 @@ android {
         //               预测性返回按 SDK 分治（Android 15+ 交给系统）、许可改为 AGPL-3.0-only
         // 1.5.1       = 列表标签屏蔽：列表接口不下发标签，改为后台逐条读详情取标签，命中即从列表隐藏
         // 1.5.2       = 搜索页提示"有结果被标签屏蔽挡住"并给「允许一次」放行；修提示条被列表锚定顶出可视区的坑
-        versionCode = 50
-        versionName = "2.3.0"
+        // 版本号从一处推导：versionCode = MAJOR*10000 + MINOR*100 + PATCH，
+        // 规则见 docs/release-process.md。手工递增容易漏，也不可复算。
+        versionCode = PRODUCT_VERSION_MAJOR * 10000 + PRODUCT_VERSION_MINOR * 100 + PRODUCT_VERSION_PATCH
+        versionName = PRODUCT_VERSION
     }
 
     signingConfigs {
@@ -130,6 +140,13 @@ android {
                 else -> ""
             }
             variant.outputs.forEach { it.versionName.set(base + suffix) }
+              // 产物命名统一为 JMNeXt-<ver>-android-<arch>-<flavor>-<buildType>.apk，
+              // 规则见 docs/release-process.md；当前没有 ABI 拆分，arch 记 universal。
+              variant.outputs.forEach { output ->
+                  output.outputFileName.set(
+                      "JMNeXt-$PRODUCT_VERSION-android-universal-${variant.flavorName}-${variant.buildType}.apk",
+                  )
+              }
         }
     }
 
