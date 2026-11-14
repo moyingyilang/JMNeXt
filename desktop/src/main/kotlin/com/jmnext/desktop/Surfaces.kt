@@ -38,7 +38,7 @@ fun Modifier.jmPressable(
     val pressed by interaction.collectIsPressedAsState()
     val scale by animateFloatAsState(
         targetValue = if (pressed && enabled) spec.surface.pressScale else 1f,
-        animationSpec = androidx.compose.animation.core.tween(Motion.QUICK_MS, easing = Motion.Standard),
+        animationSpec = androidx.compose.animation.core.tween(JmMotion.fast, easing = Motion.Standard),
         label = "jmPress",
     )
     return this

@@ -35,12 +35,14 @@ fun jmCoverKey(comicId: String): String = "jm-cover-$comicId"
 fun Modifier.jmSharedElement(key: String?): Modifier {
     val shared = LocalSharedScope.current ?: return this
     val visibility = LocalPageVisibility.current ?: return this
+    // boundsTransform 的 lambda 不是 ，令牌要先取出来。
+    val sharedMs = JmMotion.slow
     if (key == null) return this
     return with(shared) {
         this@jmSharedElement.sharedElement(
             sharedContentState = rememberSharedContentState(key = key),
             animatedVisibilityScope = visibility,
-            boundsTransform = { _, _ -> tween(durationMillis = Motion.PAGE_MS, easing = Motion.Enter) },
+            boundsTransform = { _, _ -> tween(durationMillis = sharedMs, easing = Motion.Enter) },
         )
     }
 }

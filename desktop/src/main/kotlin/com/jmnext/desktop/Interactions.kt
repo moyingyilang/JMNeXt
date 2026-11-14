@@ -55,12 +55,12 @@ fun Modifier.jmClickable(
             hovered -> hoverScale
             else -> 1f
         },
-        animationSpec = tween(durationMillis = Motion.QUICK_MS, easing = Motion.Standard),
+        animationSpec = tween(durationMillis = JmMotion.fast, easing = Motion.Standard),
         label = "hoverScale",
     )
     val ringAlpha by animateFloatAsState(
         targetValue = if (focused && enabled) 1f else 0f,
-        animationSpec = tween(durationMillis = Motion.QUICK_MS, easing = Motion.Standard),
+        animationSpec = tween(durationMillis = JmMotion.fast, easing = Motion.Standard),
         label = "focusRing",
     )
     var m = this

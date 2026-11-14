@@ -317,7 +317,7 @@ fun DetailScreen(
                 // 一路传到两个页面，改动面大，留作后续。
                 val coverIn by animateFloatAsState(
                     targetValue = if (bitmap != null) 1f else 0f,
-                    animationSpec = tween(durationMillis = Motion.NORMAL_MS, easing = Motion.Enter),
+                    animationSpec = tween(durationMillis = JmMotion.base, easing = Motion.Enter),
                     label = "detailCoverIn",
                 )
                 Box(

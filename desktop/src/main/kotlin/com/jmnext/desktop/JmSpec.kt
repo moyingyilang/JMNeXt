@@ -43,6 +43,19 @@ data class TypeScale(
     val lineHeightFactor: Float,
 )
 
+/**
+ * 动效时长，数值与 Android 每种风格的 `MotionSpec` 对齐。
+ *
+ * Android 的动效**随风格变化**：Miuix 慢而弹、Material 快而直。
+ * 桌面端原先是一组全局常量，切风格时手感不变，属于遗漏。
+ */
+data class MotionSpec(
+    val fast: Int,
+    val base: Int,
+    val slow: Int,
+    val springy: Boolean,
+)
+
 /** 表面材质参数。 */
 data class SurfaceSpec(
     val fillAlphaScale: Float,
@@ -61,6 +74,7 @@ data class JmSpec(
     val radius: RadiusScale,
     val surface: SurfaceSpec,
     val type: TypeScale,
+    val motion: MotionSpec,
 )
 
 object JmSpecs {
@@ -80,6 +94,7 @@ object JmSpecs {
             pressScale = 0.985f,
         ),
         type = standardType(),
+        motion = MotionSpec(fast = 120, base = 200, slow = 320, springy = false),
     )
 
     /** 半透明：与 WindowGlass 同一套几何，差别在填充更透、铺一点强调色。 */
@@ -102,10 +117,11 @@ object JmSpecs {
             innerHighlight = false,
             backdropSaturate = 1f,
             noise = 0f,
-            shadows = listOf(0.dp, 0.dp, 1.dp),
+            shadows = listOf(0.dp, 0.dp, 0.dp),
             pressScale = 0.99f,
         ),
-        type = standardType(),
+        type = flatBlurType(),
+        motion = MotionSpec(fast = 120, base = 220, slow = 320, springy = false),
     )
 
     /** MIUI / HyperOS：大圆角、实心卡片、1dp 描边分层、按下有弹性。 */
@@ -120,9 +136,10 @@ object JmSpecs {
             backdropSaturate = 1f,
             noise = 0f,
             shadows = listOf(0.dp, 0.dp, 0.dp),
-            pressScale = 0.96f,
+            pressScale = 0.97f,
         ),
-        type = standardType(),
+        type = miuixType(),
+        motion = MotionSpec(fast = 150, base = 240, slow = 360, springy = true),
     )
 
     /** Material 3：M3 的 typescale 与 elevation。 */
@@ -151,6 +168,35 @@ object JmSpecs {
             bodyWeight = FontWeight.Normal,
             lineHeightFactor = 1.50f,
         ),
+        motion = MotionSpec(fast = 100, base = 200, slow = 300, springy = false),
+    )
+
+    /** HyperOS / Miuix：对齐 miuix-kmp 的 TextStyles（32 / 24 / 20 / 17 / 14 / 11，行高 1.45）。 */
+    private fun miuixType() = TypeScale(
+        display = 32.sp,
+        title = 24.sp,
+        subtitle = 20.sp,
+        body = 17.sp,
+        label = 14.sp,
+        caption = 11.sp,
+        titleWeight = FontWeight.Bold,
+        subtitleWeight = FontWeight.SemiBold,
+        bodyWeight = FontWeight.Medium,
+        lineHeightFactor = 1.45f,
+    )
+
+    /** 平面化 + 模糊：标题 21、正文 15、行高 1.60，与 Android 的 flatBlur 一致。 */
+    private fun flatBlurType() = TypeScale(
+        display = 28.sp,
+        title = 21.sp,
+        subtitle = 16.sp,
+        body = 15.sp,
+        label = 13.sp,
+        caption = 11.5.sp,
+        titleWeight = FontWeight.SemiBold,
+        subtitleWeight = FontWeight.Medium,
+        bodyWeight = FontWeight.Normal,
+        lineHeightFactor = 1.60f,
     )
 
     private fun standardType() = TypeScale(
@@ -190,6 +236,20 @@ object Radius {
     val pill: Dp = 999.dp
 }
 
+/** 动效时长令牌，随风格变化；与 Android 的 MotionSpec 同步。 */
+object JmMotion {
+    private val s: MotionSpec
+        @Composable @ReadOnlyComposable get() = LocalJmSpec.current.motion
+
+    /** 即时反馈：悬停、按压。 */
+    val fast: Int @Composable @ReadOnlyComposable get() = s.fast
+    /** 常规过渡：淡入、位移、展开。 */
+    val base: Int @Composable @ReadOnlyComposable get() = s.base
+    /** 整页切换。 */
+    val slow: Int @Composable @ReadOnlyComposable get() = s.slow
+    /** 该风格是否用弹性曲线。 */
+    val springy: Boolean @Composable @ReadOnlyComposable get() = s.springy
+}
 /** 间距令牌：4dp 基准栅格，与 Android 的 Spacing 相同。 */
 object Spacing {
     val xxs: Dp = 2.dp

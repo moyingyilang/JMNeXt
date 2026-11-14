@@ -484,13 +484,16 @@ private fun App(onLocaleChange: (String) -> Unit = {}) {
                     },
                 )
             }
+                // transitionSpec 的 lambda 不是 ，不能在里面读令牌，先取出来。
+                val routeSlow = JmMotion.slow
+                val routeFast = JmMotion.fast
                 AnimatedContent(
                     targetState = screen,
                     modifier = Modifier.fillMaxSize(),
                     transitionSpec = {
-                        (fadeIn(tween(durationMillis = Motion.PAGE_MS, easing = Motion.Enter)) +
-                            slideInHorizontally(tween(durationMillis = Motion.PAGE_MS, easing = Motion.Enter)) { it / 14 })
-                            .togetherWith(fadeOut(tween(durationMillis = Motion.QUICK_MS, easing = Motion.Exit)))
+                        (fadeIn(tween(durationMillis = routeSlow, easing = Motion.Enter)) +
+                            slideInHorizontally(tween(durationMillis = routeSlow, easing = Motion.Enter)) { it / 14 })
+                            .togetherWith(fadeOut(tween(durationMillis = routeFast, easing = Motion.Exit)))
                     },
                     label = "route",
                 ) { target ->
