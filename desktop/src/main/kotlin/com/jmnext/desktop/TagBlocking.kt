@@ -40,7 +40,7 @@ fun <T> splitBlockedByTag(items: List<T>, hiddenIds: Set<String>, idOf: (T) -> S
 fun <T> BlockedByTagBanner(blocked: List<T>, idOf: (T) -> String) {
     if (blocked.isEmpty()) return
     Row(
-        modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 4.dp),
+        modifier = Modifier.fillMaxWidth().padding(horizontal = Spacing.lg, vertical = 4.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(10.dp),
     ) {

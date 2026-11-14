@@ -348,7 +348,7 @@ fun ReaderScreen(
             item {
                 // 底部也放一次"下一话"：连续滚动读完一话后，手停在这里
                 Row(
-                    modifier = Modifier.fillMaxWidth().padding(vertical = 16.dp),
+                    modifier = Modifier.fillMaxWidth().padding(vertical = Spacing.lg),
                     horizontalArrangement = Arrangement.Center,
                 ) {
                     Button(enabled = nextId != null, onClick = { nextId?.let(onSwitchChapter) }) {

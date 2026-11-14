@@ -95,7 +95,7 @@ fun NoticeHost(
                                 else -> MaterialTheme.colorScheme.surfaceVariant
                             }
                         )
-                        .padding(horizontal = 16.dp, vertical = 10.dp),
+                        .padding(horizontal = Spacing.lg, vertical = 10.dp),
                 )
             }
         }

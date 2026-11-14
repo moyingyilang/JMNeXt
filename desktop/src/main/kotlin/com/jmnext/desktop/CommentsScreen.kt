@@ -101,7 +101,7 @@ fun CommentsScreen(repository: JmRepository, aid: String, onBack: () -> Unit) {
         }
 
         // 发表区：回复时显示"正在回复谁"，可取消
-        Column(Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 4.dp)) {
+        Column(Modifier.fillMaxWidth().padding(horizontal = Spacing.lg, vertical = 4.dp)) {
             replyTo?.let { target ->
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Text(
@@ -158,7 +158,7 @@ fun CommentsScreen(repository: JmRepository, aid: String, onBack: () -> Unit) {
         }
 
         LazyColumn(
-            modifier = Modifier.fillMaxSize().padding(horizontal = 16.dp),
+            modifier = Modifier.fillMaxSize().padding(horizontal = Spacing.lg),
             verticalArrangement = Arrangement.spacedBy(6.dp),
         ) {
             items(items, key = { it.commentId }) { c ->

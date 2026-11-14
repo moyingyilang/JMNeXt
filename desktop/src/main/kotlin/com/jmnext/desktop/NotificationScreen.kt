@@ -124,7 +124,7 @@ fun NotificationScreen(repository: JmRepository) {
 
     Column(Modifier.fillMaxSize()) {
         Row(
-            modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 10.dp),
+            modifier = Modifier.fillMaxWidth().padding(horizontal = Spacing.lg, vertical = 10.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(10.dp),
         ) {
@@ -147,7 +147,7 @@ StatusLine(status, busy)
         }
 
         LazyColumn(
-            modifier = Modifier.fillMaxWidth().weight(1f).padding(horizontal = 16.dp),
+            modifier = Modifier.fillMaxWidth().weight(1f).padding(horizontal = Spacing.lg),
             verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
             items(items, key = { it.idText ?: it.hashCode().toString() }) { item ->

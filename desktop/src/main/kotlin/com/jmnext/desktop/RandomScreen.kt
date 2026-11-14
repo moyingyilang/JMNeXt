@@ -134,7 +134,7 @@ fun RandomScreen(repository: JmRepository, onOpenComic: (ListItem) -> Unit) {
 
     Column(Modifier.fillMaxSize()) {
         Row(
-            modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 10.dp),
+            modifier = Modifier.fillMaxWidth().padding(horizontal = Spacing.lg, vertical = 10.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(12.dp),
         ) {
@@ -158,7 +158,7 @@ StatusLine(status, busy)
             tl("开启偏好排序后，取一批会额外请求这一批作品的详情以获取标签（每批约 20 到 30 次），首次还可能要扫描一次收藏标签。"),
             style = MaterialTheme.typography.labelSmall,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
-            modifier = Modifier.padding(horizontal = 16.dp, vertical = 2.dp),
+            modifier = Modifier.padding(horizontal = Spacing.lg, vertical = 2.dp),
         )
 
         // 版式切换（缺口：此前只有网格）。选择写进 prefs，下次进来还是上次那一档。
@@ -166,7 +166,7 @@ StatusLine(status, busy)
         BlockedByTagBanner(blockedByTag) { it.id }
             LazyColumn(
                 modifier = Modifier.fillMaxWidth().weight(1f),
-                contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp),
+                contentPadding = PaddingValues(horizontal = Spacing.lg, vertical = 4.dp),
                 verticalArrangement = Arrangement.spacedBy(10.dp),
             ) {
                 items(visibleItems, key = { it.id }) { item ->
@@ -202,7 +202,7 @@ StatusLine(status, busy)
         } else {
             LazyVerticalGrid(
                 columns = GridCells.Adaptive(168.dp),
-                contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp),
+                contentPadding = PaddingValues(horizontal = Spacing.lg, vertical = 4.dp),
                 horizontalArrangement = Arrangement.spacedBy(14.dp),
                 verticalArrangement = Arrangement.spacedBy(16.dp),
                 modifier = Modifier.fillMaxWidth().weight(1f),

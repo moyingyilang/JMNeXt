@@ -281,7 +281,7 @@ fun DetailScreen(
         // 不必退回随机页再点。动作由 Main.kt 提供（重新取一批随机作品并替换当前详情内容）。
         if (fromRandom && onRandomAgain != null) {
             Row(
-                Modifier.fillMaxWidth().padding(horizontal = 16.dp),
+                Modifier.fillMaxWidth().padding(horizontal = Spacing.lg),
                 horizontalArrangement = Arrangement.End,
             ) {
                 TextButton(onClick = onRandomAgain) { Text(tl("换一个")) }
@@ -303,7 +303,7 @@ fun DetailScreen(
         }
 
         val d = detail ?: return@Column
-        Row(Modifier.fillMaxSize().padding(horizontal = 16.dp)) {
+        Row(Modifier.fillMaxSize().padding(horizontal = Spacing.lg)) {
             // 左栏：封面与基本信息
             Column(
                 modifier = Modifier.width(280.dp).verticalScroll(rememberScrollState()),
@@ -564,7 +564,7 @@ fun DetailScreen(
             if (d.series.isEmpty()) {
                 // 无章节作品（单话同人本很常见）：作品 id 自身就是可读单元。
                 // 与 Android 端一致 —— 不补的话这类作品点了没反应。
-                LazyColumn(modifier = Modifier.fillMaxSize().padding(start = 16.dp)) {
+                LazyColumn(modifier = Modifier.fillMaxSize().padding(start = Spacing.lg)) {
                     item {
                         Text(
                             text = tl("开始阅读"),
@@ -580,7 +580,7 @@ fun DetailScreen(
                 }
             } else {
                 LazyColumn(
-                    modifier = Modifier.fillMaxSize().padding(start = 16.dp),
+                    modifier = Modifier.fillMaxSize().padding(start = Spacing.lg),
                     verticalArrangement = Arrangement.spacedBy(2.dp),
                 ) {
                     // 顶部两个入口（用户要求）：从头开始 / 继续观看。

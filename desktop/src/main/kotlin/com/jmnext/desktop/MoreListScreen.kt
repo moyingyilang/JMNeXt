@@ -99,10 +99,12 @@ fun MoreListScreen(
     LaunchedEffect(sectionId) { load(0) }
 
     Column(Modifier.fillMaxSize()) {
-        Column(Modifier.padding(horizontal = 16.dp, vertical = 10.dp)) {
+        Column(Modifier.padding(horizontal = Spacing.lg, vertical = 10.dp)) {
             Text(
                 text = tl(title.ifBlank { "分区更多" }),
-                style = MaterialTheme.typography.titleLarge,
+                style = MaterialTheme.typography.titleMedium.copy(
+                    fontWeight = LocalJmSpec.current.type.titleWeight,
+                ),
             )
             Row(
                 modifier = Modifier.fillMaxWidth().padding(top = 4.dp),
@@ -127,7 +129,7 @@ StatusLine(status, busy, style = MaterialTheme.typography.labelSmall, color = Co
         BlockedByTagBanner(blockedByTag) { it.id }
         LazyVerticalGrid(
             columns = GridCells.Adaptive(168.dp),
-            contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp),
+            contentPadding = PaddingValues(horizontal = Spacing.lg, vertical = 4.dp),
             horizontalArrangement = Arrangement.spacedBy(14.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp),
             modifier = Modifier.fillMaxSize(),
@@ -224,7 +226,7 @@ fun WeeklyUpdateScreen(repository: JmRepository, onOpenComic: (ListItem) -> Unit
     LaunchedEffect(Unit) { load(1) }
 
     Column(Modifier.fillMaxSize()) {
-        Column(Modifier.padding(horizontal = 16.dp, vertical = 10.dp)) {
+        Column(Modifier.padding(horizontal = Spacing.lg, vertical = 10.dp)) {
             Text(tl("连载更新"), style = MaterialTheme.typography.titleLarge)
 
             Row(
@@ -272,7 +274,7 @@ StatusLine(status, busy, style = MaterialTheme.typography.labelSmall, color = Co
         BlockedByTagBanner(blockedByTag) { it.id }
         LazyVerticalGrid(
             columns = GridCells.Adaptive(168.dp),
-            contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp),
+            contentPadding = PaddingValues(horizontal = Spacing.lg, vertical = 4.dp),
             horizontalArrangement = Arrangement.spacedBy(14.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp),
             modifier = Modifier.fillMaxSize(),

@@ -151,7 +151,7 @@ fun CreatorScreen(repository: JmRepository) {
 
     Column(Modifier.fillMaxSize()) {
         Row(
-            modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 10.dp),
+            modifier = Modifier.fillMaxWidth().padding(horizontal = Spacing.lg, vertical = 10.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(10.dp),
         ) {
@@ -175,7 +175,7 @@ fun CreatorScreen(repository: JmRepository) {
         // 加宽：点了画师就显示他的作品；点了作品就显示作品信息
         selectedAuthor?.let { a ->
             Row(
-                modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 6.dp),
+                modifier = Modifier.fillMaxWidth().padding(horizontal = Spacing.lg, vertical = 6.dp),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(10.dp),
             ) {
@@ -188,7 +188,7 @@ fun CreatorScreen(repository: JmRepository) {
             }
         }
         workInfo?.let { (title, related) ->
-            Column(Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 6.dp)) {
+            Column(Modifier.fillMaxWidth().padding(horizontal = Spacing.lg, vertical = 6.dp)) {
                 Text(I18n.trf("作品：%1\$s", title), style = MaterialTheme.typography.titleMedium, color = MaterialTheme.colorScheme.primary)
                 if (related.isNotEmpty()) {
                     Text(I18n.trf("相关作品 %1\$d 部（见下方）", related.size), style = MaterialTheme.typography.labelSmall)
@@ -203,7 +203,7 @@ fun CreatorScreen(repository: JmRepository) {
         if (workInfo != null) {
             LazyColumn(
                 modifier = Modifier.fillMaxWidth().weight(1f),
-                contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
+                contentPadding = PaddingValues(horizontal = Spacing.lg, vertical = 8.dp),
                 verticalArrangement = Arrangement.spacedBy(10.dp),
             ) {
                 if (contentLoading) {
@@ -307,7 +307,7 @@ fun CreatorScreen(repository: JmRepository) {
         BlockedByTagBanner(blockedWorks) { it.id.toString() }
         LazyVerticalGrid(
             columns = GridCells.Adaptive(150.dp),
-            contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
+            contentPadding = PaddingValues(horizontal = Spacing.lg, vertical = 8.dp),
             horizontalArrangement = Arrangement.spacedBy(14.dp),
             verticalArrangement = Arrangement.spacedBy(14.dp),
             modifier = Modifier.fillMaxWidth().weight(1f),

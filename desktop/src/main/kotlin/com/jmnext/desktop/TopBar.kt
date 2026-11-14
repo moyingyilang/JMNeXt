@@ -61,7 +61,7 @@ fun JmTopBar(
                     )
                 }
             }
-            .padding(horizontal = 16.dp),
+            .padding(horizontal = Spacing.lg),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(12.dp),
     ) {

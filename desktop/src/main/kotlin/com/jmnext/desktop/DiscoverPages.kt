@@ -91,7 +91,7 @@ fun WeekScreen(repository: JmRepository, onOpenComic: (ListItem) -> Unit) {
     }
 
     Column(Modifier.fillMaxSize()) {
-        Column(Modifier.padding(horizontal = 16.dp, vertical = 10.dp)) {
+        Column(Modifier.padding(horizontal = Spacing.lg, vertical = 10.dp)) {
             Text(tl("周刊"), style = MaterialTheme.typography.titleLarge)
 StatusLine(status, busy)
             if (issues.isNotEmpty()) {
@@ -129,7 +129,7 @@ StatusLine(status, busy)
         BlockedNotice(hidden)
         LazyVerticalGrid(
             columns = GridCells.Adaptive(168.dp),
-            contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp),
+            contentPadding = PaddingValues(horizontal = Spacing.lg, vertical = 4.dp),
             horizontalArrangement = Arrangement.spacedBy(14.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp),
             modifier = Modifier.fillMaxSize(),
